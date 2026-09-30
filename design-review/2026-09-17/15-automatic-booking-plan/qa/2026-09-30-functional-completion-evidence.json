@@ -19,7 +19,8 @@
     "backup": 34,
     "project003_quota": 11,
     "website_builds": "both passed",
-    "offline_restore_migrations": 31
+    "offline_restore_migrations": 31,
+    "maintenance_concurrency_and_permanent_record_preservation": "passed"
   },
   "live": {
     "sarsa_migrations": 31,
@@ -29,8 +30,31 @@
     "cron": "*/15 * * * *",
     "worker_old_plan_compatibility": "passed",
     "health_monitor": "passed",
-    "fresh_checkpoint": "pending source publication"
+    "fresh_checkpoint": {
+      "run": 36777556541,
+      "attempt": 1,
+      "source_commit": "e5928295054d0b8fe9084ac452fa36dd6dd793e4",
+      "restored_migrations": 31,
+      "authenticated_drive_readback": "passed",
+      "retention_removed": 0,
+      "retention_preserved_older_daily_archive": true
+    },
+    "checkpoint_rerun": {
+      "run": 36777556541,
+      "attempt": 2,
+      "same_archive_reused": true,
+      "restored_migrations": 31,
+      "retention_removed": 0
+    }
   },
   "remaining_owner_action": "final Sarsa Vercel deployment from main",
-  "design": "explicitly deferred"
+  "design": "explicitly deferred",
+  "project003_release": {
+    "pull_request": 22,
+    "commit": "155d059c0f5e05687bd3e989d223e140cb0644a9",
+    "vercel_status": "success",
+    "official_health": 200,
+    "official_booking_ready": true,
+    "historical_monthly_baseline": 106
+  }
 }

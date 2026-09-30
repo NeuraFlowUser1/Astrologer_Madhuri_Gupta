@@ -38,7 +38,7 @@ GitHub accepted secret writes despite an `admin=false` permissions summary; do n
 - `provision-read-role.sql`: reviewed operational role setup outside application schema migrations. Creates no customer records; aborts if the role exists or privileges differ from the specified read scope.
 - `check_restore.py`: explicit synthetic offline PostgreSQL 18 dump/encrypt/restore proof; all31 local migrations and a synthetic row passed. Removes only its own test containers.
 
-Thirty-four backup/setup checks pass locally; the release checkpoint will also run them on the hosted runner: `python -m unittest discover -s tools/backup -p 'test_*.py'`. Install `requirements.txt` for the scheduled job. The local database handoff additionally uses the booking engine's already-installed psycopg dependency, imported only during that setup operation. Tool stderr is drained into a bounded private memory buffer and mapped to fixed categories/approved clue words, never echoed as raw provider output. No paid resource, payment or customer confirmation was created by these checks.
+Thirty-four backup/setup checks pass locally and on the current-release checkpoint runner: `python -m unittest discover -s tools/backup -p 'test_*.py'`. Install `requirements.txt` for the scheduled job. The local database handoff additionally uses the booking engine's already-installed psycopg dependency, imported only during that setup operation. Tool stderr is drained into a bounded private memory buffer and mapped to fixed categories/approved clue words, never echoed as raw provider output. No paid resource, payment or customer confirmation was created by these checks.
 
 ## Hosted acceptance — 30 September 2026
 
@@ -51,3 +51,10 @@ Thirty-four backup/setup checks pass locally; the release checkpoint will also r
 Operational limits remain explicit: GitHub schedules can be delayed and public scheduled workflows can be disabled after 60 days without repository activity. Review that this job remains enabled and recent successful copies exist at least monthly; do not claim indefinite unattended coverage or create artificial keep-alive commits. Approved retention never deletes unrelated or unverified files. Archive restoration does not recover separately managed application keys or authorise replay of provider jobs.
 
 References: [Drive owner/quota](https://developers.google.com/workspace/drive/api/reference/rest/v3/about/get), [resumable uploads](https://developers.google.com/workspace/drive/api/guides/manage-uploads), [Google Testing grants](https://support.google.com/cloud/answer/15549945?hl=en), [desktop approval flow](https://developers.google.com/identity/protocols/oauth2/native-app).
+
+
+## Current-schema checkpoint accepted — 30 September2026
+
+[Run36777556541](https://github.com/NeuraFlowUser1/Astrologer_Madhuri_Gupta/actions/runs/36777556541), source `e5928295054d0b8fe9084ac452fa36dd6dd793e4`, passed production export, full31-migration isolated restore, encrypted upload and authenticated Sarsa-owned Drive readback. All34 helper checks passed on the hosted runner. The archive was marked with its actual restore count before retention. Zero older verified copies were eligible for removal; the earlier daily19-migration copy was preserved. This proves the current database is recoverable without waiting for tomorrow’s daily run. No customer/provider action was replayed.
+
+Attempt2 of the same checkpoint also passed: the existing archive was authenticated and restored with31 migrations, no second copy was created, and retention removed zero older copies.
