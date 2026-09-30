@@ -1,5 +1,13 @@
 # Planning verification — 21 September2026
 
+## Real cancellation accepted and refund boundary — 30 September 2026, 17:23 UTC
+
+Owner cancelled the paid test through Studio. Production shows cancelled revision3, exactly one saved cancellation action at17:23:27.138 UTC and zero active slot claims for that booking. Revision2 meeting cancellation is delivered; both historical meeting revisions are cancelled with no saved Meet URL. Both revision3 spreadsheet jobs are delivered with state cancelled, correct Project004 label and original1 INR. Both practice/customer cancellation emails have signed email.sent and email.delivered observations. No failure code or direct database cancellation by Codex.
+
+Payment remains captured100 paise and refunded0 at this checkpoint. Cancellation correctly does not imply a refund. The inherited policy displays staff_review after a prior reschedule; no automatic entitlement bypass or refund-completed claim. The owner is guided to make a full normal1 INR refund of the exact test payment in the bound live Razorpay account; installed Razorpay tools are read-only and cannot create it. Refund callback/reconciliation acceptance remains pending. Existing manual calendar closures visible in the owner's screenshot are separate records and are not removed as test-booking cleanup.
+
+Additional screenshot requirements are recorded in [dashboard-redesign-requirements.md](dashboard-redesign-requirements.md): separate input/action styling, olive-filled white-text primary action, same-row layout, clear gap, compact heights, horizontally grouped facts and less vertical scrolling across customer/staff pages. No design/source modification is made now.
+
 ## Real staff rescheduling accepted — 30 September 2026, 17:16 UTC
 
 Later production readback and owner confirmation establish the actual saved move to2 October16:00–16:30 India time, rather than the earlier suggested15:30. Exactly one staff action moves revision1 to2 at17:16:11.555 UTC. The booking stays confirmed at100 paise with one active claim; zero active claims overlap its old15:00–15:30 interval. Previous observations of revision1/no action are superseded; no failed move or underlying code defect is inferred from those earlier reads. No table permission was relaxed or booking moved directly by Codex.

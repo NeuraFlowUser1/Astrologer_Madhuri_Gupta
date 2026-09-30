@@ -346,6 +346,24 @@
       "agency_sheet_revision2": "delivered",
       "three_update_emails_delivered": true,
       "direct_codex_booking_or_permission_changes": false
+    },
+    "staff_cancellation_acceptance": {
+      "state": "cancelled",
+      "revision": 3,
+      "active_claims": 0,
+      "staff_cancellation_actions": 1,
+      "created_at_utc": "2026-09-30T17:23:27.138Z",
+      "policy_guidance": "staff_review",
+      "both_meetings_cancelled": true,
+      "client_sheet_revision3": "delivered",
+      "agency_sheet_revision3": "delivered",
+      "sheet_state": "cancelled",
+      "sheet_original_rupees": "1",
+      "both_cancellation_emails_delivered": true,
+      "captured_amount_paise": 100,
+      "refunded_paise": 0,
+      "codex_issued_refund": false,
+      "manual_calendar_closures_deleted": false
     }
   },
   "owner_test_followup": {
@@ -357,7 +375,7 @@
   "owner_paid_test_followup": {
     "owner_created_booking_and_payment": true,
     "codex_created_charge_or_refund": false,
-    "staff_changes": "not_exercised"
+    "staff_changes": "reschedule_and_cancellation_accepted"
   },
   "deferred_redesign": {
     "owner_required": true,

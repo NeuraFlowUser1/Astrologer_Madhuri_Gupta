@@ -19,6 +19,16 @@ Give Madhuri and her staff a compact Sarsa-only working screen where booked days
 - Retain backend date/time/availability, quote consistency, session ownership, paid booking snapshot and atomic slot protections. Present India time clearly. Calendar markers must come from authoritative staff data with bounded paginated queries, not from loading every customer record or treating Google Calendar as an atomic second reservation system.
 - Plan concrete layout/type/colour/component/state/motion values before implementation and create browsable HTML for review, with desktop/mobile screenshots and keyboard interaction checks. Multi-stage motion may support the experience; it must not slow booking or obscure controls.
 
+## Additional owner screenshot requirements — 30 September 2026
+
+The owner supplied two screenshots of the current booking-reference lookup and stacked appointment panel. Inspection shows the input and outlined Find booking button touch, both lack a strong visual distinction, the button wraps below the full-width field, and the appointment facts/settings/actions form a long vertical flow. These are deferred design findings, not permission to restyle now.
+
+- Put the booking-reference input and Find booking action on the same desktop row, with a visible gap and aligned heights. Use an olive-filled primary action with white text and sufficient contrast; do not give the input and action near-identical empty-panel treatment.
+- Reduce excessive field/button heights, padding and vertical gaps across client dashboard and consumer flows. Compact appearance must preserve readable text, focus visibility and usable touch targets. Define bounded desktop/mobile sizes in the actual design specification rather than reducing every control indiscriminately.
+- Present appointment facts in compact aligned columns or a coherent horizontal summary where width allows: service, date/time, status, reference and relevant action. Wrap or reflow on narrow screens; do not retain a long one-fact-per-line stack on desktop simply by default.
+- Group related labels, fields and actions; provide clear spacing between distinct controls and clear visual hierarchy between primary, secondary and destructive actions. Review all customer/staff form rows for touching borders, accidental stacking, oversized controls and excessive scrolling.
+- The screenshot's NeuraFlow line within Manage appointment can be the submitted test customer's name; distinguish actual customer data from agency navigation/setup UI when auditing branding. Do not erase customer names or treat every occurrence as an account selector.
+
 ## Current acceptance observation
 
 Initial reads showed revision1 and no saved action; a later read and the owner's confirmation show the actual move saved at17:16:11.555 UTC, from2 October15:00 to16:00 India time. Revision2 is confirmed, the old slot is free and one new claim exists. Calendar, both record copies and three update emails completed. The earlier message request is superseded; do not infer a backend fault from a read made before a saved action was observed. The database functions retain the intended restricted security-definer boundary; absent direct runtime INSERT permission on staff history is expected. No permissions or booking rows were changed as a workaround.
