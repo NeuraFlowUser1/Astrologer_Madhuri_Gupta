@@ -3,6 +3,13 @@ on:
   schedule:
     - cron: '2 3 * * *'
   workflow_dispatch:
+    inputs:
+      kind:
+        description: Daily copy or a fresh current-release checkpoint
+        required: true
+        default: daily
+        type: choice
+        options: [daily, checkpoint]
 permissions:
   contents: read
 concurrency:
@@ -26,6 +33,7 @@ jobs:
         run: /tmp/sarsa-backup-venv/bin/python -m unittest discover -s tools/backup -p 'test_*.py'
       - name: Encrypt, restore-check and save Sarsa backup
         env:
+          SARSA_BACKUP_KIND: ${{ inputs.kind || 'daily' }}
           SARSA_BACKUP_DATABASE_URL: ${{ secrets.SARSA_BACKUP_DATABASE_URL }}
           SARSA_BACKUP_ENCRYPTION_KEY: ${{ secrets.SARSA_BACKUP_ENCRYPTION_KEY }}
           SARSA_BACKUP_GOOGLE: ${{ secrets.SARSA_BACKUP_GOOGLE }}

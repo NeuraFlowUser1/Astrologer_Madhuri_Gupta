@@ -35,6 +35,9 @@ class Store:
     def recovery_plan(self):
         return self._call((Path(__file__).parent/'queries/recovery_plan.sql').read_text())
 
+    def cleanup_temporary_records(self):
+        return self._call('SELECT sarsa_booking.cleanup_temporary_records()')
+
     def claim_checkout_resume(self, booking_id):
         return self._call('SELECT sarsa_booking.claim_checkout_resume(%s)', (booking_id,))
 

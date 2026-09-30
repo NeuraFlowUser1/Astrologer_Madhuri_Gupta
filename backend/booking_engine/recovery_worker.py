@@ -5,7 +5,7 @@ from .google_worker import WakeRequest
 from .recovery import run_payment_recovery_once, run_payment_event_once
 
 APPLICATION = '004-sarsa-jyotish-sansthan'
-LANES = frozenset(('email','email_events','google','payment','payment_events','contact_email','contact_google'))
+LANES = frozenset(('email','email_events','google','payment','payment_events','contact_email','contact_google','maintenance'))
 
 
 def add_configuration_route(app, key, evidence):
@@ -69,3 +69,17 @@ def add_recovery_worker_routes(app,store,key,accounts=None):
         rejection=denied(request,True)
         if rejection is not None:return rejection
         return dict(application=APPLICATION,**run_payment_event_once(store,accounts))
+
+    @app.post('/api/internal/recovery/maintenance',include_in_schema=False)
+    def maintenance(request:Request,body:WakeRequest):
+        rejection=denied(request)
+        if rejection is not None:return rejection
+        value=store.cleanup_temporary_records()
+        if (not isinstance(value,dict) or set(value)!={'processed','removed'}
+                or type(value['processed']) is not int or value['processed'] not in (0,1)
+                or not isinstance(value['removed'],dict)
+                or set(value['removed'])!={'attempts','sessions','limits'}
+                or any(type(n) is not int or not 0<=n<=500 for n in value['removed'].values())
+                or value['processed']!=int(sum(value['removed'].values())>0)):
+            raise ValueError('Maintenance result unavailable.')
+        return dict(application=APPLICATION,**value)

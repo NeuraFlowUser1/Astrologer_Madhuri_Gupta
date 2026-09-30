@@ -2,7 +2,7 @@
 
 # Project004 improvements and later project003 review
 
-Updated21 September2026. Owner request: record every appointment-booking strengthening made for004 so applicable improvements can later be applied to003. This is the ongoing implementation register, not a claim that fixes are already built. No003 files are changed by this work.
+Updated21 September2026. Owner request: record every appointment-booking strengthening made for004 so applicable improvements can later be applied to003. This is the ongoing implementation register, not a claim that fixes are already built. Earlier entries did not authorise003 changes. On30 September2026 the owner separately authorised the narrow shared-email allocation correction; see the completion entry below.
 
 ## How this register stays trustworthy
 
@@ -10,7 +10,7 @@ For each implementation slice, add/update the stable entry below before handoff.
 
 Before a003 retrofit, re-inspect its then-current code and schema, reproduce the relevant risk in an isolated test, review existing records/queued jobs through authorized means, design compatible migration/rollback and obtain scoped execution authorization. Do not copy004 wholesale. No third-party calls or customer messages during local proof.
 
-Backend entries below retain their historical planned status; see the28 September foundation update for implemented slices.003 remains not applied. The B2 update below records the local frontend work actually implemented and checked; it does not prove the planned backend protections. Source locations below are relative to003 AstroConnect unless prefixed004. Contracts C01–C08 are in implementation-contracts.md. Existing003 strengths reused unchanged are reference foundations, not claimed004 inventions.
+Backend entries below retain their historical planned status; see the28 September foundation update for implemented slices.003 retrofits otherwise remain not applied; only the separately authorised email-allocation correction below is in scope. The B2 update below records the local frontend work actually implemented and checked; it does not prove the planned backend protections. Source locations below are relative to003 AstroConnect unless prefixed004. Contracts C01–C08 are in implementation-contracts.md. Existing003 strengths reused unchanged are reference foundations, not claimed004 inventions.
 
 | ID | Improvement and practical value | Source/evidence and implementation boundary | Required proof and transfer assessment |
 | --- | --- | --- | --- |
@@ -263,3 +263,12 @@ Proof:238 Python tests,16 frontend protocol tests, build, development rollback f
 ###30September2026 — native edge acceptance and safe recovery diagnostics
 
 004’s Cloudflare Worker now uses supported manual redirects and rejects all non200 responses before any redirect, preserving credential non-forwarding. Node tests alone missed the native runtime’s rejection of redirect:error. Added status-only/unknown-error redaction, failed-heartbeat retention and redirect regression checks; native200/302 fixtures and actual scheduled/queue/health acceptance pass. Future003 review should inspect its real edge request options and execution evidence before copying this fix; no003 defect or change is claimed. Unknown provider text never enters recovery logs. Both004 record-copy owners are now verified separately. Conservative004 mail sublimits do not claim to coordinate the shared003 provider allowance; review cross-project capacity separately during the authorised later retrofit.
+
+
+## Functional completion and scoped003 transfer — 30 September2026
+
+004 support recovery/contact correction/reopening passed the actual browser and committed PostgreSQL fixture without payment or a real call. Captured provider requests exercised the durable old/new meeting, two-owner record-copy and email paths. No production identity/payment bypass was added. Migration031 adds bounded expiry maintenance with role-scoped authority and permanent-record preservation. The recovery worker is deployed as `ae1652a6-d656-4285-864d-c00f21598595`, preserving its existing queue, key bindings and15-minute schedule while accepting both old/new plans. Source/role/expiry checks and245 backend tests,26 worker checks and34 backup checks pass.
+
+Backup strengthening: separate current-release checkpoint identity, full current-schema restore requirement for new archives, authenticated readback, verification metadata,30-day/12-month retention, minimum two verified copies, exact-owner/file identity checks, bounded inventory/removal and lost-response reconciliation. The31-migration local dump/encrypt/restore proof passed; hosted checkpoint acceptance is recorded separately in verification.md.
+
+The only003 implementation authorised in this pass is its coordinated Resend share:80/day,60 verification/day and2400 across at least31 days, leaving004’s existing20/day and600/31 days. Eleven isolated database checks and003 production build pass. A conservative106-send historical baseline was saved under the quota lock without changing customer records. Code/evidence publication is tracked in [AstroConnect PR22](https://github.com/Prabhakar407/AstroConnect/pull/22); preserve its exact release evidence rather than infer every004 improvement is now transferred. No other003 source, credentials, booking rules, UI or provider settings changed.

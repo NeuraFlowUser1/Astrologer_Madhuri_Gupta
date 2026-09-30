@@ -1,15 +1,16 @@
-"""Project 004 backup storage owned by the approved Sarsa account. No sharing or deletion operations."""
+"""Project004 owned storage. Removal is limited to approved verified-backup retention."""
 import hashlib
 import json
 import re
 from urllib.parse import urlsplit
 import httpx
 from envelope import BackupError
+from retention import checked_record,candidates
 
 OWNER='sarsajyotish@gmail.com'
 PROJECT='004-sarsa-jyotish-sansthan'
 API='https://www.googleapis.com/drive/v3/'
-FIELDS='id,name,mimeType,parents,owners(emailAddress),trashed,appProperties,size,md5Checksum'
+FIELDS='id,name,mimeType,parents,owners(emailAddress),trashed,appProperties,size,md5Checksum,createdTime'
 
 
 def file_id(value):
@@ -71,12 +72,13 @@ class Drive:
         if not owned(folder):raise BackupError('backup_folder_owner_mismatch')
         return file_id(folder.get('id'))
 
-    def existing(self,folder,day):
+    def existing(self,folder,day,kind='daily',revision=''):
         # Date is produced by the caller's UTC clock, never arbitrary query input.
         if not re.fullmatch(r'\d{4}-\d{2}-\d{2}',day):raise BackupError('backup_day_invalid')
         q="trashed=false and '"+file_id(folder)+"' in parents and appProperties has { key='sarsaProject' and value='"+PROJECT+"' } and appProperties has { key='backupDay' and value='"+day+"' }"
         result=self.request('GET','files',params={'q':q,'fields':'files('+FIELDS+'),nextPageToken','pageSize':100})
-        files=result.get('files',[])
+        files=[r for r in result.get('files',[]) if r.get('appProperties',{}).get('backupKind','daily')==kind
+               and (kind=='daily' or r.get('appProperties',{}).get('sourceCommit')==revision)]
         if result.get('nextPageToken') or len(files)>1:raise BackupError('daily_backup_ambiguous')
         if not files:return None
         record=files[0]
@@ -99,7 +101,9 @@ class Drive:
             if total!=expected or digest.hexdigest()!=record['md5Checksum']:raise ValueError()
         except Exception:raise BackupError('backup_download_unverified') from None
 
-    def upload(self,path,folder,day):
+    def upload(self,path,folder,day,kind='daily',revision=''):
+        if kind not in ('daily','checkpoint') or (kind=='checkpoint' and not re.fullmatch(r'[a-f0-9]{40}',revision)):
+            raise BackupError('backup_kind_invalid')
         size=path.stat().st_size
         if self.available<size+10*1024*1024:raise BackupError('drive_space_insufficient')
         identity=self.request('GET','files/generateIds',params={'count':1,'space':'drive'})
@@ -107,8 +111,10 @@ class Drive:
         digest=hashlib.md5(usedforsecurity=False)
         with path.open('rb') as stream:
             for block in iter(lambda:stream.read(1024*1024),b''):digest.update(block)
-        metadata={'id':identity,'name':f'sarsa-004-{day}.pgdump.aesgcm','mimeType':'application/octet-stream',
-            'parents':[file_id(folder)],'appProperties':{'sarsaProject':PROJECT,'backupDay':day,'format':'aes256gcm-v1'}}
+        suffix='' if kind=='daily' else '-checkpoint-'+revision
+        metadata={'id':identity,'name':f'sarsa-004-{day}{suffix}.pgdump.aesgcm','mimeType':'application/octet-stream',
+            'parents':[file_id(folder)],'appProperties':{'sarsaProject':PROJECT,'backupDay':day,'format':'aes256gcm-v1',
+                'backupKind':kind,**({'sourceCommit':revision} if kind=='checkpoint' else {})}}
         try:
             response=self.client.post('https://www.googleapis.com/upload/drive/v3/files',
                 params={'uploadType':'resumable','fields':FIELDS},headers={**self.headers,
@@ -132,3 +138,56 @@ class Drive:
             return record
         except BackupError:raise
         except Exception:raise BackupError('drive_upload_failed') from None
+
+    def mark_verified(self,record,folder,proof):
+        checked_record(record,folder)
+        if type(proof.get('restored_migrations')) is not int or proof['restored_migrations']<1:
+            raise BackupError('retention_restore_proof_invalid')
+        value=self.request('PATCH','files/'+file_id(record['id']),params={'fields':FIELDS},json={
+            'appProperties':{**record['appProperties'],'restoreVerified':'1',
+                             'restoredMigrations':str(proof['restored_migrations'])}})
+        checked_record(value,folder)
+        if (value.get('md5Checksum')!=record.get('md5Checksum') or value.get('size')!=record.get('size')
+                or value.get('id')!=record.get('id')
+                or value['appProperties']!={**record['appProperties'],'restoreVerified':'1',
+                    'restoredMigrations':str(proof['restored_migrations'])}):
+            raise BackupError('retention_mark_unverified')
+        return value
+
+    def inventory(self,folder):
+        records=[];tokens=set();token=None
+        q="trashed=false and '"+file_id(folder)+"' in parents and appProperties has { key='sarsaProject' and value='"+PROJECT+"' }"
+        for _ in range(20):
+            params={'q':q,'fields':'files('+FIELDS+'),nextPageToken','pageSize':100}
+            if token:params['pageToken']=token
+            result=self.request('GET','files',params=params)
+            files=result.get('files')
+            if not isinstance(files,list):raise BackupError('retention_inventory_invalid')
+            records.extend(files);token=result.get('nextPageToken')
+            if not token:return records
+            if not isinstance(token,str) or token in tokens:raise BackupError('retention_inventory_ambiguous')
+            tokens.add(token)
+        raise BackupError('retention_inventory_limit')
+
+    def remove_verified(self,record,folder):
+        checked_record(record,folder)
+        current=self.request('GET','files/'+file_id(record['id']),params={'fields':FIELDS})
+        _,verified=checked_record(current,folder)
+        if (not verified or any(current.get(k)!=record.get(k) for k in
+                ('id','name','md5Checksum','size','parents','appProperties'))):
+            raise BackupError('retention_archive_changed')
+        try:
+            response=self.client.delete(API+'files/'+file_id(record['id']),headers=self.headers)
+            if response.status_code==204:return
+            # Lost response or already-removed archive: resolve this same ID.
+        except httpx.HTTPError:pass
+        try:
+            response=self.client.get(API+'files/'+file_id(record['id']),headers=self.headers,params={'fields':'id'})
+            if response.status_code==404:return
+        except httpx.HTTPError:pass
+        raise BackupError('retention_removal_unverified')
+
+    def retain(self,folder,today,current):
+        selected=candidates(self.inventory(folder),folder,today,file_id(current['id']))
+        for record in selected:self.remove_verified(record,folder)
+        return len(selected)

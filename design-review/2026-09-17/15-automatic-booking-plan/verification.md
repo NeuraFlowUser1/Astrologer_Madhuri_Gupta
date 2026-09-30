@@ -1,3 +1,11 @@
+## Authorised non-design completion — 30 September2026
+
+All seven remaining items were authorised. The end-to-end support checks use owned synthetic confirmed appointments, an actual HTTPS/browser application and the restricted PostgreSQL role. Receipt replacement, contact correction, redemption, old-access rejection, preserved slot/payment and blocked-time reopening passed. Real durable consumers produced four completed Google jobs and three provider-accepted email requests in captured transports; idle repetition produced no duplicate requests. These are isolated external-response checks, not genuine Google consent or inbox-delivery claims. Production payment/identity safeguards remain unchanged.
+
+Migration031 is applied to the pinned development and production branches. All previous30 migration checksums matched source before application. The bounded function passed its rollback checks and does not authorise permanent booking/payment/history deletion. The reviewed worker version `ae1652a6-d656-4285-864d-c00f21598595` is live, accepts the current seven-lane hosted plan, retains the15-minute schedule and reports healthy through the independent monitor. The final website deployment supplies its eighth maintenance lane; no extra database-reading monitor was created.
+
+Final source checks:245 backend tests,26 worker checks,34 backup checks,11 scoped003 quota checks and both website production builds passed. A pinned offline PostgreSQL18 proof restored all31 migrations plus synthetic data. The live encrypted current-release checkpoint and its Drive retention outcome will be added below after source publication. Final Sarsa Vercel deployment remains an owner action by explicit instruction. UI/UX work remains separately deferred.
+
 # Planning verification — 21 September2026
 
 ## Staff refund review and final policy deployment accepted — 30 September 2026, 17:50 UTC

@@ -11,7 +11,11 @@ const LANES = Object.freeze({
   email_events: ['/api/internal/email/events', 'SARSA_EMAIL_WORKER_KEY'],
   email: ['/api/internal/email/run', 'SARSA_EMAIL_WORKER_KEY'],
   contact_google: ['/api/internal/contact/google', 'SARSA_GOOGLE_WORKER_KEY'],
+  maintenance: ['/api/internal/recovery/maintenance', 'SARSA_RECOVERY_WORKER_KEY'],
 });
+// Roll out this worker before the website: the deployed seven-lane plan remains
+// valid until the additive maintenance migration and website are published.
+const LEGACY_LANES = Object.keys(LANES).filter(name => name !== 'maintenance').sort().join(',');
 const secretValid = value => typeof value === 'string' && /^[A-Za-z0-9_-]{43}=$/.test(value);
 const result = (value, status = 200) => Response.json(value, {status, headers: {'cache-control':'no-store'}});
 const messageValid = value => value && Object.keys(value).sort().join(',') === 'remaining,version'
@@ -49,7 +53,7 @@ async function boundedJSON(response, maximum) {
 
 export function checkedPlan(value) {
   if (!value || value.application !== APP || value.version !== 1 || typeof value.attention !== 'boolean'
-      || !value.lanes || Object.keys(value.lanes).sort().join(',') !== Object.keys(LANES).sort().join(',')
+      || !value.lanes || ![LEGACY_LANES,Object.keys(LANES).sort().join(',')].includes(Object.keys(value.lanes).sort().join(','))
       || Object.values(value.lanes).some(v => v !== null && (!Number.isInteger(v) || v < 0 || v > 900))) {
     throw Error('plan_invalid');
   }
@@ -157,7 +161,7 @@ export function createWorker({fetcher = (...args) => fetch(...args), now = () =>
           const deadline = now()+90_000;
           const before = await plan(env,deadline);
           let failed = false, processed = 0;
-          // At most seven invocations, sequentially; events process at most one
+          // At most eight invocations, sequentially; events process at most one
           // booking and one enquiry report. Errors do not stop later lanes
           // while the pass still has time; durable work survives the deadline.
           for (const [lane,[path,key]] of Object.entries(LANES)) {

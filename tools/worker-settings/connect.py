@@ -102,7 +102,7 @@ def hosted_plan(keys):
             or value['application'] != '004-sarsa-jyotish-sansthan'
             or type(value['version']) is not int or value['version'] != 1
             or type(value['attention']) is not bool or not isinstance(value['lanes'], dict)
-            or set(value['lanes']) != LANES
+            or set(value['lanes']) not in (LANES,LANES | {'maintenance'})
             or any(v is not None and (type(v) is not int or not 0 <= v <= 900)
                    for v in value['lanes'].values())):
         raise SafeFailure('canonical_plan_invalid')

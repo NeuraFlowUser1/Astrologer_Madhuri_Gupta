@@ -25,23 +25,27 @@ Cloudflare runs Sarsa recovery every15 minutes and also handles queued wakeups. 
 
 GitHub monitor/backup jobs use the existing public repository with an exact-name/public-visibility guard. If visibility changes, scheduled work is skipped until an authorised budget-compatible configuration is reviewed. No paid plan or extra included-minute allowance has been authorised. Keep the100 included-minute/month limit. Review workflow activity and recent successes monthly; schedules may be delayed and inactivity can disable them. Do not create artificial commits to mask that condition.
 
-Resend is shared with Project003. Sarsa's local limits are20/day and600 over31 days; enquiries have their additional8/day and240 limits. These do not reserve shared provider capacity against Project003 usage. Review actual shared usage before increasing allocations. Retry only through saved work; do not resend accepted messages manually to work around an unknown response.
+Resend is shared with Project003. Sarsa keeps20/day and600 over31 days; enquiries have their additional8/day and240 limits. The approved Project003 correction allocates80/day, verification60/day and2400 over at least31 days. Its release is tracked in AstroConnect PR22. These shares fit the provider limits; unrelated sends or inbound mail still consume the same account. Review actual shared usage before increasing allocations. Retry only through saved work; do not resend accepted messages manually to work around an unknown response.
 
 ## Backup and recovery
 
 Daily encrypted backup runs at08:32 India time into Sarsa's own Drive. See tools/backup/README.md for accepted runs, owner/key custody, restore checks and safe failure handling. Retain the password-manager recovery key and existing protected application settings. An archive alone cannot replace application encryption keys or Google permissions.
 
-The first archive/restore/readback passed with19 migrations. Production now has30; a future new daily archive has not yet supplied that newer-schema live proof. No automated archive deletion is authorised. Storage exhaustion must be investigated; do not buy capacity or delete copies automatically.
+The first archive/restore/readback passed with19 migrations. Production now has31 verified migrations. A manual checkpoint creates a separate current-release archive without overwriting that earlier daily copy; require full current-schema restore before accepting it. The approved rule keeps30 UTC dates and one newest verified archive for each of the latest12 calendar months, always preserving the current verified copy and at least two newest copies. Remove at most20 older verified app-owned archives per successful run, rechecking their exact identity first. Unknown or unverified copies and unrelated files remain untouched. Storage exhaustion still needs investigation; no paid upgrade or broad deletion is authorised.
 
 For disaster recovery, restore and verify in isolation first, recreate restricted database access, recover the existing application keys and review pending payment/email/calendar work before restarting workers. Never replay external actions blindly: reconcile their saved provider identities and outcomes first. Never restore directly over the live database merely to test an archive.
 
-## Remaining acceptance and deferred work
+## Acceptance, final publication and deferred work
 
 - Completed: provider-verified full-refund review closed through one normal Studio action, with the provider evidence and staff note saved.
 - Completed: owner reports PASS for the development-only two-connection contention check. A separate database read confirms its temporary synthetic rows were removed. The private password/output did not pass through Codex.
-- Practice/customer: live assisted receipt recovery after genuine saved-number verification. Contact correction's real provider acceptance requires an eligible confirmed future booking; local database/browser checks already cover it. Do not create another paid appointment or fake a call solely to tick this item.
+- Completed in the authorised isolated fixture: confirmed dummy appointments, staff sign-in state machine, receipt replacement/redemption, old-access rejection, contact correction and blocked-time reopening. Actual HTTP and PostgreSQL ran unchanged; Google identity and external responses were synthetic. The corrected meeting, old meeting deletion, both separately owned record copies and three email requests completed without duplicate requests. No real call, payment or customer notification was needed. Real staff identity verification remains required for actual customers.
 - Completed: final policy wording published/deployed; official privacy asset and privacy/terms/booking-policy routes verified.
-- Scheduled operation: observe a future daily30-schema archive and retain first accepted19-schema evidence; monitor actual continued service rather than promising indefinite unattended operation.
+- Scheduled operation: retain dated checkpoint/restore evidence and monitor continued daily backups. A one-time passed check cannot promise indefinite unattended operation.
 - UI/UX: separately redesign the account entry, compact calendar/dashboard, date/time pickers and horizontal controls per dashboard-redesign-requirements.md. No redesign is included in this functional-completion pass.
 
 These limits do not switch off normal booking or enquiry intake. Permanent signature checks, account separation, double-booking protection, private access and retry rules remain active.
+
+## Temporary-record maintenance
+
+Migration031 is installed on the pinned development and production branches. The existing recovery worker accepts old seven-lane and new eight-lane plans; the final website deployment advertises maintenance only when due. One bounded pass removes at most500 Google attempts,500 expired staff sessions and500 request counters older than24 hours past expiry. Sessions with remaining Google attempts are preserved. Booking, payment, receipt recovery, connection and audit history is outside this function’s authority. Overlapping passes safely skip; failures remain visible and retry through the existing15-minute schedule.

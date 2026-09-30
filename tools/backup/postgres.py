@@ -68,7 +68,7 @@ def command(args,*,capture=False):
     return result.stdout if capture else None
 
 
-def restore_check(path,key):
+def restore_check(path,key,*,require_current=False):
     # Authenticate everything before pg_restore is permitted to receive bytes.
     with path.open('rb') as source:metadata=decrypt(source,key)
     name='sarsa-004-restore-'+secrets.token_hex(8)
@@ -103,6 +103,8 @@ def restore_check(path,key):
         restored=[line.split('|',1) for line in raw.decode().splitlines()]
         if not restored or any(len(row)!=2 or versions.get(row[0])!=row[1] for row in restored):
             raise BackupError('restored_migrations_mismatch')
+        if require_current and dict(restored)!=versions:
+            raise BackupError('restored_schema_not_current')
         # No HTTP worker is started. No provider keys are supplied to the container.
         return {'restored_migrations':len(restored),'day':metadata['day']}
     finally:

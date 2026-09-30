@@ -38,7 +38,7 @@ def main():
             with path.open('xb') as target:
                 encrypt(process.stdout,target,key,{'project':'004-sarsa-jyotish-sansthan','format':'postgres-custom','day':'2026-09-29'})
             if process.wait(timeout=60):raise RuntimeError('Synthetic dump failed')
-            result=restore_check(path,key)
+            result=restore_check(path,key,require_current=True)
             assert result['restored_migrations']==len(migrations)
             print('PASS: all',len(migrations),'migrations dumped, encrypted, authenticated and restored offline.')
     finally:

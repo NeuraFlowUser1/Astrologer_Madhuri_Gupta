@@ -22,7 +22,17 @@ WITH work AS (
         CASE WHEN state='creating' THEN attempted_at+interval '30 seconds' ELSE next_check_at END)
     FROM sarsa_booking.payment_orders
     WHERE resolved_at IS NULL OR (recovery_followup AND resolution='confirmed')
-), lanes(lane) AS (VALUES ('email'),('google'),('email_events'),('payment_events'),('payment'),('contact_email'),('contact_google')),
+    UNION ALL
+    SELECT 'maintenance',min(expires_at)+interval '24 hours' FROM sarsa_booking.google_attempts
+     WHERE expires_at<statement_timestamp()-interval '24 hours'
+    UNION ALL
+    SELECT 'maintenance',min(s.expires_at)+interval '24 hours' FROM sarsa_booking.studio_sessions s
+     WHERE s.expires_at<statement_timestamp()-interval '24 hours'
+       AND NOT EXISTS(SELECT 1 FROM sarsa_booking.google_attempts a WHERE a.session_digest=s.digest)
+    UNION ALL
+    SELECT 'maintenance',min(expires_at)+interval '24 hours' FROM sarsa_booking.request_limits
+     WHERE expires_at<statement_timestamp()-interval '24 hours'
+), lanes(lane) AS (VALUES ('email'),('google'),('email_events'),('payment_events'),('payment'),('contact_email'),('contact_google'),('maintenance')),
 next_work AS (
     SELECT lanes.lane,min(work.due) due FROM lanes LEFT JOIN work USING(lane) GROUP BY lanes.lane
 )
@@ -36,7 +46,7 @@ SELECT jsonb_build_object(
             OR (state='pending' AND last_error_code IN ('email_budget_unconfigured','email_budget_exhausted'))
             OR (state IN ('failed','uncertain') AND first_attempt_at<statement_timestamp()-interval '5 minutes'))
         OR EXISTS(SELECT 1 FROM sarsa_booking.payment_cases WHERE resolved_at IS NULL)
-        OR EXISTS(SELECT 1 FROM work WHERE due<statement_timestamp()-interval '5 minutes')
+        OR EXISTS(SELECT 1 FROM work WHERE lane<>'maintenance' AND due<statement_timestamp()-interval '5 minutes')
         OR EXISTS(SELECT 1 FROM sarsa_booking.provider_inbox WHERE processed_at IS NULL
             AND last_error_code IS NOT NULL AND received_at<statement_timestamp()-interval '5 minutes')
         OR EXISTS(SELECT 1 FROM sarsa_booking.bookings b

@@ -20,6 +20,22 @@ URL='https://sarsa-booking-recovery.neuraflowindia.workers.dev/wake'
 
 
 class RecoveryWorkerTests(unittest.TestCase):
+    def test_maintenance_requires_worker_authority_and_has_bounded_counts(self):
+        store=Mock();store.cleanup_temporary_records.return_value={'processed':1,'removed':{'attempts':2,'sessions':1,'limits':0}}
+        app=FastAPI();add_recovery_worker_routes(app,store,WorkerKey(SECRET));client=TestClient(app)
+        path='/api/internal/recovery/maintenance';headers={'authorization':'Bearer '+SECRET}
+        self.assertEqual(client.post(path,json={}).status_code,401)
+        self.assertEqual(client.post(path,json={'limit':10000},headers=headers).status_code,422)
+        store.cleanup_temporary_records.assert_not_called()
+        response=client.post(path,json={},headers=headers)
+        self.assertEqual(response.status_code,200)
+        self.assertEqual(response.json()['removed']['attempts'],2)
+        for value in ({'processed':True,'removed':{'attempts':1,'sessions':0,'limits':0}},
+                      {'processed':0,'removed':{'attempts':1,'sessions':0,'limits':0}},
+                      {'processed':1,'removed':{'attempts':501,'sessions':0,'limits':0}}):
+            store.cleanup_temporary_records.return_value=value
+            with self.assertRaises(ValueError):client.post(path,json={},headers=headers)
+
     def test_private_empty_request_and_validated_minimal_plan(self):
         store=Mock();store.recovery_plan.return_value={'lanes':dict.fromkeys(LANES),'attention':False}
         app=FastAPI();add_recovery_worker_routes(app,store,WorkerKey(SECRET));client=TestClient(app)

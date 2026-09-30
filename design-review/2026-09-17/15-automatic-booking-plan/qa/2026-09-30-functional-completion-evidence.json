@@ -1,0 +1,36 @@
+{
+  "scope": "seven approved non-design items",
+  "synthetic": {
+    "browser": "passed",
+    "real_http_and_restricted_postgres": true,
+    "external_identity_and_provider_responses": "captured synthetic",
+    "receipt_replaced": true,
+    "old_access_rejected": true,
+    "contact_correction": true,
+    "blocked_time_reopened": true,
+    "google_jobs_completed": 4,
+    "email_requests_accepted": 3,
+    "idle_repetition": "no duplicate requests",
+    "real_charge_or_customer_message": false
+  },
+  "checks": {
+    "backend": 245,
+    "worker": 26,
+    "backup": 34,
+    "project003_quota": 11,
+    "website_builds": "both passed",
+    "offline_restore_migrations": 31
+  },
+  "live": {
+    "sarsa_migrations": 31,
+    "dev_branch": "br-still-mud-b38cy2py",
+    "production_branch": "br-cool-bird-b39eiccm",
+    "worker_version": "ae1652a6-d656-4285-864d-c00f21598595",
+    "cron": "*/15 * * * *",
+    "worker_old_plan_compatibility": "passed",
+    "health_monitor": "passed",
+    "fresh_checkpoint": "pending source publication"
+  },
+  "remaining_owner_action": "final Sarsa Vercel deployment from main",
+  "design": "explicitly deferred"
+}

@@ -25,6 +25,18 @@ function message(body={version:1,remaining:8}) {
 const request=(path,body='{}',auth=true)=>new Request('https://sarsa-booking-recovery.test.workers.dev'+path,
   {method:'POST',headers:{'content-type':'application/json',...(auth?{authorization:'Bearer '+SECRET}:{})},body});
 
+test('additive maintenance accepts old plans and invokes only the protected new lane when due',async()=>{
+  assert.equal(checkedPlan(idle()).version,1);
+  const due=idle();due.lanes.maintenance=0;
+  const done=idle();done.lanes.maintenance=null;
+  const f=fixture([due,done]);const m=message();await f.worker.queue({messages:[m]},f.env);
+  assert.equal(m.acks,1);assert.equal(m.retries.length,0);
+  const calls=f.calls.filter(([url])=>!url.endsWith('/plan'));
+  assert.equal(calls.length,1);assert.ok(calls[0][0].endsWith('/maintenance'));
+  assert.equal(calls[0][1].headers.authorization,'Bearer '+SECRET);
+  due.lanes.unknown=0;assert.throws(()=>checkedPlan(due),/plan_invalid/);
+});
+
 test('idle scheduled rescue reads plan once, no queue or provider work',async()=>{
   const f=fixture();await f.worker.scheduled({scheduledTime:1_800_000},f.env);
   assert.equal(f.calls.length,1);assert.equal(f.sends.length,0);assert.equal(f.writes[0][1].healthy,true);
