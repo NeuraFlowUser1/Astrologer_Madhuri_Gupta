@@ -1,5 +1,12 @@
 # Sarsa complete-website integration and release plan
 
+## Full refund received — 30 September 2026, 17:33 UTC
+
+The owner completed the full1 INR refund in Razorpay. A private read of the exact Sarsa payment confirmed refunded100/100 paise. The signed refund.processed notification arrived17:33:01.285 UTC and was processed17:33:04.479 UTC on its first attempt. Production retained the earlier captured observation and saved the new refunded observation at17:33:04.420758 UTC. Appointment remains cancelled revision3 with zero active claims. No refund was initiated by Codex. Initial reads preceded receipt of the callback; this is not evidence of a broken handoff.
+
+The refund_observed payment case awaits Sarsa's authenticated staff review. Studio's “Close review after verified full refund” requires the saved provider evidence and a staff note; it does not move money. Owner instructions were sent. Assisted receipt-access live acceptance and independent owner-local concurrency remain separate checks, not unfinished implementation. No customer-contact correction or false original-number verification is performed for the cancelled test. Final policy disclosures and the [operating handover](operating-handover.md) are completed locally. Exact isolated release build and targeted policy lint pass. Privacy screenshots inspected at1280/390; widths390/320 show no horizontal overflow. Terms and booking-policy headings render after page load; no browser page errors. Publication/deployment remain to be verified. Studio has no Inbox tab: the actual Practice Inbox section follows the calendar controls; its heading is “Know what needs your attention” and its issues button is “Needs attention”. Corrected owner navigation instructions were sent. Dashboard redesign remains deferred.
+
+
 ## Real cancellation accepted and refund boundary — 30 September 2026, 17:23 UTC
 
 Owner cancelled the paid test through Studio. Production shows cancelled revision3, exactly one saved cancellation action at17:23:27.138 UTC and zero active slot claims for that booking. Revision2 meeting cancellation is delivered; both historical meeting revisions are cancelled with no saved Meet URL. Both revision3 spreadsheet jobs are delivered with state cancelled, correct Project004 label and original1 INR. Both practice/customer cancellation emails have signed email.sent and email.delivered observations. No failure code or direct database cancellation by Codex.

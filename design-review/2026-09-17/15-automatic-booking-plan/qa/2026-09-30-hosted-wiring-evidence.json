@@ -196,7 +196,9 @@
       "monitor_completed_at": "2026-09-30T12:07:30Z",
       "workflow_state": "active",
       "scheduled_monitor_acceptance": "passed",
-      "scheduled_monitor_run": 36748562494
+      "scheduled_monitor_run": 36751036209,
+      "scheduled_monitor_checked_at_utc": "2026-09-30T17:23:31Z",
+      "health_after_refund": "healthy"
     },
     "mail": {
       "provider_daily_used": 0,
@@ -364,6 +366,42 @@
       "refunded_paise": 0,
       "codex_issued_refund": false,
       "manual_calendar_closures_deleted": false
+    },
+    "refund_acceptance": {
+      "checked_at_utc": "2026-09-30T17:33:04.479Z",
+      "provider_status": "refunded",
+      "amount_paise": 100,
+      "refunded_paise": 100,
+      "currency": "INR",
+      "signed_event": "refund.processed",
+      "received_at_utc": "2026-09-30T17:33:01.285Z",
+      "processed_at_utc": "2026-09-30T17:33:04.479Z",
+      "processing_attempts": 1,
+      "booking_state": "cancelled",
+      "revision": 3,
+      "active_claims": 0,
+      "earlier_captured_evidence_preserved": true,
+      "staff_review_resolved": false,
+      "codex_initiated_refund": false
+    },
+    "final_policy_review": {
+      "production_build": "passed",
+      "targeted_lint": "passed",
+      "browser_pages": [
+        "privacy",
+        "terms",
+        "booking-policy"
+      ],
+      "privacy_widths": [
+        1280,
+        390,
+        320
+      ],
+      "terms_and_booking_policy_render": "passed_after_page_load",
+      "privacy_screenshots_visually_inspected": true,
+      "phone_horizontal_overflow": false,
+      "browser_page_errors": 0,
+      "hosted_new_policy_acceptance": false
     }
   },
   "owner_test_followup": {
