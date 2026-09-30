@@ -2,7 +2,7 @@
 
 ## Purpose and current state
 
-30 September2026 recovery check: this Worker remains an unpublished component. The owner previously reported saving its four keys in Vercel; matching protected copies for Cloudflare are not yet available to Codex. The original generator deliberately retained no values, and the Sarsa Vercel account is intentionally disconnected. Ask only whether the owner has saved copies, then use a private matching handoff; do not regenerate existing values casually. Daily encrypted backups are now live and tested, separately from this Worker and its still-unpublished monitor. See the canonical verification record for current release evidence.
+30 September2026 recovery check: this Worker remains an unpublished component. All four owner-selected existing Vercel keys have been privately captured, checked for distinctness, encrypted for the Windows user and readback-verified. No live value was regenerated or provider setting changed. The Sarsa Vercel account remains intentionally disconnected. Configure the existing dedicated Cloudflare resources through private process input after the canonical backend is served, then prove authenticated matching; local capture alone is not live acceptance. Daily encrypted backups are live and tested, separately from this Worker and its still-unpublished monitor. See the canonical verification record for current release evidence.
 
 Immediate queue hints wake the permanent website's saved work. A15-minute scheduled sweep rescues lost hints and expired queue retries. Saved database jobs and provider observations remain authoritative. No customer records, job IDs, provider payloads or credentials enter queue messages or heartbeat storage.
 

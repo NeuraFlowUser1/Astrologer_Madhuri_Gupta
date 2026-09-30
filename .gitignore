@@ -56,3 +56,6 @@ __pycache__/
 
 # Scratch & Temporary Tools
 scratch/
+
+# Windows-user-encrypted operational handoff copies; never publish.
+tools/worker-settings/private/

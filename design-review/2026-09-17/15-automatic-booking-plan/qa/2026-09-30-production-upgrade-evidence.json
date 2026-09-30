@@ -1,0 +1,143 @@
+{
+  "date": "2026-09-30",
+  "project_id": "cold-art-76378232",
+  "branch_id": "br-cool-bird-b39eiccm",
+  "applied": [
+    {
+      "version": "001_booking_core.sql",
+      "sha256": "8f76c402c6ecc3960ab67c822f125c43e699bd30180a11726f105b912eebcaa9"
+    },
+    {
+      "version": "002_checkout_lifecycle.sql",
+      "sha256": "bcbdaa12c233e547a6e2fcf2ab3703f06115fca039835cc7405eb0bfbf54992f"
+    },
+    {
+      "version": "003_runtime_permissions.sql",
+      "sha256": "fc818406b2604477e6ddcf4e6d8d63d18ac1a94416c70b4cc846ee9c7108229a"
+    },
+    {
+      "version": "004_policy_and_admission.sql",
+      "sha256": "395bc6c76b4fa619aab20607e299bf6f7a28f2593dec484bb5c952e6e1985a9e"
+    },
+    {
+      "version": "005_reserve_checkout.sql",
+      "sha256": "51f4f10733ca293cc537e73dff491368b48dfb44b8d94ccaae5e59382d467a11"
+    },
+    {
+      "version": "006_settings_read_lock.sql",
+      "sha256": "2bc74e6633abb38a8c7ebd76b33630a1b1d1d2dc53460bee901284af01c034d7"
+    },
+    {
+      "version": "007_staff_closures.sql",
+      "sha256": "b8503b642e524329766aad06548fbcd64c5cc7e5b35a53d913a08793f3398bd5"
+    },
+    {
+      "version": "008_order_creation_result.sql",
+      "sha256": "7d114695fca641bc4311fe722c38f2438f44642f240cd1fe880116b1248a6d92"
+    },
+    {
+      "version": "009_payment_finalization.sql",
+      "sha256": "c5a79efd022d57b735490db891a881bdc5bb9019a5eacd143550a99a25ce3dbc"
+    },
+    {
+      "version": "010_null_safe_admission_binding.sql",
+      "sha256": "4d162966a81a60ad53e37c2c72d1224fec597696a6ecc8a204bc8638f6d9d935"
+    },
+    {
+      "version": "011_request_limits.sql",
+      "sha256": "ba4dbae9f6403432cf2abb9f4107706cfa71cc9209a6407a04f09ee93ba1396f"
+    },
+    {
+      "version": "012_recovery_leases.sql",
+      "sha256": "83194822b39cfebeb0ecf9dba1a24fa14f523b5bf219426648504b6c52cca9a1"
+    },
+    {
+      "version": "013_followup_after_capture.sql",
+      "sha256": "b1626c0ecfbf97800c036a499723e4e984e250e3158e5c8d64f35e0409b86fd2"
+    },
+    {
+      "version": "014_canonical_merchant_identity.sql",
+      "sha256": "2c899d1040efcf6844cf7c8acb1f61ad2ee1b17b307773d463f459f2e5a664c4"
+    },
+    {
+      "version": "015_google_studio.sql",
+      "sha256": "1ab912d1fe042011976aec4754b400254e3f52c77b978bbd95f5dc5cb9f2827a"
+    },
+    {
+      "version": "016_website_login.sql",
+      "sha256": "75dba3c02a0d9b07be7b91dddd0180d177ecef3cf31c3c23696119967ee71b01"
+    },
+    {
+      "version": "017_google_refresh.sql",
+      "sha256": "33cbb29bf639877128552edacca8f7bf90eb10ed80ea8c5a4b0cabe0204ebf8b"
+    },
+    {
+      "version": "018_google_workbooks.sql",
+      "sha256": "c8738400c213e970d14713c12992c0078396b097518adaed2b4b9f564b45028a"
+    },
+    {
+      "version": "019_google_delivery.sql",
+      "sha256": "c137ee8165ab13ffaac648f41ee026ebff81ba4790e18949872f9cf78ac35160"
+    },
+    {
+      "version": "020_email_dispatch.sql",
+      "sha256": "7fad0bf055115b6fd324e6088236900e4279251ab12c1d235ab11e4ecbd4fa17"
+    },
+    {
+      "version": "021_checkout_resume_lease.sql",
+      "sha256": "bb91d845fc345b3b2afee96f0b547b458bb71d7fe220692301b6b7e77304ffc4"
+    },
+    {
+      "version": "022_studio_calendar.sql",
+      "sha256": "7842adb1a10cce04943c8a7a8d10e949b85df33493d5902eab65e9b7edc2f373"
+    },
+    {
+      "version": "023_contact_intake.sql",
+      "sha256": "8b1e279ead2923ce9aae224743c2a8bd11b71c1e38941249d1e00862cbe158e4"
+    },
+    {
+      "version": "024_contact_delivery.sql",
+      "sha256": "9dcceb9f0e1cb9adaa5a7e30c6c7007520c429cfc1b418341737919996bd623f"
+    },
+    {
+      "version": "025_studio_inbox.sql",
+      "sha256": "75ed0c91f3874ac41d33eb770734d6de1517c78b1ee41e66097f549781215fbd"
+    },
+    {
+      "version": "026_staff_cancellation.sql",
+      "sha256": "8643ebe86485785d6553ec072d773e262d18df733d822bf86b0a4bf604daa2c0"
+    },
+    {
+      "version": "027_staff_reschedule.sql",
+      "sha256": "ea0fb7949c58577683859e2899ea84a14a90828f2c6e60a6c888d78409c72148"
+    },
+    {
+      "version": "028_staff_support.sql",
+      "sha256": "3d7823a7617c099751a8ae4a6e6ddf895924431fb343d5ca63845ff15f9d694f"
+    },
+    {
+      "version": "029_staff_receipt_recovery.sql",
+      "sha256": "8c90ab720d9ba03238453d219f98f3a11ef6ad692c3100d71d3039b2dba8e75a"
+    },
+    {
+      "version": "030_payment_independent_browsing.sql",
+      "sha256": "058fc7953898628472bc56fde790bec46ee67b06754b1253e87ebcbb681ec306"
+    }
+  ],
+  "checksum_source": "backend/booking_engine/migrations",
+  "transaction_lock": 4004001,
+  "prior_migrations": 19,
+  "final_migrations": 30,
+  "initial_connector_packaging_attempt": "Rejected multiple commands in one prepared statement; independent reread confirmed19, no partial upgrade.",
+  "corrected_packaging": "Exact reviewed source wrapped in a single PL/pgSQL utility statement, ledger inserted in same transaction, entire upgrade committed together.",
+  "verified": "Pinned baseline hashes, empty bookings, closed payable intake, old reservation entrypoint denied to website role, configured wrapper allowed, backup SELECT on all current tables, no backup table writes or privileged function execution.",
+  "final_state": {
+    "content": [
+      {
+        "type": "text",
+        "text": "[\n  {\n    \"migrations\": \"30\",\n    \"bookings\": \"0\",\n    \"public_open\": false,\n    \"schedule_browsing_open\": true,\n    \"merchant_id\": null,\n    \"payment_mode\": null,\n    \"credential_version\": null,\n    \"receipt_recoveries\": \"0\"\n  }\n]"
+      }
+    ],
+    "isError": false
+  }
+}

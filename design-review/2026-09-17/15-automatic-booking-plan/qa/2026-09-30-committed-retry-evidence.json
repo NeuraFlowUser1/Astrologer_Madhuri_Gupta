@@ -1,0 +1,66 @@
+{
+  "date": "2026-09-30",
+  "project": "cold-art-76378232",
+  "branch": "br-still-mud-b38cy2py",
+  "fixture": {
+    "context_id": "a16a92cc-c503-4663-9fa8-61572de8b0bf",
+    "request_id": "cbe5ff5b-0971-4ea8-930a-72fdae820ab2",
+    "purpose": "Independent committed retries without payment configuration; one expiring synthetic context and rejected admission retained, no customer/booking/provider data.",
+    "setup": [
+      "DO $$ BEGIN ASSERT current_database()='neondb'; ASSERT (SELECT count(*) FROM sarsa_booking.schema_migrations)=30; ASSERT NOT EXISTS(SELECT 1 FROM sarsa_booking.bookings); ASSERT NOT EXISTS(SELECT 1 FROM sarsa_booking.checkout_contexts); ASSERT NOT EXISTS(SELECT 1 FROM sarsa_booking.checkout_admissions); ASSERT NOT (SELECT public_open FROM sarsa_booking.intake_settings WHERE singleton); END $$",
+      "INSERT INTO sarsa_booking.checkout_contexts(id,credential_digest,expires_at) VALUES('a16a92cc-c503-4663-9fa8-61572de8b0bf','e3e271bbcdb17e334aea080cba59105edcf641a4e1d2c17d29b8b961bab92ecf',clock_timestamp()+interval '15 minutes')"
+    ],
+    "first": [
+      "SET LOCAL statement_timeout='20s'",
+      "SET LOCAL lock_timeout='12s'",
+      "SELECT pg_backend_pid() AS pid, clock_timestamp() AS started_at",
+      "SELECT id FROM sarsa_booking.checkout_contexts WHERE id='a16a92cc-c503-4663-9fa8-61572de8b0bf' FOR UPDATE",
+      "SELECT pg_sleep(4)",
+      "SELECT sarsa_booking.admit_checkout('a16a92cc-c503-4663-9fa8-61572de8b0bf'::uuid,'cbe5ff5b-0971-4ea8-930a-72fdae820ab2'::uuid,'210dd8bc1d0a4f9e4f0aa091c5f74661cce031de41b5f9996299da6156863e22','bf4f924f4acc096b9fabcd7679881f3b241d4989f1e7e5fbf4fbc1ccd307d40a') AS admission",
+      "SELECT sarsa_booking.reserve_configured_checkout('a16a92cc-c503-4663-9fa8-61572de8b0bf'::uuid,'cbe5ff5b-0971-4ea8-930a-72fdae820ab2'::uuid,'210dd8bc1d0a4f9e4f0aa091c5f74661cce031de41b5f9996299da6156863e22','bf4f924f4acc096b9fabcd7679881f3b241d4989f1e7e5fbf4fbc1ccd307d40a','{}'::jsonb,NULL) AS reservation",
+      "SELECT clock_timestamp() AS finished_at"
+    ],
+    "second": [
+      "SET LOCAL statement_timeout='20s'",
+      "SET LOCAL lock_timeout='12s'",
+      "SELECT pg_backend_pid() AS pid, clock_timestamp() AS started_at",
+      "SELECT sarsa_booking.admit_checkout('a16a92cc-c503-4663-9fa8-61572de8b0bf'::uuid,'cbe5ff5b-0971-4ea8-930a-72fdae820ab2'::uuid,'210dd8bc1d0a4f9e4f0aa091c5f74661cce031de41b5f9996299da6156863e22','bf4f924f4acc096b9fabcd7679881f3b241d4989f1e7e5fbf4fbc1ccd307d40a') AS admission",
+      "SELECT sarsa_booking.reserve_configured_checkout('a16a92cc-c503-4663-9fa8-61572de8b0bf'::uuid,'cbe5ff5b-0971-4ea8-930a-72fdae820ab2'::uuid,'210dd8bc1d0a4f9e4f0aa091c5f74661cce031de41b5f9996299da6156863e22','bf4f924f4acc096b9fabcd7679881f3b241d4989f1e7e5fbf4fbc1ccd307d40a','{}'::jsonb,NULL) AS reservation",
+      "SELECT clock_timestamp() AS finished_at"
+    ],
+    "verify": [
+      "SELECT request_id,context_id,outcome FROM sarsa_booking.checkout_admissions WHERE request_id='cbe5ff5b-0971-4ea8-930a-72fdae820ab2'",
+      "SELECT (SELECT count(*) FROM sarsa_booking.bookings) AS bookings,(SELECT count(*) FROM sarsa_booking.slot_claims) AS claims,(SELECT count(*) FROM sarsa_booking.payment_orders) AS orders",
+      "DO $$ BEGIN ASSERT (SELECT count(*) FROM sarsa_booking.checkout_admissions WHERE request_id='cbe5ff5b-0971-4ea8-930a-72fdae820ab2' AND context_id='a16a92cc-c503-4663-9fa8-61572de8b0bf' AND outcome='rejected')=1; ASSERT NOT EXISTS(SELECT 1 FROM sarsa_booking.bookings); ASSERT NOT EXISTS(SELECT 1 FROM sarsa_booking.slot_claims); ASSERT NOT EXISTS(SELECT 1 FROM sarsa_booking.payment_orders); END $$"
+    ]
+  },
+  "results": [
+    {
+      "status": "fulfilled",
+      "value": {
+        "content": [
+          {
+            "type": "text",
+            "text": "[\n  [],\n  [],\n  [\n    {\n      \"pid\": 588,\n      \"started_at\": \"2026-09-30T09:12:47.579Z\"\n    }\n  ],\n  [\n    {\n      \"id\": \"a16a92cc-c503-4663-9fa8-61572de8b0bf\"\n    }\n  ],\n  [\n    {\n      \"pg_sleep\": \"\"\n    }\n  ],\n  [\n    {\n      \"admission\": \"pending\"\n    }\n  ],\n  [\n    {\n      \"reservation\": {\n        \"code\": \"payment_not_configured\"\n      }\n    }\n  ],\n  [\n    {\n      \"finished_at\": \"2026-09-30T09:12:51.629Z\"\n    }\n  ]\n]"
+          }
+        ],
+        "isError": false
+      }
+    },
+    {
+      "status": "fulfilled",
+      "value": {
+        "content": [
+          {
+            "type": "text",
+            "text": "[\n  [],\n  [],\n  [\n    {\n      \"pid\": 588,\n      \"started_at\": \"2026-09-30T09:12:58.243Z\"\n    }\n  ],\n  [\n    {\n      \"admission\": \"rejected\"\n    }\n  ],\n  [\n    {\n      \"reservation\": {\n        \"code\": \"request_rejected\"\n      }\n    }\n  ],\n  [\n    {\n      \"finished_at\": \"2026-09-30T09:12:58.247Z\"\n    }\n  ]\n]"
+          }
+        ],
+        "isError": false
+      }
+    }
+  ],
+  "accepted_concurrency": false,
+  "limitation": "Connected query service serialized calls onto PID588; recorded timestamps do not overlap. This is committed replay acceptance only, not independent-session or same-slot race proof.",
+  "retention": "One expiring synthetic context and one rejected synthetic admission retained; no deletion, customer data, booking, slot claim or provider order."
+}

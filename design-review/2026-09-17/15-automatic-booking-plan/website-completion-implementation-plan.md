@@ -1,14 +1,16 @@
 # Sarsa complete-website integration and release plan
 
-Date: 29 September 2026. Status: revision 2, strengthened implementation plan; not an implementation or publication claim.
+Date: 29 September 2026; execution update 30 September 2026. Status: revision 2 contracts, authorised implementation underway; this plan does not by itself establish hosted acceptance.
+
+Latest owner direction: Sarsa's Razorpay onboarding is complete and payment integration is now part of this workstream. Verify the dedicated merchant identity, protected live credentials, capture settings and signed callbacks, then perform controlled payment acceptance. The exposed Razorpay plugin tools are read-only and do not establish their connected merchant; do not read another client's transaction history to infer ownership. All four matching worker-key copies are now protected locally. Production migrations001–030 are applied and checksum-verified, with backup read-only access preserved and no payable activation or appointment creation. See verification.md for exact limitations and evidence.
 
 ## 1. Outcome and authority
 
-Finish one coherent customer website and private staff application on Sarsa's existing Vercel project, with the actual production backend, database, Google connections, separate record copies, Resend delivery and background recovery. Razorpay account creation and real payment acceptance are deferred; everything independent of that must proceed. No disposable backend, mock checkout product, another client's resources or duplicate permanent website.
+Finish one coherent customer website and private staff application on Sarsa's existing Vercel project, with the actual production backend, database, Google connections, separate record copies, Resend delivery, background recovery and the newly onboarded dedicated Razorpay account. Proceed with independent tasks while exact account settings are supplied. No disposable backend, mock checkout product, another client's resources or duplicate permanent website.
 
 This is the current whole-website execution sequence. It supersedes the narrower next-step sequence in permanent-system-execution-plan.md. That file, implementation-contracts.md, staff-appointment-changes.md and the applied migrations remain detailed booking contracts/evidence. Earlier dated notes describe history, not today's deployment. Code and direct provider/runtime observations outrank status prose. Update this plan against evidence as implementation proceeds.
 
-The user requested planning followed by regrouping before implementation. This pass changes planning/documentation only. Subsequent execution is one integrated workstream, with incremental reviewable changes and one coordinated public release; it is not one unreviewable bulk edit. No repeated general approval request for individual files or tests once execution is authorized. Actual manual account actions remain necessary where Codex has no access.
+The owner authorised execution after reviewing this plan. Execution is one integrated workstream with incremental reviewable changes and a coordinated public release. No repeated general approval request for individual files or tests is required. Actual manual account actions remain necessary where Codex has no access.
 
 Important correction: work beyond Razorpay remains. Home/About/Kundli integration, several customer routes, common navigation, production schema upgrade, hosted staff/Google/Contact/email/worker verification and operational recovery are not finished merely because local booking tests pass.
 
@@ -186,16 +188,16 @@ Policies remain the final content step after actual collection/delivery behavior
 | W4 staff/non-payment services | Google authorization/ownership, records, Resend/Contact, staff usability, workers/alerts | Provider evidence, restricted-role tests, internal-recipient delivery, actual failure alert, no003 changes |
 | W5 operating readiness | Concurrency, restoration, retention/keys, routing/security/performance/accessibility | Independent-session race tests; isolated restore; bounded quota evidence; manual account gaps named |
 | W6 release | Final policy content, additive production schema, protected settings, reviewed source and coordinated deployment | Canonical route/content-type checks; all non-payment tasks work; checkout fails clearly only at missing payment; rollback procedure |
-| W7 later Razorpay | Client account creation/activation; merchant-bound keys/webhook; enable payable admission; controlled small payment | Verified amount/account/payment, single slot/Meet/record/mail, callback replay/recovery, refund evidence and cleanup as authorized |
+| W7 Razorpay, now in scope | Verify the owner's completed onboarding; merchant-bound live keys/webhook and capture settings; enable payable admission; controlled small payment | Verified amount/account/payment, single slot/Meet/record/mail, callback replay/recovery, refund evidence and cleanup as authorized |
 
-W1–W5 overlap where independent but do not deploy mismatched contracts. Finish all feasible work within the authorized implementation run; do not stop after each row. When a user-only setting or owner authorization is reached, ask for that exact step and continue unrelated work. W7 is the explicitly deferred workstream, not a reason to defer W1–W6.
+W1–W5 overlap where independent but do not deploy mismatched contracts. Finish all feasible work within the authorized implementation run; do not stop after each row. When a user-only setting or owner authorization is reached, ask for that exact step and continue unrelated work. W7 is now included; account-specific handoffs are not a reason to defer independent work in W1–W6.
 
 ## 10. Acceptance matrix and failure review
 
 - Navigation: direct URL, legacy hash, refresh, back/forward, wrong path, encoded input, selected service, section anchors, assets and private paths.
 - Visual: every section initial/assembling/settled, dark/light backgrounds, desktop/phone, no final-to-hidden flash, hero without scroll, below-fold lazy entry, return navigation, font/image delay, reduced motion, tour interruption.
 - Booking without merchant: all browsing works; checkout returns defined payment error; no booked slot, order or false receipt; no uncontrolled retries. Operational closure remains a distinct state.
-- Booking with wrong configuration: preflight rejects before reservation; runtime/DB identity mismatch and rotation are fenced; keys never leak. Actual correct merchant acceptance deferredW7.
+- Booking with wrong configuration: preflight rejects before reservation; runtime/DB identity mismatch and rotation are fenced; keys never leak. Actual correct merchant acceptance is required in W7.
 - Contact: valid/wrong/expired code, resend rate limits, email changed mid-flow, lost response, duplicate submit, delivery delayed, Google/email unavailable independently, safe replay and truthful receipt.
 - Staff: client/agency/anonymous access matrix, stale session, sign-out during request, role loss, expected-revision conflicts, exact uncertain retry, verified-refund evidence, original-phone attestation, recovery-code expiry/limits, stolen reference alone gives no access.
 - Financial/capacity: two independent transactions same slot, payment callback versus expiry/cancel, two workers same job, lease expiry, stale Google completion, reschedule overlap, full versus partial refund; compare immutable evidence and unchanged prices.

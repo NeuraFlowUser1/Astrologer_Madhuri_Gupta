@@ -2,7 +2,7 @@
 
 This imported client project is being rebuilt around Madhuri Gupta’s personal brand and a permanent appointment-booking system. The current implementation uses React/Vite, FastAPI, Neon Postgres, Razorpay, Google Calendar/Meet, separately owned Google Sheets, Resend and a dedicated Cloudflare recovery worker.
 
-**Current state, 30 September 2026:** the new website application is implemented locally but has not been published or opened to customers. A fresh provider check confirms development migrations through030 and production through019, with no bookings and payable intake closed in both. The official website still returns the old HTML shell at the new backend address. Razorpay’s dedicated Sarsa merchant account is pending; hosted Google, email, worker and payment acceptance remain separate unfinished work. Local tests are not proof of live delivery.
+**Current state, 30 September 2026:** the new website application is implemented locally but has not been published or opened to customers. A fresh provider check confirms development and production migrations through030, with no bookings and payable intake closed in both. The official website still returns the old HTML shell at the new backend address. The owner now reports Sarsa's Razorpay onboarding complete; its merchant identity, protected live settings and payment acceptance still require verification. Hosted Google, email and worker acceptance also remain unfinished. All four existing worker keys have protected local copies for the Cloudflare handoff; this is not hosted matching or deployment proof. Local tests are not proof of live delivery.
 
 **Backups are live:** the daily encrypted backup workflow is published and active in the existing GitHub repository. Its first production export, isolated restore, Sarsa-owned Google Drive upload and authenticated readback passed; a same-day rerun verified the existing copy without duplication. The schedule is08:32 India time. The owner has saved the recovery key, and actual initial failure notifications reached NeuraFlow’s inbox. See the [backup operating instructions and successful runs](tools/backup/README.md). This backup publication did not publish the new website application.
 
@@ -10,7 +10,7 @@ See the [current implementation checkpoint](design-review/2026-09-17/15-automati
 
 ## Start here
 
-- [Whole-website completion and release plan](design-review/2026-09-17/15-automatic-booking-plan/website-completion-implementation-plan.md) — current planned work; Razorpay account deferred, all independent work included.
+- [Whole-website completion and release plan](design-review/2026-09-17/15-automatic-booking-plan/website-completion-implementation-plan.md) — current planned work, including the newly onboarded Sarsa Razorpay account and all remaining hosted acceptance.
 
 - [Current implementation plan and status](design-review/2026-09-17/15-automatic-booking-plan/permanent-system-execution-plan.md)
 - [Permanent resource and account manifest](design-review/2026-09-17/15-automatic-booking-plan/permanent-resource-manifest.md)
