@@ -12,6 +12,7 @@ from envelope import BackupError,encrypt,decrypt
 IMAGE='postgres@sha256:5a5a84b19854a9ffaa54082c166ff4ec27473a361e496e5ea167f298f2da9722'
 HOST='ep-dry-hill-b3ujpil7.c-4.ap-southeast-1.aws.neon.tech'
 ROLE='sarsa_booking_backup'
+ROOT_CA='/etc/ssl/certs/ca-certificates.crt'
 ROOT=Path(__file__).resolve().parents[2]
 
 
@@ -24,7 +25,7 @@ def database_environment(value):
                 or set(parse_qs(url.query))-{'sslmode','channel_binding','sslrootcert'}):
             raise ValueError()
         return {'PGHOST':HOST,'PGPORT':'5432','PGDATABASE':'neondb','PGUSER':ROLE,
-            'PGPASSWORD':unquote(url.password),'PGSSLMODE':'verify-full','PGSSLROOTCERT':'system',
+            'PGPASSWORD':unquote(url.password),'PGSSLMODE':'verify-full','PGSSLROOTCERT':ROOT_CA,
             'PGCHANNELBINDING':'require','PGCONNECT_TIMEOUT':'10',
             'PGOPTIONS':'-c default_transaction_read_only=on -c statement_timeout=120000'}
     except Exception:raise BackupError('backup_database_identity_invalid') from None

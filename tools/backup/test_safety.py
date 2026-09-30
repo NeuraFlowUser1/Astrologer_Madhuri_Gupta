@@ -3,13 +3,14 @@ import unittest
 import httpx
 from drive import Drive, owned
 from envelope import BackupError
-from postgres import database_environment, HOST
+from postgres import database_environment, HOST, ROOT_CA
 
 class BackupSafetyTests(unittest.TestCase):
     def test_database_is_fixed_to_direct_sarsa_host_and_read_role(self):
         value=f'postgresql://sarsa_booking_backup:synthetic@{HOST}/neondb?sslmode=require'
         env=database_environment(value)
         self.assertEqual(env['PGSSLMODE'],'verify-full')
+        self.assertEqual(env['PGSSLROOTCERT'],ROOT_CA)
         self.assertEqual(env['PGUSER'],'sarsa_booking_backup')
         for bad in [value.replace(HOST,'example.com'),value.replace('sarsa_booking_backup','neondb_owner'),value.replace('/neondb','/other'),value+'&service=other']:
             with self.assertRaises(BackupError):database_environment(bad)
