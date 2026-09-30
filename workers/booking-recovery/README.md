@@ -1,11 +1,11 @@
 # Sarsa recovery and independent monitoring
 
-**30 September2026 live checkpoint:** dedicated Worker version4f7db6c5-155a-4bd3-903d-1c55b019c14e is deployed with the agreed15-minute rescue, existing queue/KV and all four original protected settings. Canonical RECOVERY and EMAIL-event keys pass; wake rejects unauthenticated401 and accepts the existing WAKE key202. Queue now has one producer and one consumer. The first scheduled heartbeat and monitor publication are pending; Google/Studio composition, actual sends/Meet and payments are not accepted merely because the empty plan works. Historical29 September entries below describe the preceding local state.
+**30 September2026 live checkpoint:** dedicated Worker `83b28f4b-c203-477b-992c-14037e33424a` is deployed with the agreed15-minute rescue, existing queue/KV and all four original protected settings. Actual12:00 scheduled heartbeat is healthy, and an authenticated empty-system queue pass completed without retry/failure codes (CPU3ms/wall629ms); public health returns200/healthy. Fixed the native edge runtime’s rejection of redirect:error by using redirect:manual and rejecting all non200 responses, preserving credential non-forwarding. Twenty-five Worker tests, native synthetic200/302 cases and the required frontend build pass. Unknown/private errors are replaced by fixed codes. Worker fix and independent monitor are published as `c529cfc`; first monitoring job passed. Google owners and separate workbooks are accepted; real sends/Meet/payments remain separate checks. Older checkpoints below are historical.
 
 
 ## Purpose and current state
 
-30 September2026 recovery check: this Worker remains an unpublished component. All four owner-selected existing Vercel keys have been privately captured, checked for distinctness, encrypted for the Windows user and readback-verified. No live value was regenerated or provider setting changed. The Sarsa Vercel account remains intentionally disconnected. Configure the existing dedicated Cloudflare resources through private process input after the canonical backend is served, then prove authenticated matching; local capture alone is not live acceptance. Daily encrypted backups are live and tested, separately from this Worker and its still-unpublished monitor. See the canonical verification record for current release evidence.
+Earlier30 September2026 recovery check, superseded by the live checkpoint above: this Worker was still an unpublished component. All four owner-selected existing Vercel keys have been privately captured, checked for distinctness, encrypted for the Windows user and readback-verified. No live value was regenerated or provider setting changed. The Sarsa Vercel account remains intentionally disconnected. Configure the existing dedicated Cloudflare resources through private process input after the canonical backend is served, then prove authenticated matching; local capture alone is not live acceptance. Daily encrypted backups are live and tested, separately from this Worker and its still-unpublished monitor. See the canonical verification record for current release evidence.
 
 Immediate queue hints wake the permanent website's saved work. A15-minute scheduled sweep rescues lost hints and expired queue retries. Saved database jobs and provider observations remain authoritative. No customer records, job IDs, provider payloads or credentials enter queue messages or heartbeat storage.
 
@@ -20,7 +20,7 @@ Immediate queue hints wake the permanent website's saved work. A15-minute schedu
 | Worker name | sarsa-booking-recovery (deployed30 September; version above) |
 | Queue | sarsa-booking-recovery, ID8d602c4b56f44eca8ae5bcfa6cde1fab |
 | Heartbeat KV namespace | sarsa-booking-recovery-heartbeats, ID927be5fbe5c54002ae03e55c48a0a2e5 |
-| Future worker origin | https://sarsa-booking-recovery.neuraflowindia.workers.dev |
+| Deployed worker origin | https://sarsa-booking-recovery.neuraflowindia.workers.dev |
 | Website origin | https://www.sarsajyotishsansthan.com |
 
 Wrangler account identity and account workers.dev subdomain were read live. Queue and namespace creation were acknowledged by Cloudflare. Existing003 script/queue unchanged. Billing subscriptions API returned403; Workers standard endpoint returned standard=true, which is not sufficient evidence of Free/Paid subscription or remaining shared allowances. No plan change, deployed worker, queue message or KV record was created during provisioning. Never recreate a resource blindly after an uncertain response; list exact names first.

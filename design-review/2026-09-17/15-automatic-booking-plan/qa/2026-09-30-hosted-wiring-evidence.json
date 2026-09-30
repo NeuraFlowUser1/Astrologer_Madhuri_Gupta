@@ -137,5 +137,94 @@
     "mobile_overflow": "Exact scoped clip rule visually checked in browser at390px and320px; no horizontal overflow. Hosted publication pending."
   },
   "customer_or_financial_mutations": false,
-  "private_value_files_published": false
+  "private_value_files_published": false,
+  "deployment_followup": {
+    "checked_at_utc": "2026-09-30T11:13:00Z",
+    "commit": "a9ed73e1279386e25a057d82382b6bf2d3af02e1",
+    "booking_bundle": "index-CUMZZ8VP.js",
+    "configuration_route": 200,
+    "studio": 503,
+    "rejected_format": "SARSA_GOOGLE_TOKEN_KEYS",
+    "phone_overflow": [
+      {
+        "viewport_width": 390,
+        "client_width": 382,
+        "scroll_width": 382
+      },
+      {
+        "viewport_width": 320,
+        "client_width": 312,
+        "scroll_width": 312
+      }
+    ],
+    "existing_key_format_repair": "owner_saved_copy_requested_no_rotation",
+    "scheduled_records_observed": 0,
+    "sweep_keys_observed": 0,
+    "identical_sarsa_schedule_reapplied_and_readback": true,
+    "scheduled_acceptance": false
+  },
+  "latest_acceptance": {
+    "checked_at_utc": "2026-09-30T12:08:00Z",
+    "studio": 200,
+    "unsigned_studio_status": 401,
+    "studio_private_checks_all_true": true,
+    "google_workbooks": {
+      "client": {
+        "state": "ready",
+        "owner_match": true,
+        "current_connection": true
+      },
+      "agency": {
+        "state": "ready",
+        "owner_match": true,
+        "current_connection": true
+      }
+    },
+    "worker": {
+      "version": "83b28f4b-c203-477b-992c-14037e33424a",
+      "scheduled_at": 1790769642000,
+      "completed_at": 1790769677782,
+      "healthy": true,
+      "health_http": 200,
+      "queue_outcome": "ok",
+      "queue_cpu_ms": 3,
+      "queue_wall_ms": 629,
+      "safe_failures": [],
+      "source_commit": "c529cfceace97b05abcc460b8b6425515a62a15a",
+      "monitor_run": 36712770409,
+      "monitor_acceptance": "passed",
+      "monitor_completed_at": "2026-09-30T12:07:30Z"
+    },
+    "mail": {
+      "provider_daily_used": 0,
+      "provider_daily_limit": 100,
+      "provider_monthly_used": 94,
+      "provider_monthly_limit": 3000,
+      "local_daily_limit": 20,
+      "local_rolling_31_day_limit": 600,
+      "local_contact_daily_limit": 8,
+      "local_contact_rolling_31_day_limit": 240,
+      "shared_capacity_reserved": false,
+      "actual_delivery": "pending"
+    },
+    "payment": {
+      "protected_local_copy_exists": true,
+      "production_parsers_accepted": true,
+      "merchant": "ThvGDrQ1FuyLI8",
+      "mode": "live",
+      "credential_version": "sarsa-live-20260930",
+      "hosted_provider_acceptance": false
+    },
+    "worker_unit_tests": 25,
+    "native_fixture_compatibility_date": "2026-09-17",
+    "native_200_and_redirect_302": "passed",
+    "frontend_build": "passed",
+    "customer_or_financial_mutations": false,
+    "concurrency": {
+      "connector_calls": "same_backend_nonoverlapping",
+      "terminal_credential_transfer": "rejected_by_automatic_approval_review_no_value_sent",
+      "owner_private_check": "prepared_not_run",
+      "safe_connection_rejection_cases": 7
+    }
+  }
 }
