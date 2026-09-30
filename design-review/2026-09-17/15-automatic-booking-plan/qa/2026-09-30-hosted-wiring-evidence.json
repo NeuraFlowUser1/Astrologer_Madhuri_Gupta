@@ -214,7 +214,7 @@
       "merchant": "ThvGDrQ1FuyLI8",
       "mode": "live",
       "credential_version": "sarsa-live-20260930",
-      "hosted_provider_acceptance": false,
+      "hosted_provider_acceptance": true,
       "database_merchant_tuple_configured": true,
       "public_payment_admission": true,
       "hosted_accounts_last_read": true,
@@ -277,6 +277,48 @@
       "day": "2026-10-01",
       "slots": 10,
       "approved_policy_status": 200
+    },
+    "paid_booking_acceptance": {
+      "service_id": "kundli-matching",
+      "amount_paise": 100,
+      "currency": "INR",
+      "appointment_state": "confirmed",
+      "revision": 1,
+      "active_claims": 1,
+      "bound_merchant_match": true,
+      "mode": "live",
+      "captured": true,
+      "refunded_paise": 0,
+      "signed_events_processed": [
+        "payment.authorized",
+        "payment.captured",
+        "order.paid"
+      ],
+      "checkout_verified_processed": true,
+      "meet_state": "ready",
+      "meet_url_saved": true,
+      "calendar_job": "delivered",
+      "client_sheet": "delivered",
+      "agency_sheet": "delivered",
+      "sheet_project_labels_match": true,
+      "sheet_booking_references_match": true,
+      "sheet_recorded_rupees": "1",
+      "current_owner_matches": true,
+      "booking_emails_delivered": [
+        "practice_acknowledgement",
+        "customer_acknowledgement",
+        "customer_details"
+      ],
+      "independent_visual_calendar_sheet_read": false,
+      "private_customer_or_payment_references_published": false
+    },
+    "price_restoration": {
+      "normal_source_and_public_catalogue_restored": true,
+      "unit_tests_passed": 244,
+      "frontend_build": "passed",
+      "hosted_restoration": "pending",
+      "database_pointer_restoration": "pending",
+      "existing_test_snapshot_repriced": false
     }
   },
   "owner_test_followup": {
@@ -284,5 +326,10 @@
     "actual_customer_message_processing": true,
     "payment_order_charge_refund_created": false,
     "test_record_deleted": false
+  },
+  "owner_paid_test_followup": {
+    "owner_created_booking_and_payment": true,
+    "codex_created_charge_or_refund": false,
+    "staff_changes": "not_exercised"
   }
 }

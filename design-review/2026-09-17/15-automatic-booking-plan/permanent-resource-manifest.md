@@ -1,5 +1,14 @@
 # Permanent resource manifest — 28 September 2026
 
+## Real paid-booking acceptance and price restoration — 30 September 2026
+
+The owner completed one real Kundli Matching booking at1 INR. Production shows confirmed revision1,100 paise INR, the bound Sarsa merchant/live mode, confirmed order resolution and exactly one active slot claim. The accepted payment observation is captured,100 paise INR and zero refunded. The appointment is2 October15:00–15:30 India time. No private name, email, mobile, payment/order identifier or meeting link is published here.
+
+Signed payment.authorized, payment.captured and order.paid callback references all processed on their first attempt. The separate checkout.verified entry also processed; it is browser-verification evidence, not falsely counted as a provider-signed webhook. All three booking emails have signed email.delivered observations: practice acknowledgement15:23:19.708 UTC, customer acknowledgement15:23:25.849 UTC and customer details15:23:32.806 UTC. Calendar delivery is complete and the revision1 meeting is ready with a stored Google Meet URL. Both spreadsheet jobs are delivered; each assigned row2 has the correct Project004/booking reference, recorded1 INR and matching current role-owner/consent revision. These are actual delivery/assignment records, not an independent visual inspection or attendance test.
+
+Normal2100 INR Kundli Matching source and its test are restored locally; public catalogue regenerated to the original quote version29824fcc90cabd9f8bd3245c787aa4b1694bd6270906fb65ba1eca3c2bd0fcd3.244 tests and production build pass. Publish/deploy that restoration, then compare-and-set the database pointer to the original snapshot after checking the actual hosted version. At this checkpoint hosted source/database still serve the temporary1 INR price; restoration is not falsely marked complete. Historical test booking/payment snapshots remain100 paise. No cancellation, staff reschedule, refund, payment credentials, grants or protected-key rotation performed by Codex. Controlled staff follow-through, independent owner-local concurrency, final privacy disclosures and remaining operating/backup evidence remain separate acceptance items.
+
+
 ## Real Contact acceptance — 30 September 2026
 
 The owner submitted the clearly marked test enquiry through the official Contact page. Production saved it at12:59:18.915 UTC and verified it at13:01:28.649 UTC, generation1, with zero incorrect-code attempts. The verification, acknowledgement and practice-notice jobs each completed one send attempt without a recorded error. All three have persisted email.sent and email.delivered observations from the signed Resend callback path; acknowledgement delivered13:02:01.840 UTC and practice notice13:02:13.764 UTC. Delivery means the receiving mail server accepted the message; it does not prove that a person read it or that it avoided a spam folder.

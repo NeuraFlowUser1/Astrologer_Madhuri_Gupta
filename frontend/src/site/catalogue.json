@@ -1,10 +1,10 @@
 {
-  "quote_version": "e2df74043ffe3d4e5ca2e4b8bfcb44d4a5eb68ae0034b9ca7778ac67e0acaf0e",
+  "quote_version": "29824fcc90cabd9f8bd3245c787aa4b1694bd6270906fb65ba1eca3c2bd0fcd3",
   "services": [
     {
       "id": "kundli-matching",
       "name": "Kundli Matching",
-      "amount_paise": 100,
+      "amount_paise": 210000,
       "duration_minutes": 30,
       "currency": "INR",
       "meeting_platform": "Google Meet"

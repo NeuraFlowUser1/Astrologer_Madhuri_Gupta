@@ -12,7 +12,7 @@ class SchedulingTests(unittest.TestCase):
 
     def test_approved_catalogue_and_meet(self):
         self.assertEqual({k: v.amount_paise for k, v in SERVICES.items()}, {
-            'kundli-matching': 100, 'kundli-prediction': 250000,
+            'kundli-matching': 210000, 'kundli-prediction': 250000,
             'vastu-consultation': 450000, 'numerology': 210000})
         for service in SERVICES:
             self.assertEqual(quote(service)['duration_minutes'], 30)
