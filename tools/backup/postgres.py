@@ -8,6 +8,7 @@ import threading
 import time
 from urllib.parse import urlsplit,parse_qs,unquote
 from envelope import BackupError,encrypt,decrypt
+from diagnostics import PrivateErrors
 
 IMAGE='postgres@sha256:5a5a84b19854a9ffaa54082c166ff4ec27473a361e496e5ea167f298f2da9722'
 HOST='ep-dry-hill-b3ujpil7.c-4.ap-southeast-1.aws.neon.tech'
@@ -37,14 +38,18 @@ def dump_encrypted(dsn,path,key,metadata):
     for name in settings:command+=['-e',name]
     command += [IMAGE,'pg_dump','--format=custom','--schema=sarsa_booking','--no-owner',
                 '--no-privileges','--compress=gzip:6','--lock-wait-timeout=10000','--no-password']
-    process=subprocess.Popen(command,env={**os.environ,**settings},stdout=subprocess.PIPE,stderr=subprocess.DEVNULL)
+    process=subprocess.Popen(command,env={**os.environ,**settings},stdout=subprocess.PIPE,stderr=subprocess.PIPE)
+    errors=PrivateErrors(process.stderr)
     deadline=threading.Timer(240,process.kill);deadline.start()
     try:
         with path.open('xb') as output:encrypt(process.stdout,output,key,metadata)
-        if process.wait(timeout=10)!=0:raise BackupError('postgres_dump_failed')
+        result=process.wait(timeout=10)
+        errors.finish()
+        if result!=0:raise BackupError(errors.code('dump'))
     finally:
         deadline.cancel();process.stdout.close()
         if process.poll() is None:process.kill();process.wait()
+        errors.finish();process.stderr.close()
     with path.open('rb') as source:decrypt(source,key)
 
 
