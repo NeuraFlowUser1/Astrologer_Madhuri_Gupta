@@ -11,7 +11,11 @@ export default defineConfig({
   server: {
     port: 3000,
     host: true,
+    // WSL-mounted files need polling so a refresh cannot retain stale modules.
+    watch: { usePolling: Boolean(process.env.WSL_DISTRO_NAME) || process.env.SARSA_DEV_POLL === '1', interval: 500 },
     proxy: {
+      '/studio': { target: 'http://127.0.0.1:8000', changeOrigin: true },
+      '/booking-help': { target: 'http://127.0.0.1:8000', changeOrigin: true },
       '/api': {
         target: 'http://127.0.0.1:8000',
         changeOrigin: true,

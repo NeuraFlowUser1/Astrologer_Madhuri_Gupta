@@ -1,0 +1,65 @@
+{
+  "policy": {
+    "project": "004-sarsa-jyotish-sansthan",
+    "timezone": "Asia/Kolkata",
+    "weekdays": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5
+    ],
+    "windows": [
+      [
+        "10:00",
+        "12:00"
+      ],
+      [
+        "15:00",
+        "18:00"
+      ]
+    ],
+    "slot_step_minutes": 30,
+    "notice_minutes": 30,
+    "advance_days": 10,
+    "hold_minutes": 10,
+    "receipt_after_hours": 24,
+    "availability_authority": "website_staff_calendar",
+    "services": [
+      {
+        "id": "kundli-matching",
+        "name": "Kundli Matching",
+        "amount_paise": 210000,
+        "duration_minutes": 30,
+        "currency": "INR",
+        "meeting_platform": "Google Meet"
+      },
+      {
+        "id": "kundli-prediction",
+        "name": "Kundli Prediction",
+        "amount_paise": 250000,
+        "duration_minutes": 30,
+        "currency": "INR",
+        "meeting_platform": "Google Meet"
+      },
+      {
+        "id": "vastu-consultation",
+        "name": "Vastu Consultation",
+        "amount_paise": 450000,
+        "duration_minutes": 30,
+        "currency": "INR",
+        "meeting_platform": "Google Meet"
+      },
+      {
+        "id": "numerology",
+        "name": "Numerology",
+        "amount_paise": 210000,
+        "duration_minutes": 30,
+        "currency": "INR",
+        "meeting_platform": "Google Meet"
+      }
+    ]
+  },
+  "quote_version": "29824fcc90cabd9f8bd3245c787aa4b1694bd6270906fb65ba1eca3c2bd0fcd3"
+}

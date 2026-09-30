@@ -1,835 +1,92 @@
-import React, { useState, useEffect } from 'react';
-import { useSearchParams } from 'react-router-dom';
-import { motion, AnimatePresence } from 'framer-motion';
-import {
-  Calendar as CalendarIcon,
-  Clock,
-  MapPin,
-  User,
-  Mail,
-  Sparkles,
-  CheckCircle2,
-  AlertTriangle,
-  ArrowLeft,
-  Phone,
-  CreditCard,
-  Check,
-  ShieldCheck,
-  KeyRound,
-  RefreshCw,
-  Lock,
-  X
-} from 'lucide-react';
-import EmailOtpModal from '../components/EmailOtpModal';
-
-const BACKEND_URL = import.meta.env.VITE_BACKEND_URL || (typeof window !== 'undefined' && (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') ? '' : 'https://astrologer-madhuri-gupta.onrender.com');
-
-export default function Booking() {
-  const [searchParams] = useSearchParams();
-  const initialService = searchParams.get('service') || 'kundli-prediction';
-
-  // Form State
-  const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    phone: '',
-    serviceType: initialService,
-    birthDate: '',
-    birthTime: '',
-    birthPlace: '',
-    additionalInfo: ''
-  });
-
-  // Booking Flow State
-  const [step, setStep] = useState(1); // 1: User Details, 2: Date & Time, 3: Payment/Confirm, 4: Success
-  const [selectedDate, setSelectedDate] = useState('');
-  const [availableSlots, setAvailableSlots] = useState([]);
-  const [selectedSlot, setSelectedSlot] = useState('');
-  const [paymentMethod, setPaymentMethod] = useState('pay_later'); // Default to instant confirm / test mode
-
-  // OTP Verification State
-  const [isEmailVerified, setIsEmailVerified] = useState(false);
-  const [verificationToken, setVerificationToken] = useState('');
-  const [showOtpModal, setShowOtpModal] = useState(false);
-
-  // Loading & Error States
-  const [loading, setLoading] = useState(false);
-  const [bookingLoading, setBookingLoading] = useState(false);
-  const [error, setError] = useState('');
-  const [bookingResult, setBookingResult] = useState(null);
-
-  const serviceOptions = [
-    { value: 'kundli-matching', label: 'Kundli Matching (30 min)', price: '₹2,100' },
-    { value: 'kundli-prediction', label: 'Kundli Prediction (30 min)', price: '₹2,500' },
-    { value: 'vastu-consultation', label: 'Vastu Consultation (30 min)', price: '₹4,500' },
-    { value: 'numerology', label: 'Numerology (30 min)', price: '₹2,100' }
-  ];
-
-  // Update form service type if URL parameter changes and set document title
-  useEffect(() => {
-    document.title = "Book Kundli & Vastu Consultation in Agra | Sarsa Jyotish Sansthan";
-    if (searchParams.get('service')) {
-      setFormData(prev => ({ ...prev, serviceType: searchParams.get('service') }));
-    }
-  }, [searchParams]);
-
-
-  const handleInputChange = (e) => {
-    const { name, value } = e.target;
-    setFormData(prev => ({ ...prev, [name]: value }));
-    // If email changes after verification, reset verification status
-    if (name === 'email' && isEmailVerified) {
-      setIsEmailVerified(false);
-      setVerificationToken('');
-    }
-  };
-
-  // Professional mobile phone validation helper (Does NOT enforce +91)
-  const validatePhone = (rawPhone) => {
-    if (!rawPhone) return { valid: false, message: 'Please enter your mobile number.' };
-    const digits = rawPhone.replace(/\D/g, '');
-    if (!digits) return { valid: false, message: 'Please enter a valid mobile number.' };
-    if (/^(\d)\1{7,}$/.test(digits)) {
-      return { valid: false, message: 'Please enter a genuine mobile number.' };
-    }
-    if (digits.length === 10) {
-      if (/^[6-9]/.test(digits)) return { valid: true, digits };
-      return { valid: false, message: '10-digit Indian mobile numbers must start with 6, 7, 8, or 9.' };
-    }
-    if (digits.length === 11 && digits.startsWith('0')) {
-      return { valid: true, digits: digits.slice(1) };
-    }
-    if (digits.length === 12 && digits.startsWith('91')) {
-      return { valid: true, digits: digits.slice(2) };
-    }
-    if (digits.length >= 10 && digits.length <= 15) {
-      return { valid: true, digits };
-    }
-    return { valid: false, message: 'Please enter a valid 10-digit mobile number (e.g. 98881 57343).' };
-  };
-
-  // Fetch available slots from backend
-  const fetchSlots = async (date) => {
-    setLoading(true);
-    setError('');
-    try {
-      const response = await fetch(`${BACKEND_URL}/api/available-slots?date=${date}`);
-      if (!response.ok) {
-        throw new Error('Failed to load slots from API.');
-      }
-      const data = await response.json();
-      setAvailableSlots(data.slots || []);
-    } catch (err) {
-      console.error(err);
-      setAvailableSlots(['10:00 AM', '11:30 AM', '02:00 PM', '03:30 PM', '05:00 PM']);
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  // Handle OTP Verification Success
-  const handleOtpVerified = (token) => {
-    setIsEmailVerified(true);
-    setVerificationToken(token);
-    setShowOtpModal(false);
-
-    // Auto-proceed to step 2 once verified
-    const tomorrow = new Date();
-    tomorrow.setDate(tomorrow.getDate() + 1);
-    const formattedTomorrow = tomorrow.toISOString().split('T')[0];
-    setSelectedDate(formattedTomorrow);
-    setStep(2);
-    fetchSlots(formattedTomorrow);
-  };
-
-  // Submit details to proceed to slots calendar (with mandatory email verification check)
-  const handleProceedToSlots = (e) => {
-    e.preventDefault();
-    setError('');
-
-    // 1. Validate Form Constraints
-    if (!formData.name.trim() || formData.name.trim().length < 2) {
-      setError('Please enter your full name (at least 2 characters).');
-      return;
-    }
-    if (!formData.email.trim() || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email.trim())) {
-      setError('Please enter a valid email address.');
-      return;
-    }
-    const phoneCheck = validatePhone(formData.phone);
-    if (!phoneCheck.valid) {
-      setError(phoneCheck.message);
-      return;
-    }
-    if (!formData.birthDate) {
-      setError('Please select your date of birth.');
-      return;
-    }
-    if (!formData.birthTime) {
-      setError('Please select your approximate time of birth.');
-      return;
-    }
-
-    // 2. Enforce Email Verification before advancing
-    if (!isEmailVerified) {
-      setShowOtpModal(true);
-      return;
-    }
-
-    // Set default selected date to tomorrow
-    const tomorrow = new Date();
-    tomorrow.setDate(tomorrow.getDate() + 1);
-    const formattedTomorrow = tomorrow.toISOString().split('T')[0];
-    setSelectedDate(formattedTomorrow);
-    setStep(2);
-    fetchSlots(formattedTomorrow);
-  };
-
-  // Handle changing dates in the slots panel
-  const handleDateChange = (date) => {
-    setSelectedDate(date);
-    fetchSlots(date);
-  };
-
-  // Proceed to confirmation screen
-  const handleProceedToPayment = () => {
-    if (!selectedSlot) {
-      setError('Please select a time slot.');
-      return;
-    }
-    setError('');
-    setStep(3);
-  };
-
-  // Finalize booking submit via asynchronous backend integration
-  const handleConfirmPayment = async () => {
-    setError('');
-    setBookingLoading(true);
-
-    const payload = {
-      name: formData.name.trim(),
-      email: formData.email.trim(),
-      phone: formData.phone.trim(),
-      serviceType: formData.serviceType,
-      birthDate: formData.birthDate,
-      birthTime: formData.birthTime,
-      birthPlace: formData.birthPlace.trim() || null,
-      bookingDate: selectedDate,
-      bookingTime: selectedSlot,
-      additionalInfo: formData.additionalInfo.trim() || null,
-      verificationToken: verificationToken || null
-    };
-
-    try {
-      const response = await fetch(`${BACKEND_URL}/api/book-appointment`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(payload),
-      });
-
-      if (!response.ok) {
-        const errData = await response.json();
-        throw new Error(errData.detail || 'Failed to complete booking.');
-      }
-
-      const result = await response.json();
-      setBookingResult({
-        ...payload,
-        jitsiLink: result.jitsiLink,
-        bookingId: result.bookingId
-      });
-      // Instant transition to step 4 without waiting for slow backend syncing!
-      setStep(4);
-    } catch (err) {
-      setError(err.message || 'Something went wrong during scheduling. Please try again.');
-    } finally {
-      setBookingLoading(false);
-    }
-  };
-
-  const activeService = serviceOptions.find(o => o.value === formData.serviceType) || serviceOptions[0];
-
-
-  return (
-    <div 
-      className="booking-page-root px-4 sm:px-6 2xl:px-8 relative bg-[#F3E7D5]" 
-      style={{ 
-        backgroundImage: "linear-gradient(rgba(243, 231, 213, 0.45), rgba(243, 231, 213, 0.45)), url('/marble-bg.webp')", 
-        backgroundSize: 'cover', 
-        backgroundPosition: 'center', 
-        backgroundAttachment: 'fixed' 
-      }}
-    >
-      
-      <div className="w-full max-w-[540px] 2xl:max-w-[640px] 3xl:max-w-[760px] 4xl:max-w-[920px] 5xl:max-w-[1100px] mx-auto relative z-10 flex flex-col items-center">
-        
-        {/* Header */}
-        <div className="text-center w-full mb-3 2xl:mb-4 3xl:mb-5 4xl:mb-6 space-y-1">
-          <h1 className="font-serif text-xl sm:text-2xl 2xl:text-3xl 3xl:text-4xl 4xl:text-5xl 5xl:text-6xl font-bold text-[#3a1906] tracking-wide">
-            Book a Consultation
-          </h1>
-          <div className="w-10 2xl:w-12 3xl:w-16 4xl:w-20 5xl:w-28 h-[2px] 3xl:h-[3px] bg-[#deb18a] mx-auto" />
-        </div>
-
-        {/* 3-Step Progress Tracker */}
-        {step <= 3 && (
-          <div className="flex justify-center items-center space-x-1.5 sm:space-x-3 3xl:space-x-4 4xl:space-x-5 mb-3 2xl:mb-4 3xl:mb-5 4xl:mb-6 text-[11px] sm:text-xs 2xl:text-sm 3xl:text-base 4xl:text-lg 5xl:text-xl font-medium tracking-wide">
-            
-            {/* Step 1 */}
-            <div className={`flex items-center space-x-1.5 2xl:space-x-2 4xl:space-x-3 ${step === 1 ? 'text-[#b8922b]' : step > 1 ? 'text-green-600' : 'text-gray-500'}`}>
-              <span className={`w-5 h-5 sm:w-6 sm:h-6 2xl:w-7 2xl:h-7 3xl:w-8 3xl:h-8 4xl:w-10 4xl:h-10 5xl:w-12 5xl:h-12 rounded-full flex items-center justify-center border font-bold text-[10px] sm:text-xs 2xl:text-sm 4xl:text-base transition-all ${
-                step > 1 
-                  ? 'border-green-600 bg-green-500/10 text-green-600' 
-                  : step === 1 
-                    ? 'border-[#b8922b] bg-[#b8922b]/15 text-[#b8922b] ring-2 ring-[#b8922b]/20' 
-                    : 'border-gray-300 bg-gray-100 text-gray-400'
-              }`}>
-                {step > 1 ? <Check className="w-2.5 h-2.5 sm:w-3 sm:h-3 2xl:w-3.5 2xl:h-3.5 4xl:w-5 4xl:h-5" /> : "1"}
-              </span>
-              <span className="font-serif font-semibold whitespace-nowrap">User Details</span>
-            </div>
-
-            <div className="h-[1px] 2xl:h-[2px] 4xl:h-[3px] w-3 sm:w-6 2xl:w-8 4xl:w-12 5xl:w-16 bg-gray-300 shrink-0" />
-
-            {/* Step 2 */}
-            <div className={`flex items-center space-x-1.5 2xl:space-x-2 4xl:space-x-3 ${step === 2 ? 'text-[#b8922b]' : step > 2 ? 'text-green-600' : 'text-gray-500'}`}>
-              <span className={`w-5 h-5 sm:w-6 sm:h-6 2xl:w-7 2xl:h-7 3xl:w-8 3xl:h-8 4xl:w-10 4xl:h-10 5xl:w-12 5xl:h-12 rounded-full flex items-center justify-center border font-bold text-[10px] sm:text-xs 2xl:text-sm 4xl:text-base transition-all ${
-                step > 2 
-                  ? 'border-green-600 bg-green-500/10 text-green-600' 
-                  : step === 2 
-                    ? 'border-[#b8922b] bg-[#b8922b]/15 text-[#b8922b] ring-2 ring-[#b8922b]/20' 
-                    : 'border-gray-300 bg-gray-100 text-gray-400'
-              }`}>
-                {step > 2 ? <Check className="w-2.5 h-2.5 sm:w-3 sm:h-3 2xl:w-3.5 2xl:h-3.5 4xl:w-5 4xl:h-5" /> : "2"}
-              </span>
-              <span className="font-serif font-semibold whitespace-nowrap">Select Slot</span>
-            </div>
-
-            <div className="h-[1px] 2xl:h-[2px] 4xl:h-[3px] w-3 sm:w-6 2xl:w-8 4xl:w-12 5xl:w-16 bg-gray-300 shrink-0" />
-
-            {/* Step 3 */}
-            <div className={`flex items-center space-x-1.5 2xl:space-x-2 4xl:space-x-3 ${step === 3 ? 'text-[#b8922b]' : 'text-gray-500'}`}>
-              <span className={`w-5 h-5 sm:w-6 sm:h-6 2xl:w-7 2xl:h-7 3xl:w-8 3xl:h-8 4xl:w-10 4xl:h-10 5xl:w-12 5xl:h-12 rounded-full flex items-center justify-center border font-bold text-[10px] sm:text-xs 2xl:text-sm 4xl:text-base transition-all ${
-                step === 3 
-                  ? 'border-[#b8922b] bg-[#b8922b]/15 text-[#b8922b] ring-2 ring-[#b8922b]/20' 
-                  : 'border-gray-300 bg-gray-100 text-gray-400'
-              }`}>
-                3
-              </span>
-              <span className="font-serif font-semibold whitespace-nowrap">Payment</span>
-            </div>
-
-          </div>
-        )}
-
-        {/* Error Alert */}
-        {error && (
-          <div className="w-full mb-3 p-2.5 4xl:p-3.5 rounded-lg 4xl:rounded-xl border border-red-200 bg-red-50 text-red-800 text-xs sm:text-sm 4xl:text-base flex items-center space-x-2 shadow-sm">
-            <AlertTriangle className="h-4 w-4 4xl:h-5 4xl:w-5 text-red-500 shrink-0" />
-            <span>{error}</span>
-          </div>
-        )}
-
-        {/* Main Wizard Form Card - Clean, Balanced & Centered */}
-        <div className="w-full bg-[#4f3129] rounded-2xl sm:rounded-3xl 4xl:rounded-[36px] 5xl:rounded-[44px] p-4 sm:p-5 2xl:p-6 3xl:p-7 4xl:p-9 5xl:p-12 shadow-2xl border border-[#deb18a]/10 text-white">
-          
-          <AnimatePresence mode="wait">
-            
-            {/* STEP 1: Collect User Details */}
-            {step === 1 && (
-              <motion.div
-                key="step1"
-                initial={{ opacity: 0, y: 8 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -8 }}
-                transition={{ duration: 0.25 }}
-              >
-                <form onSubmit={handleProceedToSlots} className="space-y-3 2xl:space-y-4 3xl:space-y-5 4xl:space-y-6">
-                  
-                  {/* Personal Information Group */}
-                  <div className="space-y-2 2xl:space-y-2.5 4xl:space-y-3.5">
-                    <h2 className="font-serif text-xs sm:text-sm 2xl:text-base 3xl:text-lg 4xl:text-xl 5xl:text-2xl font-bold text-white border-b border-white/15 pb-1 4xl:pb-2 flex items-center space-x-1.5 4xl:space-x-2">
-                      <User className="h-3.5 w-3.5 2xl:h-4 2xl:w-4 4xl:h-5 4xl:w-5 text-[#dfb260]" />
-                      <span>Personal Information</span>
-                    </h2>
-                    
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 2xl:gap-3 4xl:gap-4">
-                      <div>
-                        <label className="block text-[10px] sm:text-[11px] 2xl:text-xs 3xl:text-sm 4xl:text-base font-semibold uppercase tracking-wider text-white mb-1 4xl:mb-1.5">Name *</label>
-                        <div className="relative">
-                          <User className="absolute left-2.5 4xl:left-3.5 top-1/2 -translate-y-1/2 h-3.5 w-3.5 4xl:h-5 4xl:w-5 text-white/60" />
-                          <input
-                            type="text"
-                            name="name"
-                            required
-                            value={formData.name}
-                            onChange={handleInputChange}
-                            placeholder="Full Name"
-                            className="w-full pl-8 4xl:pl-11 pr-2.5 4xl:pr-4 py-1.5 2xl:py-2 3xl:py-2.5 4xl:py-3.5 5xl:py-4 bg-white/10 border border-white/20 rounded-lg 4xl:rounded-xl focus:border-[#b8922b] focus:ring-1 focus:ring-[#b8922b] focus:outline-none text-white text-xs sm:text-sm 3xl:text-base 4xl:text-lg 5xl:text-xl placeholder-white/50 transition-all"
-                          />
-                        </div>
-                      </div>
-
-                      <div>
-                        <div className="flex justify-between items-center mb-1 4xl:mb-1.5">
-                          <label className="block text-[10px] sm:text-[11px] 2xl:text-xs 3xl:text-sm 4xl:text-base font-semibold uppercase tracking-wider text-white">Email Address *</label>
-                          {isEmailVerified ? (
-                            <span className="text-[9px] sm:text-[10px] 4xl:text-xs text-green-300 font-semibold flex items-center space-x-0.5 bg-green-500/20 px-1 py-0.2 rounded border border-green-500/30">
-                              <CheckCircle2 className="w-2.5 h-2.5 4xl:w-3.5 4xl:h-3.5" />
-                              <span>Verified</span>
-                            </span>
-                          ) : (
-                            <span className="text-[9px] sm:text-[10px] 4xl:text-xs text-white/80 font-medium">OTP Verified</span>
-                          )}
-                        </div>
-                        <div className="relative">
-                          <Mail className="absolute left-2.5 4xl:left-3.5 top-1/2 -translate-y-1/2 h-3.5 w-3.5 4xl:h-5 4xl:w-5 text-white/60" />
-                          <input
-                            type="email"
-                            name="email"
-                            required
-                            value={formData.email}
-                            onChange={handleInputChange}
-                            placeholder="your.email@example.com"
-                            className="w-full pl-8 4xl:pl-11 pr-2.5 4xl:pr-4 py-1.5 2xl:py-2 3xl:py-2.5 4xl:py-3.5 5xl:py-4 bg-white/10 border border-white/20 rounded-lg 4xl:rounded-xl focus:border-[#b8922b] focus:ring-1 focus:ring-[#b8922b] focus:outline-none text-white text-xs sm:text-sm 3xl:text-base 4xl:text-lg 5xl:text-xl placeholder-white/50 transition-all"
-                          />
-                        </div>
-                      </div>
-                    </div>
-
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 2xl:gap-3 4xl:gap-4">
-                      <div>
-                        <label className="block text-[10px] sm:text-[11px] 2xl:text-xs 3xl:text-sm 4xl:text-base font-semibold uppercase tracking-wider text-white mb-1 4xl:mb-1.5">
-                          Mobile Number *
-                        </label>
-                        <div className="relative">
-                          <Phone className="absolute left-2.5 4xl:left-3.5 top-1/2 -translate-y-1/2 h-3.5 w-3.5 4xl:h-5 4xl:w-5 text-white/60" />
-                          <input
-                            type="tel"
-                            name="phone"
-                            required
-                            value={formData.phone}
-                            onChange={handleInputChange}
-                            placeholder="e.g. 98881 57343"
-                            className="w-full pl-8 4xl:pl-11 pr-2.5 4xl:pr-4 py-1.5 2xl:py-2 3xl:py-2.5 4xl:py-3.5 5xl:py-4 bg-white/10 border border-white/20 rounded-lg 4xl:rounded-xl focus:border-[#b8922b] focus:ring-1 focus:ring-[#b8922b] focus:outline-none text-white text-xs sm:text-sm 3xl:text-base 4xl:text-lg 5xl:text-xl placeholder-white/50 transition-all"
-                          />
-                        </div>
-                      </div>
-
-                      <div>
-                        <label className="block text-[10px] sm:text-[11px] 2xl:text-xs 3xl:text-sm 4xl:text-base font-semibold uppercase tracking-wider text-white mb-1 4xl:mb-1.5">Consultation Service *</label>
-                        <div className="relative">
-                          <select
-                            name="serviceType"
-                            value={formData.serviceType}
-                            onChange={handleInputChange}
-                            className="w-full pl-2.5 4xl:pl-3.5 pr-7 4xl:pr-10 py-1.5 2xl:py-2 3xl:py-2.5 4xl:py-3.5 5xl:py-4 bg-[#4f3129] border border-white/20 rounded-lg 4xl:rounded-xl focus:border-[#b8922b] focus:ring-1 focus:ring-[#b8922b] focus:outline-none text-white text-xs sm:text-sm 3xl:text-base 4xl:text-lg 5xl:text-xl transition-all appearance-none cursor-pointer"
-                          >
-                            {serviceOptions.map(opt => (
-                              <option key={opt.value} value={opt.value} className="bg-[#4f3129] text-white">
-                                {opt.label} ({opt.price})
-                              </option>
-                            ))}
-                          </select>
-                          <div className="absolute right-2.5 4xl:right-3.5 top-1/2 -translate-y-1/2 pointer-events-none text-white/70">
-                            <svg className="w-3.5 h-3.5 4xl:w-5 4xl:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7" />
-                            </svg>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-
-                  {/* Birth Details Group */}
-                  <div className="space-y-2 2xl:space-y-2.5 4xl:space-y-3.5">
-                    <h2 className="font-serif text-xs sm:text-sm 2xl:text-base 3xl:text-lg 4xl:text-xl 5xl:text-2xl font-bold text-white border-b border-white/15 pb-1 4xl:pb-2 flex items-center space-x-1.5 4xl:space-x-2">
-                      <Sparkles className="h-3.5 w-3.5 2xl:h-4 2xl:w-4 4xl:h-5 4xl:w-5 text-[#dfb260]" />
-                      <span>Vedic Birth Details</span>
-                    </h2>
-
-                    <div className="grid grid-cols-1 sm:grid-cols-3 gap-2.5 2xl:gap-3 4xl:gap-4">
-                      <div>
-                        <label className="block text-[10px] sm:text-[11px] 2xl:text-xs 3xl:text-sm 4xl:text-base font-semibold uppercase tracking-wider text-white mb-1 4xl:mb-1.5">Date of Birth *</label>
-                        <input
-                          type="date"
-                          name="birthDate"
-                          required
-                          value={formData.birthDate}
-                          onChange={handleInputChange}
-                          className="w-full px-2 4xl:px-3 py-1.5 2xl:py-2 3xl:py-2.5 4xl:py-3.5 5xl:py-4 bg-white/10 border border-white/20 rounded-lg 4xl:rounded-xl focus:border-[#b8922b] focus:outline-none text-white text-xs sm:text-sm 3xl:text-base 4xl:text-lg 5xl:text-xl transition-all"
-                        />
-                      </div>
-
-                      <div>
-                        <label className="block text-[10px] sm:text-[11px] 2xl:text-xs 3xl:text-sm 4xl:text-base font-semibold uppercase tracking-wider text-white mb-1 4xl:mb-1.5">Time of Birth *</label>
-                        <input
-                          type="time"
-                          name="birthTime"
-                          required
-                          value={formData.birthTime}
-                          onChange={handleInputChange}
-                          className="w-full px-2 4xl:px-3 py-1.5 2xl:py-2 3xl:py-2.5 4xl:py-3.5 5xl:py-4 bg-white/10 border border-white/20 rounded-lg 4xl:rounded-xl focus:border-[#b8922b] focus:outline-none text-white text-xs sm:text-sm 3xl:text-base 4xl:text-lg 5xl:text-xl transition-all"
-                        />
-                      </div>
-
-                      <div>
-                        <label className="block text-[10px] sm:text-[11px] 2xl:text-xs 3xl:text-sm 4xl:text-base font-semibold uppercase tracking-wider text-white mb-1 4xl:mb-1.5">Place of Birth</label>
-                        <div className="relative">
-                          <MapPin className="absolute left-2 4xl:left-3 top-1/2 -translate-y-1/2 h-3.5 w-3.5 4xl:h-5 4xl:w-5 text-white/60" />
-                          <input
-                            type="text"
-                            name="birthPlace"
-                            value={formData.birthPlace}
-                            onChange={handleInputChange}
-                            placeholder="City, State"
-                            className="w-full pl-6 4xl:pl-9 pr-2 py-1.5 2xl:py-2 3xl:py-2.5 4xl:py-3.5 5xl:py-4 bg-white/10 border border-white/20 rounded-lg 4xl:rounded-xl focus:border-[#b8922b] focus:outline-none text-white text-xs sm:text-sm 3xl:text-base 4xl:text-lg 5xl:text-xl placeholder-white/50 transition-all"
-                          />
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-
-                  {/* Additional Focus Areas */}
-                  <div className="space-y-1 4xl:space-y-1.5">
-                    <label className="block text-[10px] sm:text-[11px] 2xl:text-xs 3xl:text-sm 4xl:text-base font-semibold uppercase tracking-wider text-white">Specific Questions (Optional)</label>
-                    <textarea
-                      name="additionalInfo"
-                      value={formData.additionalInfo}
-                      onChange={handleInputChange}
-                      rows="1"
-                      placeholder="E.g. career path, marriage timing, health queries..."
-                      className="w-full px-2.5 4xl:px-3.5 py-1.5 4xl:py-2.5 bg-white/10 border border-white/20 rounded-lg 4xl:rounded-xl focus:border-[#b8922b] focus:outline-none text-white text-xs sm:text-sm 3xl:text-base 4xl:text-lg resize-none transition-all"
-                    />
-                  </div>
-
-                  <div className="pt-2 4xl:pt-3 flex justify-center">
-                    <button
-                      type="submit"
-                      className="w-full sm:w-auto px-7 2xl:px-10 3xl:px-12 4xl:px-14 5xl:px-16 py-2.5 2xl:py-3 3xl:py-3.5 4xl:py-4 5xl:py-5 rounded-xl 4xl:rounded-2xl bg-[#b8922b] hover:bg-[#a27e20] text-white font-bold uppercase tracking-wider shadow-md active:scale-[0.99] transition-all cursor-pointer text-xs sm:text-sm 2xl:text-base 3xl:text-lg 4xl:text-xl 5xl:text-2xl flex items-center justify-center space-x-2 4xl:space-x-3"
-                    >
-                      <span>Proceed to Select Slot</span>
-                      <Sparkles className="w-3.5 h-3.5 2xl:w-4 2xl:h-4 4xl:w-5 4xl:h-5 text-white" />
-                    </button>
-                  </div>
-
-                </form>
-              </motion.div>
-            )}
-
-            {/* STEP 2: Select Date & Time (Calendar-based booking) */}
-            {step === 2 && (
-              <motion.div
-                key="step2"
-                initial={{ opacity: 0, y: 8 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -8 }}
-                transition={{ duration: 0.25 }}
-                className="space-y-3.5 2xl:space-y-4 3xl:space-y-5 4xl:space-y-6"
-              >
-                <div className="flex items-center justify-between border-b border-white/15 pb-2 4xl:pb-3">
-                  <button
-                    onClick={() => setStep(1)}
-                    className="flex items-center space-x-1 4xl:space-x-2 text-white/90 hover:text-white transition-colors text-xs 3xl:text-sm 4xl:text-base font-semibold cursor-pointer"
-                  >
-                    <ArrowLeft className="h-3.5 w-3.5 4xl:h-5 4xl:w-5 text-white" />
-                    <span>Back to Details</span>
-                  </button>
-                  <span className="text-xs 2xl:text-sm 3xl:text-base 4xl:text-lg 5xl:text-xl text-white font-serif uppercase tracking-widest font-bold">Select Session Slot</span>
-                </div>
-
-                <div className="space-y-3 4xl:space-y-4">
-                  {/* Calendar Widget */}
-                  <div className="space-y-1 4xl:space-y-1.5">
-                    <label className="block text-[11px] sm:text-xs 3xl:text-sm 4xl:text-base font-bold uppercase tracking-wider text-white">Appointment Date</label>
-                    <div className="relative bg-white/10 p-2 4xl:p-3 rounded-xl 4xl:rounded-2xl border border-white/20">
-                      <div className="relative">
-                        <CalendarIcon className="absolute left-2.5 4xl:left-3.5 top-1/2 -translate-y-1/2 h-3.5 w-3.5 4xl:h-5 4xl:w-5 text-white" />
-                        <input
-                          type="date"
-                          min={new Date(Date.now() + 86400000).toISOString().split('T')[0]}
-                          value={selectedDate}
-                          onChange={(e) => handleDateChange(e.target.value)}
-                          className="w-full pl-8 4xl:pl-11 pr-2 py-1.5 2xl:py-2 3xl:py-2.5 4xl:py-3.5 bg-white/10 border border-white/20 rounded-lg 4xl:rounded-xl focus:border-[#b8922b] focus:outline-none text-white text-xs sm:text-sm 3xl:text-base 4xl:text-lg font-semibold transition-all"
-                        />
-                      </div>
-                    </div>
-                  </div>
-
-                  {/* Available Time Slots Grid */}
-                  <div className="space-y-1 4xl:space-y-1.5">
-                    <label className="block text-[11px] sm:text-xs 3xl:text-sm 4xl:text-base font-bold uppercase tracking-wider text-white">
-                      Available Slots for {new Date(selectedDate).toLocaleDateString(undefined, { weekday: 'short', month: 'short', day: 'numeric' })}
-                    </label>
-
-                    {loading ? (
-                      <div className="flex flex-col items-center justify-center py-6 4xl:py-8 space-y-1.5 4xl:space-y-2 bg-white/10 rounded-xl 4xl:rounded-2xl border border-white/20">
-                        <div className="w-5 h-5 4xl:w-7 4xl:h-7 rounded-full border-2 border-white border-t-transparent animate-spin" />
-                        <span className="text-[11px] 3xl:text-xs 4xl:text-sm text-white/90">Checking schedule...</span>
-                      </div>
-                    ) : (
-                      <div className="grid grid-cols-2 sm:grid-cols-3 gap-2 4xl:gap-3 bg-white/10 p-2.5 4xl:p-3.5 rounded-xl 4xl:rounded-2xl border border-white/20">
-                        {availableSlots.map((slot) => (
-                          <button
-                            key={slot}
-                            type="button"
-                            onClick={() => setSelectedSlot(slot)}
-                            className={`py-2 4xl:py-3 px-1.5 4xl:px-3 rounded-lg 4xl:rounded-xl border text-[11px] sm:text-xs 3xl:text-sm 4xl:text-base font-bold tracking-wider uppercase transition-all flex items-center justify-center space-x-1 4xl:space-x-2 cursor-pointer ${
-                              selectedSlot === slot
-                                ? 'bg-[#b8922b] text-white border-transparent shadow-md ring-1 ring-white/50'
-                                : 'bg-white/5 border-white/20 text-white hover:border-[#b8922b]/50 hover:bg-white/10'
-                            }`}
-                          >
-                            <Clock className="h-3 w-3 4xl:h-4 4xl:w-4" />
-                            <span>{slot}</span>
-                          </button>
-                        ))}
-                      </div>
-                    )}
-                  </div>
-
-                  {/* Slot Summary */}
-                  {selectedSlot && (
-                    <div className="p-2.5 4xl:p-3.5 rounded-lg 4xl:rounded-xl bg-white/10 border border-white/20 text-xs 3xl:text-sm 4xl:text-base flex items-center justify-between text-white">
-                      <span>Selected:</span>
-                      <strong className="text-white font-serif">{selectedDate} at {selectedSlot}</strong>
-                    </div>
-                  )}
-                </div>
-
-                <div className="pt-2 4xl:pt-3 border-t border-white/10 flex justify-center">
-                  <button
-                    onClick={handleProceedToPayment}
-                    disabled={!selectedSlot || loading}
-                    className="w-full sm:w-auto px-8 3xl:px-10 4xl:px-12 py-2.5 4xl:py-3.5 rounded-xl 4xl:rounded-2xl bg-[#b8922b] hover:bg-[#a27e20] text-white font-bold uppercase tracking-wider shadow-md active:scale-[0.99] transition-all disabled:opacity-40 cursor-pointer text-xs sm:text-sm 2xl:text-base 3xl:text-lg 4xl:text-xl"
-                  >
-                    Proceed to Confirmation
-                  </button>
-                </div>
-              </motion.div>
-            )}
-
-            {/* STEP 3: Payment & Consultation Confirmation */}
-            {step === 3 && (
-              <motion.div
-                key="step3"
-                initial={{ opacity: 0, y: 8 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -8 }}
-                transition={{ duration: 0.25 }}
-                className="space-y-3.5 2xl:space-y-4 3xl:space-y-5 4xl:space-y-6"
-              >
-                <div className="flex items-center justify-between border-b border-white/15 pb-2 4xl:pb-3">
-                  <button
-                    onClick={() => setStep(2)}
-                    className="flex items-center space-x-1 4xl:space-x-2 text-white/90 hover:text-white transition-colors text-xs 3xl:text-sm 4xl:text-base font-semibold cursor-pointer"
-                  >
-                    <ArrowLeft className="h-3.5 w-3.5 4xl:h-5 4xl:w-5 text-white" />
-                    <span>Back to Calendar</span>
-                  </button>
-                  <span className="text-xs 2xl:text-sm 3xl:text-base 4xl:text-lg 5xl:text-xl text-white font-serif uppercase tracking-widest font-bold">Review & Confirm</span>
-                </div>
-
-                <div className="space-y-2.5 4xl:space-y-3.5">
-                  {/* Summary Block */}
-                  <div className="bg-white/10 p-3 4xl:p-4 rounded-xl 4xl:rounded-2xl border border-white/20 text-xs 3xl:text-sm 4xl:text-base space-y-1.5 4xl:space-y-2 font-sans text-white">
-                    <div className="flex justify-between items-center">
-                      <span className="text-white/80">Service:</span>
-                      <strong className="text-white font-serif">{activeService.label}</strong>
-                    </div>
-                    <div className="flex justify-between items-center">
-                      <span className="text-white/80">Date & Time:</span>
-                      <strong className="text-white">{selectedDate} at {selectedSlot}</strong>
-                    </div>
-                    <div className="flex justify-between items-center">
-                      <span className="text-white/80">Client:</span>
-                      <strong className="text-white">{formData.name} ({formData.phone})</strong>
-                    </div>
-                    <div className="pt-1.5 4xl:pt-2 border-t border-white/15 flex justify-between items-center">
-                      <span className="font-bold text-white">Fee:</span>
-                      <span className="text-sm 2xl:text-base 3xl:text-lg 4xl:text-xl font-bold text-white font-serif">{activeService.price}</span>
-                    </div>
-                  </div>
-
-                  {/* Payment Details */}
-                  <div className="space-y-2 4xl:space-y-3">
-                    <label className="block text-[11px] sm:text-xs 3xl:text-sm 4xl:text-base font-bold uppercase tracking-wider text-white">Payment Option</label>
-                    
-                    <div className="grid grid-cols-3 gap-2 4xl:gap-3">
-                      <button
-                        type="button"
-                        onClick={() => setPaymentMethod('pay_later')}
-                        className={`p-2 4xl:p-3 rounded-lg 4xl:rounded-xl border flex flex-col items-center justify-center space-y-1 cursor-pointer transition-all ${
-                          paymentMethod === 'pay_later'
-                            ? 'bg-[#b8922b] text-white border-transparent shadow-md'
-                            : 'bg-white/5 border-white/20 text-white hover:border-[#b8922b]/50'
-                        }`}
-                      >
-                        <CheckCircle2 className="h-3.5 w-3.5 4xl:h-5 4xl:w-5 shrink-0" />
-                        <span className="text-[10px] sm:text-[11px] 3xl:text-xs 4xl:text-sm font-bold text-center">Pay at Session</span>
-                      </button>
-
-                      <button
-                        type="button"
-                        onClick={() => setPaymentMethod('upi')}
-                        className={`p-2 4xl:p-3 rounded-lg 4xl:rounded-xl border flex flex-col items-center justify-center space-y-1 cursor-pointer transition-all ${
-                          paymentMethod === 'upi'
-                            ? 'bg-[#b8922b] text-white border-transparent shadow-md'
-                            : 'bg-white/5 border-white/20 text-white hover:border-[#b8922b]/50'
-                        }`}
-                      >
-                        <Sparkles className="h-3.5 w-3.5 4xl:h-5 4xl:w-5 shrink-0" />
-                        <span className="text-[10px] sm:text-[11px] 3xl:text-xs 4xl:text-sm font-bold text-center">UPI / QR</span>
-                      </button>
-
-                      <button
-                        type="button"
-                        onClick={() => setPaymentMethod('card')}
-                        className={`p-2 4xl:p-3 rounded-lg 4xl:rounded-xl border flex flex-col items-center justify-center space-y-1 cursor-pointer transition-all ${
-                          paymentMethod === 'card'
-                            ? 'bg-[#b8922b] text-white border-transparent shadow-md'
-                            : 'bg-white/5 border-white/20 text-white hover:border-[#b8922b]/50'
-                        }`}
-                      >
-                        <CreditCard className="h-3.5 w-3.5 4xl:h-5 4xl:w-5 shrink-0" />
-                        <span className="text-[10px] sm:text-[11px] 3xl:text-xs 4xl:text-sm font-bold text-center">Card</span>
-                      </button>
-                    </div>
-
-                    <div className="bg-white/10 p-3 4xl:p-4 rounded-lg 4xl:rounded-xl border border-white/20 min-h-[60px] 4xl:min-h-[80px] flex items-center justify-center">
-                      {paymentMethod === 'pay_later' ? (
-                        <div className="text-center">
-                          <p className="text-xs 2xl:text-sm 3xl:text-base 4xl:text-lg font-bold text-white">Instant Confirmation</p>
-                          <p className="text-[11px] 3xl:text-xs 4xl:text-sm text-white/90">Click confirm to schedule and receive Jitsi Meet link immediately.</p>
-                        </div>
-                      ) : paymentMethod === 'upi' ? (
-                        <div className="text-center space-y-1.5">
-                          <p className="text-[11px] 3xl:text-xs 4xl:text-sm text-white/90">Scan UPI QR code</p>
-                          <div className="w-20 h-20 4xl:w-28 4xl:h-28 bg-white p-1 rounded-lg mx-auto flex items-center justify-center">
-                            <img
-                              src={`https://api.qrserver.com/v1/create-qr-code/?size=160x160&data=upi%3A%2F%2Fpay%3Fpa%3Dastromadhuri%40upi%26pn%3DAstrologer%2520Madhuri%2520Gupta%26am%3D${activeService.price.replace(/[^\d]/g, '')}&color=4f3129`}
-                              alt="Scan to Pay"
-                              className="w-full h-full object-contain"
-                            />
-                          </div>
-                        </div>
-                      ) : (
-                        <div className="space-y-1.5 w-full text-xs 4xl:text-sm">
-                          <input
-                            type="text"
-                            placeholder="Card Number"
-                            className="w-full px-2.5 py-1.5 4xl:py-2.5 bg-white/10 border border-white/20 rounded focus:outline-none text-white text-xs 4xl:text-sm"
-                          />
-                        </div>
-                      )}
-                    </div>
-                  </div>
-                </div>
-
-                <div className="pt-2 4xl:pt-3 border-t border-white/10 flex justify-center">
-                  <button
-                    onClick={handleConfirmPayment}
-                    disabled={bookingLoading}
-                    className="w-full sm:w-auto px-8 3xl:px-10 4xl:px-12 py-2.5 4xl:py-3.5 rounded-xl 4xl:rounded-2xl bg-gradient-to-r from-green-600 to-green-500 hover:brightness-105 text-white font-bold uppercase tracking-wider shadow-md active:scale-[0.99] transition-all flex items-center justify-center space-x-2 4xl:space-x-3 cursor-pointer text-xs sm:text-sm 2xl:text-base 3xl:text-lg 4xl:text-xl"
-                  >
-                    {bookingLoading ? (
-                      <>
-                        <div className="w-3.5 h-3.5 4xl:w-4.5 4xl:h-4.5 border-2 border-white border-t-transparent rounded-full animate-spin" />
-                        <span>Confirming...</span>
-                      </>
-                    ) : (
-                      <>
-                        <CheckCircle2 className="w-4 h-4 4xl:w-5 4xl:h-5" />
-                        <span>Confirm & Book</span>
-                      </>
-                    )}
-                  </button>
-                </div>
-              </motion.div>
-            )}
-
-            {/* STEP 4: Success Panel */}
-            {step === 4 && (
-              <motion.div
-                key="step4"
-                initial={{ opacity: 0, scale: 0.95 }}
-                animate={{ opacity: 1, scale: 0.99 }}
-                className="text-center py-2 4xl:py-4 space-y-3 4xl:space-y-4"
-              >
-                <div className="inline-flex p-2.5 4xl:p-3.5 rounded-full bg-green-500/20 border border-green-500/40 text-green-300 mx-auto">
-                  <CheckCircle2 className="h-8 w-8 4xl:h-12 4xl:w-12" />
-                </div>
-                
-                <div className="space-y-1 4xl:space-y-1.5">
-                  <h2 className="font-serif text-lg sm:text-xl 3xl:text-2xl 4xl:text-3xl 5xl:text-4xl font-bold text-white">Consultation Confirmed!</h2>
-                  <p className="text-white/90 text-xs 3xl:text-sm 4xl:text-base max-w-xs 4xl:max-w-md mx-auto">
-                    Details sent to <strong className="text-white">{formData.email}</strong>.
-                  </p>
-                </div>
-
-                <div className="p-3 4xl:p-4 rounded-xl 4xl:rounded-2xl bg-white/10 border border-white/20 text-left text-xs 3xl:text-sm 4xl:text-base space-y-1.5 4xl:space-y-2 font-sans">
-                  <p><span className="text-white/80">Client:</span> <strong className="text-white">{formData.name}</strong></p>
-                  <p><span className="text-white/80">Service:</span> <strong className="text-white">{activeService.label}</strong></p>
-                  <p><span className="text-white/80">Date/Time:</span> <strong className="text-white">{selectedDate} at {selectedSlot}</strong></p>
-                  {bookingResult?.jitsiLink && (
-                    <div className="pt-1.5 4xl:pt-2 border-t border-white/15 mt-1">
-                      <span className="block text-[10px] 3xl:text-xs 4xl:text-sm text-white/80">Video Link:</span>
-                      <a
-                        href={bookingResult.jitsiLink}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="text-xs 3xl:text-sm 4xl:text-base text-yellow-300 hover:underline font-mono break-all font-semibold"
-                      >
-                        {bookingResult.jitsiLink}
-                      </a>
-                    </div>
-                  )}
-                </div>
-
-                <div className="pt-2 4xl:pt-3">
-                  <button
-                    onClick={() => {
-                      setFormData({
-                        name: '',
-                        email: '',
-                        phone: '',
-                        serviceType: 'kundli-prediction',
-                        birthDate: '',
-                        birthTime: '',
-                        birthPlace: '',
-                        additionalInfo: ''
-                      });
-                      setSelectedSlot('');
-                      setIsEmailVerified(false);
-                      setVerificationToken('');
-                      setStep(1);
-                    }}
-                    className="px-6 4xl:px-8 py-2.5 4xl:py-3.5 rounded-full border border-white/30 text-white hover:text-[#4f3129] hover:bg-white font-semibold uppercase tracking-wider text-xs 3xl:text-sm 4xl:text-base transition-all duration-300 cursor-pointer shadow-md"
-                  >
-                    Book Another Reading
-                  </button>
-                </div>
-              </motion.div>
-            )}
-
-          </AnimatePresence>
-
-        </div>
-
-      </div>
-
-      {/* 6-Digit Email OTP Verification Modal */}
-      <EmailOtpModal
-        isOpen={showOtpModal}
-        onClose={() => setShowOtpModal(false)}
-        email={formData.email}
-        purpose="booking"
-        onVerified={handleOtpVerified}
-      />
-
-    </div>
-  );
+import React, { useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react';
+import { Link, useSearchParams } from 'react-router-dom';
+import { useBooking } from '../booking/useBooking.jsx';
+import { SERVICE_IDS, money, appointmentLabel, timeLabel, indiaDate } from '../booking/protocol.mjs';
+import { mountBookingMotion } from '../booking/motion.mjs';
+import '../booking/booking.css';
+
+const descriptions = {
+  'kundli-prediction':['Kundli Prediction','A birth-chart perspective on your questions and life’s transitions.'],
+  'kundli-matching':['Kundli Matching','Relationship questions through the lens of birth-chart compatibility.'],
+  'vastu-consultation':['Vastu Consultation','A considered look at your home or workspace through Vastu.'],
+  numerology:['Numerology','Explore the patterns associated with names, dates and numbers.'],
+};
+function Symbol({id}) {
+  if(id==='numerology')return <span className="number-symbol" aria-hidden="true">3<em>6</em>9</span>;
+  return <svg viewBox="0 0 80 80" aria-hidden="true">{id==='kundli-matching'
+    ? <><circle cx="29" cy="40" r="23"/><circle cx="51" cy="40" r="23"/><path d="M40 14v52"/></>
+    : id==='vastu-consultation' ? <><rect x="14" y="14" width="52" height="52"/><path d="M40 5v70 M5 40h70 M14 14 66 66 M66 14 14 66"/></>
+    : <><path d="M40 5 75 40 40 75 5 40Z M5 40H75 M40 5V75 M22 22 58 58 M58 22 22 58"/><circle cx="40" cy="40" r="16"/></>}</svg>;
 }
-
+function go(id) {
+  const section=document.getElementById(id); if(!section)return;
+  section.scrollIntoView({behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'instant':'smooth',block:'start'});
+  section.querySelector('h2')?.focus({preventScroll:true});
+}
+function Go({id,children,className='text-button'}) {return <button type="button" className={className} onClick={()=>go(id)}>{children}</button>}
+function Receipt({state,check,resume,restart,canRetryOriginal,retryOriginal}) {
+  const [clock,setClock]=useState(Date.now());
+  useEffect(()=>{const timer=setInterval(()=>setClock(Date.now()),1000);return()=>clearInterval(timer)},[]);
+  const r=state.receipt;
+  const offset=useMemo(()=>r?Date.parse(r.server_now)-Date.now():0,[r]);
+  const cooling=clock<state.retryAt, disabled=state.busy||state.phase==='payment'||cooling;
+  const titles={held:'Your time is reserved.',expired:'Let’s check the payment.',confirmed:'Your appointment is confirmed.',cancelled:'Your appointment is cancelled.',payment_review:'Your payment needs a closer look.'};
+  const copy={held:'Your appointment will be confirmed after payment is checked. Closing the payment window does not cancel a payment.',
+    expired:'The reserved time has expired. We still need to resolve the payment before you choose another time. Please do not pay again elsewhere.',
+    confirmed:'Your consultation with Madhuri Gupta is booked. Meeting and email updates are shown below.',
+    cancelled:'Please contact the practice if you need help with this appointment or its payment.',
+    payment_review:'We need to check this payment before confirming the next step. Please contact the practice and do not pay again.'};
+  const seconds=r?Math.max(0,Math.ceil((Date.parse(r.hold_expires_at)-clock-offset)/1000)):0;
+  const email={not_queued:'Not yet queued',pending:'Preparing',processing:'Preparing',provider_accepted:'Accepted for sending',delivered:'Delivered',failed:'Delivery needs attention',attention:'Delivery needs attention',needs_attention:'Delivery needs attention',bounced:'Could not be delivered',complained:'Delivery needs attention'};
+  return <section id="receipt" className={`appointment-receipt ${r?.appointment_state==='confirmed'?'confirmed':''}`} tabIndex="-1" aria-labelledby="receipt-title">
+    <p className="eyebrow">YOUR APPOINTMENT</p><div className="receipt-heading"><h3 id="receipt-title">{r?titles[r.appointment_state]:'Checking your booking.'}</h3>{r?.appointment_state==='confirmed'&&<span id="receipt-seal" aria-hidden="true">✓</span>}</div>
+    <p role="status">{r?copy[r.appointment_state]:'Your original booking request is saved in this browser. Please check its status before trying another payment.'}</p>
+    {state.phase==='payment'&&<p role="status">The secure payment window is open. Finish or close that window to continue here.</p>}
+    {r?.payment_state==='needs_attention'&&<p role="status">Your payment needs review. Please contact the practice before making another payment.</p>}
+    {r?.appointment_state==='held'&&seconds>0&&<p id="hold-clock">Reserved time remaining: {Math.floor(seconds/60)}:{String(seconds%60).padStart(2,'0')}</p>}
+    {r&&<dl id="receipt-facts"><div><dt>Consultation</dt><dd>{r.service_name}</dd></div><div><dt>Appointment · India time</dt><dd>{appointmentLabel(r.starts_at)}</dd></div><div><dt>Consultation fee</dt><dd>{money(r.amount_paise)}</dd></div><div><dt>Payment recorded</dt><dd>{r.captured_paise?money(r.captured_paise):'No captured payment recorded yet'}{r.refunded_paise>0&&<> · Refunded {money(r.refunded_paise)}</>}</dd></div><div><dt>Google Meet</dt><dd>{r.meet_url?<a href={r.meet_url} target="_blank" rel="noopener noreferrer">Open your meeting ↗</a>:r.meeting_state==='needs_attention'?'Please contact the practice for your meeting link.':r.appointment_state==='confirmed'?'Your meeting link is being prepared.':'Available after confirmation'}</dd></div><div><dt>Confirmation email</dt><dd>{email[r.acknowledgement_state]||'Status being checked'}</dd></div><div><dt>Meeting-details email</dt><dd>{email[r.meeting_email_state]||'Status being checked'}</dd></div></dl>}
+    <div className="receipt-reference"><span>Booking reference <strong>{state.credential.request_id}</strong></span></div>
+    <div className="result-actions"><button type="button" className="button" disabled={disabled} onClick={check}>{state.busy?'Checking…':'Check booking status'}</button>
+      {r?.next_actions.some(a=>['check_payment','resume_payment'].includes(a))&&<button type="button" className="button" disabled={disabled||seconds===0} onClick={resume}>Continue to payment ↗</button>}
+      {r?.next_actions.includes('choose_new_time')&&<button type="button" className="button" disabled={disabled} onClick={restart}>Choose a new time</button>}
+      {canRetryOriginal&&<button type="button" className="text-button" disabled={disabled} onClick={retryOriginal}>Retry the same saved request</button>}
+      <Link className="text-button" to="/contact">Ask for help ↗</Link><a className="text-button" href="/booking-help">Restore lost booking access ↗</a></div>
+    {cooling&&<p className="field-hint">Please wait {Math.ceil((state.retryAt-clock)/1000)} seconds before checking again.</p>}
+    <p className="field-hint">Keep this tab available while your booking is being checked. Your private receipt stays in this browser tab and is never placed in a link.</p>
+  </section>;
+}
+export default function Booking() {
+  const [params]=useSearchParams();
+  const flow=useBooking(params.get('service'));
+  const {state,dispatch}=flow, root=useRef(null), form=useRef(null);
+  const locked=!!state.credential||state.phase==='blocked'||state.busy;
+  const service=state.policy?.policy.services.find(s=>s.id===state.service);
+  const selectedName=service?.name||descriptions[state.service][0];
+  const appointment=state.slot?appointmentLabel(state.slot.starts_at):'Still to choose';
+  const maxDate=useMemo(()=>{const day=new Date(indiaDate()+'T12:00:00+05:30');day.setUTCDate(day.getUTCDate()+(state.policy?.policy.advance_days||10));return indiaDate(day)},[state.policy]);
+  useEffect(()=>{document.title='Book a consultation | Sarsa Jyotish Sansthan';window.scrollTo(0,0)},[]);
+  useLayoutEffect(()=>mountBookingMotion(root.current),[]);
+  const lastReceipt=useRef(false);
+  useEffect(()=>{if(state.credential&&!lastReceipt.current){lastReceipt.current=true;document.getElementById('receipt')?.scrollIntoView({block:'center',behavior:'smooth'})}if(!state.credential)lastReceipt.current=false},[state.credential]);
+  function detailsNext(){if(form.current.reportValidity())go('review')}
+  function submit(event){event.preventDefault();if(!state.slot){dispatch({type:'error',message:'Please choose an available time first.'});go('appointment');return}flow.start()}
+  return <div className="sarsa-booking" ref={root}>
+    <header className="site-header wrap"><Link className="brand" to="/"><span className="brand-icon" aria-hidden="true">✳</span><span>Sarsa Jyotish Sansthan<small>WITH MADHURI GUPTA</small></span></Link><nav aria-label="Website"><Link to="/about">About Madhuri</Link><Link className="text-button" to="/contact">Ask before booking ↗</Link></nav></header>
+    <section className="hero story-section wrap" id="welcome"><div className="hero-copy"><p className="eyebrow">A PERSONAL CONSULTATION</p><h1>A little space.<br/><em>Just for you.</em></h1><p className="lead">For the questions you carry.<br/>For a conversation with perspective.</p><p className="hero-body">Choose your consultation with Madhuri Gupta, find an available time, and book your appointment.</p><div className="actions"><Go id={state.credential?'review':'service'} className="button seal-button">{state.credential?'Check your booking':'Choose a consultation'} <i aria-hidden="true">↗</i></Go><Link className="text-button" to="/contact">Ask a question first</Link></div><div className="hero-foot"><span className="fine-line"/><p>One considered step at a time.</p></div></div><div className="folio-scene" aria-hidden="true"><div className="light-pool"/><div className="folio-shadow"/><div className="folio-paper"><span className="art-label">YOUR CONSULTATION</span><h2>Make room<br/>for what matters.</h2><div className="folio-rule"/><div className="folio-row"><span>01</span>A question worth exploring.</div><div className="folio-row"><span>02</span>A personal perspective.</div><div className="folio-stamp">S<span>J S</span></div><small>A THOUGHTFUL BEGINNING</small></div><div className="folio-cover cover-left"><span>S</span></div><div className="folio-cover cover-right"><span>J S</span></div><div className="invitation-tab"><small>THE NEXT CHAPTER</small><h3>Your time.<br/>Your conversation.</h3><span>↗</span></div></div></section>
+    <nav className="journey-nav wrap" aria-label="Booking steps">{[['service','Consultation'],['appointment','Date & time'],['details','Your details'],['review','Review & pay']].map(([id,label],i)=><a key={id} href="#/booking" onClick={e=>{e.preventDefault();go(id)}}><span>0{i+1}</span>{label}</a>)}</nav>
+    {state.error&&<div className="booking-alert wrap" role="alert"><p>{state.error}</p>{!state.policy&&!state.credential&&<button className="text-button" onClick={flow.loadPolicy} disabled={state.busy}>Reload consultation details</button>}<Link className="text-button" to="/contact">Contact the practice ↗</Link></div>}
+    <form ref={form} onSubmit={submit}><fieldset className="draft-fields" disabled={locked}><legend className="sr-only">Appointment choices</legend>
+      <section className="selection story-section wrap section-space" id="service" aria-labelledby="service-title"><div className="section-intro"><p className="eyebrow">01 / THE CONVERSATION</p><h2 id="service-title" tabIndex="-1">What brings<br/><em>you here?</em></h2><p>Start with the area that speaks to your questions. You can change your choice before you finish.</p><p className="section-note"><span>✦</span>A personal reading begins with a place to start.</p></div><div className="service-content"><div className="shelf-rail" aria-hidden="true"/><fieldset className="service-grid"><legend className="sr-only">Choose a consultation</legend>{SERVICE_IDS.map((id,i)=>{const quote=state.policy?.policy.services.find(s=>s.id===id);return <label className="service-card" key={id}><input type="radio" name="service" value={id} checked={state.service===id} disabled={!quote||locked} onChange={()=>dispatch({type:'edit',name:'service',value:id})}/><span className="service-top"><span className="card-number">0{i+1}</span><Symbol id={id}/></span><strong>{descriptions[id][0]}</strong><span className="card-description">{descriptions[id][1]}</span><span className="sample-fee">{quote?`${money(quote.amount_paise)} · ${quote.duration_minutes} minutes`:state.loadingPolicy?'Loading consultation details…':'Consultation details unavailable'}</span><span className="card-choice"><span>{state.service===id?'Selected consultation':'Choose consultation'}</span><span className="check" aria-hidden="true">✓</span></span></label>})}</fieldset><div className="section-action"><span className="selection-status">{selectedName}</span><Go id="appointment" className="button">Choose a time →</Go></div></div></section>
+      <section className="appointment story-section section-space" id="appointment" aria-labelledby="appointment-title"><div className="wrap appointment-grid"><div className="section-intro"><p className="eyebrow">02 / A LITTLE TIME</p><h2 id="appointment-title" tabIndex="-1">Find a moment.<br/><em>Make some space.</em></h2><p>Choose a day, then a time that feels right. Your appointment is confirmed after payment is checked.</p><div className="appointment-mark" aria-hidden="true"><i/><span>✦</span></div><p className="request-note">All appointments use India time.<br/>Asia/Kolkata · UTC +05:30</p></div><div className="appointment-window"><div className="window-frame" aria-hidden="true"/><div className="window-shutter" aria-hidden="true"/><div className="window-title"><span>YOUR APPOINTMENT</span><span aria-hidden="true">↗</span></div><p className="appointment-service">{selectedName}</p><div className="field"><label htmlFor="appointment-date">Choose a date</label><input id="appointment-date" type="date" required min={indiaDate()} max={maxDate} value={state.day} disabled={!state.policy||locked} onChange={e=>dispatch({type:'edit',name:'day',value:e.target.value})}/><p className="field-hint">Available times are checked when you choose a date.</p></div><p id="availability-message" role="status">{state.slotsStatus==='loading'?'Checking available times…':state.slotsStatus==='error'?'We cannot check the schedule right now. No times are being offered.':state.slotsStatus==='ready'?(state.slots.length?'Choose an available start time.':'There are no available times on this day. Please choose another date.'):'Choose a date to see available times.'}</p><fieldset className="slot-grid"><legend>Available start times</legend>{state.slots.map(slot=><label className="slot-option" key={slot.starts_at}><input name="time" type="radio" value={slot.starts_at} checked={state.slot?.starts_at===slot.starts_at} onChange={()=>dispatch({type:'edit',name:'slot',value:slot})}/>{timeLabel(slot.starts_at)}</label>)}</fieldset><p className="field-hint">Choosing a time does not reserve it yet.</p><div className="section-action"><Go id="service">← Consultation</Go><button className="button" type="button" disabled={!state.slot||locked} onClick={()=>go('details')}>Your details →</button></div></div></div></section>
+      <section className="details-section story-section wrap section-space" id="details" aria-labelledby="details-title"><div className="details-heading"><p className="eyebrow">03 / A PERSONAL BEGINNING</p><h2 id="details-title" tabIndex="-1">The details.<br/><em>Then the conversation.</em></h2><p>We’ll use these for your appointment details and any booking issues.</p></div><div className="details-grid"><div className="context-sheet"><div className="sheet-topline"><span>YOUR DETAILS</span><span>01 — 03</span></div>{[['full_name','Your name','text','name',100],['email','Email address','email','email',254]].map(([name,label,type,auto,max])=><div className="field" key={name}><label htmlFor={name}>{label} <span className="required-label">Required</span></label><input id={name} type={type} autoComplete={auto} required minLength={name==='full_name'?2:undefined} maxLength={max} value={state.details[name]} onChange={e=>dispatch({type:'details',name,value:e.target.value})}/>{name==='email'&&<p className="field-hint">Please check the spelling. No email verification code is required.</p>}</div>)}<div className="field"><label htmlFor="phone">Mobile number <span className="required-label">Required</span></label><div className="phone-group"><select aria-label="Country calling code" value={state.details.country} onChange={e=>dispatch({type:'details',name:'country',value:e.target.value})}>{[['91','India +91'],['44','UK +44'],['1','US / Canada +1'],['971','UAE +971'],['65','Singapore +65'],['61','Australia +61'],['other','Other country']].map(([value,label])=><option key={value} value={value}>{label}</option>)}</select><input id="phone" type="tel" inputMode="tel" autoComplete="tel-national" required pattern={state.details.country==='other'?'\\+[1-9][0-9\\s\\(\\)\\-]{6,29}':'[0-9\\s\\(\\)\\-]{7,30}'} maxLength="30" value={state.details.phone} onChange={e=>dispatch({type:'details',name:'phone',value:e.target.value})}/></div><p className="field-hint">{state.details.country==='other'?'Include + and your country code.':'Enter the mobile number without the country code.'}</p></div><div className="field"><label htmlFor="notes">What would you like to discuss? <span className="optional">Optional</span></label><textarea id="notes" rows="4" maxLength="4000" value={state.details.notes} onChange={e=>dispatch({type:'details',name:'notes',value:e.target.value})}/><p className="field-hint">A sentence or two is enough. Leave private information for the consultation.</p></div><p className="privacy-note">Your details are sent when you continue to payment. Please review the <a href="/privacy" target="_blank" rel="noopener noreferrer">privacy policy</a>.</p><div className="section-action"><Go id="appointment">← Date & time</Go><button className="button" type="button" onClick={detailsNext}>Review your booking →</button></div></div><aside className="context-recap"><div className="recap-tab" aria-hidden="true">✦</div><p className="eyebrow">A THREAD TO FOLLOW</p><h3>Your conversation,<br/>taking shape.</h3><dl><div><dt>Consultation</dt><dd>{selectedName}</dd></div><div><dt>Date & time · India</dt><dd>{appointment}</dd></div></dl><span className="recap-line" aria-hidden="true"/><p>One step closer. Your choices stay with you as you move through the page.</p></aside></div></section>
+    </fieldset>
+    <section className="review-section story-section section-space" id="review" aria-labelledby="review-title"><div className="review-wrap"><div className="review-heading"><p className="eyebrow">04 / BRINGING IT TOGETHER</p><h2 id="review-title" tabIndex="-1">Your time.<br/><em>Considered and clear.</em></h2><p>Check your email, mobile number and appointment before you continue.</p></div>{!state.credential&&<div className="summary-sheet"><div className="summary-seam" aria-hidden="true"/>{[['Consultation',selectedName,service?`${service.duration_minutes} minutes · Google Meet`:'Details unavailable','service'],['Date & time',appointment,'India time · Asia/Kolkata','appointment'],['Your contact details',state.details.full_name||'Add your details',state.details.email+' · '+(state.details.country==='other'?'':'+'+state.details.country+' ')+state.details.phone,'details']].map(([label,value,sub,id],i)=><div className="summary-row" key={id}><span className="summary-number">0{i+1}</span><div><span className="summary-label">{label}</span><strong>{value}</strong><span className="summary-sub">{sub}</span></div><button className="edit-button" type="button" disabled={locked} onClick={()=>go(id)}>Edit</button></div>)}{state.details.notes&&<div className="summary-row"><span className="summary-number">↳</span><div><span className="summary-label">Your question</span><p>{state.details.notes}</p></div></div>}<div className="amount-plaque"><span>Total <small>Consultation fee</small></span><strong>{service?money(service.amount_paise):'—'}</strong></div><div className="review-bottom"><p>Continue to Razorpay’s secure payment window. Your appointment is confirmed only after your payment is checked.</p><label className="acknowledgement"><input type="checkbox" checked={state.ack} disabled={locked} onChange={e=>dispatch({type:'ack',value:e.target.checked})}/><span>I’ve checked my appointment, email and mobile number, and read the <a href="/booking-policy" target="_blank" rel="noopener noreferrer">booking policy</a> and <a href="/terms" target="_blank" rel="noopener noreferrer">terms</a>.</span></label><button className="button submit-button" type="submit" disabled={locked||!state.policy||!state.slot||!state.ack}>{state.busy?'Preparing your booking…':`Continue to payment${service?' · '+money(service.amount_paise):''} ↗`}</button></div></div>}{state.credential&&<Receipt {...flow}/>}</div></section></form>
+    <section className="questions story-section wrap section-space" id="questions"><div className="section-intro"><p className="eyebrow">A LITTLE REASSURANCE</p><h2 tabIndex="-1">Before you<br/><em>begin.</em></h2><p>A few practical questions, with room for yours.</p><a className="text-button" href="/booking-help">Restore lost booking access ↗</a><Link className="text-button folded-link" to="/contact">Ask before booking <span>↗</span></Link></div><div className="question-list">{[
+      ['When is my appointment confirmed?','Your appointment is confirmed after payment is checked and the booking is saved. Choosing a time alone does not reserve it.'],
+      ['What if the payment screen closes?','Check the status of that booking first. A closed screen or expired timer does not tell us whether money moved. The page will guide you to the next safe step.'],
+      ['How will we meet?','Online appointments use Google Meet. Once your appointment is confirmed, this page shows the meeting link when it is ready. Meeting details are also prepared for email delivery.'],
+      ['Can I change my details?','Use Edit before starting payment. After checkout begins, check its status first. For a confirmed appointment, contact the practice for help with a correction.'],
+    ].map(([question,answer],i)=><details key={question}><summary><span className="question-index">0{i+1}</span>{question}<span className="plus">+</span></summary><p>{answer}</p></details>)}</div></section>
+    <footer className="site-footer wrap"><div><strong>Sarsa Jyotish Sansthan</strong><p>With Madhuri Gupta</p></div><div><Link to="/about">About Madhuri</Link><Link to="/services">Consultations</Link><Link to="/contact">Contact</Link></div><span>Your time. Your conversation.</span></footer>
+  </div>;
+}

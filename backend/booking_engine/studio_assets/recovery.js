@@ -1,0 +1,22 @@
+'use strict';
+(()=>{
+ const $=id=>document.getElementById(id),key='sarsa:004:booking-receipt:v1',stageKey='sarsa:004:receipt-recovery:v1';
+ const uuid=/^[a-f0-9]{8}-[a-f0-9]{4}-4[a-f0-9]{3}-[89ab][a-f0-9]{3}-[a-f0-9]{12}$/i,secret=/^[A-Za-z0-9_-]{43}$/;
+ let busy=false,staged=null;
+ function read(name){try{const raw=sessionStorage.getItem(name);if(raw===null)return null;const value=JSON.parse(raw);if(value?.version!==1||!uuid.test(value.request_id)||!secret.test(value.secret)||Object.keys(value).length!==3)throw Error('storage');return value;}catch{throw Error('storage');}}
+ function lock(value){busy=value;document.querySelectorAll('input,button').forEach(el=>el.disabled=value);}
+ function save(name,value){try{sessionStorage.setItem(name,JSON.stringify(value));const current=read(name);if(current?.request_id!==value.request_id||current?.secret!==value.secret)throw Error('storage');}catch{throw Error('storage');}}
+ async function request(path,body,credential){const response=await fetch(path,{method:'POST',credentials:'same-origin',cache:'no-store',redirect:'error',headers:{'Content-Type':'application/json',Accept:'application/json',...(credential?{'X-Booking-Receipt':credential.secret}:{})},body:JSON.stringify(body),signal:AbortSignal.timeout(15000)});if(!response.headers.get('content-type')?.includes('application/json'))throw Error('unavailable');const data=await response.json();if(!response.ok){const e=Error('unavailable');e.status=response.status;throw e;}return data;}
+ function promote(){const current=read(key);if(current&&current.request_id!==staged.request_id)throw Error('other_booking');save(key,staged);sessionStorage.removeItem(stageKey);$('recovery-code').value='';$('recovery-form').hidden=true;$('recovery-open').hidden=false;$('recovery-status').textContent='Your access has been restored. Open your booking below. Your old receipt access has been replaced.';}
+ function explain(error){$('recovery-status').textContent=error.message==='other_booking'?'Another booking is saved in this tab. Use a separate private browser window to restore this booking.':error.message==='storage'?'This browser cannot safely save your private booking access. Enable browser storage or use another private browser window.':error.status===403?'We could not use that code. Check the reference and code with the practice. Codes expire after 15 minutes and allow five incorrect attempts.':error.status===429?'Please wait a minute before trying again.':'We could not confirm the result. Keep this tab open and try the same code again. Do not ask for a new booking or make another payment.';}
+ $('recovery-form').addEventListener('submit',async e=>{e.preventDefault();if(busy)return;const reference=$('recovery-reference').value.trim().toLowerCase(),code=$('recovery-code').value.trim();if(!uuid.test(reference)||!/^\d{8}$/.test(code)){$('recovery-status').textContent='Enter the complete booking reference and eight-digit code.';return;}lock(true);
+  try{const current=read(key);if(current&&current.request_id!==reference)throw Error('other_booking');
+   if(staged){try{const saved=await request('/api/checkout/status',{request_id:staged.request_id},staged);if(saved.request_id!==staged.request_id||!['held','confirmed','expired','cancelled','payment_review'].includes(saved.appointment_state))throw Error('unavailable');promote();return;}catch(error){if(error.status!==403)throw error;}}
+   if(staged&&staged.request_id!==reference){sessionStorage.removeItem(stageKey);staged=null;}
+
+   if(!staged){const bytes=crypto.getRandomValues(new Uint8Array(32));staged={version:1,request_id:reference,secret:btoa(String.fromCharCode(...bytes)).replaceAll('+','-').replaceAll('/','_').replaceAll('=','')};}
+   save(stageKey,staged);$('recovery-status').textContent='Restoring your private access…';const data=await request('/api/checkout/recover-receipt',{request_id:reference,code,secret:staged.secret});if(data.code!=='receipt_restored')throw Error('unavailable');promote();
+  }catch(error){explain(error);}finally{lock(false);}
+ });
+ (async()=>{lock(true);try{staged=read(stageKey);if(staged){$('recovery-reference').value=staged.request_id;const data=await request('/api/checkout/status',{request_id:staged.request_id},staged);if(data.request_id!==staged.request_id||!['held','confirmed','expired','cancelled','payment_review'].includes(data.appointment_state))throw Error('unavailable');promote();}}catch(error){if(error.status!==403)explain(error);}finally{lock(false);}})();
+})();

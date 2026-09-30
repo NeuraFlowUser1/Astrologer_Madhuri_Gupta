@@ -1,5 +1,6 @@
 User-agent: *
 Allow: /
 Disallow: /api/
-
+Disallow: /studio
+Disallow: /booking-help
 Sitemap: https://www.sarsajyotishsansthan.com/sitemap.xml

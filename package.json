@@ -7,7 +7,7 @@
     "dev:all": "concurrently \"npm run backend\" \"npm run dev\"",
     "build": "npm --prefix frontend run build",
     "preview": "npm --prefix frontend run preview",
-    "backend": "cd backend && .venv/bin/uvicorn main:app --reload --port 8000"
+    "backend": "python -m uvicorn api.index:app --host 127.0.0.1 --port 8000"
   },
   "devDependencies": {
     "concurrently": "^10.0.5"

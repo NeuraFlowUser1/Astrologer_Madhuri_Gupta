@@ -1,39 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url>
-    <loc>https://www.sarsajyotishsansthan.com/</loc>
-    <lastmod>2026-09-04</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>1.0</priority>
-  </url>
-  <url>
-    <loc>https://www.sarsajyotishsansthan.com/#/about</loc>
-    <lastmod>2026-09-04</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://www.sarsajyotishsansthan.com/#/services</loc>
-    <lastmod>2026-09-04</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.9</priority>
-  </url>
-  <url>
-    <loc>https://www.sarsajyotishsansthan.com/#/booking</loc>
-    <lastmod>2026-09-04</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.9</priority>
-  </url>
-  <url>
-    <loc>https://www.sarsajyotishsansthan.com/#/contact</loc>
-    <lastmod>2026-09-04</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://www.sarsajyotishsansthan.com/#/testimonials</loc>
-    <lastmod>2026-09-04</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
+<url><loc>https://www.sarsajyotishsansthan.com/</loc></url>
+<url><loc>https://www.sarsajyotishsansthan.com/about</loc></url>
+<url><loc>https://www.sarsajyotishsansthan.com/services</loc></url>
+<url><loc>https://www.sarsajyotishsansthan.com/services/kundli-prediction</loc></url>
+<url><loc>https://www.sarsajyotishsansthan.com/services/kundli-matching</loc></url>
+<url><loc>https://www.sarsajyotishsansthan.com/services/vastu-consultation</loc></url>
+<url><loc>https://www.sarsajyotishsansthan.com/services/numerology</loc></url>
+<url><loc>https://www.sarsajyotishsansthan.com/booking</loc></url>
+<url><loc>https://www.sarsajyotishsansthan.com/contact</loc></url>
+<url><loc>https://www.sarsajyotishsansthan.com/privacy</loc></url>
+<url><loc>https://www.sarsajyotishsansthan.com/terms</loc></url>
+<url><loc>https://www.sarsajyotishsansthan.com/booking-policy</loc></url>
 </urlset>

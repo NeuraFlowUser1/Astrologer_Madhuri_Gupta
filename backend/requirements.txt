@@ -8,3 +8,15 @@ google-auth-oauthlib>=1.0.0
 python-dotenv>=1.0.0
 resend>=0.8.0
 redis>=5.0.0
+
+# Permanent Sarsa booking database and country-aware mobile validation.
+psycopg[binary]==3.3.5
+phonenumbers==9.0.40
+httpx==0.28.1
+
+# Google identity verification and encrypted provider credentials.
+google-auth==2.58.1
+cryptography==48.0.1
+
+# Official Resend webhook signature verification.
+svix==2.4.0

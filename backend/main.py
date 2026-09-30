@@ -39,6 +39,13 @@ app = FastAPI(
     version="2.1.0"
 )
 
+# Obsolete submission contracts are permanently closed; use the current same-origin app.
+if __package__:
+    from .booking_engine.retired_routes import RetiredSubmissions
+else:
+    from booking_engine.retired_routes import RetiredSubmissions
+app.add_middleware(RetiredSubmissions)
+
 # CORS configuration to allow cross-origin requests
 app.add_middleware(
     CORSMiddleware,

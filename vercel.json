@@ -5,8 +5,83 @@
   "framework": "vite",
   "rewrites": [
     {
-      "source": "/(.*)",
-      "destination": "/index.html"
+      "source": "/api/:path*",
+      "destination": "/api/index.py"
+    },
+    {
+      "source": "/studio",
+      "destination": "/api/index.py"
+    },
+    {
+      "source": "/studio/",
+      "destination": "/api/index.py"
+    },
+    {
+      "source": "/booking-help",
+      "destination": "/api/index.py"
+    },
+    {
+      "source": "/booking-help/",
+      "destination": "/api/index.py"
+    }
+  ],
+  "regions": [
+    "sin1"
+  ],
+  "functions": {
+    "api/index.py": {
+      "maxDuration": 120,
+      "excludeFiles": "{.git/**,.agents/**,.env*,backend/.env*,backend/main.py,backend/booking_engine/tests/**,backend/booking_engine/migrations/**,design-review/**,media/**,tools/**,workers/**,frontend/**,node_modules/**,**/__pycache__/**}"
+    }
+  },
+  "headers": [
+    {
+      "source": "/api/:path*",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "no-store"
+        },
+        {
+          "key": "X-Vercel-Enable-Rewrite-Caching",
+          "value": "0"
+        }
+      ]
+    },
+    {
+      "source": "/studio",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "no-store"
+        },
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex, nofollow"
+        }
+      ]
+    },
+    {
+      "source": "/booking-help/:path*",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "no-store"
+        },
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex, nofollow"
+        }
+      ]
+    }
+  ],
+  "fluid": true,
+  "cleanUrls": true,
+  "redirects": [
+    {
+      "source": "/testimonials",
+      "destination": "/about",
+      "permanent": true
     }
   ]
 }

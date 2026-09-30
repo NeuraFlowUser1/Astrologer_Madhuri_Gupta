@@ -1,141 +1,67 @@
-# Sarsa Jyotish Sansthan — Astrologer Madhuri Gupta
+# Sarsa Jyotish Sansthan — Project 004
 
-A full-stack celestial astrology web application combining a **React 19 + Vite 8** frontend with a **Python FastAPI** backend. Features dynamic Google Calendar sync, automated Google Sheets client logging, Jitsi Meet video consultation generation, and SMTP email automation.
+This imported client project is being rebuilt around Madhuri Gupta’s personal brand and a permanent appointment-booking system. The current implementation uses React/Vite, FastAPI, Neon Postgres, Razorpay, Google Calendar/Meet, separately owned Google Sheets, Resend and a dedicated Cloudflare recovery worker.
 
----
+**Current state, 30 September 2026:** the new website application is implemented locally but has not been published or opened to customers. A fresh provider check confirms development migrations through030 and production through019, with no bookings and payable intake closed in both. The official website still returns the old HTML shell at the new backend address. Razorpay’s dedicated Sarsa merchant account is pending; hosted Google, email, worker and payment acceptance remain separate unfinished work. Local tests are not proof of live delivery.
 
-## 📁 Project Architecture & File Structure
+**Backups are live:** the daily encrypted backup workflow is published and active in the existing GitHub repository. Its first production export, isolated restore, Sarsa-owned Google Drive upload and authenticated readback passed; a same-day rerun verified the existing copy without duplication. The schedule is08:32 India time. The owner has saved the recovery key, and actual initial failure notifications reached NeuraFlow’s inbox. See the [backup operating instructions and successful runs](tools/backup/README.md). This backup publication did not publish the new website application.
 
-```text
-Astrologer_Madhuri_Gupta/
-│
-├── 📂 frontend/                         # React 19 + Vite Frontend SPA
-│   ├── 📂 public/                       # Static public assets (Served at root /)
-│   │   ├── Goal.webp                    # Optimized WebP goal graphic (206 KB)
-│   │   ├── Hero_person.webp             # High-priority hero portrait (89 KB)
-│   │   ├── certificate.webp             # Official qualifications certificate (160 KB)
-│   │   ├── contact_office.webp          # Consultation room photo (136 KB)
-│   │   ├── marble-bg.webp               # Seamless background texture (26 KB)
-│   │   ├── right_bottom.webp            # Occult alignment tarot graphic (156 KB)
-│   │   ├── right_top.webp               # Celestial orbital graphic (67 KB)
-│   │   ├── testimonial_*.webp           # Client review avatar images (~80-100 KB)
-│   │   ├── wheel.webp                   # Rotating 12-house Zodiac wheel (209 KB)
-│   │   ├── googlebd68ff44453661db.html  # Google Search Console verification token
-│   │   ├── robots.txt                   # Crawler directives & sitemap reference
-│   │   └── sitemap.xml                  # XML sitemap for SEO indexing
-│   │
-│   ├── 📂 src/                          # Frontend Application Source Code
-│   │   ├── 📂 components/               # Reusable UI & Layout Components
-│   │   │   ├── 📂 motion-primitives/    # Framer Motion animated components
-│   │   │   │   └── text-shimmer.tsx     # Gold-reflecting text shimmer component
-│   │   │   ├── Navbar.jsx               # Navigation bar with mobile drawer
-│   │   │   └── Footer.jsx               # Site footer with Agra address & links
-│   │   │
-│   │   ├── 📂 pages/                    # Route Views & Page Components
-│   │   │   ├── Home.jsx                 # Landing page (Hero, Goal, Services, FAQ)
-│   │   │   ├── About.jsx                # Astrologer biography & credentials
-│   │   │   ├── Services.jsx             # Comprehensive 4-service offerings catalogue
-│   │   │   ├── Booking.jsx              # Slot booking, details form & checkout
-│   │   │   ├── ContactPage.jsx          # Contact form, office info & Agra map
-│   │   │   └── Testimonials.jsx         # Client reviews carousel
-│   │   │
-│   │   ├── App.jsx                      # App root router & layout provider
-│   │   ├── main.jsx                     # React DOM entrypoint
-│   │   └── index.css                    # Tailwind CSS & custom celestial styles
-│   │
-│   ├── index.html                       # HTML5 entrypoint with Schema.org JSON-LD
-│   ├── vite.config.js                   # Vite configuration
-│   ├── package.json                     # Frontend dependencies & npm scripts
-│   └── package-lock.json                # Locked dependency tree
-│
-├── 📂 backend/                          # FastAPI Python Backend
-│   ├── main.py                          # FastAPI application server & routes
-│   ├── requirements.txt                 # Python backend dependencies
-│   ├── service_account.json             # Google Cloud service account keys (GitIgnored)
-│   ├── .env                             # Secret environment variables (SMTP, Sheets ID, etc.)
-│   ├── .env.example                     # Environment template for developers
-│   └── .venv/                           # Python virtual environment (GitIgnored)
-│
-├── .gitignore                           # Root git ignore rules
-└── README.md                            # Complete documentation & developer guide
+See the [current implementation checkpoint](design-review/2026-09-17/15-automatic-booking-plan/verification.md#website-integration-checkpoint--29-september-2026) for checks and remaining live account actions.
+
+## Start here
+
+- [Whole-website completion and release plan](design-review/2026-09-17/15-automatic-booking-plan/website-completion-implementation-plan.md) — current planned work; Razorpay account deferred, all independent work included.
+
+- [Current implementation plan and status](design-review/2026-09-17/15-automatic-booking-plan/permanent-system-execution-plan.md)
+- [Permanent resource and account manifest](design-review/2026-09-17/15-automatic-booking-plan/permanent-resource-manifest.md)
+- [Verification evidence and outstanding acceptance](design-review/2026-09-17/15-automatic-booking-plan/verification.md)
+- [Staff operations and assisted recovery](design-review/2026-09-17/15-automatic-booking-plan/staff-appointment-changes.md)
+- [Booking-engine contracts and checks](backend/booking_engine/README.md)
+- [Improvements to review for Project003 later](design-review/2026-09-17/15-automatic-booking-plan/004-to-003-improvement-register.md)
+
+## Source layout
+
+| Path | Responsibility |
+| --- | --- |
+| `frontend/src/pages/` | Actual website pages; Booking and Contact use final same-origin API contracts |
+| `frontend/src/booking/`, `frontend/src/contact/` | Customer state, validation, receipt access and motion |
+| `api/index.py` | Vercel entry point for the permanent FastAPI application |
+| `backend/booking_engine/` | Booking, payment evidence, Google/Resend delivery, protected staff actions and receipt recovery |
+| `backend/booking_engine/migrations/` | Immutable, checksum-tracked database changes; never applied during a website request |
+| `backend/booking_engine/studio_assets/` | Private `/studio` and public assisted `/booking-help` pages |
+| `workers/booking-recovery/` | Dedicated queue processing,15-minute recovery and independent health-monitor source |
+| `design-review/2026-09-17/` | Approved HTML directions, choreography, planning and QA evidence |
+| `media/` | Client-supplied assets, including the approved Madhuri portrait |
+| `tools/` | Protected-setting handoff and encrypted-backup tools; credentials stay out of source and logs |
+
+The imported folder layout is retained. No client restructuring or Project003 modification is implied.
+
+## How the permanent booking system works
+
+The database owns prices, availability, reservations, appointment state and recorded payment evidence. A browser payment success screen cannot confirm an appointment. Both email and mobile are mandatory; booking has no email OTP. Contact enquiries use their separate verification flow.
+
+Saved work drives Google Meet creation, the client’s own spreadsheet, NeuraFlow’s separate spreadsheet, and Resend delivery. A saved booking is distinct from a ready meeting or delivered email. Resend replies go to `sarsajyotish@gmail.com`; the sending identity is the verified Sarsa mail subdomain. No SMTP or Jitsi fallback is part of this implementation.
+
+Practice staff can block time, move/cancel appointments, inspect problems, retry eligible work, review verified full-refund evidence, and correct contact details after the approved callback procedure. Agency access is limited to its own connection and record-copy work. Cancellation does not send a refund. Lost receipt access uses verified phone support and a short-lived activation code; private receipt credentials never enter email or URLs.
+
+## Local checks
+
+From this client root, use an existing Python environment with the declared requirements installed:
+
+```sh
+python -m unittest discover -s backend/booking_engine/tests
+node --test frontend/tests/routes.test.mjs frontend/tests/booking/*.test.mjs frontend/tests/contact/*.test.mjs workers/booking-recovery/worker.test.mjs
+npm run build --prefix frontend
 ```
 
----
+`npm run dev --prefix frontend` starts Vite at port3000 by default (it may choose another port if busy). `/api`, `/studio` and `/booking-help` proxy to port8000. Without a correctly configured permanent backend, unavailable-service responses are expected; do not substitute the retired application or sample provider data. Browser test fixtures intercept requests only inside test code.
 
-## ⚙️ Architecture & Data Flow
+## Hosting and activation
 
-```text
-[ Client Browser ] 
-       │
-       ├───> React SPA (frontend/) ───> UI / Pages
-       │
-       └───> API Calls (HTTPS / JSON)
-                 │
-                 ▼
-     [ FastAPI Backend (backend/) ]
-                 │
-      ┌──────────┼──────────────────┐
-      ▼          ▼                  ▼
-[ Google Cal ] [ Google Sheets ] [ SMTP Email ]
-(Creates Event) (Logs Client)   (Sends Meeting Link)
-```
+Sarsa uses the existing Vercel project `astrologer-madhuri-gupta` in the owner’s separate account. The Git repository is `NeuraFlowUser1/Astrologer_Madhuri_Gupta`. Build settings and routing are in `vercel.json`: frontend output is `frontend/dist`; API, Studio and booking-help requests reach `api/index.py`. Do not use the old Render commands or `backend/main.py` as the permanent application entry point.
 
----
+`main.py` and `backend/main.py` remain imported legacy source. Their obsolete submission routes are retired with410 responses. They are not production setup instructions for this booking engine.
 
-## 🛠️ Tech Stack
+Schedule browsing is independent of Razorpay readiness. Keep the permanent payment and delivery correctness controls; missing payment configuration returns a clear checkout error without an appointment. Complete the reviewed production migration, protected configuration and hosted Google/worker/email checks as separate readiness work. `SARSA_CONTACT_DELIVERY_ENABLED=true` is a deliberate final Contact readiness switch; it also requires every delivery credential and the database intake switch. Existing protected keys must not be regenerated casually. Never put credentials in this repository, chat, logs, frontend variables or documentation.
 
-* **Frontend**: React 19, Vite 8, Tailwind CSS, Framer Motion, Lucide React Icons.
-* **Backend**: Python 3.10+, FastAPI, Uvicorn, Pydantic, Google API Client, Python-dotenv.
-* **Integrations**: Google Calendar API v3, Google Sheets API v4, Jitsi Meet WebRTC, Gmail SMTP.
-* **SEO**: Schema.org JSON-LD (`ProfessionalService`, `WebSite`, `Service`, `FAQPage`, `AggregateRating`), Open Graph, Twitter Cards, XML Sitemap, Robots.txt.
-
----
-
-## 💻 Local Development Setup
-
-### 1. Start the Backend Server
-```bash
-cd backend
-
-# Activate Python virtual environment
-source .venv/bin/activate  # On Linux/macOS
-# or: .venv\Scripts\activate  # On Windows
-
-# Install backend dependencies
-pip install -r requirements.txt
-
-# Launch FastAPI server
-python main.py
-# or: uvicorn main:app --reload --port 8000
-```
-* Backend URL: `http://127.0.0.1:8000`
-* Interactive API Documentation (Swagger UI): `http://127.0.0.1:8000/docs`
-
-### 2. Start the Frontend Server
-```bash
-cd frontend
-
-# Install dependencies
-npm install
-
-# Launch Vite development server
-npm run dev
-```
-* Frontend URL: `http://localhost:5173`
-
----
-
-## 📦 Production Deployment
-
-### Frontend Production Build
-```bash
-cd frontend
-npm run build
-```
-Outputs optimized static assets to `frontend/dist/`.
-
-### Backend Production Command (Render)
-* **Root Directory**: `backend` (or set Render root directory to `backend`)
-* **Build Command**: `pip install -r requirements.txt`
-* **Start Command**: `uvicorn main:app --host 0.0.0.0 --port $PORT`
-
+Privacy and terms are the final content task before public release, as requested. See the current plan for provider, operational and release boundaries.

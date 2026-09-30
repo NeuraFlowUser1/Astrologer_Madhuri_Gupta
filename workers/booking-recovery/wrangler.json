@@ -1,0 +1,40 @@
+{
+  "name": "sarsa-booking-recovery",
+  "account_id": "162c1ab1ba0619c1c78d9495f3260f18",
+  "main": "worker.mjs",
+  "compatibility_date": "2026-09-29",
+  "workers_dev": true,
+  "preview_urls": false,
+  "triggers": {
+    "crons": [
+      "*/15 * * * *"
+    ]
+  },
+  "kv_namespaces": [
+    {
+      "binding": "HEARTBEATS",
+      "id": "927be5fbe5c54002ae03e55c48a0a2e5"
+    }
+  ],
+  "queues": {
+    "producers": [
+      {
+        "binding": "WAKE_QUEUE",
+        "queue": "sarsa-booking-recovery"
+      }
+    ],
+    "consumers": [
+      {
+        "queue": "sarsa-booking-recovery",
+        "max_batch_size": 1,
+        "max_batch_timeout": 1,
+        "max_retries": 3,
+        "retry_delay": 60,
+        "max_concurrency": 1
+      }
+    ]
+  },
+  "observability": {
+    "enabled": true
+  }
+}
