@@ -12,7 +12,7 @@ class DumpTrustTests(unittest.TestCase):
     def test_runner_bundle_is_read_only_and_password_is_not_in_docker_arguments(self):
         process = SimpleNamespace(stdout=io.BytesIO(b'synthetic dump bytes'),
                                  stderr=io.BytesIO(), wait=lambda **kwargs: 0,
-                                 poll=lambda: 0)
+                                 poll=lambda: 0, kill=lambda: None)
         metadata = {'project': '004-sarsa-jyotish-sansthan', 'format': 'postgres-custom', 'day': '2026-09-30'}
         with tempfile.TemporaryDirectory() as temporary, \
                 patch('postgres.subprocess.Popen', return_value=process) as start, \
