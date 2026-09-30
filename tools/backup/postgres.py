@@ -14,6 +14,7 @@ IMAGE='postgres@sha256:5a5a84b19854a9ffaa54082c166ff4ec27473a361e496e5ea167f298f
 HOST='ep-dry-hill-b3ujpil7.c-4.ap-southeast-1.aws.neon.tech'
 ROLE='sarsa_booking_backup'
 ROOT_CA='/etc/ssl/certs/ca-certificates.crt'
+CONTAINER_CA='/run/sarsa-backup-ca.pem'
 ROOT=Path(__file__).resolve().parents[2]
 
 
@@ -34,7 +35,12 @@ def database_environment(value):
 
 def dump_encrypted(dsn,path,key,metadata):
     settings=database_environment(dsn)
-    command=['docker','run','--rm','--read-only','--cap-drop=ALL','--security-opt=no-new-privileges']
+    if not Path(ROOT_CA).is_file():raise BackupError('backup_certificate_bundle_unavailable')
+    # Slim PostgreSQL images need not contain ca-certificates. Supply the
+    # runner's trusted public bundle read-only rather than weakening TLS.
+    settings['PGSSLROOTCERT']=CONTAINER_CA
+    command=['docker','run','--rm','--read-only','--cap-drop=ALL','--security-opt=no-new-privileges',
+        '--mount','type=bind,src='+ROOT_CA+',dst='+CONTAINER_CA+',readonly']
     for name in settings:command+=['-e',name]
     command += [IMAGE,'pg_dump','--format=custom','--schema=sarsa_booking','--no-owner',
                 '--no-privileges','--compress=gzip:6','--lock-wait-timeout=10000','--no-password']

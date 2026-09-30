@@ -33,6 +33,7 @@ class PrivateErrors:
             ('row-level security', 'row_security_restricted'),
             ('certificate verify failed', 'certificate_failed'),
             ('could not open root certificate', 'certificate_bundle_unavailable'),
+            ('root certificate file', 'certificate_bundle_unavailable'),
             ('password authentication failed', 'authentication_failed'),
             ('connection refused', 'connection_refused'),
             ('server version mismatch', 'version_mismatch'),
