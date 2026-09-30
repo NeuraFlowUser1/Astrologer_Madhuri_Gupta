@@ -97,6 +97,34 @@ def unavailable_application():
     return app
 
 
+def studio_configuration_checks(environment, booking_protection):
+    """Safe local-format evidence only; no provider requests or private values."""
+    from .google_oauth import GrantCipher, GoogleFailure
+    checks = {}
+    client_id = environment.get('SARSA_GOOGLE_CLIENT_ID')
+    secret = environment.get('SARSA_GOOGLE_CLIENT_SECRET')
+    checks['google_client_id_format'] = isinstance(client_id, str) and bool(
+        re.fullmatch(r'[0-9]+-[a-z0-9]+\.apps\.googleusercontent\.com', client_id))
+    checks['google_client_secret_format'] = (isinstance(secret, str)
+        and 1 <= len(secret) <= 8192 and all(33 <= ord(c) <= 126 for c in secret))
+    try:
+        GrantCipher(client_id, json.loads(environment.get('SARSA_GOOGLE_TOKEN_KEYS', 'null')))
+        checks['google_token_keys_format'] = True
+    except (ValueError, TypeError, RecursionError, GoogleFailure):
+        checks['google_token_keys_format'] = False
+    try:
+        encoded = environment.get('SARSA_STUDIO_SIGNING_KEY')
+        if not isinstance(encoded, str) or not re.fullmatch(r'[A-Za-z0-9_-]{43}=', encoded):
+            raise ValueError()
+        signing = base64.b64decode(encoded, altchars=b'-_', validate=True)
+        checks['studio_signing_key_format'] = len(signing) == 32
+        checks['studio_signing_key_independent'] = signing not in booking_protection.values()
+    except (ValueError, TypeError, binascii.Error):
+        checks['studio_signing_key_format'] = False
+        checks['studio_signing_key_independent'] = False
+    return checks
+
+
 def create_hosted_application(environment):
     try:
         if (environment.get('VERCEL') != '1' or environment.get('VERCEL_ENV') != 'production'
@@ -205,6 +233,23 @@ def create_hosted_application(environment):
                                  email_worker_key=email_worker_key,email_sender=email_sender,
                                  recovery_worker_key=recovery_key,wake_publisher=wake,
                                  payment_accounts=accounts,webhook_account=webhook_account,contact_secrets=contact,contact_delivery_ready=contact_ready)
+        from .recovery_worker import add_configuration_route
+        add_configuration_route(app, recovery_key, {
+            'checks': studio_configuration_checks(environment, keys),
+            'configured': {
+                'studio': studio is not None,
+                'google_worker': worker_key is not None,
+                'email_sender': email_sender is not None,
+                'email_worker': email_worker_key is not None,
+                'email_webhook': email_webhook is not None,
+                'recovery_worker': recovery_key is not None,
+                'wake_publisher': wake is not None,
+                'contact_protection': contact is not None,
+                'contact_delivery': bool(contact_ready),
+                'payment_accounts': accounts is not None,
+                'payment_webhook': webhook_account is not None,
+            },
+        })
         app.add_middleware(CanonicalHost)
         return app
     except (KeyError, ValueError, TypeError, StorageUnavailable):

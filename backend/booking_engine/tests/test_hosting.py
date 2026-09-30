@@ -39,6 +39,52 @@ class HostingTests(unittest.TestCase):
         self.assertIn('/api/checkout/status', paths)
         self.assertNotIn('/api/contact', paths)
 
+    def test_private_configuration_checks_diagnose_without_network_or_values(self):
+        recovery = key(b'r')
+        environment = dict(self.environment, SARSA_RECOVERY_WORKER_KEY=recovery,
+                           SARSA_GOOGLE_TOKEN_KEYS='not-json')
+        with patch('psycopg.connect') as connect:
+            client = TestClient(create_hosted_application(environment), base_url=ORIGIN)
+            path = '/api/internal/recovery/configuration'
+            self.assertEqual(client.post(path, json={}).status_code, 401)
+            self.assertEqual(client.post(path, json={}, headers={'authorization': 'Bearer wrong'}).status_code, 401)
+            response = client.post(path, json={}, headers={'authorization': 'Bearer ' + recovery})
+        connect.assert_not_called()
+        self.assertEqual(response.status_code, 200)
+        evidence = response.json()
+        self.assertEqual(evidence['application'], '004-sarsa-jyotish-sansthan')
+        self.assertEqual(evidence['provider_acceptance'], 'not_checked')
+        self.assertFalse(evidence['checks']['google_token_keys_format'])
+        self.assertTrue(evidence['checks']['google_client_id_format'])
+        self.assertFalse(evidence['configured']['studio'])
+        self.assertTrue(all(type(v) is bool for group in ('checks', 'configured')
+                            for v in evidence[group].values()))
+        self.assertNotIn('synthetic', response.text)
+        self.assertNotIn(recovery, response.text)
+        self.assertEqual(response.headers['cache-control'], 'no-store')
+
+    def test_configuration_requires_its_own_authority_and_canonical_host(self):
+        path = '/api/internal/recovery/configuration'
+        with patch('psycopg.connect') as connect:
+            app = create_hosted_application(self.environment)
+            self.assertEqual(TestClient(app, base_url=ORIGIN).post(path, json={}).status_code, 503)
+            self.assertEqual(TestClient(app).post(path, json={}).status_code, 421)
+        connect.assert_not_called()
+
+    def test_private_checks_explain_reused_signing_key_and_wrong_client_identifier(self):
+        environment = dict(self.environment, SARSA_RECOVERY_WORKER_KEY=key(b'r'),
+                           SARSA_STUDIO_SIGNING_KEY=key(b'a'),
+                           SARSA_GOOGLE_CLIENT_ID='http://123-synthetic.apps.googleusercontent.com')
+        with patch('psycopg.connect') as connect:
+            client = TestClient(create_hosted_application(environment), base_url=ORIGIN)
+            evidence = client.post('/api/internal/recovery/configuration', json={},
+                headers={'authorization': 'Bearer ' + key(b'r')}).json()
+        connect.assert_not_called()
+        self.assertFalse(evidence['checks']['google_client_id_format'])
+        self.assertTrue(evidence['checks']['studio_signing_key_format'])
+        self.assertFalse(evidence['checks']['studio_signing_key_independent'])
+        self.assertFalse(evidence['configured']['studio'])
+
     def test_worker_key_is_optional_but_must_be_distinct_when_configured(self):
         for value,valid in [(key(b'w'),True),(key(b'd'),False),(key(b'a'),False),('invalid',False)]:
             environment=dict(self.environment,SARSA_GOOGLE_WORKER_KEY=value)

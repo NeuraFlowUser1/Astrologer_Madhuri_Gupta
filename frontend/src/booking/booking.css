@@ -38,7 +38,7 @@
 
 }
 
-.sarsa-booking{background:#f7f5ef;color:#21392f;font:17px/1.6 system-ui,-apple-system,'Segoe UI',sans-serif;min-height:100vh}
+.sarsa-booking{background:#f7f5ef;color:#21392f;font:17px/1.6 system-ui,-apple-system,'Segoe UI',sans-serif;min-height:100vh;overflow-x:clip}
 .sarsa-booking .booking-alert{margin-block:24px;padding:20px 24px;border:1px solid #955d45;border-radius:18px;background:#fffdf8;color:#713d2c}
 .sarsa-booking .booking-alert p{margin:0 0 8px}.sarsa-booking .booking-alert a{margin-left:18px}
 .sarsa-booking .receipt-reference strong{overflow-wrap:anywhere;font-size:14px}

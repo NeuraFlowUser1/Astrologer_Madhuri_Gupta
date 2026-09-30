@@ -1,5 +1,8 @@
 # Sarsa recovery and independent monitoring
 
+**30 September2026 live checkpoint:** dedicated Worker version4f7db6c5-155a-4bd3-903d-1c55b019c14e is deployed with the agreed15-minute rescue, existing queue/KV and all four original protected settings. Canonical RECOVERY and EMAIL-event keys pass; wake rejects unauthenticated401 and accepts the existing WAKE key202. Queue now has one producer and one consumer. The first scheduled heartbeat and monitor publication are pending; Google/Studio composition, actual sends/Meet and payments are not accepted merely because the empty plan works. Historical29 September entries below describe the preceding local state.
+
+
 ## Purpose and current state
 
 30 September2026 recovery check: this Worker remains an unpublished component. All four owner-selected existing Vercel keys have been privately captured, checked for distinctness, encrypted for the Windows user and readback-verified. No live value was regenerated or provider setting changed. The Sarsa Vercel account remains intentionally disconnected. Configure the existing dedicated Cloudflare resources through private process input after the canonical backend is served, then prove authenticated matching; local capture alone is not live acceptance. Daily encrypted backups are live and tested, separately from this Worker and its still-unpublished monitor. See the canonical verification record for current release evidence.
@@ -14,7 +17,7 @@ Immediate queue hints wake the permanent website's saved work. A15-minute schedu
 | --- | --- |
 | Cloudflare owner | neuraflowindia@gmail.com |
 | Account | 162c1ab1ba0619c1c78d9495f3260f18 |
-| Worker name | sarsa-booking-recovery (not deployed) |
+| Worker name | sarsa-booking-recovery (deployed30 September; version above) |
 | Queue | sarsa-booking-recovery, ID8d602c4b56f44eca8ae5bcfa6cde1fab |
 | Heartbeat KV namespace | sarsa-booking-recovery-heartbeats, ID927be5fbe5c54002ae03e55c48a0a2e5 |
 | Future worker origin | https://sarsa-booking-recovery.neuraflowindia.workers.dev |
@@ -58,7 +61,7 @@ Four independent32-byte base64url settings belong in both the Sarsa Worker and S
 
 Existing `tools/copy-google-protection-key.ps1` now accepts all four names. Generate each value once, save a protected password-manager copy and paste the same value into its two matching destinations. Do not rerun to obtain the second copy: that creates a different key. No value in source, chat, command arguments, logs or files. Existing receipt/Google/studio/Resend secrets cannot be reused. Malformed optional recovery/wake settings leave those components unavailable without disabling receipt/studio access. Wake URL is fixed to the verified dedicated account subdomain; no owner-supplied forwarding setting.
 
-1. Finish/review backend composition and apply already-tested production migration020 before code that calls its functions. Keep intake closed and email budget zero. No new schema migration was needed for this scheduling slice.
+1. Production001–030 is applied/checksum-verified. The canonical backend, queue and protected key handoff are now connected. Complete the remaining hosted provider acceptance; emergency intake and delivery correctness controls retain their final operational role. Do not create new schema work solely for this handoff.
 2. Prepare backend deployment and protected-key handoff together. Vercel owner neuraflowuser1@gmail.com performs its dashboard steps; do not switch Codex's Vercel account.
 3. Put the reviewed Worker configuration and keys into the owned Cloudflare account and deploy only when the website private endpoints are ready. Wrangler config points to the real existing queue/KV namespace. Local `deploy --dry-run` is packaging proof only; it does not configure secrets or deploy.
 4. Verify public `/health` never wakes Neon, private routes reject wrong keys, and a controlled saved-work event is recovered. Test stopped cron, failed lane, missing/expired queue hint and overlapping invocations. Observe actual latency/CPU/quotas; no real sends/payment without the agreed concrete test.

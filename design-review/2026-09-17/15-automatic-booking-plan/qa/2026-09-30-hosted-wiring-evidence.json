@@ -1,0 +1,141 @@
+{
+  "checked_at_utc": "2026-09-30T10:33:27.247128+00:00",
+  "public_routes": [
+    {
+      "path": "/",
+      "status": 200,
+      "content_type": "text/html; charset=utf-8",
+      "title": "Madhuri Gupta | Sarsa Jyotish Sansthan",
+      "new_bundle": true
+    },
+    {
+      "path": "/about",
+      "status": 200,
+      "content_type": "text/html; charset=utf-8",
+      "title": "About Madhuri Gupta | Sarsa Jyotish Sansthan",
+      "new_bundle": true
+    },
+    {
+      "path": "/services",
+      "status": 200,
+      "content_type": "text/html; charset=utf-8",
+      "title": "Consultations | Sarsa Jyotish Sansthan",
+      "new_bundle": true
+    },
+    {
+      "path": "/services/kundli-prediction",
+      "status": 200,
+      "content_type": "text/html; charset=utf-8",
+      "title": "Kundli Prediction | Sarsa Jyotish Sansthan",
+      "new_bundle": true
+    },
+    {
+      "path": "/services/kundli-matching",
+      "status": 200,
+      "content_type": "text/html; charset=utf-8",
+      "title": "Kundli Matching | Sarsa Jyotish Sansthan",
+      "new_bundle": true
+    },
+    {
+      "path": "/services/vastu-consultation",
+      "status": 200,
+      "content_type": "text/html; charset=utf-8",
+      "title": "Vastu Consultation | Sarsa Jyotish Sansthan",
+      "new_bundle": true
+    },
+    {
+      "path": "/services/numerology",
+      "status": 200,
+      "content_type": "text/html; charset=utf-8",
+      "title": "Numerology | Sarsa Jyotish Sansthan",
+      "new_bundle": true
+    },
+    {
+      "path": "/booking",
+      "status": 200,
+      "content_type": "text/html; charset=utf-8",
+      "title": "Book an appointment | Sarsa Jyotish Sansthan",
+      "new_bundle": true
+    },
+    {
+      "path": "/contact",
+      "status": 200,
+      "content_type": "text/html; charset=utf-8",
+      "title": "Contact the practice | Sarsa Jyotish Sansthan",
+      "new_bundle": true
+    },
+    {
+      "path": "/privacy",
+      "status": 200,
+      "content_type": "text/html; charset=utf-8",
+      "title": "Privacy policy | Sarsa Jyotish Sansthan",
+      "new_bundle": true
+    },
+    {
+      "path": "/terms",
+      "status": 200,
+      "content_type": "text/html; charset=utf-8",
+      "title": "Terms of service | Sarsa Jyotish Sansthan",
+      "new_bundle": true
+    },
+    {
+      "path": "/booking-policy",
+      "status": 200,
+      "content_type": "text/html; charset=utf-8",
+      "title": "Booking policy | Sarsa Jyotish Sansthan",
+      "new_bundle": true
+    }
+  ],
+  "runtime": {
+    "booking_policy": 200,
+    "booking_help": 200,
+    "studio": 503,
+    "studio_reason": "optional_composition_rejected_not_yet_diagnosed",
+    "configuration_diagnostics": "implemented_checked_not_yet_published"
+  },
+  "worker": {
+    "account_id": "162c1ab1ba0619c1c78d9495f3260f18",
+    "version_id": "4f7db6c5-155a-4bd3-903d-1c55b019c14e",
+    "cron": "*/15 * * * *",
+    "queue_id": "8d602c4b56f44eca8ae5bcfa6cde1fab",
+    "producers": 1,
+    "consumers": 1,
+    "protected_names": [
+      "SARSA_GOOGLE_WORKER_KEY",
+      "SARSA_EMAIL_WORKER_KEY",
+      "SARSA_RECOVERY_WORKER_KEY",
+      "SARSA_WAKE_KEY"
+    ],
+    "recovery_plan": {
+      "status": 200,
+      "attention": false,
+      "pending_lanes": 0
+    },
+    "email_events": {
+      "status": 200,
+      "processed": 0
+    },
+    "wake": {
+      "missing_authority": 401,
+      "matching_key": 202
+    },
+    "scheduled_heartbeat": "not_yet_observed",
+    "monitor_published": false
+  },
+  "payment": {
+    "owner_selected_merchant_id": "ThvGDrQ1FuyLI8",
+    "owner_reports_generate_key_available": true,
+    "live_credentials_captured": false,
+    "provider_acceptance": false
+  },
+  "checks": {
+    "booking_unit_tests": 244,
+    "private_handoff_tests": 6,
+    "javascript_test_files": 5,
+    "frontend_build": "passed",
+    "browser_page_errors": 0,
+    "mobile_overflow": "Exact scoped clip rule visually checked in browser at390px and320px; no horizontal overflow. Hosted publication pending."
+  },
+  "customer_or_financial_mutations": false,
+  "private_value_files_published": false
+}
