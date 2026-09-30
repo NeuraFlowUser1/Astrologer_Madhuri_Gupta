@@ -17,6 +17,18 @@ const result = (value, status = 200) => Response.json(value, {status, headers: {
 const messageValid = value => value && Object.keys(value).sort().join(',') === 'remaining,version'
   && value.version === 1 && Number.isInteger(value.remaining) && value.remaining >= 0 && value.remaining <= 8;
 
+// Diagnose a failed pass without logging credentials or provider response text.
+const FAILURE_CODES = new Set(['configuration_missing', 'pass_deadline',
+  'backend_identity', 'response_invalid', 'response_limit', 'plan_invalid',
+  'lane_invalid', 'lane_unavailable', 'stale_schedule', 'backend_timeout',
+  'backend_request_failed', 'heartbeat_write_failed', 'recovery_attention']);
+function safeFailureCode(error) {
+  const code = error?.message;
+  if (typeof code === 'string' && (FAILURE_CODES.has(code)
+      || /^backend_http_[1-5][0-9]{2}$/.test(code))) return code;
+  return error?.name === 'AbortError' ? 'backend_timeout' : 'backend_request_failed';
+}
+
 async function boundedJSON(response, maximum) {
   if (!response.headers.get('content-type')?.toLowerCase().startsWith('application/json')) throw Error('response_invalid');
   if (!response.body) throw Error('response_invalid');
@@ -52,13 +64,17 @@ export function createWorker({fetcher = (...args) => fetch(...args), now = () =>
     const controller = new AbortController();
     const timer = setTimeout(() => controller.abort(), remaining);
     try {
-      const response = await fetcher(ORIGIN + path, {method:'POST', redirect:'error',
+      // The edge runtime supports manual redirects; reject every non-200 below
+      // so authorization is never forwarded to a redirect destination.
+      const response = await fetcher(ORIGIN + path, {method:'POST', redirect:'manual',
         headers:{'content-type':'application/json','authorization':'Bearer ' + env[key]},
         body:'{}', signal:controller.signal});
-      if (response.status !== 200) { await response.body?.cancel(); throw Error('backend_unavailable'); }
+      if (response.status !== 200) { await response.body?.cancel(); throw Error('backend_http_' + response.status); }
       const data = await boundedJSON(response, 8192);
       if (data.application !== APP) throw Error('backend_identity');
       return data;
+    } catch (error) {
+      throw Error(safeFailureCode(error));
     } finally { clearTimeout(timer); }
   }
   const plan = async (env, deadline) => checkedPlan(await call('/api/internal/recovery/plan', 'SARSA_RECOVERY_WORKER_KEY', env, deadline));
@@ -117,11 +133,15 @@ export function createWorker({fetcher = (...args) => fetch(...args), now = () =>
           await env.WAKE_QUEUE.send({version:1,remaining:8});
         }
         healthy = !state.attention;
+      } catch (error) {
+        throw Error(safeFailureCode(error));
       } finally {
         // Success means the durable queue was inspected and necessary wake-up
         // publication accepted. It is NOT a claim that all obligations finished.
-        await env.HEARTBEATS.put('sweep:' + Math.floor(scheduled/PERIOD),
-          JSON.stringify({scheduled_at:scheduled,completed_at:now(),healthy}), {expirationTtl:86400});
+        try {
+          await env.HEARTBEATS.put('sweep:' + Math.floor(scheduled/PERIOD),
+            JSON.stringify({scheduled_at:scheduled,completed_at:now(),healthy}), {expirationTtl:86400});
+        } catch { throw Error('heartbeat_write_failed'); }
       }
       if (!healthy) throw Error('recovery_attention');
     },
@@ -148,7 +168,10 @@ export function createWorker({fetcher = (...args) => fetch(...args), now = () =>
               if (!Number.isInteger(response.processed) || response.processed < 0 || response.processed > (lane === 'email_events' ? 2 : 1)) throw Error('lane_invalid');
               processed += response.processed;
               if (response.retry === true) failed = true;
-            } catch { failed = true; }
+            } catch (error) {
+              failed = true;
+              console.warn('recovery_lane_failure', lane, safeFailureCode(error));
+            }
           }
           if (failed) throw Error('lane_unavailable');
           const after = await plan(env,deadline);
@@ -160,10 +183,10 @@ export function createWorker({fetcher = (...args) => fetch(...args), now = () =>
               {delaySeconds:Math.max(Math.min(...pending) === 0 ? (processed ? 5:60):1,Math.min(...pending))});
           }
           message.ack();
-        } catch {
+        } catch (error) {
           // Retry only the wake-up. Provider ambiguity stays in durable SQL jobs.
           message.retry({delaySeconds:60});
-          console.warn('recovery_wake_retry');
+          console.warn('recovery_wake_retry', safeFailureCode(error));
         }
       }
     },

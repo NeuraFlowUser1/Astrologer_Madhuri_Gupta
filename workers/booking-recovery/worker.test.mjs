@@ -13,7 +13,7 @@ function fixture(states=[idle()], handler) {
   const worker=createWorker({now:()=>time,fetcher:async (url,options)=>{
     calls.push([url,options]);
     assert.equal(new URL(url).origin,'https://www.sarsajyotishsansthan.com');
-    assert.equal(options.body,'{}');assert.equal(options.redirect,'error');
+    assert.equal(options.body,'{}');assert.equal(options.redirect,'manual');
     if(url.endsWith('/plan')) return Response.json(states[Math.min(index++,states.length-1)]);
     return handler ? handler(url,options):Response.json({application:APP,processed:1});
   }});
@@ -100,6 +100,37 @@ test('database planning failure records failed scheduled check',async()=>{
 });
 test('stale scheduled event cannot refresh health',async()=>{
   const f=fixture();await assert.rejects(f.worker.scheduled({scheduledTime:0},f.env));assert.equal(f.calls.length,0);assert.equal(f.writes.length,0);
+});
+test('scheduled HTTP failure reports only status and keeps a failed heartbeat',async()=>{
+  const f=fixture();
+  const worker=createWorker({now:()=>1_800_000,fetcher:async()=>new Response('private provider response', {status:401})});
+  await assert.rejects(worker.scheduled({scheduledTime:1_800_000},f.env),error=>error.message==='backend_http_401');
+  assert.equal(f.writes.length,1);assert.equal(f.writes[0][1].healthy,false);
+});
+test('redirects are rejected without forwarding the protected request',async()=>{
+  const f=fixture(),calls=[];
+  const worker=createWorker({now:()=>1_800_000,fetcher:async(url,options)=>{
+    calls.push(url);assert.equal(options.redirect,'manual');
+    return new Response(null,{status:302,headers:{location:'https://untrusted.invalid/'}});
+  }});
+  await assert.rejects(worker.scheduled({scheduledTime:1_800_000},f.env),error=>error.message==='backend_http_302');
+  assert.deepEqual(calls,['https://www.sarsajyotishsansthan.com/api/internal/recovery/plan']);
+  assert.equal(f.writes[0][1].healthy,false);
+});
+test('malformed responses and unknown provider errors cannot enter diagnostic text',async()=>{
+  for(const fetcher of [async()=>new Response('private-provider-response',{headers:{'content-type':'application/json'}}),async()=>{throw Error('private authorization or provider detail');}]) {
+    const f=fixture(),worker=createWorker({now:()=>1_800_000,fetcher});
+    await assert.rejects(worker.scheduled({scheduledTime:1_800_000},f.env),error=>error.message==='backend_request_failed');
+    assert.equal(f.writes[0][1].healthy,false);
+  }
+});
+test('queue retries include a fixed safe cause without private provider content',async()=>{
+  const f=fixture(),item=message(),logs=[],warn=console.warn;
+  const worker=createWorker({now:()=>1_800_000,fetcher:async()=>new Response('private provider response',{status:421})});
+  console.warn=(...parts)=>logs.push(parts);
+  try{await worker.queue({messages:[item]},f.env);}finally{console.warn=warn;}
+  assert.equal(item.acks,0);assert.deepEqual(item.retries,[{delaySeconds:60}]);
+  assert.deepEqual(logs,[['recovery_wake_retry','backend_http_421']]);
 });
 test('contract rejects missing lanes, nonnumeric or out of bounds delay',()=>{
   for(const value of [null,{}, {...idle(),lanes:{}}, {...idle(),lanes:{...idle().lanes,email:true}}, {...idle(),lanes:{...idle().lanes,email:901}}])assert.throws(()=>checkedPlan(value));
