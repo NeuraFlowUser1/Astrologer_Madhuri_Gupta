@@ -1,0 +1,3 @@
+# Same reviewed versions already used by the booking engine.
+cryptography==48.0.1
+httpx==0.28.1
