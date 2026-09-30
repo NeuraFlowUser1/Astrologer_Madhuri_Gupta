@@ -45,7 +45,9 @@ def dump_encrypted(dsn,path,key,metadata):
         with path.open('xb') as output:encrypt(process.stdout,output,key,metadata)
         result=process.wait(timeout=10)
         errors.finish()
-        if result!=0:raise BackupError(errors.code('dump'))
+        if result!=0:
+            print('Export exit status:',result,'; fixed diagnostic clues:',errors.clues(),flush=True)
+            raise BackupError(errors.code('dump'))
     finally:
         deadline.cancel();process.stdout.close()
         if process.poll() is None:process.kill();process.wait()

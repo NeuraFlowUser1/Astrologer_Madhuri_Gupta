@@ -34,15 +34,28 @@ class PrivateErrors:
             ('certificate verify failed', 'certificate_failed'),
             ('could not open root certificate', 'certificate_bundle_unavailable'),
             ('password authentication failed', 'authentication_failed'),
+            ('connection refused', 'connection_refused'),
             ('server version mismatch', 'version_mismatch'),
             ('could not translate host name', 'dns_failed'),
             ('timeout expired', 'connection_timeout'),
             ('channel binding', 'channel_binding_failed'),
             ('unrecognized configuration parameter', 'configuration_failed'),
             ('unrecognized option', 'option_invalid'),
+            ('compression', 'compression_invalid'),
+            ('no matching schemas', 'schema_not_found'),
+            ('read-only transaction', 'transaction_read_only'),
+            ('query failed', 'catalog_query_failed'),
             ('read-only file system', 'filesystem_read_only'),
             ('network is unreachable', 'network_unavailable'),
         ):
             if needle in message:
                 return 'postgres_' + stage + '_' + category
         return 'postgres_' + stage + '_failed'
+
+    def clues(self):
+        # Fixed words only: never echo a provider line, query, name or value.
+        message = bytes(self.captured).decode(errors='replace').lower()
+        return [word for word in ('pg_dump:', 'docker:', 'error', 'query', 'option',
+                'invalid', 'compression', 'version', 'connection', 'certificate',
+                'file', 'directory', 'permission', 'transaction', 'read-only',
+                'configuration', 'timeout', 'schema', 'network', 'failed') if word in message]

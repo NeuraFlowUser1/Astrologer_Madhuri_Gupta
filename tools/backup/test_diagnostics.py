@@ -10,6 +10,7 @@ class DiagnosticTests(unittest.TestCase):
         errors.finish()
         self.assertEqual(errors.code('dump'), 'postgres_dump_permission_denied')
         self.assertNotIn('private-marker', errors.code('dump'))
+        self.assertNotIn('private-marker', str(errors.clues()))
 
     def test_diagnostic_reader_is_bounded_but_drains_the_stream(self):
         stream = io.BytesIO(b'a' * (LIMIT * 3))
@@ -23,6 +24,11 @@ class DiagnosticTests(unittest.TestCase):
         errors = PrivateErrors(io.BytesIO(b'certificate verify failed: private-marker'))
         errors.finish()
         self.assertEqual(errors.code('dump'), 'postgres_dump_certificate_failed')
+
+    def test_clues_contain_only_fixed_words(self):
+        errors = PrivateErrors(io.BytesIO(b'pg_dump: error: invalid option "private-marker"'))
+        errors.finish()
+        self.assertEqual(errors.clues(), ['pg_dump:', 'error', 'option', 'invalid'])
 
 
 if __name__ == '__main__':
