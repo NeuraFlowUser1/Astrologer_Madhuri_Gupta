@@ -1,5 +1,9 @@
 # Sarsa complete-website integration and release plan
 
+## Temporary payment-test preparation — 30 September 2026
+
+The owner approved1 INR for a real live booking. [one-rupee-payment-test.md](one-rupee-payment-test.md) records the exact single-service change, matching public/backend/database snapshot, deployment boundary and mandatory restoration.244 unit tests and production frontend build pass. The temporary snapshot is inserted but not active; normal-price production remains selected until deployment is accepted. No checkout/payment has been initiated.
+
 ## Real Contact acceptance — 30 September 2026
 
 The owner submitted the clearly marked test enquiry through the official Contact page. Production saved it at12:59:18.915 UTC and verified it at13:01:28.649 UTC, generation1, with zero incorrect-code attempts. The verification, acknowledgement and practice-notice jobs each completed one send attempt without a recorded error. All three have persisted email.sent and email.delivered observations from the signed Resend callback path; acknowledgement delivered13:02:01.840 UTC and practice notice13:02:13.764 UTC. Delivery means the receiving mail server accepted the message; it does not prove that a person read it or that it avoided a spam folder.

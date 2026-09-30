@@ -38,7 +38,8 @@ class Service:
 
 
 SERVICES = MappingProxyType({service.id: service for service in (
-    Service('kundli-matching', 'Kundli Matching', 210000),
+    # Owner-authorised live payment test: restore 210000 paise after acceptance.
+    Service('kundli-matching', 'Kundli Matching', 100),
     Service('kundli-prediction', 'Kundli Prediction', 250000),
     Service('vastu-consultation', 'Vastu Consultation', 450000),
     Service('numerology', 'Numerology', 210000),
