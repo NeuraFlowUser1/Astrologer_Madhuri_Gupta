@@ -316,9 +316,18 @@
       "normal_source_and_public_catalogue_restored": true,
       "unit_tests_passed": 244,
       "frontend_build": "passed",
-      "hosted_restoration": "pending",
-      "database_pointer_restoration": "pending",
-      "existing_test_snapshot_repriced": false
+      "hosted_restoration": "accepted",
+      "database_pointer_restoration": "accepted",
+      "existing_test_snapshot_repriced": false,
+      "normal_quote_version": "29824fcc90cabd9f8bd3245c787aa4b1694bd6270906fb65ba1eca3c2bd0fcd3",
+      "fresh_context_http": 200,
+      "fresh_context_ready": true,
+      "availability_http": 200,
+      "matching_amount_paise": 210000,
+      "existing_test_booking_amount_paise": 100,
+      "existing_test_payment_captured_paise": 100,
+      "existing_test_refunded_paise": 0,
+      "checked_at_utc": "2026-09-30T16:31:22Z"
     }
   },
   "owner_test_followup": {

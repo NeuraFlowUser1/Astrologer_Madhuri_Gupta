@@ -1,5 +1,14 @@
 # Sarsa complete-website integration and release plan
 
+## Normal pricing fully restored — 30 September 2026, 16:31 UTC
+
+The owner deployed normal-price restoration5453bb1. After the requested60-second wait the official booking-policy response exactly matches original version29824fcc90cabd9f8bd3245c787aa4b1694bd6270906fb65ba1eca3c2bd0fcd3 and all four approved amounts. A guarded production transaction changed only the active policy pointer from the temporary version to the original, asserting the exact retained snapshot relation, dedicated merchant/live tuple and existing admission controls. Database readback agrees with the live code. Public booking and browsing remain open.
+
+A fresh checkout context returns200/ready=true without exposing or saving its cookie. Kundli Matching availability returns200,210000 paise, the original quote version and nine times on2 October; the test booking still occupies its original time. Existing test booking remains confirmed at100 paise with its temporary immutable snapshot, and the accepted payment remains captured100 paise with zero refunded. No booking snapshot, payment, customer information, permission or service connection was rewritten. This completes the temporary-price restoration; previous pending/restoration prose is historical.
+
+Next controlled acceptance is owner-operated Studio rescheduling of the test appointment from2 October15:00 to15:30 India time. No staff change, cancellation or refund has yet been performed. Independent owner-local concurrency and final policy/operating checks remain distinct from the accepted paid-booking path.
+
+
 ## Real paid-booking acceptance and price restoration — 30 September 2026
 
 The owner completed one real Kundli Matching booking at1 INR. Production shows confirmed revision1,100 paise INR, the bound Sarsa merchant/live mode, confirmed order resolution and exactly one active slot claim. The accepted payment observation is captured,100 paise INR and zero refunded. The appointment is2 October15:00–15:30 India time. No private name, email, mobile, payment/order identifier or meeting link is published here.
