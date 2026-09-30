@@ -193,7 +193,8 @@
       "source_commit": "c529cfceace97b05abcc460b8b6425515a62a15a",
       "monitor_run": 36712770409,
       "monitor_acceptance": "passed",
-      "monitor_completed_at": "2026-09-30T12:07:30Z"
+      "monitor_completed_at": "2026-09-30T12:07:30Z",
+      "workflow_state": "active"
     },
     "mail": {
       "provider_daily_used": 0,
@@ -213,7 +214,11 @@
       "merchant": "ThvGDrQ1FuyLI8",
       "mode": "live",
       "credential_version": "sarsa-live-20260930",
-      "hosted_provider_acceptance": false
+      "hosted_provider_acceptance": false,
+      "database_merchant_tuple_configured": true,
+      "public_payment_admission": false,
+      "hosted_accounts_last_read": false,
+      "hosted_webhook_last_read": false
     },
     "worker_unit_tests": 25,
     "native_fixture_compatibility_date": "2026-09-17",
@@ -225,6 +230,11 @@
       "terminal_credential_transfer": "rejected_by_automatic_approval_review_no_value_sent",
       "owner_private_check": "prepared_not_run",
       "safe_connection_rejection_cases": 7
-    }
+    },
+    "contact": {
+      "hosted_delivery_last_read": false,
+      "intake_open": false
+    },
+    "evidence_commit": "c3f1fbee6ff9573abceeb4d6d3d46ababa9a8eb6"
   }
 }
