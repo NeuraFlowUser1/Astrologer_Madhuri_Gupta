@@ -206,7 +206,7 @@
       "local_contact_daily_limit": 8,
       "local_contact_rolling_31_day_limit": 240,
       "shared_capacity_reserved": false,
-      "actual_delivery": "pending"
+      "actual_delivery": "owner_contact_test_three_messages_delivered"
     },
     "payment": {
       "protected_local_copy_exists": true,
@@ -236,7 +236,26 @@
     },
     "contact": {
       "hosted_delivery_last_read": true,
-      "intake_open": true
+      "intake_open": true,
+      "owner_test_acceptance": {
+        "created_at_utc": "2026-09-30T12:59:18.915Z",
+        "verified_at_utc": "2026-09-30T13:01:28.649Z",
+        "verification_generation": 1,
+        "incorrect_code_attempts": 0,
+        "mail_kinds_delivered": [
+          "verification",
+          "acknowledgement",
+          "practice_notice"
+        ],
+        "client_sheet": "done",
+        "agency_sheet": "done",
+        "each_job_attempts": 1,
+        "project_labels_match": true,
+        "enquiry_references_match": true,
+        "current_workbook_owners_match": true,
+        "independent_sheet_visual_read": false,
+        "customer_payload_published": false
+      }
     },
     "evidence_commit": "f19b0a34b2e3ec33890a82c43347b42d35725a48",
     "live_configuration": {
@@ -259,5 +278,11 @@
       "slots": 10,
       "approved_policy_status": 200
     }
+  },
+  "owner_test_followup": {
+    "scope": "marked owner enquiry only",
+    "actual_customer_message_processing": true,
+    "payment_order_charge_refund_created": false,
+    "test_record_deleted": false
   }
 }

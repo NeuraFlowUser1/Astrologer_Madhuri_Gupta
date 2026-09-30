@@ -1,5 +1,14 @@
 # Permanent resource manifest — 28 September 2026
 
+## Real Contact acceptance — 30 September 2026
+
+The owner submitted the clearly marked test enquiry through the official Contact page. Production saved it at12:59:18.915 UTC and verified it at13:01:28.649 UTC, generation1, with zero incorrect-code attempts. The verification, acknowledgement and practice-notice jobs each completed one send attempt without a recorded error. All three have persisted email.sent and email.delivered observations from the signed Resend callback path; acknowledgement delivered13:02:01.840 UTC and practice notice13:02:13.764 UTC. Delivery means the receiving mail server accepted the message; it does not prove that a person read it or that it avoided a spam folder.
+
+Both client_sheet and agency_sheet jobs are done on their first attempt. Each has exactly one assigned row2 in its respective separately owned workbook, with the correct Project004 label and enquiry reference. Both workbook owners and consent revisions still match their current connected roles. This is actual provider-write completion and persisted assignment evidence, not an independent visual read of spreadsheet cells. No enquiry payload, recipient address, verification code or private credential is published in this record. The owner's test is retained as labelled operational evidence; no customer record was deleted, payment charged or refund issued.
+
+Next acceptance boundary: a controlled real booking/payment, confirmation/Meet and staff follow-through. The lowest published service is2100 INR; the owner has been asked to choose the normal published-price test or separately plan a controlled10 INR test. Published customer prices remain unchanged. The independent private development concurrency check remains pending. Final privacy review has identified that encrypted backup storage and browser enquiry-access storage need explicit disclosure; keep the final policy update last as directed and do not claim all policy work complete.
+
+
 ## Live payment and enquiry admission — 30 September 2026, 12:54 UTC
 
 The owner confirms the dedicated Razorpay webhook is saved and automatic capture selected. The live protected diagnostic accepts all five staff format checks and all eleven composition flags, including Contact delivery, payment accounts and payment webhook. The stored merchant tuple is ThvGDrQ1FuyLI8 / live / sarsa-live-20260930. An unsigned empty payment callback is rejected400; no event, booking, order, message, charge or refund was created by that check.
