@@ -164,7 +164,7 @@
     "scheduled_acceptance": false
   },
   "latest_acceptance": {
-    "checked_at_utc": "2026-09-30T12:08:00Z",
+    "checked_at_utc": "2026-09-30T12:54:00Z",
     "studio": 200,
     "unsigned_studio_status": 401,
     "studio_private_checks_all_true": true,
@@ -216,9 +216,12 @@
       "credential_version": "sarsa-live-20260930",
       "hosted_provider_acceptance": false,
       "database_merchant_tuple_configured": true,
-      "public_payment_admission": false,
-      "hosted_accounts_last_read": false,
-      "hosted_webhook_last_read": false
+      "public_payment_admission": true,
+      "hosted_accounts_last_read": true,
+      "hosted_webhook_last_read": true,
+      "owner_webhook_saved": true,
+      "owner_automatic_capture_selected": true,
+      "unsigned_callback_http": 400
     },
     "worker_unit_tests": 25,
     "native_fixture_compatibility_date": "2026-09-17",
@@ -232,9 +235,29 @@
       "safe_connection_rejection_cases": 7
     },
     "contact": {
-      "hosted_delivery_last_read": false,
-      "intake_open": false
+      "hosted_delivery_last_read": true,
+      "intake_open": true
     },
-    "evidence_commit": "c3f1fbee6ff9573abceeb4d6d3d46ababa9a8eb6"
+    "evidence_commit": "f19b0a34b2e3ec33890a82c43347b42d35725a48",
+    "live_configuration": {
+      "staff_format_checks_all_true": true,
+      "composition_flags_all_true": true,
+      "provider_acceptance": "not_checked"
+    },
+    "guarded_activation": {
+      "merchant_tuple_asserted": true,
+      "current_owner_bound_workbooks_asserted": true,
+      "approved_mail_allocations_asserted": true,
+      "booking_open_readback": true,
+      "enquiries_open_readback": true,
+      "permanent_security_and_payment_protections_retained": true
+    },
+    "public_availability": {
+      "status": 200,
+      "service": "kundli-matching",
+      "day": "2026-10-01",
+      "slots": 10,
+      "approved_policy_status": 200
+    }
   }
 }

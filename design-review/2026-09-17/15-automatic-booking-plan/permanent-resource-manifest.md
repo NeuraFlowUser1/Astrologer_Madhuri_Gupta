@@ -1,5 +1,14 @@
 # Permanent resource manifest — 28 September 2026
 
+## Live payment and enquiry admission — 30 September 2026, 12:54 UTC
+
+The owner confirms the dedicated Razorpay webhook is saved and automatic capture selected. The live protected diagnostic accepts all five staff format checks and all eleven composition flags, including Contact delivery, payment accounts and payment webhook. The stored merchant tuple is ThvGDrQ1FuyLI8 / live / sarsa-live-20260930. An unsigned empty payment callback is rejected400; no event, booking, order, message, charge or refund was created by that check.
+
+After those checks, one guarded production transaction enabled normal booking and enquiry intake. It asserted the exact merchant tuple, schedule browsing, both current owner-bound ready Google workbooks and the approved20/day,600/rolling31day mail allocation with8/day,240/rolling31day Contact sublimits. Readback shows both intake controls true. The public booking policy returns the four approved services/prices and Google Meet; availability returns ten30-minute times on1 October within the approved daily windows. Permanent payment verification, ownership fencing, quota and double-booking protections remain.
+
+Configuration and admission are accepted; actual provider acceptance is still pending. The owner has been asked to submit a clearly marked test enquiry using their own email. Controlled real payment, confirmation/Meet, both record copies, signed provider callbacks and staff changes must be checked against that real journey. No real payment or enquiry has been submitted by Codex. The independent owner-local development concurrency check and final policy review also remain; no false end-to-end completion is claimed. Earlier dated closed/missing-settings observations below are superseded by this checkpoint, not erased.
+
+
 ## Whole-website completion plan — current execution authority
 
 Read [website-completion-implementation-plan.md](website-completion-implementation-plan.md) for the current integration/release sequence, revision2 implementation contracts in section13, and the owner clarification: remove temporary incomplete-setup restrictions, retain permanent correctness/security protections, and complete all remaining services, including Razorpay after the owner reported onboarding complete on30 September. The existing detailed booking contracts and dated evidence below remain valid where not explicitly superseded. This is a reviewed plan, not a claim of implementation or deployment.
