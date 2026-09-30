@@ -34,6 +34,16 @@ The owner supplied two screenshots of the current booking-reference lookup and s
 Initial reads showed revision1 and no saved action; a later read and the owner's confirmation show the actual move saved at17:16:11.555 UTC, from2 October15:00 to16:00 India time. Revision2 is confirmed, the old slot is free and one new claim exists. Calendar, both record copies and three update emails completed. The earlier message request is superseded; do not infer a backend fault from a read made before a saved action was observed. The database functions retain the intended restricted security-definer boundary; absent direct runtime INSERT permission on staff history is expected. No permissions or booking rows were changed as a workaround.
 
 
+## Additional inbox/action feedback — 30 September 2026, 17:50 UTC
+
+The owner could not find an Inbox tab because the current page actually has a Practice Inbox section below the calendar controls. Ctrl+F was needed to locate “Know what needs your attention”. The section's Verified enquiries / Needs attention / Refresh choices do not explain clearly enough what they do. Opening details expands another long, loosely spaced vertical arrangement. The owner also perceived the adjacent review/retry/refund controls as several competing refund actions. This is observed usability confusion, not evidence that the application issued multiple refunds.
+
+- Give routine appointments, messages and problems a discoverable compact navigation with plain labels, useful counts and selected-state feedback. Explain what requires action without forcing the operator to interpret technical categories.
+- Keep list and selected details together with compact aligned facts and bounded scrolling where appropriate. Avoid nested full-width vertical expansions and repeated large gaps. Preserve readable mobile layout and accessible touch targets.
+- Give each detail view one clear primary next action. Show only applicable secondary actions, grouped separately with explanations and confirmation appropriate to their effect. Saving a note, retrying saved work, making a financial refund and closing a provider-verified review are different operations; the redesigned UI must communicate that difference without three apparently interchangeable buttons.
+- The current buttons are Save review note, Check payment again / Retry saved work, and Close review after verified full refund. No current Studio action initiates a Razorpay refund. If direct refund initiation is proposed later, it needs its own explicitly approved provider permissions, amount limits, durable retry identity, reconciliation and review; changing the label alone must not imply money was sent.
+- Do not remove audit notes, provider confirmation, staff access restrictions or safe identical retries to simplify the surface. Move necessary support mechanics into contextual details and keep everyday operation obvious.
+
 ## Review boundary
 
 Each redesign requires its own Design Intent and Implementation Spec, planned API/data implications and rendered review before replacement. No source/frontend/backend/permissions/customer action changed by recording these requirements. Track future reuse in the004-to-003 improvement register after the design and implementation are actually selected; do not prematurely apply unreviewed redesign to Project003.

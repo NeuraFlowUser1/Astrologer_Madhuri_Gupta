@@ -10,7 +10,7 @@ The owner-operated1 INR test passed payment capture, confirmation, Google Meet, 
 
 1. Sign in to /studio with the practice account. Review appointments and the Practice Inbox. Current date-selection/dashboard ergonomics are recorded for redesign; do not mistake that deferred work for a different booking backend.
 2. Open an appointment to move or cancel it. Read the saved outcome before repeating an action. If a reply is uncertain, use the same-request check offered by the interface. Do not create a second request to guess whether the first worked.
-3. Cancellation frees the appointment but does not refund money. Make approved refunds through Sarsa's Razorpay merchant, then wait for the saved provider evidence. In Inbox → Needs attention, open its payment item, add a note and use “Close review after verified full refund”. A review note alone does not close the case. The closure button verifies the recorded full refund; it does not issue another refund.
+3. Cancellation frees the appointment but does not refund money. Make approved refunds through Sarsa's Razorpay merchant, then wait for the saved provider evidence. In the Practice Inbox section below the calendar controls (heading “Know what needs your attention”) → Needs attention, open its payment item, add a note and use “Close review after verified full refund”. A review note alone does not close the case. The closure button verifies the recorded full refund; it does not issue another refund.
 4. For failed saved work, read the exact issue before choosing “Retry saved work” or “Check payment again”. A queued retry is not proof of delivery or financial settlement. Check the later outcome; escalate repeated or unexplained failures with the booking reference and safe error wording.
 
 ## Contact corrections and lost access
@@ -37,10 +37,10 @@ For disaster recovery, restore and verify in isolation first, recreate restricte
 
 ## Remaining acceptance and deferred work
 
-- Owner: close the provider-verified full-refund review through normal Studio. This preserves staff identity and a genuine review note.
-- Owner: independent development-only two-connection contention check using tools/booking-checks/README.md. Code and seven unsafe-connection rejection cases are checked; actual independent-connection execution is pending.
+- Completed: provider-verified full-refund review closed through one normal Studio action, with the provider evidence and staff note saved.
+- Completed: owner reports PASS for the development-only two-connection contention check. A separate database read confirms its temporary synthetic rows were removed. The private password/output did not pass through Codex.
 - Practice/customer: live assisted receipt recovery after genuine saved-number verification. Contact correction's real provider acceptance requires an eligible confirmed future booking; local database/browser checks already cover it. Do not create another paid appointment or fake a call solely to tick this item.
-- Website: publish the final policy wording, then verify the deployed privacy/terms/booking-policy pages.
+- Completed: final policy wording published/deployed; official privacy asset and privacy/terms/booking-policy routes verified.
 - Scheduled operation: observe a future daily30-schema archive and retain first accepted19-schema evidence; monitor actual continued service rather than promising indefinite unattended operation.
 - UI/UX: separately redesign the account entry, compact calendar/dashboard, date/time pickers and horizontal controls per dashboard-redesign-requirements.md. No redesign is included in this functional-completion pass.
 

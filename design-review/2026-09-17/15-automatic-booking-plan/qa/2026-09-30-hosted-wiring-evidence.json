@@ -235,8 +235,11 @@
     "concurrency": {
       "connector_calls": "same_backend_nonoverlapping",
       "terminal_credential_transfer": "rejected_by_automatic_approval_review_no_value_sent",
-      "owner_private_check": "prepared_not_run",
-      "safe_connection_rejection_cases": 7
+      "owner_private_check": "owner_reports_pass",
+      "safe_connection_rejection_cases": 7,
+      "independent_session_execution": "owner_run_hidden_local_prompt",
+      "independent_development_cleanup_read": "passed_zero_matching_synthetic_rows",
+      "source_directly_observed_output": false
     },
     "contact": {
       "hosted_delivery_last_read": true,
@@ -381,8 +384,13 @@
       "revision": 3,
       "active_claims": 0,
       "earlier_captured_evidence_preserved": true,
-      "staff_review_resolved": false,
-      "codex_initiated_refund": false
+      "staff_review_resolved": true,
+      "codex_initiated_refund": false,
+      "staff_review_resolved_at_utc": "2026-09-30T17:50:14.937597Z",
+      "staff_review_action": "verified_refund",
+      "staff_review_revision": 1,
+      "staff_review_count": 1,
+      "staff_provider_evidence_saved": true
     },
     "final_policy_review": {
       "production_build": "passed",
@@ -401,7 +409,18 @@
       "privacy_screenshots_visually_inspected": true,
       "phone_horizontal_overflow": false,
       "browser_page_errors": 0,
-      "hosted_new_policy_acceptance": false
+      "hosted_new_policy_acceptance": true,
+      "hosted_entry_asset": "index-DdYAFm2J.js",
+      "hosted_policy_asset": "PolicyPage-C2gm9trW.js",
+      "hosted_disclosures_match": true,
+      "owner_reports_deployed_commit": "5fba3f5",
+      "support_and_studio_routes": 200
+    },
+    "final_followthrough": {
+      "unprocessed_provider_events": 0,
+      "unresolved_test_payment_cases": 0,
+      "live_assisted_support_actions": 0,
+      "assisted_access": "genuine_staff_verification_and_owner_browser_test_requested"
     }
   },
   "owner_test_followup": {

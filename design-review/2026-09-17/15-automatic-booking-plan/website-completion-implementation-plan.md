@@ -1,5 +1,12 @@
 # Sarsa complete-website integration and release plan
 
+## Staff refund review and final policy deployment accepted — 30 September 2026, 17:50 UTC
+
+Production records exactly one verified_refund staff review at17:50:14.932361 UTC with saved provider evidence; the case resolved17:50:14.937597 UTC. Payment remains refunded100/100 paise. No new charge/refund or direct case update was made by Codex. Owner-reported repeated interaction did not create another saved refund review.
+
+Owner deployed5fba3f5. Official privacy entry index-DdYAFm2J.js loads PolicyPage-C2gm9trW.js with the exact encrypted-backup, separate enquiry verification and live payment/refund wording. Privacy, terms, booking-policy, booking-help and Studio routes all return200. Studio HTML and inbox script match published source. Updated operating instructions and additional deferred Inbox/action-density feedback are recorded; no dashboard redesign is implemented. The owner reports PASS for the independent development-only contention check; a subsequent database read found zero matching synthetic rows. Codex did not receive the password or directly observe the hidden-terminal result. No provider event is unprocessed and no test payment case remains unresolved. Assisted-access live proof after genuine original-phone verification is requested; that proof and the next new-schema daily archive remain distinct acceptance limits.
+
+
 ## Full refund received — 30 September 2026, 17:33 UTC
 
 The owner completed the full1 INR refund in Razorpay. A private read of the exact Sarsa payment confirmed refunded100/100 paise. The signed refund.processed notification arrived17:33:01.285 UTC and was processed17:33:04.479 UTC on its first attempt. Production retained the earlier captured observation and saved the new refunded observation at17:33:04.420758 UTC. Appointment remains cancelled revision3 with zero active claims. No refund was initiated by Codex. Initial reads preceded receipt of the callback; this is not evidence of a broken handoff.
