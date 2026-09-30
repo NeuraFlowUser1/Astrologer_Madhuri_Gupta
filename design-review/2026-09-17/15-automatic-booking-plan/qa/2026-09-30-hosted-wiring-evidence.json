@@ -194,7 +194,9 @@
       "monitor_run": 36712770409,
       "monitor_acceptance": "passed",
       "monitor_completed_at": "2026-09-30T12:07:30Z",
-      "workflow_state": "active"
+      "workflow_state": "active",
+      "scheduled_monitor_acceptance": "passed",
+      "scheduled_monitor_run": 36748562494
     },
     "mail": {
       "provider_daily_used": 0,
@@ -328,6 +330,22 @@
       "existing_test_payment_captured_paise": 100,
       "existing_test_refunded_paise": 0,
       "checked_at_utc": "2026-09-30T16:31:22Z"
+    },
+    "staff_reschedule_acceptance": {
+      "owner_confirmed_target": "2026-10-02T16:00:00+05:30",
+      "revision": 2,
+      "state": "confirmed",
+      "staff_actions": 1,
+      "active_claims": 1,
+      "old_interval_claims": 0,
+      "amount_paise": 100,
+      "old_meeting": "cancelled",
+      "new_meeting": "ready",
+      "calendar_revision2": "delivered",
+      "client_sheet_revision2": "delivered",
+      "agency_sheet_revision2": "delivered",
+      "three_update_emails_delivered": true,
+      "direct_codex_booking_or_permission_changes": false
     }
   },
   "owner_test_followup": {
@@ -340,5 +358,10 @@
     "owner_created_booking_and_payment": true,
     "codex_created_charge_or_refund": false,
     "staff_changes": "not_exercised"
+  },
+  "deferred_redesign": {
+    "owner_required": true,
+    "implemented": false,
+    "requirements_document": "dashboard-redesign-requirements.md"
   }
 }

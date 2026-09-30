@@ -1,5 +1,21 @@
 # Planning verification — 21 September2026
 
+## Real staff rescheduling accepted — 30 September 2026, 17:16 UTC
+
+Later production readback and owner confirmation establish the actual saved move to2 October16:00–16:30 India time, rather than the earlier suggested15:30. Exactly one staff action moves revision1 to2 at17:16:11.555 UTC. The booking stays confirmed at100 paise with one active claim; zero active claims overlap its old15:00–15:30 interval. Previous observations of revision1/no action are superseded; no failed move or underlying code defect is inferred from those earlier reads. No table permission was relaxed or booking moved directly by Codex.
+
+Old revision1 calendar cancellation and new revision2 calendar/two-sheet deliveries all completed without recorded errors. Old meeting state is cancelled/no stored Meet URL; new meeting is ready with a stored Meet URL. Both revision2 rows retain the Project004 label, correct16:00–16:30 interval and1 INR. All three update emails have signed email.delivered observations: practice acknowledgement17:16:18.908, customer acknowledgement17:16:24.580 and customer details17:16:29.206 UTC. No extra payment or refund occurred.
+
+Independent monitor now has actual schedule-triggered successful runs, including36748562494 at17:02:30 UTC, and the public recovery health is healthy. Scheduling is observed, not guaranteed punctual; GitHub may delay runs. Backup runs remain the already accepted initial019 archive and same-day verification; first future daily run/030 archive is not yet claimed.
+
+The owner has been guided to cancel only the test appointment through Studio next; cancellation/refund/assisted-access provider acceptance remain open. The [deferred dashboard redesign](dashboard-redesign-requirements.md) remains recorded, not implemented.
+
+## Owner redesign feedback and staff acceptance boundary — 30 September 2026
+
+Owner requires a Sarsa-only client entry, agency permission/setup outside ordinary client UI, a compact calendar-led dashboard with booked-day markers and upcoming appointments, and whole-row date/time pickers throughout customer/staff flows. Implementation is deferred until current functional work finishes. [dashboard-redesign-requirements.md](dashboard-redesign-requirements.md) records exact audience, permission, interaction and review requirements. NeuraFlow's backend record copy remains required; agency consent need not be exposed as a client-facing account choice.
+
+The owner reports rescheduling, but production readback still shows confirmed revision1 at2 October15:00–15:30 India time and zero saved staff appointment actions for this booking. The exact UI result wording is requested; do not assert a successful move, invent its cause, alter history or bypass the normal staff route. Restricted function-security/permission reads match the intended design. Normal prices remain restored and the captured test payment remains1 INR.
+
 ## Normal pricing fully restored — 30 September 2026, 16:31 UTC
 
 The owner deployed normal-price restoration5453bb1. After the requested60-second wait the official booking-policy response exactly matches original version29824fcc90cabd9f8bd3245c787aa4b1694bd6270906fb65ba1eca3c2bd0fcd3 and all four approved amounts. A guarded production transaction changed only the active policy pointer from the temporary version to the original, asserting the exact retained snapshot relation, dedicated merchant/live tuple and existing admission controls. Database readback agrees with the live code. Public booking and browsing remain open.
