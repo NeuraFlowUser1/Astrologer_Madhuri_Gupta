@@ -56,7 +56,7 @@ def main():
     if not 0<=args.minimum<=100:parser.error('Minimum must be between zero and 100.')
     result=summarize(args.minimum)
     for name,value in result['domains'].items():
-        print(name+': '+', '.join(f"{metric} {v['percent']:.2f}% ({v['covered']}/{v['total']})" for metric,v in value.items()))
+        print(name+': '+', '.join(f"{metric} {100*v['covered']/v['total']:.2f}% ({v['covered']}/{v['total']})" for metric,v in value.items()))
     if not result['passed']:raise SystemExit('Coverage target not met in every domain.')
     print('PASS: every measured domain meets both coverage targets.')
 

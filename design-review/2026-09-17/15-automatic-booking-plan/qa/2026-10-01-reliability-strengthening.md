@@ -14,7 +14,7 @@ Baseline source: `50f26fe004717ed100ec8244df6fd8cc864b2024`. Exact counts, sourc
 |---|---:|---:|---:|---:|
 | Booking backend | 88.81% | **95.51%** | 76.83% | **90.52%** |
 | Backup helpers | 57.25% | **95.31%** | 50.50% | **91.09%** |
-| Protected worker-setting helpers | 67.26% | **99.11%** | 47.37% | **94.74%** |
+| Protected worker-setting helpers | 67.26% | **99.12%** | 47.37% | **94.74%** |
 | Customer booking/enquiry logic | 35.98% | **99.47%** | 30.71% | **92.44%** |
 | Staff logic | 0% | **99.67%** | 0% | **92.91%** |
 | Recovery worker and observer | 95.65% | **98.55%** | 88.51% | **97.97%** |

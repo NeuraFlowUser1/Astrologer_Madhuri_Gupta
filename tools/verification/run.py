@@ -31,7 +31,7 @@ def main():
     run([sys.executable,'-m','coverage','json',config])
     run([args.node,str(vitest),'run','--config','frontend/vitest.config.mjs','--coverage'])
     result=summarize()
-    for name,value in result['domains'].items():print(name+': '+', '.join(f"{metric} {v['percent']:.2f}%" for metric,v in value.items()))
+    for name,value in result['domains'].items():print(name+': '+', '.join(f"{metric} {100*v['covered']/v['total']:.2f}%" for metric,v in value.items()))
     if not result['passed']:raise SystemExit('The 90% line/branch target has not been reached for every domain.')
     if args.chrome:
         npm=shutil.which('npm',path=environment['PATH'])
