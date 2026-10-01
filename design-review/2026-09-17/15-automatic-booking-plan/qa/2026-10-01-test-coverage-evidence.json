@@ -1,0 +1,215 @@
+{
+  "date_utc": "2026-10-01",
+  "scope": "Existing tests rerun and read-only hosted-service audit",
+  "source_commit": "50f26fe004717ed100ec8244df6fd8cc864b2024",
+  "individual_tests": {
+    "backend": 245,
+    "frontend": 21,
+    "worker": 26,
+    "backup": 34,
+    "worker_setting_handoff": 6,
+    "total": 332,
+    "result": "passed"
+  },
+  "database": {
+    "isolated": true,
+    "migrations": 31,
+    "fixtures": [
+      {
+        "fixture": "calendar_database.sql",
+        "passed": true
+      },
+      {
+        "fixture": "contact_database.sql",
+        "passed": true
+      },
+      {
+        "fixture": "contact_delivery_database.sql",
+        "passed": true
+      },
+      {
+        "fixture": "google_refresh_database.sql",
+        "passed": true
+      },
+      {
+        "fixture": "google_workbooks_database.sql",
+        "passed": true
+      },
+      {
+        "fixture": "payment_independent_database.sql",
+        "passed": true
+      },
+      {
+        "fixture": "request_limits_database.sql",
+        "passed": true
+      },
+      {
+        "fixture": "reservation_database.sql",
+        "passed": true
+      },
+      {
+        "fixture": "staff_cancellation_database.sql",
+        "passed": true
+      },
+      {
+        "fixture": "staff_recovery_database.sql",
+        "passed": true
+      },
+      {
+        "fixture": "staff_reschedule_database.sql",
+        "passed": true
+      },
+      {
+        "fixture": "staff_support_database.sql",
+        "passed": true
+      },
+      {
+        "fixture": "studio_calendar_database.sql",
+        "passed": true
+      },
+      {
+        "fixture": "studio_database.sql",
+        "passed": true
+      },
+      {
+        "fixture": "studio_inbox_database.sql",
+        "passed": true
+      },
+      {
+        "fixture": "temporary_cleanup_database.sql",
+        "passed": true
+      },
+      {
+        "fixture": "database_constraints.sql",
+        "passed": true
+      },
+      {
+        "fixture": "website_permissions.sql",
+        "passed": true
+      },
+      {
+        "fixture": "actual_receipt_query",
+        "passed": true
+      },
+      {
+        "fixture": "payment_recovery",
+        "passed": true
+      },
+      {
+        "fixture": "google_delivery",
+        "passed": true
+      },
+      {
+        "fixture": "workbook_connection_query",
+        "passed": true
+      },
+      {
+        "fixture": "email_event_replay",
+        "passed": true
+      },
+      {
+        "fixture": "email_dispatch",
+        "passed": true
+      },
+      {
+        "fixture": "checkout_resume",
+        "passed": true
+      },
+      {
+        "fixture": "recovery_plan",
+        "passed": true
+      },
+      {
+        "fixture": "shared_contact_budget",
+        "passed": true
+      }
+    ]
+  },
+  "build": "passed",
+  "lint": {
+    "errors": 0,
+    "warnings": 6
+  },
+  "production": {
+    "migration_count": 31,
+    "source_checksum_mismatches": 0,
+    "application_tables": 35,
+    "rls_enabled_tables": 0,
+    "rls_policies": 0,
+    "web_superuser": false,
+    "web_create_database": false,
+    "web_create_role": false,
+    "web_replication": false,
+    "web_bypass_rls": false,
+    "web_schema_create": false,
+    "web_delete_bookings": false,
+    "web_truncate_bookings": false,
+    "backup_read_bookings": true,
+    "backup_write_bookings": false,
+    "configured_integration_groups": 11,
+    "google_staff_setup_checks_passed": 5,
+    "configuration_provider_acceptance": "not_checked",
+    "recovery_lanes": 8,
+    "pending_lane_delays": null,
+    "recovery_attention": false,
+    "owner_reports_final_vercel_ready": true,
+    "vercel_deployment_id_independently_obtained": false
+  },
+  "browser": {
+    "engine": "chromium",
+    "desktop_viewport": [
+      1440,
+      900
+    ],
+    "emulated_mobile_viewport": [
+      390,
+      844
+    ],
+    "distinct_routes_loaded": 13,
+    "route_status": 200,
+    "page_errors": 0,
+    "expected_unauthenticated_studio_status": 401,
+    "mobile_horizontal_overflow": false,
+    "live_mutation_or_payment": "none"
+  },
+  "live_read_only_requests": {
+    "booking_policy": 200,
+    "unauthenticated_staff_status": 401,
+    "unauthenticated_internal_plan": 401,
+    "worker_health": 200
+  },
+  "live_prices_paise": [
+    210000,
+    250000,
+    450000,
+    210000
+  ],
+  "scheduled_backup": {
+    "run": 36809105655,
+    "event": "schedule",
+    "source_commit": "50f26fe004717ed100ec8244df6fd8cc864b2024",
+    "result": "success",
+    "upload_and_readback": "passed",
+    "isolated_restore": "passed",
+    "retention_removed": 0
+  },
+  "scheduled_monitors": {
+    "runs": [
+      36818139286,
+      36817082514,
+      36815069907
+    ],
+    "result": "success"
+  },
+  "not_claimed": [
+    "complete code coverage",
+    "RLS policy tests",
+    "automatic application regression gate",
+    "full automated real-provider E2E",
+    "Firefox or Safari acceptance",
+    "physical-device acceptance",
+    "representative load/soak or independent penetration testing",
+    "directly observed rerun of owner-only Neon concurrent-session check"
+  ],
+  "current_app_or_customer_data_changes": "none"
+}

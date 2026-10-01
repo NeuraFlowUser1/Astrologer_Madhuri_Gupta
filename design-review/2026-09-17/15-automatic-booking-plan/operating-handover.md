@@ -6,6 +6,8 @@ Keep the live service understandable for the practice and recoverable for suppor
 
 The owner-operated1 INR test passed payment capture, confirmation, Google Meet, both separately owned record-copy jobs, delivered booking emails, rescheduling, cancellation and a full provider refund. Normal prices are restored. Recorded evidence is in verification.md and qa/2026-09-30-hosted-wiring-evidence.json. Keep the labelled test history; deleting financial/audit records is not part of this work.
 
+The October1 non-design reliability pass adds506 passing individual tests, actual concurrent/restore/Chrome database proof and independently measured≥90% line/branch coverage in six domains. Its [completion report](qa/2026-10-01-reliability-strengthening.md) defines scope and limits; [local instructions](../../../tools/verification/README.md) provide one explicit repeat command without a publication/CI gate. The cryptography50.0.2 security update preserves saved keys and older encrypted data; apply the reviewed website revision once through Sarsa's separate Vercel account before treating that dependency as live. Existing daily backup scheduling and account ownership are unchanged.
+
 ## Normal staff routine
 
 1. Sign in to /studio with the practice account. Review appointments and the Practice Inbox. Current date-selection/dashboard ergonomics are recorded for redesign; do not mistake that deferred work for a different booking backend.

@@ -1,0 +1,373 @@
+{
+  "date_utc": "2026-10-01",
+  "measured_at": "2026-10-01T07:46:48.718312+00:00",
+  "scope": "Approved non-design reliability strengthening",
+  "baseline_source_commit": "50f26fe004717ed100ec8244df6fd8cc864b2024",
+  "individual_tests": {
+    "backend": 284,
+    "backup": 60,
+    "protected_worker_setting_helpers": 11,
+    "javascript_including_original_47": 151,
+    "total": 506,
+    "additional_over_baseline": 174,
+    "result": "passed"
+  },
+  "coverage": {
+    "measured_at": "2026-10-01T07:41:19.744717+00:00",
+    "minimum_per_metric": 90,
+    "passed": true,
+    "domains": {
+      "booking_backend": {
+        "lines": {
+          "covered": 2997,
+          "total": 3138,
+          "percent": 95.5067,
+          "passed": true
+        },
+        "branches": {
+          "covered": 840,
+          "total": 928,
+          "percent": 90.5172,
+          "passed": true
+        }
+      },
+      "backup_helpers": {
+        "lines": {
+          "covered": 651,
+          "total": 683,
+          "percent": 95.3148,
+          "passed": true
+        },
+        "branches": {
+          "covered": 184,
+          "total": 202,
+          "percent": 91.0891,
+          "passed": true
+        }
+      },
+      "worker_setting_helpers": {
+        "lines": {
+          "covered": 112,
+          "total": 113,
+          "percent": 99.115,
+          "passed": true
+        },
+        "branches": {
+          "covered": 36,
+          "total": 38,
+          "percent": 94.7368,
+          "passed": true
+        }
+      },
+      "customer_logic": {
+        "lines": {
+          "covered": 376,
+          "total": 378,
+          "percent": 99.4709,
+          "passed": true
+        },
+        "branches": {
+          "covered": 587,
+          "total": 635,
+          "percent": 92.4409,
+          "passed": true
+        }
+      },
+      "staff_logic": {
+        "lines": {
+          "covered": 305,
+          "total": 306,
+          "percent": 99.6732,
+          "passed": true
+        },
+        "branches": {
+          "covered": 550,
+          "total": 592,
+          "percent": 92.9054,
+          "passed": true
+        }
+      },
+      "recovery_worker": {
+        "lines": {
+          "covered": 136,
+          "total": 138,
+          "percent": 98.5507,
+          "passed": true
+        },
+        "branches": {
+          "covered": 145,
+          "total": 148,
+          "percent": 97.973,
+          "passed": true
+        }
+      }
+    },
+    "source_sha256": {
+      "backend/booking_engine/__init__.py": "eb002717f8aacbea17a9743476af6c3697023092a129514c9f403d362ee4889a",
+      "backend/booking_engine/access.py": "9bc03df193f01c00add3ab9ddc262afe1eb89463e2ff61bd9e6d0a799ceca2d2",
+      "backend/booking_engine/application.py": "98f4249bc4922b12fb6d2cf09242bebf1aa90b2ba97c31cf67db194455742fca",
+      "backend/booking_engine/availability.py": "86577adab8c256dd181d385b3bee5398285be225bd06dafbb7cacca3d706471c",
+      "backend/booking_engine/checkout.py": "c2d21937d8321503c030c73e2868bc739815728a5fa2ce995b8de1255ba75ca1",
+      "backend/booking_engine/checkout_verification.py": "db906c520c5120028f7f8dab769932346ff12428579ed5d6e92ea1ac964510d3",
+      "backend/booking_engine/connection.py": "573748668768fd678ea9bda155c4c916f120318b8afd74aa375df4abad5ea655",
+      "backend/booking_engine/contact.py": "e90171e1f364f06029a3da781d58025669ea6929ebd7910dde67e5bede7d1716",
+      "backend/booking_engine/contact_delivery.py": "eea2dae6962db08f470b61001985645da033bd30c3497600f62a7a85c740af67",
+      "backend/booking_engine/contact_messages.py": "a2a43a75f3d758cf61327697301e78dd122b15b1a2fbb81c600955c10d557a9c",
+      "backend/booking_engine/contact_records.py": "a1e7d97e654c2fdcfd92903dea6c99eaeca1fef09914cf2f450797134acaa4dc",
+      "backend/booking_engine/contact_routes.py": "056be42529fbb07b802e9c6022ec145eb4505d3b234c71cd1037e2fd4a11f7f1",
+      "backend/booking_engine/contact_worker.py": "14a9618ba648a839f6a0930e1d5c1ae6182ec78a84dfaa44f0587dbb496e7b4e",
+      "backend/booking_engine/email_delivery.py": "e40f9a5f47065ee263f29c9037da38f13f3b4b35140f324d7c3c184096f11075",
+      "backend/booking_engine/email_events.py": "870d8d768f77a38fde85e5f6a01134d21f502c9f947c10630ea7ae94ec670bac",
+      "backend/booking_engine/email_messages.py": "d81c6e8e3ca722ea9c33d280ecece4bcef2647789699f5399fc914b9aa1149d0",
+      "backend/booking_engine/email_worker.py": "4c508fbf9f80c6d550be12efbc50e41e9802921b6944ea5cf12f83b8e3968a8d",
+      "backend/booking_engine/google_access.py": "f088b1964d13e2a25105be0d605f302caca859e7f9868631c94f788899af8935",
+      "backend/booking_engine/google_delivery.py": "8d1a00d2ccc2ebbbdcc59b7b2d0dc507a02d21f74029d44775848d5e29d9dbf2",
+      "backend/booking_engine/google_oauth.py": "59c14c1b4fe8c7aea31dc5f1286ff70572bc8ba4cbba927f0cde1f24515dd519",
+      "backend/booking_engine/google_records.py": "d634f4d1b8fac9db384decca2f27a9c74c9d30b6635e28bbe2ce78fcb56e2caa",
+      "backend/booking_engine/google_worker.py": "42e80c8595ee53522e239166e3fdee57e3c83c1fae0ade242af99b388e08d348",
+      "backend/booking_engine/google_workspace.py": "9b33d30c201d18d120038a41a9a94105a394adf38c544e6e4bf071a2fa40b3ea",
+      "backend/booking_engine/hosting.py": "cbfcc1bf774b1c351266880a73be2b4a5e2ab827ace5bd7ac291b4818a19e0f1",
+      "backend/booking_engine/migrate.py": "0d630dfec0aea062a8bfcce94e18376da0485684502eb84eaa8d6091851c0282",
+      "backend/booking_engine/models.py": "e25c3a7b97cc2e91199cb63448911f8053d5c74ffd5ed248d721a3d0e640dc87",
+      "backend/booking_engine/order_creation.py": "81c92064f8a652c2d440e823bae105f1eacdb0cd3c8ef45875362ad700868f5a",
+      "backend/booking_engine/payment_configuration.py": "fe8a381fd25b265d33cd6f2d1bf339aeb9f59181f3ae85cdaa69279c095bcdc4",
+      "backend/booking_engine/payment_evidence.py": "efb505324f17bf1e0012706d9e46a771066fb554ba549e5a2d0fd78ab1e61714",
+      "backend/booking_engine/payment_policy.py": "a18a1318687192f4edc253391b34f0484e1f59b9ecb5ee80d8bc284629b3b4d6",
+      "backend/booking_engine/policy.py": "3a2cf3c1f74cd8c38627c9448a1ca002ee1e81119977a5bab29c98a38aab00e8",
+      "backend/booking_engine/rate_limit.py": "fa0b3c00eca7ff65ff4757d737ff2d9f49c55e6b8f34f19b185214c43f56d642",
+      "backend/booking_engine/razorpay.py": "9576b086fb8d58363cee29cf6dc2ba714f111d9d83e1b273e616e9c3ce6af2ba",
+      "backend/booking_engine/receipt_recovery.py": "29de175f05d5464ee7b7bf8ffd8846a26fe632c02373aa8f49f751b4b804e4a1",
+      "backend/booking_engine/receipt_view.py": "9e580d9125234f01f50e7eab64b602c42fcc5bf8373ee5e645d708e655888dbf",
+      "backend/booking_engine/recovery.py": "56e612ac28c24a0aefb294e9421889012862b6788ad0283f4f50679049ccad65",
+      "backend/booking_engine/recovery_worker.py": "e43bc41c5cc543f6e7739efb5f9469c83e4f107b2bf03696394d73696a469bf9",
+      "backend/booking_engine/resend_email.py": "c816a75ff47e73cbdef640fefadfe3be6bfb5f167b32676b70a64f6ef363dacc",
+      "backend/booking_engine/retired_routes.py": "bb8e8207fec863198dd9bd8c046adfe31f4fad25ced4cfddf2a3f97c2f3d61fe",
+      "backend/booking_engine/security.py": "68e2cd465f494550471312f0f55c9d39ed1b3afa4191510d8ad4aedcb0bd7df0",
+      "backend/booking_engine/storage.py": "e34c54639ed914a11ecb3750a2a6c02be19aeae268b0dcdf196e793c78045808",
+      "backend/booking_engine/studio.py": "2fb14d633d5249e834c23749ce47fd4af0eb0866975ddd62c392879f3362bb51",
+      "backend/booking_engine/studio_appointments.py": "8b73a32c8aad5c69153fd6db1f90af8f19a1aceea0724520b1c92375aee3b94f",
+      "backend/booking_engine/studio_assets/appointments.js": "ed22789c5f5f196e290476dbca724097fcd30489797ca3bf90e41515fc87ca7e",
+      "backend/booking_engine/studio_assets/calendar.js": "6502da13d8b5b2d2fc98a19cac44d7c7daf65cf50622326b583dd09b38578f7a",
+      "backend/booking_engine/studio_assets/inbox.js": "d93985257ad4077070e78dc1d87467c70af6a71c37c43ea71efa8fc5aeecbb54",
+      "backend/booking_engine/studio_assets/interface.js": "e319176b7da958a8f88198ebe0b9d000d9cdb990482ad46d17d11ae18c31bb0d",
+      "backend/booking_engine/studio_assets/recovery.js": "689b9e166af54854d35070007b7213cd06a51e7b5fcd20a662aab9e51ddb8d23",
+      "backend/booking_engine/studio_calendar.py": "e2d16e214299499922d9067f89d1c96a4441e5141e513842b63d3bc6f017f250",
+      "backend/booking_engine/studio_inbox.py": "55ad610c8a14c4e3e11e8777b6b02c8ca2a899548ea31110c63410938bf5cc94",
+      "backend/booking_engine/wake.py": "2d32150e3e01d8ab2d80e47b19c6a081e8ba0277086c5f85f94d430e08f19348",
+      "backend/booking_engine/webhook.py": "c7d7c1e43983110365d9f31fac4e05bdb07153cdb4f7790a117c7c5ecabfe558",
+      "frontend/src/booking/protocol.mjs": "1e262fbe7239ab976971c77a8cf20ca887d6ec57a430f9d2247aea0cf4ca0c41",
+      "frontend/src/booking/razorpay.mjs": "bfb0fec00c904c3ef787e1eb77dac951dcf865002e4c141d74727d673c30bbab",
+      "frontend/src/booking/state.mjs": "db3ab3118500faf00654da4303893453716a437c57e0f9055b8403ce40d71d3e",
+      "frontend/src/booking/useBooking.jsx": "0b85c0bc1231c8fa8d0077c27dc3ea7f020104d7a6ed24c9ec86f6ed4a7bfcf3",
+      "frontend/src/contact/ContactForm.jsx": "f7eec7818ab88671b2d194f58c62928c0e2f9f122d7b43115bea344d01a16547",
+      "frontend/src/contact/protocol.mjs": "acfe187a5186cb7d23936eb172e079328e15c0ea39b52d660cea406061497a19",
+      "frontend/src/contact/useEnquiry.jsx": "75e250e0513894fa6fddac87b569a5a4ed6fc2d9e8f8f1a290f0543217abda6f",
+      "frontend/src/pages/Booking.jsx": "0a4be391dcbd7f4a9587b3b95e54e84533b5699301938dc923fb39388ded2551",
+      "frontend/src/site/page-metadata.mjs": "1b156bd2bc6222630557c48a47d557dbfe69db228ce93805f3a675e15b3b0b7b",
+      "frontend/src/site/routes.mjs": "b0496bec39e1928b9842ada61ee54ed6a648b05c157cc317e4493cd45c35f9ea",
+      "tools/backup/authorize.py": "74044fa1bb65bb48374c29584413fa24174819429c04977b6a6960754102ce7e",
+      "tools/backup/check_restore.py": "a47415c27dbb50bf8ae5c19b4fabbaf9a0b1b6d6c4a2e47d4ef37bd2c8e87fd7",
+      "tools/backup/configure-key.py": "5c1904d7a210f47db8faed826b5dd825342f935c0c7bcb874fb17f8d92a8ea25",
+      "tools/backup/database_setting.py": "ddb1001b1237093fde1068422bfa56738a6dfc0b6678d475ffa9e125107e2a21",
+      "tools/backup/diagnostics.py": "287ae7fc2815ecd173f910e412847f3ac2acffafa3c33c91a0bde465fcbe461f",
+      "tools/backup/drive.py": "6ce837415f1e767601800856a2a2e347e86341205f4fef5a9d9e788fc6417208",
+      "tools/backup/envelope.py": "85017f1340204ad7d4447514e9fd995b15b3474f95ff3f1f93358c406b3d75e4",
+      "tools/backup/postgres.py": "db8071bd98fd285fd82ffe6c34bf8fb89a7869db7c20822f9d2fb348c382eebd",
+      "tools/backup/retention.py": "661819d560fa49727fe02d633955817caf86c51d49ed2bf243320ecc21f6cf97",
+      "tools/backup/run.py": "b4c2ae85f8f51e9b9ccd00a52ca7e06e15216e1d0ee2732b225a638d07587794",
+      "tools/backup/save-database-setting.py": "c5336fa10358dc0255ff76a581403fc37b5f0f3e445f2f5bea6f5f56cda6ca9d",
+      "tools/worker-settings/connect.py": "7cb5fd9f95ef5a19ee09fce88daaca1200c319e02b1137e7971b9d70a374eb1a",
+      "workers/booking-recovery/monitor.mjs": "3da27069d912e393630229d6f95b300426c47adc772fc3f7bb43557ab3cfce4b",
+      "workers/booking-recovery/worker.mjs": "7c3bf169c276a65be648ae9f4807f4effba66dbf26b4d3bab211985c1c2323d0"
+    },
+    "collectors": {
+      "python": "coverage.py, branch=True",
+      "javascript": "Istanbul with shared classic-script counters"
+    },
+    "excluded": [
+      "test code",
+      "third-party libraries",
+      "decorative motion",
+      "other marketing-page composition",
+      "CSS",
+      "static artwork/copy",
+      "retired legacy backend",
+      "design-review prototypes"
+    ],
+    "separate_evidence": [
+      "SQL and PL/pgSQL assertions and role permissions",
+      "Windows secure handoff",
+      "Chrome rendering and navigation",
+      "hosted provider acceptance",
+      "actual notification receipt"
+    ]
+  },
+  "baseline": {
+    "python_collector": "coverage.py branch=True, original suites only",
+    "javascript_collector": "Istanbul, same final scope, original 47 Node tests only",
+    "domains": {
+      "booking_backend": {
+        "lines": {
+          "covered": 2787,
+          "total": 3138,
+          "percent": 88.8145
+        },
+        "branches": {
+          "covered": 713,
+          "total": 928,
+          "percent": 76.8319
+        }
+      },
+      "backup_helpers": {
+        "lines": {
+          "covered": 391,
+          "total": 683,
+          "percent": 57.2474
+        },
+        "branches": {
+          "covered": 102,
+          "total": 202,
+          "percent": 50.495
+        }
+      },
+      "worker_setting_helpers": {
+        "lines": {
+          "covered": 76,
+          "total": 113,
+          "percent": 67.2566
+        },
+        "branches": {
+          "covered": 18,
+          "total": 38,
+          "percent": 47.3684
+        }
+      },
+      "customer_logic": {
+        "lines": {
+          "covered": 136,
+          "total": 378,
+          "percent": 35.9788
+        },
+        "branches": {
+          "covered": 195,
+          "total": 635,
+          "percent": 30.7087
+        }
+      },
+      "staff_logic": {
+        "lines": {
+          "covered": 0,
+          "total": 306,
+          "percent": 0.0
+        },
+        "branches": {
+          "covered": 0,
+          "total": 592,
+          "percent": 0.0
+        }
+      },
+      "recovery_worker": {
+        "lines": {
+          "covered": 132,
+          "total": 138,
+          "percent": 95.6522
+        },
+        "branches": {
+          "covered": 131,
+          "total": 148,
+          "percent": 88.5135
+        }
+      }
+    }
+  },
+  "database": {
+    "sql_groups": 26,
+    "migrations": 31,
+    "independent_contention": true,
+    "burst_visitors": 40,
+    "burst_winners": 1,
+    "concurrent_worker_leases": 3,
+    "expired_lease_fenced": true,
+    "archive_authenticated": true,
+    "restored_application_receipt": true,
+    "wrong_receipt_rejected": true,
+    "restored_permissions_verified": true,
+    "payment_and_slot_preserved": true,
+    "providers_contacted": false
+  },
+  "chrome": {
+    "passed": true,
+    "browser": "Chromium",
+    "journeys": [
+      "bound staff sign-in",
+      "calendar visibility",
+      "contact correction",
+      "receipt recovery",
+      "old access rejection",
+      "reschedule",
+      "cancellation",
+      "blocked-time reopening"
+    ],
+    "mobile_overflow": false,
+    "page_errors": [],
+    "committed_sql_verified": true,
+    "providers_contacted": false,
+    "measured_at": "2026-10-01T07:45:52.329147+00:00"
+  },
+  "production_build": "passed",
+  "lint": {
+    "errors": 0,
+    "existing_warnings": 6,
+    "introduced_warnings": 0
+  },
+  "security": {
+    "cryptography_before": "48.0.1",
+    "cryptography_after": "50.0.2",
+    "advisory_entries_before": [
+      "PYSEC-2026-3552",
+      "PYSEC-2026-3553",
+      "PYSEC-2026-3554"
+    ],
+    "advisory_entries_are_aliases_not_unique_bugs": true,
+    "unique_upstream_advisories_before": 3,
+    "resolved_production_python_packages_audited": 58,
+    "known_python_advisories_after": 0,
+    "known_production_npm_advisories": 0,
+    "public_bundle_text_files_scanned": 26,
+    "credential_pattern_matches": 0,
+    "older_encrypted_archive_and_google_grant_compatibility": "passed with public synthetic 48.0.1 fixture",
+    "minimal_backup_dependencies_only_suite": "60 passed"
+  },
+  "notification": {
+    "actual_failure_email_received": true,
+    "inbox_account": "neuraflowindia@gmail.com",
+    "workflow": "Sarsa recovery monitor",
+    "scheduled_failure_run": 36754123687,
+    "failure_finished_utc": "2026-09-30T17:49:26Z",
+    "email_received_utc": "2026-09-30T17:49:47Z",
+    "source_commit": "d15999edb14a1bf61bfcbb2bce031d33314250b0",
+    "recent_successful_scheduled_runs": [
+      36827403655,
+      36825154433,
+      36822789076
+    ],
+    "artificial_production_failure_created": false
+  },
+  "publication": {
+    "new_application_test_release_gate": false,
+    "new_github_build_release_workflow": false,
+    "vercel_account_connection_changed": false,
+    "production_database_or_provider_mutations": false,
+    "required_live_action": "Deploy reviewed main revision to Sarsa Vercel to activate the encryption-library update."
+  },
+  "not_claimed": [
+    "zero bugs or every possible combination of failures",
+    "90% coverage of SQL or PowerShell",
+    "RLS policy implementation or RLS tests",
+    "new real-provider paid E2E run in this pass",
+    "unlimited capacity or production-scale soak test",
+    "Firefox, Safari or physical-device acceptance",
+    "independent penetration testing",
+    "live Vercel installation of the new dependency before deployment"
+  ]
+}

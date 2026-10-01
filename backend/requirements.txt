@@ -16,7 +16,7 @@ httpx==0.28.1
 
 # Google identity verification and encrypted provider credentials.
 google-auth==2.58.1
-cryptography==48.0.1
+cryptography==50.0.2
 
 # Official Resend webhook signature verification.
 svix==2.4.0
