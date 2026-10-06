@@ -14,3 +14,13 @@ test('known legacy route uses replacement and preserves existing history state',
  assert.deepEqual(call,[history.state,'','/about#approach']);
  call=null;migrateLegacyLocation({pathname:'/studio',hash:'#/about'},history);assert.equal(call,null);
 });
+test('malformed inputs and private fragments never become a destination',()=>{
+ for(const input of [undefined,null,0,{},[], '#/\\[invalid'])assert.equal(legacyDestination(input),null);
+ assert.equal(legacyDestination('#/contact?email=private&token=private#access_secret'),'/contact');
+ assert.equal(legacyDestination('#/booking?service=numerology&receipt=private#section-2'),'/booking?service=numerology#section-2');
+});
+test('an unrecognized root fragment does not rewrite browsing history',()=>{
+ let calls=0;
+ migrateLegacyLocation({pathname:'/',hash:'#access=private'}, {state:null,replaceState:()=>calls++});
+ assert.equal(calls,0);
+});

@@ -1,4 +1,5 @@
-import {Link} from 'react-router-dom';
+
+import {BookingLink as Link,BookingOnly,BookingCopy} from '../site/BookingProduct.jsx';
 import {useEffect} from 'react';
 import catalogue from '../site/catalogue.json';
 import '../site/services.css';
@@ -9,14 +10,14 @@ export default function Services(){useEffect(()=>{document.title='Consultations 
 <h1>Different questions.<br/>
 <em>Space to explore them.</em>
 </h1>
-<p>Choose the consultation that best fits what is on your mind. Each is a personal, 30-minute online conversation with the practice.</p>
+<p>Choose the consultation that best fits what is on your mind. <BookingCopy off="Contact the practice with your questions.">Each is a personal, 30-minute online conversation with the practice.</BookingCopy></p>
 </section>
 <section className="service-directory" aria-label="Consultation choices">{catalogue.services.map((s,i)=>
 <article key={s.id}>
 <span className="service-number">0{i+1}</span>
 <h2>{s.name}</h2>
 <p>{descriptions[s.id]}</p>
-<p className="service-facts">₹{(s.amount_paise/100).toLocaleString('en-IN')} · {s.duration_minutes} minutes · Google Meet</p>
+<BookingOnly><p className="service-facts">₹{(s.amount_paise/100).toLocaleString('en-IN')} · {s.duration_minutes} minutes · Google Meet</p></BookingOnly>
 <div className="service-actions">
 <Link to={'/services/'+s.id}>Explore the consultation ↗</Link>
 <Link className="service-button" to={'/booking?service='+s.id}>Choose a time</Link>

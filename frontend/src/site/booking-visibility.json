@@ -1,0 +1,38 @@
+{
+  "project": "004",
+  "prefix": "SARSA",
+  "origin": "https://www.sarsajyotishsansthan.com",
+  "workerOrigin": "https://sarsa-booking-recovery.neuraflowindia.workers.dev",
+  "hosts": [
+    "www.sarsajyotishsansthan.com",
+    "sarsajyotishsansthan.com"
+  ],
+  "publicPaths": [
+    "/",
+    "/about",
+    "/contact",
+    "/services",
+    "/services/kundli-prediction",
+    "/services/kundli-matching",
+    "/services/vastu-consultation",
+    "/services/numerology",
+    "/booking",
+    "/privacy",
+    "/terms",
+    "/booking-policy"
+  ],
+  "bookingPaths": [
+    "/booking",
+    "/booking-policy"
+  ],
+  "privateShellPaths": [
+    "/booking/receipt"
+  ],
+  "backendPages": [
+    "/studio",
+    "/booking-help"
+  ],
+  "receiptStorageKey": "sarsa:004:booking-receipt:v1",
+  "receiptFormat": "sarsa",
+  "copyVersion": 1
+}

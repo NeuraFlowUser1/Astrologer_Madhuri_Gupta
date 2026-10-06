@@ -3,10 +3,24 @@ import React,{act} from 'react';
 import {createRoot} from 'react-dom/client';
 import {beforeEach,afterEach,expect,test,vi} from 'vitest';
 const mocks=vi.hoisted(()=>({api:vi.fn()}));
-vi.mock('../../src/contact/protocol.mjs',async original=>({...await original(),contactApi:mocks.api}));
+// Test-only provider doubles exercise the actual shared React hook/controller.
+vi.mock('../../../appointment-system/browser/enquiry/index.mjs',async original=>{
+ const actual=await original();
+ const {createEnquiryController}=await import('../../../appointment-system/browser/enquiry/controller.mjs');
+ const {createEnquiryStore}=await import('../../../appointment-system/browser/enquiry/credentials.mjs');
+ const {installation_id}=await import('../../../appointment-system/tests/booking-browser-fixture.mjs');
+ return {...actual,createEnquiryBrowser:()=>({controller:channel=>createEnquiryController({
+  api:{policy:async()=>({version:1,receipt_key_id:'current'}),send:mocks.api},
+  receipts:createEnquiryStore({installation_id,environment:'test',channel}),storage:()=>sessionStorage,monotonic:Date.now})})};
+});
+vi.mock('../../src/site/BookingProduct.jsx',()=>({useBookingProduct:()=>({enabled:true})}));
 import {useEnquiry} from '../../src/contact/useEnquiry.jsx';
 import ContactForm from '../../src/contact/ContactForm.jsx';
-import {createAccess,STORAGE_KEY,ContactError} from '../../src/contact/protocol.mjs';
+import {createEnquiryStore} from '../../../appointment-system/browser/enquiry/credentials.mjs';
+import {installation_id} from '../../../appointment-system/tests/booking-browser-fixture.mjs';
+import {RequestError as ContactError} from '../../../appointment-system/browser/transport.mjs';
+const receipts=createEnquiryStore({installation_id,environment:'test',channel:'contact'});
+const STORAGE_KEY=receipts.storageKey,createAccess=storage=>receipts.create(storage,{version:1,receipt_key_id:'current'});
 let current,root,host,server;
 const draft={name:'Synthetic Visitor',email:'test@example.invalid',phone:'',subject:'Before booking',message:'A synthetic question'};
 const answer=(access,changes={})=>({code:'ok',request_id:access.request_id,state:'awaiting_verification',generation:1,sends_remaining:2,verification_delivery:'queued',server_now:'2030-01-01T00:00:00Z',code_expires_at:'2030-01-01T00:10:00Z',resend_after:'2030-01-01T00:00:00Z',...changes});
@@ -14,7 +28,7 @@ async function settle(){await act(async()=>{for(let i=0;i<8;i++)await Promise.re
 async function mount(form=false,props={}){function Probe(){current=useEnquiry();return null;}await act(async()=>root.render(form?<ContactForm {...props}/>:<Probe/>));await settle();}
 async function input(name,value){const element=host.querySelector(`[name="${name}"]`);const setter=Object.getOwnPropertyDescriptor(element instanceof HTMLTextAreaElement?HTMLTextAreaElement.prototype:element instanceof HTMLSelectElement?HTMLSelectElement.prototype:HTMLInputElement.prototype,'value').set;await act(async()=>{setter.call(element,value);element.dispatchEvent(new Event(element.tagName==='SELECT'?'change':'input',{bubbles:true}));});}
 async function submit(){await act(async()=>host.querySelector('form').dispatchEvent(new Event('submit',{bubbles:true,cancelable:true})));await settle();}
-beforeEach(()=>{globalThis.IS_REACT_ACT_ENVIRONMENT=true;vi.useFakeTimers();vi.setSystemTime(new Date('2030-01-01T00:00:00Z'));sessionStorage.clear();host=document.createElement('div');document.body.append(host);root=createRoot(host);server={};mocks.api.mockReset().mockImplementation(async(action,access)=>{if(action==='verify')return answer(access,{state:'received'});if(action==='resend')return answer(access,{generation:2,sends_remaining:1});return answer(access,server);});});
+beforeEach(()=>{globalThis.IS_REACT_ACT_ENVIRONMENT=true;vi.useFakeTimers();vi.setSystemTime(new Date('2030-01-01T00:00:00Z'));sessionStorage.clear();host=document.createElement('div');document.body.append(host);root=createRoot(host);server={};mocks.api.mockReset().mockImplementation(async(action,access)=>{if(action==='verify'){server={...server,state:'received'};return answer(access,server);}if(action==='resend')return answer(access,{generation:2,sends_remaining:1});return answer(access,server);});});
 afterEach(async()=>{await act(async()=>root.unmount());host.remove();vi.useRealTimers();});
 
 test('enquiry persists only access, verifies once, focuses the result and permits another enquiry',async()=>{
@@ -33,18 +47,18 @@ test('a failed code is not replayed; the retry checks status and resend keeps on
  mocks.api.mockRejectedValueOnce(new ContactError());await act(async()=>current.resend());const identity=JSON.parse(sessionStorage.getItem(STORAGE_KEY)).resend_id;expect(identity).toBeTruthy();await act(async()=>current.retryRequest());expect(mocks.api.mock.calls.at(-1)[2].operation_id).toBe(identity);expect(JSON.parse(sessionStorage.getItem(STORAGE_KEY))).not.toHaveProperty('resend_id');
 });
 test('restored resend access can resolve its lost response without creating a new enquiry',async()=>{
- const access=createAccess(sessionStorage);sessionStorage.setItem(STORAGE_KEY,JSON.stringify({...access,resend_id:crypto.randomUUID(),resend_generation:1}));await mount();expect(mocks.api.mock.calls[0][0]).toBe('status');await act(async()=>current.retryRequest());expect(mocks.api.mock.calls.at(-1)[0]).toBe('resend');
+ const access=createAccess(sessionStorage);receipts.save(sessionStorage,{...access,resend_id:crypto.randomUUID(),resend_generation:1});await mount();expect(mocks.api.mock.calls[0][0]).toBe('status');await act(async()=>current.retryRequest());expect(mocks.api.mock.calls.at(-1)[0]).toBe('resend');
 });
 test('duplicate calls, cooldown, resend limits and restart permissions are enforced',async()=>{
  await mount();let release;mocks.api.mockImplementationOnce(()=>new Promise(resolve=>release=resolve));let pending;await act(async()=>{pending=current.start(draft);current.start(draft);current.check();});expect(mocks.api).toHaveBeenCalledTimes(1);await act(async()=>{release(answer(mocks.api.mock.calls[0][1]));await pending;});
- await act(async()=>current.restart());expect(current.started).toBe(true);mocks.api.mockRejectedValueOnce(new ContactError('please_wait',20));await act(async()=>current.check());const count=mocks.api.mock.calls.length;await act(async()=>current.check());expect(mocks.api).toHaveBeenCalledTimes(count);expect(current.waiting).toBe(20);await act(async()=>vi.advanceTimersByTimeAsync(20000));
+ await act(async()=>current.restart());expect(current.started).toBe(true);mocks.api.mockRejectedValueOnce(new ContactError('please_wait',{status:429,retryAfter:20}));await act(async()=>current.check());const count=mocks.api.mock.calls.length;await act(async()=>current.check());expect(mocks.api).toHaveBeenCalledTimes(count);expect(current.waiting).toBe(20);await act(async()=>vi.advanceTimersByTimeAsync(20000));
  server={generation:3,sends_remaining:0};await act(async()=>current.check());const before=mocks.api.mock.calls.length;await act(async()=>current.resend());expect(mocks.api).toHaveBeenCalledTimes(before);
 });
 test('polling is read-only, bounded and paused when the tab is hidden',async()=>{
  await mount();await act(async()=>current.start(draft));mocks.api.mockClear();vi.spyOn(document,'hidden','get').mockReturnValue(true);await act(async()=>vi.advanceTimersByTimeAsync(20000));expect(mocks.api).not.toHaveBeenCalled();vi.restoreAllMocks();await act(async()=>vi.advanceTimersByTimeAsync(80000));expect(mocks.api).toHaveBeenCalledTimes(6);expect(mocks.api.mock.calls.every(([a])=>a==='status')).toBe(true);
 });
 test('invalid submission clears only that request; corrupt or unwritable storage blocks unsafe continuation',async()=>{
- await mount();mocks.api.mockRejectedValueOnce(new ContactError('invalid_request'));await act(async()=>current.start(draft));expect(current.started).toBe(false);expect(sessionStorage.getItem(STORAGE_KEY)).toBeNull();
+ await mount();mocks.api.mockRejectedValueOnce(new ContactError('invalid_request',{status:422}));await act(async()=>current.start(draft));expect(current.started).toBe(false);expect(sessionStorage.getItem(STORAGE_KEY)).toBeNull();
  vi.spyOn(Storage.prototype,'setItem').mockImplementation(()=>{throw Error();});await act(async()=>current.start(draft));expect(current.error).toContain('storage');vi.restoreAllMocks();
  await act(async()=>root.unmount());root=createRoot(host);sessionStorage.setItem(STORAGE_KEY,'{broken');await mount();expect(current.blocked).toBe(true);expect(current.error).toContain('saved enquiry');
 });

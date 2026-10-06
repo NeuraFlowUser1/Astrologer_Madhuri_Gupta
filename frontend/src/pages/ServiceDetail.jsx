@@ -1,5 +1,6 @@
 import {useLayoutEffect,useRef} from 'react';
-import {Link,useParams,Navigate} from 'react-router-dom';
+import {useParams,Navigate} from 'react-router-dom';
+import {BookingLink as Link} from '../site/BookingProduct.jsx';
 import catalogue from '../site/catalogue.json';
 import {mountServiceMotion} from '../site/service-motion.mjs';
 import '../site/services.css';

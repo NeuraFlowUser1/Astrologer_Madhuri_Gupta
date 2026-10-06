@@ -5,6 +5,10 @@
   "framework": "vite",
   "rewrites": [
     {
+      "source": "/company/:path*",
+      "destination": "/api"
+    },
+    {
       "source": "/api/:path*",
       "destination": "/api"
     },
@@ -17,11 +21,11 @@
       "destination": "/api"
     },
     {
-      "source": "/booking-help",
+      "source": "/enquiries-studio",
       "destination": "/api"
     },
     {
-      "source": "/booking-help/",
+      "source": "/enquiries-studio/",
       "destination": "/api"
     }
   ],
@@ -31,7 +35,7 @@
   "functions": {
     "api/index.py": {
       "maxDuration": 120,
-      "excludeFiles": "{.git/**,.agents/**,.env*,backend/.env*,backend/main.py,backend/booking_engine/tests/**,backend/booking_engine/migrations/**,design-review/**,media/**,tools/**,workers/**,frontend/**,node_modules/**,**/__pycache__/**}"
+      "excludeFiles": "{.git/**,.agents/**,.env*,backend/**,design-review/**,media/**,tools/**,workers/**,frontend/**,node_modules/**,**/__pycache__/**}"
     }
   },
   "headers": [
@@ -83,5 +87,8 @@
       "destination": "/about",
       "permanent": true
     }
-  ]
+  ],
+  "proxy": {
+    "entrypoint": "frontend/proxy.js"
+  }
 }

@@ -21,9 +21,11 @@ export function renderContactScene(stage, progress) {
   } else if (stage.id === 'scene-routes') {
     const travel = phase(progress, 0, .241), branch = phase(progress, .167, .574);
     transform(find('.junction-line'), `scale${mobile ? 'Y' : 'X'}(${branch})`);
-    const chosen = ['question','booking','existing'].indexOf(stage.querySelector('[data-route][data-selected=true]')?.dataset.route || 'question');
+    const lanes=all('.route-lane');
+    const selected=stage.querySelector('[data-route][data-selected=true]');
+    const chosen=Math.max(0,lanes.indexOf(selected));
     const marker = find('.junction-marker');
-    const junction = find('.route-junction'), lane = all('.route-lane')[chosen];
+    const junction = find('.route-junction'), lane = lanes[chosen];
     const startX = junction.clientWidth * .08;
     const targetX = lane.offsetLeft + lane.offsetWidth / 2;
     marker.style.left = mobile ? '-5px' : `${startX + (targetX - startX) * travel - 5}px`;
@@ -68,7 +70,7 @@ export function renderContactScene(stage, progress) {
 
 export function mountContactMotion(root){
  const sections=[...root.querySelectorAll('.stage')],media=matchMedia('(prefers-reduced-motion: reduce)');
- const durations=[3600,2700,2500,2300,2800],frames=new Map(),played=new Set(),visible=new Map();
+ const durations={'scene-listening':3600,'scene-routes':2700,'scene-desk':2500,'scene-answers':2300,'scene-weave':2800},frames=new Map(),played=new Set(),visible=new Map();
  let ambient=true;
  root.classList.add('motion-ready');
  function sync(){
@@ -79,7 +81,7 @@ export function mountContactMotion(root){
  }
  function render(section,p){section.style.opacity=String(clamp(p/.12));section.dataset.motionProgress=String(p);renderContactScene(section,p);if(p===1)sync();}
  function settle(section){cancelAnimationFrame(frames.get(section));frames.delete(section);played.add(section);render(section,1);}
- function play(section){if(played.has(section))return;played.add(section);const start=performance.now(),duration=durations[sections.indexOf(section)];
+ function play(section){if(played.has(section))return;played.add(section);const start=performance.now(),duration=durations[section.id];
   const tick=time=>{const p=Math.min(1,(time-start)/duration);render(section,p);if(p<1)frames.set(section,requestAnimationFrame(tick));else frames.delete(section);};frames.set(section,requestAnimationFrame(tick));}
  sections.forEach(s=>render(s,media.matches?1:0));
  const entry=new IntersectionObserver(entries=>{for(const e of entries)if(e.isIntersecting){play(e.target);entry.unobserve(e.target);}},{rootMargin:'0px 0px -18% 0px',threshold:.05});

@@ -1,3 +1,4 @@
+import {BookingAnchor,BookingButton,BookingOnly,BookingCopy} from '../site/BookingProduct.jsx';
 import {useLayoutEffect,useRef} from 'react';
 import {useNavigate} from 'react-router-dom';
 import {mountKundliPredictionMotion} from '../site/kundliprediction-motion.mjs';
@@ -12,16 +13,16 @@ export default function KundliPrediction(){
 <section className="hero wrap" id="welcome">
 <div className="hero-copy">
 <p className="breadcrumb">
-<a href="/services">{"Consultations"}</a>{" "}<span>{"/"}</span>{" Kundli Prediction"}</p>
+<BookingAnchor href="/services">{"Consultations"}</BookingAnchor>{" "}<span>{"/"}</span>{" Kundli Prediction"}</p>
 <p className="eyebrow">{"A PERSONAL CONSULTATION"}</p>
 <h1>{"Your questions."}<br />{"A wider"}<br />
 <em>{"perspective."}</em>
 </h1>
 <p className="lead">{"Explore your birth chart with Madhuri Gupta, with room for the questions you bring to the conversation."}</p>
 <div className="actions">
-<a className="button" href="/booking?service=kundli-prediction">{"Book Kundli Prediction "}<span aria-hidden="true">{"\u2197"}</span>
-</a>
-<a className="text-link" href="#understand">{"Explore the consultation \u2193"}</a>
+<BookingAnchor className="button" href="/booking?service=kundli-prediction">{"Book Kundli Prediction "}<span aria-hidden="true">{"\u2197"}</span>
+</BookingAnchor>
+<BookingAnchor className="text-link" href="#understand">{"Explore the consultation \u2193"}</BookingAnchor>
 </div>
 <p className="small">{"Kundli Prediction \u00b7 Sarsa Jyotish Sansthan"}</p>
 </div>{"\n"}<figure className="chart-scene motion-scene" data-scene="registration" aria-label="Decorative paper layers with abstract chart geometry">
@@ -211,10 +212,10 @@ export default function KundliPrediction(){
 <p className="eyebrow">{"04 / THE PRACTICAL DETAILS"}</p>
 <h2>{"A few things"}<br />{"before you begin."}</h2>
 <p>{"Clear details make it easier to decide whether a consultation is right for you."}</p>
-<div className="terms">
+<BookingOnly><div className="terms">
 <p className="eyebrow">{"YOUR CONSULTATION"}</p>
 <p>₹{(consultation.amount_paise/100).toLocaleString('en-IN')} · {consultation.duration_minutes} minutes · Google Meet. View available times on the booking page.</p>
-</div>
+</div></BookingOnly>
 </div>
 <div className="faqs">
 <details open>
@@ -231,7 +232,7 @@ export default function KundliPrediction(){
 </details>
 <details>
 <summary>{"How do I arrange a consultation?"}</summary>
-<p>{"Book an appointment is the primary next step. Your Kundli Prediction selection carries forward. If you need to ask something first, use the separate Contact route."}</p>
+<p><BookingCopy off="Contact the practice with your questions.">{"Book an appointment is the primary next step. Your Kundli Prediction selection carries forward. If you need to ask something first, use the separate Contact route."}</BookingCopy></p>
 </details>
 </div>
 </div>
@@ -245,12 +246,12 @@ export default function KundliPrediction(){
 <em>{"Begin a conversation."}</em>
 </h2>
 <p>{"Explore a Kundli Prediction consultation with Madhuri Gupta."}</p>
-<button className="button" id="enquire">{"Book Kundli Prediction "}<span aria-hidden="true">{"\u2197"}</span>
-</button>
-<p className="small">{"Choose a time and review your details before payment."}</p>
+<BookingButton className="button" id="enquire">{"Book Kundli Prediction "}<span aria-hidden="true">{"\u2197"}</span>
+</BookingButton>
+<BookingOnly><p className="small">{"Choose a time and review your details before payment."}</p></BookingOnly>
 <button className="text-link contact-link" data-contact>{"Ask a question before booking \u2192"}</button>
 <br />
-<a className="text-link" href="/services">{"Explore the other consultations \u2192"}</a>
+<BookingAnchor className="text-link" href="/services">{"Explore the other consultations \u2192"}</BookingAnchor>
 </div>
 </section>{"\n"}</div>;
 }

@@ -1,3 +1,4 @@
+import {BookingAnchor,BookingButton,BookingCopy} from '../site/BookingProduct.jsx';
 import {useLayoutEffect,useRef} from 'react';
 import {useNavigate} from 'react-router-dom';
 import {mountHomeMotion} from '../site/home-motion.mjs';
@@ -21,15 +22,15 @@ export default function Home(){
 <h1>{"A little clarity."}<br />{"A more grounded"}<br />{"way forward."}</h1>
 <p className="lead">{"Space for your questions."}<br />{"Perspective for the choices ahead."}</p>
 <div className="actions">
-<a className="button" href="/booking">{"Book an appointment "}<span aria-hidden="true">{"\u2197"}</span>
-</a>
-<a className="text-link" href="#madhuri">{"Meet Madhuri"}</a>
+<BookingAnchor className="button" href="/booking">{"Book an appointment "}<span aria-hidden="true">{"\u2197"}</span>
+</BookingAnchor>
+<BookingAnchor className="text-link" href="#madhuri">{"Meet Madhuri"}</BookingAnchor>
 </div>
 </div>
 <div className="hero-bottom">
 <span>{"Thoughtful conversation."}<br />{"A personal perspective."}</span>
-<a href="#madhuri" className="scroll-cue">{"Take a closer look "}<span aria-hidden="true">{"\u2193"}</span>
-</a>
+<BookingAnchor href="#madhuri" className="scroll-cue">{"Take a closer look "}<span aria-hidden="true">{"\u2193"}</span>
+</BookingAnchor>
 </div>
 </div>
 </section>{"\n"}<section id="madhuri" className="scroll-scene about" data-chapter="madhuri" data-effect="e">
@@ -43,8 +44,8 @@ export default function Home(){
 <p className="body-large">{"A thoughtful approach."}<br />{"A conversation centred on you."}</p>
 <p>{"Madhuri Gupta leads Sarsa Jyotish Sansthan. Here, the focus is on the questions you bring and the perspective you are looking for."}</p>
 <div className="signature">{"Madhuri Gupta"}</div>
-<a className="text-link" href="/about">{"Read about Madhuri "}<span aria-hidden="true">{"\u2198"}</span>
-</a>
+<BookingAnchor className="text-link" href="/about">{"Read about Madhuri "}<span aria-hidden="true">{"\u2198"}</span>
+</BookingAnchor>
 </div>
 <div className="about-foot">{"An introduction, before an invitation."}</div>
 </div>
@@ -70,8 +71,8 @@ export default function Home(){
 </div>
 <h3>{"Kundli Matching"}</h3>
 <p>{"Relationship questions, explored through the lens of birth-chart compatibility."}</p>
-<a href="/services/kundli-matching" data-service="Kundli Matching">{"Choose this consultation "}<span aria-hidden="true">{"\u2197"}</span>
-</a>
+<BookingAnchor href="/services/kundli-matching" data-service="Kundli Matching">{"Choose this consultation "}<span aria-hidden="true">{"\u2197"}</span>
+</BookingAnchor>
 </article>{"\n"}<article className="service">
 <div className="service-top">
 <span className="index">{"02"}</span>
@@ -84,8 +85,8 @@ export default function Home(){
 </div>
 <h3>{"Kundli Prediction"}</h3>
 <p>{"A birth-chart perspective on the questions and transitions in your life."}</p>
-<a href="/services/kundli-prediction">{"Explore Kundli Prediction "}<span aria-hidden="true">{"\u2197"}</span>
-</a>
+<BookingAnchor href="/services/kundli-prediction">{"Explore Kundli Prediction "}<span aria-hidden="true">{"\u2197"}</span>
+</BookingAnchor>
 </article>{"\n"}<article className="service">
 <div className="service-top">
 <span className="index">{"03"}</span>
@@ -100,8 +101,8 @@ export default function Home(){
 </div>
 <h3>{"Vastu Consultation"}</h3>
 <p>{"Consider your home or workspace through the principles of Vastu."}</p>
-<a href="/services/vastu-consultation" data-service="Vastu Consultation">{"Choose this consultation "}<span aria-hidden="true">{"\u2197"}</span>
-</a>
+<BookingAnchor href="/services/vastu-consultation" data-service="Vastu Consultation">{"Choose this consultation "}<span aria-hidden="true">{"\u2197"}</span>
+</BookingAnchor>
 </article>{"\n"}<article className="service">
 <div className="service-top">
 <span className="index">{"04"}</span>
@@ -109,10 +110,10 @@ export default function Home(){
 </div>
 <h3>{"Numerology"}</h3>
 <p>{"Explore the patterns associated with names, dates and numbers."}</p>
-<a href="/services/numerology" data-service="Numerology">{"Choose this consultation "}<span aria-hidden="true">{"\u2197"}</span>
-</a>
+<BookingAnchor href="/services/numerology" data-service="Numerology">{"Choose this consultation "}<span aria-hidden="true">{"\u2197"}</span>
+</BookingAnchor>
 </article>{"\n"}</div>
-<p className="service-foot">{"Not sure where to begin? "}<button className="nav-contact" data-contact>{"Ask before booking."}</button>
+<p className="service-foot">{"Not sure where to begin? "}<button className="nav-contact" data-contact><BookingCopy off="Ask the practice.">{"Ask before booking."}</BookingCopy></button>
 </p>
 </section>{"\n"}<section id="conversation" className="scroll-scene connection" data-chapter="conversation" data-effect="hc">
 <div className="scene connection-scene">
@@ -153,13 +154,13 @@ export default function Home(){
 </article>
 <article>
 <span>{"02"}</span>
-<h3>{"Begin your booking"}</h3>
-<p>{"Carry your selected consultation into the appointment-booking journey."}</p>
+<h3><BookingCopy off="Send a question">{"Begin your booking"}</BookingCopy></h3>
+<p><BookingCopy off="Tell the practice what you would like guidance with.">{"Carry your selected consultation into the appointment-booking journey."}</BookingCopy></p>
 </article>
 <article>
 <span>{"03"}</span>
 <h3>{"Review the next step"}</h3>
-<p>{"Check the consultation details before proceeding. Your appointment is confirmed after your payment is verified."}</p>
+<p><BookingCopy off="The practice can respond to your enquiry. Sending a message does not reserve an appointment.">{"Check the consultation details before proceeding. Your appointment is confirmed after your payment is verified."}</BookingCopy></p>
 </article>
 </div>
 </section>{"\n\n"}<section id="questions" className="questions section-pad" data-chapter="questions" data-effect="b">
@@ -187,18 +188,18 @@ export default function Home(){
 <details>
 <summary>{"How do I arrange a consultation?"}<span aria-hidden="true">{"+"}</span>
 </summary>
-<p>{"Use Book an appointment below. If you have questions before booking, Contact is available separately."}</p>
+<p><BookingCopy off="Contact the practice with your questions.">{"Use Book an appointment below. If you have questions before booking, Contact is available separately."}</BookingCopy></p>
 </details>
 </div>
 </section>{"\n"}<section id="enquiry" className="enquiry section-pad" data-chapter="enquiry">
 <div className="enquiry-ring" aria-hidden="true">
 </div>
 <p className="eyebrow">{"Your next chapter"}</p>
-<h2>{"Your questions."}<br />{"Your next appointment."}</h2>
+<h2>{"Your questions."}<br /><BookingCopy off="A place to begin.">{"Your next appointment."}</BookingCopy></h2>
 <p>{"Take the first step towards a more considered perspective."}</p>
 <div id="chosen-service" hidden>
 </div>
-<button className="button" id="enquire">{"Book an appointment "}<span aria-hidden="true">{"\u2197"}</span>
-</button>
+<BookingButton className="button" id="enquire">{"Book an appointment "}<span aria-hidden="true">{"\u2197"}</span>
+</BookingButton>
 </section>{"\n"}</div>;
 }

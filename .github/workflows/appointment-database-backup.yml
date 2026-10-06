@@ -41,4 +41,26 @@ jobs:
           BOOKING_BACKUP_EXPORT_SIGNING_KEY: ${{ secrets.BOOKING_BACKUP_EXPORT_SIGNING_KEY }}
           BOOKING_BACKUP_EXPORT_VERIFY_KEYS: ${{ vars.BOOKING_BACKUP_EXPORT_VERIFY_KEYS }}
           BOOKING_BACKUP_VALIDATION_VERIFY_KEYS: ${{ vars.BOOKING_BACKUP_VALIDATION_VERIFY_KEYS }}
-        run: python3 appointment-system/tools/automation/backup.py export --age-binary "$RUNNER_TEMP/appointment-tools/age"
+        run: |
+          python3 - "$RUNNER_TEMP/appointment-tools/age" <<'PY'
+          import contextlib,httpx,runpy,sys,time
+          original=httpx.Client.stream
+          @contextlib.contextmanager
+          def observed(self,method,url,*args,**kwargs):
+              parsed=httpx.URL(url)
+              stage=('drive-upload-'+str(method).lower()) if parsed.path.startswith('/upload/drive/') else ('google-token' if parsed.host=='oauth2.googleapis.com' else 'drive-read' if parsed.host=='www.googleapis.com' else 'github-read')
+              start=time.monotonic()
+              print('backup_transfer_start '+stage,flush=True)
+              try:
+                  with original(self,method,url,*args,**kwargs) as reply:
+                      print('backup_transfer_response '+stage+' status='+str(reply.status_code),flush=True)
+                      yield reply
+              except Exception as error:
+                  print('backup_transfer_error '+stage+' type='+type(error).__name__+' elapsed='+str(round(time.monotonic()-start,2)),flush=True)
+                  raise
+              finally:
+                  print('backup_transfer_end '+stage+' elapsed='+str(round(time.monotonic()-start,2)),flush=True)
+          httpx.Client.stream=observed
+          sys.argv=['appointment-system/tools/automation/backup.py','export','--age-binary',sys.argv[1]]
+          runpy.run_path(sys.argv[0],run_name='__main__')
+          PY

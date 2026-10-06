@@ -1,6 +1,13 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {createAccess,readAccess,saveAccess,clearAccess,checkedReceipt,contactApi,STORAGE_KEY} from '../../src/contact/protocol.mjs';
+import {createEnquiryStore} from '../../../appointment-system/browser/enquiry/credentials.mjs';
+import {checkedReceipt,createEnquiryAPI} from '../../../appointment-system/browser/enquiry/protocol.mjs';
+import {installation_id} from '../../../appointment-system/tests/booking-browser-fixture.mjs';
+const receipts=createEnquiryStore({installation_id,environment:'test',channel:'contact'});
+const createAccess=storage=>receipts.create(storage,{version:1,receipt_key_id:'current'});
+const readAccess=receipts.read,saveAccess=receipts.save,clearAccess=receipts.clear,STORAGE_KEY=receipts.storageKey;
+const contactApi=(...args)=>createEnquiryAPI().send(...args);
+
 
 const storage=()=>{const values=new Map();return {getItem:key=>values.get(key)??null,setItem:(key,value)=>values.set(key,value),removeItem:key=>values.delete(key)};};
 const access=createAccess(storage());
@@ -9,14 +16,14 @@ const receipt=()=>({code:'ok',request_id:access.request_id,state:'awaiting_verif
 
 test('storage roundtrip contains no customer details and clearing checks identity',()=>{
  const memory=storage(),saved=createAccess(memory);
- assert.deepEqual(Object.keys(saved).sort(),['request_id','secret','version']);
- assert.equal(saved.secret.length,43);assert.deepEqual(readAccess(memory),saved);
- assert.throws(()=>clearAccess(memory,access),/receipt_unavailable/);
- assert.throws(()=>saveAccess(memory,{...saved,email:'private@example.com'}),/storage_unavailable/);
+ assert.deepEqual(Object.keys(saved).sort(),['credential_format','request_id','secret']);
+ assert.match(saved.secret,/^q1\.current\.[A-Za-z0-9_-]{43}$/);assert.equal(saved.credential_format,'q1');assert.deepEqual(readAccess(memory),saved);
+ assert.throws(()=>clearAccess(memory,access),/receipt_conflict/);
+ assert.throws(()=>saveAccess(memory,{...saved,email:'private@example.com'}),/receipt_unavailable/);
  assert.deepEqual(readAccess(memory),saved);
  const pending={...saved,resend_id:crypto.randomUUID(),resend_generation:1};saveAccess(memory,pending);assert.deepEqual(readAccess(memory),pending);
- assert.throws(()=>saveAccess(memory,{...pending,resend_generation:3}),/storage_unavailable/);
- memory.setItem(STORAGE_KEY,JSON.stringify(saved));clearAccess(memory,saved);assert.equal(readAccess(memory),null);
+ assert.throws(()=>saveAccess(memory,{...pending,resend_generation:3}),/receipt_unavailable/);
+ saveAccess(memory,saved);clearAccess(memory,saved);assert.equal(readAccess(memory),null);
 });
 test('disabled or corrupted storage fails closed',()=>{
  assert.throws(()=>createAccess({setItem(){throw Error();}}),/storage_unavailable/);

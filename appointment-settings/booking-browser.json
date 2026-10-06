@@ -1,0 +1,22 @@
+{
+  "version": 1,
+  "installation_id": "87b35f80-71bc-4ee1-bf34-a7316006f95c",
+  "environment": "production",
+  "legacy_receipts": [
+    {
+      "key": "sarsa:004:booking-receipt:v1",
+      "format": "request-url43"
+    }
+  ],
+  "legacy_callbacks": [
+    {
+      "key": "sarsa:004:signed-payment:v1",
+      "project": "004"
+    }
+  ],
+  "payment": {
+    "name": "Sarsa Jyotish Sansthan",
+    "description": "Personal consultation with Madhuri Gupta",
+    "color": "#26483d"
+  }
+}

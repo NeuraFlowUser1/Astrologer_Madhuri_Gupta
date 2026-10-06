@@ -1,0 +1,15 @@
+{
+  "version": 1,
+  "installation_id": "87b35f80-71bc-4ee1-bf34-a7316006f95c",
+  "environment": "production",
+  "channels": {
+    "contact": {
+      "legacy_receipts": [
+        {
+          "key": "sarsa:004:enquiry-receipt:v1",
+          "format": "request-url43"
+        }
+      ]
+    }
+  }
+}

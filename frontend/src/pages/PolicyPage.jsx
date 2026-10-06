@@ -1,3 +1,4 @@
+import {useBookingProduct,BookingNavigationLink} from '../site/BookingProduct.jsx';
 import {Link} from 'react-router-dom';
 import '../site/services.css';
 const policies={
@@ -25,4 +26,18 @@ const policies={
  ['How to request help','Email sarsajyotish@gmail.com with your booking reference and the change you need. Staff will review the booking and payment record. To change contact details or restore lost booking access, staff first call the mobile number already saved with the booking and verify payment details. If that number is inaccessible, the request stays with staff for manual review.']
  ]}
 };
-export default function PolicyPage({policy}){const page=policies[policy];return <article className="sarsa-services sarsa-policy"><header><p className="eyebrow">{policy.replaceAll('-',' ').toUpperCase()}</p><h1>{page.title}</h1></header>{page.sections.map(([title,text])=><section key={title}><h2>{title}</h2><p>{text}</p></section>)}<nav aria-label="Related policies"><Link to="/privacy">Privacy</Link> · <Link to="/terms">Terms</Link> · <Link to="/booking-policy">Booking policy</Link></nav><p>Questions? <a href="mailto:sarsajyotish@gmail.com">Contact the practice</a>.</p></article>;}
+const offlinePolicies={
+ privacy:{title:'Your information. Handled with care.',sections:[
+  ['Information you share','When you send an enquiry, the practice receives your name, contact details and message. An emailed code confirms your address before your enquiry reaches the practice.'],
+  ['How it is used','The practice uses your enquiry to respond and provide support. Its records and a separate NeuraFlow record copy support operation and recovery.'],
+  ['Saved information','Information from earlier consultations may remain in protected records and encrypted backups. Contact the practice to request a correction or ask about retention and deletion.'],
+  ['Contact','Email sarsajyotish@gmail.com with questions about your information. Do not send payment passwords, verification codes or card details.']
+ ]},
+ terms:{title:'Terms for the practice and this website.',sections:[
+  ['Consultations','Contact Sarsa Jyotish Sansthan directly to discuss a consultation with Madhuri Gupta, including its fee, time and arrangements.'],
+  ['Enquiries','Provide accurate contact details so the practice can respond. Sending an enquiry does not reserve an appointment.'],
+  policies.terms.sections.find(([title])=>title==='What a consultation can offer'),
+  ['Changes and support','Contact sarsajyotish@gmail.com about an existing consultation, cancellation or refund request. The practice will review its records.']
+ ]}
+};
+export default function PolicyPage({policy}){const {enabled}=useBookingProduct();const page=enabled?policies[policy]:(offlinePolicies[policy]||policies[policy]);return <article className="sarsa-services sarsa-policy"><header><p className="eyebrow">{policy.replaceAll('-',' ').toUpperCase()}</p><h1>{page.title}</h1></header>{page.sections.map(([title,text])=><section key={title}><h2>{title}</h2><p>{text}</p></section>)}<nav aria-label="Related policies"><Link to="/privacy">Privacy</Link> · <Link to="/terms">Terms</Link> · <BookingNavigationLink to="/booking-policy">Booking policy</BookingNavigationLink></nav><p>Questions? <a href="mailto:sarsajyotish@gmail.com">Contact the practice</a>.</p></article>;}

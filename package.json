@@ -10,6 +10,17 @@
     "backend": "python -m uvicorn api.index:app --host 127.0.0.1 --port 8000"
   },
   "devDependencies": {
-    "concurrently": "^10.0.5"
+    "concurrently": "^10.0.5",
+    "miniflare": "4.20260730.0"
+  },
+  "engines": {
+    "node": ">=22 <23"
+  },
+  "overrides": {
+    "workerd": "1.20261001.1",
+    "miniflare": {
+      "undici": "7.29.1",
+      "sharp": "0.35.4"
+    }
   }
 }

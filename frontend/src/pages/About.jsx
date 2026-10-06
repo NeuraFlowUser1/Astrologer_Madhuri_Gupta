@@ -1,3 +1,4 @@
+import {BookingAnchor,BookingButton,BookingCopy} from '../site/BookingProduct.jsx';
 import {useLayoutEffect,useRef} from 'react';
 import {useNavigate} from 'react-router-dom';
 import {mountAboutMotion} from '../site/about-motion.mjs';
@@ -45,9 +46,9 @@ export default function About(){
 <div className="rule" id="intro-rule">
 </div>
 <p data-enter="2">{"The person behind Sarsa Jyotish Sansthan."}<br />{"A place to begin with your questions."}</p>
-<button className="button" data-book="General consultation" data-enter="3">{"Book an appointment "}<span>{"\u2197"}</span>
-</button>
-<a href="#approach" className="text-link" data-enter="3">{"Discover her approach \u2193"}</a>
+<BookingButton className="button" data-book="General consultation" data-enter="3">{"Book an appointment "}<span>{"\u2197"}</span>
+</BookingButton>
+<BookingAnchor href="#approach" className="text-link" data-enter="3">{"Discover her approach \u2193"}</BookingAnchor>
 </div>
 </div>
 </section>{"\n"}<section className="welcome wrap" id="welcome">
@@ -109,7 +110,7 @@ export default function About(){
 </div>
 <span className="signature">{"Madhuri Gupta"}</span>
 <small className="signature-note">{"SARSA JYOTISH SANSTHAN"}</small>
-<a className="text-link" href="#consultations">{"Explore the consultations \u2192"}</a>
+<BookingAnchor className="text-link" href="#consultations">{"Explore the consultations \u2192"}</BookingAnchor>
 </div>
 </section>{"\n"}<section className="consultations" id="consultations">
 <div className="wrap consultation-grid">
@@ -118,30 +119,30 @@ export default function About(){
 <h2>{"Different questions."}<br />
 <em>{"A considered choice."}</em>
 </h2>
-<p>{"Choose a consultation to take your selection into the appointment journey."}</p>
-<a className="text-link" href="/services/kundli-prediction">{"Explore Kundli Prediction \u2197"}</a>
+<p><BookingCopy off="Explore a guidance area, or contact the practice with your questions.">{"Choose a consultation to take your selection into the appointment journey."}</BookingCopy></p>
+<BookingAnchor className="text-link" href="/services/kundli-prediction">{"Explore Kundli Prediction \u2197"}</BookingAnchor>
 </div>
 <div className="service-list">
-<button data-book="Kundli Prediction">
+<BookingButton data-book="Kundli Prediction" offText="Explore Kundli Prediction" offPath="/services/kundli-prediction">
 <span>{"01"}</span>
 <strong>{"Kundli Prediction"}</strong>
 <b>{"\u2197"}</b>
-</button>
-<button data-book="Kundli Matching">
+</BookingButton>
+<BookingButton data-book="Kundli Matching" offText="Explore Kundli Matching" offPath="/services/kundli-matching">
 <span>{"02"}</span>
 <strong>{"Kundli Matching"}</strong>
 <b>{"\u2197"}</b>
-</button>
-<button data-book="Vastu Consultation">
+</BookingButton>
+<BookingButton data-book="Vastu Consultation" offText="Explore Vastu Consultation" offPath="/services/vastu-consultation">
 <span>{"03"}</span>
 <strong>{"Vastu Consultation"}</strong>
 <b>{"\u2197"}</b>
-</button>
-<button data-book="Numerology">
+</BookingButton>
+<BookingButton data-book="Numerology" offText="Explore Numerology" offPath="/services/numerology">
 <span>{"04"}</span>
 <strong>{"Numerology"}</strong>
 <b>{"\u2197"}</b>
-</button>
+</BookingButton>
 </div>
 </div>
 </section>{"\n"}<section className="invitation wrap" id="invitation">
@@ -150,8 +151,8 @@ export default function About(){
 <h2>{"Your questions."}<br />
 <em>{"Your own conversation."}</em>
 </h2>
-<button className="button" data-book="General consultation">{"Book an appointment "}<span>{"\u2197"}</span>
-</button>
+<BookingButton className="button" data-book="General consultation">{"Book an appointment "}<span>{"\u2197"}</span>
+</BookingButton>
 </div>
 <div className="contact-side">
 <span>{"BEFORE YOU BOOK"}</span>

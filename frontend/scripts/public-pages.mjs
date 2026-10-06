@@ -1,17 +1,18 @@
-/** Deterministic public metadata; no API calls, customer data or private routes. */
-import {readFileSync,writeFileSync,mkdirSync} from 'node:fs';
-import {resolve,dirname} from 'node:path';
-import {pages,origin,titleFor} from '../src/site/page-metadata.mjs';
+/** Build the displayed pages and exact asset boundary; no provider access. */
+import {readFileSync} from 'node:fs';
+import {resolve} from 'node:path';
+import {pages} from '../src/site/page-metadata.mjs';
+import project from '../../appointment-settings/project.json' with {type:'json'};
+import publicAssets from '../../appointment-settings/public-assets.json' with {type:'json'};
+import {generateModes} from '../../appointment-system/tools/build/page-modes.mjs';
+import {writeSurfaceManifest} from '../../appointment-system/tools/build/surfaces.mjs';
 const dist=resolve(import.meta.dirname,'../dist');
-const shell=readFileSync(resolve(dist,'index.html'),'utf8');
-const escape=s=>s.replaceAll('&','&amp;').replaceAll('"','&quot;').replaceAll('<','&lt;').replaceAll('>','&gt;');
-for(const [path,[,description]] of Object.entries(pages)){
- let html=shell.replace(/<title>.*?<\/title>/,`<title>${escape(titleFor(path))}</title>`);
- html=html.replace(/(<meta (?:name|property)="(?:title|og:title|twitter:title)" content=")[^"]*/g,`$1${escape(titleFor(path))}`);
- html=html.replace(/(<meta (?:name|property)="(?:description|og:description|twitter:description)" content=")[^"]*/g,`$1${escape(description)}`);
- html=html.replace(/(<link rel="canonical" href=")[^"]*/g,`$1${origin+path}`);
- html=html.replace(/(<meta (?:name|property)="(?:og:url|twitter:url)" content=")[^"]*/g,`$1${origin+path}`);
- const file=resolve(dist,path==='/'?'index.html':path.slice(1)+'.html');mkdirSync(dirname(file),{recursive:true});writeFileSync(file,html);
-}
-writeFileSync(resolve(dist,'sitemap.xml'),'<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">'+Object.keys(pages).map(path=>`\n<url><loc>${origin+path}</loc></url>`).join('')+'\n</urlset>\n');
-console.log('Generated public-route metadata and clean sitemap. No private routes rendered.');
+const bookingPaths=['/booking','/booking/receipt','/booking-help','/booking-policy'];
+const manifest=writeSurfaceManifest({dist,publicDirectory:resolve(import.meta.dirname,'../public'),project,
+ publicPaths:Object.keys(pages).filter(path=>!bookingPaths.includes(path)),bookingPaths,
+ backendPaths:['/studio','/enquiries-studio'],publicAssets});
+generateModes({dist,shell:readFileSync(resolve(dist,'index.html'),'utf8'),pages,project,manifest,brand:project.label,offDescriptions:{
+ '/':'Explore astrology, Numerology and Vastu guidance with Madhuri Gupta at Sarsa Jyotish Sansthan. Contact the practice with your questions.',
+ '/services':'Explore Kundli Prediction, Kundli Matching, Vastu and Numerology guidance. Contact the practice with your questions.',
+ '/contact':'Send Sarsa Jyotish Sansthan a question or contact the practice for help.'}});
+console.log('Generated public pages and classified asset boundary from the contained release.');

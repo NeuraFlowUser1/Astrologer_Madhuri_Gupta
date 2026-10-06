@@ -1,0 +1,16 @@
+{
+  "version": 1,
+  "installation_id": "87b35f80-71bc-4ee1-bf34-a7316006f95c",
+  "environment": "production",
+  "legacy": {
+    "client": [
+      "booking:004:client:pending-actions:v1"
+    ],
+    "company": [
+      "booking:004:company:pending-actions:v1"
+    ],
+    "calendar": [],
+    "inbox": [],
+    "enquiry": []
+  }
+}
