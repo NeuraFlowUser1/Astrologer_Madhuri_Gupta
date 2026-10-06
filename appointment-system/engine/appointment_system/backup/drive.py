@@ -150,8 +150,10 @@ class Drive:
         try:
             with self.client.stream('POST',UPLOAD,params={'uploadType':'resumable','fields':FIELDS},headers=self.headers|{'X-Upload-Content-Type':'application/octet-stream','X-Upload-Content-Length':str(size)},json=metadata) as response:
                 response.raise_for_status();location=response.headers.get('location','')
-            url=urlsplit(location);query=parse_qs(url.query)
-            if url.scheme!='https' or url.netloc!='www.googleapis.com' or url.path!='/upload/drive/v3/files' or url.fragment or set(query)-{'uploadType','upload_id'} or query.get('uploadType')!=['resumable'] or len(query.get('upload_id',[]))!=1 or not 1<=len(location)<=8192:raise ValueError()
+            # Google owns the opaque session query (including fields/session_crd).
+            # Restrict the HTTPS destination; preserve its issued query unchanged.
+            url=urlsplit(location);query=parse_qs(url.query,keep_blank_values=True)
+            if url.scheme!='https' or url.netloc!='www.googleapis.com' or url.path!='/upload/drive/v3/files' or url.fragment or query.get('uploadType')!=['resumable'] or len(query.get('upload_id',[]))!=1 or not query['upload_id'][0] or not 1<=len(location)<=8192:raise ValueError()
             with path.open('rb') as source:
                 with self.client.stream('PUT',location,headers=self.headers|{'Content-Type':'application/octet-stream','Content-Length':str(size)},content=iter(lambda:source.read(65536),b''),timeout=120) as response:
                     response.raise_for_status()

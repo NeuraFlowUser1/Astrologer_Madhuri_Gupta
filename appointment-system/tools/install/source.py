@@ -11,6 +11,7 @@ FORBIDDEN={'.git','.env','.vercel','.wrangler','node_modules','__pycache__','.ve
  'secrets','credentials','private','verification-results'}
 HIDDEN={'.gitignore','.vercelignore','.oxlintrc.json','.python-version'}
 EXTENSIONLESS={'_redirects','_headers'}
+NATIVE_HOST_FILES={'pyproject.toml','uv.lock'}
 EXTENSIONS={'.py','.mjs','.js','.jsx','.ts','.tsx','.json','.jsonc','.css','.html','.txt','.xml',
  '.svg','.png','.webp','.jpg','.jpeg','.ico','.woff','.woff2','.ttf','.otf','.mp4','.webm','.avif'}
 MANIFEST='appointment-settings/hosting-files.json'
@@ -24,7 +25,7 @@ def site_path(value):
  if (path.parts[0]=='appointment-system' or any(part in FORBIDDEN or part.startswith('.env')
       or part.startswith('client_secret_') or part.startswith('service_account')
       or part.startswith('.') and part not in HIDDEN for part in path.parts)
-     or path.suffix not in EXTENSIONS and path.name not in HIDDEN|EXTENSIONLESS):
+     or path.suffix not in EXTENSIONS and path.name not in HIDDEN|EXTENSIONLESS and value not in NATIVE_HOST_FILES):
   raise PackageError('Unreviewed or private hosting path.')
  return path
 

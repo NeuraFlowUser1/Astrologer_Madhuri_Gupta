@@ -44,6 +44,24 @@ test('maintenance initializes only off, with an immutable first generation',asyn
  assert.equal((await submit('reconcile',base,{action:'initialize',expected_generation:null})).status,200);
  assert.equal((await submit('reconcile',base,{action:'initialize',expected_generation:null})).status,409);
 });
+test('first OFF projection retains a later SQL revision without resetting or enabling',async()=>{
+ const isolated=new Miniflare({modules:true,scriptPath:fileURLToPath(new URL('../worker/index.mjs',import.meta.url)),
+  compatibilityDate:'2026-04-15',bindings:env,durableObjects:{BOOKING_PRODUCT_STATE:{className:'BookingProductState',useSQLite:true}}});
+ try{
+  await isolated.ready;
+  const snapshot={...base,revision:'3'},operation_id=randomUUID();
+  const body={version:1,installation_id:declared.installation_id,project:declared.project,environment:declared.environment,
+   purpose:'reconcile',operation_id,issued_at_ms:Date.now(),snapshot,action:'initialize',expected_generation:null};
+  const send=body=>isolated.dispatchFetch('https://worker.example.test/service-control/reconcile',{method:'POST',
+   headers:{'Content-Type':'application/json','X-Booking-Control-Signature':sign('reconcile',body,keys.reconcile)},body:canonical(body)});
+  assert.equal((await send({...body,snapshot:{...snapshot,enabled:true}})).status,409);
+  assert.equal((await send({...body,snapshot:{...snapshot,generation_sequence:'2'}})).status,409);
+  assert.equal((await send(body)).status,200);assert.equal((await send(body)).status,200);
+  assert.equal((await send({...body,operation_id:randomUUID()})).status,409);
+  const response=await isolated.dispatchFetch('https://worker.example.test/service-state',{headers:{'X-Booking-State-Nonce':'b'.repeat(64)}});
+  assert.equal(response.status,200);assert.deepEqual((await response.json()).snapshot,snapshot);
+ }finally{await isolated.dispose();}
+});
 test('fresh read is nonce bound and signed independently of publication age',async()=>{
  const response=await read();assert.equal(response.status,200);
  const value=await response.json();assert.deepEqual(value.snapshot,base);assert.equal(value.nonce,'a'.repeat(64));

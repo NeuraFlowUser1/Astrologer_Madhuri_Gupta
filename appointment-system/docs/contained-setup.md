@@ -8,10 +8,29 @@ Run these commands with the project's Python environment from its project folder
 2. Provide `BOOKING_MIGRATION_DATABASE_URL` through the operator's protected environment. Its host, database, login and pooling choice must match this project's declared migration target. This credential does not belong in the normal website or worker environment.
 3. Run `python appointment-system/tools/setup.py install-schema`. This verifies immutable migration checksums and installs missing schema changes transactionally. It does not initialize business settings, create company credentials, or activate booking.
 4. Run `python appointment-system/tools/setup.py initialize`. The first invocation writes this installation's identity and initial business settings with booking OFF. Repeating it verifies identity and preserves the current business settings and mode. Updating the bootstrap JSON does not overwrite decisions already saved in the company controls.
+
 5. After the declared dedicated database logins have been created in the correct project, run `python appointment-system/tools/setup.py register-logins`. The command registers only the purposes declared in this installation, including the journal when declared. All logins must exist first. Missing, mismatched or disabled registrations are refused atomically. Passwords are not displayed, generated or rotated by this step. Successful registration is not proof that runtime credentials have been connected; the separate runtime preflight still applies.
 6. Run `python appointment-system/tools/setup.py enroll-company` in a private interactive terminal. Enter the company username and password when prompted. Password entry is hidden, and the password never becomes a command argument. This is first enrolment only; any existing company credential makes the command refuse, including after a response was lost. Normal password changes use the protected company controls.
 7. Complete the protected settings/provider bindings, historical handover, inactive worker preparation and ON/OFF publication acceptance before the release action. The public switch is controlled through the password-backed company area. A setup rerun cannot re-enable a revoked caller, reset a working password or silently turn booking on/off.
 
+## First display setting
+
+Before using the booking switch, provision the worker's independent
+`BOOKING_CONTROL_RECONCILE_KEY` in protected maintenance storage and the
+installation's own worker. Never place this key in website settings, browser
+code or monitoring jobs. With the saved setting OFF, run
+`python appointment-system/tools/initialize_projection.py --operation <saved-operation-uuid>`
+using `BOOKING_MAINTENANCE_DATABASE_URL` and the independent read, publish and
+reconcile keys in the protected process environment. Retain the operation ID
+and the maintenance key in the owner's encrypted recovery material.
+The command reads the actual maintenance-authorized SQL snapshot, retains its
+generation, revision and activation identity, initializes only an empty
+worker object, and verifies both the signed acknowledgement and a fresh signed
+read. It never writes SQL, issues a company command or enables booking.
+Reusing the same operation after a lost reply is safe. A different operation
+cannot overwrite an existing object. Pending ON intent, a later restore
+generation, signature mismatch or concurrently changed SQL state stops setup
+with an error. Ordinary company publication then owns subsequent switch changes.
 The setup tool is owner-only local tooling. It does not create an extra web administration endpoint. It does not sign in to Google, send email, move money, publish, or infer provider accounts from another project. Errors expose a bounded reason code rather than SQL parameters, connection strings or password values.
 
 First enrolment cannot reset an existing password. For verified recovery of a lost company password, use the separate [protected company recovery procedure](company-recovery.md). It checks the existing credential revision, preserves the operation identity on retry, revokes old sessions and records immutable evidence in the same transaction.

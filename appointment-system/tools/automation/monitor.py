@@ -63,7 +63,8 @@ def eligible(value,repository):
 def read(url,headers=None,*,maximum=4096,opener=None):
     opener=opener or build_opener(NoRedirect(),ProxyHandler({}))
     try:
-        with opener.open(Request(url,headers=headers or {}),timeout=10) as response:
+        request_headers={'User-Agent':'appointment-system-monitor','Accept':'application/json',**(headers or {})}
+        with opener.open(Request(url,headers=request_headers),timeout=10) as response:
             if response.status!=200 or response.geturl()!=url:raise MonitorError('monitor_read_failed')
             raw=response.read(maximum+1)
         if len(raw)>maximum:raise MonitorError('monitor_response_too_large')
@@ -100,7 +101,7 @@ def run(source=None,*,opener=None):
     try:
         if str(UUID(state['activation_epoch']))!=state['activation_epoch'] or not UUID(state['activation_epoch']).int:raise ValueError()
     except (ValueError,TypeError,AttributeError):raise MonitorError('monitor_projection_attention') from None
-    page=read(origins[0]+'/',maximum=524288,opener=opener)
+    page=read(origins[0]+'/',{'Accept':'text/html'},maximum=524288,opener=opener)
     if not page or b'<html' not in page.lower()[:4096]:raise MonitorError('monitor_website_attention')
     return {'status':'healthy','booking_enabled':state['enabled']}
 

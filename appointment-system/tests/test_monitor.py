@@ -45,6 +45,19 @@ class MonitorTests(unittest.TestCase):
         for name in ('PGPASSWORD','BOOKING_DATABASE_URL','BOOKING_BACKUP_DATABASE_URL','BOOKING_GOOGLE_CLIENT_SECRET'):
             with self.subTest(name=name),self.assertRaisesRegex(monitor.MonitorError,'private_authority'):self.run_monitor(self.env|{name:'foreign-secret'})
         self.assertEqual(self.calls,[])
+    def test_all_requests_identify_the_observer_and_keep_credentials_at_their_own_origin(self):
+        original=self.open
+        def require_identity(request,timeout):
+            self.assertEqual(request.get_header('User-agent'),'appointment-system-monitor')
+            expected=('application/vnd.github+json' if request.full_url.startswith('https://api.github.com/')
+                      else 'text/html' if request.full_url.endswith('/') else 'application/json')
+            self.assertEqual(request.get_header('Accept'),expected)
+            return original(request,timeout)
+        self.open=require_identity
+        self.assertEqual(self.run_monitor(),{'status':'healthy','booking_enabled':False})
+        self.assertEqual(len(self.calls),5)
+        self.assertEqual([request.get_header('Authorization') for request in self.calls],
+                         ['Bearer synthetic-token','Bearer '+'a'*43+'=',None,None,None])
     def test_private_fork_unknown_event_cadence_and_nonmain_ref_refuse_before_network(self):
         for change in ({'private':True},{'private':None},{'private':0},{'fork':True},{'visibility':'private'},{'disabled':True}):
             self.event.write_text(json.dumps({'repository':self.repository|change,'schedule':monitor.CRON}))

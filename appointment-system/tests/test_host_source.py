@@ -46,6 +46,20 @@ class HostingSource(unittest.TestCase):
   self.assertEqual(report['files'],len(self.names)+1+len(release['files'])+1)
   self.assertEqual(manifest['release_digest'],release['content_digest']);self.assertNotIn('not-for-export',json.dumps(manifest))
 
+ def test_explicit_native_python_host_files_export_byte_for_byte(self):
+  contents={'pyproject.toml':'[project]\nname="synthetic-host"\nrequires-python="==3.12.*"\n',
+            'uv.lock':'version = 1\nrequires-python = "==3.12.*"\n'}
+  for name,body in contents.items():(self.project/name).write_text(body)
+  self.names+=sorted(contents);self.save()
+  output=Path(self.run_export()['destination'])
+  for name,body in contents.items():self.assertEqual((output/name).read_text(),body)
+  self.assertEqual(verify(output/'appointment-system'),verify(self.project/'appointment-system'))
+
+ def test_native_python_file_allowance_does_not_admit_nested_or_private_files(self):
+  for name in ('other.toml','other.lock','nested/pyproject.toml','nested/uv.lock',
+               'private/pyproject.toml','private/uv.lock','.env.toml','../uv.lock'):
+   with self.subTest(path=name),self.assertRaises(PackageError):source.site_path(name)
+
  def test_missing_duplicate_private_and_traversing_paths_refuse_before_export(self):
   for names in (self.names[:-1],self.names+[self.names[0]],self.names+['../secret.txt'],
     self.names+['.env.production'],self.names+['private/key.json'],self.names+['client_secret_123.json'],

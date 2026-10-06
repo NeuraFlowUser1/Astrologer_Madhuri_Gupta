@@ -89,7 +89,7 @@
     }
   ],
   "fluid": true,
-  "cleanUrls": true,
+  "cleanUrls": false,
   "redirects": [
     {
       "source": "/testimonials",

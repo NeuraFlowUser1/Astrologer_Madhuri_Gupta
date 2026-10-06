@@ -108,6 +108,48 @@ class DriveTests(unittest.TestCase):
                 with self.assertRaises(BackupError):store.upload(path,manifest()['archive_name'],'encrypted-backup','1','1')
             self.assertFalse(any(r.url.host=='foreign.invalid' or r.method=='PUT' for r in calls))
         finally:store.close()
+    def test_google_issued_opaque_session_parameters_are_preserved_during_upload(self):
+        name=manifest()['archive_name'];saved=record(name,'encrypted-backup',identity='generated-file-123')
+        location='https://www.googleapis.com/upload/drive/v3/files?uploadType=resumable&upload_id=synthetic&fields=id%2Cname&session_crd=synthetic-session%2Fopaque'
+        def handler(request,archive):
+            if request.url.path.endswith('/generateIds'):return httpx.Response(200,json={'ids':[saved['id']]})
+            if request.method=='POST':return httpx.Response(200,headers={'location':location})
+            if request.method=='PUT':
+                self.assertEqual(str(request.url),location)
+                self.assertEqual(request.read(),b'synthetic-ciphertext')
+                self.assertEqual(request.headers['content-length'],str(len(b'synthetic-ciphertext')))
+                return httpx.Response(200)
+            return httpx.Response(200,json=saved)
+        store,calls,_=self.connect(handler=handler)
+        try:
+            with tempfile.TemporaryDirectory() as directory:
+                path=Path(directory)/'encrypted';path.write_bytes(b'synthetic-ciphertext')
+                self.assertEqual(store.upload(path,name,'encrypted-backup','1','1'),saved)
+            self.assertEqual(sum(r.method=='PUT' for r in calls),1)
+        finally:store.close()
+
+    def test_unsafe_or_ambiguous_session_addresses_never_receive_upload_data(self):
+        base='https://www.googleapis.com/upload/drive/v3/files?uploadType=resumable&upload_id=synthetic'
+        locations=(base.replace('https:','http:'),base.replace('www.googleapis.com','foreign.invalid'),
+            base.replace('www.googleapis.com','user:password@www.googleapis.com'),
+            base.replace('www.googleapis.com','www.googleapis.com:443'),base.replace('/upload/drive/v3/files','/other'),
+            base+'#fragment',base.replace('resumable','media'),base+'&upload_id=second',
+            base.replace('upload_id=synthetic','upload_id='),base+'&opaque='+'x'*8192)
+        for location in locations:
+            with self.subTest(location=location[:100]):
+                def handler(request,archive):
+                    if request.url.path.endswith('/generateIds'):return httpx.Response(200,json={'ids':['generated-file-123']})
+                    if request.method=='POST':return httpx.Response(200,headers={'location':location})
+                    return httpx.Response(404,json={})
+                store,calls,_=self.connect(handler=handler)
+                try:
+                    with tempfile.TemporaryDirectory() as directory:
+                        path=Path(directory)/'encrypted';path.write_bytes(b'synthetic-ciphertext')
+                        with self.assertRaisesRegex(BackupError,'upload_pending'):
+                            store.upload(path,manifest()['archive_name'],'encrypted-backup','1','1')
+                    self.assertFalse(any(r.method=='PUT' for r in calls))
+                finally:store.close()
+
     def test_retention_rechecks_exact_unchanged_version_before_delete(self):
         for mode in ('unchanged','changed'):
             def handler(r,a):

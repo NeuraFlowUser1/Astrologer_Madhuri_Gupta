@@ -74,7 +74,7 @@ class RestoreReconciliationTests(TestCase):
         for changes in ({'read_key':b'short'},{'read_key':'x'*32},{'reconcile_key':b'R'*32},{'origin':'https://foreign.example.test'}):
             with self.subTest(changes=changes),self.assertRaises(ControlError):replace(self.keys,**changes)
         with self.assertRaisesRegex(ControlError,'restore_privacy_replay_required'):RestoreReconciliation(self.database,self.keys,None)
-        for identifier in (None,True,'not-a-uuid',self.operation.upper()):
+        for identifier in (None,True,'not-a-uuid',self.operation.upper(),'00000000-0000-0000-0000-000000000000'):
             with self.subTest(identifier=identifier),self.assertRaisesRegex(ControlError,'restore_operation_invalid'):self.restore.run(identifier)
         self.database.saved.assert_not_called()
 

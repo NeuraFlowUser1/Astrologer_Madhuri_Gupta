@@ -73,11 +73,10 @@ class RecoveryDatabase:
         return self.call('SELECT appointment_system.control_confirm_restore(%s,%s,%s,%s)',
             (operation,Jsonb(projection),privacy['sequence'],privacy['head_hash']))
 
-class RestoreReconciliation:
-    def __init__(self,database,settings,privacy_replay,*,transport=None,clock=None):
-        if not callable(privacy_replay):raise ControlError('restore_privacy_replay_required')
+class ProjectionMaintenance:
+    def __init__(self,database,settings,*,transport=None,clock=None):
         settings.__post_init__()
-        self.database,self.settings,self.privacy_replay=database,settings,privacy_replay
+        self.database,self.settings=database,settings
         self.transport,self.clock=transport,clock or (lambda:int(time.time()*1000))
     def exchange(self,path,*,body=None,nonce=None):
         try:
@@ -123,10 +122,44 @@ class RestoreReconciliation:
     def read(self):
         nonce=secrets.token_hex(32);value=self.exchange('/service-state',nonce=nonce)
         return self.checked(value,'read',None,None,nonce)
+
+class ProjectionInitialization(ProjectionMaintenance):
+    """First display setup from actual OFF SQL authority; no command or reset.
+
+    Company commands may precede first display setup. Their monotonic revision
+    is retained, never reset to one. The worker accepts initialization only
+    when its own object is empty and the database remains in generation one.
+    Reuse the operation ID after a lost response. Existing projections cannot
+    be overwritten, advanced or enabled by this command.
+    """
     def run(self,operation):
-        try:
-            if not isinstance(operation,str) or str(UUID(operation))!=operation:raise ValueError()
-        except (ValueError,TypeError,AttributeError):raise ControlError('restore_operation_invalid') from None
+        operation=_operation(operation)
+        current=snapshot(self.database.current())
+        if current['enabled'] or current['generation_sequence']!='1':
+            raise ControlError('initial_projection_off_required')
+        facts=installation()
+        body={'version':1,'installation_id':facts['installation_id'],'project':PROJECT,'environment':facts['environment'],
+              'purpose':'reconcile','operation_id':operation,'issued_at_ms':self.clock(),'snapshot':current,
+              'action':'initialize','expected_generation':None}
+        value=self.exchange('/service-control/reconcile',body=body)
+        self.checked(value,'reconcile-ack',operation,current)
+        if value['reconcile_pending'] or self.read()!=current or snapshot(self.database.current())!=current:
+            raise ControlError('initial_projection_state_changed')
+        return {'operation_id':operation,'verified':True,'enabled':False}
+
+def _operation(value):
+    try:
+        if not isinstance(value,str) or str(UUID(value))!=value or not UUID(value).int:raise ValueError()
+        return value
+    except (ValueError,TypeError,AttributeError):raise ControlError('restore_operation_invalid') from None
+
+class RestoreReconciliation(ProjectionMaintenance):
+    def __init__(self,database,settings,privacy_replay,*,transport=None,clock=None):
+        if not callable(privacy_replay):raise ControlError('restore_privacy_replay_required')
+        super().__init__(database,settings,transport=transport,clock=clock)
+        self.privacy_replay=privacy_replay
+    def run(self,operation):
+        operation=_operation(operation)
         saved=self.database.saved(operation)
         if saved is None:
             external=self.read()

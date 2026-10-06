@@ -35,6 +35,7 @@ test('actual email-code fields reset stale input, respect expiry and expose only
  let server,browser;
  try{
   server=await createServer({root:dirname(dependencies),configFile:false,cacheDir:cache,logLevel:'error',
+   optimizeDeps:{noDiscovery:true,include:['react','react-dom/client']},
    server:{host:'127.0.0.1',port:0,fs:{allow:[master,dirname(dependencies)]}},
    plugins:[{name:'local-verification-proof',resolveId:id=>id==='/proof-entry.mjs'?'\0abs-verification-proof':null,
     load:id=>id==='\0abs-verification-proof'?entry:null,

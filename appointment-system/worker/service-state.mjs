@@ -140,8 +140,10 @@ export class BookingProductState {
           return current;
         }
         if (body.action === 'initialize') {
+          // Initial OFF setup retains the authoritative SQL revision, even if
+          // company commands occurred before the first display publication.
           if (current || body.expected_generation !== null || body.snapshot.generation_sequence !== '1'
-              || body.snapshot.revision !== '1' || body.snapshot.enabled) throw Error('state_generation_conflict');
+              || body.snapshot.enabled) throw Error('state_generation_conflict');
           this.save(body.snapshot,hash);
         } else if (body.action === 'advance_generation') {
           if (!current || body.expected_generation !== current.snapshot.restore_generation
