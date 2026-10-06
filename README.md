@@ -1,10 +1,17 @@
+> **Current replacement release:** use [the contained release and operating guide](docs/appointment-system-release.md).
+> Both live common databases are at migration 034 with booking OFF authority preserved,
+> and the fresh official stored-backup/restore/retention chain is accepted. Worker/public
+> website and resource/account acceptance remain separate. The dated original material
+> below describes the previous engine and is historical; removed file paths and old
+> setup/backup commands are not current operating instructions.
+
 # Sarsa Jyotish Sansthan — Project 004
 
 This imported client project is being rebuilt around Madhuri Gupta’s personal brand and a permanent appointment-booking system. The current implementation uses React/Vite, FastAPI, Neon Postgres, Razorpay, Google Calendar/Meet, separately owned Google Sheets, Resend and a dedicated Cloudflare recovery worker.
 
 **Current state, 30 September 2026, 17:50 UTC:** the redesigned website and permanent backend are live. Staff setup, both separately owned Google spreadsheets, scheduled recovery and the independent monitor have passed their recorded checks. Razorpay settings are recognised on the live website; the owner saved the webhook and selected automatic capture. Normal booking and enquiry intake are now enabled after guarded readiness checks. The approved prices and available times are served correctly. The owner’s real Contact test passed: verification, acknowledgement and practice-notice emails have delivery reports; both separately owned spreadsheet jobs completed once with the correct Project004 label. The owner’s real1 INR booking is confirmed with captured payment, signed callback processing, Google Meet, both record copies and three delivered booking emails. Normal prices are fully restored in source, the actual deployment and the database; fresh checkout-context and availability checks pass, and the existing test payment remains1 INR. The real staff reschedule also passed: revision2 at the new time, old slot released, new meeting and record copies, and three delivered update emails. The real cancellation also passed: revision3 cancelled, slot released, meeting cancelled, record copies and cancellation emails delivered. The full1 INR refund is verified in Razorpay and recorded through its signed callback on the first processing attempt. The provider-verified refund review is closed through one authenticated staff action. Final privacy wording is deployed and its actual asset is verified. The owner reports the independent simultaneous-booking check passed, and separate development cleanup verification found no remaining test rows. Assisted-access live acceptance remains an owner/staff-operated check. Client dashboard/account-choice/date-picker redesign is separately deferred and recorded. No appointment, message, charge or refund was created by Codex in these checks.
 
-**Backups are live:** the daily encrypted backup workflow is published and active in the existing GitHub repository. Its first production export, isolated restore, Sarsa-owned Google Drive upload and authenticated readback passed; a same-day rerun verified the existing copy without duplication. The schedule is08:32 India time. The owner has saved the recovery key, and actual initial failure notifications reached NeuraFlow’s inbox. See the [backup operating instructions and successful runs](tools/backup/README.md). The first accepted archive covers the earlier019 schema; a backup of the now030 schema has not yet been claimed. Website publication is separately recorded above.
+**Backups are live:** the daily encrypted backup workflow is published and active in the existing GitHub repository. Its first production export, isolated restore, Sarsa-owned Google Drive upload and authenticated readback passed; a same-day rerun verified the existing copy without duplication. The schedule is08:32 India time. The owner has saved the recovery key, and actual initial failure notifications reached NeuraFlow’s inbox. See the backup operating instructions and successful runs (historical path `tools/backup/README.md`). The first accepted archive covers the earlier019 schema; a backup of the now030 schema has not yet been claimed. Website publication is separately recorded above.
 
 See the [current implementation checkpoint](design-review/2026-09-17/15-automatic-booking-plan/verification.md#website-integration-checkpoint--29-september-2026) for checks and remaining live account actions.
 
@@ -18,7 +25,7 @@ See the [current implementation checkpoint](design-review/2026-09-17/15-automati
 - [Permanent resource and account manifest](design-review/2026-09-17/15-automatic-booking-plan/permanent-resource-manifest.md)
 - [Verification evidence and outstanding acceptance](design-review/2026-09-17/15-automatic-booking-plan/verification.md)
 - [Staff operations and assisted recovery](design-review/2026-09-17/15-automatic-booking-plan/staff-appointment-changes.md)
-- [Booking-engine contracts and checks](backend/booking_engine/README.md)
+- Booking-engine contracts and checks (historical path `backend/booking_engine/README.md`)
 - [Improvements to review for Project003 later](design-review/2026-09-17/15-automatic-booking-plan/004-to-003-improvement-register.md)
 
 ## Source layout

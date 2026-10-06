@@ -1,4 +1,0 @@
-# Test-only coverage measurement. This does not change server dependencies.
-coverage==7.16.2
-pglast==8.4
-pip-audit==2.10.1
