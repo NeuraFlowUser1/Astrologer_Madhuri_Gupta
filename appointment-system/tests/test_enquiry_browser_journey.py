@@ -1,6 +1,7 @@
 """Common enquiry browser -> real HTTP -> native SQL, with booking OFF throughout."""
-import contextlib,json,os,selectors,shutil,subprocess,time,unittest
+import contextlib,json,os,shutil,subprocess,time,unittest
 from pathlib import Path
+from .child_stream import ChildLines
 from appointment_system.configuration import installation
 from appointment_system.receipt_view import timestamp
 from tools.checks.sql_target import literal
@@ -18,14 +19,14 @@ class EnquiryBrowserJourneySQL(EnquiryFixture):
             if 'prashna' in profile['channels']:forms=['/contact','/','/services/prashna-kundali']
         process=subprocess.Popen([node,str(Path(__file__).with_name(script))],
             stdin=subprocess.PIPE,stdout=subprocess.PIPE,stderr=subprocess.PIPE,text=True,bufsize=1)
-        selector=selectors.DefaultSelector();selector.register(process.stdout,selectors.EVENT_READ);completed=False
+        lines=ChildLines(process.stdout);completed=False
         try:
             deadline=time.monotonic()+120
             while time.monotonic()<deadline:
-                if not selector.select(timeout=1):
+                line=lines.readline(timeout=1)
+                if line is None:
                     if process.poll() is not None:break
                     continue
-                line=process.stdout.readline()
                 if not line:break
                 self.assertLess(len(line),16384);row=json.loads(line);path=row['path'];body={};status=200;response_headers={}
                 if path=='test:settings':
@@ -51,7 +52,7 @@ class EnquiryBrowserJourneySQL(EnquiryFixture):
             _,error=process.communicate(timeout=10)
             self.assertEqual(process.returncode,0,error[-2000:]);self.assertTrue(completed)
         finally:
-            selector.close()
+            lines.close()
             if process.poll() is None:process.kill();process.wait()
             for stream in (process.stdin,process.stdout,process.stderr):
                 with contextlib.suppress(BrokenPipeError):stream.close()

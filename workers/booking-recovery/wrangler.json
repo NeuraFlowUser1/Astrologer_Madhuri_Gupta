@@ -10,7 +10,7 @@
     "BOOKING_PROJECT_ID": "004",
     "BOOKING_ENVIRONMENT": "production",
     "BOOKING_PUBLIC_ORIGIN": "https://www.sarsajyotishsansthan.com",
-    "BOOKING_RELEASE_DIGEST": "7f259b80c72668cef0405f9095d1aaf69b02e0ef31c3ff81d1c8dc42a098d1e7"
+    "BOOKING_RELEASE_DIGEST": "35b92073c14c709849133063ba4bb31166319a91ecf23acaa2a3f4bb63239af1"
   },
   "triggers": {
     "crons": [

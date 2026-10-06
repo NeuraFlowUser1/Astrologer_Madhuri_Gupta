@@ -95,9 +95,14 @@ class Drive:
         permissions=value.get('permissions')
         if value.get('nextPageToken') or not isinstance(permissions,list) or len(permissions)!=1 or any(not isinstance(p,dict) or p.get('type')!='user' or p.get('role')!='owner' or not isinstance(p.get('emailAddress'),str) or p['emailAddress'].lower()!=self.identity.owner_email or p.get('deleted') is True for p in permissions):raise BackupError('backup_drive_shared_storage_rejected')
     def checked(self,record,*,purpose=None):
-        if not owned(record,self.identity.owner_email) or record.get('parents')!=[self.folder] or record.get('mimeType')!='application/octet-stream' or not isinstance(record.get('properties'),dict):raise BackupError('backup_drive_record_mismatch')
+        if not owned(record,self.identity.owner_email) or record.get('parents')!=[self.folder] or not isinstance(record.get('properties'),dict):raise BackupError('backup_drive_record_mismatch')
         props=record['properties'];expected=properties(self.identity,purpose or props.get('purpose',''),props.get('sourceRun',''),props.get('sourceAttempt',''))
         if props!=expected:raise BackupError('backup_drive_record_mismatch')
+        # Google classifies JSON records by their actual content/extension.
+        # Only signed record documents may be JSON; encrypted archives stay binary.
+        allowed={'application/octet-stream'}
+        if expected['purpose'] in ('backup-manifest','backup-restore-proof'):allowed.add('application/json')
+        if not isinstance(record.get('mimeType'),str) or record['mimeType'] not in allowed:raise BackupError('backup_drive_record_mismatch')
         checked_name(self.identity,record.get('name'),expected['purpose'],expected['sourceRun'],expected['sourceAttempt'])
         if not isinstance(record.get('version'),str) or not re.fullmatch(r'[1-9][0-9]{0,19}',record['version']):raise BackupError('backup_drive_record_mismatch')
         file_id(record.get('id'));return record
@@ -146,16 +151,17 @@ class Drive:
         if not 0<size<=MAX_BYTES or self.available<size+10*1024*1024:raise BackupError('backup_drive_space_insufficient')
         generated=self.request('GET','files/generateIds',params={'count':1,'space':'drive'})
         if not isinstance(generated.get('ids'),list) or len(generated['ids'])!=1:raise BackupError('backup_drive_identity_invalid')
-        identity=file_id(generated['ids'][0]);metadata={'id':identity,'name':name,'mimeType':'application/octet-stream','parents':[self.folder],'properties':labels}
+        media_type='application/octet-stream' if purpose=='encrypted-backup' else 'application/json'
+        identity=file_id(generated['ids'][0]);metadata={'id':identity,'name':name,'mimeType':media_type,'parents':[self.folder],'properties':labels}
         try:
-            with self.client.stream('POST',UPLOAD,params={'uploadType':'resumable','fields':FIELDS},headers=self.headers|{'X-Upload-Content-Type':'application/octet-stream','X-Upload-Content-Length':str(size)},json=metadata) as response:
+            with self.client.stream('POST',UPLOAD,params={'uploadType':'resumable','fields':FIELDS},headers=self.headers|{'X-Upload-Content-Type':media_type,'X-Upload-Content-Length':str(size)},json=metadata) as response:
                 response.raise_for_status();location=response.headers.get('location','')
             # Google owns the opaque session query (including fields/session_crd).
             # Restrict the HTTPS destination; preserve its issued query unchanged.
             url=urlsplit(location);query=parse_qs(url.query,keep_blank_values=True)
             if url.scheme!='https' or url.netloc!='www.googleapis.com' or url.path!='/upload/drive/v3/files' or url.fragment or query.get('uploadType')!=['resumable'] or len(query.get('upload_id',[]))!=1 or not query['upload_id'][0] or not 1<=len(location)<=8192:raise ValueError()
             with path.open('rb') as source:
-                with self.client.stream('PUT',location,headers=self.headers|{'Content-Type':'application/octet-stream','Content-Length':str(size)},content=iter(lambda:source.read(65536),b''),timeout=120) as response:
+                with self.client.stream('PUT',location,headers=self.headers|{'Content-Type':media_type,'Content-Length':str(size)},content=iter(lambda:source.read(65536),b''),timeout=120) as response:
                     response.raise_for_status()
         except Exception:
             # Exact generated identity is checked; no blind second create.

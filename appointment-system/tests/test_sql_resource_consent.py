@@ -59,6 +59,45 @@ class ConsentSQL(CompanyFixture):
           (a['authority'],parent or (self.token if a['authority']=='company' else self.staff_token),
            csrf or (self.csrf if a['authority']=='company' else None),a['id']))
 
+    def test_actual_restore_barrier_invalidates_every_unfinished_resource_consent_and_preserves_completed_grants(self):
+        self.db.sql('TRUNCATE appointment_system.control_restore_operations CASCADE;')
+        # Restore deliberately closes company/staff access until recovery is
+        # completed. Always remove this synthetic barrier, including on a
+        # failed assertion, so a failed test cannot poison later fixtures.
+        self.addCleanup(self.db.sql,'TRUNCATE appointment_system.control_restore_operations CASCADE;')
+        self.db.scalar("SELECT appointment_system.provision_login('abs_maintenance','maintenance');")
+        unfinished=[]
+        for authority in ('company','staff'):
+            for stage in ('started','consumed','staged'):
+                attempt=self.start(authority=authority)
+                if stage!='started':self.assertIsNotNone(self.consume(attempt))
+                if stage=='staged':self.assertTrue(self.stage(attempt))
+                unfinished.append(attempt)
+        completed=self.start(resource='client_sheet')
+        self.consume(completed);self.assertTrue(self.stage(completed))
+        self.assertEqual(self.finish_consent(completed)['code'],'saved')
+        before=self.db.value('SELECT to_jsonb(a) FROM appointment_system.google_resource_attempts a WHERE id='+literal(completed['id'])+';')
+        grants=self.db.scalar('SELECT count(*) FROM appointment_system.google_resource_grants;')
+        external=self.db.value('SELECT appointment_system.control_snapshot();')
+        operation=str(uuid4())
+        query='SELECT appointment_system.control_restore_barrier('+literal(operation)+','+literal(external)+'::jsonb);'
+        recovered=self.db.value(query,role='abs_maintenance')['snapshot']
+        self.assertFalse(recovered['enabled'])
+        self.assertNotEqual(recovered['restore_generation'],external['restore_generation'])
+        self.assertEqual(int(recovered['generation_sequence']),int(external['generation_sequence'])+1)
+        for attempt in unfinished:
+            row=self.db.value('SELECT jsonb_build_object(\'result\',result,\'consumed\',consumed_at IS NOT NULL,\'finished\',finished_at IS NOT NULL,\'grant_removed\',encrypted_grant IS NULL) FROM appointment_system.google_resource_attempts WHERE id='+literal(attempt['id'])+';')
+            self.assertEqual(row,dict(result='changed',consumed=True,finished=True,grant_removed=True))
+        self.assertEqual(self.db.value('SELECT to_jsonb(a) FROM appointment_system.google_resource_attempts a WHERE id='+literal(completed['id'])+';'),before)
+        self.assertEqual(self.db.scalar('SELECT count(*) FROM appointment_system.google_resource_grants;'),grants)
+        self.assertTrue(self.db.value(query,role='abs_maintenance')['replayed'])
+        self.assertEqual(self.db.scalar('SELECT count(*) FROM appointment_system.control_restore_operations;'),'1')
+        self.assertEqual(self.db.scalar('SELECT count(*) FROM appointment_system.control_company_sessions WHERE revoked_at IS NULL;'),'0')
+        self.assertEqual(self.db.scalar('SELECT count(*) FROM appointment_system.studio_sessions WHERE revoked_at IS NULL;'),'0')
+        for attempt in unfinished:
+            with self.assertRaisesRegex(AssertionError,'isolated recovery completion required'):
+                self.finish_consent(attempt)
+
     def test_callback_only_stages_and_same_parent_finishes_exactly_once(self):
         a=self.start();self.assertIsNotNone(self.consume(a));self.assertTrue(self.stage(a))
         self.assertEqual(self.db.scalar('SELECT count(*) FROM appointment_system.google_resource_grants;'),'0')

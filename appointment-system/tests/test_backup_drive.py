@@ -1,6 +1,7 @@
 """Capture real adapter requests using synthetic HTTP, including OAuth scopes."""
 import copy
 import hashlib
+import json
 from pathlib import Path
 import tempfile
 import unittest
@@ -66,6 +67,42 @@ class DriveTests(unittest.TestCase):
             store,_,_=self.connect(handler=handler)
             try:
                 with self.assertRaisesRegex(BackupError,code):store.files()
+            finally:store.close()
+    def test_google_json_metadata_is_allowed_only_for_signed_record_documents(self):
+        store,_,archive=self.connect()
+        try:
+            for purpose,suffix in (('backup-manifest','.manifest.json'),('backup-restore-proof','.restore.json')):
+                item=record(archive['name']+suffix,purpose)
+                for mime in ('application/json','application/octet-stream'):
+                    self.assertEqual(store.checked(dict(item,mimeType=mime)),dict(item,mimeType=mime))
+                for mime in ('text/html','text/plain','application/vnd.google-apps.document',None,[]):
+                    with self.subTest(purpose=purpose,mime=mime),self.assertRaisesRegex(BackupError,'record_mismatch'):
+                        store.checked(dict(item,mimeType=mime))
+                with self.assertRaises(BackupError):store.checked(dict(item,mimeType='application/json'),purpose='encrypted-backup')
+            with self.assertRaisesRegex(BackupError,'record_mismatch'):
+                store.checked(dict(archive,mimeType='application/json'))
+        finally:store.close()
+    def test_document_upload_declares_json_consistently_and_verifies_real_metadata(self):
+        for purpose,suffix in (('backup-manifest','.manifest.json'),('backup-restore-proof','.restore.json')):
+            name=manifest()['archive_name']+suffix;content=b'{"synthetic":"signed-envelope"}'
+            saved=dict(record(name,purpose,identity='generated-document-123',body=content),mimeType='application/json')
+            def handler(request,archive):
+                if request.url.path.endswith('/generateIds'):return httpx.Response(200,json={'ids':[saved['id']]})
+                if request.method=='POST':
+                    self.assertEqual(json.loads(request.read())['mimeType'],'application/json')
+                    self.assertEqual(request.headers['X-Upload-Content-Type'],'application/json')
+                    return httpx.Response(200,headers={'location':'https://www.googleapis.com/upload/drive/v3/files?uploadType=resumable&upload_id=synthetic'})
+                if request.method=='PUT':
+                    self.assertEqual(request.headers['Content-Type'],'application/json')
+                    self.assertEqual(request.read(),content)
+                    return httpx.Response(200)
+                return httpx.Response(200,json=saved)
+            store,calls,_=self.connect(handler=handler)
+            try:
+                with tempfile.TemporaryDirectory() as scratch:
+                    path=Path(scratch)/'record.json';path.write_bytes(content)
+                    self.assertEqual(store.upload(path,name,purpose,'1','1'),saved)
+                self.assertEqual(sum(request.method=='PUT' for request in calls),1)
             finally:store.close()
     def test_download_checks_bytes_checksum_private_owner_and_size_limit(self):
         def handler(r,a):
