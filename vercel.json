@@ -35,7 +35,8 @@
   "functions": {
     "api/index.py": {
       "maxDuration": 120,
-      "excludeFiles": "{.git/**,.agents/**,.env*,backend/**,design-review/**,media/**,tools/**,workers/**,frontend/**,node_modules/**,**/__pycache__/**}"
+      "excludeFiles": "{.git/**,.agents/**,.env*,backend/**,design-review/**,media/**,tools/**,workers/**,frontend/**,node_modules/**,**/__pycache__/**}",
+      "includeFiles": "appointment-system/tools/checks/package-lock.json"
     }
   },
   "headers": [
