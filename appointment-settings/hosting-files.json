@@ -1,6 +1,7 @@
 {
   "version": 1,
   "files": [
+    ".python-version",
     "api/index.py",
     "appointment-settings/booking-browser.json",
     "appointment-settings/business-settings.json",
@@ -115,7 +116,9 @@
     "frontend/vite.config.js",
     "package-lock.json",
     "package.json",
+    "pyproject.toml",
     "requirements.txt",
+    "uv.lock",
     "vercel.json",
     "workers/booking-recovery/wrangler.json"
   ]
