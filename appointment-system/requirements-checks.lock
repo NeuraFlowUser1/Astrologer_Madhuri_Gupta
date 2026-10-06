@@ -1,0 +1,4 @@
+# Fully pinned transitive dependencies for CPython 3.12, Linux x86_64.
+# Rebuild explicitly when changing a dependency or runtime; no floating install.
+-r requirements.lock
+coverage==7.16.2 --hash=sha256:5375ebd99038021b35e99dc88255022912c06565d316212f4a576e4b08d30f5d

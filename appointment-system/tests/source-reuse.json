@@ -1,0 +1,1040 @@
+{
+  "version": 1,
+  "source_commit": "78f33eba810bee5192a9176b2244184e75f2c4b5",
+  "note": "This is source provenance, not completed implementation or test evidence.",
+  "files": [
+    {
+      "source": "004/backend/booking_engine/access.py",
+      "source_sha256": "9bc03df193f01c00add3ab9ddc262afe1eb89463e2ff61bd9e6d0a799ceca2d2",
+      "master": "engine/appointment_system/access.py",
+      "initial_master_sha256": "9d1a93c0ecce34004e80da718bb44ec4b3c9f3d29021947bfa99d66ffd678c6c",
+      "status": "reused_base_pending_canonical_contract_review"
+    },
+    {
+      "source": "004/backend/booking_engine/application.py",
+      "source_sha256": "83852ee2fc29be043d71e7bd01f37a7ecb610be3a50710baa6f22a3aa78881f0",
+      "master": "engine/appointment_system/application.py",
+      "initial_master_sha256": "83852ee2fc29be043d71e7bd01f37a7ecb610be3a50710baa6f22a3aa78881f0",
+      "status": "reused_base_pending_canonical_contract_review"
+    },
+    {
+      "source": "004/backend/booking_engine/availability.py",
+      "source_sha256": "86577adab8c256dd181d385b3bee5398285be225bd06dafbb7cacca3d706471c",
+      "master": "engine/appointment_system/availability.py",
+      "initial_master_sha256": "86577adab8c256dd181d385b3bee5398285be225bd06dafbb7cacca3d706471c",
+      "status": "reused_base_pending_canonical_contract_review"
+    },
+    {
+      "source": "004/backend/booking_engine/checkout.py",
+      "source_sha256": "c900479135cdf685948796bc01e1844ecc881a5f00e3f3369a6ae08e1d7f6349",
+      "master": "engine/appointment_system/checkout.py",
+      "initial_master_sha256": "c900479135cdf685948796bc01e1844ecc881a5f00e3f3369a6ae08e1d7f6349",
+      "status": "reused_base_pending_canonical_contract_review"
+    },
+    {
+      "source": "004/backend/booking_engine/checkout_verification.py",
+      "source_sha256": "db906c520c5120028f7f8dab769932346ff12428579ed5d6e92ea1ac964510d3",
+      "master": "engine/appointment_system/checkout_verification.py",
+      "initial_master_sha256": "db906c520c5120028f7f8dab769932346ff12428579ed5d6e92ea1ac964510d3",
+      "status": "reused_base_pending_canonical_contract_review"
+    },
+    {
+      "source": "004/backend/booking_engine/company_assets/control.css",
+      "source_sha256": "5064010dbde7098ffd882b12a96297160406f468e0aab368b7f99fd0e8af0c03",
+      "master": "engine/appointment_system/company_assets/control.css",
+      "initial_master_sha256": "5064010dbde7098ffd882b12a96297160406f468e0aab368b7f99fd0e8af0c03",
+      "status": "reused_base_pending_canonical_contract_review"
+    },
+    {
+      "source": "004/backend/booking_engine/company_assets/control.html",
+      "source_sha256": "2c8ec2a47b9e172de9d7ea4e856fef52ed3443a080a8fc1d8e6ffd07f653f0fd",
+      "master": "engine/appointment_system/company_assets/control.html",
+      "initial_master_sha256": "2c8ec2a47b9e172de9d7ea4e856fef52ed3443a080a8fc1d8e6ffd07f653f0fd",
+      "status": "reused_base_pending_canonical_contract_review"
+    },
+    {
+      "source": "004/backend/booking_engine/company_assets/control.js",
+      "source_sha256": "c8d7271a0d2e628bf10916af416477c89a5469a38e4cb7fd1017547ff9040aca",
+      "master": "engine/appointment_system/company_assets/control.js",
+      "initial_master_sha256": "c8d7271a0d2e628bf10916af416477c89a5469a38e4cb7fd1017547ff9040aca",
+      "status": "reused_base_pending_canonical_contract_review"
+    },
+    {
+      "source": "004/backend/booking_engine/company_assets/google-repair.html",
+      "source_sha256": "effb8b7a8db87c2bac3e6559dcd6bfd263d0f59a97c3269810e189216f723ef2",
+      "master": "engine/appointment_system/company_assets/google-repair.html",
+      "initial_master_sha256": "effb8b7a8db87c2bac3e6559dcd6bfd263d0f59a97c3269810e189216f723ef2",
+      "status": "reused_base_pending_canonical_contract_review"
+    },
+    {
+      "source": "004/backend/booking_engine/company_assets/google-repair.js",
+      "source_sha256": "ff5d171d20c264913509ea1f83f144737849bd87a5ee2f98ffc945b8e7d4b5a9",
+      "master": "engine/appointment_system/company_assets/google-repair.js",
+      "initial_master_sha256": "00781462541d2aeb8257362ba05b1d39f49df683b2260d592ef35b0a23d20129",
+      "status": "reused_base_pending_canonical_contract_review"
+    },
+    {
+      "source": "004/backend/booking_engine/company_assets/support.html",
+      "source_sha256": "ea5aa1a401b02f13e4b4452741f9d386576e707571adf8ff2e02ec32d79f4b07",
+      "master": "engine/appointment_system/company_assets/support.html",
+      "initial_master_sha256": "5582f652f2469b08fb2e716031336124ba8766eec74d64f0c97986c60c113312",
+      "status": "reused_base_pending_canonical_contract_review"
+    },
+    {
+      "source": "004/backend/booking_engine/company_assets/support.js",
+      "source_sha256": "724778b954a86bf95dad9330f7128ab209f073227d83cae71af28cd753d65447",
+      "master": "engine/appointment_system/company_assets/support.js",
+      "initial_master_sha256": "c604ff245538a75017ace107737a64dc3c70a5963040a76a5a9a66bbd540a845",
+      "status": "canonical_staff_bindings_local_proof_complete_release_evidence_pending",
+      "review": "Scoped durable opaque journals; live OFF fencing; configured timezone resolution; month markers; native Chrome plus PostgreSQL 16/18. Full historical conversion and hosted acceptance remain separate."
+    },
+    {
+      "source": "004/backend/booking_engine/company_control.py",
+      "source_sha256": "cd26baaf2f293b6cb9f1ae910c2350cd323c06f6d5dcc589b537c6d8390f3abb",
+      "master": "engine/appointment_system/company_control.py",
+      "initial_master_sha256": "0cce9abe574ca5f6c4634891e05e2c31a9e402009cd540ee88fb0306778403e7",
+      "status": "reused_base_pending_canonical_contract_review"
+    },
+    {
+      "source": "004/backend/booking_engine/company_support.py",
+      "source_sha256": "7471fd32234f636e4c0c3aa06a7d420e75957420d1b47b5550681d5ab130d704",
+      "master": "engine/appointment_system/company_support.py",
+      "initial_master_sha256": "7471fd32234f636e4c0c3aa06a7d420e75957420d1b47b5550681d5ab130d704",
+      "status": "reused_base_pending_canonical_contract_review"
+    },
+    {
+      "source": "004/backend/booking_engine/connection.py",
+      "source_sha256": "d718d711e3ad75bbf479804a05c30c87742f05902e9c7d86ba00e64074c7095d",
+      "master": "engine/appointment_system/connection.py",
+      "initial_master_sha256": "a019c014fcb1bd6f79282776a46b008a4f5ba348b9a933199920524aa3c0749d",
+      "status": "reused_base_pending_canonical_contract_review"
+    },
+    {
+      "source": "004/backend/booking_engine/contact.py",
+      "source_sha256": "e36d20d6e1005a2ac39bec4c6e07e88064764a36bb839405389a6fe40445767f",
+      "master": "engine/appointment_system/contact.py",
+      "initial_master_sha256": "2c903752afd6d9e0253d310580ccb4b2387f31d24830b26811c3e4f033efa2ca",
+      "status": "reused_base_pending_canonical_contract_review"
+    },
+    {
+      "source": "004/backend/booking_engine/contact_delivery.py",
+      "source_sha256": "e97f4eb33c831e29b21dace4630198dec95ac0003c36f23c1c480a0e4693ef96",
+      "master": "engine/appointment_system/contact_delivery.py",
+      "initial_master_sha256": "e97f4eb33c831e29b21dace4630198dec95ac0003c36f23c1c480a0e4693ef96",
+      "status": "reused_base_pending_canonical_contract_review"
+    },
+    {
+      "source": "004/backend/booking_engine/contact_messages.py",
+      "source_sha256": "18912e897696528ad443ca758baf4292ed67b045b800a9683a44a6e5fea06953",
+      "master": "engine/appointment_system/contact_messages.py",
+      "initial_master_sha256": "396e48036f7e2da72d17940aea8c197df3844c70d952a35f40ca580c48a12bfc",
+      "status": "reused_base_pending_canonical_contract_review"
+    },
+    {
+      "source": "004/backend/booking_engine/contact_records.py",
+      "source_sha256": "460a7e4a2fcab2ee274a34e92448e4fe22bcfb3059180d2fa44e4f3d3ac31c1e",
+      "master": "engine/appointment_system/contact_records.py",
+      "initial_master_sha256": "460a7e4a2fcab2ee274a34e92448e4fe22bcfb3059180d2fa44e4f3d3ac31c1e",
+      "status": "reused_base_pending_canonical_contract_review"
+    },
+    {
+      "source": "004/backend/booking_engine/contact_routes.py",
+      "source_sha256": "056be42529fbb07b802e9c6022ec145eb4505d3b234c71cd1037e2fd4a11f7f1",
+      "master": "engine/appointment_system/contact_routes.py",
+      "initial_master_sha256": "056be42529fbb07b802e9c6022ec145eb4505d3b234c71cd1037e2fd4a11f7f1",
+      "status": "reused_base_pending_canonical_contract_review"
+    },
+    {
+      "source": "004/backend/booking_engine/contact_worker.py",
+      "source_sha256": "bc91867ae2a744969b6d91996723641f697537f531b7c277a05fd41b83f76db0",
+      "master": "engine/appointment_system/contact_worker.py",
+      "initial_master_sha256": "dad4ed30b279649948004864a870c53d98eaeed40d98934a3ed90d2ed8f9bbe3",
+      "status": "retired_inactive_entry_retained_in_programme_evidence",
+      "retired_evidence": "001-implementation-evidence/retired-development/legacy-consumers/contact_worker.py"
+    },
+    {
+      "source": "004/backend/booking_engine/control_publication.py",
+      "source_sha256": "055128448bd0d8c81f87fb5c37c0855fb9e1d79816b97c6dafd2728c6e71c7d3",
+      "master": "engine/appointment_system/control_publication.py",
+      "initial_master_sha256": "14a8e919b8559507deb3c262f1d4589b1b21bb451d8af43e73a7cba7cd3093c3",
+      "status": "reused_base_pending_canonical_contract_review"
+    },
+    {
+      "source": "004/backend/booking_engine/control_recovery.py",
+      "source_sha256": "bdf7784e1d44c22be4a8b22e4d88115832cf8097ab938238cbaaef41da918ba8",
+      "master": "engine/appointment_system/control_recovery.py",
+      "initial_master_sha256": "bdf7784e1d44c22be4a8b22e4d88115832cf8097ab938238cbaaef41da918ba8",
+      "status": "reused_base_pending_canonical_contract_review"
+    },
+    {
+      "source": "004/backend/booking_engine/diagnostics.py",
+      "source_sha256": "279f0b1692d6f64000c10d3c3a37e08cc39e3d67a71f2a1a8025efac7c4dda4a",
+      "master": "engine/appointment_system/diagnostics.py",
+      "initial_master_sha256": "279f0b1692d6f64000c10d3c3a37e08cc39e3d67a71f2a1a8025efac7c4dda4a",
+      "status": "reused_base_pending_canonical_contract_review"
+    },
+    {
+      "source": "004/backend/booking_engine/email_delivery.py",
+      "source_sha256": "6dea59e4b678907a66bf64e471c43908d3c78c78fdc4ce68730a2080d17489e9",
+      "master": "engine/appointment_system/email_delivery.py",
+      "initial_master_sha256": "6dea59e4b678907a66bf64e471c43908d3c78c78fdc4ce68730a2080d17489e9",
+      "status": "reused_base_pending_canonical_contract_review"
+    },
+    {
+      "source": "004/backend/booking_engine/email_events.py",
+      "source_sha256": "e188a59ff953452f46bddc71b74b0254c51733f8682f8f2f8bf83476c40edfff",
+      "master": "engine/appointment_system/email_events.py",
+      "initial_master_sha256": "3ddf644e2ca3ea56945f8f763902a75731c39b2aef8ebaa7b046362fe82f6b4d",
+      "status": "reused_base_pending_canonical_contract_review"
+    },
+    {
+      "source": "004/backend/booking_engine/email_messages.py",
+      "source_sha256": "cb4210c1a2b031bf2fe991e1b0c331e9d0f1eb61c3557f845141151cf52cd877",
+      "master": "engine/appointment_system/email_messages.py",
+      "initial_master_sha256": "b55ad35dd322d12a9cbd3a7ee326a8b0212bd22f34e3c4f7657b6064e8b7760a",
+      "status": "reused_base_pending_canonical_contract_review"
+    },
+    {
+      "source": "004/backend/booking_engine/email_worker.py",
+      "source_sha256": "5828687ae7857ac292c7ee36c88724892382bb13aedb06bc33c214fddaa82928",
+      "master": "engine/appointment_system/email_worker.py",
+      "initial_master_sha256": "3fd334ebec36972743944680edd9247ec667d5b45ed35e2119fec7ca77293c66",
+      "status": "retired_inactive_entry_retained_in_programme_evidence",
+      "retired_evidence": "001-implementation-evidence/retired-development/legacy-consumers/email_worker.py"
+    },
+    {
+      "source": "004/backend/booking_engine/financial_resources.py",
+      "source_sha256": "02616176673346fa39cab6d0c72de5e64fd6b52c2991b112e5d427aa62853b80",
+      "master": "engine/appointment_system/financial_resources.py",
+      "initial_master_sha256": "02616176673346fa39cab6d0c72de5e64fd6b52c2991b112e5d427aa62853b80",
+      "status": "reused_base_pending_canonical_contract_review"
+    },
+    {
+      "source": "004/backend/booking_engine/google_access.py",
+      "source_sha256": "f088b1964d13e2a25105be0d605f302caca859e7f9868631c94f788899af8935",
+      "master": "engine/appointment_system/google_access.py",
+      "initial_master_sha256": "f088b1964d13e2a25105be0d605f302caca859e7f9868631c94f788899af8935",
+      "status": "reused_base_pending_canonical_contract_review"
+    },
+    {
+      "source": "004/backend/booking_engine/google_delivery.py",
+      "source_sha256": "8d1a00d2ccc2ebbbdcc59b7b2d0dc507a02d21f74029d44775848d5e29d9dbf2",
+      "master": "engine/appointment_system/google_delivery.py",
+      "initial_master_sha256": "8d1a00d2ccc2ebbbdcc59b7b2d0dc507a02d21f74029d44775848d5e29d9dbf2",
+      "status": "reused_base_pending_canonical_contract_review"
+    },
+    {
+      "source": "004/backend/booking_engine/google_oauth.py",
+      "source_sha256": "782deb72b331a91bab8a7351af63196eaf10447914271e651500861d6a944d3e",
+      "master": "engine/appointment_system/google_oauth.py",
+      "initial_master_sha256": "f3f48e81c7f4bd90581ab6b4fb4c9e0d2be1e846dbe39b90dd49055a4fb57cd4",
+      "status": "reused_base_pending_canonical_contract_review"
+    },
+    {
+      "source": "004/backend/booking_engine/google_records.py",
+      "source_sha256": "afb2132e52a86592ad3e20875fe6317bd97d7e09c95fb0698f6ac215493e2ff0",
+      "master": "engine/appointment_system/google_records.py",
+      "initial_master_sha256": "afb2132e52a86592ad3e20875fe6317bd97d7e09c95fb0698f6ac215493e2ff0",
+      "status": "reused_base_pending_canonical_contract_review"
+    },
+    {
+      "source": "004/backend/booking_engine/google_transport.py",
+      "source_sha256": "24f243c6d49941b2b83fc815aae35607a7b1f08260ebe6f6c12fad0ffe32b1a7",
+      "master": "engine/appointment_system/google_transport.py",
+      "initial_master_sha256": "24f243c6d49941b2b83fc815aae35607a7b1f08260ebe6f6c12fad0ffe32b1a7",
+      "status": "reused_base_pending_canonical_contract_review"
+    },
+    {
+      "source": "004/backend/booking_engine/google_worker.py",
+      "source_sha256": "a6fcf3acb31f58c061447a731f0c9bf1ace0581f247ae92619ba5327944c4679",
+      "master": "engine/appointment_system/google_worker.py",
+      "initial_master_sha256": "0563c7eecae01f5ba45fc189521c488e6ad291d08ba6fccf8555b292d1dd84fb",
+      "status": "retired_inactive_entry_retained_in_programme_evidence",
+      "retired_evidence": "001-implementation-evidence/retired-development/legacy-consumers/google_worker.py"
+    },
+    {
+      "source": "004/backend/booking_engine/google_workspace.py",
+      "source_sha256": "28234a0657fc178b3e8cb95db422aab9cd936167ac4d41d39b16baffc302caaa",
+      "master": "engine/appointment_system/google_workspace.py",
+      "initial_master_sha256": "7505a744b5a8ef259f0fc959884605f0ee872bfe05a2bd065229b87d89b12037",
+      "status": "reused_base_pending_canonical_contract_review"
+    },
+    {
+      "source": "004/backend/booking_engine/grant_repair.py",
+      "source_sha256": "c7e1a54c353231aa861f00fb22cf6dc426d924fc2af92b84ddd7c52aa10dbdc7",
+      "master": "engine/appointment_system/grant_repair.py",
+      "initial_master_sha256": "4b1808c57377d4ada77ebb1e6b0255dec81a3d6ec7fcd2bdfd5197944f0e1657",
+      "status": "retired_inactive_entry_retained_in_programme_evidence",
+      "retired_evidence": "001-implementation-evidence/retired-development/legacy-consumers/grant_repair.py"
+    },
+    {
+      "source": "004/backend/booking_engine/grant_repair_provider.py",
+      "source_sha256": "4283cec3557fbf747732e04aaea0031723ec720e1ec1cce9c6881322006886f6",
+      "master": "engine/appointment_system/grant_repair_provider.py",
+      "initial_master_sha256": "4a422257cea207df98a900c9d43217f40ad5450049d72cd4ea60f10289906e18",
+      "status": "retired_inactive_entry_retained_in_programme_evidence",
+      "retired_evidence": "001-implementation-evidence/retired-development/legacy-consumers/grant_repair_provider.py"
+    },
+    {
+      "source": "004/backend/booking_engine/hosting.py",
+      "source_sha256": "45870fd5ced7c8ac824d9ce1a4d1f3bcfe1d96525976a6981f46c208942f37ae",
+      "master": "engine/appointment_system/hosting.py",
+      "initial_master_sha256": "c2b8c04602439be2e008d770168b04b80bb23d2daab1b059709f7af2551268eb",
+      "status": "reused_base_pending_canonical_contract_review"
+    },
+    {
+      "source": "004/backend/booking_engine/mail_outcomes.py",
+      "source_sha256": "4eba82b31c87c93593b1af766ce70dff754ca119e77e7da39873d6d78495c858",
+      "master": "engine/appointment_system/mail_outcomes.py",
+      "initial_master_sha256": "4eba82b31c87c93593b1af766ce70dff754ca119e77e7da39873d6d78495c858",
+      "status": "reused_base_pending_canonical_contract_review"
+    },
+    {
+      "source": "004/backend/booking_engine/migrate.py",
+      "source_sha256": "0d630dfec0aea062a8bfcce94e18376da0485684502eb84eaa8d6091851c0282",
+      "master": "engine/appointment_system/migrate.py",
+      "initial_master_sha256": "4bb50fe7ed69778f65ea31c2f233faa6203263f6b0826db88f133726d550b2d6",
+      "status": "reused_base_pending_canonical_contract_review"
+    },
+    {
+      "source": "004/backend/booking_engine/migrations/001_booking_core.sql",
+      "source_sha256": "8f76c402c6ecc3960ab67c822f125c43e699bd30180a11726f105b912eebcaa9",
+      "master": "engine/appointment_system/migrations/001_booking_core.sql",
+      "initial_master_sha256": "f1b6e13f5d205635056f198d8dc775f0d78bcc1e2fdd202766b211db0778cb1d",
+      "status": "reconciled_into_effective_initial_schema_history_retired",
+      "current_contract": "engine/appointment_system/migrations/001_initial_schema.sql",
+      "retired_evidence": "001-implementation-evidence/retired-development/migrations-through108/001_booking_core.sql"
+    },
+    {
+      "source": "004/backend/booking_engine/migrations/002_checkout_lifecycle.sql",
+      "source_sha256": "bcbdaa12c233e547a6e2fcf2ab3703f06115fca039835cc7405eb0bfbf54992f",
+      "master": "engine/appointment_system/migrations/002_checkout_lifecycle.sql",
+      "initial_master_sha256": "ce934f8880d1da87a2002c0f91dbd403ee81a5a5b410349a1ca16a1846f02cf9",
+      "status": "reconciled_into_effective_initial_schema_history_retired",
+      "current_contract": "engine/appointment_system/migrations/001_initial_schema.sql",
+      "retired_evidence": "001-implementation-evidence/retired-development/migrations-through108/002_checkout_lifecycle.sql"
+    },
+    {
+      "source": "004/backend/booking_engine/migrations/003_runtime_permissions.sql",
+      "source_sha256": "fc818406b2604477e6ddcf4e6d8d63d18ac1a94416c70b4cc846ee9c7108229a",
+      "master": "engine/appointment_system/migrations/003_runtime_permissions.sql",
+      "initial_master_sha256": "ecf802b9f2317fa95a1e7e1c3e97064d5184cb752cabd7474cc87016d325b350",
+      "status": "reconciled_into_effective_initial_schema_history_retired",
+      "current_contract": "engine/appointment_system/migrations/001_initial_schema.sql",
+      "retired_evidence": "001-implementation-evidence/retired-development/migrations-through108/003_runtime_permissions.sql"
+    },
+    {
+      "source": "004/backend/booking_engine/migrations/004_policy_and_admission.sql",
+      "source_sha256": "395bc6c76b4fa619aab20607e299bf6f7a28f2593dec484bb5c952e6e1985a9e",
+      "master": "engine/appointment_system/migrations/004_policy_and_admission.sql",
+      "initial_master_sha256": "d49996c7a27be1123151e4feff256acb6fb5e301380aefbe27983ab8afdf1091",
+      "status": "reconciled_into_effective_initial_schema_history_retired",
+      "current_contract": "engine/appointment_system/migrations/001_initial_schema.sql",
+      "retired_evidence": "001-implementation-evidence/retired-development/migrations-through108/004_policy_and_admission.sql"
+    },
+    {
+      "source": "004/backend/booking_engine/migrations/005_reserve_checkout.sql",
+      "source_sha256": "51f4f10733ca293cc537e73dff491368b48dfb44b8d94ccaae5e59382d467a11",
+      "master": "engine/appointment_system/migrations/005_reserve_checkout.sql",
+      "initial_master_sha256": "86c4c7fa4c5ac1a4dfe7fc791a92eadc9a3d077b23781b3b5fe01975c4053b1f",
+      "status": "reconciled_into_effective_initial_schema_history_retired",
+      "current_contract": "engine/appointment_system/migrations/001_initial_schema.sql",
+      "retired_evidence": "001-implementation-evidence/retired-development/migrations-through108/005_reserve_checkout.sql"
+    },
+    {
+      "source": "004/backend/booking_engine/migrations/006_settings_read_lock.sql",
+      "source_sha256": "2bc74e6633abb38a8c7ebd76b33630a1b1d1d2dc53460bee901284af01c034d7",
+      "master": "engine/appointment_system/migrations/006_settings_read_lock.sql",
+      "initial_master_sha256": "afb7bd5a3e85d2f6f791612162eebee4ba1bba0da734199eee54a9728c0adb82",
+      "status": "reconciled_into_effective_initial_schema_history_retired",
+      "current_contract": "engine/appointment_system/migrations/001_initial_schema.sql",
+      "retired_evidence": "001-implementation-evidence/retired-development/migrations-through108/006_settings_read_lock.sql"
+    },
+    {
+      "source": "004/backend/booking_engine/migrations/007_staff_closures.sql",
+      "source_sha256": "b8503b642e524329766aad06548fbcd64c5cc7e5b35a53d913a08793f3398bd5",
+      "master": "engine/appointment_system/migrations/007_staff_closures.sql",
+      "initial_master_sha256": "2edb3ebbca8fcca32eba8be48bd6f0318fecca4a6f4cd71d9601ad7939e5516d",
+      "status": "reconciled_into_effective_initial_schema_history_retired",
+      "current_contract": "engine/appointment_system/migrations/001_initial_schema.sql",
+      "retired_evidence": "001-implementation-evidence/retired-development/migrations-through108/007_staff_closures.sql"
+    },
+    {
+      "source": "004/backend/booking_engine/migrations/008_order_creation_result.sql",
+      "source_sha256": "7d114695fca641bc4311fe722c38f2438f44642f240cd1fe880116b1248a6d92",
+      "master": "engine/appointment_system/migrations/008_order_creation_result.sql",
+      "initial_master_sha256": "ca47df00aeb132fd870e818f95d16ef8168cd4be70f4dba9069b8d31885074bb",
+      "status": "reconciled_into_effective_initial_schema_history_retired",
+      "current_contract": "engine/appointment_system/migrations/001_initial_schema.sql",
+      "retired_evidence": "001-implementation-evidence/retired-development/migrations-through108/008_order_creation_result.sql"
+    },
+    {
+      "source": "004/backend/booking_engine/migrations/009_payment_finalization.sql",
+      "source_sha256": "c5a79efd022d57b735490db891a881bdc5bb9019a5eacd143550a99a25ce3dbc",
+      "master": "engine/appointment_system/migrations/009_payment_finalization.sql",
+      "initial_master_sha256": "96fb5d1904f1b5cf1dafbe606484f99cfc55335472fa0b4bc8f4727c32e6d96a",
+      "status": "reconciled_into_effective_initial_schema_history_retired",
+      "current_contract": "engine/appointment_system/migrations/001_initial_schema.sql",
+      "retired_evidence": "001-implementation-evidence/retired-development/migrations-through108/009_payment_finalization.sql"
+    },
+    {
+      "source": "004/backend/booking_engine/migrations/010_null_safe_admission_binding.sql",
+      "source_sha256": "4d162966a81a60ad53e37c2c72d1224fec597696a6ecc8a204bc8638f6d9d935",
+      "master": "engine/appointment_system/migrations/010_null_safe_admission_binding.sql",
+      "initial_master_sha256": "b00de4695ce11277d0497c12477e4451675f8041a3202df2e6a21d1b154d301c",
+      "status": "reconciled_into_effective_initial_schema_history_retired",
+      "current_contract": "engine/appointment_system/migrations/001_initial_schema.sql",
+      "retired_evidence": "001-implementation-evidence/retired-development/migrations-through108/010_null_safe_admission_binding.sql"
+    },
+    {
+      "source": "004/backend/booking_engine/migrations/011_request_limits.sql",
+      "source_sha256": "ba4dbae9f6403432cf2abb9f4107706cfa71cc9209a6407a04f09ee93ba1396f",
+      "master": "engine/appointment_system/migrations/011_request_limits.sql",
+      "initial_master_sha256": "106c87d67d576252bec8883f596bcc886d51a5d055590afdfa6fd68012b3156e",
+      "status": "reconciled_into_effective_initial_schema_history_retired",
+      "current_contract": "engine/appointment_system/migrations/001_initial_schema.sql",
+      "retired_evidence": "001-implementation-evidence/retired-development/migrations-through108/011_request_limits.sql"
+    },
+    {
+      "source": "004/backend/booking_engine/migrations/012_recovery_leases.sql",
+      "source_sha256": "83194822b39cfebeb0ecf9dba1a24fa14f523b5bf219426648504b6c52cca9a1",
+      "master": "engine/appointment_system/migrations/012_recovery_leases.sql",
+      "initial_master_sha256": "ea90ffd4dcce72da323f3520e0884cc1d060451b994a35d2e9606c5e6575c5b2",
+      "status": "reconciled_into_effective_initial_schema_history_retired",
+      "current_contract": "engine/appointment_system/migrations/001_initial_schema.sql",
+      "retired_evidence": "001-implementation-evidence/retired-development/migrations-through108/012_recovery_leases.sql"
+    },
+    {
+      "source": "004/backend/booking_engine/migrations/013_followup_after_capture.sql",
+      "source_sha256": "b1626c0ecfbf97800c036a499723e4e984e250e3158e5c8d64f35e0409b86fd2",
+      "master": "engine/appointment_system/migrations/013_followup_after_capture.sql",
+      "initial_master_sha256": "55fbc9001631b69e41939a6fbc0dae01f2b2ff8e2abb62e9c9ddc4ab1f28fbb4",
+      "status": "reconciled_into_effective_initial_schema_history_retired",
+      "current_contract": "engine/appointment_system/migrations/001_initial_schema.sql",
+      "retired_evidence": "001-implementation-evidence/retired-development/migrations-through108/013_followup_after_capture.sql"
+    },
+    {
+      "source": "004/backend/booking_engine/migrations/014_canonical_merchant_identity.sql",
+      "source_sha256": "2c899d1040efcf6844cf7c8acb1f61ad2ee1b17b307773d463f459f2e5a664c4",
+      "master": "engine/appointment_system/migrations/014_canonical_merchant_identity.sql",
+      "initial_master_sha256": "a56efefec39ef9e418e73d99d66ebd8e3c87adff652bfb82205002cc6cb618ff",
+      "status": "reconciled_into_effective_initial_schema_history_retired",
+      "current_contract": "engine/appointment_system/migrations/001_initial_schema.sql",
+      "retired_evidence": "001-implementation-evidence/retired-development/migrations-through108/014_canonical_merchant_identity.sql"
+    },
+    {
+      "source": "004/backend/booking_engine/migrations/015_google_studio.sql",
+      "source_sha256": "1ab912d1fe042011976aec4754b400254e3f52c77b978bbd95f5dc5cb9f2827a",
+      "master": "engine/appointment_system/migrations/015_google_studio.sql",
+      "initial_master_sha256": "702ec9314856ea4b36524aac54e7b873ff4b33690b3c4195467a5cc578241beb",
+      "status": "reconciled_into_effective_initial_schema_history_retired",
+      "current_contract": "engine/appointment_system/migrations/001_initial_schema.sql",
+      "retired_evidence": "001-implementation-evidence/retired-development/migrations-through108/015_google_studio.sql"
+    },
+    {
+      "source": "004/backend/booking_engine/migrations/016_website_login.sql",
+      "source_sha256": "75dba3c02a0d9b07be7b91dddd0180d177ecef3cf31c3c23696119967ee71b01",
+      "master": "engine/appointment_system/migrations/016_website_login.sql",
+      "initial_master_sha256": "572aff20ec6afb9160ea7729e5388af56e17cbbbd63135a8264d5e854e3d399c",
+      "status": "reconciled_into_effective_initial_schema_history_retired",
+      "current_contract": "engine/appointment_system/migrations/001_initial_schema.sql",
+      "retired_evidence": "001-implementation-evidence/retired-development/migrations-through108/016_website_login.sql"
+    },
+    {
+      "source": "004/backend/booking_engine/migrations/017_google_refresh.sql",
+      "source_sha256": "33cbb29bf639877128552edacca8f7bf90eb10ed80ea8c5a4b0cabe0204ebf8b",
+      "master": "engine/appointment_system/migrations/017_google_refresh.sql",
+      "initial_master_sha256": "0f4c39737d003dad16a174a03d72d7bdb1a9a6aa52901bf2e612c3534dd48e36",
+      "status": "reconciled_into_effective_initial_schema_history_retired",
+      "current_contract": "engine/appointment_system/migrations/001_initial_schema.sql",
+      "retired_evidence": "001-implementation-evidence/retired-development/migrations-through108/017_google_refresh.sql"
+    },
+    {
+      "source": "004/backend/booking_engine/migrations/018_google_workbooks.sql",
+      "source_sha256": "c8738400c213e970d14713c12992c0078396b097518adaed2b4b9f564b45028a",
+      "master": "engine/appointment_system/migrations/018_google_workbooks.sql",
+      "initial_master_sha256": "c6bdc5e6dede9a2f2f8e74fd88c113d4f45813762dc4bfa3d79904fbb217ec06",
+      "status": "reconciled_into_effective_initial_schema_history_retired",
+      "current_contract": "engine/appointment_system/migrations/001_initial_schema.sql",
+      "retired_evidence": "001-implementation-evidence/retired-development/migrations-through108/018_google_workbooks.sql"
+    },
+    {
+      "source": "004/backend/booking_engine/migrations/019_google_delivery.sql",
+      "source_sha256": "c137ee8165ab13ffaac648f41ee026ebff81ba4790e18949872f9cf78ac35160",
+      "master": "engine/appointment_system/migrations/019_google_delivery.sql",
+      "initial_master_sha256": "13e1521b5b1b15972c2cf6c46a2c7519a85ea197ab5520dfea16c26d8990e5df",
+      "status": "reconciled_into_effective_initial_schema_history_retired",
+      "current_contract": "engine/appointment_system/migrations/001_initial_schema.sql",
+      "retired_evidence": "001-implementation-evidence/retired-development/migrations-through108/019_google_delivery.sql"
+    },
+    {
+      "source": "004/backend/booking_engine/migrations/020_email_dispatch.sql",
+      "source_sha256": "7fad0bf055115b6fd324e6088236900e4279251ab12c1d235ab11e4ecbd4fa17",
+      "master": "engine/appointment_system/migrations/020_email_dispatch.sql",
+      "initial_master_sha256": "ee85fc41a0dccb37ed9db5de63c01dafb124853007bac995e0898564049d7836",
+      "status": "reconciled_into_effective_initial_schema_history_retired",
+      "current_contract": "engine/appointment_system/migrations/001_initial_schema.sql",
+      "retired_evidence": "001-implementation-evidence/retired-development/migrations-through108/020_email_dispatch.sql"
+    },
+    {
+      "source": "004/backend/booking_engine/migrations/021_checkout_resume_lease.sql",
+      "source_sha256": "bb91d845fc345b3b2afee96f0b547b458bb71d7fe220692301b6b7e77304ffc4",
+      "master": "engine/appointment_system/migrations/021_checkout_resume_lease.sql",
+      "initial_master_sha256": "6746dec9f68acd57505efb7991a78118bc0e0d5dfe7e3dffdc85d3c9d6a41fd5",
+      "status": "reconciled_into_effective_initial_schema_history_retired",
+      "current_contract": "engine/appointment_system/migrations/001_initial_schema.sql",
+      "retired_evidence": "001-implementation-evidence/retired-development/migrations-through108/021_checkout_resume_lease.sql"
+    },
+    {
+      "source": "004/backend/booking_engine/migrations/022_studio_calendar.sql",
+      "source_sha256": "7842adb1a10cce04943c8a7a8d10e949b85df33493d5902eab65e9b7edc2f373",
+      "master": "engine/appointment_system/migrations/022_studio_calendar.sql",
+      "initial_master_sha256": "293c7b05c69daf20e0c364501bbab6e2c322db896b4aec146abe2edffe8a163d",
+      "status": "reconciled_into_effective_initial_schema_history_retired",
+      "current_contract": "engine/appointment_system/migrations/001_initial_schema.sql",
+      "retired_evidence": "001-implementation-evidence/retired-development/migrations-through108/022_studio_calendar.sql"
+    },
+    {
+      "source": "004/backend/booking_engine/migrations/023_contact_intake.sql",
+      "source_sha256": "8b1e279ead2923ce9aae224743c2a8bd11b71c1e38941249d1e00862cbe158e4",
+      "master": "engine/appointment_system/migrations/023_contact_intake.sql",
+      "initial_master_sha256": "ae2174d05d6e86c48b9cb508c095a2be532d63fa4da79f04215b3fc98b94a7d2",
+      "status": "reconciled_into_effective_initial_schema_history_retired",
+      "current_contract": "engine/appointment_system/migrations/001_initial_schema.sql",
+      "retired_evidence": "001-implementation-evidence/retired-development/migrations-through108/023_contact_intake.sql"
+    },
+    {
+      "source": "004/backend/booking_engine/migrations/024_contact_delivery.sql",
+      "source_sha256": "9dcceb9f0e1cb9adaa5a7e30c6c7007520c429cfc1b418341737919996bd623f",
+      "master": "engine/appointment_system/migrations/024_contact_delivery.sql",
+      "initial_master_sha256": "4666bec741df50c5505ad54b1d586f0236424ec3113196dc7fa1afaf77bf9415",
+      "status": "reconciled_into_effective_initial_schema_history_retired",
+      "current_contract": "engine/appointment_system/migrations/001_initial_schema.sql",
+      "retired_evidence": "001-implementation-evidence/retired-development/migrations-through108/024_contact_delivery.sql"
+    },
+    {
+      "source": "004/backend/booking_engine/migrations/025_studio_inbox.sql",
+      "source_sha256": "75ed0c91f3874ac41d33eb770734d6de1517c78b1ee41e66097f549781215fbd",
+      "master": "engine/appointment_system/migrations/025_studio_inbox.sql",
+      "initial_master_sha256": "01d84284a9ad5954f133d2c9a5b6a9fc3eb98fe564c15182c3b9663c699bb9b9",
+      "status": "reconciled_into_effective_initial_schema_history_retired",
+      "current_contract": "engine/appointment_system/migrations/001_initial_schema.sql",
+      "retired_evidence": "001-implementation-evidence/retired-development/migrations-through108/025_studio_inbox.sql"
+    },
+    {
+      "source": "004/backend/booking_engine/migrations/026_staff_cancellation.sql",
+      "source_sha256": "8643ebe86485785d6553ec072d773e262d18df733d822bf86b0a4bf604daa2c0",
+      "master": "engine/appointment_system/migrations/026_staff_cancellation.sql",
+      "initial_master_sha256": "55b2f17e73b59bd93f8ac4cec09f8f3bf38f12997e78973abb8d00fe0ee47854",
+      "status": "reconciled_into_effective_initial_schema_history_retired",
+      "current_contract": "engine/appointment_system/migrations/001_initial_schema.sql",
+      "retired_evidence": "001-implementation-evidence/retired-development/migrations-through108/026_staff_cancellation.sql"
+    },
+    {
+      "source": "004/backend/booking_engine/migrations/027_staff_reschedule.sql",
+      "source_sha256": "ea0fb7949c58577683859e2899ea84a14a90828f2c6e60a6c888d78409c72148",
+      "master": "engine/appointment_system/migrations/027_staff_reschedule.sql",
+      "initial_master_sha256": "6731bd212fe0e395ec1017a03ad37dc1fc51a2b1fd5f020ca8fd07c63c73e456",
+      "status": "reconciled_into_effective_initial_schema_history_retired",
+      "current_contract": "engine/appointment_system/migrations/001_initial_schema.sql",
+      "retired_evidence": "001-implementation-evidence/retired-development/migrations-through108/027_staff_reschedule.sql"
+    },
+    {
+      "source": "004/backend/booking_engine/migrations/028_staff_support.sql",
+      "source_sha256": "3d7823a7617c099751a8ae4a6e6ddf895924431fb343d5ca63845ff15f9d694f",
+      "master": "engine/appointment_system/migrations/028_staff_support.sql",
+      "initial_master_sha256": "1fcb5dd084bad78f86ac2784a41593d9382f5939ecbd13e683af2305ed04164a",
+      "status": "reconciled_into_effective_initial_schema_history_retired",
+      "current_contract": "engine/appointment_system/migrations/001_initial_schema.sql",
+      "retired_evidence": "001-implementation-evidence/retired-development/migrations-through108/028_staff_support.sql"
+    },
+    {
+      "source": "004/backend/booking_engine/migrations/029_staff_receipt_recovery.sql",
+      "source_sha256": "8c90ab720d9ba03238453d219f98f3a11ef6ad692c3100d71d3039b2dba8e75a",
+      "master": "engine/appointment_system/migrations/029_staff_receipt_recovery.sql",
+      "initial_master_sha256": "fd8032b2f5dabe8afb590e7022427650c52dac30e5402d25db9aeed0da4a5b82",
+      "status": "reconciled_into_effective_initial_schema_history_retired",
+      "current_contract": "engine/appointment_system/migrations/001_initial_schema.sql",
+      "retired_evidence": "001-implementation-evidence/retired-development/migrations-through108/029_staff_receipt_recovery.sql"
+    },
+    {
+      "source": "004/backend/booking_engine/migrations/030_payment_independent_browsing.sql",
+      "source_sha256": "058fc7953898628472bc56fde790bec46ee67b06754b1253e87ebcbb681ec306",
+      "master": "engine/appointment_system/migrations/030_payment_independent_browsing.sql",
+      "initial_master_sha256": "0f099d50fb91f42c4c73ca3ce868bb84bb32e00aa067f92bdaccf2aebd122c24",
+      "status": "reconciled_into_effective_initial_schema_history_retired",
+      "current_contract": "engine/appointment_system/migrations/001_initial_schema.sql",
+      "retired_evidence": "001-implementation-evidence/retired-development/migrations-through108/030_payment_independent_browsing.sql"
+    },
+    {
+      "source": "004/backend/booking_engine/migrations/031_temporary_record_cleanup.sql",
+      "source_sha256": "ef838649634af274a0ce30f3e02b992c42c81d62980ac47349855bf668bc173f",
+      "master": "engine/appointment_system/migrations/031_temporary_record_cleanup.sql",
+      "initial_master_sha256": "d53a41df90673a37fc6f98f6568b92901bfd6de8a6b430b8db2fe1d459bd4bf1",
+      "status": "reconciled_into_effective_initial_schema_history_retired",
+      "current_contract": "engine/appointment_system/migrations/001_initial_schema.sql",
+      "retired_evidence": "001-implementation-evidence/retired-development/migrations-through108/031_temporary_record_cleanup.sql"
+    },
+    {
+      "source": "004/backend/booking_engine/migrations/032_booking_product_control.sql",
+      "source_sha256": "f52242c04c9c52fd9b4c250af1483194f0be3e81d786e4051f6ceafa89793c95",
+      "master": "engine/appointment_system/migrations/032_booking_product_control.sql",
+      "initial_master_sha256": "e3e159cc4ebb0d80299d3303bab6cf8f24b276d76c86e0121f70ad3d0386fc3d",
+      "status": "reconciled_into_effective_initial_schema_history_retired",
+      "current_contract": "engine/appointment_system/migrations/001_initial_schema.sql",
+      "retired_evidence": "001-implementation-evidence/retired-development/migrations-through108/032_booking_product_control.sql"
+    },
+    {
+      "source": "004/backend/booking_engine/migrations/033_company_control_authority.sql",
+      "source_sha256": "e6e6fdf49f9fa45335a5db30eaea01a4c1e1f84cb7b9b1ef9258c04995454dfe",
+      "master": "engine/appointment_system/migrations/033_company_control_authority.sql",
+      "initial_master_sha256": "e68ca8069ed2f9a40002045c6b7490d453ca3aaecf6da0c55bb6a1a5aff18b43",
+      "status": "reconciled_into_effective_initial_schema_history_retired",
+      "current_contract": "engine/appointment_system/migrations/001_initial_schema.sql",
+      "retired_evidence": "001-implementation-evidence/retired-development/migrations-through108/033_company_control_authority.sql"
+    },
+    {
+      "source": "004/backend/booking_engine/migrations/034_control_publication_recovery.sql",
+      "source_sha256": "aeacb519fb90925be0770f49440167f8c6dca96770e10776609993a5b70adb01",
+      "master": "engine/appointment_system/migrations/034_control_publication_recovery.sql",
+      "initial_master_sha256": "ac2f4d117ad60878adbd356091308420c9b9a324cbe7333af7c008c30d5b36fb",
+      "status": "reconciled_into_effective_initial_schema_history_retired",
+      "current_contract": "engine/appointment_system/migrations/001_initial_schema.sql",
+      "retired_evidence": "001-implementation-evidence/retired-development/migrations-through108/034_control_publication_recovery.sql"
+    },
+    {
+      "source": "004/backend/booking_engine/migrations/035_scoped_company_obligations.sql",
+      "source_sha256": "da129a59432545d6078de040dc8e565c03bd831684797a75e82a50143e8a460f",
+      "master": "engine/appointment_system/migrations/035_scoped_company_obligations.sql",
+      "initial_master_sha256": "b9e6f7389e93eda298fe5a8acb840406d705159d8b8e43b1ba7bfeaa40d3f8ec",
+      "status": "reconciled_into_effective_initial_schema_history_retired",
+      "current_contract": "engine/appointment_system/migrations/001_initial_schema.sql",
+      "retired_evidence": "001-implementation-evidence/retired-development/migrations-through108/035_scoped_company_obligations.sql"
+    },
+    {
+      "source": "004/backend/booking_engine/migrations/036_bounded_company_signin.sql",
+      "source_sha256": "50ff66b65f5652077fb25b3596fc34a97ed46d6cd25b8056eb5724b7edc4ab7f",
+      "master": "engine/appointment_system/migrations/036_bounded_company_signin.sql",
+      "initial_master_sha256": "b1002462f5248e853831a5e2776e7510f2839418f3e9e34e714054f63bc43857",
+      "status": "reconciled_into_effective_initial_schema_history_retired",
+      "current_contract": "engine/appointment_system/migrations/001_initial_schema.sql",
+      "retired_evidence": "001-implementation-evidence/retired-development/migrations-through108/036_bounded_company_signin.sql"
+    },
+    {
+      "source": "004/backend/booking_engine/migrations/037_complete_order_search.sql",
+      "source_sha256": "e116e07bd1227d313ac0e046824bae1a70f49db93e3741d1dfd7feef08528eea",
+      "master": "engine/appointment_system/migrations/037_complete_order_search.sql",
+      "initial_master_sha256": "42176f84c46b6093cd05a01af174ada246f9aaf8b10abadfef40491d5b39b35b",
+      "status": "reconciled_into_effective_initial_schema_history_retired",
+      "current_contract": "engine/appointment_system/migrations/001_initial_schema.sql",
+      "retired_evidence": "001-implementation-evidence/retired-development/migrations-through108/037_complete_order_search.sql"
+    },
+    {
+      "source": "004/backend/booking_engine/migrations/038_financial_resource_lifecycle.sql",
+      "source_sha256": "859651493d6ace6c5eb1d2da655317955d33ab8c344639b89fdafb5b0dbf85b8",
+      "master": "engine/appointment_system/migrations/038_financial_resource_lifecycle.sql",
+      "initial_master_sha256": "d15ca0d06894a77b5d12063c5815c852c5d29abb432e9fcde9f16446326bae46",
+      "status": "reconciled_into_effective_initial_schema_history_retired",
+      "current_contract": "engine/appointment_system/migrations/001_initial_schema.sql",
+      "retired_evidence": "001-implementation-evidence/retired-development/migrations-through108/038_financial_resource_lifecycle.sql"
+    },
+    {
+      "source": "004/backend/booking_engine/migrations/039_aged_financial_followup.sql",
+      "source_sha256": "080c1343163afe4c939ad9ff910414b0ff0b0873e602fb629129cbee60a47ce9",
+      "master": "engine/appointment_system/migrations/039_aged_financial_followup.sql",
+      "initial_master_sha256": "58bec6de32db06be96878bbc9b57d817988270ba8214e0365cb3a6f06c1d320b",
+      "status": "reconciled_into_effective_initial_schema_history_retired",
+      "current_contract": "engine/appointment_system/migrations/001_initial_schema.sql",
+      "retired_evidence": "001-implementation-evidence/retired-development/migrations-through108/039_aged_financial_followup.sql"
+    },
+    {
+      "source": "004/backend/booking_engine/migrations/040_durable_mail_outcomes.sql",
+      "source_sha256": "f7693179519316165467143608da421ed8765da1c03f9dc53be1ed5e32651278",
+      "master": "engine/appointment_system/migrations/040_durable_mail_outcomes.sql",
+      "initial_master_sha256": "42919a62007680860d0c40889fc4bedf17051996b744d99450d912d86bd3c8e2",
+      "status": "reconciled_into_effective_initial_schema_history_retired",
+      "current_contract": "engine/appointment_system/migrations/001_initial_schema.sql",
+      "retired_evidence": "001-implementation-evidence/retired-development/migrations-through108/040_durable_mail_outcomes.sql"
+    },
+    {
+      "source": "004/backend/booking_engine/migrations/041_staff_action_results.sql",
+      "source_sha256": "89a707fabb6d48428caf1748d460554e7f1cb1f73a0f756980e1d58d05f6f026",
+      "master": "engine/appointment_system/migrations/041_staff_action_results.sql",
+      "initial_master_sha256": "40bb6cff95ee05339acadf1a9c8865c6595c52c5293b7938f712c8a68aedfee8",
+      "status": "reconciled_into_effective_initial_schema_history_retired",
+      "current_contract": "engine/appointment_system/migrations/001_initial_schema.sql",
+      "retired_evidence": "001-implementation-evidence/retired-development/migrations-through108/041_staff_action_results.sql"
+    },
+    {
+      "source": "004/backend/booking_engine/migrations/042_owned_workbook_volumes.sql",
+      "source_sha256": "6569122d1f22057d4387dd010ae188b24d183298b3f1aa0f179a40c9623aa162",
+      "master": "engine/appointment_system/migrations/042_owned_workbook_volumes.sql",
+      "initial_master_sha256": "7285c1766737cce031d5f891001d089a8b6826a43d75f0544b94ee01e1ae4e63",
+      "status": "reconciled_into_effective_initial_schema_history_retired",
+      "current_contract": "engine/appointment_system/migrations/001_initial_schema.sql",
+      "retired_evidence": "001-implementation-evidence/retired-development/migrations-through108/042_owned_workbook_volumes.sql"
+    },
+    {
+      "source": "004/backend/booking_engine/migrations/043_fenced_mail_callbacks.sql",
+      "source_sha256": "03222cf18c15350a98e5cda0097f4f3bfa19c8389e574728a1f09c3873a1f4ac",
+      "master": "engine/appointment_system/migrations/043_fenced_mail_callbacks.sql",
+      "initial_master_sha256": "757e71cf40e3f155c2d7f13a66924e11adf46bc06f784d45c147e77990b62285",
+      "status": "reconciled_into_effective_initial_schema_history_retired",
+      "current_contract": "engine/appointment_system/migrations/001_initial_schema.sql",
+      "retired_evidence": "001-implementation-evidence/retired-development/migrations-through108/043_fenced_mail_callbacks.sql"
+    },
+    {
+      "source": "004/backend/booking_engine/migrations/044_recovery_lane_evidence.sql",
+      "source_sha256": "4572cb4e0421cf14fb56780a43535d5c8d66be840db834d8f9614b96995ad475",
+      "master": "engine/appointment_system/migrations/044_recovery_lane_evidence.sql",
+      "initial_master_sha256": "6a5c4629c71fc2974f347e4d6dac87cd0f94a54ac1e66d217cf5f586074be3ab",
+      "status": "reconciled_into_effective_initial_schema_history_retired",
+      "current_contract": "engine/appointment_system/migrations/001_initial_schema.sql",
+      "retired_evidence": "001-implementation-evidence/retired-development/migrations-through108/044_recovery_lane_evidence.sql"
+    },
+    {
+      "source": "004/backend/booking_engine/migrations/045_empty_publication_hint.sql",
+      "source_sha256": "c7ff7ce68aeb856d109fa482f703373de1639bc48761f2c34de90fe0bf2fe1e6",
+      "master": "engine/appointment_system/migrations/045_empty_publication_hint.sql",
+      "initial_master_sha256": "c7ff7ce68aeb856d109fa482f703373de1639bc48761f2c34de90fe0bf2fe1e6",
+      "status": "reconciled_into_effective_initial_schema_history_retired",
+      "current_contract": "engine/appointment_system/migrations/001_initial_schema.sql",
+      "retired_evidence": "001-implementation-evidence/retired-development/migrations-through108/045_empty_publication_hint.sql"
+    },
+    {
+      "source": "004/backend/booking_engine/migrations/046_bounded_operational_incidents.sql",
+      "source_sha256": "6c5f5ccac6116aa430647619398a9041a3e23830f65d54eae402ca911ecd5b11",
+      "master": "engine/appointment_system/migrations/046_bounded_operational_incidents.sql",
+      "initial_master_sha256": "46b2c8ccace8257bfc9531d62d8a128a3edf18579de889193aebe3aa045403e7",
+      "status": "reconciled_into_effective_initial_schema_history_retired",
+      "current_contract": "engine/appointment_system/migrations/001_initial_schema.sql",
+      "retired_evidence": "001-implementation-evidence/retired-development/migrations-through108/046_bounded_operational_incidents.sql"
+    },
+    {
+      "source": "004/backend/booking_engine/migrations/047_restore_authority_barrier.sql",
+      "source_sha256": "ac3f5a870e29c77368ebc1591f397e8f1cca76a34e1bf67a36b2e3417f904e40",
+      "master": "engine/appointment_system/migrations/047_restore_authority_barrier.sql",
+      "initial_master_sha256": "2ae5763b049e7b57e4d7ae8e750ce5f0cf7ae8bfd6575b7497583bae8554bb27",
+      "status": "reconciled_into_effective_initial_schema_history_retired",
+      "current_contract": "engine/appointment_system/migrations/001_initial_schema.sql",
+      "retired_evidence": "001-implementation-evidence/retired-development/migrations-through108/047_restore_authority_barrier.sql"
+    },
+    {
+      "source": "004/backend/booking_engine/migrations/048_restore_completion.sql",
+      "source_sha256": "035e4a8c1971a97726e9b22881d9bd0f2e57e7072a46dcd4c801cdb6b474a8ee",
+      "master": "engine/appointment_system/migrations/048_restore_completion.sql",
+      "initial_master_sha256": "035e4a8c1971a97726e9b22881d9bd0f2e57e7072a46dcd4c801cdb6b474a8ee",
+      "status": "reconciled_into_effective_initial_schema_history_retired",
+      "current_contract": "engine/appointment_system/migrations/001_initial_schema.sql",
+      "retired_evidence": "001-implementation-evidence/retired-development/migrations-through108/048_restore_completion.sql"
+    },
+    {
+      "source": "004/backend/booking_engine/migrations/049_protected_privacy_retention.sql",
+      "source_sha256": "fb974c8142084fc6efd4b7836b824ba4009cc25ca102abfab5d23b5fcdab9826",
+      "master": "engine/appointment_system/migrations/049_protected_privacy_retention.sql",
+      "initial_master_sha256": "0ae4d2924041a03ac6406ab0751b095c09bd5a0dca25a1a3545efc6fbbc7dd11",
+      "status": "reconciled_into_effective_initial_schema_history_retired",
+      "current_contract": "engine/appointment_system/migrations/001_initial_schema.sql",
+      "retired_evidence": "001-implementation-evidence/retired-development/migrations-through108/049_protected_privacy_retention.sql"
+    },
+    {
+      "source": "004/backend/booking_engine/migrations/050_existing_obligation_grant_repair.sql",
+      "source_sha256": "e7d0892e709af913987ea2d6a7259b3586cfe8e0c9ff736f2e6a559b254dcb7b",
+      "master": "engine/appointment_system/migrations/050_existing_obligation_grant_repair.sql",
+      "initial_master_sha256": "36d411a742e5900c937ebbc6bc9a53dfe028c92ed2e4acfc4bc8d4b9b4f1f4ad",
+      "status": "reconciled_into_effective_initial_schema_history_retired",
+      "current_contract": "engine/appointment_system/migrations/001_initial_schema.sql",
+      "retired_evidence": "001-implementation-evidence/retired-development/migrations-through108/050_existing_obligation_grant_repair.sql"
+    },
+    {
+      "source": "004/backend/booking_engine/migrations/051_protected_company_maintenance.sql",
+      "source_sha256": "b35c1b0a80e88816b5445798327cf4734c2c9f020008846b9d816bacaa838128",
+      "master": "engine/appointment_system/migrations/051_protected_company_maintenance.sql",
+      "initial_master_sha256": "8c70f2b7ac08e0824e673543757d0cb23e2412b5977334d21000de7bbe5b0ab9",
+      "status": "reconciled_into_effective_initial_schema_history_retired",
+      "current_contract": "engine/appointment_system/migrations/001_initial_schema.sql",
+      "retired_evidence": "001-implementation-evidence/retired-development/migrations-through108/051_protected_company_maintenance.sql"
+    },
+    {
+      "source": "004/backend/booking_engine/migrations/052_revoke_replaced_receipt.sql",
+      "source_sha256": "882a830acdf932b956dae04f9331e4bad583c22f8055d78b88b614dd89cc92f4",
+      "master": "engine/appointment_system/migrations/052_revoke_replaced_receipt.sql",
+      "initial_master_sha256": "4ccb63010e22f0f2f921a931cac245621e009d9719b6edaf6aaf505c760f4452",
+      "status": "reconciled_into_effective_initial_schema_history_retired",
+      "current_contract": "engine/appointment_system/migrations/001_initial_schema.sql",
+      "retired_evidence": "001-implementation-evidence/retired-development/migrations-through108/052_revoke_replaced_receipt.sql"
+    },
+    {
+      "source": "004/backend/booking_engine/models.py",
+      "source_sha256": "e25c3a7b97cc2e91199cb63448911f8053d5c74ffd5ed248d721a3d0e640dc87",
+      "master": "engine/appointment_system/models.py",
+      "initial_master_sha256": "e25c3a7b97cc2e91199cb63448911f8053d5c74ffd5ed248d721a3d0e640dc87",
+      "status": "reused_base_pending_canonical_contract_review"
+    },
+    {
+      "source": "004/backend/booking_engine/order_creation.py",
+      "source_sha256": "81c92064f8a652c2d440e823bae105f1eacdb0cd3c8ef45875362ad700868f5a",
+      "master": "engine/appointment_system/order_creation.py",
+      "initial_master_sha256": "81c92064f8a652c2d440e823bae105f1eacdb0cd3c8ef45875362ad700868f5a",
+      "status": "reused_base_pending_canonical_contract_review"
+    },
+    {
+      "source": "004/backend/booking_engine/payment_configuration.py",
+      "source_sha256": "9d62eecda23ecbfc14a31bf4c26e0478c5853a4df7bc6e8e06b1b5e56aa57393",
+      "master": "engine/appointment_system/payment_configuration.py",
+      "initial_master_sha256": "5d14ab76906fe20654fbed2233b0c839060870b8a64d1a8dd7bcb3aa63bbf742",
+      "status": "reused_base_pending_canonical_contract_review"
+    },
+    {
+      "source": "004/backend/booking_engine/payment_evidence.py",
+      "source_sha256": "efb505324f17bf1e0012706d9e46a771066fb554ba549e5a2d0fd78ab1e61714",
+      "master": "engine/appointment_system/payment_evidence.py",
+      "initial_master_sha256": "efb505324f17bf1e0012706d9e46a771066fb554ba549e5a2d0fd78ab1e61714",
+      "status": "reused_base_pending_canonical_contract_review"
+    },
+    {
+      "source": "004/backend/booking_engine/payment_policy.py",
+      "source_sha256": "a18a1318687192f4edc253391b34f0484e1f59b9ecb5ee80d8bc284629b3b4d6",
+      "master": "engine/appointment_system/payment_policy.py",
+      "initial_master_sha256": "a18a1318687192f4edc253391b34f0484e1f59b9ecb5ee80d8bc284629b3b4d6",
+      "status": "reused_base_pending_canonical_contract_review"
+    },
+    {
+      "source": "004/backend/booking_engine/policy.py",
+      "source_sha256": "3a2cf3c1f74cd8c38627c9448a1ca002ee1e81119977a5bab29c98a38aab00e8",
+      "master": "engine/appointment_system/policy.py",
+      "initial_master_sha256": "255b21c32a062809da64e1fac0163c41241c20d6b4d777f4b85069bdf3419947",
+      "status": "reused_base_pending_canonical_contract_review"
+    },
+    {
+      "source": "004/backend/booking_engine/privacy_retention.py",
+      "source_sha256": "b6bd1d41f5a39dbf9a53ef34e4833ed266580a7cbc3d0fac5e3d9e65e46fc9dd",
+      "master": "engine/appointment_system/privacy_retention.py",
+      "initial_master_sha256": "b6bd1d41f5a39dbf9a53ef34e4833ed266580a7cbc3d0fac5e3d9e65e46fc9dd",
+      "status": "reused_base_pending_canonical_contract_review"
+    },
+    {
+      "source": "004/backend/booking_engine/queries/receipt_snapshot.sql",
+      "source_sha256": "8621aaf0a23db33a8dc61eef209ca52345821538c08a75bdeaf0eaea8a99b6de",
+      "master": "engine/appointment_system/queries/receipt_snapshot.sql",
+      "initial_master_sha256": "7da59eb7acfdd3aae6c73e92dcd67a0c7d19a45c270ba059baf8210681f90eec",
+      "status": "retired_unreferenced_query_file",
+      "retired_evidence": "001-implementation-evidence/retired-development/unused-query-files/receipt_snapshot.sql"
+    },
+    {
+      "source": "004/backend/booking_engine/queries/recovery_plan.sql",
+      "source_sha256": "74aae12d13b1ed859beb5e7de2992c5f2ba1a0e623a0b98447228a7f3df8a528",
+      "master": "engine/appointment_system/queries/recovery_plan.sql",
+      "initial_master_sha256": "357b8849cf70ab1550397db57d8eea96566d52e8992686dbbd73e6fb5772958c",
+      "status": "retired_unreferenced_query_file",
+      "retired_evidence": "001-implementation-evidence/retired-development/unused-query-files/recovery_plan.sql"
+    },
+    {
+      "source": "004/backend/booking_engine/rate_limit.py",
+      "source_sha256": "1c193591eaa7e1ffb64ccb5a278873ee3a4a5e64158732c6ff686107a5c486f3",
+      "master": "engine/appointment_system/rate_limit.py",
+      "initial_master_sha256": "0708dfcce18e48278c133d06dba10f8adbd24dc1003648b0a9e4cdbedc79384d",
+      "status": "reused_base_pending_canonical_contract_review"
+    },
+    {
+      "source": "004/backend/booking_engine/razorpay.py",
+      "source_sha256": "c24d009507ac959890ccea9e63e68f4498f650151d6951f12b45e92a2114b844",
+      "master": "engine/appointment_system/razorpay.py",
+      "initial_master_sha256": "d5d0eb17db5192032cbfee64eb16f36eff134c2cc154e3a36293905e72174331",
+      "status": "reused_base_pending_canonical_contract_review"
+    },
+    {
+      "source": "004/backend/booking_engine/receipt_recovery.py",
+      "source_sha256": "29de175f05d5464ee7b7bf8ffd8846a26fe632c02373aa8f49f751b4b804e4a1",
+      "master": "engine/appointment_system/receipt_recovery.py",
+      "initial_master_sha256": "9ed63ad89f2a6e3853a512b44f286a7f00fbed22aa671af640ad70e22a91ad24",
+      "status": "reused_base_pending_canonical_contract_review"
+    },
+    {
+      "source": "004/backend/booking_engine/receipt_view.py",
+      "source_sha256": "48915ef425f05d992de2acd8732275523a25a0ffe47633f9373e4955c03ee4b4",
+      "master": "engine/appointment_system/receipt_view.py",
+      "initial_master_sha256": "48915ef425f05d992de2acd8732275523a25a0ffe47633f9373e4955c03ee4b4",
+      "status": "reused_base_pending_canonical_contract_review"
+    },
+    {
+      "source": "004/backend/booking_engine/recovery.py",
+      "source_sha256": "34206ee68a4b60ee740b747d12332393f200fb5195323398de1ad926cceb241c",
+      "master": "engine/appointment_system/recovery.py",
+      "initial_master_sha256": "34206ee68a4b60ee740b747d12332393f200fb5195323398de1ad926cceb241c",
+      "status": "reused_base_pending_canonical_contract_review"
+    },
+    {
+      "source": "004/backend/booking_engine/recovery_evidence.py",
+      "source_sha256": "fef6d635abc3d1de791adcd4ec3c9ea4d4bed935d9a4a0290d6cf781b388729d",
+      "master": "engine/appointment_system/recovery_evidence.py",
+      "initial_master_sha256": "fef6d635abc3d1de791adcd4ec3c9ea4d4bed935d9a4a0290d6cf781b388729d",
+      "status": "retired_inactive_entry_retained_in_programme_evidence",
+      "retired_evidence": "001-implementation-evidence/retired-development/legacy-consumers/recovery_evidence.py"
+    },
+    {
+      "source": "004/backend/booking_engine/recovery_worker.py",
+      "source_sha256": "c468d7c7e27dfe777a1f30739dcbebe6aa8aede37d359632212d2b592270f854",
+      "master": "engine/appointment_system/recovery_worker.py",
+      "initial_master_sha256": "e74b68c0d8bf1dcf87e32d966e34788ce2132d06382086cfd4589d64df67ad99",
+      "status": "retired_inactive_entry_retained_in_programme_evidence",
+      "retired_evidence": "001-implementation-evidence/retired-development/legacy-consumers/recovery_worker.py"
+    },
+    {
+      "source": "004/backend/booking_engine/request_budget.py",
+      "source_sha256": "cf3af39e5a78d0add0682be2a1615e5b13f5b2fbcec2f30b53691bfabbca1b5a",
+      "master": "engine/appointment_system/request_budget.py",
+      "initial_master_sha256": "e183899c744c6c25c37d475cfa8b4251310596062053aff3e9863e5656c8d4d2",
+      "status": "reused_base_pending_canonical_contract_review"
+    },
+    {
+      "source": "004/backend/booking_engine/resend_email.py",
+      "source_sha256": "14f55a05c7149e80b056bc2c8532f60fc9c47abf8571506d508e0dd80365dcc6",
+      "master": "engine/appointment_system/resend_email.py",
+      "initial_master_sha256": "494c39eb918e7e96e2a2d7b82b398f19ce5b66d1592609809df9bc2fde9c7227",
+      "status": "reused_base_pending_canonical_contract_review"
+    },
+    {
+      "source": "004/backend/booking_engine/retired_routes.py",
+      "source_sha256": "bb8e8207fec863198dd9bd8c046adfe31f4fad25ced4cfddf2a3f97c2f3d61fe",
+      "master": "engine/appointment_system/retired_routes.py",
+      "initial_master_sha256": "bb8e8207fec863198dd9bd8c046adfe31f4fad25ced4cfddf2a3f97c2f3d61fe",
+      "status": "reused_base_pending_canonical_contract_review"
+    },
+    {
+      "source": "004/backend/booking_engine/security.py",
+      "source_sha256": "68e2cd465f494550471312f0f55c9d39ed1b3afa4191510d8ad4aedcb0bd7df0",
+      "master": "engine/appointment_system/security.py",
+      "initial_master_sha256": "fc75b22d9993173d7b8e0fda8211f98ad4cf3c3fd980a2c3383986a63b4d73ac",
+      "status": "reused_base_pending_canonical_contract_review"
+    },
+    {
+      "source": "004/backend/booking_engine/service_control.py",
+      "source_sha256": "dda62e86e9abb355c81b95eb8957750e27635ff06aa5d3947878a2134520dc46",
+      "master": "engine/appointment_system/service_control.py",
+      "initial_master_sha256": "49cffd702806bac04f5568207a46a58131308a3cf2372820be14dc4316450240",
+      "status": "reused_base_pending_canonical_contract_review"
+    },
+    {
+      "source": "004/backend/booking_engine/storage.py",
+      "source_sha256": "c0ff10a405ff33017bf62e95c9bee4838095cbd8e411a87e611c2c73bd6f2559",
+      "master": "engine/appointment_system/storage.py",
+      "initial_master_sha256": "7504304d402e9a6dd84a59976f1182a0dd9c8392ebd2a058bd3d13c174d450ae",
+      "status": "reused_base_pending_canonical_contract_review"
+    },
+    {
+      "source": "004/backend/booking_engine/studio.py",
+      "source_sha256": "a269f40d3903ae4c4930b9e8dd4f10da270c0d6909c969351f58cab2331b9903",
+      "master": "engine/appointment_system/studio.py",
+      "initial_master_sha256": "c371722f2efad8a6756f8824b8580a3185308319d17516a9af03953b4d2e25bc",
+      "status": "reused_base_pending_canonical_contract_review"
+    },
+    {
+      "source": "004/backend/booking_engine/studio_appointments.py",
+      "source_sha256": "2e0062ebc772bfa9896ac22455c9ee8b7369dfce9a2c6b2f9ab52b10cf682d8c",
+      "master": "engine/appointment_system/studio_appointments.py",
+      "initial_master_sha256": "2e0062ebc772bfa9896ac22455c9ee8b7369dfce9a2c6b2f9ab52b10cf682d8c",
+      "status": "reused_base_pending_canonical_contract_review"
+    },
+    {
+      "source": "004/backend/booking_engine/studio_assets/appointments.js",
+      "source_sha256": "0c14620b59b65d7aa7cef08413805c7785f39b96608f1665036e3108e48fb6be",
+      "master": "engine/appointment_system/studio_assets/appointments.js",
+      "initial_master_sha256": "d33d45956c96bf28c4be10c3ea03d0defce4157da1effca5a02c7e6a74fe4655",
+      "status": "canonical_staff_bindings_local_proof_complete_release_evidence_pending",
+      "review": "Scoped durable opaque journals; live OFF fencing; configured timezone resolution; month markers; native Chrome plus PostgreSQL 16/18. Full historical conversion and hosted acceptance remain separate."
+    },
+    {
+      "source": "004/backend/booking_engine/studio_assets/calendar.js",
+      "source_sha256": "6502da13d8b5b2d2fc98a19cac44d7c7daf65cf50622326b583dd09b38578f7a",
+      "master": "engine/appointment_system/studio_assets/calendar.js",
+      "initial_master_sha256": "ec00ecb11b786235a006278495bcfe35aea98ae018f57d8fa58fea5353416f73",
+      "status": "canonical_staff_bindings_local_proof_complete_release_evidence_pending",
+      "review": "Scoped durable opaque journals; live OFF fencing; configured timezone resolution; month markers; native Chrome plus PostgreSQL 16/18. Full historical conversion and hosted acceptance remain separate."
+    },
+    {
+      "source": "004/backend/booking_engine/studio_assets/inbox.js",
+      "source_sha256": "9361688bae06d9bb02c41406191ce068126359ba831712c74aa593c520f85d39",
+      "master": "engine/appointment_system/studio_assets/inbox.js",
+      "initial_master_sha256": "9361688bae06d9bb02c41406191ce068126359ba831712c74aa593c520f85d39",
+      "status": "canonical_staff_bindings_local_proof_complete_release_evidence_pending",
+      "review": "Scoped durable opaque journals; live OFF fencing; configured timezone resolution; month markers; native Chrome plus PostgreSQL 16/18. Full historical conversion and hosted acceptance remain separate."
+    },
+    {
+      "source": "004/backend/booking_engine/studio_assets/index.html",
+      "source_sha256": "2d6ed9b08af8ca6692f6a4283c175102d2e7b67213606749a59c04f1a250e7a1",
+      "master": "engine/appointment_system/studio_assets/index.html",
+      "initial_master_sha256": "6e9bc56538da531d88644ba8e694a273c1235a08e125b74231b18cc29571027d",
+      "status": "canonical_staff_bindings_local_proof_complete_release_evidence_pending",
+      "review": "Scoped durable opaque journals; live OFF fencing; configured timezone resolution; month markers; native Chrome plus PostgreSQL 16/18. Full historical conversion and hosted acceptance remain separate."
+    },
+    {
+      "source": "004/backend/booking_engine/studio_assets/interface.css",
+      "source_sha256": "68a1a5f6c4dfd31216e913ccc12894f0d98efde1337a65701276fdf80c0ac6d8",
+      "master": "engine/appointment_system/studio_assets/interface.css",
+      "initial_master_sha256": "68a1a5f6c4dfd31216e913ccc12894f0d98efde1337a65701276fdf80c0ac6d8",
+      "status": "reused_base_pending_canonical_contract_review"
+    },
+    {
+      "source": "004/backend/booking_engine/studio_assets/interface.js",
+      "source_sha256": "45c9c5a9006a5521acba789c3fa9fe42e120920b7742cba1f86aeceef47fd183",
+      "master": "engine/appointment_system/studio_assets/interface.js",
+      "initial_master_sha256": "45c9c5a9006a5521acba789c3fa9fe42e120920b7742cba1f86aeceef47fd183",
+      "status": "reused_base_pending_canonical_contract_review"
+    },
+    {
+      "source": "004/backend/booking_engine/studio_assets/recovery.html",
+      "source_sha256": "fd2fc54c4cf68a67783303752054987f86f37005914dfacf22e0dde72cf4894e",
+      "master": "browser/booking/receipt-recovery.mjs",
+      "initial_master_sha256": "035ca96be0e6806af19b2c85075e38d54398968c14c0d60b067ee42a3cc7607b",
+      "status": "replaced_by_common_receipt_recovery_browser",
+      "retired_master_path": "engine/appointment_system/studio_assets/recovery.html",
+      "reason": "Project-themed views use one scoped durable recovery controller; inherited global-key server page retired."
+    },
+    {
+      "source": "004/backend/booking_engine/studio_assets/recovery.js",
+      "source_sha256": "06ce114a6f0afa91bd5fd0192028d899c9920c4267b8bca020d2e4233d9a4d47",
+      "master": "browser/booking/receipt-recovery.mjs",
+      "initial_master_sha256": "2316496cc3ab85d7b9dba56941e4f80b014b2ea8f28f0b45ddcbf6cd230071c7",
+      "status": "replaced_by_common_receipt_recovery_browser",
+      "retired_master_path": "engine/appointment_system/studio_assets/recovery.js",
+      "reason": "Project-themed views use one scoped durable recovery controller; inherited global-key server page retired."
+    },
+    {
+      "source": "004/backend/booking_engine/studio_assets/staff-actions.js",
+      "source_sha256": "7440a2a04b263fd5bf52bc6824fbc25720d7ccebbd1b7cd5315c7f631dc656d3",
+      "master": "engine/appointment_system/studio_assets/staff-actions.js",
+      "initial_master_sha256": "2d66d9acbf742f636b897eb6c77fb6a65578b065fef6033e3b1570a4b5feb89f",
+      "status": "canonical_staff_bindings_local_proof_complete_release_evidence_pending",
+      "review": "Scoped durable opaque journals; live OFF fencing; configured timezone resolution; month markers; native Chrome plus PostgreSQL 16/18. Full historical conversion and hosted acceptance remain separate."
+    },
+    {
+      "source": "004/backend/booking_engine/studio_calendar.py",
+      "source_sha256": "e2d16e214299499922d9067f89d1c96a4441e5141e513842b63d3bc6f017f250",
+      "master": "engine/appointment_system/studio_calendar.py",
+      "initial_master_sha256": "e2d16e214299499922d9067f89d1c96a4441e5141e513842b63d3bc6f017f250",
+      "status": "reused_base_pending_canonical_contract_review"
+    },
+    {
+      "source": "004/backend/booking_engine/studio_inbox.py",
+      "source_sha256": "e18159da913f917e3a59e8a0ee8255af5cd43e20e9e48da915ad3cd21d8a7953",
+      "master": "engine/appointment_system/studio_inbox.py",
+      "initial_master_sha256": "e18159da913f917e3a59e8a0ee8255af5cd43e20e9e48da915ad3cd21d8a7953",
+      "status": "reused_base_pending_canonical_contract_review"
+    },
+    {
+      "source": "004/backend/booking_engine/wake.py",
+      "source_sha256": "c654e00024277e48fb973451dde214bcf2615fb196b02c029cf1e17b503f7206",
+      "master": "engine/appointment_system/wake.py",
+      "initial_master_sha256": "2c61ddb9ece98c6d14b652b1d05aff81948284e931a63f672e24675b4fcc8856",
+      "status": "reused_base_pending_canonical_contract_review"
+    },
+    {
+      "source": "004/backend/booking_engine/webhook.py",
+      "source_sha256": "9edb0faf0cfdad0c5504626d83852e4e0465e70c7fd8044d0b450482ecd06d7e",
+      "master": "engine/appointment_system/webhook.py",
+      "initial_master_sha256": "9edb0faf0cfdad0c5504626d83852e4e0465e70c7fd8044d0b450482ecd06d7e",
+      "status": "reused_base_pending_canonical_contract_review"
+    }
+  ]
+}

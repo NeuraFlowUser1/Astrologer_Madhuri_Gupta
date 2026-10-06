@@ -1,0 +1,121 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex,nofollow">
+  <title>Private management · {{PRACTICE_NAME}}</title>
+  <link rel="icon" href="data:,">
+  <link rel="stylesheet" href="/api/studio/interface.css">
+  <script type="module" src="/api/studio/booking-guard.mjs"></script>
+  <script src="/api/studio/staff-actions.js" defer></script>
+  <script src="/api/studio/interface.js" defer></script>
+  <script src="/api/studio/calendar.js" defer></script>
+  <script src="/api/studio/inbox.js" defer></script>
+  <script src="/api/studio/appointments.js" defer></script>
+</head>
+<body>
+  <section id="studio-unavailable"><p role="status">Checking this page…</p><a href="/">Return to the website</a></section>
+  <main data-booking-shell hidden inert>
+    <header><p class="eyebrow">{{PRACTICE_NAME}} · PRIVATE MANAGEMENT</p>
+      <h1>A place for every appointment.</h1>
+      <p>Manage appointments, availability and the practice’s records.</p>
+    </header>
+    <p id="status" role="status" aria-live="polite">Checking your sign-in…</p>
+    <section class="panel" id="signin-panel" hidden aria-labelledby="signin-heading">
+      <span class="step">01 / SIGN IN</span><h2 id="signin-heading">Sign in to {{PRACTICE_NAME}}’s management</h2>
+      <p>Use the practice’s approved Google account.</p>
+      <div class="choices"><button data-role="client">Sign in with Google</button></div>
+    </section>
+    <section class="panel" id="connection-panel" hidden aria-labelledby="connection-heading">
+      <span class="step">02 / CONNECT GOOGLE</span><h2 id="connection-heading">Your Google connection</h2>
+      <p id="account"></p><p id="purpose"></p><p id="connection-status"></p>
+      <div class="actions"><button id="connect">Connect Calendar</button><button id="connect-records">Connect my records</button><button class="secondary" id="logout">Sign out</button></div>
+      <div class="records">
+        <span class="step">03 / YOUR RECORDS</span><h2>Your booking spreadsheet</h2>
+        <p id="workbook-status">Connect Google before preparing your spreadsheet.</p>
+        <button id="prepare-workbook" class="secondary" hidden>Prepare my spreadsheet</button>
+        <a id="open-workbook" hidden target="_blank" rel="noopener noreferrer">Open my spreadsheet ↗</a>
+        <p class="note">This spreadsheet belongs to the account shown above. Booking records appear here automatically once the service is running. Keep the Booking history and Enquiries tabs unchanged; use a separate tab for your own notes.</p>
+      </div>
+      <p class="note">Preparing records does not open public appointments. Calendar, payment and email checks must also be completed before launch.</p>
+    </section>
+    <section class="panel calendar" id="calendar-panel" hidden aria-labelledby="calendar-heading">
+      <span class="step">PRACTICE CALENDAR</span><h2 id="calendar-heading">Make room for your appointments.</h2>
+      <p>Block times when you cannot accept appointments. Existing reservations stay protected.</p>
+      <p class="note">All times below use <span data-staff-timezone>the practice time zone</span>. Record commitments here before promising a time elsewhere; this screen does not read personal Google Calendar events.</p>
+      <div class="calendar-monthbar"><button id="calendar-previous" type="button" class="secondary" aria-label="Previous month">Previous</button><h3 id="calendar-month-label"></h3><button id="calendar-next" type="button" class="secondary" aria-label="Next month">Next</button></div>
+      <div id="calendar-month" class="calendar-month" role="group" aria-label="Choose a date; appointments are marked"></div>
+      <p id="calendar-month-status" class="note" role="status"></p>
+      <form id="calendar-view"><label for="calendar-day">Day to view · <span data-staff-timezone>practice time</span></label>
+        <div class="calendar-row"><input id="calendar-day" type="date" required><button type="submit" class="secondary">Show this day</button></div></form>
+      <p id="calendar-status" role="status" aria-live="polite"></p>
+      <ul id="calendar-items" aria-label="Appointments and unavailable times"></ul>
+      <button id="calendar-more" class="secondary" hidden>Show more</button>
+      <form id="booking-lookup" class="records"><h3>Find a booking for support</h3><p>Use the complete booking reference. This private lookup does not give anyone access to the customer’s receipt.</p>
+        <label for="booking-reference">Booking reference</label><input id="booking-reference" minlength="36" maxlength="36" required autocomplete="off"><button type="submit" class="secondary">Find booking</button></form>
+      <div id="booking-support" class="records" hidden><div id="booking-support-content"></div><button id="booking-support-manage" type="button" class="secondary" hidden>Manage this appointment</button></div>
+      <form id="booking-support-change" class="records" hidden>
+        <h3>Help this customer safely</h3><p>Call the mobile number already saved above and verify the customer’s payment details before continuing. If they cannot be reached on that number, keep this for manual review.</p>
+        <label for="support-action">What does the customer need?</label><select id="support-action"><option value="receipt_recovery">Restore lost booking access</option><option value="contact_correction">Correct email or mobile number</option></select>
+        <div id="support-contacts" hidden><label for="support-email">Correct email</label><input id="support-email" type="email" maxlength="254" autocomplete="off"><label for="support-phone">Correct mobile · include country code</label><input id="support-phone" type="tel" maxlength="32" autocomplete="off"></div>
+        <label for="support-payment">Verified payment ID</label><input id="support-payment" required pattern="pay_[A-Za-z0-9]{1,64}" autocomplete="off">
+        <label for="support-reason">Reason · private staff record</label><input id="support-reason" minlength="2" maxlength="500" required>
+        <label class="acknowledgement"><input id="support-verified" type="checkbox" required> I called the original saved mobile number and verified the payment details with the customer.</label>
+        <p>Correcting contact details replaces old receipt access and queues updated meeting, email and record copies. It does not change the appointment time, fee or payment.</p><button type="submit">Save verified support action</button>
+      </form><div id="support-code-result" class="records" hidden><p id="support-code-note"></p><strong id="support-code" class="support-code"></strong><p>Give this code only during the verified call. Ask the customer to open <a href="/booking-help" target="_blank" rel="noopener noreferrer">the booking access page</a>. Do not email it or put it in a link.</p></div>
+      <button id="support-repeat" type="button" class="secondary" hidden>Check same support action</button><p id="booking-support-status" role="status" aria-live="polite"></p>
+      <section id="appointment-detail" class="records" hidden aria-labelledby="appointment-title">
+        <h3 id="appointment-title" tabindex="-1">Manage appointment</h3><div id="appointment-summary"></div>
+        <p id="appointment-policy"></p>
+        <form id="appointment-reschedule" class="records">
+          <h3>Move to another time</h3><p>Your original appointment stays in place if the replacement time is unavailable. This changes the time, not the service or price.</p>
+          <label for="appointment-start">New appointment time · <span data-staff-timezone>practice time</span></label><input id="appointment-start" type="datetime-local" step="60" required>
+          <label for="appointment-move-reason">Reason for moving · private staff record</label><input id="appointment-move-reason" minlength="2" maxlength="500" required>
+          <button type="submit">Move appointment</button>
+        </form>
+        <form id="appointment-cancel" class="records"><h3>Cancel this appointment</h3><label for="appointment-reason">Reason for cancellation · private staff record</label>
+          <input id="appointment-reason" minlength="2" maxlength="500" required>
+          <label class="acknowledgement"><input id="appointment-ack" type="checkbox" required> I understand that this cancels the appointment and frees its time. Any refund must be handled separately.</label>
+          <button type="submit">Cancel appointment</button>
+        </form>
+        <button id="appointment-repeat" class="secondary" type="button" hidden>Check same change</button>
+        <p id="appointment-status" role="status" aria-live="polite"></p>
+      </section>
+      <form id="calendar-close" class="records">
+        <h3>Mark time unavailable</h3>
+        <div class="calendar-grid"><label>From · <span data-staff-timezone>practice time</span><input id="closure-start" type="datetime-local" required></label>
+          <label>Until · <span data-staff-timezone>practice time</span><input id="closure-end" type="datetime-local" required></label></div>
+        <label for="closure-reason">Reason · visible only in private management</label>
+        <input id="closure-reason" maxlength="500" minlength="2" required placeholder="For example, a personal commitment">
+        <button type="submit">Block this time</button>
+      </form>
+      <form id="calendar-reopen" class="records" hidden>
+        <h3>Make this time available again</h3><p id="reopen-period"></p>
+        <label for="reopen-reason">Reason for reopening</label><input id="reopen-reason" maxlength="500" minlength="2" required>
+        <div class="actions"><button type="submit">Make time available</button><button id="reopen-cancel" type="button" class="secondary">Keep it blocked</button></div>
+      </form>
+      <div id="calendar-pending" class="records" hidden><p>The last change could not be confirmed. Check the same request before making another change.</p>
+        <button id="calendar-repeat" class="secondary">Check the same change</button></div>
+      <p id="calendar-action-status" role="status" aria-live="polite"></p>
+    </section>
+    <section class="panel inbox" id="inbox-panel" hidden aria-labelledby="inbox-heading">
+      <span class="step">PRACTICE INBOX</span><h2 id="inbox-heading">Know what needs your attention.</h2>
+      <p id="inbox-purpose">Read verified enquiries and review problems with saved work.</p>
+      <div class="actions"><button id="inbox-enquiries" class="secondary" type="button">Verified enquiries</button><button id="inbox-issues" class="secondary" type="button">Needs attention</button><button id="inbox-refresh" class="secondary" type="button">Refresh</button></div>
+      <p id="inbox-status" role="status" aria-live="polite"></p><ul id="inbox-items" aria-label="Private inbox items"></ul>
+      <button id="inbox-more" class="secondary" type="button" hidden>Show more</button>
+      <section id="inbox-detail" class="records" hidden aria-labelledby="inbox-detail-title">
+        <h3 id="inbox-detail-title" tabindex="-1">Saved details</h3><div id="inbox-content"></div>
+        <h3>Staff review notes</h3><ol id="inbox-reviews"></ol>
+        <form id="inbox-review"><label for="review-note">What did you check or do?</label><textarea id="review-note" rows="3" minlength="2" maxlength="1000" required placeholder="A short note for the practice. Do not enter passwords or bank details."></textarea>
+          <p class="note">A review note does not mark a problem solved, send an email, change an appointment or issue a refund.</p><button type="submit">Save review note</button><button id="inbox-action-retry" type="button" class="secondary" hidden>Retry saved work</button><button id="inbox-action-refund" type="button" class="secondary" hidden>Close review after verified full refund</button></form>
+        <button id="inbox-retry-review" class="secondary" type="button" hidden>Check the same saved note</button>
+        <p id="inbox-review-status" role="status" aria-live="polite"></p>
+      </section>
+    </section>
+    <button class="secondary" id="retry" hidden>Check again</button>
+    <footer>Private management for the practice. Customers do not need to sign in to book.</footer>
+  </main>
+</body>
+</html>

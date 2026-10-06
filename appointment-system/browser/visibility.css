@@ -1,0 +1,2 @@
+html:not([data-booking-state="on"]) [data-booking-only]{display:none!important}
+[data-booking-only][hidden]{display:none!important}

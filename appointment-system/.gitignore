@@ -1,0 +1,11 @@
+__pycache__/
+*.pyc
+.coverage*
+coverage-results/
+.venv/
+private/
+node_modules/
+.wrangler/
+# These are source files, not generated build output.
+!tools/build/
+!tools/build/*.mjs

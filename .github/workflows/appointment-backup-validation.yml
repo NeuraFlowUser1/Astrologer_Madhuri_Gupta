@@ -1,0 +1,91 @@
+name: Appointment stored backup verification
+on:
+  workflow_run:
+    workflows: [Appointment database backup]
+    types: [completed]
+    branches: [main]
+  workflow_dispatch:
+    inputs:
+      source_run:
+        description: Successful owned export run ID to resume
+        type: string
+        required: true
+permissions:
+  contents: read
+  actions: read
+concurrency:
+  group: appointment-backup-verification
+  cancel-in-progress: false
+jobs:
+  verify:
+    if: github.repository == vars.BOOKING_REPOSITORY && github.event.repository.visibility == 'public' && toJSON(github.event.repository.private) == 'false' && toJSON(github.event.repository.fork) == 'false' && github.ref == 'refs/heads/main' && (github.event_name == 'workflow_dispatch' || (github.event_name == 'workflow_run' && github.event.workflow_run.conclusion == 'success'))
+    environment: appointment-backup-validation
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    outputs:
+      restore_proof: ${{ steps.restore.outputs.restore_proof }}
+      source_run: ${{ steps.trigger.outputs.source_run }}
+      source_attempt: ${{ steps.trigger.outputs.source_attempt }}
+      source_commit: ${{ steps.trigger.outputs.source_commit }}
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with:
+          ref: ${{ github.sha }}
+          persist-credentials: false
+          sparse-checkout: |
+            appointment-system
+            appointment-settings
+      - name: Install pinned backup dependencies and verified age tool
+        run: |
+          python3 -m pip install --disable-pip-version-check --require-hashes -r appointment-system/requirements.lock
+          mkdir -m 700 "$RUNNER_TEMP/appointment-tools"
+          bash appointment-system/tools/automation/install-age.sh "$RUNNER_TEMP/appointment-tools"
+      - name: Check actual successful owned source run
+        id: trigger
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+          BOOKING_PROFILE: appointment-settings/project.json
+        run: python3 appointment-system/tools/automation/trigger.py
+      - name: Independently restore with read-only archive permission
+        id: restore
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+          BOOKING_PROFILE: appointment-settings/project.json
+          BOOKING_BACKUP_DRIVE_READER: ${{ secrets.BOOKING_BACKUP_DRIVE_READER }}
+          BOOKING_BACKUP_AGE_IDENTITY: ${{ secrets.BOOKING_BACKUP_AGE_IDENTITY }}
+          BOOKING_BACKUP_EXPORT_VERIFY_KEYS: ${{ vars.BOOKING_BACKUP_EXPORT_VERIFY_KEYS }}
+          BOOKING_BACKUP_VALIDATION_KEY_ID: ${{ vars.BOOKING_BACKUP_VALIDATION_KEY_ID }}
+          BOOKING_BACKUP_VALIDATION_SIGNING_KEY: ${{ secrets.BOOKING_BACKUP_VALIDATION_SIGNING_KEY }}
+          BOOKING_BACKUP_VALIDATION_VERIFY_KEYS: ${{ vars.BOOKING_BACKUP_VALIDATION_VERIFY_KEYS }}
+          SOURCE_RUN: ${{ steps.trigger.outputs.source_run }}
+          SOURCE_ATTEMPT: ${{ steps.trigger.outputs.source_attempt }}
+          SOURCE_COMMIT: ${{ steps.trigger.outputs.source_commit }}
+        run: python3 appointment-system/tools/automation/backup.py validate --source-run "$SOURCE_RUN" --source-attempt "$SOURCE_ATTEMPT" --source-commit "$SOURCE_COMMIT" --age-binary "$RUNNER_TEMP/appointment-tools/age"
+  retain:
+    needs: verify
+    # Every job, including dependent jobs, has its own pre-allocation guard.
+    if: github.repository == vars.BOOKING_REPOSITORY && github.event.repository.visibility == 'public' && toJSON(github.event.repository.private) == 'false' && toJSON(github.event.repository.fork) == 'false' && github.ref == 'refs/heads/main' && (github.event_name == 'workflow_dispatch' || github.event_name == 'workflow_run') && needs.verify.result == 'success'
+    environment: appointment-backup-retention
+    runs-on: ubuntu-24.04
+    timeout-minutes: 6
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with:
+          ref: ${{ github.sha }}
+          persist-credentials: false
+          sparse-checkout: |
+            appointment-system
+            appointment-settings
+      - run: python3 -m pip install --disable-pip-version-check --require-hashes -r appointment-system/requirements.lock
+      - name: Store independent proof and apply the project recovery policy
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+          BOOKING_PROFILE: appointment-settings/project.json
+          BOOKING_BACKUP_DRIVE_WRITER: ${{ secrets.BOOKING_BACKUP_DRIVE_WRITER }}
+          BOOKING_BACKUP_EXPORT_VERIFY_KEYS: ${{ vars.BOOKING_BACKUP_EXPORT_VERIFY_KEYS }}
+          BOOKING_BACKUP_VALIDATION_VERIFY_KEYS: ${{ vars.BOOKING_BACKUP_VALIDATION_VERIFY_KEYS }}
+          BOOKING_RESTORE_PROOF: ${{ needs.verify.outputs.restore_proof }}
+          SOURCE_RUN: ${{ needs.verify.outputs.source_run }}
+          SOURCE_ATTEMPT: ${{ needs.verify.outputs.source_attempt }}
+          SOURCE_COMMIT: ${{ needs.verify.outputs.source_commit }}
+        run: python3 appointment-system/tools/automation/backup.py retain --source-run "$SOURCE_RUN" --source-attempt "$SOURCE_ATTEMPT" --source-commit "$SOURCE_COMMIT"

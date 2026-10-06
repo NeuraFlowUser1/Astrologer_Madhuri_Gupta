@@ -1,0 +1,30 @@
+name: Appointment background monitor
+on:
+  schedule:
+    - cron: '8,23,38,53 * * * *'
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: appointment-background-monitor
+  cancel-in-progress: false
+jobs:
+  monitor:
+    if: github.repository == vars.BOOKING_REPOSITORY && github.event.repository.visibility == 'public' && toJSON(github.event.repository.private) == 'false' && toJSON(github.event.repository.fork) == 'false' && github.ref == 'refs/heads/main' && (github.event_name == 'workflow_dispatch' || (github.event_name == 'schedule' && github.event.schedule == '8,23,38,53 * * * *'))
+    environment: appointment-monitor
+    runs-on: ubuntu-24.04
+    timeout-minutes: 2
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with:
+          ref: ${{ github.sha }}
+          persist-credentials: false
+          sparse-checkout: |
+            appointment-system
+            appointment-settings
+      - name: Read independent health without database access
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+          BOOKING_PROFILE: appointment-settings/project.json
+          BOOKING_MONITOR_KEY: ${{ secrets.BOOKING_MONITOR_KEY }}
+        run: python3 appointment-system/tools/automation/monitor.py

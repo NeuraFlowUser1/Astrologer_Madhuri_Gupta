@@ -1,0 +1,178 @@
+{
+  "version": 1,
+  "installation_id": "87b35f80-71bc-4ee1-bf34-a7316006f95c",
+  "project_id": "004",
+  "label": "Sarsa Jyotish Sansthan",
+  "environment": "production",
+  "origin": "https://www.sarsajyotishsansthan.com",
+  "aliases": [
+    "https://sarsajyotishsansthan.com"
+  ],
+  "database_targets": {
+    "web": {
+      "host": "ep-dry-hill-b3ujpil7-pooler.c-4.ap-southeast-1.aws.neon.tech",
+      "database": "neondb",
+      "role": "appointment_web",
+      "port": 5432,
+      "pooling": true
+    },
+    "staff": {
+      "host": "ep-dry-hill-b3ujpil7-pooler.c-4.ap-southeast-1.aws.neon.tech",
+      "database": "neondb",
+      "role": "appointment_staff",
+      "port": 5432,
+      "pooling": true
+    },
+    "company": {
+      "host": "ep-dry-hill-b3ujpil7-pooler.c-4.ap-southeast-1.aws.neon.tech",
+      "database": "neondb",
+      "role": "appointment_company",
+      "port": 5432,
+      "pooling": true
+    },
+    "worker": {
+      "host": "ep-dry-hill-b3ujpil7-pooler.c-4.ap-southeast-1.aws.neon.tech",
+      "database": "neondb",
+      "role": "appointment_worker",
+      "port": 5432,
+      "pooling": true
+    },
+    "maintenance": {
+      "host": "ep-dry-hill-b3ujpil7.c-4.ap-southeast-1.aws.neon.tech",
+      "database": "neondb",
+      "role": "appointment_maintenance",
+      "port": 5432,
+      "pooling": false
+    },
+    "backup": {
+      "host": "ep-dry-hill-b3ujpil7.c-4.ap-southeast-1.aws.neon.tech",
+      "database": "neondb",
+      "role": "appointment_backup",
+      "port": 5432,
+      "pooling": false
+    },
+    "migration": {
+      "host": "ep-dry-hill-b3ujpil7.c-4.ap-southeast-1.aws.neon.tech",
+      "database": "neondb",
+      "role": "neondb_owner",
+      "port": 5432,
+      "pooling": false
+    },
+    "journal": {
+      "host": "ep-dry-hill-b3ujpil7-pooler.c-4.ap-southeast-1.aws.neon.tech",
+      "database": "neondb",
+      "role": "appointment_journal",
+      "port": 5432,
+      "pooling": true
+    }
+  },
+  "owners": {
+    "client_email": "sarsajyotish@gmail.com",
+    "agency_email": "neuraflowindia@gmail.com"
+  },
+  "sender": {
+    "name": "Sarsa Jyotish Sansthan",
+    "email": "bookings@mail.sarsajyotishsansthan.com",
+    "reply_to": "sarsajyotish@gmail.com"
+  },
+  "providers": {
+    "payment": "razorpay",
+    "calendar": "google",
+    "email": "resend",
+    "sms": null
+  },
+  "worker": {
+    "name": "sarsa-booking-recovery",
+    "origin": "https://sarsa-booking-recovery.neuraflowindia.workers.dev"
+  },
+  "surfaces": [
+    {
+      "path": "/",
+      "class": "general"
+    },
+    {
+      "path": "/about",
+      "class": "general"
+    },
+    {
+      "path": "/api/company",
+      "class": "company"
+    },
+    {
+      "path": "/api/enquiries",
+      "class": "enquiry"
+    },
+    {
+      "path": "/api/enquiry-studio",
+      "class": "enquiry"
+    },
+    {
+      "path": "/api/internal",
+      "class": "worker"
+    },
+    {
+      "path": "/api/webhooks",
+      "class": "provider"
+    },
+    {
+      "path": "/booking",
+      "class": "booking"
+    },
+    {
+      "path": "/booking-help",
+      "class": "booking"
+    },
+    {
+      "path": "/booking-policy",
+      "class": "booking"
+    },
+    {
+      "path": "/booking/receipt",
+      "class": "booking"
+    },
+    {
+      "path": "/company",
+      "class": "company"
+    },
+    {
+      "path": "/contact",
+      "class": "enquiry"
+    },
+    {
+      "path": "/enquiries-studio",
+      "class": "enquiry"
+    },
+    {
+      "path": "/privacy",
+      "class": "general"
+    },
+    {
+      "path": "/services",
+      "class": "general"
+    },
+    {
+      "path": "/services/kundli-matching",
+      "class": "general"
+    },
+    {
+      "path": "/services/kundli-prediction",
+      "class": "general"
+    },
+    {
+      "path": "/services/numerology",
+      "class": "general"
+    },
+    {
+      "path": "/services/vastu-consultation",
+      "class": "general"
+    },
+    {
+      "path": "/studio",
+      "class": "booking"
+    },
+    {
+      "path": "/terms",
+      "class": "general"
+    }
+  ]
+}

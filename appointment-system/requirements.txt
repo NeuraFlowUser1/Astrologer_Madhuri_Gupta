@@ -1,0 +1,12 @@
+fastapi==0.142.2
+uvicorn==0.54.0
+pydantic==2.13.5
+email-validator==2.3.0
+psycopg[binary]==3.3.5
+phonenumbers==9.0.40
+httpx==0.28.1
+certifi==2026.7.22
+google-auth==2.58.1
+cryptography==50.0.2
+svix==2.4.0
+argon2-cffi==25.1.0

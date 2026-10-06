@@ -1,0 +1,44 @@
+name: Appointment database backup
+on:
+  schedule:
+    - cron: '37 1 * * *'
+    - cron: '2 3 * * *'
+  workflow_dispatch:
+permissions:
+  contents: read
+  actions: read
+concurrency:
+  group: appointment-backup-export
+  cancel-in-progress: false
+jobs:
+  export:
+    # Evaluated BEFORE runner allocation or protected environment secrets.
+    if: github.repository == vars.BOOKING_REPOSITORY && github.event.repository.visibility == 'public' && toJSON(github.event.repository.private) == 'false' && toJSON(github.event.repository.fork) == 'false' && github.ref == 'refs/heads/main' && (github.event_name == 'workflow_dispatch' || (github.event_name == 'schedule' && github.event.schedule == vars.BOOKING_BACKUP_CRON))
+    environment: appointment-backup-export
+    runs-on: ubuntu-24.04
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with:
+          ref: ${{ github.sha }}
+          persist-credentials: false
+          sparse-checkout: |
+            appointment-system
+            appointment-settings
+      - name: Install pinned backup dependencies and verified age tool
+        run: |
+          python3 -m pip install --disable-pip-version-check --require-hashes -r appointment-system/requirements.lock
+          mkdir -m 700 "$RUNNER_TEMP/appointment-tools"
+          bash appointment-system/tools/automation/install-age.sh "$RUNNER_TEMP/appointment-tools"
+      - name: Export read-only snapshot and store encrypted copies
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+          BOOKING_PROFILE: appointment-settings/project.json
+          BOOKING_BACKUP_DATABASE_URL: ${{ secrets.BOOKING_BACKUP_DATABASE_URL }}
+          BOOKING_BACKUP_DRIVE_WRITER: ${{ secrets.BOOKING_BACKUP_DRIVE_WRITER }}
+          BOOKING_BACKUP_AGE_RECIPIENT: ${{ vars.BOOKING_BACKUP_AGE_RECIPIENT }}
+          BOOKING_BACKUP_EXPORT_KEY_ID: ${{ vars.BOOKING_BACKUP_EXPORT_KEY_ID }}
+          BOOKING_BACKUP_EXPORT_SIGNING_KEY: ${{ secrets.BOOKING_BACKUP_EXPORT_SIGNING_KEY }}
+          BOOKING_BACKUP_EXPORT_VERIFY_KEYS: ${{ vars.BOOKING_BACKUP_EXPORT_VERIFY_KEYS }}
+          BOOKING_BACKUP_VALIDATION_VERIFY_KEYS: ${{ vars.BOOKING_BACKUP_VALIDATION_VERIFY_KEYS }}
+        run: python3 appointment-system/tools/automation/backup.py export --age-binary "$RUNNER_TEMP/appointment-tools/age"

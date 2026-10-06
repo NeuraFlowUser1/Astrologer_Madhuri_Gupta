@@ -1,0 +1,16 @@
+{
+  "version": 1,
+  "installation_id": "87b35f80-71bc-4ee1-bf34-a7316006f95c",
+  "environment": "production",
+  "owner_email": "sarsajyotish@gmail.com",
+  "folder": "1xYPulnwV00mUGuo-XwKV_q2To1qb_ye7",
+  "folder_name": "Sarsa Project 004 – Encrypted Backups",
+  "repository": "NeuraFlowUser1/Astrologer_Madhuri_Gupta",
+  "cron": "2 3 * * *",
+  "retention": {
+    "mode": "calendar",
+    "recent_copies": 2,
+    "daily_days": 30,
+    "monthly_months": 12
+  }
+}

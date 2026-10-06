@@ -1,0 +1,19 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow"><title>Existing appointments · Private Practice support</title>
+<link rel="stylesheet" href="/api/company/assets/control.css"><script defer src="/api/company/staff-actions.js"></script><script defer src="/api/company/support.js"></script></head>
+<body><main class="panel"><p class="caption">Private company support · CLIENT_NAME · Project PROJECT_NUMBER</p><h1>Existing appointments</h1>
+<p>Resolve appointments and payments already accepted. New appointments and refunds cannot be created here.</p>
+<div class="actions"><a href="/company/booking-control">Booking control</a><button type="button" id="refresh" class="secondary">Refresh</button></div>
+<p id="status" role="status" aria-live="polite">Checking your support access…</p><ul id="appointments"></ul><ul id="reviews"></ul>
+<form id="lookup" class="actions"><label for="reference">Booking reference</label><input id="reference" required pattern="[a-fA-F0-9-]{36}" maxlength="36"><button>Find booking</button></form>
+<section id="detail" hidden><h2 id="detail-title" tabindex="-1">Appointment details</h2><dl id="summary" class="fields"></dl>
+<form id="change"><div class="fields"><label>Action<select id="action"><option value="reschedule">Move appointment</option><option value="cancel">Cancel appointment</option><option value="receipt_recovery">Replace lost receipt access</option><option value="contact_correction">Correct email and mobile</option></select></label>
+<label id="time-field">New time · <span data-staff-timezone>practice time</span><input id="starts-at" type="datetime-local" step="60"></label>
+<label id="email-field" hidden>New email<input id="email" type="email" maxlength="254"></label><label id="phone-field" hidden>New mobile<input id="phone" type="tel" maxlength="32" placeholder="+91…"></label>
+<label id="payment-field" hidden>Verified payment ID<input id="payment" pattern="pay_[A-Za-z0-9]{1,64}" maxlength="68"></label></div>
+<label>Reason<input id="reason" required minlength="2" maxlength="500"></label>
+<label id="verification-field" hidden><input id="verified" type="checkbox"> I called the mobile already saved with the booking and verified its payment details.</label>
+<p id="action-note" class="caption"></p><button id="submit-change">Save this change</button></form></section>
+<button id="retry" type="button" hidden>Check the same saved action</button>
+<p id="activation" role="status" hidden></p><a href="/company/booking-control">Sign in or renew company access</a>
+<p><a href="/company/google-repair">Repair an owner’s Google access for existing work</a></p></main></body></html>

@@ -1,0 +1,16 @@
+# Protected company access recovery
+
+This is an owner-operated recovery command for a lost company password. Normal password changes remain in the signed-in company controls. There is no public recovery route, email reset link, default password or newly created company account.
+
+Use the complete copy inside the correct project. Supply that project's direct migration-owner connection through its protected `BOOKING_MIGRATION_DATABASE_URL` environment, never a command argument or pasted chat message. The command verifies the contained release, exact project settings, database, owner login and saved installation before changing anything. Ordinary web, staff, company, worker, backup and maintenance logins cannot use it.
+
+1. Run `python appointment-system/tools/company_recovery.py inspect` in a private interactive terminal. Enter the existing company username. The result contains its current credential revision and enabled state, without its password or stored password hash.
+2. After verifying the requesting owner's identity through the company's operating procedure, generate a fresh operation UUID and retain it with the non-secret revision and reason. Run `python appointment-system/tools/company_recovery.py recover --operation-id <operation-uuid> --expected-revision <inspected-revision> --reason "<verified recovery reason>"`. Angle-bracket values are placeholders. Enter the same existing username and the replacement password twice when prompted; password input stays hidden. Keep credentials and customer details out of the reason.
+
+The replacement is stored with Argon2id. The password change, old-session revocation and immutable recovery record commit together. The record contains operation identity, subject, prior/resulting revision, operator database role, reason and time, but no password or password hash. It is included in encrypted backups. Booking mode, business settings, appointments, payments and provider connections are not changed.
+
+If the result is lost, retry the same operation UUID, original revision, reason, username and replacement password. A completed matching request returns `existing` without changing credentials or revoking newly created sessions again. A different password/request, changed credential revision or later password change rejects the retry. A missing account is never created. A disabled account remains disabled and requires explicit owner review; recovery does not silently reactivate it.
+
+An unavailable hidden-input terminal, cancellation, missing operation details, wrong installation or invalid owner connection refuses the command. Failure output contains a bounded reason code and never includes connection details, SQL parameters or password input. If audit recording fails, the password and session changes roll back too.
+
+The database structure is migration `029_company_password_recovery.sql`. Focused native tests cover current and pending sign-in revocation, exact retry, conflicting/concurrent operations, wrong installation/role, missing/disabled users, audit failure rollback, immutable audit and backup access. Terminal checks cover hidden input and redacted errors. Encrypted backup/isolated restore includes a populated recovery audit. These are local synthetic proofs, not permission to reset a real account.

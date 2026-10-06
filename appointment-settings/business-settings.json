@@ -1,0 +1,136 @@
+{
+  "version": 1,
+  "timezone": "Asia/Kolkata",
+  "services": [
+    {
+      "id": "kundli-matching",
+      "name": "Kundli Matching",
+      "enabled": true,
+      "duration_minutes": 30,
+      "pricing": {
+        "kind": "fixed",
+        "amount_paise": 210000,
+        "maximum_questions": 1
+      },
+      "required_preparation": []
+    },
+    {
+      "id": "kundli-prediction",
+      "name": "Kundli Prediction",
+      "enabled": true,
+      "duration_minutes": 30,
+      "pricing": {
+        "kind": "fixed",
+        "amount_paise": 250000,
+        "maximum_questions": 1
+      },
+      "required_preparation": []
+    },
+    {
+      "id": "vastu-consultation",
+      "name": "Vastu Consultation",
+      "enabled": true,
+      "duration_minutes": 30,
+      "pricing": {
+        "kind": "fixed",
+        "amount_paise": 450000,
+        "maximum_questions": 1
+      },
+      "required_preparation": []
+    },
+    {
+      "id": "numerology",
+      "name": "Numerology",
+      "enabled": true,
+      "duration_minutes": 30,
+      "pricing": {
+        "kind": "fixed",
+        "amount_paise": 210000,
+        "maximum_questions": 1
+      },
+      "required_preparation": []
+    }
+  ],
+  "weekly_windows": [
+    {
+      "weekday": 0,
+      "start": "10:00",
+      "end": "12:00"
+    },
+    {
+      "weekday": 0,
+      "start": "15:00",
+      "end": "18:00"
+    },
+    {
+      "weekday": 1,
+      "start": "10:00",
+      "end": "12:00"
+    },
+    {
+      "weekday": 1,
+      "start": "15:00",
+      "end": "18:00"
+    },
+    {
+      "weekday": 2,
+      "start": "10:00",
+      "end": "12:00"
+    },
+    {
+      "weekday": 2,
+      "start": "15:00",
+      "end": "18:00"
+    },
+    {
+      "weekday": 3,
+      "start": "10:00",
+      "end": "12:00"
+    },
+    {
+      "weekday": 3,
+      "start": "15:00",
+      "end": "18:00"
+    },
+    {
+      "weekday": 4,
+      "start": "10:00",
+      "end": "12:00"
+    },
+    {
+      "weekday": 4,
+      "start": "15:00",
+      "end": "18:00"
+    },
+    {
+      "weekday": 5,
+      "start": "10:00",
+      "end": "12:00"
+    },
+    {
+      "weekday": 5,
+      "start": "15:00",
+      "end": "18:00"
+    }
+  ],
+  "slot_step_minutes": 30,
+  "notice_minutes": 30,
+  "horizon_days": 10,
+  "buffer_before_minutes": 0,
+  "buffer_after_minutes": 0,
+  "booking_verification": {
+    "email": false,
+    "sms": false
+  },
+  "required_contacts": [
+    "email",
+    "phone"
+  ],
+  "meeting": "google_meet",
+  "email_budget": {
+    "daily": 20,
+    "rolling": 600,
+    "verification_daily": 8,
+    "verification_rolling": 240
+  }
+}

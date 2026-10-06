@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow"><title>Booking control · CLIENT_NAME</title>
+<link rel="stylesheet" href="/api/company/assets/control.css"><script defer src="/api/company/assets/command-journal.js"></script><script defer src="/api/company/assets/control.js"></script></head>
+<body data-project="PROJECT_NUMBER"><main class="panel"><p class="caption">Private company tools · Project PROJECT_NUMBER</p>
+<h1>CLIENT_NAME</h1><p>Control whether the appointment service appears and accepts new bookings.</p>
+<p id="status" class="status" role="status" aria-live="polite">Checking your access…</p>
+<section id="signed-in" hidden><div class="state-row"><div><p class="caption">Appointment service</p><strong id="mode">Checking…</strong></div><span id="publication" class="badge">Checking…</span></div>
+<p class="explanation">Turning it off hides all online booking pages, receipts and the client appointment dashboard. Contact enquiries continue. Existing paid appointments stay saved for private company support.</p>
+<div class="actions"><button id="change" type="button">Checking…</button><button id="refresh" class="secondary" type="button">Refresh status</button><button id="logout" class="text-button" type="button">Sign out</button></div>
+<p id="reference" class="caption"></p><a href="/company/booking-support">Manage existing appointments</a> · <a href="/company/records">Company record connection</a></section>
+<section id="diagnostics" hidden><button id="load-incidents" class="secondary" type="button">Recent service issues</button><p id="incident-status" class="caption" role="status" aria-live="polite"></p><div id="incident-list" class="incident-list"></div></section>
+<section id="signed-out" hidden><form id="login-form"><label for="username">Company username</label><input id="username" name="username" autocomplete="username" minlength="3" maxlength="64" required><label for="password">Company password</label><input id="password" name="password" type="password" autocomplete="current-password" minlength="15" maxlength="128" required><button id="login" type="submit">Sign in</button></form></section>
+<section id="business-section" hidden><details><summary>Prices, appointment lengths and working hours</summary>
+<p>Saved changes apply to new bookings. Accepted prices and appointment lengths stay unchanged.</p>
+<button id="load-business" class="secondary" type="button">Load current settings</button>
+<p id="business-status" role="status" aria-live="polite"></p>
+<form id="business-form" hidden><div class="fields">
+<label>Time zone<input id="business-timezone" required maxlength="80" placeholder="Asia/Kolkata"></label>
+<label>Minutes between appointment starts<input id="business-step" type="number" min="5" max="120" step="5" required></label>
+<label>Minutes of advance notice<input id="business-notice" type="number" min="0" max="10080" required></label>
+<label>Days customers can book ahead<input id="business-horizon" type="number" min="1" max="365" required></label>
+<label>Minutes reserved before each appointment<input id="business-before" type="number" min="0" max="120" required></label>
+<label>Minutes reserved after each appointment<input id="business-after" type="number" min="0" max="120" required></label>
+<label>Online meeting<select id="business-meeting"><option value="google_meet">Google Meet</option><option value="internal">Arrange the meeting directly</option></select></label>
+<label><input id="business-otp" type="checkbox">Confirm the customer's email before booking</label></div>
+<h2>Services</h2><div id="business-services" class="service-settings"></div>
+<h2>Working hours</h2><p>Use 24-hour times. Each row is one open period on one weekday.</p>
+<div id="business-windows" class="working-windows"></div><button id="add-window" type="button" class="secondary">Add an open period</button>
+<label for="business-reason">Reason for this change</label><input id="business-reason" minlength="5" maxlength="300" required>
+<div class="actions"><button id="save-business" type="submit">Save settings</button></div></form></details></section>
+<section id="google-section" hidden><details><summary>Google connections and record copies</summary>
+<p>Each connection uses its own approved Google account. Connecting does not turn booking on.</p>
+<div class="actions"><button type="button" data-google-resource="calendar">Connect the client’s Calendar</button><button type="button" data-google-resource="client_sheet">Connect the client’s records</button><button type="button" data-google-resource="agency_sheet">Connect NeuraFlow’s record copy</button></div>
+<p id="google-status" role="status" aria-live="polite"></p><div id="google-pending" class="actions"></div><div class="actions"><button id="google-refresh" type="button" class="secondary">Check connections</button><a href="/company/google-repair">Create an owner approval link</a></div>
+<p id="record-status" role="status" aria-live="polite"></p><div id="record-list"></div><button id="record-refresh" type="button" class="secondary">Check spreadsheet updates</button>
+</details></section>
+<section id="credentials-section" hidden><details><summary>Confirm or change your company password</summary>
+<p>Confirm your password before changing protected settings if your previous confirmation was more than ten minutes ago.</p>
+<form id="reauth-form" class="credential-form"><label>Current password<input id="reauth-password" type="password" autocomplete="current-password" minlength="15" maxlength="128" required></label><button id="reauth-submit" type="submit">Confirm password</button></form>
+<form id="password-form"><div class="fields"><label>Current password<input id="old-password" type="password" autocomplete="current-password" minlength="15" maxlength="128" required></label><label>New password<input id="new-password" type="password" autocomplete="new-password" minlength="15" maxlength="128" required></label></div><button id="password-submit" type="submit">Change password</button></form>
+<p id="credential-status" role="status" aria-live="polite"></p></details></section>
+</main></body></html>

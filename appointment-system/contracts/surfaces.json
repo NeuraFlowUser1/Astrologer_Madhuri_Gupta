@@ -1,0 +1,6 @@
+{
+  "version": 1,
+  "booking_prefixes": ["/booking", "/book", "/checkout", "/receipt", "/reschedule", "/manage-booking", "/booking-help", "/booking-recovery", "/studio", "/admin", "/dashboard", "/api/booking-policy", "/api/availability", "/api/checkout-context", "/api/checkout", "/api/booking", "/api/booking-verification", "/api/studio", "/api/admin", "/api/auth", "/assets/appointment-system"],
+  "protected_prefixes": ["/company", "/api/company", "/api/internal", "/api/webhooks", "/enquiries-studio", "/api/enquiry-studio"],
+  "protected_exact": ["/api/studio/sign-in/callback"]
+}

@@ -1,0 +1,10 @@
+{
+  "name": "appointment-system-local-checks",
+  "private": true,
+  "type": "module",
+  "engines": {"node": "22.x"},
+  "devDependencies": {
+    "@actions/expressions": "0.3.61",
+    "miniflare": "4.20260426.0"
+  }
+}

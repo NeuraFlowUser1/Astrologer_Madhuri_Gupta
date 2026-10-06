@@ -1,0 +1,1108 @@
+[
+  {
+    "file": "engine/appointment_system/company_auth.py",
+    "method": "login",
+    "line": 65,
+    "query": "SELECT appointment_system.company_login_begin(%s,%s,%s)",
+    "direct": false
+  },
+  {
+    "file": "engine/appointment_system/company_auth.py",
+    "method": "login",
+    "line": 71,
+    "query": "SELECT appointment_system.company_login_finish(%s,%s,%s,%s,%s)",
+    "direct": false
+  },
+  {
+    "file": "engine/appointment_system/company_auth.py",
+    "method": "session",
+    "line": 82,
+    "query": "SELECT appointment_system.company_session_touch(%s)",
+    "direct": false
+  },
+  {
+    "file": "engine/appointment_system/company_auth.py",
+    "method": "credential_action",
+    "line": 90,
+    "query": "SELECT appointment_system.company_credential_begin(%s,%s,%s,%s)",
+    "direct": false
+  },
+  {
+    "file": "engine/appointment_system/company_auth.py",
+    "method": "credential_action",
+    "line": 97,
+    "query": "SELECT appointment_system.company_credential_finish(%s,%s,%s,%s,%s,%s,%s,%s,%s)",
+    "direct": false
+  },
+  {
+    "file": "engine/appointment_system/company_control.py",
+    "method": "router",
+    "line": 160,
+    "query": "SELECT appointment_system.company_save_business_settings(%s,%s,%s,%s,%s,%s)",
+    "direct": false
+  },
+  {
+    "file": "engine/appointment_system/company_control.py",
+    "method": "router",
+    "line": 180,
+    "query": "SELECT appointment_system.control_session_end(%s)",
+    "direct": false
+  },
+  {
+    "file": "engine/appointment_system/company_control.py",
+    "method": "router",
+    "line": 149,
+    "query": "SELECT appointment_system.company_business_settings(%s)",
+    "direct": false
+  },
+  {
+    "file": "engine/appointment_system/company_control.py",
+    "method": "router",
+    "line": 173,
+    "query": "SELECT appointment_system.control_command_result(%s,%s)",
+    "direct": false
+  },
+  {
+    "file": "engine/appointment_system/company_control.py",
+    "method": "business_settings",
+    "line": 149,
+    "query": "SELECT appointment_system.company_business_settings(%s)",
+    "direct": false
+  },
+  {
+    "file": "engine/appointment_system/company_control.py",
+    "method": "change_business",
+    "line": 160,
+    "query": "SELECT appointment_system.company_save_business_settings(%s,%s,%s,%s,%s,%s)",
+    "direct": false
+  },
+  {
+    "file": "engine/appointment_system/company_control.py",
+    "method": "change",
+    "line": 173,
+    "query": "SELECT appointment_system.control_command_result(%s,%s)",
+    "direct": false
+  },
+  {
+    "file": "engine/appointment_system/company_control.py",
+    "method": "logout",
+    "line": 180,
+    "query": "SELECT appointment_system.control_session_end(%s)",
+    "direct": false
+  },
+  {
+    "file": "engine/appointment_system/company_support.py",
+    "method": "router",
+    "line": 53,
+    "query": "SELECT appointment_system.control_obligation_action(%s,%s,%s,%s,%s)",
+    "direct": false
+  },
+  {
+    "file": "engine/appointment_system/company_support.py",
+    "method": "router",
+    "line": 67,
+    "query": "SELECT appointment_system.control_obligation_summary(%s)",
+    "direct": false
+  },
+  {
+    "file": "engine/appointment_system/company_support.py",
+    "method": "action",
+    "line": 53,
+    "query": "SELECT appointment_system.control_obligation_action(%s,%s,%s,%s,%s)",
+    "direct": false
+  },
+  {
+    "file": "engine/appointment_system/company_support.py",
+    "method": "status",
+    "line": 67,
+    "query": "SELECT appointment_system.control_obligation_summary(%s)",
+    "direct": false
+  },
+  {
+    "file": "engine/appointment_system/control_recovery.py",
+    "method": "saved",
+    "line": 61,
+    "query": "SELECT appointment_system.restore_saved(%s)",
+    "direct": false
+  },
+  {
+    "file": "engine/appointment_system/control_recovery.py",
+    "method": "barrier",
+    "line": 63,
+    "query": "SELECT appointment_system.control_restore_barrier(%s,%s)",
+    "direct": false
+  },
+  {
+    "file": "engine/appointment_system/control_recovery.py",
+    "method": "current",
+    "line": 64,
+    "query": "SELECT appointment_system.restore_current()",
+    "direct": false
+  },
+  {
+    "file": "engine/appointment_system/control_recovery.py",
+    "method": "claim_publication",
+    "line": 65,
+    "query": "SELECT appointment_system.restore_claim_publication()",
+    "direct": false
+  },
+  {
+    "file": "engine/appointment_system/control_recovery.py",
+    "method": "finish_publication",
+    "line": 67,
+    "query": "SELECT appointment_system.restore_finish_publication(%s,%s,%s,%s)",
+    "direct": false
+  },
+  {
+    "file": "engine/appointment_system/control_recovery.py",
+    "method": "claim_probe",
+    "line": 69,
+    "query": "SELECT appointment_system.restore_claim_probe()",
+    "direct": false
+  },
+  {
+    "file": "engine/appointment_system/control_recovery.py",
+    "method": "record_probe",
+    "line": 70,
+    "query": "SELECT appointment_system.restore_record_probe(%s,%s)",
+    "direct": false
+  },
+  {
+    "file": "engine/appointment_system/control_recovery.py",
+    "method": "probe_retry",
+    "line": 71,
+    "query": "SELECT appointment_system.restore_probe_retry(%s,%s,%s)",
+    "direct": false
+  },
+  {
+    "file": "engine/appointment_system/control_recovery.py",
+    "method": "confirm",
+    "line": 73,
+    "query": "SELECT appointment_system.control_confirm_restore(%s,%s,%s,%s)",
+    "direct": false
+  },
+  {
+    "file": "engine/appointment_system/privacy_retention.py",
+    "method": "inspect",
+    "line": 7,
+    "query": "SELECT appointment_system.control_privacy_candidates(%s,%s,%s,NULL)",
+    "direct": false
+  },
+  {
+    "file": "engine/appointment_system/privacy_retention.py",
+    "method": "record",
+    "line": 9,
+    "query": "SELECT appointment_system.control_privacy_record_intent(%s,%s,%s,%s,%s)",
+    "direct": false
+  },
+  {
+    "file": "engine/appointment_system/privacy_retention.py",
+    "method": "saved_intent",
+    "line": 10,
+    "query": "SELECT appointment_system.privacy_saved_intent(%s)",
+    "direct": false
+  },
+  {
+    "file": "engine/appointment_system/privacy_retention.py",
+    "method": "freeze",
+    "line": 11,
+    "query": "SELECT appointment_system.privacy_freeze(%s,%s)",
+    "direct": false
+  },
+  {
+    "file": "engine/appointment_system/privacy_retention.py",
+    "method": "attach",
+    "line": 13,
+    "query": "SELECT appointment_system.control_privacy_attach_export(%s,%s,%s,%s,%s)",
+    "direct": false
+  },
+  {
+    "file": "engine/appointment_system/privacy_retention.py",
+    "method": "required_sequence",
+    "line": 14,
+    "query": "SELECT appointment_system.privacy_required_sequence()",
+    "direct": false
+  },
+  {
+    "file": "engine/appointment_system/privacy_retention.py",
+    "method": "replay_apply",
+    "line": 15,
+    "query": "SELECT appointment_system.control_privacy_replay_apply(%s,%s)",
+    "direct": false
+  },
+  {
+    "file": "engine/appointment_system/privacy_retention.py",
+    "method": "apply",
+    "line": 16,
+    "query": "SELECT appointment_system.control_privacy_apply(%s)",
+    "direct": false
+  },
+  {
+    "file": "engine/appointment_system/privacy_retention.py",
+    "method": "restore_intent",
+    "line": 18,
+    "query": "SELECT appointment_system.privacy_restore_intent(%s,%s,%s,%s,%s)",
+    "direct": false
+  },
+  {
+    "file": "engine/appointment_system/privacy_retention.py",
+    "method": "finish_replay",
+    "line": 20,
+    "query": "SELECT appointment_system.privacy_finish_replay(%s,%s,%s,%s)",
+    "direct": false
+  },
+  {
+    "file": "engine/appointment_system/resource_consent.py",
+    "method": "router",
+    "line": 53,
+    "query": "sql",
+    "direct": false
+  },
+  {
+    "file": "engine/appointment_system/resource_consent.py",
+    "method": "router",
+    "line": 53,
+    "query": "sql",
+    "direct": false
+  },
+  {
+    "file": "engine/appointment_system/resource_consent.py",
+    "method": "router",
+    "line": 127,
+    "query": "statement",
+    "direct": false
+  },
+  {
+    "file": "engine/appointment_system/resource_consent.py",
+    "method": "call",
+    "line": 53,
+    "query": "sql",
+    "direct": false
+  },
+  {
+    "file": "engine/appointment_system/resource_consent.py",
+    "method": "call",
+    "line": 53,
+    "query": "sql",
+    "direct": false
+  },
+  {
+    "file": "engine/appointment_system/resource_consent.py",
+    "method": "prepare",
+    "line": 127,
+    "query": "statement",
+    "direct": false
+  },
+  {
+    "file": "engine/appointment_system/resource_consent.py",
+    "method": "_call",
+    "line": 127,
+    "query": "statement",
+    "direct": false
+  },
+  {
+    "file": "engine/appointment_system/service_control.py",
+    "method": "command",
+    "line": 126,
+    "query": "SELECT appointment_system.control_command(%s,%s,%s,%s,%s,%s,%s,%s)",
+    "direct": false
+  },
+  {
+    "file": "engine/appointment_system/service_control.py",
+    "method": "status",
+    "line": 131,
+    "query": "SELECT appointment_system.control_control_status(%s)",
+    "direct": false
+  },
+  {
+    "file": "engine/appointment_system/service_control.py",
+    "method": "claim_publication",
+    "line": 134,
+    "query": "SELECT appointment_system.control_claim_publication()",
+    "direct": false
+  },
+  {
+    "file": "engine/appointment_system/service_control.py",
+    "method": "finish_publication",
+    "line": 137,
+    "query": "SELECT appointment_system.control_finish_publication(%s,%s,%s,%s)",
+    "direct": false
+  },
+  {
+    "file": "engine/appointment_system/service_control.py",
+    "method": "record_probe",
+    "line": 141,
+    "query": "SELECT appointment_system.control_record_probe(%s,%s)",
+    "direct": false
+  },
+  {
+    "file": "engine/appointment_system/service_control.py",
+    "method": "claim_probe",
+    "line": 145,
+    "query": "SELECT appointment_system.control_claim_probe()",
+    "direct": false
+  },
+  {
+    "file": "engine/appointment_system/service_control.py",
+    "method": "probe_retry",
+    "line": 148,
+    "query": "SELECT appointment_system.control_probe_retry(%s,%s,%s)",
+    "direct": false
+  },
+  {
+    "file": "engine/appointment_system/service_control.py",
+    "method": "incidents",
+    "line": 152,
+    "query": "SELECT appointment_system.read_operation_incidents(%s)",
+    "direct": false
+  },
+  {
+    "file": "engine/appointment_system/storage.py",
+    "method": "begin_recovery_run",
+    "line": 32,
+    "query": "SELECT appointment_system.begin_recovery_run(%s,%s,%s)",
+    "direct": false
+  },
+  {
+    "file": "engine/appointment_system/storage.py",
+    "method": "claim_recovery_turn",
+    "line": 35,
+    "query": "SELECT appointment_system.claim_recovery_turn(%s,%s,%s,%s)",
+    "direct": false
+  },
+  {
+    "file": "engine/appointment_system/storage.py",
+    "method": "complete_recovery_turn",
+    "line": 38,
+    "query": "SELECT appointment_system.complete_recovery_turn(%s,%s,%s,%s,%s,%s,%s,%s)",
+    "direct": false
+  },
+  {
+    "file": "engine/appointment_system/storage.py",
+    "method": "end_recovery_run",
+    "line": 42,
+    "query": "SELECT appointment_system.finish_recovery_run(%s,%s)",
+    "direct": false
+  },
+  {
+    "file": "engine/appointment_system/storage.py",
+    "method": "claim_publication",
+    "line": 45,
+    "query": "SELECT appointment_system.control_claim_publication()",
+    "direct": false
+  },
+  {
+    "file": "engine/appointment_system/storage.py",
+    "method": "finish_publication",
+    "line": 48,
+    "query": "SELECT appointment_system.control_finish_publication(%s,%s,%s,%s)",
+    "direct": false
+  },
+  {
+    "file": "engine/appointment_system/storage.py",
+    "method": "claim_probe",
+    "line": 52,
+    "query": "SELECT appointment_system.control_claim_probe()",
+    "direct": false
+  },
+  {
+    "file": "engine/appointment_system/storage.py",
+    "method": "probe_retry",
+    "line": 55,
+    "query": "SELECT appointment_system.control_probe_retry(%s,%s,%s)",
+    "direct": false
+  },
+  {
+    "file": "engine/appointment_system/storage.py",
+    "method": "record_probe",
+    "line": 59,
+    "query": "SELECT appointment_system.control_record_probe(%s,%s)",
+    "direct": false
+  },
+  {
+    "file": "engine/appointment_system/storage.py",
+    "method": "claim_financial_resources",
+    "line": 62,
+    "query": "SELECT appointment_system.claim_financial_resources(%s,%s,1)",
+    "direct": false
+  },
+  {
+    "file": "engine/appointment_system/storage.py",
+    "method": "finish_financial_resource",
+    "line": 65,
+    "query": "SELECT appointment_system.finish_financial_resource(%s,%s,%s,%s)",
+    "direct": false
+  },
+  {
+    "file": "engine/appointment_system/storage.py",
+    "method": "require_booking_admission",
+    "line": 111,
+    "query": "SELECT appointment_system.control_admission(NULL)",
+    "direct": false
+  },
+  {
+    "file": "engine/appointment_system/storage.py",
+    "method": "record_operation_incident",
+    "line": 114,
+    "query": "SELECT appointment_system.record_operation_incident(%s,%s,%s,%s,%s)",
+    "direct": false
+  },
+  {
+    "file": "engine/appointment_system/storage.py",
+    "method": "cleanup_temporary_records",
+    "line": 121,
+    "query": "SELECT appointment_system.cleanup_temporary_records()",
+    "direct": false
+  },
+  {
+    "file": "engine/appointment_system/storage.py",
+    "method": "claim_checkout_resume",
+    "line": 124,
+    "query": "SELECT appointment_system.claim_checkout_resume(%s)",
+    "direct": false
+  },
+  {
+    "file": "engine/appointment_system/storage.py",
+    "method": "checkout_launchable",
+    "line": 127,
+    "query": "SELECT appointment_system.api_checkout_launchable(%s)",
+    "direct": false
+  },
+  {
+    "file": "engine/appointment_system/storage.py",
+    "method": "expire_holds",
+    "line": 130,
+    "query": "SELECT appointment_system.expire_holds()",
+    "direct": false
+  },
+  {
+    "file": "engine/appointment_system/storage.py",
+    "method": "claim_email_delivery",
+    "line": 133,
+    "query": "SELECT appointment_system.claim_email_delivery()",
+    "direct": false
+  },
+  {
+    "file": "engine/appointment_system/storage.py",
+    "method": "begin_email_send",
+    "line": 139,
+    "query": "SELECT appointment_system.begin_email_send(%s,%s,%s,%s)",
+    "direct": false
+  },
+  {
+    "file": "engine/appointment_system/storage.py",
+    "method": "begin_email_send",
+    "line": 137,
+    "query": "SELECT appointment_system.begin_scoped_mail(%s,%s,%s,%s,%s,%s)",
+    "direct": false
+  },
+  {
+    "file": "engine/appointment_system/storage.py",
+    "method": "finish_email_delivery",
+    "line": 143,
+    "query": "SELECT appointment_system.finish_mail_attempt(%s,%s,%s,%s,%s,%s,%s,%s,%s)",
+    "direct": false
+  },
+  {
+    "file": "engine/appointment_system/storage.py",
+    "method": "mail_acceptance",
+    "line": 147,
+    "query": "SELECT appointment_system.adopt_mail_acceptance(%s,%s,%s)",
+    "direct": false
+  },
+  {
+    "file": "engine/appointment_system/storage.py",
+    "method": "reconcile_email_event",
+    "line": 150,
+    "query": "SELECT appointment_system.reconcile_email_event()",
+    "direct": false
+  },
+  {
+    "file": "engine/appointment_system/storage.py",
+    "method": "claim_google_resource_refresh",
+    "line": 156,
+    "query": "SELECT appointment_system.claim_google_resource_refresh(%s)",
+    "direct": false
+  },
+  {
+    "file": "engine/appointment_system/storage.py",
+    "method": "claim_google_resource_refresh",
+    "line": 155,
+    "query": "SELECT appointment_system.claim_google_resource_refresh(%s,%s)",
+    "direct": false
+  },
+  {
+    "file": "engine/appointment_system/storage.py",
+    "method": "finish_google_resource_refresh",
+    "line": 159,
+    "query": "SELECT appointment_system.finish_google_resource_refresh(%s,%s,%s,%s,%s,%s,%s,%s,%s)",
+    "direct": false
+  },
+  {
+    "file": "engine/appointment_system/storage.py",
+    "method": "claim_google_delivery",
+    "line": 166,
+    "query": "SELECT appointment_system.claim_google_delivery()",
+    "direct": false
+  },
+  {
+    "file": "engine/appointment_system/storage.py",
+    "method": "claim_google_delivery",
+    "line": 165,
+    "query": "SELECT appointment_system.claim_google_resource(%s)",
+    "direct": false
+  },
+  {
+    "file": "engine/appointment_system/storage.py",
+    "method": "finish_google_delivery",
+    "line": 169,
+    "query": "SELECT appointment_system.finish_google_delivery(%s,%s,%s,%s,%s,%s,%s)",
+    "direct": false
+  },
+  {
+    "file": "engine/appointment_system/storage.py",
+    "method": "claim_google_workbook",
+    "line": 173,
+    "query": "SELECT appointment_system.claim_google_workbook_v2(%s,%s)",
+    "direct": false
+  },
+  {
+    "file": "engine/appointment_system/storage.py",
+    "method": "begin_google_workbook_create",
+    "line": 176,
+    "query": "SELECT appointment_system.begin_google_workbook_create(%s,%s,%s)",
+    "direct": false
+  },
+  {
+    "file": "engine/appointment_system/storage.py",
+    "method": "finish_google_workbook",
+    "line": 179,
+    "query": "SELECT appointment_system.finish_google_workbook(%s,%s,%s)",
+    "direct": false
+  },
+  {
+    "file": "engine/appointment_system/storage.py",
+    "method": "mapped_google_row",
+    "line": 182,
+    "query": "SELECT appointment_system.mapped_google_row(%s,%s,%s)",
+    "direct": false
+  },
+  {
+    "file": "engine/appointment_system/storage.py",
+    "method": "assign_sheet_row",
+    "line": 185,
+    "query": "SELECT appointment_system.assign_sheet_row(%s,%s,%s,%s,%s)",
+    "direct": false
+  },
+  {
+    "file": "engine/appointment_system/storage.py",
+    "method": "claim_enquiry_delivery",
+    "line": 190,
+    "query": "SELECT appointment_system.claim_enquiry_delivery(%s)",
+    "direct": false
+  },
+  {
+    "file": "engine/appointment_system/storage.py",
+    "method": "begin_enquiry_send",
+    "line": 200,
+    "query": "SELECT appointment_system.begin_enquiry_send(%s,%s,%s,%s)",
+    "direct": false
+  },
+  {
+    "file": "engine/appointment_system/storage.py",
+    "method": "begin_enquiry_send",
+    "line": 194,
+    "query": "SELECT appointment_system.begin_scoped_contact_mail(%s,%s,%s,%s,%s,%s,%s,%s)",
+    "direct": false
+  },
+  {
+    "file": "engine/appointment_system/storage.py",
+    "method": "begin_enquiry_send",
+    "line": 198,
+    "query": "SELECT appointment_system.begin_contact_send(%s,%s,%s,%s,%s,%s,%s)",
+    "direct": false
+  },
+  {
+    "file": "engine/appointment_system/storage.py",
+    "method": "finish_enquiry_delivery",
+    "line": 207,
+    "query": "SELECT appointment_system.finish_enquiry_delivery(%s,%s,%s,%s,%s,%s)",
+    "direct": false
+  },
+  {
+    "file": "engine/appointment_system/storage.py",
+    "method": "finish_enquiry_delivery",
+    "line": 205,
+    "query": "SELECT appointment_system.finish_mail_attempt(%s,%s,%s,%s,%s,%s,%s,%s,%s)",
+    "direct": false
+  },
+  {
+    "file": "engine/appointment_system/storage.py",
+    "method": "reconcile_enquiry_email_event",
+    "line": 211,
+    "query": "SELECT appointment_system.reconcile_enquiry_email_event()",
+    "direct": false
+  },
+  {
+    "file": "engine/appointment_system/storage.py",
+    "method": "assign_enquiry_row",
+    "line": 214,
+    "query": "SELECT appointment_system.assign_enquiry_row(%s,%s,%s,%s,%s)",
+    "direct": false
+  },
+  {
+    "file": "engine/appointment_system/storage.py",
+    "method": "enquiry_protection",
+    "line": 218,
+    "query": "SELECT appointment_system.api_enquiry_protection(%s)",
+    "direct": false
+  },
+  {
+    "file": "engine/appointment_system/storage.py",
+    "method": "start_enquiry",
+    "line": 221,
+    "query": "SELECT appointment_system.api_start_enquiry(%s,%s,%s,%s,%s,%s,%s,%s,%s)",
+    "direct": false
+  },
+  {
+    "file": "engine/appointment_system/storage.py",
+    "method": "enquiry_status",
+    "line": 225,
+    "query": "SELECT appointment_system.enquiry_view(%s,%s)",
+    "direct": false
+  },
+  {
+    "file": "engine/appointment_system/storage.py",
+    "method": "enquiry_verification_context",
+    "line": 228,
+    "query": "SELECT appointment_system.api_enquiry_verification_context(%s,%s)",
+    "direct": false
+  },
+  {
+    "file": "engine/appointment_system/storage.py",
+    "method": "resend_enquiry",
+    "line": 231,
+    "query": "SELECT appointment_system.api_resend_enquiry(%s,%s,%s,%s,%s,%s,%s)",
+    "direct": false
+  },
+  {
+    "file": "engine/appointment_system/storage.py",
+    "method": "verify_enquiry",
+    "line": 235,
+    "query": "SELECT appointment_system.verify_enquiry(%s,%s,%s,%s)",
+    "direct": false
+  },
+  {
+    "file": "engine/appointment_system/storage.py",
+    "method": "expire_enquiry_codes",
+    "line": 239,
+    "query": "SELECT appointment_system.expire_enquiry_codes()",
+    "direct": false
+  },
+  {
+    "file": "engine/appointment_system/storage.py",
+    "method": "studio_inbox_list",
+    "line": 242,
+    "query": "SELECT appointment_system.studio_inbox_list(%s,%s,%s,%s,%s)",
+    "direct": false
+  },
+  {
+    "file": "engine/appointment_system/storage.py",
+    "method": "studio_inbox_detail",
+    "line": 245,
+    "query": "SELECT appointment_system.studio_inbox_detail(%s,%s,%s,%s)",
+    "direct": false
+  },
+  {
+    "file": "engine/appointment_system/storage.py",
+    "method": "studio_inbox_review",
+    "line": 248,
+    "query": "SELECT appointment_system.studio_inbox_review(%s,%s,%s,%s,%s,%s,%s)",
+    "direct": false
+  },
+  {
+    "file": "engine/appointment_system/storage.py",
+    "method": "studio_support_change",
+    "line": 251,
+    "query": "SELECT appointment_system.studio_support_change(%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)",
+    "direct": false
+  },
+  {
+    "file": "engine/appointment_system/storage.py",
+    "method": "redeem_receipt_recovery",
+    "line": 254,
+    "query": "SELECT appointment_system.redeem_receipt_recovery(%s,%s,%s)",
+    "direct": false
+  },
+  {
+    "file": "engine/appointment_system/storage.py",
+    "method": "studio_inbox_refund_verified",
+    "line": 257,
+    "query": "SELECT appointment_system.studio_inbox_refund_verified(%s,%s,%s,%s,%s,%s,%s)",
+    "direct": false
+  },
+  {
+    "file": "engine/appointment_system/storage.py",
+    "method": "studio_inbox_resource_reviewed",
+    "line": 260,
+    "query": "SELECT appointment_system.studio_inbox_resource_reviewed(%s,%s,%s,%s,%s,%s,%s)",
+    "direct": false
+  },
+  {
+    "file": "engine/appointment_system/storage.py",
+    "method": "studio_inbox_retry",
+    "line": 263,
+    "query": "SELECT appointment_system.studio_inbox_retry(%s,%s,%s,%s,%s,%s,%s)",
+    "direct": false
+  },
+  {
+    "file": "engine/appointment_system/storage.py",
+    "method": "studio_booking_lookup",
+    "line": 266,
+    "query": "SELECT appointment_system.studio_booking_lookup(%s,%s,%s,%s)",
+    "direct": false
+  },
+  {
+    "file": "engine/appointment_system/storage.py",
+    "method": "studio_action_result",
+    "line": 269,
+    "query": "SELECT appointment_system.studio_action_result(%s,%s,%s,%s)",
+    "direct": false
+  },
+  {
+    "file": "engine/appointment_system/storage.py",
+    "method": "studio_appointment_reschedule",
+    "line": 272,
+    "query": "SELECT appointment_system.studio_appointment_reschedule(%s,%s,%s,%s,%s,%s,%s,%s)",
+    "direct": false
+  },
+  {
+    "file": "engine/appointment_system/storage.py",
+    "method": "studio_appointment_detail",
+    "line": 275,
+    "query": "SELECT appointment_system.studio_appointment_detail(%s,%s,%s,%s)",
+    "direct": false
+  },
+  {
+    "file": "engine/appointment_system/storage.py",
+    "method": "studio_appointment_cancel",
+    "line": 278,
+    "query": "SELECT appointment_system.studio_appointment_cancel(%s,%s,%s,%s,%s,%s,%s)",
+    "direct": false
+  },
+  {
+    "file": "engine/appointment_system/storage.py",
+    "method": "studio_calendar_list",
+    "line": 281,
+    "query": "SELECT appointment_system.studio_calendar_list(%s,%s,%s,%s,%s)",
+    "direct": false
+  },
+  {
+    "file": "engine/appointment_system/storage.py",
+    "method": "studio_calendar_month",
+    "line": 285,
+    "query": "SELECT appointment_system.studio_calendar_month(%s,%s,%s,%s)",
+    "direct": false
+  },
+  {
+    "file": "engine/appointment_system/storage.py",
+    "method": "studio_calendar_close",
+    "line": 288,
+    "query": "SELECT appointment_system.studio_calendar_close(%s,%s,%s,%s,%s,%s,%s)",
+    "direct": false
+  },
+  {
+    "file": "engine/appointment_system/storage.py",
+    "method": "studio_calendar_reopen",
+    "line": 292,
+    "query": "SELECT appointment_system.studio_calendar_reopen(%s,%s,%s,%s,%s,%s)",
+    "direct": false
+  },
+  {
+    "file": "engine/appointment_system/storage.py",
+    "method": "studio_session",
+    "line": 296,
+    "query": "SELECT appointment_system.studio_session(%s,%s,%s)",
+    "direct": false
+  },
+  {
+    "file": "engine/appointment_system/storage.py",
+    "method": "start_google_attempt",
+    "line": 299,
+    "query": "SELECT appointment_system.staff_signin_start(%s,%s,%s,%s,%s,%s,%s,%s,%s)",
+    "direct": false
+  },
+  {
+    "file": "engine/appointment_system/storage.py",
+    "method": "consume_google_attempt",
+    "line": 303,
+    "query": "SELECT appointment_system.staff_signin_consume(%s,%s,%s,%s,%s)",
+    "direct": false
+  },
+  {
+    "file": "engine/appointment_system/storage.py",
+    "method": "finish_google_signin",
+    "line": 307,
+    "query": "SELECT appointment_system.staff_signin_finish(%s,%s,%s)",
+    "direct": false
+  },
+  {
+    "file": "engine/appointment_system/storage.py",
+    "method": "studio_logout",
+    "line": 311,
+    "query": "SELECT appointment_system.studio_logout(%s,%s,%s)",
+    "direct": false
+  },
+  {
+    "file": "engine/appointment_system/storage.py",
+    "method": "start_order_creation",
+    "line": 315,
+    "query": "SELECT appointment_system.start_order_creation(%s,%s)",
+    "direct": false
+  },
+  {
+    "file": "engine/appointment_system/storage.py",
+    "method": "abandon_unattempted",
+    "line": 318,
+    "query": "SELECT appointment_system.abandon_unattempted(%s,%s)",
+    "direct": false
+  },
+  {
+    "file": "engine/appointment_system/storage.py",
+    "method": "reserve",
+    "line": 342,
+    "query": "SELECT appointment_system.admit_checkout(%s,%s,%s,%s)",
+    "direct": false
+  },
+  {
+    "file": "engine/appointment_system/storage.py",
+    "method": "reserve",
+    "line": 345,
+    "query": "SELECT appointment_system.reserve_configured_checkout(%s,%s,%s,%s,%s,%s)",
+    "direct": false
+  },
+  {
+    "file": "engine/appointment_system/storage.py",
+    "method": "start_booking_verification",
+    "line": 349,
+    "query": "SELECT appointment_system.start_booking_verification(%s,%s,%s,%s,%s,%s,%s)",
+    "direct": false
+  },
+  {
+    "file": "engine/appointment_system/storage.py",
+    "method": "resend_booking_verification",
+    "line": 353,
+    "query": "SELECT appointment_system.resend_booking_verification(%s,%s,%s,%s,%s,%s,%s,%s)",
+    "direct": false
+  },
+  {
+    "file": "engine/appointment_system/storage.py",
+    "method": "booking_verification_metadata",
+    "line": 357,
+    "query": "SELECT appointment_system.booking_verification_metadata(%s,%s,%s)",
+    "direct": false
+  },
+  {
+    "file": "engine/appointment_system/storage.py",
+    "method": "verify_booking_code",
+    "line": 360,
+    "query": "SELECT appointment_system.verify_booking_code(%s,%s,%s,%s,%s,%s,%s,%s)",
+    "direct": false
+  },
+  {
+    "file": "engine/appointment_system/storage.py",
+    "method": "claim_booking_code",
+    "line": 364,
+    "query": "SELECT appointment_system.claim_booking_code(%s)",
+    "direct": false
+  },
+  {
+    "file": "engine/appointment_system/storage.py",
+    "method": "begin_booking_code",
+    "line": 367,
+    "query": "SELECT appointment_system.begin_booking_code(%s,%s,%s,%s,%s)",
+    "direct": false
+  },
+  {
+    "file": "engine/appointment_system/storage.py",
+    "method": "finish_booking_code",
+    "line": 371,
+    "query": "SELECT appointment_system.finish_booking_code(%s,%s,%s,%s,%s,%s,%s)",
+    "direct": false
+  },
+  {
+    "file": "engine/appointment_system/storage.py",
+    "method": "reconcile_booking_code_email_event",
+    "line": 375,
+    "query": "SELECT appointment_system.reconcile_booking_code_email_event()",
+    "direct": false
+  },
+  {
+    "file": "engine/appointment_system/storage.py",
+    "method": "order_intent",
+    "line": 378,
+    "query": "SELECT appointment_system.api_order_intent(%s,%s)",
+    "direct": false
+  },
+  {
+    "file": "engine/appointment_system/storage.py",
+    "method": "record_order_creation",
+    "line": 381,
+    "query": "SELECT appointment_system.record_order_creation(%s,%s,%s,%s,%s,%s)",
+    "direct": false
+  },
+  {
+    "file": "engine/appointment_system/storage.py",
+    "method": "observe_payment",
+    "line": 386,
+    "query": "SELECT appointment_system.observe_payment(%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)",
+    "direct": false
+  },
+  {
+    "file": "engine/appointment_system/storage.py",
+    "method": "observe_financial_resource",
+    "line": 393,
+    "query": "SELECT appointment_system.observe_financial_resource(%s,%s,%s,%s,%s,%s,%s,%s)",
+    "direct": false
+  },
+  {
+    "file": "engine/appointment_system/storage.py",
+    "method": "receipt_snapshot",
+    "line": 399,
+    "query": "SELECT appointment_system.api_receipt_snapshot(%s)",
+    "direct": false
+  },
+  {
+    "file": "engine/appointment_system/storage.py",
+    "method": "payment_intake",
+    "line": 402,
+    "query": "SELECT appointment_system.api_payment_intake()",
+    "direct": false
+  },
+  {
+    "file": "engine/appointment_system/storage.py",
+    "method": "public_policy",
+    "line": 405,
+    "query": "SELECT appointment_system.public_policy()",
+    "direct": false
+  },
+  {
+    "file": "engine/appointment_system/storage.py",
+    "method": "available_times",
+    "line": 408,
+    "query": "SELECT appointment_system.available_times(%s,%s,%s)",
+    "direct": false
+  },
+  {
+    "file": "engine/appointment_system/storage.py",
+    "method": "scheduling_snapshot",
+    "line": 411,
+    "query": "SELECT appointment_system.api_scheduling_snapshot(%s,%s)",
+    "direct": false
+  },
+  {
+    "file": "engine/appointment_system/storage.py",
+    "method": "context_snapshot",
+    "line": 414,
+    "query": "SELECT appointment_system.api_context_snapshot(%s)",
+    "direct": false
+  },
+  {
+    "file": "engine/appointment_system/storage.py",
+    "method": "create_context",
+    "line": 420,
+    "query": "SELECT appointment_system.api_create_context(%s,%s)",
+    "direct": false
+  },
+  {
+    "file": "engine/appointment_system/storage.py",
+    "method": "create_context",
+    "line": 418,
+    "query": "SELECT appointment_system.api_create_context(%s,%s,%s,%s)",
+    "direct": false
+  },
+  {
+    "file": "engine/appointment_system/storage.py",
+    "method": "consume_limit",
+    "line": 428,
+    "query": "SELECT appointment_system.consume_request_limit(%s,%s)",
+    "direct": false
+  },
+  {
+    "file": "engine/appointment_system/storage.py",
+    "method": "consume_limit",
+    "line": 427,
+    "query": "SELECT appointment_system.api_consume_limit(%s,%s)",
+    "direct": false
+  },
+  {
+    "file": "engine/appointment_system/storage.py",
+    "method": "save_provider_event",
+    "line": 432,
+    "query": "SELECT appointment_system.api_save_provider_event(%s,%s,%s,%s,%s,%s)",
+    "direct": false
+  },
+  {
+    "file": "engine/appointment_system/storage.py",
+    "method": "claim_payment_recovery",
+    "line": 435,
+    "query": "SELECT appointment_system.claim_payment_recovery(%s)",
+    "direct": false
+  },
+  {
+    "file": "engine/appointment_system/storage.py",
+    "method": "advance_order_search",
+    "line": 438,
+    "query": "SELECT appointment_system.advance_order_search(%s,%s,%s,%s,%s)",
+    "direct": false
+  },
+  {
+    "file": "engine/appointment_system/storage.py",
+    "method": "finish_payment_recovery",
+    "line": 442,
+    "query": "SELECT appointment_system.finish_payment_recovery(%s,%s,%s,%s,%s,%s)",
+    "direct": false
+  },
+  {
+    "file": "engine/appointment_system/storage.py",
+    "method": "claim_payment_events",
+    "line": 446,
+    "query": "SELECT appointment_system.claim_payment_events(%s)",
+    "direct": false
+  },
+  {
+    "file": "engine/appointment_system/storage.py",
+    "method": "finish_payment_event",
+    "line": 449,
+    "query": "SELECT appointment_system.finish_payment_event(%s,%s,%s,%s,%s,%s,%s)",
+    "direct": false
+  },
+  {
+    "file": "engine/appointment_system/storage.py",
+    "method": "find_order",
+    "line": 453,
+    "query": "SELECT appointment_system.api_find_order(%s,%s,%s)",
+    "direct": false
+  },
+  {
+    "file": "engine/appointment_system/storage.py",
+    "method": "wake_payment_recovery",
+    "line": 457,
+    "query": "SELECT appointment_system.api_wake_payment_recovery(%s)",
+    "direct": false
+  },
+  {
+    "file": "engine/appointment_system/studio.py",
+    "method": "add_studio_routes",
+    "line": 273,
+    "query": "SELECT appointment_system.resource_connection_status(%s,%s,%s)",
+    "direct": false
+  },
+  {
+    "file": "engine/appointment_system/studio.py",
+    "method": "status",
+    "line": 273,
+    "query": "SELECT appointment_system.resource_connection_status(%s,%s,%s)",
+    "direct": false
+  }
+]
