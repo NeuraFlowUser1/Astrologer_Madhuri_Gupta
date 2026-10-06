@@ -1,0 +1,7 @@
+{
+  "version": 1,
+  "installation_id": "87b35f80-71bc-4ee1-bf34-a7316006f95c",
+  "environment": "production",
+  "repository": "NeuraFlowUser1/Astrologer_Madhuri_Gupta",
+  "cron": "8,23,38,53 * * * *"
+}

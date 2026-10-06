@@ -5,6 +5,14 @@
   "framework": "vite",
   "rewrites": [
     {
+      "source": "/api/company/resources/callback",
+      "destination": "/api"
+    },
+    {
+      "source": "/api/studio/resources/callback",
+      "destination": "/api"
+    },
+    {
       "source": "/company/:path*",
       "destination": "/api"
     },
