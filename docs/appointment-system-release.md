@@ -1,4 +1,16 @@
-# Current contained appointment release — 7 October 2026
+# Current contained booking refinement — 7 October 2026
+
+The complete project-contained local candidate is `9506aa7ee20cd110b5cb656938c3b10d03c93e08ea64f34416e51fc955e55ccc`, with **572 manifest files and migrations 001–036**. It uses this repository’s own `api/index.py`, `appointment-system/` and `appointment-settings/`; there is no factory dependency at runtime. The common package matches the neutral master and the other project’s package byte for byte. Branding, business choices and provider accounts remain project-specific.
+
+Local booking-only qualification is complete: 741 independent Python checks per profile, complete native SQL/serving lanes with their declared target-only counterparts, all 320 JavaScript checks per profile and 44 actual built-site journeys. Coverage exceeds 90% statements and branches without exclusions. Exact PostgreSQL 16/18 upgrades preserve the earlier 35 migration bytes, all existing function identities/access contracts, saved meeting rules and maintenance locks. Final keyboard, contrast, responsive and native browser-zoom review is complete. This does not claim physical phone OS or native screen-reader acceptance.
+
+The implemented behavior preserves in-page details and verification during tab/app changes; a deliberate refresh may clear the draft. Booking email is optional with email codes OFF, and required and verified with them ON. Supplied invalid email remains an error. Ordinary enquiries retain their own required verification. AstroAdvice’s birth date is optional; Sarsa gains no birth fields. Shared receipt actions show truthful meeting/pending/refund facts, download a real PDF and offer a deliberate bounded email copy. A no-email booking still requires payment, the practice meeting, staff mail and both record copies. Use [the complete refinement contract](../appointment-system/docs/booking-experience.md).
+
+The candidate’s client source is prepared but not pushed. The current live application, worker and database binding still use the earlier release described below. Keep both Vercel accounts disconnected. The approved release sequence is company-controlled OFF; append-only migration 036; coordinated API/worker/site source; official signed-in revision-checked policy save while OFF; exact identity, role and OFF checks; current-schema encrypted backup and independent provider-disabled restore; verified ON. Bootstrap JSON does not overwrite saved business choices. Preserve all other prices, lengths, hours, accounts and secrets. Fresh no-email real payments and deliberate real email sends require their specific approval and participation; local provider doubles are not live provider acceptance.
+
+After new nullable/V3 records or requested-copy jobs exist, an old 552 API/worker is not an assumed safe rollback. Keep booking OFF and repair the compatible release, or use a separately tested compatible rollback. Never invent an email address, discard accepted copy evidence, replay a payment or overwrite production to recover. Broader website tests and chronological staff-note history remain deferred.
+
+## Retained accepted 552-file release — 7 October 2026
 
 The application entry is `api/index.py`; it loads this repository's complete
 `appointment-system/` package and sibling `appointment-settings/`. It does not
