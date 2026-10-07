@@ -48,6 +48,7 @@ class BusinessSettingsSQL(CompanyFixture,BookingFixture):
 
     def test_settings_work_off_but_require_fresh_password_for_a_new_save(self):
         current=self.settings();updated=deepcopy(current['settings']);updated['booking_verification']['email']=True
+        updated['required_contacts']=['email',*updated['required_contacts']]
         self.db.sql('UPDATE appointment_system.control_product_state SET enabled=false;')
         operation=str(uuid4());saved=self.save(updated,operation=operation,revision=current['revision'])
         self.db.sql("UPDATE appointment_system.control_company_sessions SET created_at=clock_timestamp()-interval '11 minutes',fresh_until=clock_timestamp()-interval '1 second';")

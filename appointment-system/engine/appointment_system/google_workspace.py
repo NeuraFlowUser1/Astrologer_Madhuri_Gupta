@@ -141,7 +141,7 @@ class Workspace:
         protocol=booking.get('calendar_protocol','v1')
         identifier = event_id(booking['id'], booking['revision'],protocol)
         email=booking.get('email')
-        if not isinstance(email,str) or not re.fullmatch(r'[^\s@]+@[^\s@]+\.[^\s@]+',email):
+        if email is not None and (not isinstance(email,str) or not re.fullmatch(r'[^\s@]+@[^\s@]+\.[^\s@]+',email)):
             raise WorkspaceFailure('google_customer_invalid')
         private={'installation':installation()['installation_id'],'project':PROJECT,'booking':str(booking['id']),'revision':str(booking['revision'])}
         conference=identifier
@@ -156,7 +156,7 @@ class Workspace:
             start={'dateTime': timestamp(booking['starts_at']).isoformat(), 'timeZone':booking['practice_timezone']},
             end={'dateTime': timestamp(booking['ends_at']).isoformat(), 'timeZone':booking['practice_timezone']},
             visibility='private', reminders={'useDefault':False},
-            attendees=[] if email.lower()==OWNERS['client'] else [{'email':email}],
+            attendees=[] if email is None or email.lower()==OWNERS['client'] else [{'email':email}],
             guestsCanInviteOthers=False,guestsCanModify=False,guestsCanSeeOtherGuests=False,
             extendedProperties={'private':private},
             conferenceData={'createRequest':{'requestId':conference,'conferenceSolutionKey':{'type':'hangoutsMeet'}}})

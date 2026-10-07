@@ -33,7 +33,7 @@ def business(*, booking_otp=False, per_question=False):
         "slot_step_minutes": 30, "notice_minutes": 30, "horizon_days": 10,
         "buffer_before_minutes": 0, "buffer_after_minutes": 0,
         "booking_verification": {"email": booking_otp, "sms": False},
-        "required_contacts": ["email", "phone"], "meeting": "google_meet",
+        "required_contacts": ["email", "phone"] if booking_otp else ["phone"], "meeting": "google_meet",
         "email_budget": {"daily": 20, "rolling": 600, "verification_daily": 8, "verification_rolling": 240},
     }
 

@@ -31,7 +31,8 @@ class GoogleDocumentBoundaries(unittest.TestCase):
             with self.assertRaisesRegex(WorkspaceFailure,'google_revision_invalid'):event_id(self.fixture.booking['id'],revision)
         with self.assertRaisesRegex(WorkspaceFailure,'google_calendar_protocol_invalid'):event_id(self.fixture.booking['id'],1,'guess-from-project')
         workspace=self.fixture.workspace([])
-        for email in (None,False,'missing-domain','a@b','a b@example.test'):
+        self.assertEqual(workspace.calendar_body(self.fixture.booking|{'email':None})['attendees'],[])
+        for email in (False,'',{},[],'missing-domain','a@b','a b@example.test'):
             with self.assertRaisesRegex(WorkspaceFailure,'google_customer_invalid'):workspace.calendar_body(self.fixture.booking|{'email':email})
         self.assertEqual(self.fixture.requests,[])
 

@@ -199,6 +199,7 @@
         for (const [id, key] of [['step','slot_step_minutes'],['notice','notice_minutes'],['horizon','horizon_days'],['before','buffer_before_minutes'],['after','buffer_after_minutes']]) spec[key] = Number($('business-'+id).value);
         spec.timezone = $('business-timezone').value; spec.meeting = $('business-meeting').value;
         spec.booking_verification.email = $('business-otp').checked;
+        spec.required_contacts = (spec.booking_verification.email ? ['email'] : []).concat(spec.required_contacts.filter(item => item !== 'email'));
         for (const row of $('business-services').children) {
           const service = spec.services.find(item => item.id === row.dataset.service);
           const input = part => row.querySelector(`[data-part="${part}"]`);

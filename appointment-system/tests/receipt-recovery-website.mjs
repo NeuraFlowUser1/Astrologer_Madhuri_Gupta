@@ -32,7 +32,7 @@ try{
  await page.getByLabel('Eight-digit access code').fill(settings.code);await page.getByRole('button',{name:'Open my booking',exact:true}).click();
  await page.waitForFunction(()=>document.querySelector('[role="status"]')?.textContent?.trim());
  await page.reload();await page.waitForURL('**/booking/receipt');
- await page.getByText('confirmed',{exact:true}).waitFor();assert.equal(redemptions,1);assert.deepEqual(errors,[]);
+ await page.getByRole('heading',{name:'Your appointment is confirmed',exact:true}).waitFor();assert.equal(redemptions,1);assert.deepEqual(errors,[]);
  await page.screenshot({path:'/tmp/abs-recovered-receipt-'+(site===root?'astro':'sarsa')+'.png',fullPage:false});
  proof.setEnabled(false);const response=await page.goto(proof.origin+'/booking-help');assert.equal(response.status(),404);
  assert.equal(await page.getByLabel('Eight-digit access code').count(),0);

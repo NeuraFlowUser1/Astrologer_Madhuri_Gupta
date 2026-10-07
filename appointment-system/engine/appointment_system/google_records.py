@@ -57,7 +57,7 @@ def sheet_values(job,layout_version=3,*,project=PROJECT):
     base=[project,str(UUID(job['id'])),str(UUID(booking['id'])),str(booking['revision']),
         booking['state'],booking['service_snapshot']['name'],
         timestamp(booking['starts_at']).isoformat(),timestamp(booking['ends_at']).isoformat(),
-        booking['full_name'],booking['email'],booking['phone'],str(Decimal(booking['amount_paise'])/100)]
+        booking['full_name'],booking['email'] or '',booking['phone'],str(Decimal(booking['amount_paise'])/100)]
     if layout_version in (1,2):return base
     if layout_version not in (3,4):raise WorkspaceFailure('google_workbook_layout_changed')
     preparation=booking.get('preparation') or {};payment=booking.get('payment_identity') or {}

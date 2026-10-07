@@ -10,7 +10,7 @@ IGNORED={'__pycache__','.pytest_cache','.coverage','coverage.json','coverage.xml
 FIELDS={'format_version','release','engine_contract','database_contract','worker_contract','runtime','files','content_digest'}
 MANIFEST='release.json'
 INTENT='.appointment-install-intent.json'
-EXTENSIONS={'.py','.sql','.md','.mjs','.js','.json','.yml','.yaml','.ps1','.css','.html','.txt','.sh','.lock','.svg'}
+EXTENSIONS={'.py','.sql','.md','.mjs','.js','.json','.yml','.yaml','.ps1','.css','.html','.txt','.sh','.lock','.svg','.ttf'}
 
 class PackageError(ValueError):pass
 

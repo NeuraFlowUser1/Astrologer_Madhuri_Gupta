@@ -37,8 +37,21 @@ test('company business settings preserve exact money, optional question pricing 
  assert.equal(saved.settings.services[0].pricing.amount_paise,1205);assert.equal(saved.settings.services[0].enabled,false);assert.equal(saved.settings.services[0].duration_minutes,45);
  assert.equal(saved.settings.services[1].pricing.amount_paise,350);assert.equal(saved.settings.services[1].pricing.maximum_questions,4);
  assert.equal(saved.settings.booking_verification.email,true);assert.equal(saved.settings.meeting,'internal');
+ assert.deepEqual(saved.settings.required_contacts,['email','phone']);
  assert.deepEqual(saved.settings.weekly_windows,[{weekday:6,start:'09:00',end:'24:00'}]);
  for(let n=0;n<30;n++)await page.click('#add-window');assert.equal(await rows.count(),28);
+}));
+
+test('changing the email-code choice changes only its email requirement and preserves other required contacts',{skip:!available},()=>companyFixture(async(page,state)=>{
+ state.business.settings.required_contacts=['phone'];await business(page);
+ for(const enabled of [true,false]){
+  if(enabled)await page.check('#business-otp');else await page.uncheck('#business-otp');
+  await submit(page);await waitText(page,'#business-status','Settings saved.');
+  const saved=state.calls.filter(c=>c.path==='/api/company/settings'&&c.body).at(-1).body;
+  assert.equal(saved.settings.booking_verification.email,enabled);
+  assert.deepEqual(saved.settings.required_contacts,enabled?['email','phone']:['phone']);
+  await page.locator('#business-form').waitFor({state:'visible'});
+ }
 }));
 
 test('company business rejects stale or invalid settings and preserves an uncertain save',{skip:!available},()=>companyFixture(async(page,state)=>{

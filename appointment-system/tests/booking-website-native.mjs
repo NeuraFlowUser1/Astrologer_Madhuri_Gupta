@@ -13,7 +13,7 @@ lines.on('line',line=>{const value=JSON.parse(line),resolve=pending.get(value.id
 const bridge=(path,options={})=>new Promise(resolve=>{const id=++sequence;pending.set(id,resolve);process.stdout.write(JSON.stringify({id,path,...options})+'\n');});
 const {chromium}=await import(pathToFileURL(resolve(site,'node_modules/playwright-core/index.mjs')).href);
 const browser=await chromium.launch({headless:true,executablePath:process.env.BOOKING_CHROME_EXECUTABLE,args:['--no-sandbox']}),proof=await displayProof(root,site);
-const context=await browser.newContext(),errors=[];proof.setEnabled(true);
+const context=await browser.newContext(),errors=[],observations=[];proof.setEnabled(true);let page;
 try{
  await context.addInitScript(()=>{
   window.__isolatedPayment={opened:0,options:null};
@@ -25,19 +25,22 @@ try{
   if(!url.pathname.startsWith('/api/') || url.pathname==='/api/service-state')return route.continue();
   const body=request.postDataJSON(),secret=request.headers()['x-booking-receipt'];
   const response=await bridge(url.pathname+url.search,{...(body?{body}:{}),...(secret?{credential:{secret}}:{})});
+  observations.push({path:url.pathname,status:response.status,code:response.body.code,
+   appointment_state:response.body.receipt?.appointment_state||response.body.appointment_state});
   return route.fulfill({status:response.status,contentType:'application/json',headers:{'cache-control':'no-store'},body:JSON.stringify(response.body)});
  });
- const page=await context.newPage();page.on('pageerror',error=>errors.push(error.message));
+ page=await context.newPage();page.on('pageerror',error=>errors.push(error.message));
  await page.goto(proof.origin+'/booking');await page.locator('#full_name,#name').waitFor();
+ const settings=(await bridge('test:settings')).body;
  const date=(await bridge('test:date')).body.value;
- if(await page.locator('#appointment-date').count()){
-  await page.locator('#appointment-date').fill(date);
- }else{
-  for(let moves=0;!(await page.locator(`[data-booking-day="${date}"]`).count()) && moves<2;moves++)await page.getByRole('button',{name:'Next month',exact:true}).click();
-  await page.locator(`[data-booking-day="${date}"]`).click();
- }
- await page.locator('#full_name,#name').fill('Synthetic Customer');await page.locator('#email').fill('Customer@example.com');await page.locator('#phone').fill('9876543210');
- if(await page.locator('#birth_date,#birthDate').count())await page.locator('#birth_date,#birthDate').fill('1990-01-01');
+ await page.locator('.abs-date-picker').filter({has:page.getByText('Appointment date',{exact:true})}).locator('.abs-date-group').click();
+ const targetDay=Number(date.slice(-2));await page.locator('.abs-calendar-cell').first().waitFor();
+ let cells=page.locator('.abs-calendar-cell:not([data-outside-month]):not([data-disabled])').filter({hasText:new RegExp('^'+targetDay+'$')});
+ for(let moves=0;!(await cells.count()) && moves<2;moves++)await page.getByRole('button',{name:'Next month',exact:true}).click();
+ await cells.first().click();
+ await page.locator('#full_name,#name').fill('Synthetic Customer');
+ if(!settings.no_email)await page.locator('#email').fill('Customer@example.com');
+ await page.locator('#phone').fill('9876543210');
  const slot=page.locator('input[name="time"],button[data-booking-time]').first();await slot.waitFor();
  if(await slot.evaluate(node=>node.tagName==='INPUT'))await slot.check();else await slot.click();
  const send=page.getByRole('button',{name:'Send email code',exact:true});
@@ -57,4 +60,6 @@ try{
  proof.setEnabled(false);await page.waitForFunction(()=>!document.body.innerText.includes('Your appointment is confirmed'),undefined,{timeout:10000});
  assert.equal(await page.evaluate(()=>window.__isolatedPayment.opened),1);
  await bridge('test:finished');
+}catch(error){
+ process.stderr.write(JSON.stringify({error:error.message,observations,synthetic_page_text:page?await page.locator('body').innerText():null})+'\n');throw error;
 }finally{lines.close();await context.close();await browser.close();await proof.close();}

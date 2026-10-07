@@ -168,6 +168,18 @@ class Installation:
         return self.document["environment"]
 
 
+def canonical_business_contacts(document):
+    """The one verification switch owns email membership at write/bootstrap boundaries."""
+    value=decode(canonical(document))
+    if type(value) is not dict:raise invalid('settings')
+    verification=object_fields(value.get('booking_verification'), {'email','sms'})
+    enabled=boolean(verification['email'],'booking_verification')
+    contacts=value.get('required_contacts')
+    _unique_list(contacts,2,CONTACT_FIELDS,'required_contacts')
+    value['required_contacts']=(['email'] if enabled else [])+[item for item in contacts if item!='email']
+    return value
+
+
 @dataclass(frozen=True)
 class BusinessSettings:
     """Immutable data; neither a caller nor one client supplies executable rules."""
@@ -196,7 +208,7 @@ class BusinessSettings:
         if verification["sms"]:
             raise invalid("booking_verification")
         _unique_list(value["required_contacts"], 2, CONTACT_FIELDS, "required_contacts")
-        if "email" not in value["required_contacts"]:
+        if ("email" in value["required_contacts"]) != verification["email"]:
             raise invalid("required_contacts")
         if value["meeting"] not in ("internal", "google_meet"):
             raise invalid("meeting")

@@ -9,14 +9,14 @@ import {installation_id,now,policy,receipt,checkout} from './booking-browser-fix
 function fixture(){
  const values=new Map(),storage={getItem:key=>values.get(key)??null,setItem:(key,value)=>values.set(key,value),removeItem:key=>values.delete(key)};
  const receipts=createReceiptStore({installation_id,environment:'test'}),credential=receipts.prepareReceipt(storage,policy());
- let enabled=true,time=now,fail=false,calls=0,release;
+ let enabled=true,time=now,fail=false,calls=0,release,productChanged;
  const pending=[];
  const api=async(path,options)=>{calls++;pending.push(options);assert.equal(path,'/api/checkout/verify-payment');
   if(release)await release;if(fail)throw new RequestError();return {receipt:receipt(options.body.request_id)};};
  const recovery=createPaymentRecovery({installation_id,environment:'test',legacy_callbacks:[{key:'old-callbacks',project:'old'}],
-  receipts,storage:()=>storage,api,enabled:()=>enabled,clock:()=>time});
+  receipts,storage:()=>storage,api,enabled:()=>enabled,subscribeEnabled:fn=>{productChanged=fn;return()=>{productChanged=null;};},clock:()=>time});
  const signed={razorpay_order_id:'order_fixture',razorpay_payment_id:'pay_fixture',razorpay_signature:'a'.repeat(64)};
- return {values,storage,receipts,credential,recovery,signed,pending,calls:()=>calls,setEnabled:value=>{enabled=value;},
+ return {values,storage,receipts,credential,recovery,signed,pending,calls:()=>calls,setEnabled:value=>{enabled=value;productChanged?.();},
   setTime:value=>{time=value;},setFailure:value=>{fail=value;},setPending:value=>{release=value;}};
 }
 
@@ -31,6 +31,16 @@ test('OFF keeps evidence without contacting the application; reactivation can re
  const f=fixture();f.setEnabled(false);await assert.rejects(f.recovery.rememberAndSubmit(f.credential,f.signed,'order_fixture'),error=>error.code==='booking_disabled');
  await f.recovery.recover();assert.equal(f.calls(),0);assert.ok(f.values.get(f.recovery.storageKey));
  f.setEnabled(true);await f.recovery.recover();assert.equal(f.calls(),1);
+});
+
+test('a payment callback saved during a display check is recovered on fresh ON without another focus event',async()=>{
+ const f=fixture(),win=new EventTarget(),doc=new EventTarget();doc.visibilityState='visible';
+ const stop=f.recovery.start(win,doc);f.setEnabled(false);
+ await assert.rejects(f.recovery.rememberAndSubmit(f.credential,f.signed,'order_fixture'));
+ assert.equal(f.calls(),0);f.setEnabled(true);await new Promise(resolve=>setImmediate(resolve));
+ assert.equal(f.calls(),1);assert.equal(f.values.has(f.recovery.storageKey),false);
+ stop();f.setEnabled(false);f.recovery.save(f.credential,{...f.signed,razorpay_payment_id:'pay_later'},'order_fixture');
+ f.setTime(now+60001);f.setEnabled(true);await new Promise(resolve=>setImmediate(resolve));assert.equal(f.calls(),1);
 });
 
 test('overlapping callbacks share a submission and a different signature cannot replace saved evidence',async()=>{

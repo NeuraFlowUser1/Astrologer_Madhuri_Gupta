@@ -16,6 +16,11 @@ from appointment_system.google_delivery import run_google_delivery_once
 
 
 class WorkspaceTests(unittest.TestCase):
+    def test_missing_customer_email_keeps_meeting_creation_without_a_fake_attendee(self):
+        body=Workspace(self.access).calendar_body(dict(self.booking,email=None))
+        self.assertEqual(body['attendees'],[]);self.assertIn('conferenceData',body)
+        self.assertNotIn('None',json.dumps(body));self.assertIn('hangoutsMeet',json.dumps(body))
+
     def setUp(self):
         self.grant = Grant('client','subject',OWNERS['client'],'synthetic-refresh',scopes_for('client'))
         self.access = Access('synthetic-access',datetime.now(timezone.utc)+timedelta(hours=1),self.grant)

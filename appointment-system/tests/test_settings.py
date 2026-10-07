@@ -71,7 +71,7 @@ class SettingsTests(unittest.TestCase):
         for field, value in (('version', 0), ('timezone', 'Wrong/Timezone'), ('slot_step_minutes', 7),
                              ('notice_minutes', -1), ('horizon_days', 366), ('buffer_before_minutes', True),
                              ('buffer_after_minutes', 121), ('services', []), ('weekly_windows', []),
-                             ('required_contacts', ['phone']), ('required_contacts', ['email', 'email']),
+                             ('required_contacts', ['email','phone']), ('required_contacts', ['email', 'email']),
                              ('booking_verification', {'email': True, 'sms': True}),
                              ('booking_verification', {'email': 1, 'sms': False}), ('meeting', 'unknown')):
             self.rejected(BusinessSettings.parse, changed(base, field, value))

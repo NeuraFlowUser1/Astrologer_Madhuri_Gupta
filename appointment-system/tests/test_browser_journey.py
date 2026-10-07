@@ -15,11 +15,13 @@ from .test_sql_booking_verification import BookingCodeFixture
 
 
 class BrowserJourneySQL(BookingCodeFixture):
-    def journey(self,otp,*,website=False):
+    def journey(self,otp,*,website=False,no_email=False):
         spec=business(booking_otp=otp)
         if website:
             spec=json.loads((Path(os.environ['BOOKING_WEBSITE_PROOF_PROJECT'])/'appointment-settings/business-settings.json').read_text())
             otp=spec['booking_verification']['email']
+        if no_email:
+            otp=False;spec['booking_verification']['email']=False;spec['required_contacts']=['phone']
         self.set_policy(spec);adapter=Mock()
         adapter.credentials=Credentials('SyntheticMerchant','live','fixture','rzp_live_synthetic','synthetic-secret')
         captured=False;order={}
@@ -53,7 +55,7 @@ class BrowserJourneySQL(BookingCodeFixture):
                     continue
                 if not line:break
                 self.assertLess(len(line),16384);row=json.loads(line);path=row['path'];body={};status=200
-                if path=='test:settings':body={key:installation()[key] for key in ('installation_id','environment')}
+                if path=='test:settings':body={key:installation()[key] for key in ('installation_id','environment')}|{'no_email':no_email}
                 elif path=='test:date':body={'value':datetime.fromisoformat(self.starts[0]).astimezone(ZoneInfo('Asia/Kolkata')).date().isoformat()}
                 elif path=='test:verification-code':body={'value':self.code()}
                 elif path=='test:payment-capture':
@@ -80,9 +82,17 @@ class BrowserJourneySQL(BookingCodeFixture):
         self.assertEqual(self.db.scalar('SELECT count(*) FROM appointment_system.bookings;'),'1')
         self.assertEqual(self.db.scalar('SELECT count(*) FROM appointment_system.accepted_payments;'),'1')
         self.assertEqual(len(self.requests),1 if otp else 0)
+        if no_email:
+            self.assertEqual(self.db.scalar('SELECT email IS NULL FROM appointment_system.bookings;'),'t')
+            self.assertEqual(self.db.scalar("SELECT count(*) FROM appointment_system.delivery_jobs WHERE recipient_role='customer';"),'0')
+            self.assertEqual(self.db.scalar("SELECT count(*) FROM appointment_system.delivery_jobs WHERE kind='sheet_booking';"),'2')
 
     def test_without_booking_email_code(self):self.journey(False)
     def test_with_booking_email_code(self):self.journey(True)
+    def test_without_booking_email(self):self.journey(False,no_email=True)
 
     @unittest.skipUnless(os.environ.get('BOOKING_WEBSITE_PROOF_PROJECT'),'Explicit built project required')
     def test_real_built_website(self):self.journey(False,website=True)
+
+    @unittest.skipUnless(os.environ.get('BOOKING_WEBSITE_PROOF_PROJECT'),'Explicit built project required')
+    def test_real_built_website_without_email(self):self.journey(False,website=True,no_email=True)

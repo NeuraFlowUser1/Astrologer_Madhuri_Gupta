@@ -2,9 +2,10 @@ import {RequestError} from '../transport.mjs';
 import {checkedReceipt} from './protocol.mjs';
 
 /** Opaque signed references only. This never opens checkout or claims payment success. */
-export function createPaymentRecovery({installation_id,environment,legacy_callbacks=[],receipts,storage,api,enabled,clock=Date.now}){
+export function createPaymentRecovery({installation_id,environment,legacy_callbacks=[],receipts,storage,api,enabled,subscribeEnabled,clock=Date.now}){
  if(!/^[a-f0-9]{8}(?:-[a-f0-9]{4}){3}-[a-f0-9]{12}$/.test(installation_id) || !['production','development','test'].includes(environment)
-  || typeof enabled!=='function' || !Array.isArray(legacy_callbacks) || legacy_callbacks.length>4)throw new RequestError('invalid_configuration');
+  || typeof enabled!=='function' || subscribeEnabled!==undefined && typeof subscribeEnabled!=='function'
+  || !Array.isArray(legacy_callbacks) || legacy_callbacks.length>4)throw new RequestError('invalid_configuration');
  const key=`appointment:${installation_id}:${environment}:signed-payment:v2`,readers=[{key,current:true}];
  for(const row of legacy_callbacks){
   if(!row || Object.keys(row).sort().join(',')!=='key,project' || typeof row.key!=='string' || !/^[A-Za-z0-9:_-]{1,120}$/.test(row.key)
@@ -77,7 +78,8 @@ export function createPaymentRecovery({installation_id,environment,legacy_callba
  function start(windowObject=window,documentObject=document){
   const check=()=>{if(documentObject.visibilityState==='visible')void recover().catch(()=>{});};
   windowObject.addEventListener('pageshow',check);windowObject.addEventListener('focus',check);documentObject.addEventListener('visibilitychange',check);check();
-  return()=>{windowObject.removeEventListener('pageshow',check);windowObject.removeEventListener('focus',check);documentObject.removeEventListener('visibilitychange',check);};
+  const unsubscribe=subscribeEnabled?.(check);
+  return()=>{unsubscribe?.();windowObject.removeEventListener('pageshow',check);windowObject.removeEventListener('focus',check);documentObject.removeEventListener('visibilitychange',check);};
  }
  return Object.freeze({save,recover,start,rememberAndSubmit:(credential,signed,order)=>send(save(credential,signed,order),credential),storageKey:key});
 }

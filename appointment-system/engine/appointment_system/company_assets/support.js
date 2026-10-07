@@ -57,7 +57,7 @@
  function fields(){
   const action=$('action').value,support=['receipt_recovery','contact_correction'].includes(action);
   $('time-field').hidden=action!=='reschedule';$('starts-at').required=action==='reschedule';
-  for(const id of ['email','phone']){$(id+'-field').hidden=action!=='contact_correction';$(id).required=action==='contact_correction';}
+  for(const id of ['email','phone']){$(id+'-field').hidden=action!=='contact_correction';$(id).required=action==='contact_correction' && (id!=='email' || current?.contact_email_required!==false);}
   $('payment-field').hidden=$('verification-field').hidden=!support;$('payment').required=$('verified').required=support;
   $('action-note').textContent=action==='cancel'?'Cancellation releases the appointment time. It does not issue a refund.':support?'Use the original saved mobile and payment details. If that mobile is unavailable, keep the case for manual review.':'The original appointment remains if the new time is unavailable.';
  }
@@ -109,7 +109,7 @@
    finally{busy=false;}
   }
   else submit('support',{...base,reference:current.reference,action,verified_payment_id:$('payment').value.trim(),verification_confirmed:$('verified').checked,
-    ...(action==='contact_correction'?{email:$('email').value.trim(),phone:$('phone').value.trim()}:{} )});
+    ...(action==='contact_correction'?{email:$('email').value.trim()||null,phone:$('phone').value.trim()}:{} )});
  });
  $('action').addEventListener('change',fields);$('retry').textContent='Check saved action';$('retry').addEventListener('click',checkSaved);
  $('refresh').addEventListener('click',load);if(pending){$('retry').hidden=false;$('submit-change').disabled=true;}load();

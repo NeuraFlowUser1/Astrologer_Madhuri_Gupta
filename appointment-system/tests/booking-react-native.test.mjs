@@ -28,7 +28,7 @@ test('project React mounts the contained booking and receipt hooks, updates inpu
   import {createBookingBrowser,createUseBooking} from '/browser/booking/index.mjs';
   import {createUseReceiptRecovery} from '/browser/booking/receipt-recovery.mjs';
   import {createEnquiryBrowser,createUseEnquiry} from '/browser/enquiry/index.mjs';
-  let state={enabled:true,activation_epoch:${JSON.stringify(epoch)}};const subscribers=new Set();
+  let state={enabled:true,verified:true,checking:false,activation_epoch:${JSON.stringify(epoch)}};const subscribers=new Set();
   const product={getSnapshot:()=>state,subscribe:fn=>{subscribers.add(fn);return()=>subscribers.delete(fn);}};
   const browser=createBookingBrowser(${JSON.stringify(profile)},{product});
   const useBooking=createUseBooking(React,browser),useRecovery=createUseReceiptRecovery(React,browser);

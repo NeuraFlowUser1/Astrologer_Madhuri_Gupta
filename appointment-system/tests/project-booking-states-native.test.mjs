@@ -7,6 +7,7 @@ import {resolve} from 'node:path';
 import {pathToFileURL} from 'node:url';
 import {displayProof} from '../tools/checks/website-display.mjs';
 import {policy,availability,receipt} from './booking-browser-fixture.mjs';
+import {money} from '../browser/display-formatting.mjs';
 const root=process.env.BOOKING_WEBSITE_PROOF_PROJECT,site=process.env.BOOKING_WEBSITE_PROOF_SITE;
 const reference='11111111-1111-4111-8111-111111111111';
 test('actual project booking and receipt views distinguish payment, meeting, refund and unavailable states',{skip:!root||!site},async()=>{
@@ -51,12 +52,11 @@ test('actual project booking and receipt views distinguish payment, meeting, ref
      assert.equal(await page.getByRole('heading',{name:/Your appointment is confirmed/}).count(),0);
     }else{
      await page.getByText(reference,{exact:false}).first().waitFor();
-     if(path==='/booking')await page.getByRole('heading',{name:({held:/Your time is reserved/,expired:/This reservation has ended|Let’s check the payment/,cancelled:/This appointment was cancelled|Your appointment is cancelled/,payment_review:/Your payment is being checked|Your payment needs a closer look/,confirmed:/Your appointment is confirmed/})[saved.appointment_state]}).waitFor();
-     if(path==='/booking/receipt'){
-      const appointmentState=page.locator('dt').filter({hasText:/^Appointment$/}).locator('xpath=following-sibling::dd[1]');
-      await appointmentState.filter({hasText:new RegExp('^'+saved.appointment_state.replaceAll('_',' ')+'$')}).waitFor();
-      assert.equal(await appointmentState.innerText(),saved.appointment_state.replaceAll('_',' '));
-     }
+     await page.getByRole('heading',{name:({held:/Your time is reserved/,expired:/This reservation has ended|Let’s check the payment/,cancelled:/This appointment was cancelled|Your appointment is cancelled/,payment_review:/Your payment is being checked|Your payment needs a closer look/,confirmed:/Your appointment is confirmed/})[saved.appointment_state]}).waitFor();
+     const fact=label=>page.locator('.abs-receipt dt').filter({hasText:new RegExp('^'+label+'$')}).locator('xpath=following-sibling::dd[1]');
+     assert.equal(await fact('Payment recorded').innerText(),money(saved.captured_paise));
+     assert.equal(await fact('Refund recorded').innerText(),money(saved.refunded_paise));
+     assert.equal(await page.getByRole('button',{name:'Download appointment PDF',exact:true}).count(),0,'Legacy projections cannot enable actions without the current contract');
      if(saved.meet_url)assert.equal(await page.locator('a[href="'+saved.meet_url+'"]').count(),1);
      else assert.equal(await page.locator('a[href^="https://meet.google.com/"]').count(),0);
      if(path==='/booking/receipt'){

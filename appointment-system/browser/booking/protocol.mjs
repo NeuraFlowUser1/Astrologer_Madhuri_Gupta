@@ -15,11 +15,12 @@ const preparation=['birth_date','birth_time','birth_place','notes'];
 export function checkedPolicy(data){
  const p=data?.policy;
  requireValue(p?.version===1 && zone(p.timezone) && /^[a-f0-9]{64}$/.test(data.quote_version)
+  && /^[a-f0-9]{64}$/.test(data.booking_verification_policy_hash)
   && instant(data.server_now) && typeof data.schedule_browsing_open==='boolean'
   && integer(p.horizon_days,1,365) && Array.isArray(p.services) && p.services.length>0 && p.services.length<=100
   && unique(p.services.map(service=>service?.id)) && typeof p.booking_verification?.email==='boolean'
   && p.booking_verification.sms===false && ['google_meet','internal'].includes(p.meeting)
-  && Array.isArray(p.required_contacts) && unique(p.required_contacts) && p.required_contacts.includes('email')
+  && Array.isArray(p.required_contacts) && unique(p.required_contacts) && p.required_contacts.includes('email')===p.booking_verification.email
   && p.required_contacts.every(value=>['email','phone'].includes(value))
   && data.receipt_access?.version===1 && /^[a-z0-9][a-z0-9_-]{0,31}$/.test(data.receipt_access.key_id));
  for(const s of p.services)requireValue(s && /^[a-z0-9][a-z0-9-]{0,79}$/.test(s.id) && text(s.name,150)
@@ -56,13 +57,34 @@ export function checkedReceipt(data,id){
   && Array.isArray(data.next_actions) && unique(data.next_actions)
   && data.next_actions.every(action=>['check_status','check_payment','resume_payment','contact_support','choose_new_time'].includes(action))
   && ['not_created','preparing','ready','needs_attention','cancelled'].includes(data.meeting_state));
- requireValue(data.meet_url===null || (data.appointment_state==='confirmed' && data.meeting_state==='ready'
-  && typeof data.meet_url==='string' && /^https:\/\/meet\.google\.com\/[a-z]{3}-[a-z]{4}-[a-z]{3}$/.test(data.meet_url)));
+ if(data.booking_revision!==undefined)requireValue(integer(data.booking_revision,1));
+ if(data.meeting_mode!==undefined)requireValue(['google_meet','internal'].includes(data.meeting_mode));
+ if(data.email_copy!==undefined && data.email_copy!==null)checkedEmailCopy(data.email_copy);
+ if(data.appointment_state==='confirmed' && data.meeting_mode==='google_meet' && data.meeting_state==='ready' && data.meet_url===null)
+  return {...data,meeting_state:'needs_attention'};
+ if(!(data.meet_url===null || (data.appointment_state==='confirmed' && data.meeting_state==='ready'
+  && typeof data.meet_url==='string' && /^https:\/\/meet\.google\.com\/[a-z]{3}-[a-z]{4}-[a-z]{3}$/.test(data.meet_url))))
+  return {...data,meet_url:null,meeting_state:'needs_attention'};
  return data;
 }
 
+export function checkedEmailCopy(value){
+ const keys='blocked_reason,booking_revision,can_request,has_booking_email,next_request_at,operation_id,remaining_requests,state,target_hint';
+ const states=['not_requested','pending','processing','provider_accepted','delivered','superseded','needs_attention'];
+ const reasons=['delivery_pending','delivery_unknown','cooldown','quota','destination_unavailable','copy_unavailable','booking_unavailable'];
+ requireValue(value && Object.keys(value).sort().join(',')===keys && states.includes(value.state)
+  && typeof value.has_booking_email==='boolean' && typeof value.can_request==='boolean' && integer(value.remaining_requests,0,3)
+  && (value.blocked_reason===null || reasons.includes(value.blocked_reason)) && value.can_request===(value.blocked_reason===null)
+  && (value.next_request_at===null || instant(value.next_request_at))
+  && (value.target_hint===null || text(value.target_hint,254) && /^[^\s@]\*\*\*@[^\s@]+$/u.test(value.target_hint)));
+ if(value.operation_id===null)requireValue(value.booking_revision===null && value.state==='not_requested' && value.target_hint===null);
+ else requireValue(/^[a-f0-9]{8}(?:-[a-f0-9]{4}){3}-[a-f0-9]{12}$/.test(value.operation_id)
+  && value.operation_id!=='00000000-0000-0000-0000-000000000000' && integer(value.booking_revision,1) && value.state!=='not_requested');
+ return value;
+}
+
 export function checkedCheckout(data,id){
- checkedReceipt(data?.receipt,id);
+ const receipt=checkedReceipt(data?.receipt,id);
  if(data.checkout!==null && data.checkout!==undefined){
   const c=data.checkout,r=data.receipt;
   requireValue(/^rzp_live_[A-Za-z0-9]+$/.test(c?.key_id) && /^order_[A-Za-z0-9]{1,64}$/.test(c?.order_id)
@@ -70,27 +92,31 @@ export function checkedCheckout(data,id){
    && r.captured_paise===0 && r.refunded_paise===0 && ['unobserved','pending','failed_observed'].includes(r.payment_state)
    && r.order_state==='ready' && r.next_actions.includes('resume_payment')
    && Date.parse(r.hold_expires_at)>Date.parse(r.server_now));
+  if(c.email_optional!==undefined)requireValue(typeof c.email_optional==='boolean' && typeof r.email_copy?.has_booking_email==='boolean'
+   && c.email_optional===!r.email_copy.has_booking_email);
  }
  if(data.retry_after!==undefined)requireValue(integer(data.retry_after,1,3600));
- return data;
+ return receipt===data.receipt?data:{...data,receipt};
 }
 
 export function checkedChallenge(data){
  requireValue(data?.code==='ok' && data.state==='awaiting_verification'
+  && /^[a-f0-9]{64}$/.test(data.booking_verification_policy_hash)
   && /^[a-f0-9]{8}(?:-[a-f0-9]{4}){3}-[a-f0-9]{12}$/.test(data.challenge_id)
   && integer(data.generation,1,3) && instant(data.expires_at));return data;
 }
 export function checkedGrant(data){
  requireValue(data?.code==='ok' && data.state==='verified' && instant(data.expires_at)
+  && /^[a-f0-9]{64}$/.test(data.booking_verification_policy_hash)
   && /^bv1\.[a-z0-9][a-z0-9_-]{0,31}\.[A-Za-z0-9_-]{43}$/.test(data.verification_grant));return data;
 }
 
 export function createBookingAPI(options={}){
- const request=createTransport({...options,allowed:path=>/^\/api\/(booking-policy|availability\?[^#]*|checkout-context|booking-verification\/(start|verify|resend)|checkout(?:\/(status|resume|verify-payment))?)$/.test(path)});
+ const request=createTransport({...options,allowed:path=>/^\/api\/(booking-policy|availability\?[^#]*|checkout-context|booking-verification\/(start|verify|resend)|checkout(?:\/(status|resume|verify-payment|email-details))?)$/.test(path)});
  return (path,{credential,...rest}={})=>request(path,{...rest,headers:credential?{'X-Booking-Receipt':credential.secret}:{}});
 }
 // This list is restricted to explicit pre-commit rejection codes from checkout.
 // Network errors, payment uncertainty and conflicts NEVER discard access.
 export const rejectedWithoutBooking=error=>error instanceof RequestError &&
  ((error.status===409 && ['intake_closed','quote_changed','service_unavailable','invalid_time','time_unavailable','request_rejected','verification_required'].includes(error.code))
-  || (error.status===422 && error.code==='invalid_request') || (error.status===503 && error.code==='payment_not_configured'));
+  || (error.status===422 && ['invalid_request','invalid_details','preparation_required'].includes(error.code)) || (error.status===503 && error.code==='payment_not_configured'));

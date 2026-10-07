@@ -63,13 +63,14 @@ class BookingInput(BaseModel):
 
 
 class BookingRequest(BookingInput):
-    """V2 preserves mailbox spelling; explicit V1 retains old retry bindings."""
-    normalization_version: Literal[1, 2] = 2
+    """V3 permits no email; V1/V2 keep their mandatory-email retry contracts."""
+    normalization_version: Literal[1, 2, 3] = 2
+    email: EmailStr | None = Field(default=None, max_length=254)
 
     @field_validator('normalization_version', mode='before')
     @classmethod
     def explicit_normalization_version(cls, value):
-        if type(value) is not int or value not in (1, 2):
+        if type(value) is not int or value not in (1, 2, 3):
             raise ValueError('Use an explicit supported request version.')
         return value
 
@@ -80,8 +81,18 @@ class BookingRequest(BookingInput):
         # sensitive and is not silently rewritten for new requests.
         return value
 
+    @field_validator('email', mode='before')
+    @classmethod
+    def absent_email(cls, value):
+        return None if isinstance(value, str) and not value.strip() else value
+
     @model_validator(mode='after')
     def legacy_normalization(self):
+        if self.email is None:
+            if self.normalization_version != 3:
+                raise ValueError('Email is required for this request version.')
+            if self.verification_grant is not None:
+                raise ValueError('Email verification requires an email address.')
         if self.normalization_version == 1:
             self.email = self.email.lower()
         return self

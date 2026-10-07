@@ -18,7 +18,7 @@ class BookingInputBoundaries(TestCase):
         old=BookingRequest(**self.body(),normalization_version=1);self.assertEqual(old.email,'mixedcase@example.com')
         legacy=BookingInput(**self.body());self.assertEqual(legacy.email,'mixedcase@example.com')
         self.assertEqual(new.starts_at,datetime(2026,10,9,4,30,tzinfo=timezone.utc))
-        for version in (True,False,0,3,'1',1.0):
+        for version in (True,False,0,4,'1',1.0):
             with self.subTest(version=version),self.assertRaises(ValueError):BookingRequest(**self.body(),normalization_version=version)
 
     def test_controls_ambiguous_times_and_invalid_mobile_numbers_are_rejected(self):
@@ -41,3 +41,17 @@ class BookingInputBoundaries(TestCase):
         for invalid_day,questions in [('2026-10-09',1),(datetime(2026,10,9),1),(day,True)]:
             with self.assertRaises(InvalidSelection):available_times(store,'consultation',invalid_day,questions)
         store.available_times.assert_not_called()
+
+    def test_only_v3_can_omit_email_without_weakening_the_legacy_importer(self):
+        for empty in (None,'','   '):
+            with self.subTest(empty=empty):
+                self.assertIsNone(BookingRequest(**(self.body()|{'email':empty,'normalization_version':3})).email)
+                for version in (1,2):
+                    with self.assertRaises(ValueError):BookingRequest(**(self.body()|{'email':empty,'normalization_version':version}))
+                with self.assertRaises(ValueError):BookingInput(**(self.body()|{'email':empty}))
+        body=self.body();body.pop('email')
+        self.assertIsNone(BookingRequest(**body,normalization_version=3).email)
+        with self.assertRaises(ValueError):BookingRequest(**body)
+        for invalid in ('not-an-email',True,12,[]):
+            with self.assertRaises(ValueError):BookingRequest(**(self.body()|{'email':invalid,'normalization_version':3}))
+        with self.assertRaises(ValueError):BookingRequest(**(self.body()|{'email':None,'normalization_version':3,'verification_grant':'synthetic'}))

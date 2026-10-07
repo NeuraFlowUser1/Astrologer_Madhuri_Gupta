@@ -1,6 +1,7 @@
 import {createTransport,RequestError} from '../transport.mjs';
 import {checkedReceipt} from './protocol.mjs';
 import {messageFor} from './messages.mjs';
+import {admissionAllowed} from '../product-state.mjs';
 
 export function createReceiptRecovery({receipts,storage,product,fetcher=globalThis.fetch}){
  const request=createTransport({fetcher,maximum:32768,timeout:20000,
@@ -10,14 +11,15 @@ export function createReceiptRecovery({receipts,storage,product,fetcher=globalTh
  let state=Object.freeze({reference:staged?.request_id||'',busy:false,restored:false,error,blocked});
  let alive=false,generation=0,write,unsubscribe,busy=false;const listeners=new Set();
  const notify=change=>{state=Object.freeze({...state,...change});for(const listener of listeners)listener();};
- const enabled=()=>alive && product.getSnapshot().enabled===true;
+ const enabled=()=>alive && admissionAllowed(product.getSnapshot());
  const mark=()=>({generation,epoch:product.getSnapshot().activation_epoch});
- const current=value=>enabled() && value.generation===generation && value.epoch===product.getSnapshot().activation_epoch;
+ const current=value=>alive && value.generation===generation && value.epoch===product.getSnapshot().activation_epoch
+  && !(product.getSnapshot().verified===true && product.getSnapshot().enabled===false);
  async function operation(work){
   if(!enabled() || busy || blocked || state.restored)return;
   const saved=mark(),abort=write=new AbortController();busy=true;notify({busy:true,error:''});
   try{await work(saved,abort.signal);}catch(e){if(current(saved))notify({error:messageFor(e)});}
-  finally{if(current(saved)){busy=false;write=null;notify({busy:false});}}
+  finally{if(saved.generation===generation && write===abort){busy=false;write=null;notify({busy:false});}}
  }
  async function check(saved,signal,{expected=false}={}){
   if(!staged)return false;
@@ -36,9 +38,9 @@ export function createReceiptRecovery({receipts,storage,product,fetcher=globalTh
   reference=reference.trim().toLowerCase();code=code.trim();
   if(!/^[a-f0-9]{8}-[a-f0-9]{4}-4[a-f0-9]{3}-[89ab][a-f0-9]{3}-[a-f0-9]{12}$/.test(reference) || !/^[0-9]{8}$/.test(code))throw new RequestError('invalid_request');
   if(staged && staged.request_id!==reference)throw new RequestError('receipt_conflict');
-  if(staged && await check(saved,signal))return;if(!current(saved))return;
+  if(staged && await check(saved,signal))return;if(!current(saved) || !enabled())return;
   if(!staged){
-   const policy=await request('/api/booking-policy',{signal});if(!current(saved))return;
+   const policy=await request('/api/booking-policy',{signal});if(!current(saved) || !enabled())return;
    staged=receipts.prepareRecovery(storage(),reference,policy);notify({reference});
   }
   const reply=await request('/api/checkout/recover-receipt',{body:{request_id:reference,code,secret:staged.secret},signal});
@@ -48,11 +50,12 @@ export function createReceiptRecovery({receipts,storage,product,fetcher=globalTh
  function stop(){alive=false;generation++;write?.abort();write=null;busy=false;unsubscribe?.();}
  function start(){
   if(alive)return stop;alive=true;generation++;busy=false;notify({busy:false});
-  let active=product.getSnapshot().enabled===true,epoch=product.getSnapshot().activation_epoch;
+  let previous=product.getSnapshot();
   unsubscribe=product.subscribe(()=>{
-   const p=product.getSnapshot();if(p.enabled===active && p.activation_epoch===epoch)return;
-   active=p.enabled;epoch=p.activation_epoch;generation++;write?.abort();write=null;busy=false;notify({busy:false,restored:false});
-   if(enabled() && staged)void operation((saved,signal)=>check(saved,signal));
+   const p=product.getSnapshot(),reset=p.activation_epoch!==previous.activation_epoch || p.verified===true && p.enabled===false;
+   const resume=admissionAllowed(p) && !admissionAllowed(previous);previous=p;
+   if(reset){generation++;write?.abort();write=null;busy=false;notify({busy:false,restored:false});}
+   if((reset || resume) && enabled() && staged)void operation((saved,signal)=>check(saved,signal));
   });
   if(enabled() && staged)void operation((saved,signal)=>check(saved,signal));return stop;
  }

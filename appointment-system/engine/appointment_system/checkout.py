@@ -29,9 +29,9 @@ def pinned(accounts, row):
     return accounts.pinned(row['merchant_id'], row['mode'], row['credential_version'])
 
 
-def resume_checkout(store, accounts, settings, request_id, secret, wake):
+def resume_checkout(store, accounts, settings, request_id, secret, wake,*,sending_ready=None):
     saved = store.receipt_snapshot(request_id)
-    view = receipt_view(saved, request_id, secret, settings.receipt_key)
+    view = receipt_view(saved, request_id, secret, settings.receipt_key,sending_ready=sending_ready)
     row = saved['booking']
     if saved.get('booking_product_enabled') is False:
         return dict(receipt=view,checkout=None)
@@ -85,24 +85,25 @@ def resume_checkout(store, accounts, settings, request_id, secret, wake):
     finished = store.finish_checkout_resume(job, 15, followup_cursor, job['order_search_skip'], error=error)
     if wake is not None:
         wake.publish()
-    current = receipt_view(store.receipt_snapshot(request_id), request_id, secret, settings.receipt_key)
+    current = receipt_view(store.receipt_snapshot(request_id), request_id, secret, settings.receipt_key,sending_ready=sending_ready)
     if (finished is not True or not launch or current['appointment_state'] != 'held'
             or current['payment_state'] not in ('unobserved', 'failed_observed')
             or store.checkout_launchable(row['booking_id']) is not True):
         return dict(receipt=current, checkout=None, retry_after=15)
     current = dict(current, next_actions=['resume_payment', 'check_status'])
     return dict(receipt=current, checkout=dict(key_id=adapter.credentials.key_id,
-        order_id=row['provider_order_id'], amount_paise=row['amount_paise'], currency=row['currency']))
+        order_id=row['provider_order_id'], amount_paise=row['amount_paise'], currency=row['currency'],
+        **({'email_optional':row['has_booking_email'] is False} if type(row.get('has_booking_email')) is bool else {})))
 
 
-def add_checkout_routes(app, store, settings, accounts, browser_request, limit, wake,*,verification_keys=None):
+def add_checkout_routes(app, store, settings, accounts, browser_request, limit, wake,*,verification_keys=None,sending_ready=None):
     @app.post('/api/checkout/resume')
     def resume(request: Request, body: ResumeRequest):
         browser_request(request)
         limit(request, 'checkout')
         try:
             return resume_checkout(store, accounts, settings, body.request_id,
-                                   request.headers.get('x-booking-receipt'), wake)
+                                   request.headers.get('x-booking-receipt'), wake,sending_ready=sending_ready)
         except RazorpayFailure:
             raise StorageUnavailable('Payment recovery is temporarily unavailable.') from None
 
@@ -148,6 +149,8 @@ def add_checkout_routes(app, store, settings, accounts, browser_request, limit, 
                 'intake_closed': 'Online booking is not available at the moment.',
                 'quote_changed': 'The consultation details have changed. Please review them again.',
                 'verification_required': 'Please verify your email before continuing.',
+                'invalid_details': 'Please check your contact and birth details.',
+                'preparation_required': 'Please fill the required consultation details.',
                 'service_unavailable': 'Please choose an available consultation.',
                 'invalid_time': 'Please choose an available appointment time.',
                 'time_unavailable': 'That time is no longer available. Please choose another.',
@@ -156,7 +159,7 @@ def add_checkout_routes(app, store, settings, accounts, browser_request, limit, 
             }
             if code not in messages:
                 raise StorageUnavailable('Reservation outcome unavailable.')
-            return JSONResponse(dict(code=code, message=messages[code]), 503 if code == 'payment_not_configured' else 429 if code == 'rate_limited' else 409)
+            return JSONResponse(dict(code=code, message=messages[code]), 422 if code in ('invalid_details','preparation_required') else 503 if code == 'payment_not_configured' else 429 if code == 'rate_limited' else 409)
         saved = store.receipt_snapshot(body.request_id)
         receipt_view(saved, body.request_id, secret, settings.receipt_key)
         row = saved['booking']
@@ -167,7 +170,7 @@ def add_checkout_routes(app, store, settings, accounts, browser_request, limit, 
             create_once(store, adapter, context_id, row['booking_id'])
             if wake is not None:
                 wake.publish()
-            return resume_checkout(store, accounts, settings, body.request_id, secret, wake)
+            return resume_checkout(store, accounts, settings, body.request_id, secret, wake,sending_ready=sending_ready)
         except RazorpayFailure:
             # The committed reservation remains visible/recoverable. No new
             # request, another provider order, or automatic retry is invented.

@@ -6,7 +6,7 @@ from threading import Lock
 
 from .errors import unavailable
 from .serialization import decode
-from .settings import BusinessSettings, Installation
+from .settings import BusinessSettings, Installation, canonical_business_contacts
 
 
 @dataclass(frozen=True)
@@ -28,7 +28,7 @@ def configure(installation, initial_business):
     A process never switches installations. Business changes are read from the
     database, not by modifying this bootstrap snapshot or hot-reloading files.
     """
-    incoming = Profile(Installation.parse(installation), BusinessSettings.parse(initial_business))
+    incoming = Profile(Installation.parse(installation), BusinessSettings.parse(canonical_business_contacts(initial_business)))
     global _profile
     with _lock:
         if _profile is not None and _profile != incoming:

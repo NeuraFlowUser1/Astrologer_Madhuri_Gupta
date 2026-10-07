@@ -7,8 +7,9 @@ import subprocess
 import tempfile
 import unittest
 from uuid import uuid4
+from unittest.mock import patch
 import psycopg
-from appointment_system.backup.database import export_connection,validate_archive,migration_hashes
+from appointment_system.backup.database import export_connection,validate_archive,migration_hashes,IsolatedPostgres
 from appointment_system.backup.snapshot import capture
 from appointment_system.backup.protocol import Identity,BackupError
 from appointment_system.backup.age_stream import hashed
@@ -21,6 +22,9 @@ from appointment_system.company_auth import password_hash
 from . import test_backup_protocol as backup_tests
 from tools.checks.sql_target import literal
 from tools.conversion import verification
+from .test_mail_contracts import document
+from appointment_system.email_configuration import connection as mail_connection
+from .test_sql_receipt_copy import ReceiptCopySQL
 
 @unittest.skipUnless(os.environ.get('BOOKING_SQL_TEST_TARGET') and os.environ.get('BOOKING_AGE_BINARY'),
     'Owned native PostgreSQL socket and pinned native age tool are both required.')
@@ -75,8 +79,17 @@ class BackupSQL(BookingFixture):
             ' FROM appointment_system.installation WHERE singleton;')
         self.db.sql('INSERT INTO appointment_system.conversion_retained_enquiries VALUES ('+literal(handover)+','+
             literal(retained)+",'synthetic_retired',"+literal('f'*64)+",'{}');")
-        booking=self.booking();self.assertEqual(self.start_order(booking),'t');self.assertEqual(self.record_order(booking),'ready')
+        booking=self.booking(email=None,normalization_version=3);self.assertEqual(self.start_order(booking),'t');self.assertEqual(self.record_order(booking),'ready')
         self.assertEqual(self.capture(booking),'confirmed')
+        declared=mail_connection(json.dumps(document()))
+        self.db.scalar('SELECT appointment_system.configure_mail_connection('+literal({
+            'account_id':declared.account_id,'active_key_id':declared.active_key_id,
+            'retained_keys':list(declared.keys),'legacy_identities':document()['legacy_identities']})+'::jsonb,20,600);')
+        accepted=ReceiptCopySQL.copy(self,booking)
+        self.assertEqual(accepted['code'],'receipt_copy_accepted')
+        ReceiptCopySQL.history(self,booking,age=120,state='suppressed')
+        copy_query="SELECT jsonb_agg(to_jsonb(j) ORDER BY id) FROM appointment_system.delivery_jobs j WHERE kind='booking_receipt';"
+        expected_copies=self.db.value(copy_query)
         self.db.sql('TRUNCATE appointment_system.google_workbooks,appointment_system.google_workbook_volumes CASCADE;'
             "UPDATE appointment_system.sheet_projection_turns SET last_was_current=false;"
             "INSERT INTO appointment_system.google_workbooks(role,subject,client_id,spreadsheet_id,state,connection_revision,layout_version) "
@@ -125,7 +138,17 @@ class BackupSQL(BookingFixture):
                 archive_name='appointment-'+self.scope.installation_id+'-12345-1.dump.age',archive_sha256=sha,archive_bytes=size,
                 created_at=datetime.now(timezone.utc).strftime('%Y-%m-%dT%H:%M:%SZ'),schemas=['appointment_system'],database_contract=1,
                 **{key:value for key,value in facts.items() if key!='snapshot'})
-            proof=validate_archive(path,self.scope,manifest,self.identity,self.binary,self.ledger)
+            restored_facts=[];original_query=IsolatedPostgres.query
+            def query_with_copy_proof(target,query):
+                result=original_query(target,query)
+                if 'jsonb_object_agg(version,sha256)' in query:
+                    self.assertEqual(original_query(target,'SELECT count(*) FROM appointment_system.bookings WHERE email IS NULL;'),'1')
+                    self.assertEqual(json.loads(original_query(target,copy_query)),expected_copies)
+                    restored_facts.append(True)
+                return result
+            with patch.object(IsolatedPostgres,'query',query_with_copy_proof):
+                proof=validate_archive(path,self.scope,manifest,self.identity,self.binary,self.ledger)
+            self.assertEqual(restored_facts,[True],'The independent restored database must preserve NULL contacts and both queued and settled immutable copy rows.')
             self.assertEqual(proof['migration_count'],len(self.ledger));self.assertEqual(proof['restored_authority'],'off_new_generation')
             self.assertEqual(len(proof['invariants_digest']),64)
 

@@ -22,7 +22,7 @@ test('actual email-code fields reset stale input, respect expiry and expose only
   const Fields=createVerificationFields(React),root=createRoot(document.getElementById('root'));
   window.proofCalls=[];
   const base={policy:{policy:{booking_verification:{email:true}}},credential:null,verification:null,challenge:null,
-   details:{email:'synthetic@example.test'},busy:false,retryAt:0,serverOffset:0};
+   details:{email:'synthetic@example.test'},busy:false,retryAt:0,serverOffset:0,policyFresh:true};
   window.proofState=base;
   window.renderProof=change=>{
    window.proofState={...base,...change};
@@ -67,6 +67,14 @@ test('actual email-code fields reset stale input, respect expiry and expose only
   await input.fill('654321');
   await page.evaluate(challenge=>window.renderProof({challenge:{...challenge,generation:2},details:{email:'changed@example.test'}}),challenge);
   await page.waitForFunction(()=>document.querySelector('input')?.value==='');
+  await input.fill('654321');
+  await page.evaluate(challenge=>window.renderProof({challenge:{...challenge,generation:2},details:{email:'changed@example.test'},policyFresh:false}),challenge);
+  await page.waitForFunction(()=>document.querySelector('input')?.disabled===true);
+  assert.equal(await input.inputValue(),'654321','A temporary policy check must keep the typed code');
+  assert.equal(await verify.isDisabled(),true);
+  await page.evaluate(challenge=>window.renderProof({challenge:{...challenge,generation:2},details:{email:'changed@example.test'}}),challenge);
+  await page.waitForFunction(()=>document.querySelector('input')?.disabled===false);
+  assert.equal(await input.inputValue(),'654321');
   await page.evaluate(challenge=>window.renderProof({challenge:{...challenge,generation:3}}),challenge);
   await page.waitForFunction(()=>[...document.querySelectorAll('button')].find(b=>b.textContent==='Send another code')?.disabled===true);
   await page.evaluate(challenge=>window.renderProof({challenge,busy:true}),challenge);

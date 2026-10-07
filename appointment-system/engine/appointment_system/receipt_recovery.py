@@ -85,7 +85,7 @@ class SupportChange(CalendarAction):
 
     @model_validator(mode='after')
     def action_fields(self):
-        if self.action=='contact_correction' and (self.email is None or self.phone is None):raise ValueError('Email and mobile are required.')
+        if self.action=='contact_correction' and self.phone is None:raise ValueError('Mobile is required.')
         if self.action=='receipt_recovery' and (self.email is not None or self.phone is not None):raise ValueError('Receipt recovery cannot change contacts.')
         return self
 

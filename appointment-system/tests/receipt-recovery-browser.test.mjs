@@ -13,7 +13,7 @@ function fixture({legacy=false}={}){
  const values=new Map(),storage={getItem:key=>values.get(key)??null,setItem:(key,value)=>values.set(key,value),removeItem:key=>values.delete(key)};
  const receipts=createReceiptStore({installation_id,environment:'test',legacy_receipts:[{key:'fixture:old',format:'id-hex64'}]});
  if(legacy)values.set('fixture:old',JSON.stringify({id:reference,secret:'a'.repeat(64)}));
- let snapshot={enabled:true,activation_epoch:epoch};const listeners=new Set(),calls=[];
+ let snapshot={enabled:true,verified:true,checking:false,retained_on_epoch:epoch,foreground_revision:0,activation_epoch:epoch};const listeners=new Set(),calls=[];
  const product={getSnapshot:()=>snapshot,subscribe:listener=>{listeners.add(listener);return()=>listeners.delete(listener);}};
  const result={values,storage,receipts,calls,product,installed:null,override:null};
  result.change=value=>{snapshot={...snapshot,...value};for(const listener of listeners)listener();};

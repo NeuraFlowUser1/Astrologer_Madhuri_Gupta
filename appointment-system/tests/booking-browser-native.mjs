@@ -18,7 +18,7 @@ const receipts=createReceiptStore(settings);
 let paymentOptions,opened=0;
 const payment={load:async()=>{},open:(value,options)=>{opened++;paymentOptions={value,options};return()=>{};},
  rememberAndSubmit:async(c,signed)=>bridge('/api/checkout/verify-payment',{body:{request_id:c.request_id,...signed},credential:c})};
-let enabled=true,changed;const product={getSnapshot:()=>({enabled,activation_epoch:settings.installation_id}),subscribe:fn=>{changed=fn;return()=>{};}};
+let enabled=true,changed;const product={getSnapshot:()=>({enabled,verified:true,checking:false,activation_epoch:settings.installation_id}),subscribe:fn=>{changed=fn;return()=>{};}};
 const controller=createBookingController({api:(path,{signal,...options}={})=>bridge(path,options),receipts,storage:()=>storage,payment,product,
  interval:()=>1,clearInterval:()=>{},documentObject:{visibilityState:'visible'}});
 const until=async(predicate,label)=>{const started=Date.now();while(!predicate()){
@@ -27,7 +27,7 @@ controller.start();await until(()=>!controller.getSnapshot().loadingPolicy,'poli
 assert.ok(controller.getSnapshot().policy);
 const date=await bridge('test:date');controller.edit('day',date.value);await until(()=>controller.getSnapshot().slotsStatus==='ready','slots');
 assert.ok(controller.getSnapshot().slots.length);
-controller.details('full_name','Synthetic Customer');controller.details('email','Customer@example.com');controller.details('phone','9876543210');
+controller.details('full_name','Synthetic Customer');controller.details('email',settings.no_email?'':'Customer@example.com');controller.details('phone','9876543210');
 controller.edit('slot',controller.getSnapshot().slots[0]);
 if(controller.getSnapshot().policy.policy.booking_verification.email){
  await controller.startVerification();assert.ok(controller.getSnapshot().challenge);

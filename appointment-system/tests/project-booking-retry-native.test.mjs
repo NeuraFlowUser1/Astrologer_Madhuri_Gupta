@@ -33,29 +33,30 @@ test('actual booking form retries failed policy and schedule reads without start
  try{
   await page.goto(proof.origin+'/booking');
   await page.locator('[role=alert]').filter({hasText:/\S/}).first().waitFor();
+  const stepped=await page.locator('.sarsa-booking').count()>0;
   assert.equal(await page.locator('button[type=submit]').isDisabled(),true);
   policyFailure=false;
-  await page.getByRole('button',{name:'Reload consultation details',exact:true}).click();
-  await page.getByRole('button',{name:/^(Try again|Retry available times)$/}).waitFor();
+  await page.getByRole('button',{name:stepped?'Reload service details':'Reload consultation details',exact:true}).click();
+  const retry=page.getByRole('button',{name:/^(Try again|Retry available times|Check available times)$/});
+  await retry.waitFor();
   assert.equal(await page.locator('input[name=time],button[data-booking-time]').count(),0);
   assert.equal(await page.locator('button[type=submit]').isDisabled(),true);
-  schedule='empty';await page.getByRole('button',{name:/^(Try again|Retry available times)$/}).click();
-  await page.getByText('There are no available times on this day. Please choose another date.',{exact:true}).waitFor();
+  schedule='empty';await retry.click();
+  await page.getByText(stepped?'No times are available on this date. Please choose another date.':'There are no available times on this day. Please choose another date.',{exact:true}).waitFor();
   assert.equal(await page.locator('button[type=submit]').isDisabled(),true);
   // A fresh page visit checks the same saved business rules; no fake receipt is introduced.
   schedule='ready';await page.reload();
   const slot=page.locator('input[name=time],button[data-booking-time]').first();await slot.waitFor();
-  const stepped=await page.locator('#appointment-date').count()>0;
   for(const service of offered.policy.services){
    if(stepped)await page.locator('input[name=service][value="'+service.id+'"]').check();
    else await page.locator('#readingType').selectOption(service.id);
    await slot.waitFor();
-   if(stepped)assert.equal(await page.locator('.appointment-service').innerText(),service.name);
+   if(stepped)assert.equal(await page.locator('.selected-service').innerText(),service.name);
    else assert.equal(await page.locator('#readingType').inputValue(),service.id);
   }
   if(await slot.evaluate(node=>node.tagName==='INPUT'))await slot.check();else await slot.click();
   if(stepped){
-   await page.getByRole('button',{name:'Your details →',exact:true}).click();
+   await page.getByRole('button',{name:'Fill your details →',exact:true}).click();
    await page.getByRole('button',{name:'Review your booking →',exact:true}).click();
    assert.equal(await page.locator('#full_name').evaluate(node=>node.validity.valueMissing),true);
   }
@@ -70,10 +71,10 @@ test('actual booking form retries failed policy and schedule reads without start
    for(const button of await page.getByRole('button',{name:'Edit',exact:true}).all())await button.click();
    assert.equal(await page.locator('#full_name').inputValue(),'Synthetic Customer');
    assert.equal(await page.locator('#notes').inputValue(),'A synthetic appointment question.');
-   for(const button of await page.locator('.journey-nav a').all())await button.click();
+   for(const button of await page.locator('.journey-nav button').all())await button.click();
    await page.getByRole('button',{name:'← Date & time',exact:true}).click();
-   await page.getByRole('button',{name:'← Consultation',exact:true}).click();
-   await page.getByRole('button',{name:'Choose a time →',exact:true}).click();
+   await page.getByRole('button',{name:'← Service',exact:true}).click();
+   await page.getByRole('button',{name:'Choose a date and time →',exact:true}).click();
   }
   assert.equal(await page.locator('button[type=submit]').isDisabled(),true,'An unchecked acknowledgement must prevent submission');
   await page.locator('input[type=checkbox]').check();

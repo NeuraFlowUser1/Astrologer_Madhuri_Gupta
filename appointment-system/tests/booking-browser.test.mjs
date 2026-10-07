@@ -10,9 +10,9 @@ const deferred=()=>{let resolve,reject;const promise=new Promise((a,b)=>{resolve
 
 async function fixture({otp=false,initialReceipt=null,overrides={},initialEnabled=true}={}){
  const values=new Map(),storage={getItem:key=>values.get(key)??null,setItem:(key,value)=>values.set(key,value),removeItem:key=>values.delete(key)};
- const receipts=createReceiptStore({installation_id,environment:'test'}),p=policy();p.policy.booking_verification.email=otp;
+ const receipts=createReceiptStore({installation_id,environment:'test'}),p=policy();p.policy.booking_verification.email=otp;p.policy.required_contacts=otp?['email','phone']:['phone'];
  if(initialReceipt)receipts.prepareReceipt(storage,p);
- let product={enabled:initialEnabled,activation_epoch:epoch},notifyProduct,poll,callbacks,opened=0,closed=0,clock=now;
+ let product={enabled:initialEnabled,verified:true,checking:false,retained_on_epoch:initialEnabled?epoch:null,foreground_revision:0,activation_epoch:epoch},notifyProduct,poll,callbacks,opened=0,closed=0,clock=now;
  const calls=[];
  const api=async(path,options={})=>{
   calls.push({path,...structuredClone({...options,signal:undefined})});
@@ -23,9 +23,9 @@ async function fixture({otp=false,initialReceipt=null,overrides={},initialEnable
   if(path==='/api/checkout-context')return {ready:true};
   if(path==='/api/checkout/status')return receipt(options.body.request_id);
   if(path==='/api/checkout' || path==='/api/checkout/resume')return checkout(options.body.request_id);
-  if(path==='/api/booking-verification/start' || path==='/api/booking-verification/resend')return {code:'ok',state:'awaiting_verification',
+  if(path==='/api/booking-verification/start' || path==='/api/booking-verification/resend')return {code:'ok',booking_verification_policy_hash:'b'.repeat(64),state:'awaiting_verification',
    challenge_id:'e8e4b70f-d390-41c9-9b47-b3c50aac25b1',generation:path.endsWith('resend')?2:1,expires_at:new Date(now+300000).toISOString()};
-  if(path==='/api/booking-verification/verify')return {code:'ok',state:'verified',verification_grant:'bv1.current.'+'a'.repeat(43),expires_at:new Date(now+300000).toISOString()};
+  if(path==='/api/booking-verification/verify')return {code:'ok',booking_verification_policy_hash:'b'.repeat(64),state:'verified',verification_grant:'bv1.current.'+'a'.repeat(43),expires_at:new Date(now+300000).toISOString()};
   throw Error('Unimplemented fixture path '+path);
  };
  const payment={load:async()=>{},open:(_checkout,c)=>{opened++;callbacks=c;return()=>{closed++;};},
@@ -35,7 +35,9 @@ async function fixture({otp=false,initialReceipt=null,overrides={},initialEnable
  controller.start();await tick();
  return {controller,calls,p,values,receipts,storage,payment,overrides,poll:()=>poll(),setClock:value=>{clock=value;},
   opened:()=>opened,closed:()=>closed,callback:()=>callbacks,
-  mode:(enabled,activation_epoch=epoch)=>{product={enabled,activation_epoch};notifyProduct();},
+  checking:()=>{product={...product,checking:true,verified:false,foreground_revision:product.foreground_revision+1};notifyProduct();},
+  settled:()=>{product={...product,checking:false,verified:true};notifyProduct();},
+  mode:(enabled,activation_epoch=epoch)=>{product={...product,enabled,verified:true,checking:false,retained_on_epoch:enabled?activation_epoch:null,activation_epoch};notifyProduct();},
   draft:()=>{controller.details('full_name','Test Customer');controller.details('email','Customer@example.net');
    controller.details('phone','9876543210');controller.edit('slot',controller.getSnapshot().slots[0]);controller.acknowledge(true);},
  };
@@ -48,7 +50,7 @@ test('both configured verification modes use the same request and receipt coordi
    await f.controller.startVerification();await f.controller.verifyCode('123456');f.controller.acknowledge(true);}
   await f.controller.checkout();assert.equal(f.opened(),1);
   const submitted=f.calls.find(c=>c.path==='/api/checkout');assert.equal(submitted.body.email,'Customer@example.net');assert.equal(submitted.body.phone,'+919876543210');
-  assert.equal(!!submitted.body.verification_grant,otp);assert.equal(submitted.body.normalization_version,2);
+  assert.equal(!!submitted.body.verification_grant,otp);assert.equal(submitted.body.normalization_version,3);
   assert.equal([...f.values.values()].some(value=>value.includes('Customer') || value.includes('9876543210')),false);
   await f.callback().onSuccess({razorpay_order_id:'order_fixture',razorpay_payment_id:'pay_fixture',razorpay_signature:'a'.repeat(64)});
   assert.equal(f.controller.getSnapshot().receipt.appointment_state,'confirmed');f.controller.stop();
@@ -90,7 +92,7 @@ test('booking OFF prevents start, closes checkout and rejects a stale response a
 
 test('changing email invalidates verification; lost code replies retry one operation; unrelated fields preserve proof',async()=>{
  let attempts=0;const f=await fixture({otp:true,overrides:{'/api/booking-verification/start':async()=>{
-  if(attempts++===0)throw new RequestError();return {code:'ok',state:'awaiting_verification',challenge_id:'e8e4b70f-d390-41c9-9b47-b3c50aac25b1',generation:1,expires_at:new Date(now+300000).toISOString()};}}});
+  if(attempts++===0)throw new RequestError();return {code:'ok',booking_verification_policy_hash:'b'.repeat(64),state:'awaiting_verification',challenge_id:'e8e4b70f-d390-41c9-9b47-b3c50aac25b1',generation:1,expires_at:new Date(now+300000).toISOString()};}}});
  f.draft();await f.controller.startVerification();await f.controller.startVerification();
  const calls=f.calls.filter(c=>c.path==='/api/booking-verification/start');assert.deepEqual(calls[0].body,calls[1].body);
  await f.controller.verifyCode('123456');assert.ok(f.controller.getSnapshot().verification);
@@ -155,12 +157,12 @@ test('invalid edits leave the exact selection intact and listeners can unsubscri
  const f=await fixture();let observed=0;const off=f.controller.subscribe(()=>observed++);const before=f.controller.getSnapshot();
  for(const [name,value] of [['service','missing'],['day','bad'],['questions',0],['questions',2],['questions',1.5],['slot',null],['unknown','value']])f.controller.edit(name,value);
  f.controller.details('unknown','value');f.controller.details('email',null);assert.equal(f.controller.getSnapshot(),before);
- f.controller.edit('service',before.service);await tick();assert.ok(observed);off();const saved=observed;f.controller.report('Example error');assert.equal(observed,saved);assert.equal(f.controller.getSnapshot().error,'Example error');f.controller.report('a'.repeat(501));f.controller.report(null);assert.equal(f.controller.getSnapshot().error,'Example error');f.controller.stop();
+ f.controller.edit('service',before.service);await tick();assert.equal(observed,0);f.controller.details('notes','Retain this note');assert.ok(observed);off();const saved=observed;f.controller.report('Example error');assert.equal(observed,saved);assert.equal(f.controller.getSnapshot().error,'Example error');f.controller.report('a'.repeat(501));f.controller.report(null);assert.equal(f.controller.getSnapshot().error,'Example error');f.controller.stop();
 });
 test('no enabled service offers no checkout and a failed policy or availability read cannot reuse an old quote',async()=>{
  const f=await fixture();f.p.policy.services[0].enabled=false;await f.controller.loadPolicy();assert.equal(f.controller.getSnapshot().service,'');await f.controller.checkout();assert.equal(f.opened(),0);
  f.p.policy.services[0].enabled=true;f.overrides['/api/booking-policy']=async()=>{throw new RequestError();};await f.controller.loadPolicy();assert.equal(f.controller.getSnapshot().loadingPolicy,false);assert.ok(f.controller.getSnapshot().error);
- delete f.overrides['/api/booking-policy'];await f.controller.loadPolicy();const path=f.calls.filter(c=>c.path.startsWith('/api/availability')).at(-1).path;f.overrides[path]=async()=>{throw new RequestError();};await f.controller.loadSlots();assert.equal(f.controller.getSnapshot().slotsStatus,'error');assert.equal(f.controller.getSnapshot().quote,null);f.controller.stop();
+ delete f.overrides['/api/booking-policy'];await f.controller.loadPolicy();assert.equal(f.controller.getSnapshot().service,'');f.controller.edit('service','consultation');await tick();const path=f.calls.filter(c=>c.path.startsWith('/api/availability')).at(-1).path;f.overrides[path]=async()=>{throw new RequestError();};await f.controller.loadSlots();assert.equal(f.controller.getSnapshot().slotsStatus,'error');assert.equal(f.controller.getSnapshot().quote,null);f.controller.stop();
 });
 test('a newer availability request wins even when the old request ignores cancellation',async()=>{
  const f=await fixture(),pending=deferred();const oldPath=f.calls.find(c=>c.path.startsWith('/api/availability')).path;f.overrides[oldPath]=()=>pending.promise;
@@ -196,4 +198,55 @@ test('settled receipt states stop automatic checks and OFF makes every new actio
   const f=await fixture({initialReceipt:true,overrides:{'/api/checkout/status':async({body})=>({...receipt(body.request_id),...changes})}});const count=f.calls.length;f.poll();await tick();assert.equal(f.calls.length,count);f.controller.stop();
  }
  const f=await fixture({initialEnabled:false});await f.controller.loadPolicy();await f.controller.checkout();await f.controller.resume();await f.controller.restart();await f.controller.startVerification();assert.equal(f.calls.length,0);f.controller.stop();
+});
+
+test('foreground checks retain all fields, selections and proof while refusing new operations',async()=>{
+ const f=await fixture({otp:true});f.draft();await f.controller.startVerification();await f.controller.verifyCode('123456');f.controller.acknowledge(true);
+ const before=f.controller.getSnapshot(),calls=f.calls.length;f.checking();
+ assert.deepEqual(f.controller.getSnapshot(),before);await f.controller.checkout();await f.controller.resendVerification();assert.equal(f.calls.length,calls);
+ f.settled();await tick();const after=f.controller.getSnapshot();
+ assert.deepEqual(after.details,before.details);assert.deepEqual(after.slot,before.slot);assert.deepEqual(after.verification,before.verification);assert.equal(after.ack,true);
+ assert.equal(f.calls.slice(calls).filter(c=>c.path==='/api/booking-policy').length,1);
+ assert.equal(f.calls.slice(calls).filter(c=>c.path.startsWith('/api/availability')).length,1);f.controller.stop();
+});
+test('an in-flight verification result survives a check and never leaves busy stuck',async()=>{
+ const pending=deferred(),f=await fixture({otp:true,overrides:{'/api/booking-verification/start':()=>pending.promise}});f.draft();
+ const action=f.controller.startVerification();await tick();f.checking();
+ pending.resolve({code:'ok',booking_verification_policy_hash:'b'.repeat(64),state:'awaiting_verification',challenge_id:'e8e4b70f-d390-41c9-9b47-b3c50aac25b1',generation:1,expires_at:new Date(now+300000).toISOString()});
+ await action;assert.ok(f.controller.getSnapshot().challenge);assert.equal(f.controller.getSnapshot().busy,false);
+ f.settled();await tick();assert.ok(f.controller.getSnapshot().challenge);f.controller.stop();
+});
+test('failed foreground availability keeps the selected facts but refuses a payment',async()=>{
+ const f=await fixture();f.draft();const before=f.controller.getSnapshot();
+ const path=f.calls.find(c=>c.path.startsWith('/api/availability')).path;f.overrides[path]=async()=>{throw new RequestError();};
+ f.checking();f.settled();await tick();const after=f.controller.getSnapshot();
+ assert.deepEqual(after.slot,before.slot);assert.deepEqual(after.details,before.details);assert.equal(after.slotsFresh,false);
+ await f.controller.checkout();assert.equal(f.opened(),0);f.controller.stop();
+});
+test('a removed slot clears only the appointment choice on a foreground return',async()=>{
+ const f=await fixture();f.draft();const before=f.controller.getSnapshot(),path=f.calls.find(c=>c.path.startsWith('/api/availability')).path;
+ f.overrides[path]=async()=>({...availability(f.p),slots:[]});f.checking();f.settled();await tick();
+ assert.equal(f.controller.getSnapshot().slot,null);assert.equal(f.controller.getSnapshot().ack,false);
+ assert.deepEqual(f.controller.getSnapshot().details,before.details);f.controller.stop();
+});
+test('a renewed context clears the old code proof and asks for an explicit new code',async()=>{
+ const f=await fixture({otp:true});f.draft();await f.controller.startVerification();await f.controller.verifyCode('123456');f.controller.acknowledge(true);
+ f.overrides['/api/checkout-context']=async()=>({ready:true,renewed:true});const prior=f.calls.length;
+ await f.controller.checkout();assert.equal(f.opened(),0);assert.equal(f.controller.getSnapshot().verification,null);
+ assert.equal(f.controller.getSnapshot().details.email,'Customer@example.net');assert.equal(f.calls.slice(prior).some(c=>c.path.includes('booking-verification')),false);f.controller.stop();
+});
+test('committed checkout received during checking opens once only after verified ON',async()=>{
+ const pending=deferred(),f=await fixture({overrides:{'/api/checkout':()=>pending.promise}});f.draft();
+ const action=f.controller.checkout();await tick();const saved=f.controller.getSnapshot().credential;f.checking();pending.resolve(checkout(saved.request_id));await action;
+ assert.ok(f.controller.getSnapshot().receipt);assert.equal(f.opened(),0);assert.equal(f.controller.getSnapshot().busy,false);
+ f.settled();await tick();assert.equal(f.opened(),1);f.checking();f.settled();await tick();assert.equal(f.opened(),1);assert.equal(f.closed(),0);f.controller.stop();
+});
+
+test('late older receipt observations cannot overwrite a newer revision or newer same-revision facts',async()=>{
+ const f=await fixture({initialReceipt:true}),id=f.controller.getSnapshot().credential.request_id;
+ const fresh={...receipt(id),booking_revision:2,server_now:new Date(now+1000).toISOString()};
+ f.controller.updateReceipt(fresh);f.controller.updateReceipt({...fresh,booking_revision:1});
+ assert.equal(f.controller.getSnapshot().receipt.booking_revision,2);
+ f.controller.updateReceipt({...fresh,server_now:new Date(now).toISOString()});
+ assert.equal(f.controller.getSnapshot().receipt.server_now,fresh.server_now);f.controller.stop();
 });

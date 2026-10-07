@@ -101,7 +101,7 @@ def add_booking_verification_routes(app,store,settings,keys,browser_request,limi
         code=value.get('code')
         if code in codes:return JSONResponse({'code':code},codes[code],headers={'Retry-After':'60'} if codes[code]==429 else None)
         if code!='ok':raise StorageUnavailable()
-        public={name:value[name] for name in ('code','challenge_id','generation','expires_at','state') if name in value}
+        public={name:value[name] for name in ('code','challenge_id','generation','expires_at','state','booking_verification_policy_hash') if name in value}
         if public.get('state')=='awaiting_verification' and wake is not None:wake.publish()
         return public
 
@@ -137,5 +137,6 @@ def add_booking_verification_routes(app,store,settings,keys,browser_request,limi
         if isinstance(value,dict) and value.get('state')=='verified':
             # A matching retry returns the originally committed opaque grant.
             saved_token=keys.cipher.open('booking-grant:'+str(body.operation_id),value['grant_ciphertext'],purpose='appointment:v1:booking-grant')['token']
-            return {'code':'ok','state':'verified','verification_grant':saved_token,'expires_at':value['expires_at']}
+            return {'code':'ok','state':'verified','verification_grant':saved_token,'expires_at':value['expires_at'],
+                    'booking_verification_policy_hash':value['booking_verification_policy_hash']}
         return outcome(value)

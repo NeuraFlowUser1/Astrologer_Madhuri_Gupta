@@ -37,7 +37,7 @@ def values_for(job):
             local = timestamp(data['starts_at']).astimezone(ZoneInfo(data['practice_timezone']))
             preparation = data.get('preparation') or {}
             values = [data['request_id'], data['state'], data['created_at'], data['full_name'],
-                data['email'], data['phone'], data['service_snapshot']['name'], str(data['questions']),
+                '' if data['email'] is None else data['email'], data['phone'], data['service_snapshot']['name'], str(data['questions']),
                 str(Decimal(data['amount_paise']) / 100), data['currency'], local.date().isoformat(),
                 local.strftime('%H:%M'), data['practice_timezone'], preparation.get('birth_date') or '',
                 preparation.get('birth_time') or '', preparation.get('birth_place') or '',

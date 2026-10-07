@@ -12,7 +12,7 @@ export function createVerificationFields(React){
   },[state.retryAt,expiry,now]);
   if(!state.policy?.policy.booking_verification.email || state.credential)return null;
   if(state.verification && expiry>Date.now())return h('p',{role:'status'},'Your email address is verified.');
-  const waiting=state.busy || Date.now()<state.retryAt;
+  const waiting=state.busy || !state.policyFresh || flow.available===false || Date.now()<state.retryAt;
   return h('div',{className},
    h('p',null,'Verify your email address before continuing to payment.'),
    !state.challenge || expiry<=Date.now()?h('button',{type:'button',className:buttonClassName,disabled:waiting||!state.details.email,onClick:flow.startVerification},state.challenge?'Request a new code':'Send email code'):

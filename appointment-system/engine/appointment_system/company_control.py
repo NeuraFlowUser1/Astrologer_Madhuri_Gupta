@@ -184,8 +184,8 @@ def router(settings,*,database=None,publisher=None,worker_key=None,address=None)
         token,csrf=write(request)
         if body.operation_id.int==0 or int(body.revision)>=9223372036854775807:
             raise ControlError('invalid_company_request',422)
-        from .settings import BusinessSettings
-        try:spec=BusinessSettings.parse(body.settings).document
+        from .settings import BusinessSettings,canonical_business_contacts
+        try:spec=BusinessSettings.parse(canonical_business_contacts(body.settings)).document
         except Rejected as error:raise ControlError('invalid_company_request',422) from None
         result=database.call('SELECT appointment_system.company_save_business_settings(%s,%s,%s,%s,%s,%s)',
             (token,csrf,body.operation_id,int(body.revision),Jsonb(spec),body.reason.strip()))

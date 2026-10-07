@@ -10,7 +10,7 @@ const assets=fileURLToPath(new URL('../engine/appointment_system/company_assets/
 export async function companyFixture(run,{login=true}={}){
  const state={signed:false,calls:[],handlers:new Map(),errors:[],progress:'effective',snapshot:{enabled:false,revision:'1',restore_generation:id},
   business:{revision:'1',settings:{timezone:'Asia/Kolkata',slot_step_minutes:15,notice_minutes:60,horizon_days:90,buffer_before_minutes:0,buffer_after_minutes:0,
-   meeting:'google_meet',booking_verification:{email:false},weekly_windows:[{weekday:0,start:'09:00',end:'17:00'}],services:[
+   meeting:'google_meet',booking_verification:{email:false},required_contacts:['phone'],weekly_windows:[{weekday:0,start:'09:00',end:'17:00'}],services:[
     {id:'fixed',name:'Synthetic fixed',enabled:true,duration_minutes:30,pricing:{kind:'fixed',amount_paise:100}},
     {id:'question',name:'Synthetic question',enabled:true,duration_minutes:15,pricing:{kind:'per_question',amount_paise:125,maximum_questions:3}}]}}};
  const server=createServer(async(req,res)=>{

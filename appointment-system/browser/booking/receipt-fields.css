@@ -1,0 +1,14 @@
+.abs-receipt{--abs-bg:#fffdf8;--abs-fg:#21392f;--abs-muted:#50624d;--abs-line:#bec9b4;--abs-button:#26483d;--abs-button-fg:#fff;--abs-error:#955d45;color:var(--abs-fg);text-align:left;width:100%;min-width:0}
+.abs-receipt.abs-theme-astro{--abs-bg:#181122;--abs-fg:#fff;--abs-muted:#d8cfeb;--abs-line:#ab7a5780;--abs-button:#d3af54;--abs-button-fg:#181122;--abs-error:#ffb8af}
+.abs-receipt h2{font-size:clamp(24px,2.5vw,30px);line-height:1.25;margin:0 0 24px;font-weight:600}
+.abs-receipt-facts{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px 24px;margin:0;padding:0}
+.abs-receipt-facts>div{min-width:0}.abs-receipt-facts dt{font-size:14px;line-height:1.4;color:var(--abs-muted);margin-bottom:5px}
+.abs-receipt-facts dd{font-size:16px;line-height:1.5;margin:0;overflow-wrap:anywhere}
+.abs-receipt-actions{display:flex;flex-wrap:wrap;gap:12px;align-items:center;border-top:1px solid var(--abs-line);margin-top:24px;padding-top:24px;font-size:16px;line-height:1.5}
+.abs-receipt button,.abs-receipt .abs-download,.abs-receipt .abs-meet-link{min-height:44px;border:1px solid var(--abs-line);border-radius:10px;padding:10px 16px;font-size:16px;line-height:1.4;font-weight:600;display:inline-flex;align-items:center;justify-content:center;text-decoration:none;background:var(--abs-button);color:var(--abs-button-fg);cursor:pointer}
+.abs-receipt button:disabled{opacity:.6;cursor:default}.abs-receipt button:focus-visible,.abs-receipt a:focus-visible,.abs-receipt input:focus-visible{outline:2px solid var(--abs-button);outline-offset:3px}
+.abs-receipt button:hover:not(:disabled),.abs-receipt a:hover{filter:brightness(.93)}
+.abs-receipt-actions p{width:100%;margin:0;color:var(--abs-muted)}.abs-receipt-actions .abs-action-error{color:var(--abs-error)}
+.abs-copy-address{width:100%;max-width:520px}.abs-copy-address label{display:block;font-size:14px}.abs-copy-address input{display:block;width:100%;box-sizing:border-box;min-height:44px;margin:6px 0 10px;border:1px solid var(--abs-line);border-radius:10px;padding:10px 12px;font-size:16px;color:var(--abs-fg);background:var(--abs-bg)}
+@media(max-width:767px){.abs-receipt-facts{grid-template-columns:1fr;gap:16px}.abs-receipt-actions button,.abs-receipt-actions .abs-download{width:100%}.abs-receipt .abs-meet-link{max-width:100%}}
+@media(prefers-reduced-motion:reduce){.abs-receipt *{transition:none!important}}

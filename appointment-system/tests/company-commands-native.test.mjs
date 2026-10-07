@@ -11,7 +11,7 @@ async function fixture(run){
  const {chromium}=await import(pathToFileURL(resolve(process.env.BOOKING_BROWSER_NODE_MODULES,'playwright-core/index.mjs')).href);
  const calls={mode:[],business:[]},lost={mode:true,business:true};let signed=false;
  const business={revision:'1',settings:{timezone:'Asia/Kolkata',slot_step_minutes:15,notice_minutes:60,horizon_days:90,
-  buffer_before_minutes:0,buffer_after_minutes:0,meeting:'google_meet',booking_verification:{email:false},weekly_windows:[{weekday:0,start:'09:00',end:'17:00'}],
+  buffer_before_minutes:0,buffer_after_minutes:0,meeting:'google_meet',booking_verification:{email:false},required_contacts:['phone'],weekly_windows:[{weekday:0,start:'09:00',end:'17:00'}],
   services:[{id:'consultation',name:'Synthetic consultation',enabled:true,duration_minutes:30,pricing:{kind:'fixed',amount_paise:100}}]}};
  const snapshot={enabled:false,revision:'1',restore_generation:'cb122b99-90c2-42ec-b165-f77e6d0caa22'};
  const server=createServer(async(req,res)=>{

@@ -18,6 +18,13 @@ from appointment_system.sheet_projection import (
 
 
 class CurrentSheets(unittest.TestCase):
+    def test_missing_booking_email_is_a_blank_cell_in_both_supported_current_layouts(self):
+        self.job['snapshot']['email']=None
+        for layout in (3,4):
+            self.job['layout_version']=layout;values=values_for(self.job)
+            self.assertEqual(values[4],'');self.assertEqual(len(values),len(BOOKING_HEADERS))
+            self.assertTrue(all(type(value) is str for value in values));self.assertIn('+919876543210',values)
+
     def setUp(self):
         grant = Grant('client', 'synthetic-subject', OWNERS['client'], 'synthetic-refresh', scopes_for('client'))
         self.access = Access('synthetic-access', datetime.now(timezone.utc)+timedelta(hours=1), grant)

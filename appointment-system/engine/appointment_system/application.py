@@ -175,7 +175,9 @@ def create_application(store,settings,*,verified_client_address,webhook_account=
     from .checkout_verification import add_checkout_verification_route
     add_checkout_verification_route(app,store,settings,payment_accounts,browser_request,limit,wake_publisher)
     from .checkout import add_checkout_routes
-    add_checkout_routes(app,store,settings,payment_accounts,browser_request,limit,wake_publisher,verification_keys=booking_verification_keys)
+    add_checkout_routes(app,store,settings,payment_accounts,browser_request,limit,wake_publisher,verification_keys=booking_verification_keys,sending_ready=email_sender is not None)
+    from .receipt_copy import add_receipt_copy_routes
+    add_receipt_copy_routes(app,store,settings,browser_request,limit,wake_publisher,sending_ready=email_sender is not None)
     from .booking_verification import add_booking_verification_routes
     from .booking_verification_delivery import run_booking_code_once
     deliver=(lambda job:run_booking_code_once(worker_store,email_sender,booking_verification_keys,job=job)) if email_sender is not None and booking_verification_keys is not None else None
@@ -253,13 +255,13 @@ def create_application(store,settings,*,verified_client_address,webhook_account=
                 context_id,digest=parse_context(token,settings.context_key,row)
                 authorize_context(row,digest,timestamp(saved['server_now']))
                 if row.get("activation_epoch")==str(epoch):
-                    return {'ready':True}
+                    return {'ready':True,'renewed':False}
             except AccessDenied:
                 pass
         context_id,token,digest=new_context(settings.context_key)
         metadata=settings.context_key.metadata(token)
         store.create_context(context_id,digest,metadata=metadata)
-        response=JSONResponse({'ready':True})
+        response=JSONResponse({'ready':True,'renewed':True})
         response.set_cookie(COOKIE_NAME,token,max_age=CONTEXT_SECONDS,secure=True,httponly=True,samesite='strict',path='/')
         return response
 
@@ -271,7 +273,7 @@ def create_application(store,settings,*,verified_client_address,webhook_account=
         browser_request(request)
         limit(request,'receipt')
         snapshot=store.receipt_snapshot(body.request_id)
-        return receipt_view(snapshot,body.request_id,request.headers.get('x-booking-receipt'),settings.receipt_key)
+        return receipt_view(snapshot,body.request_id,request.headers.get('x-booking-receipt'),settings.receipt_key,sending_ready=email_sender is not None)
 
     @app.post('/api/webhooks/razorpay')
     async def razorpay_webhook(request:Request):

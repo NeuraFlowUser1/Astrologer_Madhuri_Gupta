@@ -6,8 +6,8 @@ export const ends='2026-10-03T06:30:00+00:00';
 export const service={id:'consultation',name:'Consultation',enabled:true,duration_minutes:30,
  pricing:{kind:'fixed',amount_paise:210000,maximum_questions:1},required_preparation:[]};
 export const policy=()=>({policy:{version:1,timezone:'Asia/Kolkata',horizon_days:10,services:[structuredClone(service)],
- booking_verification:{email:false,sms:false},required_contacts:['email','phone'],meeting:'google_meet'},
- quote_version:'a'.repeat(64),server_now:new Date(now).toISOString(),schedule_browsing_open:true,
+ booking_verification:{email:false,sms:false},required_contacts:['phone'],meeting:'google_meet'},
+ booking_verification_policy_hash:'b'.repeat(64),quote_version:'a'.repeat(64),server_now:new Date(now).toISOString(),schedule_browsing_open:true,
  receipt_access:{version:1,key_id:'current'}});
 export const availability=(p=policy(),questions=1)=>({date:'2026-10-03',server_now:p.server_now,slots:[{starts_at:starts,ends_at:ends}],
  service:{...p.policy.services[0],questions,amount_paise:questions*210000,currency:'INR',timezone:p.policy.timezone,quote_version:p.quote_version}});

@@ -39,7 +39,7 @@ def render_message(job):
             subject='Appointment cancelled — '+brand
             lines=['This appointment has been cancelled.','Booking reference: '+reference,
                    'Cancellation does not confirm a refund. Please contact us about any refund due.']
-        elif kind in ('booking_ack','booking_details') and (kind!='booking_details' or role=='customer'):
+        elif kind in ('booking_ack','booking_details','booking_receipt') and (kind=='booking_ack' or role=='customer'):
             zone=ZoneInfo(data['practice_timezone'])
             start=timestamp(data['starts_at']).astimezone(zone)
             time_label='India time' if zone.key=='Asia/Kolkata' else zone.key.rsplit('/',1)[-1].replace('_',' ')+' time ('+start.strftime('%Z')+')'
@@ -49,7 +49,7 @@ def render_message(job):
             if type(amount) is not int or amount<=0 or data['currency']!='INR':raise ValueError()
             service=data['service']
             if not isinstance(service,str) or not 1<=len(service)<=200 or any(ord(c)<32 for c in service):raise ValueError()
-            subject=('Your appointment details' if kind=='booking_details' else 'Appointment confirmed')+' — '+brand
+            subject=('Your appointment details' if kind in ('booking_details','booking_receipt') else 'Appointment confirmed')+' — '+brand
             lines=['Your appointment is confirmed.' if role=='customer' else 'A paid appointment is confirmed.',
                    service,start.strftime('%d %B %Y at %I:%M %p')+' ('+time_label+')',
                    f'Amount: INR {amount//100:,}.{amount%100:02d}', 'Booking reference: '+reference]
@@ -61,7 +61,7 @@ def render_message(job):
                 subject='Appointment contact details updated — '+brand
                 lines[0]=brand+' has updated the contact details for this appointment.'
                 lines+=['Your appointment time and fee have not changed.']
-            if kind=='booking_details':
+            if kind=='booking_details' or kind=='booking_receipt' and meeting=='google_meet':
                 link=data['meet_url']
                 if meeting!='google_meet' or not isinstance(link,str) or not re.fullmatch(r'https://meet\.google\.com/[a-z]{3}-[a-z]{4}-[a-z]{3}',link):raise ValueError()
                 lines+=['Join your online appointment: '+link]

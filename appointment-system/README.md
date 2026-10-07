@@ -4,7 +4,7 @@ This package is the neutral master for independently owned project copies. Ident
 
 ## Current implementation status
 
-The common booking, enquiries, company password authority, separate staff/resource consent, transport, recovery and backup/privacy contracts are under local acceptance. This is a release candidate under implementation. No original client copy or public/live conversion is claimed by this document. See the programme execution checkpoint for evidence and remaining work.
+The common foundation includes the approved booking-experience refinements: draft retention through tab checks, V3 optional email, accessible date/time controls, shared receipt facts/PDF/requested email copy, and thin receiving-site adapters. The [implementation contract](docs/booking-experience.md) explains the data, dependencies, migration and controlled cutover. Source-bound test, qualification and per-installation production observations are recorded in the programme evidence and checkpoint; an older release's evidence does not automatically qualify a new digest.
 
 ## Project folder contract
 

@@ -40,13 +40,21 @@ class ReceiptRecoveryFixture(StaffFixture):
         return self.client.post('/api/checkout/recover-receipt',json={'request_id':booking['request'],'code':code,'secret':secret},headers=self.headers)
 
 class ReceiptRecoverySQL(ReceiptRecoveryFixture):
-    def correction(self,booking,operation=None):
+    def correction(self,booking,operation=None,*,email='corrected@example.com'):
         operation=operation or uuid4();reference=UUID(booking['request'])
         key_id=support_key(self.old,self.staff,reference,operation,new=True)
         code=recovery_code(self.old,operation,reference,key_id=key_id)
         return self.staff.studio_support_change(self.session,CLIENT,ORIGIN,operation,reference,1,'contact_correction',
-            'Synthetic approved contact correction','pay_synthetic','corrected@example.com','+919123456789',
+            'Synthetic approved contact correction','pay_synthetic',email,'+919123456789',
             code_digest(self.old,reference,code,key_id=key_id),key_id)
+
+    def test_contact_correction_uses_the_booking_frozen_email_rule_when_current_otp_is_on(self):
+        booking=self.confirmed(email=None,normalization_version=3)
+        self.spec['booking_verification']['email']=True;self.spec['required_contacts']=['email','phone'];self.set_policy(self.spec)
+        result=self.correction(booking,email=None);self.assertEqual(result['code'],'support_saved')
+        self.assertEqual(self.db.scalar('SELECT email IS NULL FROM appointment_system.bookings;'),'t')
+        self.assertEqual(self.db.scalar("SELECT count(*) FROM appointment_system.delivery_jobs WHERE booking_revision=2 AND recipient_role='customer';"),'0')
+        self.assertEqual(self.db.scalar("SELECT count(*) FROM appointment_system.delivery_jobs WHERE booking_revision=2 AND kind='sheet_booking';"),'2')
 
     def test_contact_correction_preserves_full_records_and_the_accepted_meeting_choice(self):
         booking=self.confirmed(notes='Saved preparation',birth_place='Saved city')

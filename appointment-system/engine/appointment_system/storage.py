@@ -372,6 +372,11 @@ class Store:
         return self._call('SELECT appointment_system.reserve_configured_checkout(%s,%s,%s,%s,%s,%s)',
                           (*args, Jsonb(payload), Jsonb(expected_merchant) if expected_merchant is not None else None))
 
+    def request_receipt_copy(self,request_id,receipt_secret,receipt_key,operation_id,revision,email,*,sending_ready):
+        digest=receipt_digest(request_id,receipt_secret,receipt_key)
+        return self._call('SELECT appointment_system.request_receipt_copy(%s,%s,%s,%s,%s)',
+                         (request_id,digest,operation_id,revision,Jsonb({'email':email,'sending_ready':sending_ready})))
+
     def start_booking_verification(self,context,operation,email,digest,cipher,recipient,key):
         return self._call('SELECT appointment_system.start_booking_verification(%s,%s,%s,%s,%s,%s,%s)',
                           (context,operation,email,digest,cipher,recipient,key))

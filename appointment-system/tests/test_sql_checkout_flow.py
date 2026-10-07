@@ -39,7 +39,7 @@ class CheckoutFlowSQL(BookingFixture):
 
     def test_only_current_unpaid_matching_order_can_launch_and_never_creates_another(self):
         self.prepare();result=self.resume()
-        self.assertEqual(result['checkout'],{'key_id':'rzp_live_synthetic','order_id':'order_synthetic','amount_paise':210000,'currency':'INR'})
+        self.assertEqual(result['checkout'],{'key_id':'rzp_live_synthetic','order_id':'order_synthetic','amount_paise':210000,'currency':'INR','email_optional':False})
         self.assertNotIn('synthetic-secret',str(result));self.adapter.create_order.assert_not_called()
         self.assertEqual(self.adapter.order.call_count,1);self.assertEqual(self.adapter.order_payments.call_count,1)
 
