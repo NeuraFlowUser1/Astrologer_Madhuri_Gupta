@@ -1,9 +1,7 @@
-> **Current replacement release:** use [the contained release and operating guide](docs/appointment-system-release.md).
-> Both live common databases are at migration 034 with booking OFF authority preserved,
-> and the fresh official stored-backup/restore/retention chain is accepted. Worker/public
-> website and resource/account acceptance remain separate. The dated original material
-> below describes the previous engine and is historical; removed file paths and old
-> setup/backup commands are not current operating instructions.
+> **Current contained release — 7 October 2026:** use [the release and operating guide](docs/appointment-system-release.md).
+> The accepted release `e9f9085b1ec4a9f64dc894f326ead6448cd6b048a36ab36834aec0fe417d97e4` contains 552 package files and migrations 001–035. Both official applications, production databases and workers match it; ordinary scheduled health and fresh signed backup/isolated-restore/retention checks pass for both projects.
+> Last owner-approved booking state is ON on both sites, with selected prices restored to ₹2,100 and AstroAdvice booking email codes OFF. The dated paid-booking, OFF-enquiry and owner staff-view/note outcomes remain accepted bounded evidence, not repeated 552 customer journeys or a future uptime guarantee.
+> The entire imported README body below is historical reference. Removed backend/worker/setup paths and old commands are not current instructions; use the contained guide above. Broader website coverage, visual redesign and visible chronological history remain deferred.
 
 # Sarsa Jyotish Sansthan — Project 004
 

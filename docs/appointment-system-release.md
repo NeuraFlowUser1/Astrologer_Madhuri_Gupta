@@ -1,44 +1,98 @@
-# Current contained appointment release — 6 October 2026
+# Current contained appointment release — 7 October 2026
 
-The application entry is `api/index.py`; it uses this repository's complete
+The application entry is `api/index.py`; it loads this repository's complete
 `appointment-system/` package and sibling `appointment-settings/`. It does not
-load another client or the factory runtime. The neutral release is
-`35b92073c14c709849133063ba4bb31166319a91ecf23acaa2a3f4bb63239af1`,
-with 550 manifest files and 34 migrations. Both production common databases are
-independently checked at migration 034 with booking OFF authority preserved.
-Worker deployment and public website/account acceptance have separate outcomes;
-a GitHub commit does not prove that the public website is running this revision.
+load another client, the removed old backend, or the factory runtime. The accepted
+release is `e9f9085b1ec4a9f64dc894f326ead6448cd6b048a36ab36834aec0fe417d97e4`,
+with **552 manifest files and migrations 001–035**. Both official applications,
+production database release bindings and published workers independently match
+this release. The 35-entry ledger and all 345 routine identities/access contracts
+are checked; migration 035 changes only three booking-code event predicates.
 
-The local release proof is an exhaustive segmented execution with a focused
-AstroAdvice website repair. It retains the original failed native occurrence,
-its six passing whole-module repair checks and all required shared-engine checks.
-Shared Python and JavaScript statement/branch coverage exceed 90% without
-exclusions. Broader marketing-site coverage/design remains separately deferred.
+Ordinary scheduled worker health passes for both projects. The observed 07:00
+plans are empty across all nine lanes, with no attention or active lease. These
+are dated operational observations, not a guarantee about future cycles. The
+source commit, live application identity, database binding, worker deployment,
+backup and provider outcomes have separate readbacks; a Git commit alone does
+not establish deployment or customer acceptance.
 
-Use the [contained package guide](../appointment-system/README.md), the
-[installation profile](../appointment-settings/project.json) and the
+The original 550 package files are unchanged. Their preserved exhaustive
+segmented qualification, focused AstroAdvice email-modal repair and coverage
+remain source-bound evidence. Current additive qualification adds three permanent
+native booking-code event cases on each owned database target, exact 552 source
+copies, fresh 683/674-file exports/builds/contained startup/routing/hosting checks,
+and the separately proved AstroAdvice recovery-caller repair. No complete old-suite
+rerun on 552 is claimed. Coverage of the unchanged working Python/JavaScript
+source exceeds 90% statements and branches in every required domain, without
+exclusions. Original failures and their narrower repair receipts remain retained.
+
+Use the [contained package guide](../appointment-system/README.md),
+[contained setup instructions](../appointment-system/docs/contained-setup.md),
+[command guide](../appointment-system/docs/handover-commands.md),
+[installation profile](../appointment-settings/project.json) and
 [public backup configuration](../appointment-settings/backup.json). Protected
-values belong in the existing project-specific account settings, never in source.
-Company control is `/company/booking-control`; staff enquiries are separate.
-Calendar, client record copy and company record copy approvals remain separate
-owner flows. Completed backup Google permissions do not approve these website
-resources. Booking remains OFF until its normal readiness/activation checks pass.
+values belong in existing project-specific account settings, never in source.
+Company booking control is `/company/booking-control`; staff enquiries are
+separate. Calendar, client record copy and company record copy consents are
+separate owner flows; backup approval does not substitute for website approval.
+All six website connections, four workbooks, four backup Google approvals and
+both recovery saves are complete. Do not repeat completed handovers or create
+replacement resources merely to close documentation.
+
+Last owner-approved booking state is **ON on both sites**, with selected prices
+restored to **₹2,100**. AstroAdvice booking email codes remain **OFF by owner
+choice**. The repair and cleanup preserve these controls. The dated 6 October
+bounded journeys include two approved 100-paise (₹1) captured bookings, six
+delivered booking emails, two ready meetings and four workbook records; two
+normal enquiries while booking was OFF produced six delivered emails and four
+workbook records. Owner sign-in, exact enquiry viewing and saved private notes
+passed on both sites, with independent non-content note-storage checks. Final
+owner ON/public readback and selected-host protection each pass 14/14. Those
+550-era journeys retain their original identities and were not repeated to
+qualify 552. Stored workbook outcomes do not claim an additional independent
+Google content read. Both Vercel accounts remain disconnected from Codex.
+
+Broader marketing-site coverage, visual redesign and visible chronological
+note/action history remain deferred. The owner accepted AstroAdvice's dated
+local warm policy/availability comparison of 48 to 68 ms and Sarsa's earlier
+narrow exception; neither is a cold-start, hosted/provider/queue or future-load
+waiver. There is no outstanding owner setting, consent, recovery-save or switch
+handover in this accepted programme. Ongoing monitoring remains normal operation.
 
 ## Official backup and independent restore
 
 The active workflows are `.github/workflows/appointment-database-backup.yml`
-and `.github/workflows/appointment-backup-validation.yml`. Export gets its
-restricted read-only database/writer settings; validation gets a separate reader,
-decryption identity and signing key; retention gets writer access plus the signed
-proof. No validator restores into production. Every completed triple consists of
-an encrypted archive, signed manifest and independently signed restore proof.
+and `.github/workflows/appointment-backup-validation.yml`. Export uses its
+restricted read-only database connection and writer settings. Validation uses
+an independent reader, decryption identity and signing key; retention uses
+writer access plus signed proof. Validation restores only into an isolated
+provider-disabled environment, never production. The restored copy begins OFF
+with new restore authority; that does not change the production ON control.
+Every accepted stored triple comprises an encrypted archive, signed manifest
+and independently signed restore proof.
 
-Fresh official export, independent stored restore and explicit completed retention
-are accepted for this exact common release and 34-migration ledger. Source run
-37509098588 at commit 7a018cd729a0c96e718caa399bf08a08946b94ee triggered validator 37509492645. Both jobs
-retain these original source identities after cleanup. The stored signed proof
-binds the archive/manifest versions and the new OFF restore authority. Retention
-reported completion with zero eligible old verified groups removed. Unsupported
-old private archives remain preserved; they are not claimed as accepted new-format
-proofs. Historical backup commands and the duplicate old engine are retired only
-after this replacement proof, with exact original bytes archived locally.
+Fresh **7 October 2026** backup acceptance for this project binds release 552
+and its exact **35-migration ledger**, covering all 95 owned relations. Source
+[run 37583382264](https://github.com/NeuraFlowUser1/Astrologer_Madhuri_Gupta/actions/runs/37583382264)
+at commit `fc19da24afdb96f05fa05b5c4acc60e7d7a3b8f7` triggered independent
+[validation/retention run 37583623878](https://github.com/NeuraFlowUser1/Astrologer_Madhuri_Gupta/actions/runs/37583623878).
+Export, independent restore/validation and explicit completed retention all
+passed. The actual signed stored archive/manifest/proof triple was independently
+read back; all three files and their identities match. Retention completed with
+zero eligible old verified groups removed. These original accepted source/run
+identities remain unchanged after later deletion-only or documentation cleanup.
+No new backup run or production restore is inferred from a cleanup commit.
+
+## Retained historical 550/034 milestone — 6 October 2026
+
+The previous qualified release was
+`35b92073c14c709849133063ba4bb31166319a91ecf23acaa2a3f4bb63239af1`,
+with **550 manifest files and 34 migrations**. Its accepted source run
+`37509098588` at commit `7a018cd729a0c96e718caa399bf08a08946b94ee`
+triggered validator `37509492645`. Those historical receipts and source
+identities are preserved as recorded; they are not relabelled as 552/035 proof.
+The upgrade-time booking OFF row belonged to that earlier milestone, while
+current production controls retain the owner's later ON choice. Unsupported
+old private archives remain preserved and are not described as accepted
+new-format restore proofs. Old duplicate backend/worker/setup paths are retired
+after replacement acceptance, with their original source bytes archived.
