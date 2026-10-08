@@ -1,10 +1,9 @@
-> **Current booking refinement — 8 October 2026:** use [the release and operating guide](docs/appointment-system-release.md).
-> The complete contained local candidate is `1ec326e28d610bcde53508984612b4346df130579861ff5f190c42c4960de800`, with 573 package files and migrations 001–036. Booking-only local qualification and the final visual review pass; client source publication and coordinated live changeover remain pending. The actual live application, database and worker still use the preceding 552-file release until that changeover is verified.
-> Booking email becomes optional when its email-code check is OFF, and required and verified when it is ON. Drafts survive tab/app changes; a deliberate refresh may clear them. Both sites share the same selectors and receipt/meeting/PDF/requested-email behavior. AstroAdvice’s birth date is optional; Sarsa keeps its own concise four-step appearance.
-> Preserve the owner’s prices, hours, lengths and verification choice. The changeover requires company-controlled OFF, coordinated migration/API/worker deployment, a revision-checked policy save while OFF, fresh backup/restore proof and verified ON. Existing Google resources and secrets are retained.
-> The imported README body below is historical reference. Removed backend/worker/setup paths and old commands are not current instructions; use the contained guide above. Broader website tests and visible chronological note history remain deferred.
-
-> The five private pages now have internal navigation: `/studio`, `/enquiries-studio`, `/company/booking-control`, `/company/booking-support` and `/company/google-repair`. The existing sign-in checks remain in place. All website and separate master-tool security checks report zero known advisories. Full parent qualification is retained; the latest navigation changes have focused browser, access, visual, build and complete-export proof.
+> **Current booking release — 8 October 2026:** use [the current operating guide](docs/appointment-system-release.md).
+> The complete contained package is `1ec326e28d610bcde53508984612b4346df130579861ff5f190c42c4960de800`, with573 manifest files and migrations001–036. Local booking-only qualification passes. Sarsa source, saved-data upgrade, background service and backup jobs are complete. Its website deployment is pending and booking stays OFF until the remaining live checks finish.
+> Booking email follows the email-code switch. Drafts survive tab/app changes; deliberate refresh may clear them. Shared selectors and receipt/Meet/PDF/requested-email behavior are contained in this project. AstroAdvice birth date is optional; Sarsa keeps its own concise four-step appearance.
+> Five private pages have internal links with existing sign-in checks. Company credentials are stored encrypted outside source. All three approved software security checks report0 known advisories.
+> Preserve existing prices, hours, lengths, verification choices, Google resources and secrets. Both Vercel accounts remain disconnected. Fresh real no-email payments and deliberate email-copy sends are not claimed. Broader website testing and visible note history remain deferred.
+> The imported README below is historical reference. Removed backend/worker/setup paths and old commands are not current instructions. Use the operating guide above.
 
 # Sarsa Jyotish Sansthan — Project 004
 
