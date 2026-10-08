@@ -2,13 +2,13 @@
 <html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="robots" content="noindex,nofollow"><title>Booking control · CLIENT_NAME</title>
 <link rel="stylesheet" href="/api/company/assets/control.css"><script defer src="/api/company/assets/command-journal.js"></script><script defer src="/api/company/assets/control.js"></script></head>
-<body data-project="PROJECT_NUMBER"><main class="panel"><p class="caption">Private company tools · Project PROJECT_NUMBER</p>
+<body data-project="PROJECT_NUMBER"><main class="panel"><nav class="private-nav" aria-label="Private pages"><a href="/company/booking-control" aria-current="page">Company controls</a><a href="/company/booking-support">Appointment support</a><a href="/company/google-repair">Connection repair</a><a href="/studio">Owner dashboard</a><a href="/enquiries-studio">Owner enquiries</a></nav><p class="caption">Private company tools · Project PROJECT_NUMBER</p>
 <h1>CLIENT_NAME</h1><p>Control whether the appointment service appears and accepts new bookings.</p>
 <p id="status" class="status" role="status" aria-live="polite">Checking your access…</p>
 <section id="signed-in" hidden><div class="state-row"><div><p class="caption">Appointment service</p><strong id="mode">Checking…</strong></div><span id="publication" class="badge">Checking…</span></div>
 <p class="explanation">Turning it off hides all online booking pages, receipts and the client appointment dashboard. Contact enquiries continue. Existing paid appointments stay saved for private company support.</p>
 <div class="actions"><button id="change" type="button">Checking…</button><button id="refresh" class="secondary" type="button">Refresh status</button><button id="logout" class="text-button" type="button">Sign out</button></div>
-<p id="reference" class="caption"></p><a href="/company/booking-support">Manage existing appointments</a> · <a href="/company/records">Company record connection</a></section>
+<p id="reference" class="caption"></p><a href="#google-section">Open Google connections</a></section>
 <section id="diagnostics" hidden><button id="load-incidents" class="secondary" type="button">Recent service issues</button><p id="incident-status" class="caption" role="status" aria-live="polite"></p><div id="incident-list" class="incident-list"></div></section>
 <section id="signed-out" hidden><form id="login-form"><label for="username">Company username</label><input id="username" name="username" autocomplete="username" minlength="3" maxlength="64" required><label for="password">Company password</label><input id="password" name="password" type="password" autocomplete="current-password" minlength="15" maxlength="128" required><button id="login" type="submit">Sign in</button></form></section>
 <section id="business-section" hidden><details><summary>Prices, appointment lengths and working hours</summary>

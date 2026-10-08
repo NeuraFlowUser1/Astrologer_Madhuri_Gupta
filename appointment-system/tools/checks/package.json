@@ -2,9 +2,18 @@
   "name": "appointment-system-local-checks",
   "private": true,
   "type": "module",
-  "engines": {"node": "22.x"},
+  "engines": {
+    "node": "22.x"
+  },
   "devDependencies": {
     "@actions/expressions": "0.3.61",
     "miniflare": "4.20260426.0"
+  },
+  "overrides": {
+    "miniflare": {
+      "sharp": "0.35.5",
+      "undici": "7.29.1",
+      "ws": "8.21.0"
+    }
   }
 }

@@ -1,9 +1,9 @@
 <!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="robots" content="noindex,nofollow"><title>Existing appointments · Private Practice support</title>
 <link rel="stylesheet" href="/api/company/assets/control.css"><script defer src="/api/company/staff-actions.js"></script><script defer src="/api/company/support.js"></script></head>
-<body><main class="panel"><p class="caption">Private company support · CLIENT_NAME · Project PROJECT_NUMBER</p><h1>Existing appointments</h1>
+<body><main class="panel"><nav class="private-nav" aria-label="Private pages"><a href="/company/booking-control">Company controls</a><a href="/company/booking-support" aria-current="page">Appointment support</a><a href="/company/google-repair">Connection repair</a><a href="/studio">Owner dashboard</a><a href="/enquiries-studio">Owner enquiries</a></nav><p class="caption">Private company support · CLIENT_NAME · Project PROJECT_NUMBER</p><h1>Existing appointments</h1>
 <p>Resolve appointments and payments already accepted. New appointments and refunds cannot be created here.</p>
-<div class="actions"><a href="/company/booking-control">Booking control</a><button type="button" id="refresh" class="secondary">Refresh</button></div>
+<div class="actions"><button type="button" id="refresh" class="secondary">Refresh</button></div>
 <p id="status" role="status" aria-live="polite">Checking your support access…</p><ul id="appointments"></ul><ul id="reviews"></ul>
 <form id="lookup" class="actions"><label for="reference">Booking reference</label><input id="reference" required pattern="[a-fA-F0-9-]{36}" maxlength="36"><button>Find booking</button></form>
 <section id="detail" hidden><h2 id="detail-title" tabindex="-1">Appointment details</h2><dl id="summary" class="fields"></dl>

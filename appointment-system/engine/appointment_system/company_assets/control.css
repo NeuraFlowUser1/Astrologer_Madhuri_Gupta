@@ -18,3 +18,10 @@ button.secondary{background:var(--panel);color:var(--ink)}button.text-button{col
 @media(max-width:640px){.incident-row{grid-template-columns:1fr}}
 
 .permission-repair h2{font-size:20px;line-height:1.3}.permission-repair form{display:grid;grid-template-columns:180px minmax(0,1fr);gap:12px;align-items:center;margin:16px 0}.permission-repair input,.permission-repair select{min-width:0;width:100%;min-height:44px;padding:9px 12px;border:1px solid var(--border);border-radius:10px;background:var(--paper);color:var(--ink);font:15px/1.4 system-ui,sans-serif}.permission-repair form button{grid-column:2;justify-self:start}.permission-repair a{color:var(--olive)}.permission-repair #owner-link{margin:12px 0}.permission-repair #owner button{margin:0 8px 12px 0}.permission-repair input:focus-visible,.permission-repair select:focus-visible{outline:3px solid var(--focus);outline-offset:3px}@media(max-width:640px){.permission-repair form{grid-template-columns:1fr;gap:8px}.permission-repair form button{grid-column:1;margin-top:8px}}
+
+/* Shared private navigation: links change location, never access authority. */
+.private-nav{display:flex;align-items:center;flex-wrap:wrap;gap:8px;margin:0 0 20px}
+.private-nav a{display:inline-flex;align-items:center;justify-content:center;min-height:44px;max-width:100%;padding:8px 12px;border:1px solid #a5b3a8;border-radius:8px;background:#fffdfa;color:#21392f;font:600 14px/1.4 system-ui,sans-serif;text-align:center;text-decoration:none;overflow-wrap:anywhere}
+.private-nav a:hover{background:#e9eee6}
+.private-nav a[aria-current="page"]{background:#294d3f;border-color:#294d3f;color:#fff}
+.private-nav a:focus-visible{outline:3px solid #986832;outline-offset:3px}

@@ -66,3 +66,10 @@ footer { border-top: 1px solid #d4dcd2; padding-top: 20px; margin-top: 32px; }
 .receipt-help{max-width:720px}.receipt-help h1{font-size:clamp(32px,4vw,40px)}.receipt-help a{color:#294d40;text-underline-offset:4px}.receipt-help a:focus-visible{outline:3px solid #a76628;outline-offset:3px}.support-code{display:block;font-size:28px;letter-spacing:.15em;font-variant-numeric:tabular-nums;overflow-wrap:anywhere}.calendar select{width:100%;min-height:48px;font:16px system-ui;border:1px solid #a5b3a8;border-radius:12px;background:#fffdf9;padding:10px;color:#263b32}#booking-support-content{overflow-wrap:anywhere}
 
 .calendar-monthbar{display:flex;align-items:center;justify-content:space-between;gap:12px}.calendar-monthbar h3{margin:0;font-size:16px}.calendar-month{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:6px;margin:12px 0;max-width:560px}.calendar-month button{padding:8px 2px;min-height:40px;font-size:14px}.calendar-month button[aria-pressed="true"]{outline:2px solid currentColor;outline-offset:2px}.calendar-month .day-count{display:block;font-size:11px;line-height:1.3}.calendar-month .weekday{text-align:center;font-size:12px}
+
+/* Shared private navigation: links change location, never access authority. */
+.private-nav{display:flex;align-items:center;flex-wrap:wrap;gap:8px;margin:0 0 20px}
+.private-nav a{display:inline-flex;align-items:center;justify-content:center;min-height:44px;max-width:100%;padding:8px 12px;border:1px solid #a5b3a8;border-radius:8px;background:#fffdfa;color:#21392f;font:600 14px/1.4 system-ui,sans-serif;text-align:center;text-decoration:none;overflow-wrap:anywhere}
+.private-nav a:hover{background:#e9eee6}
+.private-nav a[aria-current="page"]{background:#294d3f;border-color:#294d3f;color:#fff}
+.private-nav a:focus-visible{outline:3px solid #986832;outline-offset:3px}
