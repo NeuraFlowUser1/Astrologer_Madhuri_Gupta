@@ -38,6 +38,7 @@ export default function Booking(){
  const [params]=useSearchParams(),flow=useBooking(params.get('service')||'kundli-prediction'),{state,dispatch}=flow;
  const root=useRef(null),form=useRef(null),layout=useRef(null),arrow=useRef(false),[active,setActive]=useState('service');
  const locked=!!state.credential||state.phase==='blocked'||state.busy||!flow.available;
+ const checkingDate=!!state.policy&&flow.viewAvailable&&!flow.available&&!state.credential&&state.phase!=='blocked'&&!state.busy;
  const configured=state.policy?.policy.services.find(s=>s.id===state.service);
  const amount=state.quote?.amount_paise??(configured?configured.pricing.amount_paise*state.questions:0);
  const selectedName=configured?.name||'Select your service',timezone=state.policy?.policy.timezone||'Asia/Kolkata';
@@ -79,7 +80,7 @@ export default function Booking(){
    <section className="appointment story-section wrap section-space" id="appointment" aria-labelledby="appointment-title"><h2 id="appointment-title" tabIndex="-1">Select a suitable date and time</h2>
     <div className="appointment-window"><p className="selected-service">{selectedName}</p><p className="field-hint">Times shown in {timezone}</p>
      {configured?.pricing.kind==='per_question'&&<div className="field"><label htmlFor="question-count">Number of questions</label><input id="question-count" type="number" min="1" max={configured.pricing.maximum_questions} step="1" required value={state.questions} onChange={e=>dispatch({type:'edit',name:'questions',value:Number(e.target.value)})}/></div>}
-     <DateField label="Appointment date" name="appointmentDate" required value={state.day} min={range?.first_date} max={range?.last_date} disabled={!state.policy||locked} available={flow.viewAvailable} onChange={value=>dispatch({type:'edit',name:'day',value})}/>
+     <DateField label="Appointment date" name="appointmentDate" required value={state.day} min={range?.first_date} max={range?.last_date} disabled={!state.policy||locked} checking={checkingDate} available={flow.viewAvailable} onChange={value=>dispatch({type:'edit',name:'day',value})}/>
      <p id="availability-message" role="status">{state.slotsStatus==='loading'?'Checking available times…':state.slotsStatus==='error'?'Available times could not be checked. Please try again.':state.slotsStatus==='ready'&&!state.slots.length?'No times are available on this date. Please choose another date.':'Select an available start time.'}</p>
      {state.slotsStatus==='error'&&<button type="button" className="text-button" disabled={locked||state.loadingPolicy} onClick={flow.loadPolicy}>Check available times</button>}
      <fieldset className="slot-grid"><legend>Available start times</legend>{state.slots.map(slot=><label className="slot-option" key={slot.starts_at}><input name="time" type="radio" value={slot.starts_at} checked={state.slot?.starts_at===slot.starts_at} disabled={!state.slotsFresh} onChange={()=>dispatch({type:'edit',name:'slot',value:slot})}/>{timeLabel(slot.starts_at,timezone)}</label>)}</fieldset>

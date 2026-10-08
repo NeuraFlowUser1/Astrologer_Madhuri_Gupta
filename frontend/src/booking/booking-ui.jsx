@@ -10,8 +10,22 @@ import '../../../appointment-system/browser/booking/date-time-fields.css';
 import '../../../appointment-system/browser/booking/receipt-fields.css';
 import {bookingBrowser} from './browser.mjs';
 
-export const {DateField,TimeField:BirthTimeField}=createDateTimeFields(React,{DatePicker,TimeField,DateInput,DateSegment,
- Label,Group,Button,Popover,Dialog,Calendar,CalendarGrid,CalendarCell,Heading,Text,FieldError,I18nProvider,parseDate,parseTime,Time});
+// A short ON/OFF read pauses date selection without dismissing the open menu.
+// Confirmed OFF and payment/blocked states retain the shared field's normal lock.
+const CalendarCheckContext=React.createContext(false);
+function CalendarDuringCheck(props){
+ const checking=React.useContext(CalendarCheckContext);
+ return <Calendar {...props} isReadOnly={props.isReadOnly||checking}/>;
+}
+const {DateField:SharedDateField,TimeField:BirthTimeField}=createDateTimeFields(React,{DatePicker,TimeField,DateInput,DateSegment,
+ Label,Group,Button,Popover,Dialog,Calendar:CalendarDuringCheck,CalendarGrid,CalendarCell,Heading,Text,FieldError,I18nProvider,parseDate,parseTime,Time});
+export {BirthTimeField};
+export function DateField({checking=false,...props}){
+ return <CalendarCheckContext.Provider value={checking}>
+  <SharedDateField {...props} disabled={props.disabled&&!checking}
+   onChange={value=>{if(!checking)props.onChange(value);}}/>
+ </CalendarCheckContext.Provider>;
+}
 let dependencies;
 async function loadPDF(){
  if(!dependencies)dependencies=Promise.all([import('pdf-lib'),import('@pdf-lib/fontkit'),(async()=>{
