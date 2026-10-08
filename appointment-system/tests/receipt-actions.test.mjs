@@ -89,3 +89,97 @@ test('an older owned status response cannot offer a stale PDF over newer known b
  assert.equal(f.actions.canOpen(),false);assert.equal(f.actions.getSnapshot().pdfURL,null);
  assert.match(f.actions.getSnapshot().error,/changed/);f.actions.stop();
 });
+
+test('a failed delivery-status read cannot undo a validated email-copy acknowledgement',async()=>{
+ const f=fixture({email:false,read:r=>{if(r.email_copy.operation_id)throw new RequestError('temporarily_unavailable',{status:503});return r;}});
+ await f.actions.email('copy@example.test');
+ assert.equal(f.posts.length,1);assert.equal(f.actions.getSnapshot().emailUncertain,false);
+ assert.equal(f.actions.getSnapshot().error,'');assert.match(f.actions.getSnapshot().message,/request is saved/);
+ assert.match(f.actions.getSnapshot().message,/Check booking status/);f.actions.stop();
+});
+
+test('a later owned observation clears the resolved email uncertainty without another send',async()=>{
+ const f=fixture({email:false,post:()=>{throw new RequestError('temporarily_unavailable',{status:503});}});
+ await f.actions.email('copy@example.test');assert.equal(f.actions.getSnapshot().emailUncertain,true);
+ assert.match(f.actions.getSnapshot().error,/could not confirm/);const body=f.posts[0];
+ const saved={...f.current(),email_copy:{...copy(false),operation_id:body.operation_id,booking_revision:body.expected_revision,
+  state:'delivered',target_hint:'c***@example.test',remaining_requests:2}};
+ f.set(saved);f.actions.observe(saved);
+ assert.equal(f.actions.getSnapshot().emailUncertain,false);assert.equal(f.actions.getSnapshot().error,'');
+ assert.equal(f.posts.length,1);assert.match(f.actions.getSnapshot().message,/saved/);f.actions.stop();
+});
+
+test('an owned observation keeps a saved copy resolved even if its HTTP reply is lost',async()=>{
+ const pending=defer(),f=fixture({post:()=>pending.promise});const task=f.actions.email();await tick();const body=f.posts[0];
+ const saved={...f.current(),email_copy:{...copy(),operation_id:body.operation_id,booking_revision:body.expected_revision,
+  state:'pending',can_request:false,blocked_reason:'delivery_pending'}};
+ f.set(saved);f.actions.observe(saved);pending.reject(new RequestError('temporarily_unavailable',{status:503}));await task;
+ assert.equal(f.actions.getSnapshot().emailUncertain,false);assert.equal(f.actions.getSnapshot().error,'');
+ assert.match(f.actions.getSnapshot().message,/saved/);assert.equal(f.posts.length,1);f.actions.stop();
+});
+
+test('resolving email uncertainty preserves an independent PDF error',async()=>{
+ const f=fixture({post:()=>{throw new RequestError();},pdfLoad:()=>{throw Error('synthetic PDF failure');}});
+ await f.actions.email();const body=f.posts[0];await f.actions.pdf();const pdfError=f.actions.getSnapshot().error;
+ assert.match(pdfError,/PDF could not be prepared/);
+ const saved={...f.current(),email_copy:{...copy(),operation_id:body.operation_id,booking_revision:body.expected_revision,
+  state:'pending',can_request:false,blocked_reason:'delivery_pending'}};
+ f.set(saved);f.actions.observe(saved);assert.equal(f.actions.getSnapshot().emailUncertain,false);
+ assert.equal(f.actions.getSnapshot().error,pdfError);f.actions.stop();
+});
+
+test('invalid acknowledgements still preserve uncertainty and the exact retry identity',async()=>{
+ for(const change of [{operation_id:randomUUID()},{booking_revision:2},{code:'not_accepted'},
+  {email_copy:{...copy(),operation_id:randomUUID(),booking_revision:1,state:'delivered',target_hint:'private@example.test'}}]){
+  const f=fixture({post:body=>({code:'receipt_copy_accepted',...body,booking_revision:body.expected_revision,
+   email_copy:{...copy(),operation_id:body.operation_id,booking_revision:body.expected_revision,state:'pending',can_request:false,blocked_reason:'delivery_pending'},...change})});
+  await f.actions.email();assert.equal(f.actions.getSnapshot().emailUncertain,true);assert.doesNotMatch(f.actions.getSnapshot().message,/saved/);
+  await f.actions.email();assert.deepEqual(f.posts[1],f.posts[0]);f.actions.stop();
+ }
+});
+
+test('an observation for another booking or accepted revision cannot resolve this email operation',async()=>{
+ for(const change of ['booking','revision']){
+  const f=fixture({post:()=>{throw new RequestError();}});await f.actions.email();const body=f.posts[0];
+  const observed={...f.current(),request_id:change==='booking'?randomUUID():body.request_id,
+   email_copy:{...copy(),operation_id:body.operation_id,booking_revision:change==='revision'?2:body.expected_revision,
+    state:'pending',can_request:false,blocked_reason:'delivery_pending'}};
+  f.actions.observe(observed);assert.equal(f.actions.getSnapshot().emailUncertain,true);
+  assert.match(f.actions.getSnapshot().error,/could not confirm/);
+  await f.actions.email();assert.deepEqual(f.posts[1],f.posts[0]);f.actions.stop();
+ }
+});
+
+test('a validated acknowledgement replaces the unchanged old copy facts before a failed follow-up read',async()=>{
+ let reads=0;const f=fixture({email:false,read:r=>{if(++reads>1)throw new RequestError();return r;},
+  post:body=>{f.set({...f.current(),email_copy:Object.fromEntries(Object.entries(f.current().email_copy).reverse())});return {code:'receipt_copy_accepted',...body,booking_revision:body.expected_revision,
+   email_copy:{...copy(false),operation_id:body.operation_id,booking_revision:body.expected_revision,state:'pending',
+    can_request:false,blocked_reason:'delivery_pending',target_hint:'c***@example.test',remaining_requests:2}};}});
+ const original=f.current();await f.actions.email('copy@example.test');
+ assert.equal(f.current().email_copy.state,'pending');assert.equal(f.current().email_copy.has_booking_email,false);
+ assert.equal(f.current().email_copy.operation_id,f.posts[0].operation_id);
+ assert.deepEqual({...f.current(),email_copy:original.email_copy},original);
+ assert.equal(f.actions.getSnapshot().error,'');assert.equal(f.posts.length,1);f.actions.stop();
+});
+
+test('an acknowledgement cannot replace newer booking facts or a concurrently observed copy',async()=>{
+ for(const variant of ['revision','copy']){
+  let reads=0,newest;const f=fixture({read:r=>{if(++reads>1)throw new RequestError();return r;},post:body=>{
+   newest={...f.current(),booking_revision:variant==='revision'?2:1,
+    email_copy:{...copy(),operation_id:randomUUID(),booking_revision:variant==='revision'?2:1,state:'delivered',target_hint:'c***@example.test'}};
+   f.set(newest);return {code:'receipt_copy_accepted',...body,booking_revision:body.expected_revision,
+    email_copy:{...copy(),operation_id:body.operation_id,booking_revision:body.expected_revision,state:'pending',can_request:false,blocked_reason:'delivery_pending'}};
+  }});
+  await f.actions.email();assert.deepEqual(f.current(),newest);
+  assert.equal(f.actions.getSnapshot().error,'');assert.equal(f.posts.length,1);f.actions.stop();
+ }
+});
+
+test('an acknowledgement cannot change whether this booking has a saved email',async()=>{
+ const f=fixture({post:body=>({code:'receipt_copy_accepted',...body,booking_revision:body.expected_revision,
+  email_copy:{...copy(false),operation_id:body.operation_id,booking_revision:body.expected_revision,state:'pending',
+   can_request:false,blocked_reason:'delivery_pending'}})});
+ await f.actions.email();assert.equal(f.actions.getSnapshot().emailUncertain,true);
+ assert.equal(f.current().email_copy.has_booking_email,true);
+ await f.actions.email();assert.deepEqual(f.posts[1],f.posts[0]);f.actions.stop();
+});
