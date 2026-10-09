@@ -5,7 +5,6 @@ import {beforeEach,afterEach,test,expect,vi} from 'vitest';
 import business from '../../../appointment-settings/business-settings.json';
 const mock=vi.hoisted(()=>({flow:null,go:vi.fn(),dispose:vi.fn(),header:{current:null}}));
 vi.mock('../../src/booking/useBooking.jsx',()=>({useBooking:()=>mock.flow}));
-vi.mock('../../src/site/PublicHeaderContext.jsx',()=>({usePublicHeader:()=>mock.header}));
 vi.mock('../../src/booking/booking-layout.mjs',()=>({mountBookingLayout:()=>({go:mock.go,dispose:mock.dispose})}));
 vi.mock('../../src/booking/booking-ui.jsx',()=>({
  DateField:({label,name='birth_date',value,required,onChange,disabled})=><label>{label}<input aria-label={label} name={name} value={value} required={required} disabled={disabled} onChange={e=>onChange(e.target.value)}/></label>,
@@ -19,12 +18,12 @@ const click=node=>act(async()=>node.click());
 const button=text=>[...host.querySelectorAll('button')].find(n=>n.textContent.includes(text));
 async function change(selector,value){const node=host.querySelector(selector);Object.getOwnPropertyDescriptor(node instanceof HTMLTextAreaElement?HTMLTextAreaElement.prototype:node instanceof HTMLSelectElement?HTMLSelectElement.prototype:HTMLInputElement.prototype,'value').set.call(node,value);await act(async()=>node.dispatchEvent(new Event(node.tagName==='SELECT'?'change':'input',{bubbles:true})));}
 beforeEach(()=>{
- globalThis.IS_REACT_ACT_ENVIRONMENT=true;vi.useFakeTimers();vi.setSystemTime(new Date('2030-01-01T09:00:00Z'));host=document.createElement('div');document.body.append(host);root=createRoot(host);mock.go.mockClear();mock.dispose.mockClear();
+ globalThis.IS_REACT_ACT_ENVIRONMENT=true;window.scrollTo=vi.fn();vi.useFakeTimers();vi.setSystemTime(new Date('2030-01-01T09:00:00Z'));host=document.createElement('div');document.body.append(host);root=createRoot(host);mock.go.mockClear();mock.dispose.mockClear();
  mock.flow={available:true,viewAvailable:true,state:{service:'kundli-prediction',questions:1,day:'2030-01-02',slot:null,policy:{policy:structuredClone(business),server_now:"2030-01-01T09:00:00Z"},policyFresh:true,slotsFresh:true,slots:[slot],slotsStatus:'ready',credential:null,receipt:null,phase:'draft',error:'',busy:false,ack:false,retryAt:0,details:{full_name:'',email:'',phone:'',country:'91',notes:'',birth_date:'',birth_time:'',birth_place:''}},dispatch:vi.fn(),start:vi.fn(),resume:vi.fn(),check:vi.fn(),restart:vi.fn(),retryOriginal:vi.fn(),loadPolicy:vi.fn(),canRetryOriginal:false};
 });
 afterEach(async()=>{await act(async()=>root.unmount());host.remove();vi.useRealTimers();vi.restoreAllMocks();});
 test('one frame adapter preserves optional email and blocks review before a selected time',async()=>{
- await render();expect(host.querySelector('.site-header')).toBeNull();expect(host.querySelector('.site-footer')).toBeNull();expect(host.querySelector('#email').required).toBe(false);expect(host.querySelector('#phone').required).toBe(true);await click(button('Review'));expect(mock.go).toHaveBeenLastCalledWith('appointment');await act(async()=>host.querySelector('form').dispatchEvent(new Event('submit',{bubbles:true,cancelable:true})));expect(mock.flow.dispatch).toHaveBeenCalledWith({type:'error',message:'Please choose an available time first.'});expect(mock.flow.start).not.toHaveBeenCalled();
+ await render();expect(host.querySelectorAll('.site-header')).toHaveLength(1);expect(host.querySelectorAll('.site-footer')).toHaveLength(1);expect(host.querySelector('#email').required).toBe(false);expect(host.querySelector('#phone').required).toBe(true);await click(button('Review'));expect(mock.go).toHaveBeenLastCalledWith('appointment');await act(async()=>host.querySelector('form').dispatchEvent(new Event('submit',{bubbles:true,cancelable:true})));expect(mock.flow.dispatch).toHaveBeenCalledWith({type:'error',message:'Please choose an available time first.'});expect(mock.flow.start).not.toHaveBeenCalled();
  mock.flow.state.slot=slot;mock.flow.state.ack=true;await render();const validity=vi.spyOn(HTMLFormElement.prototype,'reportValidity').mockReturnValue(false);mock.go.mockClear();await click(button('Review'));expect(mock.go).not.toHaveBeenCalled();validity.mockReturnValue(true);await click(button('Review'));expect(mock.go).toHaveBeenLastCalledWith('review');await act(async()=>host.querySelector('form').dispatchEvent(new Event('submit',{bubbles:true,cancelable:true})));expect(mock.flow.start).toHaveBeenCalledOnce();
 });
 test('email-code mode, required preparation and per-question pricing retain existing contracts',async()=>{

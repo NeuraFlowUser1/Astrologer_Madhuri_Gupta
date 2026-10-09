@@ -11,14 +11,14 @@ test('protected-path checks reject every backend boundary and retain the public 
 test('release preflight inventories all active source and rejects an unclassified public file',()=>{
  const result=runChecks();expect(result.source).toContain('src/booking/booking-ui.jsx');expect(result.routes).toHaveLength(12);
  const publicRoot=new URL('../../public',import.meta.url).pathname,assets=JSON.parse(readFileSync(new URL('../../../appointment-settings/public-assets.json',import.meta.url)));
- delete assets['/fonts/outfit-latin.woff2'];expect(()=>checkAssets(assets,publicRoot)).toThrow('Unclassified public asset');
+ delete assets['/media/consultation-still-life.png'];expect(()=>checkAssets(assets,publicRoot)).toThrow('Unclassified public asset');
 });
 test('the real public-page build entrypoint creates both modes and exact asset classes',async()=>{
  await import('../../scripts/public-pages.mjs');
  await import('../../scripts/public-pages.mjs?repeat');
  const manifest=JSON.parse(readFileSync(new URL('../../dist/appointment-surface-manifest.json',import.meta.url)));
- expect(manifest.public_paths).toContain('/services');expect(manifest.booking_paths).toContain('/booking-help');expect(manifest.assets['/fonts/outfit-latin.woff2']).toBe('general');
- expect(readFileSync(new URL('../../dist/__booking_display/on/index.html',import.meta.url),'utf8')).toContain('consultation-still-life-phone.webp');expect(readFileSync(new URL('../../dist/__booking_display/on/contact.html',import.meta.url),'utf8')).not.toContain('consultation-still-life-phone.webp');
+ expect(manifest.public_paths).toContain('/services');expect(manifest.booking_paths).toContain('/booking-help');expect(manifest.assets['/media/consultation-still-life.png']).toBe('general');
+ expect(readFileSync(new URL('../../dist/__booking_display/on/index.html',import.meta.url),'utf8')).not.toContain('sarsa-public/');
  for(const mode of ['on','off'])for(const path of Object.keys(pages)){
   const file=new URL('../../dist/__booking_display/'+mode+'/'+(path==='/'?'index':path.slice(1))+'.html',import.meta.url);
   if(mode==='off'&&['/booking','/booking-policy'].includes(path)){expect(existsSync(file)).toBe(false);continue;}

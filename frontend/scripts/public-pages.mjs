@@ -1,5 +1,5 @@
 /** Build the displayed pages and exact asset boundary; no provider access. */
-import {readFileSync,writeFileSync,existsSync} from 'node:fs';
+import {readFileSync} from 'node:fs';
 import {resolve} from 'node:path';
 import {pages} from '../src/site/page-metadata.mjs';
 import project from '../../appointment-settings/project.json' with {type:'json'};
@@ -19,13 +19,3 @@ generateModes({dist,shell,pages,project,manifest,brand:project.label,offDescript
  '/services':'Explore Kundli Prediction, Kundli Matching, Vastu and Numerology guidance. Contact the practice with your questions.',
  '/contact':'Send Sarsa Jyotish Sansthan a question or contact the practice for help.'}});
 console.log('Generated public pages and classified asset boundary from the contained release.');
-// The hero is Home-only. Other direct routes must not download it speculatively.
-for(const path of [...manifest.public_paths,...manifest.booking_paths]){
- if(path==='/')continue;
- for(const mode of ['on','off']){
-  const file=resolve(dist,'__booking_display',mode,path.slice(1)+'.html');
-  if(existsSync(file))writeFileSync(file,readFileSync(file,'utf8').replace(/^.*<link rel="preload" href="\/media\/sarsa-public\/consultation-still-life-(?:desktop|phone)\.webp".*\n/gm,''));
- }
- const file=resolve(dist,path.slice(1)+'.html');
- if(existsSync(file))writeFileSync(file,readFileSync(file,'utf8').replace(/^.*<link rel="preload" href="\/media\/sarsa-public\/consultation-still-life-(?:desktop|phone)\.webp".*\n/gm,''));
-}

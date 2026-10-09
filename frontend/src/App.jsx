@@ -4,14 +4,11 @@ import {pages,origin,titleFor} from './site/page-metadata.mjs'
 import {useBookingProduct,ProductNavigationCheck,UnavailablePage,BookingRoute} from './site/BookingProduct.jsx'
 const BookingReceipt = lazy(() => import('./pages/BookingReceipt.jsx'))
 const BookingAccess = lazy(() => import('./pages/BookingAccess.jsx'))
-import {SiteHeader,SiteFooter,SiteSkip} from './site/SiteFrame.jsx'
-import {PublicHeaderProvider} from './site/PublicHeaderContext.jsx'
-import {AnchorNavigationProvider} from './site/AnchorNavigation.jsx'
+import {SiteHeader,SiteFooter} from './site/SiteFrame.jsx'
 const KundliPrediction = lazy(() => import('./pages/KundliPrediction.jsx'))
 const ServiceDetail = lazy(() => import('./pages/ServiceDetail.jsx'))
 const PolicyPage = lazy(() => import('./pages/PolicyPage.jsx'))
-// Home is the critical landing page; avoid a second script/style round trip.
-import Home from './pages/Home.jsx'
+const Home = lazy(() => import('./pages/Home.jsx'))
 const About = lazy(() => import('./pages/About.jsx'))
 const Services = lazy(() => import('./pages/Services.jsx'))
 const Booking = lazy(() => import('./pages/Booking.jsx'))
@@ -30,13 +27,14 @@ function AppShell() {
     for(const selector of ['meta[property="og:url"]','meta[name="twitter:url"]']) document.querySelector(selector)?.setAttribute('content',origin+path);
     document.querySelector('meta[name="robots"]')?.setAttribute('content',data && (enabled || !['/booking','/booking-policy'].includes(path)) ? 'index, follow':'noindex');
   }, [location.pathname,enabled]);
+  const hasOwnNavigation = ['/booking', '/contact'].includes(location.pathname)
 
   return (
     <div className="sarsa-site">
       <div>
         <div>
-          <SiteSkip />
-          <SiteHeader />
+          {!hasOwnNavigation && <SiteHeader />}
+          <a className="sarsa-skip" href="#page-content">Skip to content</a>
           <main id="page-content" tabIndex="-1" className="flex-grow relative z-10">
             <Suspense fallback={<p role="status" className="p-8">Loading the page…</p>}><Routes>
               <Route path="/" element={<Home />} />
@@ -54,18 +52,41 @@ function AppShell() {
           </main>
         </div>
       </div>
-      <SiteFooter />
+      {!hasOwnNavigation && <SiteFooter />}
     </div>
   )
+}
+
+function ScrollToHashElement() {
+  const location = useLocation()
+
+  useEffect(() => {
+    if (!location.hash) { window.scrollTo(0, 0); return; }
+    let elementId; try { elementId = decodeURIComponent(location.hash.substring(1)); } catch { return; }
+    let observer, timer;
+    const scroll = () => {
+      const el = document.getElementById(elementId);
+      if (!el) return false;
+      el.scrollIntoView({behavior:'auto'});
+      observer?.disconnect(); clearTimeout(timer); return true;
+    };
+    if (!scroll()) {
+      observer = new MutationObserver(scroll);
+      observer.observe(document.body,{childList:true,subtree:true});
+      timer = setTimeout(() => observer.disconnect(),10000);
+    }
+    return () => { observer?.disconnect(); clearTimeout(timer); };
+  }, [location.pathname, location.hash]);
+
+  return null
 }
 
 function App() {
 
   return (
     <Router>
-      <PublicHeaderProvider><AnchorNavigationProvider><ProductNavigationCheck />
+      <ScrollToHashElement /><ProductNavigationCheck />
       <AppShell />
-      </AnchorNavigationProvider></PublicHeaderProvider>
     </Router>
   )
 }

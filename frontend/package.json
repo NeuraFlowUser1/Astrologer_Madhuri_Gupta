@@ -11,7 +11,7 @@
     "test:public-site": "vitest run --config vitest.public-site.config.mjs --coverage && node tests/public-site/coverage-audit.mjs",
     "check:public-site": "node scripts/check-public-site.mjs",
     "test:public-site:browser": "node tests/public-site/browser.mjs",
-    "test:public-site:performance": "node tests/public-site/performance.mjs"
+    "test:restore": "vitest run --config vitest.restore.config.mjs --coverage"
   },
   "dependencies": {
     "@internationalized/date": "3.12.4",

@@ -1,6 +1,6 @@
 # Sarsa Jyotish Sansthan — Project 004
 
-Sarsa's public website introduces Madhuri Gupta and four services: Kundli Matching, Kundli Prediction, Vastu Consultation and Numerology. It uses one public header/footer, simple English with short Hindi lines, illustrated service pages and a Contact page with the owner's Agra address and Google Maps pin.
+Sarsa's public website introduces Madhuri Gupta and four services: Kundli Matching, Kundli Prediction, Vastu Consultation and Numerology. Its public appearance is restored to the owner-selected checkpoint A from 8 October 2026. This includes the older animated pages and compact booking form. Later shared booking repairs remain; A's Contact page has no map.
 
 The public-site implementation and its checks are described in [the public-site guide](docs/public-site-refresh.md). The separate [booking operating guide](docs/appointment-system-release.md) owns booking, staff access, provider connections and recovery. Source implementation, local qualification and actual online release are separate evidence stages; the release record identifies the exact tested and published commit.
 
@@ -9,11 +9,11 @@ The public-site implementation and its checks are described in [the public-site 
 | Path | Responsibility |
 | --- | --- |
 | `frontend/src/pages/` | Public pages and the existing appointment form/receipt pages. |
-| `frontend/src/site/` | Public frame, reviewed copy, navigation, finite decoration and common booking-state bindings. |
+| `frontend/src/site/` | Restored public frame, original choreography and common booking-state bindings. |
 | `frontend/src/contact/` | Enquiry presentation and the existing shared enquiry coordinator. |
 | `frontend/src/booking/` | Client-owned appointment presentation, measured scrolling and contained-system adapters. |
 | `frontend/scripts/` | Public route generation and release preflight. |
-| `frontend/tests/public-site/` | Public-site unit, browser, accessibility, coverage and local performance checks. All application responses are synthetic. |
+| `frontend/tests/public-site/` | Focused restoration unit/browser checks. Coverage is scoped to two retained functional owners; browser application responses are synthetic. |
 | `api/index.py` | Existing Python hosting entrypoint. |
 | `appointment-system/` | Complete independently contained booking system; no factory runtime dependency. |
 | `appointment-settings/` | This installation's public profile and settings contracts. Secrets are stored outside source. |
@@ -31,10 +31,10 @@ npm --prefix frontend run dev
 npm --prefix frontend run build
 npm --prefix frontend run lint
 npm --prefix frontend run check:public-site
-npm --prefix frontend run test:public-site
+npm --prefix frontend run test:restore
 ```
 
-Browser/performance checks and their external report-directory settings are documented in the public-site guide. Native build/proxy helpers are executed and instrumented separately, then merged into the complete source coverage. Tests do not substitute a sample backend for customers.
+The public-site guide defines the focused restoration checks and their exact coverage limits. Native build/proxy helpers are exercised separately. Tests use isolated synthetic responses; they do not provide a substitute backend to customers.
 
 The Vite development server runs at port 3000 by default. `/api`, `/company` and `/studio` requests use the local Python server on port 8000. Without that server and valid private configuration, unavailable responses are expected. Do not reconnect a retired backend or invent provider credentials to make a local page appear ready.
 
