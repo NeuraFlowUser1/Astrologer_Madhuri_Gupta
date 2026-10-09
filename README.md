@@ -1,76 +1,53 @@
-> **Current booking release — 8 October 2026:** use [the current operating guide](docs/appointment-system-release.md).
-> Complete package `97ab5d49fc559eb1acdeb7157d4561134d1bad824cca298506f48b2a9d32b49d`:573 files,36 unchanged migrations. The bounded email-feedback correction is published and independently verified on both official websites. Both company switches are effective ON, normal prices are restored, and both exact paid test receipts remain correct. Both existing Git publishing connections have successful automatic-deployment evidence. After the owner reconnected Sarsa's existing repository, its first normal main-branch push deployed successfully without a manual build; protected readback confirms the corrected release on the official domain. The exact internal cause of the earlier silent gap is not established.
-> Fresh Kundli Matching no-email paid acceptance passes:₹1 captured, confirmed booking, Meet link, parsed PDF, staff notification, both spreadsheets and one requested company-inbox copy. Normal price is restored to₹2,100; other settings remain.
-> The shared email-feedback correction passes93/93 focused checks. Full parent evidence remains verified for unchanged code, with current whole-code coverage above90% and no exclusions. Both builds and contained hosting checks pass. No fresh full-suite or backup-run claim is made for this correction.
-> Five private pages are internally linked with existing permissions. Company passwords remain encrypted outside source. Keep the existing accounts, keys and saved choices. Broader website tests and visible note history remain deferred.
-> The imported README below is dated reference; use the current guide for operation.
-
 # Sarsa Jyotish Sansthan — Project 004
 
-This imported client project is being rebuilt around Madhuri Gupta’s personal brand and a permanent appointment-booking system. The current implementation uses React/Vite, FastAPI, Neon Postgres, Razorpay, Google Calendar/Meet, separately owned Google Sheets, Resend and a dedicated Cloudflare recovery worker.
+Sarsa's public website introduces Madhuri Gupta and four services: Kundli Matching, Kundli Prediction, Vastu Consultation and Numerology. It uses one public header/footer, simple English with short Hindi lines, illustrated service pages and a Contact page with the owner's Agra address and Google Maps pin.
 
-**Current state, 30 September 2026, 17:50 UTC:** the redesigned website and permanent backend are live. Staff setup, both separately owned Google spreadsheets, scheduled recovery and the independent monitor have passed their recorded checks. Razorpay settings are recognised on the live website; the owner saved the webhook and selected automatic capture. Normal booking and enquiry intake are now enabled after guarded readiness checks. The approved prices and available times are served correctly. The owner’s real Contact test passed: verification, acknowledgement and practice-notice emails have delivery reports; both separately owned spreadsheet jobs completed once with the correct Project004 label. The owner’s real1 INR booking is confirmed with captured payment, signed callback processing, Google Meet, both record copies and three delivered booking emails. Normal prices are fully restored in source, the actual deployment and the database; fresh checkout-context and availability checks pass, and the existing test payment remains1 INR. The real staff reschedule also passed: revision2 at the new time, old slot released, new meeting and record copies, and three delivered update emails. The real cancellation also passed: revision3 cancelled, slot released, meeting cancelled, record copies and cancellation emails delivered. The full1 INR refund is verified in Razorpay and recorded through its signed callback on the first processing attempt. The provider-verified refund review is closed through one authenticated staff action. Final privacy wording is deployed and its actual asset is verified. The owner reports the independent simultaneous-booking check passed, and separate development cleanup verification found no remaining test rows. Assisted-access live acceptance remains an owner/staff-operated check. Client dashboard/account-choice/date-picker redesign is separately deferred and recorded. No appointment, message, charge or refund was created by Codex in these checks.
+The public-site implementation and its checks are described in [the public-site guide](docs/public-site-refresh.md). The separate [booking operating guide](docs/appointment-system-release.md) owns booking, staff access, provider connections and recovery. Source implementation, local qualification and actual online release are separate evidence stages; the release record identifies the exact tested and published commit.
 
-**Backups are live:** the daily encrypted backup workflow is published and active in the existing GitHub repository. Its first production export, isolated restore, Sarsa-owned Google Drive upload and authenticated readback passed; a same-day rerun verified the existing copy without duplication. The schedule is08:32 India time. The owner has saved the recovery key, and actual initial failure notifications reached NeuraFlow’s inbox. See the backup operating instructions and successful runs (historical path `tools/backup/README.md`). The first accepted archive covers the earlier019 schema; a backup of the now030 schema has not yet been claimed. Website publication is separately recorded above.
-
-See the [current implementation checkpoint](design-review/2026-09-17/15-automatic-booking-plan/verification.md#website-integration-checkpoint--29-september-2026) for checks and remaining live account actions.
-
-**Deployment follow-up:** the hosted booking page computes `overflow-x:clip` and has no horizontal overflow at390px/320px. Protected diagnostics expose only booleans. Google and payment keys remain private; no existing key was regenerated. Sarsa’s local mail limits are20/day and600/rolling31days, with enquiries limited to8/day and240/rolling31days within those totals. These counters cannot reserve capacity against Project003 or other senders in the shared Resend account. Actual Contact activation, notification delivery, Meet/payment acceptance and final policy review remain.
-
-## Start here
-
-- [Whole-website completion and release plan](design-review/2026-09-17/15-automatic-booking-plan/website-completion-implementation-plan.md) — current planned work, including the newly onboarded Sarsa Razorpay account and all remaining hosted acceptance.
-
-- [Current implementation plan and status](design-review/2026-09-17/15-automatic-booking-plan/permanent-system-execution-plan.md)
-- [Permanent resource and account manifest](design-review/2026-09-17/15-automatic-booking-plan/permanent-resource-manifest.md)
-- [Verification evidence and outstanding acceptance](design-review/2026-09-17/15-automatic-booking-plan/verification.md)
-- [Staff operations and assisted recovery](design-review/2026-09-17/15-automatic-booking-plan/staff-appointment-changes.md)
-- Booking-engine contracts and checks (historical path `backend/booking_engine/README.md`)
-- [Improvements to review for Project003 later](design-review/2026-09-17/15-automatic-booking-plan/004-to-003-improvement-register.md)
-
-## Source layout
+## Application boundaries
 
 | Path | Responsibility |
 | --- | --- |
-| `frontend/src/pages/` | Actual website pages; Booking and Contact use final same-origin API contracts |
-| `frontend/src/booking/`, `frontend/src/contact/` | Customer state, validation, receipt access and motion |
-| `api/index.py` | Vercel entry point for the permanent FastAPI application |
-| `backend/booking_engine/` | Booking, payment evidence, Google/Resend delivery, protected staff actions and receipt recovery |
-| `backend/booking_engine/migrations/` | Immutable, checksum-tracked database changes; never applied during a website request |
-| `backend/booking_engine/studio_assets/` | Private `/studio` and public assisted `/booking-help` pages |
-| `workers/booking-recovery/` | Dedicated queue processing,15-minute recovery and independent health-monitor source |
-| `design-review/2026-09-17/` | Approved HTML directions, choreography, planning and QA evidence |
-| `media/` | Client-supplied assets, including the approved Madhuri portrait |
-| `tools/` | Protected-setting handoff and encrypted-backup tools; credentials stay out of source and logs |
+| `frontend/src/pages/` | Public pages and the existing appointment form/receipt pages. |
+| `frontend/src/site/` | Public frame, reviewed copy, navigation, finite decoration and common booking-state bindings. |
+| `frontend/src/contact/` | Enquiry presentation and the existing shared enquiry coordinator. |
+| `frontend/src/booking/` | Client-owned appointment presentation, measured scrolling and contained-system adapters. |
+| `frontend/scripts/` | Public route generation and release preflight. |
+| `frontend/tests/public-site/` | Public-site unit, browser, accessibility, coverage and local performance checks. All application responses are synthetic. |
+| `api/index.py` | Existing Python hosting entrypoint. |
+| `appointment-system/` | Complete independently contained booking system; no factory runtime dependency. |
+| `appointment-settings/` | This installation's public profile and settings contracts. Secrets are stored outside source. |
+| `workers/` and `.github/workflows/` | Existing background processing, monitoring and independent backups. |
 
-The imported folder layout is retained. No client restructuring or Project003 modification is implied.
+This programme changes the Sarsa public pages and local frame/scroll integration. AstroAdvice, booking-master bytes, database rules, prices, Google approvals, payment/email contracts, worker configuration and private portal permissions are preserved.
 
-## How the permanent booking system works
+## Local development and checks
 
-The database owns prices, availability, reservations, appointment state and recorded payment evidence. A browser payment success screen cannot confirm an appointment. Both email and mobile are mandatory; booking has no email OTP. Contact enquiries use their separate verification flow.
-
-Saved work drives Google Meet creation, the client’s own spreadsheet, NeuraFlow’s separate spreadsheet, and Resend delivery. A saved booking is distinct from a ready meeting or delivered email. Resend replies go to `sarsajyotish@gmail.com`; the sending identity is the verified Sarsa mail subdomain. No SMTP or Jitsi fallback is part of this implementation.
-
-Practice staff can block time, move/cancel appointments, inspect problems, retry eligible work, review verified full-refund evidence, and correct contact details after the approved callback procedure. Agency access is limited to its own connection and record-copy work. Cancellation does not send a refund. Lost receipt access uses verified phone support and a short-lived activation code; private receipt credentials never enter email or URLs.
-
-## Local checks
-
-From this client root, use an existing Python environment with the declared requirements installed:
+Use Node 22 and the committed frontend lockfile:
 
 ```sh
-python -m unittest discover -s backend/booking_engine/tests
-node --test frontend/tests/routes.test.mjs frontend/tests/booking/*.test.mjs frontend/tests/contact/*.test.mjs workers/booking-recovery/worker.test.mjs
-npm run build --prefix frontend
+npm ci --prefix frontend
+npm --prefix frontend run dev
+npm --prefix frontend run build
+npm --prefix frontend run lint
+npm --prefix frontend run check:public-site
+npm --prefix frontend run test:public-site
 ```
 
-`npm run dev --prefix frontend` starts Vite at port3000 by default (it may choose another port if busy). `/api`, `/studio` and `/booking-help` proxy to port8000. Without a correctly configured permanent backend, unavailable-service responses are expected; do not substitute the retired application or sample provider data. Browser test fixtures intercept requests only inside test code.
+Browser/performance checks and their external report-directory settings are documented in the public-site guide. Native build/proxy helpers are executed and instrumented separately, then merged into the complete source coverage. Tests do not substitute a sample backend for customers.
 
-## Hosting and activation
+The Vite development server runs at port 3000 by default. `/api`, `/company` and `/studio` requests use the local Python server on port 8000. Without that server and valid private configuration, unavailable responses are expected. Do not reconnect a retired backend or invent provider credentials to make a local page appear ready.
 
-Sarsa uses the existing Vercel project `astrologer-madhuri-gupta` in the owner’s separate account. The Git repository is `NeuraFlowUser1/Astrologer_Madhuri_Gupta`. Build settings and routing are in `vercel.json`: frontend output is `frontend/dist`; API, Studio and booking-help requests reach `api/index.py`. Do not use the old Render commands or `backend/main.py` as the permanent application entry point.
+## Booking and staff access
 
-`main.py` and `backend/main.py` remain imported legacy source. Their obsolete submission routes are retired with410 responses. They are not production setup instructions for this booking engine.
+The saved company settings own prices, available times and verification choices. Booking email is optional while email codes are OFF and required/verified while they are ON. Mobile remains required. Drafts survive tab/app changes; a deliberate page refresh may clear them. Enquiries keep their separate required-email verification flow.
 
-Schedule browsing is independent of Razorpay readiness. Keep the permanent payment and delivery correctness controls; missing payment configuration returns a clear checkout error without an appointment. The production upgrade through030 is complete; finish protected configuration and hosted Google/worker/email/payment checks as separate readiness work. `SARSA_CONTACT_DELIVERY_ENABLED=true` is a deliberate final Contact readiness switch; it also requires every delivery credential and the database intake switch. Existing protected keys must not be regenerated casually. Never put credentials in this repository, chat, logs, frontend variables or documentation.
+The private pages are `/studio`, `/enquiries-studio`, `/company/booking-control`, `/company/booking-support` and `/company/google-repair`. They retain their existing authentication and internal navigation. Passwords, receipt access, API keys and provider credentials must never be stored in source, screenshots, logs or public documents.
 
-Privacy, terms and booking-policy wording describe the completed connections, separate enquiry verification, protected browser access and encrypted backups. The reviewed policy update is published and the actual deployed asset is verified. See the [operating handover](design-review/2026-09-17/15-automatic-booking-plan/operating-handover.md) for staff routines and unresolved acceptance boundaries.
+The contained package remains `97ab5d49fc559eb1acdeb7157d4561134d1bad824cca298506f48b2a9d32b49d`: 573 manifest files and migrations 001–036. Dated real payment, Meet, email, spreadsheet and backup acceptance remains in the booking operating guide; public visual checks do not claim fresh provider acceptance.
+
+## Publishing
+
+Use the existing route only: `NeuraFlowUser1/Astrologer_Madhuri_Gupta` → `main` → Vercel `neura-flow1/astrologer-madhuri-gupta` → `https://www.sarsajyotishsansthan.com`.
+
+Vercel stays disconnected from Codex. Publish the same locally qualified commit through Git, then verify its actual public asset identities and read-only page journeys on the official domain. A successful Git push alone does not establish a successful online release. Booking remains ON for this public-site programme; no live price, enquiry, payment or company-setting mutation is required.

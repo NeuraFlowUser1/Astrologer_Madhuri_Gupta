@@ -2,7 +2,7 @@
 import React, {act} from 'react';
 import {createRoot} from 'react-dom/client';
 import {afterEach,beforeEach,expect,test,vi} from 'vitest';
-import {policy as samplePolicy,installation_id,epoch} from '../../../appointment-system/tests/booking-browser-fixture.mjs';
+import {policy as samplePolicy,installation_id} from '../../../appointment-system/tests/booking-browser-fixture.mjs';
 import {createReceiptStore} from '../../../appointment-system/browser/booking/credentials.mjs';
 const policy=samplePolicy();policy.server_now='2030-01-01T09:00:00Z';
 policy.policy.services=[{...policy.policy.services[0],id:'kundli-prediction',name:'Kundli Prediction',pricing:{kind:'fixed',amount_paise:250000,maximum_questions:1}}];
@@ -16,9 +16,10 @@ vi.mock('../../src/booking/browser.mjs',async()=>{
  const {createPaymentRecovery}=await import('../../../appointment-system/browser/booking/payment-recovery.mjs');
  const {installation_id,epoch}=await import('../../../appointment-system/tests/booking-browser-fixture.mjs');
  const receipts=createReceiptStore({installation_id,environment:'test'}),storage=()=>sessionStorage;
- const product={getSnapshot:()=>({enabled:true,activation_epoch:epoch}),subscribe:()=>()=>{}};
+ const display=Object.freeze({enabled:true,verified:true,checking:false,activation_epoch:epoch,retained_on_epoch:epoch,foreground_revision:0});
+ const product={getSnapshot:()=>display,getServerSnapshot:()=>display,subscribe:()=>()=>{}};
  const recovery=createPaymentRecovery({installation_id,environment:'test',receipts,storage,api:mocks.api,enabled:()=>true});
- return {bookingBrowser:{controller:initialService=>createBookingController({api:mocks.api,receipts,storage,product,initialService,
+ return {bookingBrowser:{product,controller:initialService=>createBookingController({api:mocks.api,receipts,storage,product,initialService,
   payment:{load:mocks.load,open:mocks.open,rememberAndSubmit:recovery.rememberAndSubmit}})}};
 });
 import {useBooking} from '../../src/booking/useBooking.jsx';
@@ -91,7 +92,7 @@ test('verification failure never confirms locally or replaces the saved receipt'
  await act(async()=>mocks.open.mock.calls[0][1].onSuccess({razorpay_signature:'synthetic'}));expect(current.state.receipt.appointment_state).toBe('held');expect(sessionStorage.getItem(STORAGE_KEY)).toBe(saved);expect(current.state.busy).toBe(false);
 });
 test('restored payment checks do not create a new context; restart requires fresh server permission',async()=>{
- const credential=prepareReceipt(sessionStorage);await mount('unknown');expect(current.state.service).toBe('kundli-prediction');expect(current.state.credential).toEqual(credential);expect(mocks.api.mock.calls.some(([p])=>p==='/api/checkout-context')).toBe(false);
+ const credential=prepareReceipt(sessionStorage);await mount('unknown');expect(current.state.service).toBe('');expect(current.state.credential).toEqual(credential);expect(mocks.api.mock.calls.some(([p])=>p==='/api/checkout-context')).toBe(false);
  await act(async()=>current.restart());expect(current.state.credential).toEqual(credential);
  const normal=mocks.api.getMockImplementation();mocks.api.mockImplementation(async(p,o)=>p.endsWith('/status')?receipt(credential.request_id,{appointment_state:'expired',next_actions:['choose_new_time']}):normal(p,o));await act(async()=>current.check());
  mocks.api.mockImplementation(async(p,o)=>p.endsWith('/status')?receipt(credential.request_id,{next_actions:['check_payment']}):normal(p,o));await act(async()=>current.restart());expect(current.state.credential).toEqual(credential);

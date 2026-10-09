@@ -7,7 +7,11 @@
     "dev": "vite",
     "build": "vite build && node scripts/public-pages.mjs",
     "lint": "oxlint",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "test:public-site": "vitest run --config vitest.public-site.config.mjs --coverage && node tests/public-site/coverage-audit.mjs",
+    "check:public-site": "node scripts/check-public-site.mjs",
+    "test:public-site:browser": "node tests/public-site/browser.mjs",
+    "test:public-site:performance": "node tests/public-site/performance.mjs"
   },
   "dependencies": {
     "@internationalized/date": "3.12.4",

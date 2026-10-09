@@ -1,32 +1,7 @@
-
-import {BookingLink as Link,BookingOnly,BookingCopy} from '../site/BookingProduct.jsx';
-import {useEffect} from 'react';
-import catalogue from '../site/catalogue.json';
-import '../site/services.css';
-const descriptions={'kundli-prediction':'Life questions, explored through your birth chart.','kundli-matching':'A considered conversation about compatibility.','vastu-consultation':'A fresh perspective on the spaces around you.',numerology:'Explore the patterns associated with names and dates.'};
-export default function Services(){useEffect(()=>{document.title='Consultations | Sarsa Jyotish Sansthan';},[]);return <div className="sarsa-services">
-<section className="service-intro">
-<p className="eyebrow">FIND YOUR STARTING POINT</p>
-<h1>Different questions.<br/>
-<em>Space to explore them.</em>
-</h1>
-<p>Choose the consultation that best fits what is on your mind. <BookingCopy off="Contact the practice with your questions.">Each is a personal, 30-minute online conversation with the practice.</BookingCopy></p>
-</section>
-<section className="service-directory" aria-label="Consultation choices">{catalogue.services.map((s,i)=>
-<article key={s.id}>
-<span className="service-number">0{i+1}</span>
-<h2>{s.name}</h2>
-<p>{descriptions[s.id]}</p>
-<BookingOnly><p className="service-facts">₹{(s.amount_paise/100).toLocaleString('en-IN')} · {s.duration_minutes} minutes · Google Meet</p></BookingOnly>
-<div className="service-actions">
-<Link to={'/services/'+s.id}>Explore the consultation ↗</Link>
-<Link className="service-button" to={'/booking?service='+s.id}>Choose a time</Link>
-</div>
-</article>)}</section>
-<section className="service-preparation">
-<p className="eyebrow">BEFORE WE BEGIN</p>
-<h2>A question is enough<br/>to start a conversation.</h2>
-<p>Write down what you would like to discuss. If you are unsure which consultation fits your needs, ask the practice before booking.</p>
-<Link className="service-button" to="/contact">Ask a question ↗</Link>
-</section>
-</div>;}
+import {PublicPage,copy,Action,ServiceCards} from '../site/PublicSections.jsx';
+export default function Services(){return <PublicPage className="sarsa-services">
+ <section className="section compact-opening"><div className="wrap"><h1 tabIndex={-1}>{copy.directory.title}</h1><p className="hindi" lang="hi">{copy.directory.hindi}</p><p>{copy.directory.body}</p><ServiceCards/></div></section>
+ <section className="section sage"><div className="wrap"><h2>{copy.directory.matching_title}</h2><div className="choice-list">{copy.services.map(s=><p key={s.id}><strong>{s.name}</strong><span>{s.description}</span></p>)}</div></div></section>
+ <section className="section knowledge"><div className="wrap two-column"><div><h2>{copy.directory.knowledge_title}</h2><dl>{copy.directory.glossary.map(([title,body])=><div key={title}><dt>{title}</dt><dd>{body}</dd></div>)}</dl></div><img src="/media/sarsa-public/kundli-prediction-illustration.svg" width="640" height="320" alt="" loading="lazy"/></div></section>
+ <section className="section ending sage"><div className="wrap"><h2>{copy.directory.preparation_title}</h2><p>{copy.directory.preparation_body}</p><Action to="/contact">Ask a question</Action></div></section>
+ </PublicPage>;}
