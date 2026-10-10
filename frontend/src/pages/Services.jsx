@@ -3,30 +3,51 @@ import {BookingLink as Link,BookingOnly,BookingCopy} from '../site/BookingProduc
 import {useEffect} from 'react';
 import catalogue from '../site/catalogue.json';
 import '../site/services.css';
-const descriptions={'kundli-prediction':'Life questions, explored through your birth chart.','kundli-matching':'A considered conversation about compatibility.','vastu-consultation':'A fresh perspective on the spaces around you.',numerology:'Explore the patterns associated with names and dates.'};
-export default function Services(){useEffect(()=>{document.title='Consultations | Sarsa Jyotish Sansthan';},[]);return <div className="sarsa-services">
+import ServiceArtwork from '../site/ServiceArtwork.jsx';
+const descriptions={'kundli-prediction':'Questions about work, marriage, family or a changing phase of life? Explore your birth chart, grah and dasha in simple words.','kundli-matching':'Thinking about marriage? Explore what two kundlis can tell you about compatibility and the questions you want to discuss.','vastu-consultation':'Questions about your home or workspace? Understand its layout and directions through the principles of Vastu.',numerology:'Curious about your name, date of birth or numbers? Explore their meaning in the numerology tradition.'};
+export default function Services(){useEffect(()=>{document.title='Services | Sarsa Jyotish Sansthan';},[]);return <div className="sarsa-services services-directory-page">
 <section className="service-intro">
 <p className="eyebrow">FIND YOUR STARTING POINT</p>
 <h1>Different questions.<br/>
 <em>Space to explore them.</em>
 </h1>
-<p>Choose the consultation that best fits what is on your mind. <BookingCopy off="Contact the practice with your questions.">Each is a personal, 30-minute online conversation with the practice.</BookingCopy></p>
+<p>Start with the question you have. Explore Jyotish, Vastu and Numerology with Madhuri Gupta. <BookingCopy off="Contact the practice with your questions.">Read about a service, then book an appointment when you are ready.</BookingCopy></p>
 </section>
-<section className="service-directory" aria-label="Consultation choices">{catalogue.services.map((s,i)=>
+<section className="service-directory" aria-label="Services">{catalogue.services.map((s,i)=>
 <article key={s.id}>
-<span className="service-number">0{i+1}</span>
+<ServiceArtwork id={s.id}/><span className="service-number">0{i+1}</span>
 <h2>{s.name}</h2>
 <p>{descriptions[s.id]}</p>
 <BookingOnly><p className="service-facts">₹{(s.amount_paise/100).toLocaleString('en-IN')} · {s.duration_minutes} minutes · Google Meet</p></BookingOnly>
 <div className="service-actions">
-<Link to={'/services/'+s.id}>Explore the consultation ↗</Link>
-<Link className="service-button" to={'/booking?service='+s.id}>Choose a time</Link>
+<Link to={'/services/'+s.id}>Explore the service ↗</Link>
+<Link className="service-button" to={'/booking?service='+s.id} bookingMode="hide">Book an appointment</Link>
 </div>
 </article>)}</section>
+<section className="service-guide" aria-labelledby="question-guide-title">
+<p className="eyebrow">LIFE’S QUESTIONS</p><h2 id="question-guide-title">Which question brings you here?</h2>
+<div className="question-guide">{[
+['kundli-matching','Planning a marriage?','Start with Kundli Matching.'],
+['kundli-prediction','Thinking about your next phase in life?','Explore Kundli Prediction.'],
+['vastu-consultation','Questions about your home or workspace?','Read about Vastu Consultation.'],
+['numerology','Curious about names, dates and numbers?','Explore Numerology.']
+].map(([id,question,label])=><div key={id}><h3>{question}</h3><Link to={'/services/'+id}>{label} ↗</Link></div>)}</div>
+<p>These are starting points. Read the service details, or ask the practice which area fits your question.</p>
+</section>
+<section className="service-guide jyotish-guide" aria-labelledby="jyotish-guide-title">
+<p className="eyebrow" lang="hi">कुंडली, ग्रह और दशा — सरल शब्दों में।</p><h2 id="jyotish-guide-title">A little Jyotish, in simple words</h2>
+<dl>{[
+['Kundli','A birth chart used in the Jyotish tradition.'],
+['Grah','The planetary influences discussed in Jyotish.'],
+['Dasha','A planetary period in the traditional astrological system.'],
+['Gochar','The movement of planets considered in relation to a birth chart.']
+].map(([term,meaning])=><div key={term}><dt>{term}</dt><dd>{meaning}</dd></div>)}</dl>
+<p>Vastu looks at the layout and directions of a space. Numerology explores names, dates and numbers. These are traditional ideas; you can ask what an unfamiliar term means.</p>
+</section>
 <section className="service-preparation">
 <p className="eyebrow">BEFORE WE BEGIN</p>
 <h2>A question is enough<br/>to start a conversation.</h2>
-<p>Write down what you would like to discuss. If you are unsure which consultation fits your needs, ask the practice before booking.</p>
+<p>Write down what you would like to discuss. If you are unsure which service fits your question, ask the practice before booking.</p>
 <Link className="service-button" to="/contact">Ask a question ↗</Link>
 </section>
 </div>;}

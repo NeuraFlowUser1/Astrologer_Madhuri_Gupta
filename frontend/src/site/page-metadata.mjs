@@ -2,7 +2,7 @@ export const origin='https://www.sarsajyotishsansthan.com';
 export const pages={
  '/':['Madhuri Gupta','Personal astrology consultations with Madhuri Gupta at Sarsa Jyotish Sansthan. Explore consultations and book an appointment.'],
  '/about':['About Madhuri Gupta','Meet Madhuri Gupta, who leads Sarsa Jyotish Sansthan, and explore her approach to personal consultations.'],
- '/services':['Consultations','Explore Kundli Prediction, Kundli Matching, Vastu and Numerology consultations, with clear fees and online appointments.'],
+ '/services':['Services','Explore Kundli Prediction, Kundli Matching, Vastu and Numerology services with Madhuri Gupta. Read about each service and book an appointment.'],
  '/services/kundli-prediction':['Kundli Prediction','Explore your birth chart and the questions you bring to a personal Kundli Prediction consultation with Madhuri Gupta.'],
  '/services/kundli-matching':['Kundli Matching','Bring your questions about compatibility to a personal Kundli Matching consultation with Madhuri Gupta.'],
  '/services/vastu-consultation':['Vastu Consultation','Discuss questions about your home or workspace in a Vastu consultation with Madhuri Gupta.'],

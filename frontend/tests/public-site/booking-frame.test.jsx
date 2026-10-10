@@ -10,10 +10,11 @@ vi.mock('../../src/booking/booking-ui.jsx',()=>({
  DateField:({label,name='birth_date',value,required,onChange,disabled})=><label>{label}<input aria-label={label} name={name} value={value} required={required} disabled={disabled} onChange={e=>onChange(e.target.value)}/></label>,
  BirthTimeField:({label,value,required,onChange})=><label>{label}<input aria-label={label} value={value} required={required} onChange={e=>onChange(e.target.value)}/></label>,ReceiptFields:()=> <p>Receipt information</p>}));
 import Booking from '../../src/pages/Booking.jsx';
+import {SiteHeader,SiteFooter} from '../../src/site/SiteFrame.jsx';
 import BookingReceipt from '../../src/pages/BookingReceipt.jsx';
 let root,host;
 const slot={starts_at:'2030-01-02T10:00:00+05:30',ends_at:'2030-01-02T10:30:00+05:30'};
-const render=async(page=<Booking/>)=>act(async()=>root.render(<MemoryRouter>{page}</MemoryRouter>));
+const render=async(page=<Booking headerRef={mock.header}/>)=>act(async()=>root.render(<MemoryRouter><SiteHeader headerRef={mock.header}/>{page}<SiteFooter/></MemoryRouter>));
 const click=node=>act(async()=>node.click());
 const button=text=>[...host.querySelectorAll('button')].find(n=>n.textContent.includes(text));
 async function change(selector,value){const node=host.querySelector(selector);Object.getOwnPropertyDescriptor(node instanceof HTMLTextAreaElement?HTMLTextAreaElement.prototype:node instanceof HTMLSelectElement?HTMLSelectElement.prototype:HTMLInputElement.prototype,'value').set.call(node,value);await act(async()=>node.dispatchEvent(new Event(node.tagName==='SELECT'?'change':'input',{bubbles:true})));}
@@ -23,7 +24,7 @@ beforeEach(()=>{
 });
 afterEach(async()=>{await act(async()=>root.unmount());host.remove();vi.useRealTimers();vi.restoreAllMocks();});
 test('one frame adapter preserves optional email and blocks review before a selected time',async()=>{
- await render();expect(host.querySelectorAll('.site-header')).toHaveLength(1);expect(host.querySelectorAll('.site-footer')).toHaveLength(1);expect(host.querySelector('#email').required).toBe(false);expect(host.querySelector('#phone').required).toBe(true);await click(button('Review'));expect(mock.go).toHaveBeenLastCalledWith('appointment');await act(async()=>host.querySelector('form').dispatchEvent(new Event('submit',{bubbles:true,cancelable:true})));expect(mock.flow.dispatch).toHaveBeenCalledWith({type:'error',message:'Please choose an available time first.'});expect(mock.flow.start).not.toHaveBeenCalled();
+ await render();expect(host.querySelectorAll('.sarsa-header')).toHaveLength(1);expect(host.querySelectorAll('.sarsa-footer')).toHaveLength(1);expect(host.querySelector('#email').required).toBe(false);expect(host.querySelector('#phone').required).toBe(true);await click(button('Review'));expect(mock.go).toHaveBeenLastCalledWith('appointment');await act(async()=>host.querySelector('form').dispatchEvent(new Event('submit',{bubbles:true,cancelable:true})));expect(mock.flow.dispatch).toHaveBeenCalledWith({type:'error',message:'Please choose an available time first.'});expect(mock.flow.start).not.toHaveBeenCalled();
  mock.flow.state.slot=slot;mock.flow.state.ack=true;await render();const validity=vi.spyOn(HTMLFormElement.prototype,'reportValidity').mockReturnValue(false);mock.go.mockClear();await click(button('Review'));expect(mock.go).not.toHaveBeenCalled();validity.mockReturnValue(true);await click(button('Review'));expect(mock.go).toHaveBeenLastCalledWith('review');await act(async()=>host.querySelector('form').dispatchEvent(new Event('submit',{bubbles:true,cancelable:true})));expect(mock.flow.start).toHaveBeenCalledOnce();
 });
 test('email-code mode, required preparation and per-question pricing retain existing contracts',async()=>{

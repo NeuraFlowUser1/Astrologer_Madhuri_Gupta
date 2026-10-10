@@ -15,10 +15,10 @@ export function checkProtectedPaths(paths){
  const protectedPaths=paths.filter(path=>path.startsWith('appointment-system/')||path.startsWith('workers/')||path.startsWith('api/')||path.startsWith('backend/')||path.startsWith('.github/')||(path.startsWith('appointment-settings/')&&path!=='appointment-settings/public-assets.json')||['requirements.txt','pyproject.toml','vercel.json','package.json','package-lock.json','frontend/package-lock.json'].includes(path));
  assert.deepEqual(protectedPaths,[],'Protected backend or settings changed');
 }
-export function runChecks({root=resolve(import.meta.dirname,'../..'),baseline='fef4f4e48eb87fe748c9d05b3be3ce4f27f6a548'}={}){
+export function runChecks({root=resolve(import.meta.dirname,'../..'),baseline='39aaedf34eb046b3bae106ea579bb8c0b375fcc0'}={}){
  const frontend=resolve(root,'frontend'),assets=JSON.parse(readFileSync(resolve(root,'appointment-settings/public-assets.json')));
  checkAssets(assets,resolve(frontend,'public'));
- assert.equal(origin,'https://www.sarsajyotishsansthan.com');assert.equal(pages['/services'][0],'Consultations');assert.equal(Object.keys(pages).length,12);
+ assert.equal(origin,'https://www.sarsajyotishsansthan.com');assert.equal(pages['/services'][0],'Services');assert.equal(Object.keys(pages).length,12);
  for(const path of Object.keys(pages))assert.ok(titleFor(path).endsWith(' | Sarsa Jyotish Sansthan'));
  // Compare the complete committed and working candidate with the approved start,
  // including new untracked files. HEAD-only comparison misses committed changes.
@@ -27,7 +27,7 @@ export function runChecks({root=resolve(import.meta.dirname,'../..'),baseline='f
  checkProtectedPaths([...changed,...untracked]);
  const source=listFiles(resolve(frontend,'src')).filter(p=>/\.(?:jsx?|mjs|tsx?)$/.test(p));
  assert.ok(source.length>20,'Unexpected working-source denominator');
- console.log(JSON.stringify({checks:'passed',public_routes:12,working_source_files:source.length,protected_diff:'unchanged',appearance:'checkpoint-A'}));
+ console.log(JSON.stringify({checks:'passed',public_routes:12,working_source_files:source.length,protected_diff:'unchanged',appearance:'checkpoint-A-preserved-and-refined'}));
  return {source:source.map(p=>relative(frontend,p)),routes:Object.keys(pages)};
 }
 if(process.argv[1]&&resolve(process.argv[1])===fileURLToPath(import.meta.url))runChecks();

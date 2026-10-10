@@ -1,48 +1,55 @@
-# Sarsa: checkpoint A restoration
+# Sarsa: preserve and refine the restored website
 
-Current approved objective: restore the public website from checkpoint A, `fef4f4e48eb87fe748c9d05b3be3ce4f27f6a548` (8 October 2026, 21:28:36 India time), while retaining working booking protections. The owner chose A explicitly on 9 October. The later published public redesign and unpublished M4 design are superseded. Their evidence is historical, not the current appearance contract.
+Current objective: the owner accepted the moving preserve-and-refine candidate on 10 October 2026 and authorized its commit/push through the existing publication route, explicitly skipping test suites. The approved presentation augments the restored website in .local-runtime/version-a-restore, based on commit 39aaedf34eb046b3bae106ea579bb8c0b375fcc0. See the [publication scope](public-site-refinement-release-2026-10-10.md).
 
-## What returns
+The enclosing dirty client checkout and rejected public-site-refresh workspace remain separate and are not source donors. A Git push, the hosting provider's deployment result and a current public-page observation are separate facts; record each against its exact commit rather than reuse the restoration's dated receipts.
 
-Home, About, Consultations, all four existing service routes, Contact and compact Booking return to A's actual source composition, text, images, typography, CSS, choreography and responsive rules. Three policy routes also return to A. The `/services` address stays the same but its visible label is again Consultations. A has seven Home sections with three Home FAQs, a separate process section, the original still-life hero and owner portraits. Contact restores the older layered cards, five motion scenes, four questions and enquiry desk. There is no Google map or owner address on A's Contact page. Header/footer differences between ordinary pages, Contact and Booking are restored rather than silently redesigned. Three simpler service-detail routes and the richer Kundli Prediction route return as they were. No new artwork, Hindi copy, richer service articles, M4 guide decorations, shared-menu system or back-to-top control is retained.
+## Current public website
 
-## Complete product exceptions from A
+The original Georgia/system typography, forest/cream palette, still-life photograph, authentic portrait, section order and 36 staged scenes remain. Home has a taller proportional hero and readable copy, simple English with short Hindi lines, restrained optional margin artwork, service-card glow, eight exclusive FAQs and a Home back-to-top button. About adds the approach action, clearer service action and separate Explore/Book controls for all four services. Services keeps its existing two-column directory and adds four illustration bands, a question guide and a short Jyotish glossary. The four service pages retain their original animated artwork.
 
-1. `src/booking/booking-layout.mjs`: retain the later connected-header measurement, interruption handling, optional-browser-feature guards, disposal and stale-callback protection. Remove only the rejected M4 SVG guide renderer. Movement is bounded to 220ms with instant reduced-motion fallback. These are Sarsa presentation protections, not booking-engine changes.
-2. `src/pages/Booking.jsx`: pass A's own connected `.site-header` to that adapter. The form markup and wording match A; no replacement header or M4 artwork is included.
-3. `src/contact/ContactForm.jsx`: consume each topic request once and apply it only to an editable, non-busy, non-blocked, non-retrying draft. Do not replay it after verification/restart. Focus a received result without forcing a scroll. Keep the original shared enquiry owner and exact submitted contract.
-4. `src/pages/ContactPage.jsx`: remove A's Pause background movement button, honoring the owner's explicit standing decision. Automatic operating-system reduced motion remains. All other page markup matches A.
-5. `scripts/public-pages.mjs`: retain removal of an existing generated booking-mode marker before regeneration. Repeating the build cannot leave conflicting ON/OFF markers. This does not change A's appearance.
-6. Eight already-unreferenced pre-standardization component files stay retired. They were not active routes in A and are not needed to restore it. `/testimonials` still redirects to About, exactly as A's router did.
+Contact keeps all five original scenes. Its shorter rear-card wording fits the uncovered area; the original front-card wording remains to preserve its natural size at every narrow width. The existing closing arrow is now a real 44px booking link. A readable booking explanation and location block sit outside the original scenes. The address is exactly **8, Gailana Road, LIC Colony, Agra - 282007** and the external pin is https://maps.app.goo.gl/CwQftW8iYfxAZFDo8. The real Google embed was visually checked locally. Its text address and directions link remain usable when the frame is blocked.
 
-All other selected active product files match A byte for byte: 90 of 94, with four intentional source exceptions above. The build-script exception is outside that appearance-file denominator. Exact path inventories and hashes are retained in the factory restoration record.
+One persistent public header/footer serves the public pages, including Booking, Contact, help and policies. The header stays sticky only on Booking. Its connected reference is passed to the unchanged booking-layout helper. Public anchors have one interruptible 400ms scroll owner with instant reduced-motion behavior and outside-scene keyboard focus markers. Contact topic scrolling and Booking's original 220ms stage scrolling remain separately owned.
 
-## Preserved system
+## Motion boundaries
 
-The complete contained booking package remains digest `97ab5d49fc559eb1acdeb7157d4561134d1bad824cca298506f48b2a9d32b49d`: 573 manifest files, 36 migrations. Master and contained Project003 are checked against this same release; Project003's published manifest identifies it too. The restoration changes no engine, API, SQL/RLS, database, provider connection, account permission, worker, backup job, root runtime configuration, lockfile, price or stored record. Private portals and their internal links are preserved. AstroAdvice is not visually reverted.
+Exactly two geometry exceptions were agreed: Home hero height/proportional crop/height-dependent curtains and removal of its unused outer reserve; and About service-row spacing for the two actions below 1200px. The original timing and movement formulas remain. About's original page-root background shapes receive a measured compensation for the added row height, preserving their original bounds. The only edit to an existing motion module is About's selector adapter from whole-row buttons to permanent row identity elements.
 
-Optional email when email codes are OFF, required/verified email when ON, required phone, tab-change draft retention, payment/receipt/Meet status, requested email copy, PDF and booking recovery remain in the contained shared system. Enquiries have their separate required-email verification. Deliberate refresh retention is not promised. Booking stays ON; no new live payment, message, enquiry or settings change is required by this restoration. Earlier dated provider acceptance remains in `appointment-system-release.md` and is not relabelled as today's test.
+Home's emblem and process remain separate original canvases. Their requested repositioning/merger is excluded under the owner's position lock. Contact's original FAQ number/line alignment is likewise retained. Do not describe those earlier geometric requests as completed.
 
-## Focused verification
+The common scene engine, Home/generic/Kundli/Contact motion modules, Booking layout helper, Contact form/hook and service catalogue match the preserved baseline byte for byte. Disabled About ambient styles remain disabled. No Pause background movement button is present.
 
-Run with Node22 and the committed lockfile:
+## Protected product contracts
 
-```sh
-npm --prefix frontend run build
-npm --prefix frontend run lint
-npm --prefix frontend run check:public-site
-npm --prefix frontend run test:restore
-SARSA_EVIDENCE_DIR=/tmp/sarsa-version-a-browser npm --prefix frontend run test:public-site:browser
-```
+All 633 inventoried appointment-system/settings files are unchanged: 573 contained release files and 60 settings files. No API payload, database, migration, provider, price, duration, authentication, stored booking, permission, private portal, dependency or lockfile changed. Existing service IDs, product-state bindings and latest-at-click admission guards remain authoritative.
 
-The separate test:restore command owns this bounded restoration. The existing whole-source test:public-site coverage configuration and its audit remain unchanged and are not claimed as a newly passed complete suite. It covers restored page rendering, real build/proxy entrypoints, booking/receipt/bootstrap integration, booking/enquiry/callback coordination and the two retained functional owners. Coverage is explicitly scoped to `booking-layout.mjs` and `ContactForm.jsx`, with at least90% statements/branches/functions/lines **per file**, no exclusions. This must never be described as 90% of the whole website or a full shared-system release gate. Retired design-only tests and the old redesign performance helper are archived with their retired owners. The full coverage thresholds and source inventory are preserved; the focused command does not replace or weaken them. Dependency versions and lockfiles are unchanged.
+Booking email follows the current form: optional when email-code checking is off, required and verified when it is on; mobile remains required. Contact enquiries use their separate email verification. Home FAQ, Contact answer, Privacy and Terms now describe this correctly. Payment confirmation, receipt status and Meet/email delivery remain distinct. Existing help/recovery routes remain.
 
-The browser command serves the actual compiled app on loopback with visibly labelled test data. Synthetic responses are checked against production contracts; no provider SDK, credentials, real mail, payment or real-customer writes are used. Only external font GETs from Google's font hosts may load; application/provider requests are blocked. It checks all12 public routes at390/1440px, Booking at eight widths320–2560px, OFF/unknown fail-closed states, four booking journeys across both email-code modes, two enquiry journeys and four lower Home motion timelines. Screenshot and code inspection supplements automated checks. Browser claims are Chromium software observations, not physical-device or screen-reader certification. Current operation checks do not claim a new full accessibility audit, performance benchmark or backend release gate.
+## Focused local verification
 
-## Release and rollback
+The 9 October local implementation evidence is retained in the client-scoped folder design-review/2026-10-09-preserve-and-refine/implementation, outside this application Git root. The evidence is local Chromium and synthetic contract proof, not a hosted release or physical-device certification. The owner reviewed and accepted the actual moving candidate on 10 October. No test suite is rerun for this push, at the owner's instruction.
 
-Publish the qualified restoration commit through the existing `NeuraFlowUser1/Astrologer_Madhuri_Gupta` main→Vercel integration. Verify the official domain's actual asset hashes against the built candidate and inspect read-only health/service state/public pages. Vercel stays disconnected from Codex; do not create another hosting project or repeatedly push empty commits. Missing deployment evidence triggers investigation of Git status and public output.
+- 138 focused tests in 9 files pass. All 19 changed application/build executable files exceed 90% statements, branches, functions and lines individually, with no exclusions. Aggregate results: 98.82% statements, 96.66% branches, 98.61% functions and 99.73% lines. This is not coverage of every untouched website/shared-system file.
+- The browser checks cover shared public navigation, the action destinations, FAQs, Top, anchors, form retention, both booking email modes, unavailable/unknown booking, image/map failure and 200% zoom-equivalent layout.
+- Original/candidate motion comparisons cover 36 scenes, 8 viewports and 18 sampled progress points. Protected object geometry/styles match outside the two recorded exceptions. About root backdrops are compared in their actual root coordinate system; row identities are compared within each row.
+- Eight native-clock observations cover Contact's 24s and 36s full return cycles in both builds at phone and desktop widths, with offscreen, simulated-hidden and reduced-motion checks. Home attention runs with one light at a time, no consecutive repeat, manual focus priority and reduced-motion cancellation.
+- Production compilation and the 12-route public boundary preflight pass. Lint has zero errors and four pre-existing warnings in unchanged tests.
 
-The rejected M4 working copy and its exact 78-path archive remain preserved outside published source. Work occurs in `.local-runtime/version-a-restore`; `.local-runtime/public-site-refresh` is the rejected preserved workspace, not the current editing target. Roll back with a reviewed ordinary reverse commit preserving intervening work; never force/reset main. No database/provider/key rollback is necessary.
+For a later expressly authorized verification run, the focused checks are reproducible from this source root. Do not run them as part of the 10 October push:
 
-Current source and publication receipts live under the factory client's `design-review/2026-10-08-public-site-feedback/revert-identification-2026-10-09/`. They include the selected checkpoint, all file differences, focused diagnostics, screenshots, common-system comparison and actual hosted readback. Future enhancement requests are separate from this restoration; chronological staff-note history remains deferred.
+    npm --prefix frontend run build
+    npm --prefix frontend run lint
+    npm --prefix frontend run check:public-site
+    cd frontend
+    npx vitest run --config vitest.refinement.config.mjs --coverage
+
+The client-scoped implementation folder contains the separate focused browser runners. They serve/visit the actual compiled app with synthetic contracts and block real application/provider requests. The separately observed public Google map is read-only. No checkout, enquiry, email or payment is sent to a real provider.
+
+## Review, release and recovery
+
+The owner completed visual review and authorized publishing this accepted version through NeuraFlowUser1/Astrologer_Madhuri_Gupta, main, and the existing connected Vercel project/official Sarsa domain. Full local/hosted suites are skipped. No manual GitHub Action, shared settings/data/provider change or customer action is authorized by this presentation push.
+
+The owner's next requested work is planning: richer generated service imagery, combining the Home emblem/process while retaining their multi-stage motion, stronger hover/action styling, Services spacing, and additive visual storytelling on the individual service pages. That new scope is separate from this accepted publication. Its proposed geometry/motion changes are not implemented in this commit.
+
+Original source, tests, built output and documentation are preserved in the client implementation/before folder. Rollback is the reviewed presentation patch against the restored baseline; preserve unrelated outer work and all stored bookings. Do not reset either checkout or restore rejected redesign files.

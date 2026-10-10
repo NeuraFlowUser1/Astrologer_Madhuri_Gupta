@@ -4,9 +4,9 @@ import {createServer} from 'node:http';
 import {readFile,stat} from 'node:fs/promises';
 import {resolve,extname,sep} from 'node:path';
 import {syntheticResponses} from './synthetic-responses.mjs';
-const dist=resolve(import.meta.dirname,'../../dist');
 const mime={'.html':'text/html; charset=utf-8','.js':'text/javascript; charset=utf-8','.css':'text/css; charset=utf-8','.json':'application/json','.svg':'image/svg+xml','.avif':'image/avif','.webp':'image/webp','.jpeg':'image/jpeg','.png':'image/png','.woff2':'font/woff2','.ttf':'font/ttf'};
-export async function startReview({port=0,otp=false,mode='on'}={}){
+export async function startReview({port=0,otp=false,mode='on',distRoot=resolve(import.meta.dirname,'../../dist')}={}){
+ const dist=resolve(distRoot);
  const {respond}=syntheticResponses({otp,mode}),calls=[];
  const server=createServer(async(req,res)=>{
   res.setHeader('cache-control','no-store');res.setHeader('x-robots-tag','noindex, nofollow');

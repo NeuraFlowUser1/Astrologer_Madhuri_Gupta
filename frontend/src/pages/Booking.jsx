@@ -34,7 +34,7 @@ function Receipt({flow}){
    <Link className="text-button" to="/contact">Ask for help</Link><a className="text-button" href="/booking-help">Restore booking access</a></div>
  </section>;
 }
-export default function Booking(){
+export default function Booking({headerRef}){
  const [params]=useSearchParams(),flow=useBooking(params.get('service')||'kundli-prediction'),{state,dispatch}=flow;
  const root=useRef(null),form=useRef(null),layout=useRef(null),arrow=useRef(false),[active,setActive]=useState('service');
  const locked=!!state.credential||state.phase==='blocked'||state.busy||!flow.available;
@@ -45,7 +45,7 @@ export default function Booking(){
  const range=state.policy?dateRange(state.policy):null,appointment=state.slot?appointmentLabel(state.slot.starts_at,timezone):'Choose a date and time';
  const verificationRequired=state.policy?.policy.booking_verification.email===true;
  useEffect(()=>{document.title='Book your appointment | Sarsa Jyotish Sansthan';window.scrollTo(0,0);},[]);
- useLayoutEffect(()=>{layout.current=mountBookingLayout(root.current,setActive,{headerBar:root.current.querySelector('.site-header')});return()=>{layout.current.dispose();layout.current=null;};},[]);
+ useLayoutEffect(()=>{layout.current=mountBookingLayout(root.current,setActive,{headerBar:headerRef?.current});return()=>{layout.current.dispose();layout.current=null;};},[]);
  function go(id){
   if(state.credential)id='review';
   else if(id!=='service'&&!state.service)id='service';
@@ -62,7 +62,6 @@ export default function Booking(){
  }
  function submit(event){event.preventDefault();if(!state.slot){dispatch({type:'error',message:'Please choose an available time first.'});go('appointment');return;}void flow.start();}
  return <div className="sarsa-booking" ref={root}>
-  <header className="site-header wrap"><Link className="brand" to="/"><span className="brand-icon" aria-hidden="true">✳</span><span>Sarsa Jyotish Sansthan<small>WITH MADHURI GUPTA</small></span></Link><nav aria-label="Website"><Link to="/about">About Madhuri</Link><Link to="/contact">Contact</Link></nav></header>
   <div className="booking-opener wrap"><h1>Book your appointment for expert guidance.</h1></div>
   <nav className="journey-nav wrap" aria-label="Booking steps">{[['service','Service'],['appointment','Date & time'],['details','Your details'],['review','Review']].map(([id,label],i)=><button type="button" key={id} aria-current={active===id?'step':undefined} onClick={()=>go(id)}><span>0{i+1}</span>{label}</button>)}</nav>
   {!flow.available&&<p className="wrap booking-checking" role="status">Checking that booking is available. Your details are kept.</p>}
@@ -111,6 +110,5 @@ export default function Booking(){
    ['How will we meet?',state.policy?.policy.meeting==='google_meet'?'The confirmation page shows your Google Meet link when it is ready. You can also download your appointment details or request an email copy.':'Contact the practice for your meeting arrangements.'],
    ['Can I change my details?','Use Edit before payment begins. For a confirmed appointment, contact the practice for help with a correction.']
   ].map(([question,answer])=><details key={question}><summary>{question}</summary><p>{answer}</p></details>)}</section>
-  <footer className="site-footer wrap"><Link to="/contact">Contact the practice</Link><a href="/booking-help">Restore booking access</a><Link to="/about">About Madhuri</Link><Link to="/services">Consultations</Link><Link to="/">Back to the website</Link></footer>
  </div>;
 }

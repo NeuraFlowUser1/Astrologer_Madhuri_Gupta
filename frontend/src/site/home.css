@@ -10,3 +10,16 @@
 }
 /* Keep the desktop scroll cue legible over every crop of the hero photograph. */
 @media(min-width:701px){.sarsa-home .scroll-cue{background:#f7f5eff0;border:1px solid #26483d29;border-radius:16px;padding:8px 12px;box-shadow:0 4px 12px #26483d14}.sarsa-home .scroll-cue:focus-visible{outline:2px solid #26483d;outline-offset:4px}}
+
+/* The approved geometry exception is limited to the opening canvas. */
+@scope (.sarsa-home){
+#welcome{height:var(--hero-height);--hero-height:max(620px,calc(100svh - var(--public-header-height,85px)),var(--hero-content-height,620px))}
+#welcome .hero-scene{height:var(--hero-height);position:relative;top:auto}
+.hero-copy{width:min(640px,86vw);max-width:none;margin-left:7vw;padding:88px 0 0}
+.hero-bottom>span[lang=hi]{font-size:18px;letter-spacing:normal;max-width:65%;line-height:1.6}
+.service-glow{position:absolute;inset:0;border-radius:inherit;pointer-events:none;opacity:0;box-shadow:0 0 0 1px rgba(139,148,111,.45),0 12px 26px rgba(38,72,61,.12),0 0 22px rgba(163,157,104,.18);transition:opacity 220ms cubic-bezier(.2,.7,.2,1)}
+.faq-list summary{font-weight:600}.faq-list details[open] summary{font-weight:700}.faq-list details p{padding-top:12px;font-size:16px;line-height:1.7}
+@media(min-width:1600px){.hero-copy{margin-left:max(7vw,calc((100vw - 1240px)/2));padding-left:0}}
+@media(max-width:1000px) and (min-width:701px){.hero-copy{width:min(560px,86vw);padding-top:75px}}
+@media(max-width:700px){#welcome{--hero-height:max(700px,calc(100svh - var(--public-header-height,135px)),var(--hero-content-height,700px))}.hero-copy{width:calc(100% - 48px);margin-left:24px;padding:46px 0 0}.hero-copy .eyebrow{max-width:none;font-size:11px;letter-spacing:.08em}.hero-bottom>span[lang=hi]{font-size:16px}.faq-list summary{font-size:16px}.faq-list details p{font-size:15px}}
+}

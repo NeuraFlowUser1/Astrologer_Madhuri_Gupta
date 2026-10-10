@@ -1,10 +1,11 @@
-import React, { useEffect, lazy, Suspense } from 'react'
-import { BrowserRouter as Router, Routes, Route, useLocation, Navigate } from 'react-router-dom'
+import React, { useEffect, useLayoutEffect, useRef, lazy, Suspense } from 'react'
+import { BrowserRouter as Router, Routes, Route, useLocation, useNavigate, useNavigationType, Navigate } from 'react-router-dom'
 import {pages,origin,titleFor} from './site/page-metadata.mjs'
 import {useBookingProduct,ProductNavigationCheck,UnavailablePage,BookingRoute} from './site/BookingProduct.jsx'
 const BookingReceipt = lazy(() => import('./pages/BookingReceipt.jsx'))
 const BookingAccess = lazy(() => import('./pages/BookingAccess.jsx'))
 import {SiteHeader,SiteFooter} from './site/SiteFrame.jsx'
+import {observeHeader,createPublicScroller} from './site/public-scroll.mjs'
 const KundliPrediction = lazy(() => import('./pages/KundliPrediction.jsx'))
 const ServiceDetail = lazy(() => import('./pages/ServiceDetail.jsx'))
 const PolicyPage = lazy(() => import('./pages/PolicyPage.jsx'))
@@ -16,6 +17,15 @@ const ContactPage = lazy(() => import('./pages/ContactPage.jsx'))
 
 function AppShell() {
   const location = useLocation()
+  const navigate=useNavigate(),navigationType=useNavigationType();
+  const navigation=useRef(navigate);navigation.current=navigate;
+  const shell=useRef(null),header=useRef(null),main=useRef(null),scroller=useRef(null);
+  useLayoutEffect(()=>{
+    const stopHeader=observeHeader(shell.current,header.current);
+    scroller.current=createPublicScroller({main:main.current,header:header.current,navigate:to=>navigation.current(to)});
+    return()=>{stopHeader();scroller.current.dispose();scroller.current=null;};
+  },[]);
+  useLayoutEffect(()=>{scroller.current?.route(location,navigationType);},[location,navigationType]);
   const {enabled}=useBookingProduct();
   useEffect(() => {
     const path=location.pathname, data=pages[path];
@@ -27,22 +37,21 @@ function AppShell() {
     for(const selector of ['meta[property="og:url"]','meta[name="twitter:url"]']) document.querySelector(selector)?.setAttribute('content',origin+path);
     document.querySelector('meta[name="robots"]')?.setAttribute('content',data && (enabled || !['/booking','/booking-policy'].includes(path)) ? 'index, follow':'noindex');
   }, [location.pathname,enabled]);
-  const hasOwnNavigation = ['/booking', '/contact'].includes(location.pathname)
 
   return (
-    <div className="sarsa-site">
+    <div className="sarsa-site" ref={shell}>
       <div>
         <div>
-          {!hasOwnNavigation && <SiteHeader />}
+          <SiteHeader headerRef={header} sticky={location.pathname==='/booking'} />
           <a className="sarsa-skip" href="#page-content">Skip to content</a>
-          <main id="page-content" tabIndex="-1" className="flex-grow relative z-10">
+          <main id="page-content" ref={main} tabIndex="-1" className="flex-grow relative z-10">
             <Suspense fallback={<p role="status" className="p-8">Loading the page…</p>}><Routes>
               <Route path="/" element={<Home />} />
               <Route path="/about" element={<About />} />
               <Route path="/services/kundli-prediction" element={<KundliPrediction />} />
               <Route path="/services/:serviceId" element={<ServiceDetail />} />
               <Route path="/services" element={<Services />} />
-              <Route path="/booking" element={<BookingRoute><Booking /></BookingRoute>} />
+              <Route path="/booking" element={<BookingRoute><Booking headerRef={header} /></BookingRoute>} />
               <Route path="/testimonials" element={<Navigate to="/about" replace />} />
               <Route path="/booking/receipt" element={<BookingRoute><BookingReceipt/></BookingRoute>}/>
               <Route path="/booking-help" element={<BookingRoute><BookingAccess/></BookingRoute>}/>
@@ -52,40 +61,16 @@ function AppShell() {
           </main>
         </div>
       </div>
-      {!hasOwnNavigation && <SiteFooter />}
+      <SiteFooter home={location.pathname==='/'} scrollerRef={scroller} />
     </div>
   )
-}
-
-function ScrollToHashElement() {
-  const location = useLocation()
-
-  useEffect(() => {
-    if (!location.hash) { window.scrollTo(0, 0); return; }
-    let elementId; try { elementId = decodeURIComponent(location.hash.substring(1)); } catch { return; }
-    let observer, timer;
-    const scroll = () => {
-      const el = document.getElementById(elementId);
-      if (!el) return false;
-      el.scrollIntoView({behavior:'auto'});
-      observer?.disconnect(); clearTimeout(timer); return true;
-    };
-    if (!scroll()) {
-      observer = new MutationObserver(scroll);
-      observer.observe(document.body,{childList:true,subtree:true});
-      timer = setTimeout(() => observer.disconnect(),10000);
-    }
-    return () => { observer?.disconnect(); clearTimeout(timer); };
-  }, [location.pathname, location.hash]);
-
-  return null
 }
 
 function App() {
 
   return (
     <Router>
-      <ScrollToHashElement /><ProductNavigationCheck />
+      <ProductNavigationCheck />
       <AppShell />
     </Router>
   )

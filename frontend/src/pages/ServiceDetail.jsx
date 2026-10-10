@@ -5,9 +5,9 @@ import catalogue from '../site/catalogue.json';
 import {mountServiceMotion} from '../site/service-motion.mjs';
 import '../site/services.css';
 const content={
- 'kundli-matching':{word:'Two perspectives.',line:'One conversation.',intro:'Bring your questions about compatibility to a personal consultation.',heading:'Make room for both stories.',points:['The questions you share','The context each person brings','What you would like to understand'],prepare:'Have the birth details you know for both people available. If any details are uncertain, ask the practice what is useful to bring.',art:'matching'},
- 'vastu-consultation':{word:'The spaces around you.',line:'A fresh perspective.',intro:'Explore questions about your home or workspace through a Vastu consultation.',heading:'Begin with the space you know.',points:['How you use the space','The questions you have','The context for your consultation'],prepare:'Make a note of the space you would like to discuss. Contact the practice to check whether a layout or photographs would be useful for your appointment.',art:'vastu'},
- numerology:{word:'Names. Dates. Patterns.',line:'Your questions, explored.',intro:'A personal conversation about the patterns associated with names and dates.',heading:'Start with what matters to you.',points:['The name or date you want to discuss','The question behind your interest','The perspective you are looking for'],prepare:'Have the names and dates you would like to discuss available. Write down your questions so the conversation can focus on what matters to you.',art:'numerology'}
+ 'kundli-matching':{word:'Before marriage.',line:'Look at both kundlis.',intro:'Planning marriage? Bring both birth charts and your questions about compatibility.',heading:'Understanding two kundlis.',points:['The questions you share','The context each person brings','What you would like to understand'],prepare:'Have the birth details you know for both people available. If any details are uncertain, ask the practice what is useful to bring.',art:'matching'},
+ 'vastu-consultation':{word:'The spaces around you.',line:'A Vastu perspective.',intro:'Explore questions about your home or workspace through a Vastu consultation.',heading:'Begin with the space you know.',points:['How you use the space','The questions you have','The context for your consultation'],prepare:'Make a note of the space you would like to discuss. Contact the practice to check whether a layout or photographs would be useful for your appointment.',art:'vastu'},
+ numerology:{word:'Names. Dates. Numbers.',line:'Let’s understand them.',intro:'A personal conversation about the numbers linked to your names and dates.',heading:'Start with what matters to you.',points:['The name or date you want to discuss','The question behind your interest','The perspective you are looking for'],prepare:'Have the names and dates you would like to discuss available. Write down your questions so the conversation can focus on what matters to you.',art:'numerology'}
 };
 function Detail({service,data}){const root=useRef(null);useLayoutEffect(()=>{document.title=service.name+' | Sarsa Jyotish Sansthan';return mountServiceMotion(root.current,data.art);},[service.name,data.art]);return <div className={'sarsa-services detail-'+data.art} ref={root}>
 <section className="detail-hero">
@@ -18,7 +18,7 @@ function Detail({service,data}){const root=useRef(null);useLayoutEffect(()=>{doc
 </h1>
 <p>{data.intro}</p>
 <p className="service-facts">₹{(service.amount_paise/100).toLocaleString('en-IN')} · {service.duration_minutes} minutes · Google Meet</p>
-<Link className="service-button" to={'/booking?service='+service.id}>Choose your appointment ↗</Link>
+<Link className="service-button" to={'/booking?service='+service.id}>Book an appointment ↗</Link>
 </div>
 <div className={'service-art art-'+data.art} aria-hidden="true">{data.art==='matching'?<>
 <div data-layer className="chart-disc">✧</div>
@@ -42,7 +42,7 @@ function Detail({service,data}){const root=useRef(null);useLayoutEffect(()=>{doc
 <span>0{i+1}</span>
 <h3>{point}</h3>
 </article>)}</div>
-<p data-copy>A consultation offers a space to explore your questions. It does not guarantee a particular outcome or replace qualified medical, legal or financial advice.</p>
+<p data-copy>A consultation helps you explore your questions. It does not guarantee an outcome or replace qualified medical, legal or financial advice.</p>
 </section>
 <section className="detail-prepare">
 <div className="preparation-paper" data-layer>
@@ -60,8 +60,8 @@ function Detail({service,data}){const root=useRef(null);useLayoutEffect(()=>{doc
 <section className="service-preparation">
 <div data-copy>
 <p className="eyebrow">YOUR NEXT STEP</p>
-<h2>Make time for<br/>
-<em>your questions.</em>
+<h2>Your questions.<br/>
+<em>Your next step.</em>
 </h2>
 <Link className="service-button" to={'/booking?service='+service.id}>Book {service.name} ↗</Link>
 </div>

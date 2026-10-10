@@ -3,3 +3,17 @@
 .sarsa-policy{max-width:880px;margin:auto;padding:64px 24px}.sarsa-policy h1{font-size:clamp(34px,5vw,52px)}.sarsa-policy h2{font-size:26px;margin-bottom:16px}.sarsa-policy section{margin:44px 0}.sarsa-policy p{font-size:17px;line-height:1.75}
 
 @media(hover:hover) and (prefers-reduced-motion:no-preference){.sarsa-services .service-button{transition:transform .25s ease,box-shadow .25s ease}.sarsa-services .service-button:hover{transform:translateY(-3px);box-shadow:0 12px 24px #26483d32}.service-directory article{transition:transform .35s ease,box-shadow .35s ease}.service-directory article:hover{transform:translateY(-4px);box-shadow:0 20px 38px #26483d22}}
+
+/* Directory additions do not alter the four-section animated detail pages. */
+.services-directory-page{max-width:1240px;padding-inline:32px}
+.services-directory-page .service-directory{gap:24px}.services-directory-page .service-directory article{min-width:0;border-radius:23px}
+.directory-art{height:176px;margin:-14px -14px 24px;border-radius:18px;background:radial-gradient(ellipse at 65% 25%,#fffdf8,#e1e7d8);display:grid;place-items:center;overflow:hidden}
+.directory-art svg{width:100%;height:100%;max-width:352px;fill:none;stroke:#7c8e68;stroke-width:1}.directory-art .art-accent{stroke:#a6814d}.directory-art text{fill:#526456;stroke:none;text-anchor:middle;font:44px Georgia}
+.services-directory-page .service-actions a{min-height:44px;display:inline-flex;align-items:center;font-size:16px}
+.service-guide{padding-block:80px;border-top:1px solid #bec9b4}.service-guide h2{font-size:38px;line-height:1.18}.service-guide p{font-size:18px;line-height:1.6}
+.question-guide,.jyotish-guide dl{display:grid;grid-template-columns:1fr 1fr;gap:32px 48px;margin:38px 0}
+.question-guide h3{font-size:25px;line-height:1.3;margin-bottom:12px}.question-guide a{display:inline-flex;align-items:center;min-height:44px;font-size:16px}
+.jyotish-guide{background:#e9ece2;border-radius:24px;padding-inline:32px}.jyotish-guide .eyebrow[lang=hi]{font-size:17px;letter-spacing:normal;font-weight:500}
+.jyotish-guide dt{font:25px/1.3 Georgia;margin-bottom:12px}.jyotish-guide dd{margin:0;font-size:17px;line-height:1.6}
+@media(max-width:650px){.services-directory-page{padding-inline:24px}.directory-art{height:144px;margin:-8px -8px 24px}.service-guide{padding-block:56px}.service-guide h2{font-size:30px}.service-guide p,.jyotish-guide dd{font-size:16px}.question-guide,.jyotish-guide dl{grid-template-columns:1fr;gap:28px}.jyotish-guide{padding-inline:24px}.services-directory-page .service-actions{gap:12px}.services-directory-page .service-actions a{width:100%}.services-directory-page .service-button{justify-content:center}}
+@media(max-width:350px){.services-directory-page{padding-inline:20px}}

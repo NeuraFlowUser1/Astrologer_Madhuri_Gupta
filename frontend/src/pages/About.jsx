@@ -1,12 +1,16 @@
-import {BookingAnchor,BookingButton,BookingCopy} from '../site/BookingProduct.jsx';
+import {BookingAnchor,BookingButton,BookingCopy,BookingLink} from '../site/BookingProduct.jsx';
 import {useLayoutEffect,useRef} from 'react';
 import {useNavigate} from 'react-router-dom';
 import {mountAboutMotion} from '../site/about-motion.mjs';
 import '../site/about.css';
+import catalogue from '../site/catalogue.json';
+import MarginArt from '../site/MarginArt.jsx';
+import {mountAboutLayout} from '../site/about-layout.mjs';
+const serviceOrder=['kundli-prediction','kundli-matching','vastu-consultation','numerology'];
 export default function About(){
  const root=useRef(null),navigate=useNavigate();
- useLayoutEffect(()=>{document.title='About Madhuri Gupta | Sarsa Jyotish Sansthan';return mountAboutMotion(root.current);},[]);
- function actions(event){const button=event.target.closest('[data-book],#contact');if(!button)return;const service=button.dataset.book?.toLowerCase().replaceAll(' ','-');navigate(button.id==='contact'?'/contact':'/booking'+(['kundli-prediction','kundli-matching','vastu-consultation','numerology'].includes(service)?'?service='+service:''));}
+ useLayoutEffect(()=>{document.title='About Madhuri Gupta | Sarsa Jyotish Sansthan';const stopMotion=mountAboutMotion(root.current),stopLayout=mountAboutLayout(root.current);return()=>{stopLayout();stopMotion();};},[]);
+ function actions(event){const button=event.target.closest('[data-book],#contact');if(button)navigate(button.id==='contact'?'/contact':'/booking');}
  return <div className="sarsa-about settled" ref={root} onClick={actions}>
 <section className="opening" id="opening">
 <div className="scene" id="scene">
@@ -48,7 +52,7 @@ export default function About(){
 <p data-enter="2">{"The person behind Sarsa Jyotish Sansthan."}<br />{"A place to begin with your questions."}</p>
 <BookingButton className="button" data-book="General consultation" data-enter="3">{"Book an appointment "}<span>{"\u2197"}</span>
 </BookingButton>
-<BookingAnchor href="#approach" className="text-link" data-enter="3">{"Discover her approach \u2193"}</BookingAnchor>
+<BookingAnchor href="#approach" data-public-scroll className="text-link" data-enter="3">{"Discover her approach \u2193"}</BookingAnchor>
 </div>
 </div>
 </section>{"\n"}<section className="welcome wrap" id="welcome">
@@ -57,15 +61,15 @@ export default function About(){
 <em>{"Find your starting point."}</em>
 </h2>
 <p>{"Madhuri Gupta leads Sarsa Jyotish Sansthan, bringing a personal identity to its astrology, numerology and Vastu consultations."}</p>
-</section>{"\n"}<section className="approach" id="approach">
+</section>{"\n"}<span className="sarsa-scroll-destination" tabIndex="-1" data-scroll-destination="approach">Madhuri’s approach</span><section className="approach" id="approach">
 <div className="wrap">
 <div className="section-title">
 <div>
 <p className="eyebrow">{"01 / THE APPROACH"}</p>
-<h2>{"A conversation"}<br />{"with room "}<em>{"for you."}</em>
+<h2>Start with what<br />matters <em>to you.</em>
 </h2>
 </div>
-<p>{"Begin with a question."}<br />{"Make space to explore it."}<br />{"Bring the discussion back to what matters."}</p>
+<div className="approach-intro"><p>Tell us what you would like to understand.</p><BookingLink className="approach-action" to="/services">Explore the services ↗</BookingLink></div>
 </div>
 <div className="approach-scene" id="approach-scene">
 <div className="connecting-rule" aria-hidden="true">
@@ -75,21 +79,21 @@ export default function About(){
 </div>
 <span className="chapter">{"I."}</span>
 <h3>{"Begin with listening."}</h3>
-<p>{"The context behind a question deserves space, as much as the question itself."}</p>
+<p>{"Tell the practice what brought you here and what you would like to understand."}</p>
 </article>
 <article>
 <div className="moving-paper" aria-hidden="true">
 </div>
 <span className="chapter">{"II."}</span>
 <h3>{"Explore with curiosity."}</h3>
-<p>{"A thoughtful exchange makes room for explanation and for the questions that follow."}</p>
+<p>{"Ask for a simple explanation when a word is unfamiliar, and bring the questions you have."}</p>
 </article>
 <article>
 <div className="moving-paper" aria-hidden="true">
 </div>
 <span className="chapter">{"III."}</span>
 <h3>{"Keep the person in view."}</h3>
-<p>{"The conversation comes back to you and what brought you to the consultation."}</p>
+<p>{"Bring the discussion back to your life and the questions that matter to you."}</p>
 </article>
 </div>
 </div>
@@ -101,48 +105,30 @@ export default function About(){
 </div>
 <div className="personal-copy">
 <p className="eyebrow">{"02 / THE PERSON & THE PRACTICE"}</p>
-<h2>{"A name."}<br />{"A face."}<br />
-<em>{"A personal connection."}</em>
+<h2>{"A name."}<br />{"A face."}<br /><em>{"A personal connection."}</em>
 </h2>
 <p>{"Behind Sarsa Jyotish Sansthan is Madhuri Gupta. The practice offers Kundli Prediction, Kundli Matching, Numerology and Vastu Consultation."}</p>
-<p>{"Getting to know the person behind a consultation is part of choosing where to begin. Explore the areas below, or contact the practice if you have a question before booking."}</p>
+<p>{"Getting to know the person behind the practice is part of choosing where to begin. Explore the services below, or contact the practice if you have a question before booking."}</p>
 <div className="signature-rule">
 </div>
 <span className="signature">{"Madhuri Gupta"}</span>
 <small className="signature-note">{"SARSA JYOTISH SANSTHAN"}</small>
-<BookingAnchor className="text-link" href="#consultations">{"Explore the consultations \u2192"}</BookingAnchor>
+<BookingAnchor className="text-link" href="#consultations" data-public-scroll>{"Find your service \u2192"}</BookingAnchor>
 </div>
-</section>{"\n"}<section className="consultations" id="consultations">
+</section>{"\n"}<MarginArt targetId="personal" /><span className="sarsa-scroll-destination" tabIndex="-1" data-scroll-destination="consultations">Find your service</span><section className="consultations" id="consultations">
 <div className="wrap consultation-grid">
 <div>
 <p className="eyebrow">{"03 / YOUR STARTING POINT"}</p>
-<h2>{"Different questions."}<br />
-<em>{"A considered choice."}</em>
+<h2>What would you like<br /><em>to understand?</em>
 </h2>
-<p><BookingCopy off="Explore a guidance area, or contact the practice with your questions.">{"Choose a consultation to take your selection into the appointment journey."}</BookingCopy></p>
+<p><BookingCopy off="Read about a service, or contact the practice with your questions.">{"Read about each service, then book an appointment when you are ready."}</BookingCopy></p>
 <BookingAnchor className="text-link" href="/services/kundli-prediction">{"Explore Kundli Prediction \u2197"}</BookingAnchor>
 </div>
 <div className="service-list">
-<BookingButton data-book="Kundli Prediction" offText="Explore Kundli Prediction" offPath="/services/kundli-prediction">
-<span>{"01"}</span>
-<strong>{"Kundli Prediction"}</strong>
-<b>{"\u2197"}</b>
-</BookingButton>
-<BookingButton data-book="Kundli Matching" offText="Explore Kundli Matching" offPath="/services/kundli-matching">
-<span>{"02"}</span>
-<strong>{"Kundli Matching"}</strong>
-<b>{"\u2197"}</b>
-</BookingButton>
-<BookingButton data-book="Vastu Consultation" offText="Explore Vastu Consultation" offPath="/services/vastu-consultation">
-<span>{"03"}</span>
-<strong>{"Vastu Consultation"}</strong>
-<b>{"\u2197"}</b>
-</BookingButton>
-<BookingButton data-book="Numerology" offText="Explore Numerology" offPath="/services/numerology">
-<span>{"04"}</span>
-<strong>{"Numerology"}</strong>
-<b>{"\u2197"}</b>
-</BookingButton>
+{serviceOrder.map((id,i)=>{const service=catalogue.services.find(item=>item.id===id);return <div className="service-row" key={id}>
+<div className="row-identity"><span>{'0'+(i+1)}</span><strong>{service.name}</strong><b aria-hidden="true">↗</b></div>
+<div className="row-actions"><BookingLink to={'/services/'+service.id} aria-label={'Explore '+service.name}>Explore</BookingLink><BookingLink to={'/booking?service='+service.id} bookingMode="hide" aria-label={'Book '+service.name}>Book</BookingLink></div>
+</div>;})}
 </div>
 </div>
 </section>{"\n"}<section className="invitation wrap" id="invitation">
