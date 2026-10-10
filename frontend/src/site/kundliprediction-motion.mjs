@@ -1,7 +1,8 @@
 import {mountScenes} from './scenes.mjs';
+import {createServiceVisualMotion} from './service-visual-motion.mjs';
 export function mountKundliPredictionMotion(root){
 const clamp=n=>Math.max(0,Math.min(1,n)),phase=(p,a,b)=>{const q=clamp((p-a)/(b-a));return q*q*(3-2*q)};
-const sections=[...root.querySelectorAll(':scope>section')];
+const sections=['welcome','understand','conversation','prepare','questions','begin'].map(key=>root.querySelector('[data-kundli-scene="'+key+'"]'));
 const artEnds=new Map([...root.querySelectorAll('[data-part]')].map(el=>[el,getComputedStyle(el).transform]));
 function renderSection(el,p){
  const mobile=innerWidth<=650,scale=mobile?.55:1;
@@ -23,5 +24,5 @@ function renderSection(el,p){
  }
 }
 // Join the real marker centers at each viewport size, including the vertical phone layout.
-function positionThread(){const scene=root.querySelector('.thread-scene'),svg=scene.querySelector('svg'),r=scene.getBoundingClientRect();svg.setAttribute('viewBox',`0 0 ${r.width} ${r.height}`);const points=[...scene.querySelectorAll('.step-seal')].map(el=>{const b=el.getBoundingClientRect();return {x:b.left-r.left+b.width/2,y:b.top-r.top+b.height/2}});let d=`M${points[0].x} ${points[0].y}`;for(let i=1;i<points.length;i++){const a=points[i-1],b=points[i];d+=innerWidth<=650?` C${a.x+25} ${a.y+35},${b.x-25} ${b.y-35},${b.x} ${b.y}`:` C${a.x+(b.x-a.x)*.32} ${a.y-90},${b.x-(b.x-a.x)*.32} ${b.y-90},${b.x} ${b.y}`}svg.querySelector('path').setAttribute('d',d)}positionThread();const resize=()=>positionThread();window.addEventListener('resize',resize);const stop=mountScenes(root,sections.map((el,i)=>({element:el,duration:i===0?4200:2800,render:p=>{el.style.opacity=phase(p,0,.12);renderSection(el,p);}})));return()=>{stop();window.removeEventListener('resize',resize);};
+function positionThread(){const scene=root.querySelector('.thread-scene'),svg=scene.querySelector('svg'),r=scene.getBoundingClientRect();svg.setAttribute('viewBox',`0 0 ${r.width} ${r.height}`);const points=[...scene.querySelectorAll('.step-seal')].map(el=>{const b=el.getBoundingClientRect();return {x:b.left-r.left+b.width/2,y:b.top-r.top+b.height/2}});let d=`M${points[0].x} ${points[0].y}`;for(let i=1;i<points.length;i++){const a=points[i-1],b=points[i];d+=innerWidth<=650?` C${a.x+25} ${a.y+35},${b.x-25} ${b.y-35},${b.x} ${b.y}`:` C${a.x+(b.x-a.x)*.32} ${a.y-90},${b.x-(b.x-a.x)*.32} ${b.y-90},${b.x} ${b.y}`}svg.querySelector('path').setAttribute('d',d)}positionThread();const resize=()=>positionThread();window.addEventListener('resize',resize);const visual=createServiceVisualMotion(root);const stop=mountScenes(root,[...sections.map((el,i)=>({element:el,duration:i===0?4200:2800,render:p=>{el.style.opacity=phase(p,0,.12);renderSection(el,p);}})),...visual.definitions]);return()=>{visual.dispose();stop();window.removeEventListener('resize',resize);};
 }

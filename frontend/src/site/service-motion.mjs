@@ -1,4 +1,5 @@
 import {mountScenes} from './scenes.mjs';
+import {createServiceVisualMotion} from './service-visual-motion.mjs';
 const phase=(p,a,b)=>{const t=Math.max(0,Math.min(1,(p-a)/(b-a)));return t*t*(3-2*t);};
 const style=(el,values)=>Object.assign(el.style,values);
 
@@ -21,8 +22,9 @@ function hero(element,p,art){
  }
 }
 export function mountServiceMotion(root,art){
- const sections=[...root.querySelectorAll('section')];
- return mountScenes(root,sections.map((element,index)=>({element,duration:index===0?3000:2200,render:p=>{
+ const sections=['hero','topics','prepare','book'].map(key=>root.querySelector('[data-service-scene="'+key+'"]'));
+ const visual=createServiceVisualMotion(root);
+ const stop=mountScenes(root,[...sections.map((element,index)=>({element,duration:index===0?3000:2200,render:p=>{
   if(index===0){hero(element,p,art);return;}
   const layers=[...element.querySelectorAll('[data-layer]')];
   layers.forEach((el,i)=>{
@@ -31,5 +33,6 @@ export function mountServiceMotion(root,art){
    else style(el,{opacity:t,transformOrigin:'left center',transform:`perspective(750px) rotateY(${-24*(1-t)}deg) translateX(${-20*(1-t)}px)`});
   });
   element.querySelectorAll('[data-copy]').forEach(el=>{const t=phase(p,index===3?0:.45,1);style(el,{opacity:t,transform:`translateY(${18*(1-t)}px)`});});
- }})));
+ }})),...visual.definitions]);
+ return()=>{visual.dispose();stop();};
 }

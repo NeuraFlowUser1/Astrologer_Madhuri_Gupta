@@ -21,3 +21,21 @@
 @media(min-width:1200px){.row-actions{position:absolute;right:43px;top:50%;transform:translateY(-50%);margin:0}}
 @media(max-width:650px){.service-list .row-identity strong{font-size:23px}.approach-intro{font-size:15px;margin-top:23px}.approach-action{margin-top:5.5px}.approach-scene{margin-top:45px}}
 }
+
+/* Hover is a separate layer: the original 2925ms fan owns transform. */
+@scope (.sarsa-about){
+.approach-scene article{border-radius:24px;transition:translate 240ms var(--ease-action),box-shadow 240ms var(--ease-action)}
+.approach-scene .moving-paper{border:1px solid transparent;transition:border-color 240ms var(--ease-action)}
+.approach-action{font-weight:var(--action-weight,700);line-height:1.4;background:#e9eee1;color:#26483d;border:1px solid #7c8e68;border-radius:14px;padding:12px 18px;min-height:48px;text-decoration:none;transition:translate 220ms var(--ease-action),background 220ms,box-shadow 220ms}
+.button,.text-link,.contact-button,.row-actions a{font-weight:var(--action-weight,700)}
+.button,.text-link,.contact-button,.row-actions a{transition:translate 220ms var(--ease-action),box-shadow 220ms var(--ease-action)}
+@media(hover:hover) and (pointer:fine){
+#approach[data-motion-progress="1.000"] .approach-scene article:hover{translate:0 -5px;box-shadow:0 20px 38px #26483d28}
+#approach[data-motion-progress="1.000"] .approach-scene article:hover .moving-paper{border-color:#a69f6988}
+.approach-action:hover{translate:0 -3px;background:#dde6cf;box-shadow:0 12px 24px #0002}
+.button:hover,.text-link:hover,.contact-button:hover,.row-actions a:hover{translate:0 -3px}
+}
+/* The stronger action is 4px taller; keep the original phone fan start in place. */
+@media(max-width:650px){.approach-scene{margin-top:41px}}
+@media(prefers-reduced-motion:reduce){.approach-scene article,.moving-paper,.approach-action,.button,.text-link,.contact-button,.row-actions a{transition:none!important}.approach-scene article:hover,.approach-action:hover,.button:hover,.text-link:hover,.contact-button:hover,.row-actions a:hover{translate:none!important}}
+}

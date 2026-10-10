@@ -19,3 +19,12 @@
 .sarsa-margin-art .left{left:var(--margin-art-inset)}.sarsa-margin-art .right{right:var(--margin-art-inset)}.sarsa-margin-art[data-running=true] svg{animation-play-state:running}
 @keyframes sarsa-margin-breathe{0%,100%{opacity:.12}50%{opacity:.2}}
 @media(prefers-reduced-motion:reduce){.sarsa-margin-art svg{animation:none;opacity:.16}.sarsa-home .service-glow{transition:none}}
+
+/* Action emphasis is shared; ordinary navigation and paragraph links stay readable. */
+.sarsa-site{--action-weight:700;--ease-action:cubic-bezier(.2,.7,.2,1)}
+.sarsa-site .sarsa-header .sarsa-action{font-weight:var(--action-weight);transition:translate 220ms var(--ease-action),box-shadow 220ms var(--ease-action)}
+.sarsa-site :is(.sarsa-home,.sarsa-about,.sarsa-kundli,.sarsa-contact,.sarsa-booking) :is(.button,.text-link,.text-button,.contact-button,.approach-action,.row-actions a){font-weight:var(--action-weight);transition:translate 220ms var(--ease-action),box-shadow 220ms var(--ease-action)}
+.sarsa-site .sarsa-contact .lane-action{font-weight:var(--action-weight)}
+.sarsa-site :is(.sarsa-action,.button,.text-link,.text-button,.contact-button,.approach-action,.service-button,.service-actions a,.row-actions a):focus-visible{outline:3px solid #955d45;outline-offset:3px;box-shadow:0 0 0 6px #fffdf8}
+@media(hover:hover) and (pointer:fine){.sarsa-site .sarsa-header .sarsa-action:hover,.sarsa-site :is(.sarsa-kundli,.sarsa-contact,.sarsa-booking) :is(.button,.text-link,.text-button):not(:disabled):hover{translate:0 -3px}}
+@media(prefers-reduced-motion:reduce){.sarsa-site .sarsa-header .sarsa-action,.sarsa-site :is(.sarsa-home,.sarsa-about,.sarsa-kundli,.sarsa-contact,.sarsa-booking) :is(.button,.text-link,.text-button,.contact-button,.approach-action,.row-actions a){transition:none!important}.sarsa-site .sarsa-header .sarsa-action:hover,.sarsa-site :is(.sarsa-kundli,.sarsa-contact,.sarsa-booking) :is(.button,.text-link,.text-button):hover{translate:none!important}}

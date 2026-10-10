@@ -5,6 +5,7 @@ import {mountHomeMotion} from '../site/home-motion.mjs';
 import '../site/home.css';
 import {mountHomeEnhancements,exclusiveFaq} from '../site/home-enhancements.mjs';
 import MarginArt from '../site/MarginArt.jsx';
+import ServiceMedia from '../site/ServiceMedia.jsx';
 export default function Home(){
  const root=useRef(null),navigate=useNavigate();
  useLayoutEffect(()=>{document.title="Sarsa Jyotish Sansthan | Madhuri Gupta";const stopMotion=mountHomeMotion(root.current),stopExtras=mountHomeEnhancements(root.current);return()=>{stopExtras();stopMotion();};},[]);
@@ -62,6 +63,7 @@ export default function Home(){
 </div>
 <div className="service-grid">{"\n"}<article className="service">
 <div className="service-glow" aria-hidden="true" />
+<div className="home-service-photo"><ServiceMedia serviceId="kundli-matching"/></div>
 <div className="service-top">
 <span className="index">{"01"}</span>
 <svg viewBox="0 0 100 100" aria-hidden="true">
@@ -79,6 +81,7 @@ export default function Home(){
 </BookingAnchor>
 </article>{"\n"}<article className="service">
 <div className="service-glow" aria-hidden="true" />
+<div className="home-service-photo"><ServiceMedia serviceId="kundli-prediction"/></div>
 <div className="service-top">
 <span className="index">{"02"}</span>
 <svg viewBox="0 0 100 100" aria-hidden="true">
@@ -94,6 +97,7 @@ export default function Home(){
 </BookingAnchor>
 </article>{"\n"}<article className="service">
 <div className="service-glow" aria-hidden="true" />
+<div className="home-service-photo"><ServiceMedia serviceId="vastu-consultation"/></div>
 <div className="service-top">
 <span className="index">{"03"}</span>
 <svg viewBox="0 0 100 100" aria-hidden="true">
@@ -111,6 +115,7 @@ export default function Home(){
 </BookingAnchor>
 </article>{"\n"}<article className="service">
 <div className="service-glow" aria-hidden="true" />
+<div className="home-service-photo"><ServiceMedia serviceId="numerology"/></div>
 <div className="service-top">
 <span className="index">{"04"}</span>
 <div className="number-art" aria-hidden="true">{"3"}<span>{"6"}</span>{"9"}</div>
@@ -122,10 +127,10 @@ export default function Home(){
 </article>{"\n"}</div>
 <p className="service-foot">{"Not sure where to begin? "}<button className="nav-contact" data-contact><BookingCopy off="Ask the practice.">{"Ask before booking."}</BookingCopy></button>
 </p>
-</section>{"\n"}<section id="conversation" className="scroll-scene connection" data-chapter="conversation" data-effect="hc">
-<div className="scene connection-scene">
+</section>{"\n"}<span id="process" className="process-anchor" aria-hidden="true"/><span className="sarsa-scroll-destination" tabIndex="-1" data-scroll-destination="process">How to begin</span><span className="sarsa-scroll-destination" tabIndex="-1" data-scroll-destination="conversation">From a question to your next step</span><section id="conversation" className="connection combined-chapter" data-chapter="conversation" data-effect="hc">
 <div className="forest-reveal">
 </div>
+<div className="scene connection-scene">
 <div className="connection-start">
 <p className="eyebrow">{"From a question"}</p>
 <h2>{"Something"}<br />{"on your mind?"}</h2>
@@ -138,12 +143,12 @@ export default function Home(){
 <div className="connection-end">
 <p className="eyebrow">{"To a conversation"}</p>
 <h2>Bring your<br />questions.</h2>
-<p lang="hi">एक कदम,<br />समझ की ओर।</p>
+<p lang="hi">एक कदम, समझ की ओर।</p>
 </div>
 <div className="disc-orbit" aria-hidden="true">
 </div>
 </div>
-</section>{"\n"}<section id="process" className="process section-pad" data-chapter="process" data-effect="i">
+<div className="process process-scene" data-process-stage>
 <div className="section-top">
 <div>
 <p className="eyebrow"><BookingCopy off="How to begin">How to book</BookingCopy></p>
@@ -155,20 +160,21 @@ export default function Home(){
 <div className="step-line" aria-hidden="true">
 </div>
 <article>
-<span>{"01"}</span>
+<span className="step-number">{"01"}</span>
 <h3><BookingCopy off="Explore a service">Choose a service</BookingCopy></h3>
 <p><BookingCopy off="Read about the service that fits your question.">Explore a service and check its fee and timings.</BookingCopy></p>
 </article>
 <article>
-<span>{"02"}</span>
+<span className="step-number">{"02"}</span>
 <h3><BookingCopy off="Send a question">{"Make your payment"}</BookingCopy></h3>
 <p><BookingCopy off="Tell the practice what you would like guidance with.">{"Choose a suitable appointment time, add your details and make payment."}</BookingCopy></p>
 </article>
 <article>
-<span>{"03"}</span>
+<span className="step-number">{"03"}</span>
 <h3><BookingCopy off="Wait for a reply">Check your booking</BookingCopy></h3>
 <p><BookingCopy off="The practice can respond to your enquiry. Sending a message does not reserve an appointment.">{"Check the consultation details before proceeding. Your appointment is confirmed after your payment is verified."}</BookingCopy></p>
 </article>
+</div>
 </div>
 </section>{"\n\n"}<section id="questions" className="questions section-pad" data-chapter="questions" data-effect="b">
 <div className="faq-title">

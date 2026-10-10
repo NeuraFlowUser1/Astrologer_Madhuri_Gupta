@@ -1,0 +1,358 @@
+{
+  "kundli-matching": {
+    "provenance": "Illustrative service imagery generated with the built-in image tool, 10 October 2026. Not a practitioner, office or customer photograph.",
+    "images": [
+      {
+        "variant": "primary",
+        "width": 1536,
+        "height": 1024,
+        "alt": "Two illustrative birth-chart folios on green cloth",
+        "caption": "Two charts, considered together.",
+        "focal": "50% 50%",
+        "markers": [
+          [
+            32,
+            46
+          ],
+          [
+            66,
+            48
+          ],
+          [
+            50,
+            69
+          ]
+        ],
+        "renditions": [
+          {
+            "src": "./media/services/kundli-matching-primary-480.webp",
+            "width": 480,
+            "height": 320,
+            "bytes": 44474
+          },
+          {
+            "src": "./media/services/kundli-matching-primary-800.webp",
+            "width": 800,
+            "height": 533,
+            "bytes": 119772
+          },
+          {
+            "src": "./media/services/kundli-matching-primary-960.webp",
+            "width": 960,
+            "height": 640,
+            "bytes": 114402
+          },
+          {
+            "src": "./media/services/kundli-matching-primary-1200.webp",
+            "width": 1200,
+            "height": 800,
+            "bytes": 205306
+          }
+        ]
+      },
+      {
+        "variant": "supporting",
+        "width": 1536,
+        "height": 1024,
+        "alt": "Paired chart folios with paper, thread and a pen",
+        "caption": "Keep the birth details you know ready.",
+        "focal": "50% 50%",
+        "markers": [
+          [
+            25,
+            43
+          ],
+          [
+            68,
+            48
+          ],
+          [
+            45,
+            72
+          ]
+        ],
+        "renditions": [
+          {
+            "src": "./media/services/kundli-matching-supporting-800.webp",
+            "width": 800,
+            "height": 533,
+            "bytes": 111410
+          },
+          {
+            "src": "./media/services/kundli-matching-supporting-1200.webp",
+            "width": 1200,
+            "height": 800,
+            "bytes": 194856
+          }
+        ]
+      }
+    ]
+  },
+  "kundli-prediction": {
+    "provenance": "Illustrative service imagery generated with the built-in image tool, 10 October 2026. Not a practitioner, office or customer photograph.",
+    "images": [
+      {
+        "variant": "primary",
+        "width": 1536,
+        "height": 1024,
+        "alt": "Birth-chart folio and a brass orbital instrument",
+        "caption": "A kundli and the passage of time.",
+        "focal": "50% 50%",
+        "markers": [
+          [
+            42,
+            62
+          ],
+          [
+            78,
+            28
+          ],
+          [
+            66,
+            68
+          ]
+        ],
+        "renditions": [
+          {
+            "src": "./media/services/kundli-prediction-primary-480.webp",
+            "width": 480,
+            "height": 320,
+            "bytes": 45164
+          },
+          {
+            "src": "./media/services/kundli-prediction-primary-800.webp",
+            "width": 800,
+            "height": 533,
+            "bytes": 108872
+          },
+          {
+            "src": "./media/services/kundli-prediction-primary-960.webp",
+            "width": 960,
+            "height": 640,
+            "bytes": 139380
+          },
+          {
+            "src": "./media/services/kundli-prediction-primary-1200.webp",
+            "width": 1200,
+            "height": 800,
+            "bytes": 186138
+          }
+        ]
+      },
+      {
+        "variant": "supporting",
+        "width": 1536,
+        "height": 1024,
+        "alt": "Brass orbital instrument beside an unlabeled paper timeline",
+        "caption": "Planets and periods in the Jyotish tradition.",
+        "focal": "50% 50%",
+        "markers": [
+          [
+            34,
+            43
+          ],
+          [
+            74,
+            28
+          ],
+          [
+            66,
+            76
+          ]
+        ],
+        "renditions": [
+          {
+            "src": "./media/services/kundli-prediction-supporting-800.webp",
+            "width": 800,
+            "height": 533,
+            "bytes": 97802
+          },
+          {
+            "src": "./media/services/kundli-prediction-supporting-1200.webp",
+            "width": 1200,
+            "height": 800,
+            "bytes": 162382
+          }
+        ]
+      }
+    ]
+  },
+  "vastu-consultation": {
+    "provenance": "Illustrative service imagery generated with the built-in image tool, 10 October 2026. Not a practitioner, office or customer photograph.",
+    "images": [
+      {
+        "variant": "primary",
+        "width": 1536,
+        "height": 1024,
+        "alt": "Illustrative courtyard-house model, floor plan and compass",
+        "caption": "Start with the space you know.",
+        "focal": "50% 50%",
+        "markers": [
+          [
+            37,
+            34
+          ],
+          [
+            80,
+            54
+          ],
+          [
+            47,
+            72
+          ]
+        ],
+        "renditions": [
+          {
+            "src": "./media/services/vastu-consultation-primary-480.webp",
+            "width": 480,
+            "height": 320,
+            "bytes": 48094
+          },
+          {
+            "src": "./media/services/vastu-consultation-primary-800.webp",
+            "width": 800,
+            "height": 533,
+            "bytes": 116930
+          },
+          {
+            "src": "./media/services/vastu-consultation-primary-960.webp",
+            "width": 960,
+            "height": 640,
+            "bytes": 120160
+          },
+          {
+            "src": "./media/services/vastu-consultation-primary-1200.webp",
+            "width": 1200,
+            "height": 800,
+            "bytes": 207416
+          }
+        ]
+      },
+      {
+        "variant": "supporting",
+        "width": 1536,
+        "height": 1024,
+        "alt": "Courtyard and rooms of an illustrative house model",
+        "caption": "A closer look at rooms and directions.",
+        "focal": "50% 50%",
+        "markers": [
+          [
+            40,
+            34
+          ],
+          [
+            76,
+            42
+          ],
+          [
+            69,
+            76
+          ]
+        ],
+        "renditions": [
+          {
+            "src": "./media/services/vastu-consultation-supporting-800.webp",
+            "width": 800,
+            "height": 533,
+            "bytes": 105792
+          },
+          {
+            "src": "./media/services/vastu-consultation-supporting-1200.webp",
+            "width": 1200,
+            "height": 800,
+            "bytes": 176116
+          }
+        ]
+      }
+    ]
+  },
+  "numerology": {
+    "provenance": "Illustrative service imagery generated with the built-in image tool, 10 October 2026. Not a practitioner, office or customer photograph.",
+    "images": [
+      {
+        "variant": "primary",
+        "width": 1536,
+        "height": 1024,
+        "alt": "Number cards marked 3, 6 and 9 on handmade paper",
+        "caption": "Names, dates and numbers.",
+        "focal": "50% 50%",
+        "markers": [
+          [
+            28,
+            58
+          ],
+          [
+            50,
+            50
+          ],
+          [
+            72,
+            62
+          ]
+        ],
+        "renditions": [
+          {
+            "src": "./media/services/numerology-primary-480.webp",
+            "width": 480,
+            "height": 320,
+            "bytes": 44456
+          },
+          {
+            "src": "./media/services/numerology-primary-800.webp",
+            "width": 800,
+            "height": 533,
+            "bytes": 106296
+          },
+          {
+            "src": "./media/services/numerology-primary-960.webp",
+            "width": 960,
+            "height": 640,
+            "bytes": 132292
+          },
+          {
+            "src": "./media/services/numerology-primary-1200.webp",
+            "width": 1200,
+            "height": 800,
+            "bytes": 173786
+          }
+        ]
+      },
+      {
+        "variant": "supporting",
+        "width": 1536,
+        "height": 1024,
+        "alt": "Number slips, a blank notebook and a brass counting instrument",
+        "caption": "Bring the names and dates you want to discuss.",
+        "focal": "50% 50%",
+        "markers": [
+          [
+            30,
+            40
+          ],
+          [
+            67,
+            46
+          ],
+          [
+            50,
+            78
+          ]
+        ],
+        "renditions": [
+          {
+            "src": "./media/services/numerology-supporting-800.webp",
+            "width": 800,
+            "height": 533,
+            "bytes": 91628
+          },
+          {
+            "src": "./media/services/numerology-supporting-1200.webp",
+            "width": 1200,
+            "height": 800,
+            "bytes": 156640
+          }
+        ]
+      }
+    ]
+  }
+}

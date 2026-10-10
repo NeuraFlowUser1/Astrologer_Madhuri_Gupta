@@ -4,13 +4,14 @@ import {useNavigate} from 'react-router-dom';
 import {mountKundliPredictionMotion} from '../site/kundliprediction-motion.mjs';
 import '../site/kundliprediction.css';
 import catalogue from '../site/catalogue.json';
+import ServiceVisualStory from '../site/ServiceVisualStory.jsx';
 const consultation=catalogue.services.find(s=>s.id==='kundli-prediction');
 export default function KundliPrediction(){
  const root=useRef(null),navigate=useNavigate();
  useLayoutEffect(()=>{document.title="Kundli Prediction | Sarsa Jyotish Sansthan";return mountKundliPredictionMotion(root.current);},[]);
  function actions(event){if(event.defaultPrevented)return;const el=event.target.closest('[data-contact],#enquire,a');if(!el)return;if(el.matches('[data-contact]')){event.preventDefault();navigate('/contact');}else if(el.id==='enquire'){event.preventDefault();navigate('/booking?service=kundli-prediction');}else if(el.getAttribute('href')?.startsWith('/')&&!event.ctrlKey&&!event.metaKey&&!event.shiftKey&&event.button===0){event.preventDefault();navigate(el.getAttribute('href'));}}
  return <div className="sarsa-kundli settled" ref={root} onClick={actions}>
-<section className="hero wrap" id="welcome">
+<section className="hero wrap" id="welcome" data-kundli-scene="welcome">
 <div className="hero-copy">
 <p className="breadcrumb">
 <BookingAnchor href="/services">{"Services"}</BookingAnchor>{" "}<span>{"/"}</span>{" Kundli Prediction"}</p>
@@ -74,10 +75,10 @@ export default function KundliPrediction(){
 </div>
 <figcaption>{"AN ABSTRACT STUDY \u00b7 NOT A PERSONAL BIRTH CHART"}</figcaption>
 </figure>
-</section>{"\n"}<div className="section-rule wrap">
+</section><div className="wrap"><ServiceVisualStory serviceId="kundli-prediction" name="Kundli Prediction"/></div>{"\n"}<div className="section-rule wrap">
 <span>{"01 / UNDERSTAND"}</span>
 <span>{"A LITTLE SPACE TO LOOK MORE CLOSELY"}</span>
-</div>{"\n"}<span className="sarsa-scroll-destination" tabIndex="-1" data-scroll-destination="understand">Understand Kundli Prediction</span><section className="topics wrap" id="understand">
+</div>{"\n"}<span className="sarsa-scroll-destination" tabIndex="-1" data-scroll-destination="understand">Understand Kundli Prediction</span><section className="topics wrap" id="understand" data-kundli-scene="understand">
 <div className="section-intro">
 <p className="eyebrow">{"THE CONVERSATION"}</p>
 <h2>What would you like<br />to understand?</h2>
@@ -109,7 +110,7 @@ export default function KundliPrediction(){
 <span className="topic-symbol" aria-hidden="true">{"\u25ce"}</span>
 </article>
 </div>
-</section>{"\n"}<section className="process" id="conversation">
+</section>{"\n"}<section className="process" id="conversation" data-kundli-scene="conversation">
 <div className="wrap">
 <div className="process-heading">
 <p className="eyebrow">{"02 / THE CONSULTATION"}</p>
@@ -142,7 +143,7 @@ export default function KundliPrediction(){
 </div>
 </div>
 </div>
-</section>{"\n"}<section className="preparation wrap" id="prepare">
+</section>{"\n"}<section className="preparation wrap" id="prepare" data-kundli-scene="prepare">
 <figure className="field-scene motion-scene" data-scene="field">
 <div className="field-art" aria-hidden="true">
 <div className="sheet sheet-left" data-part="sheet">
@@ -205,7 +206,7 @@ export default function KundliPrediction(){
 </li>
 </ul>
 </div>
-</section>{"\n"}<section className="details-section" id="questions">
+</section>{"\n"}<section className="details-section" id="questions" data-kundli-scene="questions">
 <div className="wrap details-grid">
 <div>
 <p className="eyebrow">{"04 / THE PRACTICAL DETAILS"}</p>
@@ -235,7 +236,7 @@ export default function KundliPrediction(){
 </details>
 </div>
 </div>
-</section>{"\n"}<section className="closing wrap" id="begin">
+</section>{"\n"}<section className="closing wrap" id="begin" data-kundli-scene="begin">
 <div className="closing-image">
 <img src="/media/consultation-still-life.png" alt="" loading="lazy" />
 </div>

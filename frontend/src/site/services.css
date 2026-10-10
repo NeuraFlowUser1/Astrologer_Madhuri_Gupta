@@ -2,9 +2,9 @@
 
 .sarsa-policy{max-width:880px;margin:auto;padding:64px 24px}.sarsa-policy h1{font-size:clamp(34px,5vw,52px)}.sarsa-policy h2{font-size:26px;margin-bottom:16px}.sarsa-policy section{margin:44px 0}.sarsa-policy p{font-size:17px;line-height:1.75}
 
-@media(hover:hover) and (prefers-reduced-motion:no-preference){.sarsa-services .service-button{transition:transform .25s ease,box-shadow .25s ease}.sarsa-services .service-button:hover{transform:translateY(-3px);box-shadow:0 12px 24px #26483d32}.service-directory article{transition:transform .35s ease,box-shadow .35s ease}.service-directory article:hover{transform:translateY(-4px);box-shadow:0 20px 38px #26483d22}}
+@media(hover:hover) and (prefers-reduced-motion:no-preference){.sarsa-services .service-button:hover{translate:0 -3px;box-shadow:0 12px 24px #26483d32}}
 
-/* Directory additions do not alter the four-section animated detail pages. */
+/* Directory styling remains separate from the original animated detail artwork. */
 .services-directory-page{max-width:1240px;padding-inline:32px}
 .services-directory-page .service-directory{gap:24px}.services-directory-page .service-directory article{min-width:0;border-radius:23px}
 .directory-art{height:176px;margin:-14px -14px 24px;border-radius:18px;background:radial-gradient(ellipse at 65% 25%,#fffdf8,#e1e7d8);display:grid;place-items:center;overflow:hidden}
@@ -17,3 +17,35 @@
 .jyotish-guide dt{font:25px/1.3 Georgia;margin-bottom:12px}.jyotish-guide dd{margin:0;font-size:17px;line-height:1.6}
 @media(max-width:650px){.services-directory-page{padding-inline:24px}.directory-art{height:144px;margin:-8px -8px 24px}.service-guide{padding-block:56px}.service-guide h2{font-size:30px}.service-guide p,.jyotish-guide dd{font-size:16px}.question-guide,.jyotish-guide dl{grid-template-columns:1fr;gap:28px}.jyotish-guide{padding-inline:24px}.services-directory-page .service-actions{gap:12px}.services-directory-page .service-actions a{width:100%}.services-directory-page .service-button{justify-content:center}}
 @media(max-width:350px){.services-directory-page{padding-inline:20px}}
+
+/* Image-led directory additions keep native motifs and the real service actions. */
+.services-directory-page .service-directory article{display:flex;flex-direction:column;border-radius:26px;transition:translate 240ms var(--ease-action),box-shadow 240ms var(--ease-action)}
+.directory-photo{position:relative;height:220px;flex:none;border-radius:20px;margin:0 0 26px;overflow:hidden}
+.directory-motif{position:absolute;right:12px;bottom:12px;width:112px;height:64px;border-radius:14px;border:1px solid #bec9b488;background:#fffdf8e8;box-shadow:0 6px 16px #183d3120}
+.directory-motif .directory-art{height:100%;width:100%;margin:0;border-radius:inherit;background:none}
+.services-directory-page .service-number{margin-bottom:18px}
+.services-directory-page .service-directory h2{font-size:34px;line-height:1.15;margin-bottom:20px}
+.services-directory-page .service-directory p{font-size:17px;line-height:1.65;margin:0 0 22px}
+.services-directory-page .service-directory .service-facts{font-size:15px}
+.services-directory-page .service-actions{justify-content:flex-end;gap:12px;margin-top:auto;padding-top:8px}
+.services-directory-page .service-actions a{font-weight:var(--action-weight,700);font-size:15px;line-height:1.4;min-height:48px;display:inline-flex;align-items:center;justify-content:center;gap:12px;padding:12px 18px;border-radius:14px;text-decoration:none;border:1px solid #7c8e68;transition:translate 220ms var(--ease-action),box-shadow 220ms var(--ease-action),background 220ms}
+.services-directory-page .service-actions a:not(.service-button){background:#e9eee1;color:#26483d}
+.services-directory-page .service-actions .service-button{border-color:#26483d}
+.services-directory-page .first-service-guide{margin-top:48px;padding-top:48px}
+.guide-motif{width:80px;height:48px;margin-bottom:20px}
+.guide-motif .directory-art{height:100%;width:100%;margin:0;background:none;overflow:visible}
+.services-directory-page .question-guide a{font-weight:var(--action-weight,700);transition:translate 220ms var(--ease-action),color 220ms}
+.jyotish-visual{display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr);align-items:center;gap:42px;margin:38px 0}
+.knowledge-diagram{display:block;max-width:320px;width:100%;height:auto;margin:auto;fill:none;stroke:#7c8e68;stroke-width:1.2}
+.knowledge-diagram g:first-child circle{fill:#a6814d;stroke:none}
+.knowledge-diagram g:last-child>circle:first-child{stroke-dasharray:3 8;opacity:.65}
+.knowledge-diagram g:last-child>path{stroke:#a6814d;stroke-width:2}
+.knowledge-diagram g:last-child>circle:not(:first-child){fill:#f7f5ef;stroke:#a6814d}
+.jyotish-visual dl{margin:0;gap:32px 28px}
+.sarsa-services .service-button{font-weight:var(--action-weight,700);min-height:48px;transition:translate 220ms var(--ease-action),box-shadow 220ms var(--ease-action)}
+.sarsa-services .detail-prepare a{font-weight:var(--action-weight,700);display:inline-flex;align-items:center;min-height:44px}
+@media(hover:hover) and (pointer:fine){.services-directory-page [data-directory-card][data-motion-progress="1.000"]:hover{translate:0 -4px;box-shadow:0 20px 38px #26483d22}.services-directory-page .service-actions a:hover,.services-directory-page .question-guide a:hover{translate:0 -3px}.services-directory-page .service-actions a:not(.service-button):hover{background:#dde6cf}}
+@media(max-width:1000px){.services-directory-page .service-directory article{padding:28px}.jyotish-visual{gap:28px}}
+@media(max-width:700px){.jyotish-visual{grid-template-columns:1fr;gap:32px}.knowledge-diagram{max-width:280px}.jyotish-visual dl{grid-template-columns:1fr 1fr;gap:28px 20px}}
+@media(max-width:650px){.services-directory-page .service-directory article{padding:24px}.directory-photo{height:190px;margin-bottom:24px}.directory-motif{width:96px;height:56px}.services-directory-page .service-directory h2{font-size:30px}.services-directory-page .service-directory p{font-size:16px}.services-directory-page .service-actions a{width:100%;font-size:16px}.services-directory-page .first-service-guide{margin-top:32px;padding-top:32px}}
+@media(prefers-reduced-motion:reduce){.services-directory-page .service-directory article,.sarsa-services .service-button,.services-directory-page .service-actions a,.services-directory-page .question-guide a{transition:none}.services-directory-page [data-directory-card]:hover,.sarsa-services .service-button:hover,.services-directory-page .service-actions a:hover,.services-directory-page .question-guide a:hover{translate:none}}
