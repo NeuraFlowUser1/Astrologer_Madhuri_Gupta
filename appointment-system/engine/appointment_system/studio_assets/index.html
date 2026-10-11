@@ -57,13 +57,13 @@
       <div id="booking-support" class="records" hidden><div id="booking-support-content"></div><button id="booking-support-manage" type="button" class="secondary" hidden>Manage this appointment</button></div>
       <form id="booking-support-change" class="records" hidden>
         <h3>Help this customer safely</h3><p>Call the mobile number already saved above and verify the customer’s payment details before continuing. If they cannot be reached on that number, keep this for manual review.</p>
-        <label for="support-action">What does the customer need?</label><select id="support-action"><option value="receipt_recovery">Restore lost booking access</option><option value="contact_correction">Correct email or mobile number</option></select>
+        <label for="support-action">What does the customer need?</label><select id="support-action"><option value="contact_correction">Correct email or mobile number</option></select>
         <div id="support-contacts" hidden><label for="support-email">Correct email</label><input id="support-email" type="email" maxlength="254" autocomplete="off"><label for="support-phone">Correct mobile · include country code</label><input id="support-phone" type="tel" maxlength="32" autocomplete="off"></div>
         <label for="support-payment">Verified payment ID</label><input id="support-payment" required pattern="pay_[A-Za-z0-9]{1,64}" autocomplete="off">
         <label for="support-reason">Reason · private staff record</label><input id="support-reason" minlength="2" maxlength="500" required>
         <label class="acknowledgement"><input id="support-verified" type="checkbox" required> I called the original saved mobile number and verified the payment details with the customer.</label>
-        <p>Correcting contact details replaces old receipt access and queues updated meeting, email and record copies. It does not change the appointment time, fee or payment.</p><button type="submit">Save verified support action</button>
-      </form><div id="support-code-result" class="records" hidden><p id="support-code-note"></p><strong id="support-code" class="support-code"></strong><p>Give this code only during the verified call. Ask the customer to open <a href="/booking-help" target="_blank" rel="noopener noreferrer">the booking access page</a>. Do not email it or put it in a link.</p></div>
+        <p>Correcting contact details revokes old receipt access and queues updated meeting, email and record copies. It does not change the appointment time, fee or payment.</p><button type="submit">Save corrected contact details</button>
+      </form>
       <button id="support-repeat" type="button" class="secondary" hidden>Check same support action</button><p id="booking-support-status" role="status" aria-live="polite"></p>
       <section id="appointment-detail" class="records" hidden aria-labelledby="appointment-title">
         <h3 id="appointment-title" tabindex="-1">Manage appointment</h3><div id="appointment-summary"></div>

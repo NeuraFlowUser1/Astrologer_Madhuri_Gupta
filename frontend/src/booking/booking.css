@@ -50,3 +50,13 @@
 .sarsa-booking .booking-questions details{border-bottom:1px solid #bec9b4;padding:12px 0}
 .sarsa-booking .booking-questions summary{font-size:16px;font-weight:600;min-height:44px;display:flex;align-items:center;cursor:pointer}
 .sarsa-booking .booking-questions p{font-size:16px;line-height:1.5;max-width:760px;margin:8px 0 16px}
+
+/* Existing booking access and new read-only lookup share one destination. */
+.booking-access-page{width:min(1060px,calc(100% - 48px));margin:0 auto;padding:64px 0 88px;min-height:55vh}
+.booking-access-page h1{font-size:clamp(34px,3.8vw,50px);line-height:1.15;margin:12px 0 24px;font-weight:600}
+.booking-access-eyebrow{font-size:13px;letter-spacing:.12em;text-transform:uppercase;font-weight:700}
+.booking-access-selector,.booking-access-actions{display:flex;flex-wrap:wrap;gap:12px;margin:24px 0 32px}
+.booking-access-selector button,.booking-access-actions button{min-height:46px;padding:12px 18px;border:1px solid currentColor;border-radius:12px;font-size:15px;font-weight:700;cursor:pointer;background:transparent;color:inherit}
+.booking-access-selector button[aria-pressed=true]{background:#24473b;color:#fff;border-color:#24473b}
+.booking-access-selector button:focus-visible,.booking-access-actions button:focus-visible{outline:2px solid currentColor;outline-offset:4px}
+@media(max-width:767px){.booking-access-page{width:calc(100% - 36px);padding:42px 0 64px}.booking-access-selector{gap:10px}.booking-access-selector button{flex:1 1 180px}}

@@ -21,7 +21,7 @@ from .transport import TransportTransfer
 from .mail_events import MailEventTransfer
 from .resources import ResourceTransfer
 from .grants import GrantTransfer
-from .recovery import RecoveryTransfer
+from .recovery import RecoveryTransfer,recovery_keys
 from .support import SupportHistoryTransfer
 from .allowance import AllowanceTransfer
 from .configuration import ConfigurationTransfer
@@ -117,7 +117,7 @@ def bindings(profile,selection,environment,*,now=None):
                           {project:chosen['credential_version']},contact=contact,
                           contact_formats={project:tuple(formats)} if formats is not None else {})
     transport=TransportTransfer(base,mail)
-    recovery=RecoveryTransfer(booking.receipt_key,selection['recovery_reader']) if selection['recovery_reader'] is not None else None
+    recovery=RecoveryTransfer(recovery_keys(environment),selection['recovery_reader']) if selection['recovery_reader'] is not None else None
     history=SupportHistoryTransfer(recovery,MailEventTransfer(transport) if mail is not None else None)
     resource=None
     if selection['google'] is not None:

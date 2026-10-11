@@ -27,8 +27,8 @@ async function fixture(run){
   if(path.endsWith('/lookup'))return res.end(JSON.stringify(appointment));
   if(path.endsWith('/resolve-time'))return res.end(JSON.stringify({code:'ok',local:body.local,timezone:body.timezone,instant:'2031-04-04T11:30:00Z'}));
   if(path.includes('/actions/')){const id=path.split('/').pop();return res.end(JSON.stringify({...(state.results.get(id)||{code:'operation_not_found'}),operation_id:state.wrongResult?reference:id}));}
-  const name=path.split('/').pop();const code={cancel:'cancelled',reschedule:'rescheduled',support:'support_saved','verified-refund':'refund_verified','resource-reviewed':'resource_reviewed'}[name];
-  if(code){const result={code,operation_id:body.operation_id,revision:body.expected_revision+(name==='support'&&body.action==='receipt_recovery'?0:1),...(name==='reschedule'?{starts_at:body.starts_at}:{}),...(name==='support'?{active:true,activation_code:'12345678',expires_at:'2031-04-04T12:00:00Z'}:{}),...state.resultChange};
+  const name=path.split('/').pop();const code={cancel:'cancelled',reschedule:'rescheduled',support:'contact_corrected','verified-refund':'refund_verified','resource-reviewed':'resource_reviewed'}[name];
+  if(code){const result={code,operation_id:body.operation_id,revision:body.expected_revision+1,...(name==='reschedule'?{starts_at:body.starts_at}:{}),...(name==='support'?{reference:body.reference}:{}),...state.resultChange};
    if(state.failure==='lost'){state.results.set(body.operation_id,result);res.writeHead(503);return res.end('{"code":"reply_lost"}');}
    if(state.failure){res.writeHead(409);return res.end(JSON.stringify({code:state.failure}));}
    state.results.set(body.operation_id,result);return res.end(JSON.stringify(result));}
@@ -51,7 +51,7 @@ test('company support resolves practice time and sends only the selected appoint
  await action(page,'cancel');assert.match(await page.locator('#action-note').textContent(),/does not issue a refund/);await page.click('#submit-change');
  await page.waitForFunction(()=>document.querySelector('#status').textContent.startsWith('cancelled'));assert.equal(state.calls.filter(row=>row.path.endsWith('/cancel')).length,1);
  await action(page,'contact_correction');await page.fill('#email','corrected@example.test');await page.fill('#phone','+919888888888');await page.fill('#payment','pay_fixture');await page.check('#verified');
- await page.click('#submit-change');await page.locator('#activation').waitFor({state:'visible'});assert.match(await page.locator('#activation').textContent(),/12345678/);
+ await page.click('#submit-change');await page.waitForFunction(()=>document.querySelector('#status').textContent.startsWith('contact corrected'));assert.equal(await page.locator('#activation').count(),0);
  const corrected=state.calls.find(row=>row.path.endsWith('/support'));assert.equal(corrected.body.email,'corrected@example.test');assert.equal(corrected.body.verification_confirmed,true);
  assert.equal(await page.evaluate(()=>JSON.stringify(localStorage).includes('corrected@example.test')),false);
 }));
@@ -94,9 +94,11 @@ test('company access expiry removes previously loaded customer details while kee
  await action(page,'cancel');state.handlers.set('/api/company/support/status',({res})=>{res.writeHead(401);res.end('{"code":"company_session_required"}');});await page.click('#refresh');await page.waitForFunction(()=>document.querySelector('#status').textContent.startsWith('Sign in with company'));
  assert.equal(await page.locator('#detail').isVisible(),false);assert.equal(await page.locator('#summary').textContent(),'');assert.equal(await page.locator('#appointments li').count(),0);
 }));
-test('inactive or malformed support codes are never shown as usable access',{skip:!available},()=>fixture(async(page,state)=>{
- state.resultChange={active:false,activation_code:'12345678'};await action(page,'receipt_recovery');await page.fill('#payment','pay_fixture');await page.check('#verified');await page.click('#submit-change');await page.waitForFunction(()=>document.querySelector('#status').textContent.startsWith('support saved'));assert.equal(await page.locator('#activation').isVisible(),false);
- state.resultChange={active:true,activation_code:'bad'};await action(page,'receipt_recovery');await page.fill('#payment','pay_fixture');await page.check('#verified');await page.click('#submit-change');await page.locator('#retry').waitFor();assert.equal(await page.locator('#activation').isVisible(),false);assert.equal(await page.evaluate(()=>window.PracticeStaffActions('company').get().length),1);
+test('retired earlier code actions reconcile without displaying customer access',{skip:!available},()=>fixture(async(page,state)=>{
+ state.failure='lost';await action(page,'contact_correction');await page.fill('#phone','+918888888888');await page.fill('#payment','pay_fixture');await page.check('#verified');await page.click('#submit-change');await page.locator('#retry').waitFor();
+ const sent=state.calls.find(x=>x.path.endsWith('/support'));state.results.set(sent.body.operation_id,{code:'operation_retired',revision:2,reference});
+ await page.click('#retry');await page.waitForFunction(()=>document.querySelector('#status').textContent.startsWith('Earlier results checked'));
+ assert.equal(await page.locator('#activation').count(),0);assert.equal(await page.evaluate(()=>window.PracticeStaffActions('company').get().length),0);
 }));
 test('permission expiry during a change keeps the exact operation for later checking',{skip:!available},()=>fixture(async(page,state)=>{
  state.handlers.set('/api/company/support/cancel',({res})=>{res.writeHead(401);res.end('{"code":"company_session_required"}');});await action(page,'cancel');await page.click('#submit-change');await page.waitForFunction(()=>document.querySelector('#status').textContent.includes('Renew company access'));assert.equal(await page.locator('#summary').textContent(),'');assert.equal(await page.locator('#detail').isVisible(),false);assert.equal(await page.evaluate(()=>window.PracticeStaffActions('company').get().length),1);

@@ -9,7 +9,6 @@ from fastapi.testclient import TestClient
 from appointment_system.access import AccessDenied
 from appointment_system.connection import StorageUnavailable
 from appointment_system.credentials import ReceiptKeys
-from appointment_system.receipt_recovery import recovery_code
 from appointment_system.studio_appointments import add_appointment_routes
 from appointment_system.studio_calendar import add_calendar_routes
 from appointment_system.studio_inbox import add_inbox_routes
@@ -19,7 +18,7 @@ from .test_keys import ring
 class StaffActionBoundaries(TestCase):
     def setUp(self):
         self.methods = ['studio_action_result', 'studio_appointment_detail', 'studio_appointment_cancel',
-            'studio_appointment_reschedule', 'studio_booking_lookup', 'recovery_protection',
+            'studio_appointment_reschedule', 'studio_booking_lookup',
             'studio_time_context', 'studio_resolve_time', 'studio_pending_result', 'studio_calendar_list',
             'studio_calendar_month', 'studio_calendar_close', 'studio_calendar_reopen', 'studio_inbox_list',
             'studio_inbox_detail', 'studio_inbox_review', 'studio_inbox_retry',
@@ -48,7 +47,7 @@ class StaffActionBoundaries(TestCase):
         async def unavailable(request, error):
             return JSONResponse({'code': 'temporarily_unavailable'}, 503)
         arguments = (app, self.store, 'synthetic-client', 'https://practice.example.test', self.actor, self.browser, self.limit)
-        add_appointment_routes(*arguments, wake=self.wake, receipt_key=self.key if with_key else None)
+        add_appointment_routes(*arguments, wake=self.wake)
         add_calendar_routes(*arguments)
         add_inbox_routes(*arguments, wake=self.wake)
         return TestClient(app)
@@ -100,21 +99,18 @@ class StaffActionBoundaries(TestCase):
             self.assertEqual(self.post('studio/appointments/reschedule', body).status_code, 422)
         self.store.studio_appointment_reschedule.assert_not_called()
 
-    def test_retried_support_action_uses_saved_code_key_and_never_fabricates_access(self):
-        body = {'operation_id': str(self.operation)}
-        self.store.recovery_protection.return_value = {'format': 'v1', 'key_id': 'k1'}
-        self.store.studio_action_result.return_value = {'code': 'support_saved', 'active': True, 'reference': str(self.reference)}
-        response = self.post('studio/appointments/action-result', body)
-        self.assertEqual(response.status_code, 200)
-        self.assertEqual(response.json()['activation_code'], recovery_code(self.key, self.operation, self.reference, key_id='k1'))
-        with self.make_client(with_key=False) as client:
-            self.assertEqual(client.post('/api/studio/appointments/action-result', json=body).status_code, 503)
-        self.store.studio_action_result.return_value = {'code': 'support_saved', 'active': False}
-        self.assertNotIn('activation_code', self.post('studio/appointments/action-result', body).json())
-        for value, status in [(None, 503), ({'code': 'access_unavailable'}, 403), ({'code': 'unexpected'}, 503),
-                              ({'code': 'operation_not_found'}, 200)]:
-            self.store.studio_action_result.return_value = value
-            self.assertEqual(self.post('studio/appointments/action-result', body).status_code, status)
+    def test_retried_correction_and_retired_action_never_fabricate_customer_access(self):
+        body={'operation_id':str(self.operation)}
+        for code in ('contact_corrected','operation_retired'):
+            value={'code':code,'operation_id':str(self.operation),'reference':str(self.reference),'revision':2}
+            self.store.studio_action_result.return_value=value
+            response=self.post('studio/appointments/action-result',body)
+            self.assertEqual(response.status_code,200)
+            self.assertEqual(response.json(),value)
+            self.assertNotIn('activation_code',response.json())
+        for value,status in ((None,503),({'code':'access_unavailable'},403),({'code':'unexpected'},503),({'code':'operation_not_found'},200)):
+            self.store.studio_action_result.return_value=value
+            self.assertEqual(self.post('studio/appointments/action-result',body).status_code,status)
 
     def test_calendar_writes_use_bounded_zoned_intervals_and_client_authority(self):
         body = self.base | {'starts_at': '2026-10-09T10:00:00Z', 'ends_at': '2026-10-09T10:20:00Z'}

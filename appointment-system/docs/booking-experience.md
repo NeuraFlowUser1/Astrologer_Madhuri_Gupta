@@ -1,5 +1,7 @@
 # Booking experience refinement
 
+The current name-and-phone access contract and migration 037 are documented in [booking-details.md](booking-details.md). The original checkout, saved-receipt and email-copy behavior below remains separate. The 11 October run explicitly skips tests and release gates; older qualification evidence does not qualify its new digest.
+
 ## Current boundary
 
 This release implements the owner-approved booking-experience refinement in the neutral master and complete, independent project copies. The original imported client work is preserved. Source-bound qualification, visual results and per-installation publication/provider observations belong to the programme evidence under `001-implementation-evidence/2026-10-07-booking-experience`; earlier released-package proof does not qualify a different source digest. The owner authorized complete booking-only qualification, agent visual review and controlled publication without another design checkpoint. New live payments/emails still require specific authority.

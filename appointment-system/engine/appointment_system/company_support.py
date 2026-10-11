@@ -18,13 +18,13 @@ from .configuration import label,project_id
 from .service_control import COOKIE,ORIGIN,ControlError
 from .studio_appointments import AppointmentDetail,BookingLookup,CancelAppointment,RescheduleAppointment
 from .studio_calendar import CalendarAction
-from .receipt_recovery import SupportChange,recovery_code,code_digest,support_key,support_protection
+from .contact_correction import SupportChange
 
 class VerifiedRefund(CalendarAction):
     case_id:UUID
     expected_revision:int=Field(ge=0,lt=2147483647,strict=True)
 
-def router(settings,store,receipt_key,wake=None,database=None):
+def router(settings,store,wake=None,database=None):
     routes=APIRouter()
     def session(request,*,write=False):
         if settings is None:raise ControlError()
@@ -48,7 +48,7 @@ def router(settings,store,receipt_key,wake=None,database=None):
         if not isinstance(value,dict):raise ControlError()
         code=value.get('code')
         if code=='access_unavailable':raise ControlError('company_session_required',401)
-        if code not in ('ok','cancelled','rescheduled','support_saved','refund_verified','resource_reviewed'):
+        if code not in ('ok','cancelled','rescheduled','contact_corrected','operation_retired','refund_verified','resource_reviewed'):
             return JSONResponse({'code':code},status_code=409,headers=PRIVATE_HEADERS)
         return value
     def action(request,name,body):
@@ -87,10 +87,7 @@ def router(settings,store,receipt_key,wake=None,database=None):
         value=store.studio_action_result(token,settings.google_client_id,ORIGIN+'/company/booking-support',operation)
         if not isinstance(value,dict):raise ControlError()
         if value.get('code')=='access_unavailable':raise ControlError('company_session_required',401)
-        if value.get('code') not in ('operation_not_found','operation_conflict','cancelled','rescheduled','support_saved','refund_verified','resource_reviewed'):raise ControlError()
-        if value.get('code')=='support_saved' and value.get('active') is True:
-            reference=UUID(value['reference']);protection=support_protection(receipt_key,store,reference,operation)
-            value=dict(value,activation_code=recovery_code(receipt_key,operation,reference,**protection))
+        if value.get('code') not in ('operation_not_found','operation_conflict','cancelled','rescheduled','contact_corrected','operation_retired','refund_verified','resource_reviewed'):raise ControlError()
         return JSONResponse(value,headers=PRIVATE_HEADERS)
     @routes.post('/api/company/support/lookup')
     def lookup(request:Request,body:BookingLookup):return action(request,'lookup',body.model_dump(mode='json'))
@@ -102,16 +99,7 @@ def router(settings,store,receipt_key,wake=None,database=None):
     def reschedule(request:Request,body:RescheduleAppointment):return action(request,'reschedule',body.model_dump(mode='json'))
     @routes.post('/api/company/support/support')
     def support(request:Request,body:SupportChange):
-        session(request,write=True)
-        key_id=support_key(receipt_key,store,body.reference,body.operation_id,new=True)
-        code=recovery_code(receipt_key,body.operation_id,body.reference,key_id=key_id)
-        data=body.model_dump(mode='json')|{'code_digest':code_digest(receipt_key,body.reference,code,key_id=key_id),'code_key_id':key_id}
-        response=action(request,'support',data)
-        if response.status_code==200:
-            import json
-            value=json.loads(response.body)
-            return JSONResponse(dict(value,activation_code=code if value.get('active') is True else None),headers=PRIVATE_HEADERS)
-        return response
+        return action(request,'support',body.model_dump(mode='json'))
     @routes.post('/api/company/support/verified-refund')
     def verified_refund(request:Request,body:VerifiedRefund):return action(request,'verified_refund',body.model_dump(mode='json'))
     @routes.post('/api/company/support/resource-reviewed')

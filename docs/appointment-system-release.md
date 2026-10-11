@@ -1,5 +1,13 @@
 # Current contained booking release — 8 October 2026
 
+## Current change — 11 October 2026
+
+The approved name-and-phone booking-details replacement is implemented locally, using contained release `54af467afbe152286f1f81f28f904a8b59b51e31111e6a81d93b1d340bd3720a` (576 files; migrations 001–037). Publication is in progress; this document is not a live acceptance claim. Customers use `/booking/receipt` with the full name and phone saved when booking. Old booking-help/access links redirect there. Lookup grants viewing, refresh and a local PDF for a confirmed appointment; it grants no payment, cancellation, rescheduling, email-send or contact-change action. The original saved-browser receipt remains separate. Contact and appointment booking provide the entry links.
+
+Migration 037 retires old code authority in one changeover while preserving audit facts and the existing protected staff correction. Earlier migration files remain unchanged. Sarsa alone receives the agreed visual section/background/navigation/art refinements; its original choreography remains intact. The owner excluded tests and release gates; no fresh test or coverage result is claimed. Necessary website builds and source/rendered-page review are recorded separately.
+
+## Retained earlier release evidence
+
 This is **Sarsa Jyotish Sansthan**, Project004. Its complete contained package is `97ab5d49fc559eb1acdeb7157d4561134d1bad824cca298506f48b2a9d32b49d`, with **573 manifest files and migrations001–036**. Its own `api/index.py`, `appointment-system/` and `appointment-settings/` run independently of the factory. Branding, saved business choices, accounts and protected values remain project-specific. The bounded email-feedback correction is published and independently verified on both official websites. Both company switches are effective ON, normal prices are restored, and both exact paid test receipts remain correct. Both existing Git publishing connections have successful automatic-deployment evidence. After the owner reconnected Sarsa's existing repository, its first normal main-branch push deployed successfully without a manual build; protected readback confirms the corrected release on the official domain. The exact internal cause of the earlier silent gap is not established.
 
 The fresh approved Kundli Matching test passes: one ₹1 captured payment, a confirmed appointment with no booking email, a ready Meet link, an actual parsed one-page PDF, delivered staff notification, and both verified spreadsheet records. Exactly one deliberate details-copy job afterward delivered to the approved company inbox; the main booking email remains empty. The normal service price is restored to₹2,100, and other prices, hours, lengths and verification choices are preserved.

@@ -5,6 +5,8 @@ import {DatePicker,TimeField,DateInput,DateSegment,Label,Group,Button,Popover,Di
  CalendarGrid,CalendarCell,Heading,Text,FieldError,I18nProvider} from 'react-aria-components';
 import {parseDate,parseTime,Time} from '@internationalized/date';
 import {createDateTimeFields} from '../../../appointment-system/browser/booking/date-time-fields.mjs';
+import {createBookingDetailsFields} from '../../../appointment-system/browser/booking/booking-details-fields.mjs';
+import '../../../appointment-system/browser/booking/booking-details-fields.css';
 import {createReceiptFields} from '../../../appointment-system/browser/booking/receipt-fields.mjs';
 import '../../../appointment-system/browser/booking/date-time-fields.css';
 import '../../../appointment-system/browser/booking/receipt-fields.css';
@@ -37,3 +39,5 @@ async function loadPDF(){
  return dependencies;
 }
 export const ReceiptFields=createReceiptFields(React,{browser:bookingBrowser,brand:'Sarsa Jyotish Sansthan',loadPDF,theme:''});
+
+export const BookingDetailsFields=createBookingDetailsFields(React,{browser:bookingBrowser,brand:'Sarsa Jyotish Sansthan',loadPDF,theme:''});

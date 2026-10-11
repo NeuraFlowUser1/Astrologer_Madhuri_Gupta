@@ -13,7 +13,7 @@ from tools.conversion.resources import ResourceTransfer
 from tools.conversion.recovery import RecoveryTransfer
 from tools.conversion.support import SupportHistoryTransfer
 from appointment_system.credentials import ReceiptKeys
-from appointment_system.receipt_recovery import recovery_code
+from tools.conversion.recovery import RecoveryKeys,recovery_readers
 from .test_keys import ring
 from .native_legacy_fixture import create
 from .test_native_handover import NativeJournal
@@ -190,16 +190,14 @@ class NativeSarsaHandover(HandoverOperations,unittest.TestCase):
    VALUES('receipt',%s,clock_timestamp()-interval '1 minute',clock_timestamp()+interval '1 minute',7)""",('d'*64,))
   old=self.connection.execute('SELECT to_jsonb(r) FROM sarsa_booking.receipt_recoveries r').fetchone()[0]
   window=self.connection.execute('SELECT to_jsonb(r) FROM sarsa_booking.request_limits r').fetchone()[0]
-  keys=ReceiptKeys(ring(purpose='receipt'),legacy_keys=(('prior',material),),recovery_readers={'prior-support':{
-   'key_id':'prior','code_audience':'sarsa:004:support-code:v1:','digest_audience':'sarsa:004:support-code-digest:v1:'}})
+  keys=RecoveryKeys(recovery_readers({'prior-support':{'key_id':'prior','code_audience':'sarsa:004:support-code:v1:','digest_audience':'sarsa:004:support-code-digest:v1:'}},{'prior':material}),{'prior':material})
   self.bound=replace(self.bound,history_mapper=SupportHistoryTransfer(RecoveryTransfer(keys,'prior-support')),
    receipt_formats=dict(self.bound.receipt_formats))
   self.handover=Handover(self.connection,self.bound,'a'*64,('sarsa_booking_web',))
   identifier=self.start();result=self.handover.convert(identifier)
   saved=self.connection.execute('SELECT to_jsonb(r) FROM appointment_system.receipt_recoveries r').fetchone()[0]
-  self.assertEqual({key:saved[key] for key in old},old)
-  self.assertEqual(saved['code_format'],'prior-support');self.assertEqual(saved['code_key_id'],'prior')
-  self.assertEqual(recovery_code(keys,operation,self.request,format=saved['code_format'],key_id=saved['code_key_id']),code)
+  self.assertEqual({key:saved[key] for key in old if key not in ('code_digest','redeemed_digest')},{key:value for key,value in old.items() if key not in ('code_digest','redeemed_digest')})
+  for retired in ('code_digest','redeemed_digest','code_format','code_key_id'):self.assertNotIn(retired,saved)
   self.assertEqual(self.connection.execute('SELECT to_jsonb(r) FROM appointment_system.request_limits r').fetchone()[0],window)
   self.handover.complete(identifier,result['target_digest'])
 

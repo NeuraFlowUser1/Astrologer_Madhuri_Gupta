@@ -1,4 +1,4 @@
-import {checkedReceipt,appointmentLabel,money} from './protocol.mjs';
+import {checkedReceiptFacts,appointmentLabel,money} from './protocol.mjs';
 
 /** Only the facts printed in the document participate in its freshness check. */
 export const pdfFacts=receipt=>JSON.stringify(['request_id','booking_revision','appointment_state','service_name',
@@ -6,7 +6,7 @@ export const pdfFacts=receipt=>JSON.stringify(['request_id','booking_revision','
  .map(key=>receipt[key]??null));
 
 export async function buildAppointmentPDF(receipt,{brand,load,generatedAt=new Date()}){
- const r=checkedReceipt(receipt,receipt.request_id);
+ const r=checkedReceiptFacts(receipt,receipt.request_id);
  if(r.appointment_state!=='confirmed' || !r.booking_revision || !r.meeting_mode)throw Error('receipt_changed');
  if(typeof brand!=='string' || !brand.trim() || brand.length>150)throw Error('pdf_unavailable');
  const {PDFDocument,PDFName,PDFString,fontkit,fontBytes}=await load();
@@ -54,4 +54,15 @@ export async function buildAppointmentPDF(receipt,{brand,load,generatedAt=new Da
  }
  const bytes=await document.save();
  return {bytes,filename:'appointment-'+r.request_id+'.pdf'};
+}
+
+/** Shared two-read PDF preparation. No receipt credential or write capability. */
+export async function prepareVerifiedPDF({read,current,valid,prepared,brand,loadPDF}){
+ const before=await read(),facts=pdfFacts(before);
+ if(before.appointment_state!=='confirmed' || !before.booking_revision || !before.meeting_mode)throw Error('receipt_changed');
+ const file=prepared?.facts===facts?prepared:await buildAppointmentPDF(before,{brand,load:loadPDF});
+ const after=await read();
+ if(facts!==pdfFacts(after) || facts!==pdfFacts(current()||{}))throw Error('receipt_changed');
+ if(!valid())throw Error('unavailable');
+ return {file,facts};
 }

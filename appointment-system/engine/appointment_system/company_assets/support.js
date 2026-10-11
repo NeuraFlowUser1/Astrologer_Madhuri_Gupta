@@ -2,16 +2,15 @@
  'use strict';const $=id=>document.getElementById(id);
  const journal=window.PracticeStaffActions('company');
  let timeZone=null,csrf=null,current=null,pending=journal.get()[0]||null,busy=false,accessEpoch=0;
- const allowed=new Set(['ok','rescheduled','cancelled','support_saved','refund_verified','resource_reviewed','operation_not_found','operation_conflict']);
+ const allowed=new Set(['ok','rescheduled','cancelled','contact_corrected','refund_verified','resource_reviewed','operation_not_found','operation_conflict','operation_retired']);
  function clearPrivate(){
   accessEpoch++;csrf=null;current=null;timeZone=null;
-  for(const id of ['appointments','reviews','summary','activation'])$(id).replaceChildren();
-  $('detail').hidden=$('activation').hidden=true;$('change').reset();$('reference').value='';
+  for(const id of ['appointments','reviews','summary'])$(id).replaceChildren();
+  $('detail').hidden=true;$('change').reset();$('reference').value='';
  }
- const outcomes={cancel:'cancelled',reschedule:'rescheduled',support:'support_saved','verified-refund':'refund_verified','resource-reviewed':'resource_reviewed'};
+ const outcomes={cancel:'cancelled',reschedule:'rescheduled',support:'contact_corrected','verified-refund':'refund_verified','resource-reviewed':'resource_reviewed'};
  function checkedOutcome(value){
   if(!Object.values(outcomes).includes(value.code)||!Number.isSafeInteger(value.revision)||value.revision<1)throw Error('support_unavailable');
-  if(value.code==='support_saved'&&(typeof value.active!=='boolean'||!Number.isFinite(Date.parse(value.expires_at))||(value.active&&!/^[0-9]{8}$/.test(value.activation_code))))throw Error('support_unavailable');
   return value;
  }
  async function api(path,body){
@@ -51,11 +50,11 @@
   try{current=await api('lookup',{reference});$('reference').value=reference;$('summary').replaceChildren();
    for(const [name,value] of [['Person',current.name],['Consultation',current.service],['Time',time(current.starts_at)+' · '+timeZone],['Status',current.state],['Email',current.email],['Mobile',current.phone]]){
     const cell=document.createElement('div');cell.append(text('dt',name),text('dd',value));$('summary').append(cell);}
-   $('detail').hidden=false;$('detail-title').focus();$('activation').hidden=true;fields();
+   $('detail').hidden=false;$('detail-title').focus();fields();
   }catch{current=null;$('detail').hidden=true;$('status').textContent='We could not find an accepted appointment for that reference.';}
  }
  function fields(){
-  const action=$('action').value,support=['receipt_recovery','contact_correction'].includes(action);
+  const action=$('action').value,support=action==='contact_correction';
   $('time-field').hidden=action!=='reschedule';$('starts-at').required=action==='reschedule';
   for(const id of ['email','phone']){$(id+'-field').hidden=action!=='contact_correction';$(id).required=action==='contact_correction' && (id!=='email' || current?.contact_email_required!==false);}
   $('payment-field').hidden=$('verification-field').hidden=!support;$('payment').required=$('verified').required=support;
@@ -66,11 +65,9 @@
   pending={path,body,operation_id:body.operation_id};busy=true;$('submit-change').disabled=true;$('retry').hidden=true;
   $('status').textContent='Checking and saving this action…';
   try{await journal.remember(body.operation_id);const value=checkedOutcome(await api(path,body));
-   const revision=body.expected_revision+(path==='support'&&body.action==='receipt_recovery'?0:1);
+   const revision=body.expected_revision+1;
    if(value.code!==outcomes[path]||value.revision!==revision||(value.operation_id!==undefined&&value.operation_id!==body.operation_id)||(path==='reschedule'&&!Number.isFinite(Date.parse(value.starts_at))))throw Error('support_unavailable');
    await journal.forget(body.operation_id);pending=null;$('status').textContent=value.code.replaceAll('_',' ')+'.';
-   if(value.active&&value.activation_code){$('activation').hidden=false;$('activation').textContent=`Give this code only during the verified call: ${value.activation_code}. The customer uses the booking access page. No receipt secret is exposed here.`;}
-   else $('activation').hidden=true;
    current=null;$('detail').hidden=true;
    $('status').textContent+=' Find the booking again before another change.';
   }catch(error){
@@ -90,8 +87,7 @@
   try{const saved=journal.get();if(journal.error)throw Error(journal.error);for(const item of saved){const value=await api('actions/'+item.operation_id);
     if(value.operation_id!==item.operation_id||value.code==='operation_conflict')throw Error('operation_conflict');
     if(value.code==='operation_not_found'){if(Date.now()-item.created_at<300000)throw Error('still_checking');await journal.forget(item.operation_id);continue;}
-    checkedOutcome(value);await journal.forget(item.operation_id);current=null;$('detail').hidden=true;
-    if(value.active&&value.activation_code){$('activation').hidden=false;$('activation').textContent='Give this short code only to the verified customer: '+value.activation_code;}
+    if(value.code!=='operation_retired')checkedOutcome(value);await journal.forget(item.operation_id);current=null;$('detail').hidden=true;
    }pending=journal.get()[0]||null;$('status').textContent='Earlier results checked. Find the booking again before another change.';
   }catch{$('status').textContent='The earlier result still needs checking. Renew company access if needed, then retry.';}
   finally{busy=false;$('retry').hidden=!journal.get().length;$('submit-change').disabled=!!journal.get().length;}

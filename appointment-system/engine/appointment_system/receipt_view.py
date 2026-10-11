@@ -45,14 +45,12 @@ def email_copy_view(value,*,sending_ready=None):
     return result
 
 
-def receipt_view(snapshot, request_id, secret, key,*,sending_ready=None):
+def receipt_facts(snapshot, request_id):
+    """Project facts only. The calling path must authorize its own matched read."""
     now = timestamp(snapshot['server_now'])
     row = snapshot.get('booking')
-    if row:
-        row = dict(row)
-        for name in ('receipt_expires_at', 'receipt_revoked_at'):
-            row[name] = timestamp(row.get(name))
-    authorize_receipt(row, request_id, secret, key, now)
+    if not isinstance(row, dict) or str(row.get('request_id')) != str(request_id):
+        raise ValueError('Invalid matched booking facts.')
     state = Appointment(row['state'])
     deadline = timestamp(row['hold_expires_at'])
     if state == Appointment.HELD and deadline <= now:
@@ -63,13 +61,6 @@ def receipt_view(snapshot, request_id, secret, key,*,sending_ready=None):
         Resolution(row['resolution']) if row.get('resolution') else None,
         timestamp(row.get('resolved_at')),
     )
-    actions = customer_actions(evidence, now)
-    if snapshot.get('booking_product_enabled') is False:
-        actions=dict(customer_message_code='contact_support',next_actions=['check_status','contact_support'])
-    # Final route may further restrict resume when provider recovery is stale.
-    # This read-only view never exposes payment-launch credentials.
-    if 'resume_payment' in actions['next_actions']:
-        actions = dict(customer_message_code='time_reserved', next_actions=['check_payment','check_status'])
     meeting_state=row['meeting_state']
     meet_url = row.get('meet_url') if state == Appointment.CONFIRMED and meeting_state == 'ready' else None
     if meet_url is not None and (not isinstance(meet_url,str) or not re.fullmatch(r'https://meet\.google\.com/[a-z]{3}-[a-z]{4}-[a-z]{3}',meet_url)):
@@ -91,7 +82,7 @@ def receipt_view(snapshot, request_id, secret, key,*,sending_ready=None):
         payment_checked_at=row.get('payment_checked_at'),
         payment_evidence_source='provider_observation' if row.get('payment_checked_at') else 'unobserved',
         meeting_state=meeting_state, meet_url=meet_url, acknowledgement_state=row['acknowledgement_state'],
-        meeting_email_state=row['meeting_email_state'], **actions,
+        meeting_email_state=row['meeting_email_state'],
     )
     if 'booking_revision' in row:
         if type(row['booking_revision']) is not int or not 1<=row['booking_revision']<=2147483647:
@@ -100,6 +91,32 @@ def receipt_view(snapshot, request_id, secret, key,*,sending_ready=None):
     if 'meeting_mode' in row:
         if row['meeting_mode'] not in ('google_meet','internal'):raise ValueError('Invalid saved meeting mode.')
         result['meeting_mode']=row['meeting_mode']
+    return result
+
+
+def receipt_view(snapshot, request_id, secret, key,*,sending_ready=None):
+    """Original secret-authorized receipt; lookup never acquires these actions."""
+    now = timestamp(snapshot['server_now'])
+    row = snapshot.get('booking')
+    if row:
+        row = dict(row)
+        for name in ('receipt_expires_at', 'receipt_revoked_at'):
+            row[name] = timestamp(row.get(name))
+    authorize_receipt(row, request_id, secret, key, now)
+    result = receipt_facts(snapshot, request_id)
+    evidence = CheckoutEvidence(
+        Appointment(result['appointment_state']), Order(row['order_state']), Payment(row['payment_state']),
+        timestamp(row['hold_expires_at']), timestamp(row.get('attempted_at')), row.get('provider_order_id'),
+        Resolution(row['resolution']) if row.get('resolution') else None, timestamp(row.get('resolved_at')),
+    )
+    actions = customer_actions(evidence, now)
+    if snapshot.get('booking_product_enabled') is False:
+        actions = dict(customer_message_code='contact_support',next_actions=['check_status','contact_support'])
+    # Final route may further restrict resume when provider recovery is stale.
+    # This read-only view never exposes payment-launch credentials.
+    if 'resume_payment' in actions['next_actions']:
+        actions = dict(customer_message_code='time_reserved',next_actions=['check_payment','check_status'])
+    result.update(actions)
     if 'email_copy' in row:
-        result['email_copy']=email_copy_view(row['email_copy'],sending_ready=sending_ready)
+        result['email_copy'] = email_copy_view(row['email_copy'],sending_ready=sending_ready)
     return result

@@ -16,7 +16,7 @@ export function generateModes({dist,shell,pages,project,manifest,brand,offDescri
    .replace(/(<meta (?:name|property)="(?:description|og:description|twitter:description)" content=")[^"]*/g,`$1${escape(description)}`)
    .replace(/(<link rel="canonical" href=")[^"]*/g,`$1${escape(project.origin+path)}`)
    .replace(/(<meta (?:name|property)="(?:og:url|twitter:url)" content=")[^"]*/g,`$1${escape(project.origin+path)}`)
-   .replace(/(<meta name="robots" content=")[^"]*/g,`$1${booking?'noindex, nofollow':'index, follow'}`)
+   .replace(/(<meta name="(?:robots|googlebot)" content=")[^"]*/g,`$1${booking?'noindex, nofollow':'index, follow'}`)
    .replace('</head>',`<meta name="booking-display-mode" content="${mode}"></head>`);
   if(booking && !html.includes('name="robots"'))html=html.replace('</head>','<meta name="robots" content="noindex, nofollow"></head>');
   return html;

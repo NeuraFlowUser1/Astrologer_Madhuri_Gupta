@@ -52,19 +52,46 @@ class ReceiptRequest(BaseModel):
 
 
 class RequestBoundary:
-    def __init__(self,app):
+    def __init__(self,app,lookup_admission=None):
         self.app=app
+        self.lookup_admission=lookup_admission
 
     async def __call__(self,scope,receive,send):
         if scope['type']!='http':
             return await self.app(scope,receive,send)
+        lookup=scope['path']=='/api/booking/details'
         async def protected_send(message):
             if message['type']=='http.response.start':
                 message=dict(message)
                 headers=[(k,v) for k,v in message.get('headers',[]) if k.lower()!=b'cache-control']
-                message['headers']=headers+[(b'cache-control',b'no-store'),(b'referrer-policy',b'no-referrer'),
+                message['headers']=headers+[(b'cache-control',b'private, no-store' if lookup else b'no-store'),(b'referrer-policy',b'no-referrer'),
                     (b'x-content-type-options',b'nosniff')]
+                if lookup:
+                    message['headers'].append((b'x-robots-tag',b'noindex, nofollow'))
             await send(message)
+        if lookup and scope['method']=='POST':
+            from starlette.concurrency import run_in_threadpool
+            from .service_control import ControlError
+            try:
+                if self.lookup_admission is None:
+                    raise StorageUnavailable()
+                await run_in_threadpool(self.lookup_admission,Request(scope))
+            except AccessDenied:
+                response=JSONResponse({'code':'access_unavailable','message':'Please open this page on our website.'},403)
+            except RateLimited as error:
+                response=JSONResponse({'code':'please_wait','message':'Please wait before trying again.'},429,headers={'Retry-After':str(error.retry_after)})
+            except ControlError as error:
+                response=JSONResponse({'code':error.code,'message':'Please refresh this page to continue.'},error.status)
+            except (StorageUnavailable,BudgetExpired):
+                response=JSONResponse({'code':'temporarily_unavailable','message':'We cannot complete this request right now. Please try again shortly.'},503)
+            except Exception:
+                # This middleware sits outside route exception handling. Never
+                # include a source address, identity pair or exception text.
+                response=JSONResponse({'code':'temporarily_unavailable','message':'We cannot complete this request right now. Please try again shortly.'},503)
+            else:
+                response=None
+            if response is not None:
+                return await response(scope,receive,protected_send)
         if scope['method'] in ('POST','PUT','PATCH'):
             headers=dict(scope.get('headers',[]))
             if (headers.get(b'content-type',b'').split(b';',1)[0].strip().lower()!=b'application/json'
@@ -116,7 +143,9 @@ def create_application(store,settings,*,verified_client_address,webhook_account=
     staff_store=staff_store if staff_store is not None else UnavailableStore()
     worker_store=worker_store if worker_store is not None else UnavailableStore()
     company_store=company_store if company_store is not None else UnavailableStore()
-    app.add_middleware(RequestBoundary)
+    from .booking_lookup import preparse_admission,add_routes as add_booking_details_routes
+    app.add_middleware(RequestBoundary,lookup_admission=preparse_admission(store,settings,verified_client_address))
+    add_booking_details_routes(app,store)
     app.add_middleware(RetiredSubmissions)
     # The last declared middleware is outermost: include slow body reception.
     app.add_middleware(BudgetMiddleware)
@@ -139,7 +168,7 @@ def create_application(store,settings,*,verified_client_address,webhook_account=
         database=company_database,publisher=control_publisher,
         worker_key=recovery_worker_key,address=verified_client_address))
     from .company_support import router as company_support_router
-    app.include_router(company_support_router(company_config,company_store,settings.receipt_key,wake_publisher,database=company_database))
+    app.include_router(company_support_router(company_config,company_store,wake_publisher,database=company_database))
 
     @app.exception_handler(BudgetExpired)
     async def budget_exhausted(request,error):
@@ -213,6 +242,11 @@ def create_application(store,settings,*,verified_client_address,webhook_account=
     @app.exception_handler(InvalidSelection)
     async def invalid(request,error):
         # Do not return Pydantic's raw input values (names/contact/notes).
+        if request.url.path=='/api/booking/details' and isinstance(error,RequestValidationError):
+            allowed={'full_name','phone','cursor','request_id'}
+            fields=sorted({entry['loc'][1] for entry in error.errors()
+                if len(entry.get('loc',()))>1 and entry['loc'][0]=='body' and entry['loc'][1] in allowed})
+            return JSONResponse({'code':'invalid_request','message':'Please check the details and try again.','fields':fields},422)
         return JSONResponse({'code':'invalid_request','message':'Please check the details and try again.'},422)
 
     # The nine-lane contract is the only asynchronous consumer entry point.
@@ -264,9 +298,6 @@ def create_application(store,settings,*,verified_client_address,webhook_account=
         response=JSONResponse({'ready':True,'renewed':True})
         response.set_cookie(COOKIE_NAME,token,max_age=CONTEXT_SECONDS,secure=True,httponly=True,samesite='strict',path='/')
         return response
-
-    from .receipt_recovery import add_receipt_recovery_routes
-    add_receipt_recovery_routes(app,store,settings,browser_request,limit)
 
     @app.post('/api/checkout/status')
     def checkout_status(request:Request,body:ReceiptRequest):

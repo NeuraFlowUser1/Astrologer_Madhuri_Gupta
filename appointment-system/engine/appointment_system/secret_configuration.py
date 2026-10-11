@@ -49,7 +49,7 @@ def historical(environment):
 def booking_settings(environment):
     from .application import Settings
     definitions,materials=historical(environment)
-    receipt=ReceiptKeys(ring(environment,'BOOKING_RECEIPT_KEYS','receipt'),definitions['receipt'],materials,definitions.get('recovery',{}))
+    receipt=ReceiptKeys(ring(environment,'BOOKING_RECEIPT_KEYS','receipt'),definitions['receipt'],materials)
     context=ContextKeys(ring(environment,'BOOKING_CONTEXT_KEYS','context'),definitions['context'],materials)
     risk=ring(environment,'BOOKING_RISK_KEYS','risk')
     independent((receipt.ring,context.ring,risk))

@@ -51,37 +51,16 @@ def historical_keys(value):
     return accepted
 
 
-def recovery_readers(value, materials):
-    if type(value) not in (dict,MappingProxyType) or len(value)>8:raise invalid('legacy_recovery_readers')
-    result={}
-    for name,reader in value.items():
-        if type(reader) is MappingProxyType:reader=dict(reader)
-        if type(name) is not str or name=='v1' or not re.fullmatch(r'[a-z0-9][a-z0-9-]{0,63}',name):
-            raise invalid('legacy_recovery_readers')
-        object_fields(reader,{'key_id','code_audience','digest_audience'})
-        if type(reader['key_id']) is not str or not KEY_ID.fullmatch(reader['key_id']) or reader['key_id'] not in materials:raise invalid('legacy_recovery_keys')
-        for field_name in ('code_audience','digest_audience'):
-            audience=reader[field_name]
-            if type(audience) is not str or not 1<=len(audience)<=128 or not re.fullmatch(r'[a-zA-Z0-9:-]+',audience) or not audience.endswith(':'):
-                raise invalid('legacy_recovery_readers')
-        if reader['code_audience']==reader['digest_audience']:raise invalid('legacy_recovery_readers')
-        result[name]=MappingProxyType(dict(reader))
-    return MappingProxyType(result)
-
-
 @dataclass(frozen=True,repr=False)
 class ReceiptKeys:
     ring:KeyRing=field(repr=False)
     legacy:dict=field(default_factory=dict,repr=False)
     legacy_keys:tuple=field(default_factory=tuple,repr=False)
-    recovery_readers:dict=field(default_factory=dict,repr=False)
 
     def __post_init__(self):
         if not isinstance(self.ring,KeyRing) or self.ring.purpose not in ("receipt","enquiry-digest"):raise invalid("receipt_keys")
         object.__setattr__(self,"legacy",readers(self.legacy))
         materials=historical_keys(self.legacy_keys)
-        if self.ring.purpose!='receipt' and self.recovery_readers:raise invalid('legacy_recovery_readers')
-        object.__setattr__(self,'recovery_readers',recovery_readers(self.recovery_readers,materials))
         for value in self.legacy.values():
             if value["purpose"] not in ("booking","inquiry") or value["encoding"] not in ("hex64","url43"):raise invalid("legacy_readers")
             if value["key_id"] is not None and value["key_id"] not in materials:raise invalid("legacy_keys")

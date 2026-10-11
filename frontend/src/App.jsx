@@ -35,7 +35,13 @@ function AppShell() {
     for(const selector of ['meta[name="description"]','meta[property="og:description"]','meta[name="twitter:description"]']) document.querySelector(selector)?.setAttribute('content',description||'We could not find that page.');
     document.querySelector('link[rel="canonical"]')?.setAttribute('href',origin+path);
     for(const selector of ['meta[property="og:url"]','meta[name="twitter:url"]']) document.querySelector(selector)?.setAttribute('content',origin+path);
-    document.querySelector('meta[name="robots"]')?.setAttribute('content',data && (enabled || !['/booking','/booking-policy'].includes(path)) ? 'index, follow':'noindex');
+    const privatePage=['/booking/receipt','/booking-help'].includes(path);
+    const robots=!privatePage && data && (enabled || !['/booking','/booking-policy'].includes(path)) ? 'index, follow':'noindex, nofollow';
+    for(const name of ['robots','googlebot','referrer']){
+      let meta=document.querySelector(`meta[name="${name}"]`);
+      if(!meta){meta=document.createElement('meta');meta.name=name;document.head.append(meta);}
+      meta.content=name==='referrer'?(privatePage?'no-referrer':'strict-origin-when-cross-origin'):robots;
+    }
   }, [location.pathname,enabled]);
 
   return (

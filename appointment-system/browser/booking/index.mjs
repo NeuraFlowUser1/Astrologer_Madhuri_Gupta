@@ -4,7 +4,6 @@ import {createPaymentRecovery} from './payment-recovery.mjs';
 import {createRazorpay} from './razorpay.mjs';
 import {createBookingController} from './controller.mjs';
 import {RequestError} from '../transport.mjs';
-import {createReceiptRecovery} from './receipt-recovery.mjs';
 import {admissionAllowed,displayAllowed} from '../product-state.mjs';
 
 export function createBookingBrowser(profile,{product,storage=()=>window.sessionStorage,fetcher=globalThis.fetch}={}){
@@ -13,7 +12,7 @@ export function createBookingBrowser(profile,{product,storage=()=>window.session
  const api=createBookingAPI({fetcher}),receipts=createReceiptStore(profile);
  const recovery=createPaymentRecovery({...profile,receipts,storage,api,enabled:()=>admissionAllowed(product.getSnapshot()),subscribeEnabled:product.subscribe});
  const gateway=createRazorpay(profile.payment),payment={...gateway,rememberAndSubmit:recovery.rememberAndSubmit};
- return Object.freeze({api,receipts,recovery,product,receiptRecovery:()=>createReceiptRecovery({receipts,storage,product,fetcher}),
+ return Object.freeze({api,receipts,recovery,product,
   controller:initialService=>createBookingController({api,receipts,storage,payment,product,initialService})});
 }
 

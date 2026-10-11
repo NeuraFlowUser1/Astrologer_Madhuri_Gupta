@@ -28,3 +28,13 @@
 .sarsa-site :is(.sarsa-action,.button,.text-link,.text-button,.contact-button,.approach-action,.service-button,.service-actions a,.row-actions a):focus-visible{outline:3px solid #955d45;outline-offset:3px;box-shadow:0 0 0 6px #fffdf8}
 @media(hover:hover) and (pointer:fine){.sarsa-site .sarsa-header .sarsa-action:hover,.sarsa-site :is(.sarsa-kundli,.sarsa-contact,.sarsa-booking) :is(.button,.text-link,.text-button):not(:disabled):hover{translate:0 -3px}}
 @media(prefers-reduced-motion:reduce){.sarsa-site .sarsa-header .sarsa-action,.sarsa-site :is(.sarsa-home,.sarsa-about,.sarsa-kundli,.sarsa-contact,.sarsa-booking) :is(.button,.text-link,.text-button,.contact-button,.approach-action,.row-actions a){transition:none!important}.sarsa-site .sarsa-header .sarsa-action:hover,.sarsa-site :is(.sarsa-kundli,.sarsa-contact,.sarsa-booking) :is(.button,.text-link,.text-button):hover{translate:none!important}}
+
+/* Reserve the bold label width, so menu emphasis never shifts its neighbours. */
+.sarsa-header nav a{position:relative;display:inline-grid;grid-template-areas:"label";font-weight:500}
+.sarsa-header .sarsa-nav-label,.sarsa-header .sarsa-nav-reserve{grid-area:label}.sarsa-header .sarsa-nav-reserve{visibility:hidden;font-weight:700;pointer-events:none}
+.sarsa-header nav a::after{content:"";position:absolute;left:0;right:0;bottom:3px;height:2px;background:#a6814d;transform:scaleX(0);transform-origin:left;transition:transform 180ms cubic-bezier(.2,.7,.2,1)}
+.sarsa-header nav a[aria-current=page]{text-decoration:none}.sarsa-header nav a[aria-current=page] .sarsa-nav-label,.sarsa-header nav a:focus-visible .sarsa-nav-label{font-weight:700}
+.sarsa-header nav a[aria-current=page]::after,.sarsa-header nav a:focus-visible::after{transform:scaleX(1)}
+.sarsa-header .sarsa-action[aria-current=page]{text-decoration:none;box-shadow:0 0 0 3px #a6814d65,0 8px 18px #26483d25}
+@media(hover:hover) and (pointer:fine){.sarsa-header nav a:hover .sarsa-nav-label{font-weight:700}.sarsa-header nav a:hover::after{transform:scaleX(1)}}
+@media(prefers-reduced-motion:reduce){.sarsa-header nav a::after{transition:none}}

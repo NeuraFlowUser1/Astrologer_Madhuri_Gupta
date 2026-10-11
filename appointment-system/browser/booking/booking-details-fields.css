@@ -1,0 +1,19 @@
+.abs-booking-details[hidden]{display:none}
+.abs-lookup-form{max-width:880px}.abs-lookup-intro{font-size:17px;line-height:1.6;max-width:62ch;margin:0 0 28px}
+.abs-lookup-inputs{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:24px}
+.abs-lookup-field,.abs-lookup-phone{min-width:0}.abs-booking-details label{display:block;font-size:15px;line-height:1.5;font-weight:700;margin:0 0 7px}
+.abs-booking-details input,.abs-booking-details select{width:100%;box-sizing:border-box;min-height:48px;border:1px solid var(--abs-line);border-radius:12px;padding:11px 14px;font:inherit;font-size:16px;color:var(--abs-fg);background:var(--abs-bg)}
+.abs-booking-details select{margin:0 0 15px}.abs-booking-details input[aria-invalid=true]{border-color:var(--abs-error)}
+.abs-booking-details input:focus-visible,.abs-booking-details select:focus-visible{outline:2px solid var(--abs-button);outline-offset:3px}
+.abs-lookup-hint{font-size:14px;line-height:1.55;color:var(--abs-muted);margin:8px 0 20px}
+.abs-lookup-status{min-height:24px;font-size:15px}.abs-lookup-results{border-top:1px solid var(--abs-line);padding-top:32px;margin-top:16px}
+.abs-lookup-results>h2{margin-bottom:16px}.abs-lookup-results>p{font-size:16px;line-height:1.6}
+.abs-lookup-list{list-style:none;padding:0;margin:24px 0;display:grid;gap:12px}
+.abs-lookup-list li{min-width:0}.abs-lookup-list button{width:100%;display:grid;grid-template-columns:1fr auto;gap:8px 18px;text-align:left;justify-content:stretch;padding:20px;border-radius:18px;background:var(--abs-bg);color:var(--abs-fg);transition:transform .2s,box-shadow .2s}
+.abs-lookup-list button:hover:not(:disabled){transform:translateY(-3px);box-shadow:0 8px 22px #142c2112}.abs-lookup-service{font-size:20px;font-weight:700}.abs-lookup-date{grid-column:1;font-size:15px;font-weight:400;line-height:1.6}
+.abs-lookup-state{font-size:14px;font-weight:700;color:var(--abs-muted)}.abs-lookup-list .abs-lookup-state{grid-column:1}.abs-lookup-list button>span:last-child{grid-column:2;grid-row:1/4;font-size:24px;align-self:center}
+.abs-lookup-stale{padding:16px;border:1px solid var(--abs-line);border-radius:12px;background:var(--abs-bg)}
+.abs-booking-details .abs-action-error{color:var(--abs-error);font-size:15px;line-height:1.6}
+.abs-lookup-back{background:transparent!important;color:var(--abs-fg)!important}
+@media(max-width:767px){.abs-lookup-inputs{grid-template-columns:1fr;gap:4px}.abs-lookup-intro{font-size:16px}.abs-lookup-results{padding-top:24px}.abs-lookup-service{font-size:18px}.abs-lookup-list button{padding:17px}.abs-lookup-date{font-size:14px}}
+@media(prefers-reduced-motion:reduce){.abs-booking-details *{transition:none!important;transform:none!important}}

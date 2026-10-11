@@ -262,14 +262,15 @@ class Store:
     def studio_inbox_review(self, session, client, origin, operation, item, revision, note):
         return self._call('SELECT appointment_system.studio_inbox_review(%s,%s,%s,%s,%s,%s,%s)',(session,client,origin,operation,item,revision,note))
 
-    def studio_support_change(self,session,client,origin,operation,reference,revision,action,reason,payment,email,phone,digest,code_key):
-        return self._call('SELECT appointment_system.studio_support_change(%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)',(session,client,origin,operation,reference,revision,action,reason,payment,email,phone,digest,code_key))
+    def studio_support_change(self,session,client,origin,operation,reference,revision,action,reason,payment,email,phone):
+        return self._call('SELECT appointment_system.studio_support_change(%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)',(session,client,origin,operation,reference,revision,action,reason,payment,email,phone))
 
-    def recovery_protection(self,reference,operation=None):
-        return self._call('SELECT appointment_system.recovery_protection(%s,%s)',(reference,operation))
+    def consume_booking_lookup_limits(self,digest,epoch):
+        return self._call('SELECT appointment_system.consume_booking_lookup_limits(%s,%s)',(digest,epoch))
 
-    def redeem_receipt_recovery(self,reference,code,digest,receipt_key):
-        return self._call('SELECT appointment_system.redeem_receipt_recovery(%s,%s,%s,%s)',(reference,code,digest,receipt_key))
+    def booking_details(self,name,phone,epoch,request_id,as_of,bucket,start,last_id):
+        return self._call('SELECT appointment_system.booking_details(%s,%s,%s,%s,%s,%s,%s,%s)',
+                          (name,phone,epoch,request_id,as_of,bucket,start,last_id))
 
     def studio_inbox_refund_verified(self,session,client,origin,operation,item,revision,note):
         return self._call('SELECT appointment_system.studio_inbox_refund_verified(%s,%s,%s,%s,%s,%s,%s)',(session,client,origin,operation,item,revision,note))

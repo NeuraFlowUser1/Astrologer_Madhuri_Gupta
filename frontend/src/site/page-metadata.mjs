@@ -7,6 +7,8 @@ export const pages={
  '/services/kundli-matching':['Kundli Matching','Bring your questions about compatibility to a personal Kundli Matching consultation with Madhuri Gupta.'],
  '/services/vastu-consultation':['Vastu Consultation','Discuss questions about your home or workspace in a Vastu consultation with Madhuri Gupta.'],
  '/services/numerology':['Numerology','Explore your questions about names and dates in a Numerology consultation with Madhuri Gupta.'],
+ '/booking/receipt':['View my booking','View your appointment details with the full name and phone number saved when booking.'],
+ '/booking-help':['View my booking','Open the booking-details page.'],
  '/booking':['Book an appointment','Choose a consultation and an available appointment time with Madhuri Gupta. Online appointments use Google Meet.'],
  '/contact':['Contact the practice','Ask Sarsa Jyotish Sansthan a question before booking, or contact the practice for help with an existing appointment.'],
  '/privacy':['Privacy policy','How Sarsa Jyotish Sansthan handles booking and enquiry information, including practice and agency records.'],

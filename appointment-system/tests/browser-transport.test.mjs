@@ -80,21 +80,7 @@ test('receipt readers reject malformed and mixed historical formats without dele
  }
  for(const options of [{installation_id:null,environment:'test'},{installation_id:'00000000-0000-0000-0000-000000000000',environment:'test'},{installation_id,environment:'unknown'},{installation_id,environment:'test',legacy_receipts:{}},{installation_id,environment:'test',legacy_receipts:Array(5).fill({key:'x',format:'id-hex64'})},{installation_id,environment:'test',legacy_receipts:[{key:'x',format:'id-hex64'},{key:'x',format:'id-hex64'}]}])assert.throws(()=>createReceiptStore(options),code('invalid_configuration'));
 });
-test('failed receipt removal and recovery commit retain recoverable state instead of claiming success',()=>{
+test('failed receipt removal retains the saved receipt instead of claiming success',()=>{
  const s=storage(),r=store(),saved=r.prepareReceipt(s,policy);s.removeItem=()=>{};assert.throws(()=>r.clearReceipt(s,saved),code('storage_unavailable'));assert.deepEqual(r.readReceipt(s),saved);
  s.removeItem=()=>{throw Error('Synthetic storage failure');};assert.throws(()=>r.clearReceipt(s,saved),code('storage_unavailable'));
- const v=storage(),recovery=r.prepareRecovery(v,request_id,policy);v.removeItem=()=>{};assert.throws(()=>r.commitRecovery(v,recovery),code('storage_unavailable'));assert.deepEqual(r.readRecovery(v),recovery);assert.deepEqual(r.readReceipt(v),recovery);
-});
-test('recovery does not replace a different pending booking or accept a mismatched staged secret',()=>{
- const r=store(),s=storage();assert.throws(()=>r.prepareRecovery(s,'invalid',policy),code('invalid_request'));
- assert.throws(()=>r.commitRecovery(s,null),code('receipt_conflict'));
- const staged=r.prepareRecovery(s,request_id,policy);assert.deepEqual(r.prepareRecovery(s,request_id,policy),staged);assert.throws(()=>r.prepareReceipt(s,policy),code('checkout_in_progress'));
- assert.throws(()=>r.commitRecovery(s,{...staged,secret:'different'}),code('receipt_conflict'));
- s.setItem('old-one',JSON.stringify({id:'11111111-1111-4111-8111-111111111111',secret:'a'.repeat(64)}));assert.throws(()=>r.commitRecovery(s,staged),code('receipt_conflict'));assert.deepEqual(r.readRecovery(s),staged);
-});
-test('recovery storage write readback and read errors prevent committing unverified credentials',()=>{
- const r=store(),s=storage();s.setItem=()=>{};assert.throws(()=>r.prepareRecovery(s,request_id,policy),code('storage_unavailable'));
- assert.throws(()=>r.readRecovery({getItem(){throw Error('private');}}),code('storage_unavailable'));
- const v=storage(),staged=r.prepareRecovery(v,request_id,policy);v.setItem=()=>{};assert.throws(()=>r.commitRecovery(v,staged),code('storage_unavailable'));assert.deepEqual(r.readRecovery(v),staged);
- const legacy=storage();legacy.setItem('old-two',JSON.stringify({version:1,request_id,secret:'a'.repeat(43)}));const updated=r.prepareRecovery(legacy,request_id,policy);assert.deepEqual(r.commitRecovery(legacy,updated),updated);assert.equal(legacy.getItem('old-two'),null);assert.equal(r.readRecovery(legacy),null);
 });

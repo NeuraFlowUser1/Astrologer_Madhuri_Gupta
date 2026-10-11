@@ -32,6 +32,7 @@ export function createReceiptStore({installation_id,environment,legacy_receipts=
   return Object.freeze({version:1,request_id:value.request_id,secret:value.secret});
  }
  function entries(storage){
+  try{storage.removeItem(stageKey);}catch{/* Obsolete staging cannot block a valid receipt read. */}
   try{return readers.flatMap(reader=>{const raw=storage.getItem(reader.key);return raw===null?[]:[{key:reader.key,value:parse(raw,reader.format)}];});}
   catch(error){if(error instanceof RequestError)throw error;throw new RequestError('storage_unavailable');}
  }
@@ -42,7 +43,7 @@ export function createReceiptStore({installation_id,environment,legacy_receipts=
  }
  function prepareReceipt(storage,policy,cryptoSource=globalThis.crypto){
   if(policy?.receipt_access?.version!==1 || !keyId.test(policy.receipt_access.key_id || ''))throw new RequestError('invalid_response');
-  if(readReceipt(storage) || readRecovery(storage))throw new RequestError('checkout_in_progress');
+  if(readReceipt(storage))throw new RequestError('checkout_in_progress');
   const bytes=cryptoSource.getRandomValues(new Uint8Array(32));
   const value={version:1,installation_id,environment,request_id:cryptoSource.randomUUID(),
    secret:'r1.'+policy.receipt_access.key_id+'.'+btoa(String.fromCharCode(...bytes)).replaceAll('+','-').replaceAll('/','_').replaceAll('=','')};
@@ -57,33 +58,5 @@ export function createReceiptStore({installation_id,environment,legacy_receipts=
   try{for(const item of saved)storage.removeItem(item.key);if(readReceipt(storage)!==null)throw Error();}
   catch(error){if(error instanceof RequestError)throw error;throw new RequestError('storage_unavailable');}
  }
- function readRecovery(storage){
-  try{const raw=storage.getItem(stageKey);return raw===null?null:parse(raw,'v1');}
-  catch(error){if(error instanceof RequestError)throw error;throw new RequestError('storage_unavailable');}
- }
- function prepareRecovery(storage,reference,policy,source=globalThis.crypto){
-  if(!uuid(reference) || policy?.receipt_access?.version!==1 || !keyId.test(policy.receipt_access.key_id || ''))throw new RequestError('invalid_request');
-  const saved=readRecovery(storage),old=entries(storage);
-  if((saved && saved.request_id!==reference) || old.some(item=>item.value.request_id!==reference))throw new RequestError('receipt_conflict');
-  if(saved)return saved;
-  const bytes=source.getRandomValues(new Uint8Array(32)),value={version:1,installation_id,environment,request_id:reference,
-   secret:'r1.'+policy.receipt_access.key_id+'.'+btoa(String.fromCharCode(...bytes)).replaceAll('+','-').replaceAll('/','_').replaceAll('=','')};
-  const encoded=JSON.stringify(value);parse(encoded,'v1');
-  try{storage.setItem(stageKey,encoded);if(storage.getItem(stageKey)!==encoded)throw Error();}
-  catch{throw new RequestError('storage_unavailable');}
-  return readRecovery(storage);
- }
- function commitRecovery(storage,expected){
-  const staged=readRecovery(storage),old=entries(storage);
-  if(!staged || !expected || !equal(staged,expected) || old.some(item=>item.value.request_id!==staged.request_id))throw new RequestError('receipt_conflict');
-  const encoded=JSON.stringify({version:1,installation_id,environment,request_id:staged.request_id,secret:staged.secret});
-  try{
-   storage.setItem(current,encoded);if(storage.getItem(current)!==encoded)throw Error();
-   for(const item of old)if(item.key!==current)storage.removeItem(item.key);
-   if(!equal(readReceipt(storage),staged))throw Error();
-   storage.removeItem(stageKey);if(storage.getItem(stageKey)!==null)throw Error();
-  }catch(error){if(error instanceof RequestError)throw error;throw new RequestError('storage_unavailable');}
-  return staged;
- }
- return Object.freeze({readReceipt,prepareReceipt,clearReceipt,readRecovery,prepareRecovery,commitRecovery,storageKey:current});
+ return Object.freeze({readReceipt,prepareReceipt,clearReceipt,storageKey:current});
 }

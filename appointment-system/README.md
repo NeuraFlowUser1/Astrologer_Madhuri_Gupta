@@ -4,7 +4,9 @@ This package is the neutral master for independently owned project copies. Ident
 
 ## Current implementation status
 
-The common foundation includes the approved booking-experience refinements: draft retention through tab checks, V3 optional email, accessible date/time controls, shared receipt facts/PDF/requested email copy, and thin receiving-site adapters. The [implementation contract](docs/booking-experience.md) explains the data, dependencies, migration and controlled cutover. Source-bound test, qualification and per-installation production observations are recorded in the programme evidence and checkpoint; an older release's evidence does not automatically qualify a new digest.
+The common foundation includes the approved booking-experience refinements: draft retention through tab checks, V3 optional email, accessible date/time controls, shared receipt facts/PDF/requested email copy, and thin receiving-site adapters. Migration 037 adds read-only booking access using the saved full name and phone number, with bounded history, refreshed appointment facts and confirmed-appointment PDFs. It retires the customer code process while retaining historical audit facts and protected staff contact correction. The [booking-details contract](docs/booking-details.md) defines matching, admission, privacy, browser lifetime and the single changeover; the [booking-experience contract](docs/booking-experience.md) continues to cover checkout and original saved receipts.
+
+This change was implemented under the owner's explicit no-tests/no-release-gates instruction. Source review, rendered-page observations, packaging and publication records are distinct from test evidence. Earlier release tests do not qualify the changed source, and no fresh test or coverage result is claimed.
 
 ## Project folder contract
 
@@ -18,7 +20,7 @@ The company enters through username/password at `/company/booking-control`. Staf
 
 The [owner recovery command](docs/company-recovery.md) handles a lost company password through protected project-owned database access. It is separate from first enrolment and never exposes a public reset route.
 
-Switching OFF immediately closes new booking admission. Public booking, receipts, support/recovery and the booking dashboard are denied. General website content and enquiries remain independent. Staff can read enquiries at `/enquiries-studio`. Existing paid obligations are preserved for private company resolution; OFF itself neither cancels nor refunds. An older ON acknowledgement cannot defeat a newer OFF or a restored authority generation.
+Switching OFF immediately closes new booking admission. Public booking, receipts, name-and-phone lookup and the booking dashboard are denied. General website content and enquiries remain independent. Staff can read enquiries at `/enquiries-studio`. Existing paid obligations are preserved for private company resolution; OFF itself neither cancels nor refunds. An older ON acknowledgement cannot defeat a newer OFF or a restored authority generation.
 
 ## Database and background work
 

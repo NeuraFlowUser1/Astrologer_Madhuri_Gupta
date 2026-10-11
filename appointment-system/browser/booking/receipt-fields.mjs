@@ -16,6 +16,7 @@ const blocked={delivery_pending:'Your earlier copy is still being prepared.',del
 /** Identical facts and actions in confirmation and standalone receipts. Theme stays local. */
 export function createReceiptFields(React,{browser,brand,loadPDF,theme=''}){
  const {createElement:h,useRef,useEffect,useState,useSyncExternalStore,useId}=React;
+ const ReceiptFacts=createReceiptFacts(React);
  return function ReceiptFields({flow,showTitle=true}){
   const latest=useRef(flow);latest.current=flow;
   const instance=useRef(null);if(!instance.current)instance.current=createReceiptActions({api:browser.api,product:browser.product,
@@ -32,24 +33,15 @@ export function createReceiptFields(React,{browser,brand,loadPDF,theme=''}){
   const confirmed=r.appointment_state==='confirmed',copy=r.email_copy,contract=!!r.booking_revision && !!r.meeting_mode && !!copy;
   const titles={confirmed:'Your appointment is confirmed',held:'Your time is reserved',expired:'This reservation has ended',
    cancelled:'This appointment was cancelled',payment_review:'Your payment is being checked'};
-  const fact=(label,value)=>h('div',{key:label},h('dt',null,label),h('dd',null,value));
   const send=()=>{
    if(!copy.has_booking_email && !state.emailUncertain && !entry){setEntry(true);return;}
    if(!copy.has_booking_email && !state.emailUncertain && !emailInput.current?.reportValidity())return;
    void actions.email(email);
   };
   const linkProps={href:state.pdfURL,download:state.filename,onClick:event=>{if(!actions.canOpen())event.preventDefault();}};
-  const meeting=r.meeting_mode==='internal'?'Contact the practice for the meeting arrangements.':
-   r.meet_url?h('a',{href:r.meet_url,target:'_blank',rel:'noopener noreferrer',className:'abs-meet-link'},'Open Google Meet ↗'):
-   r.meeting_state==='needs_attention'?'Your meeting link needs attention. Please contact the practice.':
-   confirmed?'Your meeting link is being prepared.':'Meeting details are available after confirmation.';
   return h('section',{className:'abs-receipt '+theme,...(showTitle?{'aria-labelledby':titleId}:{'aria-label':'Saved appointment details'})},
    showTitle?h('h2',{id:titleId},titles[r.appointment_state]):null,
-   h('dl',{className:'abs-receipt-facts'},fact('Service',r.service_name),fact('Appointment',appointmentLabel(r.starts_at,r.timezone)+' – '+timeLabel(r.ends_at,r.timezone)),
-    fact('Time zone',r.timezone),fact('Duration',Math.round((Date.parse(r.ends_at)-Date.parse(r.starts_at))/60000)+' minutes'),
-    fact('Agreed fee',money(r.amount_paise)),fact('Payment recorded',money(r.captured_paise)),fact('Refund recorded',money(r.refunded_paise)),
-    fact('Meeting',meeting),fact('Confirmation email',delivery[r.acknowledgement_state]||'Status being checked'),
-    fact('Meeting-details email',delivery[r.meeting_email_state]||'Status being checked'),fact('Booking reference',r.request_id)),
+   h(ReceiptFacts,{receipt:r}),
    confirmed && contract?h('div',{className:'abs-receipt-actions'},
     h('button',{type:'button',disabled:!enabled||state.pdfBusy,onClick:()=>void actions.pdf()},state.pdfBusy?'Preparing PDF…':state.pdfURL?'Refresh PDF':'Download appointment PDF'),
     state.pdfURL?h(React.Fragment,null,h('a',{...linkProps,className:'abs-download'},'Download PDF'),
@@ -64,5 +56,25 @@ export function createReceiptFields(React,{browser,brand,loadPDF,theme=''}){
     r.meeting_mode==='google_meet'&&!r.meet_url&&copy.state==='pending'?h('p',null,'We’ll email the details when your meeting link is ready.'):null,
     state.message?h('p',{role:'status'},state.message):null,state.error?h('p',{role:'alert',className:'abs-action-error'},state.error):null):null,
    confirmed&&!contract?h('p',null,'Check the latest booking status to see available document and email options.'):null);
+ };
+}
+
+/** Shared factual display; callers independently control access and actions. */
+export function createReceiptFacts(React){
+ const h=React.createElement;
+ return function ReceiptFacts({receipt:r,stale=false}){
+  const fact=(label,value)=>h('div',{key:label},h('dt',null,label),h('dd',null,value));
+  const confirmed=r.appointment_state==='confirmed';
+  const meeting=stale?'Refresh these details to open the current meeting link.':
+   r.meeting_mode==='internal'?'Contact the practice for the meeting arrangements.':
+   r.meet_url?h('a',{href:r.meet_url,target:'_blank',rel:'noopener noreferrer',className:'abs-meet-link'},'Open Google Meet ↗'):
+   r.meeting_state==='needs_attention'?'Your meeting link needs attention. Please contact the practice.':
+   confirmed?'Your meeting link is being prepared.':'Meeting details are available after confirmation.';
+  return h('dl',{className:'abs-receipt-facts'},fact('Service',r.service_name),
+   fact('Appointment',appointmentLabel(r.starts_at,r.timezone)+' – '+timeLabel(r.ends_at,r.timezone)),
+   fact('Time zone',r.timezone),fact('Duration',Math.round((Date.parse(r.ends_at)-Date.parse(r.starts_at))/60000)+' minutes'),
+   fact('Agreed fee',money(r.amount_paise)),fact('Payment recorded',money(r.captured_paise)),fact('Refund recorded',money(r.refunded_paise)),
+   fact('Meeting',meeting),fact('Confirmation email',delivery[r.acknowledgement_state]||'Status being checked'),
+   fact('Meeting-details email',delivery[r.meeting_email_state]||'Status being checked'),fact('Booking reference',r.request_id));
  };
 }

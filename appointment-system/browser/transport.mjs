@@ -1,7 +1,8 @@
 /** Bounded same-origin JSON transport. Errors contain codes, never submitted fields. */
 export class RequestError extends Error{
- constructor(code='temporarily_unavailable',{status=0,retryAfter=0}={}){
+ constructor(code='temporarily_unavailable',{status=0,retryAfter=0,fields=[]}={}){
   super(code);this.name='RequestError';this.code=code;this.status=status;this.retryAfter=retryAfter;
+  this.fields=Object.freeze(Array.isArray(fields)?fields.filter(value=>typeof value==='string' && /^[a-z_]{1,32}$/.test(value)).slice(0,8):[]);
  }
 }
 
@@ -30,7 +31,7 @@ export function createTransport({allowed,fetcher=globalThis.fetch,timeout=60000,
     if(!response.ok){
      const code=typeof data.code==='string' && /^[a-z][a-z0-9_]{0,63}$/.test(data.code)?data.code:'temporarily_unavailable';
      const retry=response.headers.get('retry-after');
-     throw new RequestError(code,{status:response.status,retryAfter:retry && /^[0-9]{1,9}$/.test(retry)?Math.min(3600,Number(retry)):0});
+     throw new RequestError(code,{status:response.status,fields:data.fields,retryAfter:retry && /^[0-9]{1,9}$/.test(retry)?Math.min(3600,Number(retry)):0});
     }
     return data;
    })(),new Promise((_,reject)=>{

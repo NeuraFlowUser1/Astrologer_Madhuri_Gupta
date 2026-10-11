@@ -37,7 +37,7 @@ class RescheduleAppointment(CancelAppointment):
         return value
 
 
-def add_appointment_routes(app,store,client_id,origin,actor,browser_request,limit,wake=None,receipt_key=None):
+def add_appointment_routes(app,store,client_id,origin,actor,browser_request,limit,wake=None):
     def authorize(request,scope):
         browser_request(request)
         limit(request,scope)
@@ -60,12 +60,7 @@ def add_appointment_routes(app,store,client_id,origin,actor,browser_request,limi
         value=store.studio_action_result(session,client_id,origin,body.operation_id)
         if not isinstance(value,dict):raise StorageUnavailable()
         if value.get('code')=='access_unavailable':raise AccessDenied()
-        if value.get('code') not in ('operation_not_found','operation_conflict','cancelled','rescheduled','support_saved','refund_verified','resource_reviewed'):raise StorageUnavailable()
-        if value.get('code')=='support_saved' and value.get('active') is True:
-            from .receipt_recovery import recovery_code,support_protection
-            if not receipt_key:raise StorageUnavailable()
-            reference=UUID(value['reference']);protection=support_protection(receipt_key,store,reference,body.operation_id)
-            value=dict(value,activation_code=recovery_code(receipt_key,body.operation_id,reference,**protection))
+        if value.get('code') not in ('operation_not_found','operation_conflict','cancelled','rescheduled','contact_corrected','operation_retired','refund_verified','resource_reviewed'):raise StorageUnavailable()
         return value
 
     @app.post('/api/studio/appointments/detail')

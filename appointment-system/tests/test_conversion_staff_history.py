@@ -4,7 +4,7 @@ from dataclasses import replace
 from types import SimpleNamespace
 from uuid import uuid4
 import unittest
-from appointment_system.receipt_recovery import recovery_code,code_digest
+from tools.conversion.recovery import RecoveryKeys,recovery_readers,provenance_digest
 from appointment_system.secret_configuration import booking_settings
 from tools.conversion.recovery import RecoveryTransfer
 from tools.conversion.support import SupportHistoryTransfer
@@ -17,15 +17,13 @@ def fixture(book=None,reference=None):
  book=book or str(uuid4());reference=reference or str(uuid4());operation=str(uuid4())
  definition={'key_id':'old','code_audience':'astro:003:support-code:v1:',
   'digest_audience':'astro:003:support-code-digest:v1:'}
- keys=replace(booking_settings(environment()).receipt_key,legacy_keys=(('old',b'Synthetic historical protection key'),),
-  recovery_readers={'historical-code':definition})
- code=recovery_code(keys,operation,reference,format='historical-code',key_id='old')
+ keys=RecoveryKeys(recovery_readers({'historical-code':definition},{'old':b'Synthetic historical protection key'}),{'old':b'Synthetic historical protection key'})
  record={'operation_id':operation,'booking_id':book,'action':'contact_correction','actor':'client:123456789',
   'body_hash':'a'*64,'previous_revision':1,'revision':2,'created_at':'2026-10-01T10:00:00Z',
   'result':{'code':'support_saved','operation_id':operation,'revision':2,'booking_id':book,'reference':reference}}
  history={'operation_id':operation,'previous_start':'2031-04-04T10:30:00Z','current_start':'2031-04-04T10:30:00Z',
   'notice_seconds':86400,'late_exception':False,'reason':'Synthetic verified support'}
- recovery={'operation_id':operation,'booking_id':book,'code_digest':code_digest(keys,reference,code,format='historical-code',key_id='old'),
+ recovery={'operation_id':operation,'booking_id':book,'code_digest':provenance_digest(keys,operation,reference,'historical-code','old'),
   'expires_at':'2026-10-01T10:15:00Z','attempts':5,'superseded_at':None,
   'redeemed_at':'2026-10-01T10:05:00Z','redeemed_digest':'b'*64}
  source={'public.staff_operations':[record],'public.staff_appointment_history':[history],
@@ -47,12 +45,12 @@ class HistoricalStaffTransfer(unittest.TestCase):
  def test_code_keeps_expiry_wrong_attempts_and_redemption_without_invented_payment_or_contacts(self):
   before=deepcopy(self.row)
   translated=self.reader(self.layout,'receipt_recoveries',[self.row],self.source)['receipt_recoveries'][0]
-  for field in ('expires_at','attempts','redeemed_at','redeemed_digest','superseded_at','operation_id','code_digest'):
+  for field in ('expires_at','attempts','redeemed_at','superseded_at','operation_id'):
    self.assertEqual(translated[field],self.row[field])
   self.assertEqual(translated['historical_operation_id'],self.row['operation_id'])
   self.assertEqual(translated['verification_method'],'retained_staff_operation')
   self.assertEqual(translated['request_id'],self.source['public.bookings'][0]['request_id'])
-  self.assertEqual(translated['code_format'],'historical-code')
+  for retired in ('code_format','code_key_id','code_digest','redeemed_digest'):self.assertNotIn(retired,translated)
   for field in ('verified_payment_id','previous_email','previous_phone','new_email','new_phone'):self.assertIsNone(translated[field])
   self.assertEqual(self.row,before)
 

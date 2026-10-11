@@ -3,18 +3,19 @@ import {BookingLink as Link,BookingOnly,BookingCopy} from '../site/BookingProduc
 import {useLayoutEffect,useRef} from 'react';
 import catalogue from '../site/catalogue.json';
 import '../site/services.css';
+import '../site/page-rhythm.css';
 import ServiceArtwork from '../site/ServiceArtwork.jsx';
 import ServiceMedia from '../site/ServiceMedia.jsx';
 import {mountDirectoryMotion} from '../site/directory-motion.mjs';
 const descriptions={'kundli-prediction':'Questions about work, marriage, family or a changing phase of life? Explore your birth chart, grah and dasha in simple words.','kundli-matching':'Thinking about marriage? Explore what two kundlis can tell you about compatibility and the questions you want to discuss.','vastu-consultation':'Questions about your home or workspace? Understand its layout and directions through the principles of Vastu.',numerology:'Curious about your name, date of birth or numbers? Explore their meaning in the numerology tradition.'};
 export default function Services(){const root=useRef(null);useLayoutEffect(()=>{document.title='Services | Sarsa Jyotish Sansthan';return mountDirectoryMotion(root.current);},[]);return <div className="sarsa-services services-directory-page" ref={root}>
-<section className="service-intro">
+<div className="service-intro-frame"><section className="service-intro">
 <p className="eyebrow">FIND YOUR STARTING POINT</p>
 <h1>Different questions.<br/>
 <em>Space to explore them.</em>
 </h1>
 <p>Start with the question you have. Explore Jyotish, Vastu and Numerology with Madhuri Gupta. <BookingCopy off="Contact the practice with your questions.">Read about a service, then book an appointment when you are ready.</BookingCopy></p>
-</section>
+</section></div>
 <section className="service-directory" aria-label="Services">{catalogue.services.map((s,i)=>
 <article key={s.id} data-directory-card>
 <div className="directory-photo" data-directory-part="photo"><ServiceMedia serviceId={s.id}/><div className="directory-motif" data-directory-part="motif"><ServiceArtwork id={s.id}/></div></div>

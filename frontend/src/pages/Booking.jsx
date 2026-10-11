@@ -6,6 +6,8 @@ import {mountBookingLayout} from '../booking/booking-layout.mjs';
 import {DateField,BirthTimeField,ReceiptFields} from '../booking/booking-ui.jsx';
 import {createVerificationFields} from '../../../appointment-system/browser/booking/verification-fields.mjs';
 import '../booking/booking.css';
+import ServiceMedia from '../site/ServiceMedia.jsx';
+import BookingOrnament from '../site/BookingOrnament.jsx';
 const VerificationFields=createVerificationFields(React);
 function Symbol({id}) {
   if(id==='numerology')return <span className="number-symbol" aria-hidden="true">3<em>6</em>9</span>;
@@ -31,7 +33,7 @@ function Receipt({flow}){
    {r?.next_actions.some(a=>['check_payment','resume_payment'].includes(a))&&<button type="button" className="button" disabled={disabled||seconds===0} onClick={resume}>Continue to payment ↗</button>}
    {r?.next_actions.includes('choose_new_time')&&<button type="button" className="button" disabled={disabled} onClick={restart}>Choose a new time</button>}
    {canRetryOriginal&&<button type="button" className="text-button" disabled={disabled} onClick={retryOriginal}>Retry the same saved request</button>}
-   <Link className="text-button" to="/contact">Ask for help</Link><a className="text-button" href="/booking-help">Restore booking access</a></div>
+   <Link className="text-button" to="/contact">Ask for help</Link><Link className="text-button" to="/booking/receipt">View my bookings</Link></div>
  </section>;
 }
 export default function Booking({headerRef}){
@@ -62,7 +64,7 @@ export default function Booking({headerRef}){
  }
  function submit(event){event.preventDefault();if(!state.slot){dispatch({type:'error',message:'Please choose an available time first.'});go('appointment');return;}void flow.start();}
  return <div className="sarsa-booking" ref={root}>
-  <div className="booking-opener wrap"><h1>Book your appointment for expert guidance.</h1></div>
+  <div className="booking-opener wrap"><h1>Book your appointment for expert guidance.</h1><p>Apne sawaalon ke saath shuru karein. Choose a service and a time that suits you, then share what you would like to discuss.</p><Link to="/booking/receipt">Already booked? View my booking ↗</Link><BookingOrnament/></div>
   <nav className="journey-nav wrap" aria-label="Booking steps">{[['service','Service'],['appointment','Date & time'],['details','Your details'],['review','Review']].map(([id,label],i)=><button type="button" key={id} aria-current={active===id?'step':undefined} onClick={()=>go(id)}><span>0{i+1}</span>{label}</button>)}</nav>
   {!flow.available&&<p className="wrap booking-checking" role="status">Checking that booking is available. Your details are kept.</p>}
   {state.error&&<div className="booking-alert wrap" role="alert"><p>{state.error}</p>{!state.policy&&!state.credential&&<button type="button" onClick={flow.loadPolicy} disabled={locked}>Reload service details</button>}<Link to="/contact">Contact the practice</Link></div>}
@@ -72,7 +74,7 @@ export default function Booking({headerRef}){
      <input type="radio" name="service" value={service.id} checked={state.service===service.id} onChange={()=>dispatch({type:'edit',name:'service',value:service.id})}
       onKeyDown={event=>radioKey(event,service.id)} onKeyUp={event=>{if(event.key.startsWith('Arrow'))arrow.current=false;}}
       onPointerDown={()=>{arrow.current=false;}} onClick={()=>{if(!arrow.current)choose(service.id);}}/>
-     <span className="service-top"><span>0{i+1}</span><Symbol id={service.id}/></span><strong>{service.name}</strong><span>{money(service.pricing.amount_paise)} · {service.duration_minutes} minutes</span>
+     <ServiceMedia serviceId={service.id} className="booking-service-photo" hidden/><span className="service-top"><span>0{i+1}</span><Symbol id={service.id}/></span><strong>{service.name}</strong><span>{money(service.pricing.amount_paise)} · {service.duration_minutes} minutes</span>
      <span className="card-choice">{state.service===service.id?'Selected ✓':'Select service →'}</span></label>)}</fieldset>
     <div className="section-action"><span>{selectedName}</span><button type="button" className="button" disabled={!state.service} onClick={()=>go('appointment')}>Choose a date and time →</button></div>
    </section>
@@ -105,6 +107,7 @@ export default function Booking({headerRef}){
    </div>:<Receipt flow={flow}/>}
   </section></form>
   <section className="booking-questions wrap section-space" aria-labelledby="booking-questions-title"><h2 id="booking-questions-title">Booking questions</h2>{[
+   ['How can I view an existing booking?',<>Use your saved full name and phone number. <Link to="/booking/receipt">View my booking ↗</Link></>],
    ['When is my appointment confirmed?','After payment is checked and the booking is saved. Choosing a time alone does not reserve it.'],
    ['What if the payment window closes?','Check that booking’s status first. A closed window does not tell you whether payment succeeded.'],
    ['How will we meet?',state.policy?.policy.meeting==='google_meet'?'The confirmation page shows your Google Meet link when it is ready. You can also download your appointment details or request an email copy.':'Contact the practice for your meeting arrangements.'],

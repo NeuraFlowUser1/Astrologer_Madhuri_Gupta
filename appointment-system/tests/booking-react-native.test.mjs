@@ -26,20 +26,18 @@ test('project React mounts the contained booking and receipt hooks, updates inpu
  const document=`<!doctype html><div id="root"></div><script type="module">
   import {React,createRoot} from '/vendor.mjs';
   import {createBookingBrowser,createUseBooking} from '/browser/booking/index.mjs';
-  import {createUseReceiptRecovery} from '/browser/booking/receipt-recovery.mjs';
   import {createEnquiryBrowser,createUseEnquiry} from '/browser/enquiry/index.mjs';
   let state={enabled:true,verified:true,checking:false,activation_epoch:${JSON.stringify(epoch)}};const subscribers=new Set();
   const product={getSnapshot:()=>state,subscribe:fn=>{subscribers.add(fn);return()=>subscribers.delete(fn);}};
   const browser=createBookingBrowser(${JSON.stringify(profile)},{product});
-  const useBooking=createUseBooking(React,browser),useRecovery=createUseReceiptRecovery(React,browser);
+  const useBooking=createUseBooking(React,browser);
   const useEnquiry=createUseEnquiry(React,createEnquiryBrowser({version:1,installation_id:${JSON.stringify(installation_id)},environment:'test',channels:{contact:{legacy_receipts:[]}}}));
   const root=createRoot(document.getElementById('root'));
   function Booking({service}){const value=useBooking(service);window.fixture.current=value;return React.createElement('pre',{id:'state'},JSON.stringify(value.state));}
   function Enquiry(){const value=useEnquiry();window.fixture.current=value;return React.createElement('pre',{id:'state'},JSON.stringify(value));}
-  function Recovery(){const value=useRecovery();window.fixture.current=value;return React.createElement('pre',{id:'state'},JSON.stringify(value));}
   window.fixture={current:null,setService:value=>root.render(React.createElement(Booking,{service:value})),
    mode:value=>{state={...state,enabled:value};for(const fn of subscribers)fn();},
-   enquiry:()=>root.render(React.createElement(Enquiry)),recovery:()=>root.render(React.createElement(Recovery)),unmount:()=>root.unmount(),subscribers:()=>subscribers.size,
+   enquiry:()=>root.render(React.createElement(Enquiry)),unmount:()=>root.unmount(),subscribers:()=>subscribers.size,
    invalidConfiguration:()=>{try{createBookingBrowser({}, {product});return false;}catch{return true;}}};
   root.render(React.createElement(Booking,{service:''}));
  </script>`;
@@ -55,7 +53,6 @@ test('project React mounts the contained booking and receipt hooks, updates inpu
    if(path==='/api/booking-policy')return res.end(JSON.stringify(policy()));
    if(path==='/api/availability')return res.end(JSON.stringify(availability()));
    if(path==='/api/checkout-context')return res.end('{"ready":true}');
-   if(path==='/api/checkout/recover-receipt'){recovered=body.secret;return res.end('{"code":"receipt_restored"}');}
    if(path==='/api/checkout/status'&&req.headers['x-booking-receipt']===recovered)return res.end(JSON.stringify({...receipt(body.request_id),appointment_state:'confirmed',payment_state:'captured',captured_paise:210000}));
    res.writeHead(404);res.end('{"code":"fixture_route_missing"}');
   }catch(error){errors.push(error.message);res.destroy();}
@@ -75,11 +72,6 @@ test('project React mounts the contained booking and receipt hooks, updates inpu
   await page.evaluate(()=>fixture.current.dispatch({type:'error',message:'Synthetic report'}));await page.waitForFunction(()=>fixture.current.state.error==='Synthetic report');
   const before=calls.length;await page.evaluate(()=>fixture.mode(false));await page.evaluate(()=>fixture.current.loadPolicy());assert.equal(calls.length,before);
   await page.evaluate(()=>fixture.mode(true));await page.waitForFunction(()=>fixture.current.state.slotsStatus==='ready');
-  await page.evaluate(()=>fixture.recovery());await page.waitForFunction(()=>fixture.current.restore!==undefined);
-  const reference='ea79bf9a-6aac-415c-becf-d6d49af3946a';await page.evaluate(reference=>fixture.current.restore(reference,'12345678'),reference);
-  await page.waitForFunction(()=>fixture.current.restored===true);assert.equal(await page.evaluate(()=>fixture.current.reference),reference);
-  assert.equal(calls.filter(c=>c.path==='/api/checkout/recover-receipt').length,1);
-  await page.evaluate(()=>fixture.current.check());assert.equal(calls.filter(c=>c.path==='/api/checkout/recover-receipt').length,1);
   await page.evaluate(()=>fixture.enquiry());await page.waitForFunction(()=>typeof fixture.current.start==='function');
   await page.evaluate(()=>fixture.current.start({name:'Synthetic Customer',email:'fixture@example.test',phone:'',subject:'Synthetic enquiry',message:'Synthetic request',source:'contact'}));
   await page.waitForFunction(()=>fixture.current.receipt?.state==='awaiting_verification');

@@ -1,6 +1,6 @@
 import {checkedReceipt,checkedEmailCopy,requireValue,integer} from './protocol.mjs';
 import {admissionAllowed} from '../product-state.mjs';
-import {pdfFacts,buildAppointmentPDF} from './receipt-pdf.mjs';
+import {pdfFacts,prepareVerifiedPDF} from './receipt-pdf.mjs';
 
 const explanation={revision_changed:'Your appointment changed. Review its current details before trying again.',
  request_conflict:'This request differs from the saved request. Check your booking before trying again.',
@@ -38,15 +38,10 @@ export function createReceiptActions({api,product,getCredential,getReceipt,onRec
  async function pdf(){
   if(!allowed() || state.pdfBusy)return;const m=mark(),abort=pdfWrite=new AbortController();emailError=false;notify({pdfBusy:true,error:'',message:''});
   try{
-   const before=await fresh(m,abort.signal),facts=pdfFacts(before);
-   if(before.appointment_state!=='confirmed' || !before.booking_revision || !before.meeting_mode)throw Error('receipt_changed');
-   const file=prepared?.facts===facts?prepared:await buildAppointmentPDF(before,{brand,load:loadPDF});
-   const after=await fresh(m,abort.signal);
-   if(facts!==pdfFacts(after)){prepared=null;revoke();throw Error('receipt_changed');}
-   if(!same(m) || !allowed())throw Error('unavailable');
-   if(facts!==pdfFacts(getReceipt()||{}))throw Error('receipt_changed');
+   const {file,facts}=await prepareVerifiedPDF({read:()=>fresh(m,abort.signal),current:getReceipt,
+    valid:()=>same(m)&&allowed(),prepared,brand,loadPDF});
    offer(file,facts);
-  }catch(error){if(same(m) && !abort.signal.aborted){emailError=false;notify({error:error.message==='receipt_changed'?
+  }catch(error){prepared=null;revoke();if(same(m) && !abort.signal.aborted){emailError=false;notify({error:error.message==='receipt_changed'?
    'Your appointment details changed. Review them and download again.':error.message==='pdf_font_unavailable'?
    'The PDF cannot display these details correctly. Please use the details shown on this page.':'The PDF could not be prepared. Please check your booking and try again.'});}}
   finally{if(pdfWrite===abort){pdfWrite=null;notify({pdfBusy:false});}}

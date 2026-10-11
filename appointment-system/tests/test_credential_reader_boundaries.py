@@ -2,7 +2,8 @@
 from types import MappingProxyType
 from uuid import uuid4
 import hashlib,hmac,unittest
-from appointment_system.credentials import readers,historical_keys,recovery_readers,ReceiptKeys,ContextKeys
+from appointment_system.credentials import readers,historical_keys,ReceiptKeys,ContextKeys
+from tools.conversion.recovery import recovery_readers
 from appointment_system.errors import Rejected
 from appointment_system.serialization import canonical
 from .test_keys import ring
@@ -38,7 +39,7 @@ class ReaderBoundaries(unittest.TestCase):
             ({'key_id':'missing'},{'key_id':None},{'code_audience':''},{'digest_audience':'no-ending'},
              {'code_audience':'bad space:'},{'digest_audience':'historical:code:'}))):
             with self.subTest(data=data),self.assertRaises(Rejected):recovery_readers(data,{'old':b'a'*32})
-        with self.assertRaises(Rejected):ReceiptKeys(ring(purpose='enquiry-digest'),legacy_keys=(('old',b'a'*32),),recovery_readers={'legacy':good})
+        with self.assertRaises(TypeError):ReceiptKeys(ring(),recovery_readers={'legacy':good})
 
     def test_wrong_reader_family_and_missing_key_do_not_create_a_fallback(self):
         for definition in (self.definition(purpose='context'),self.definition(encoding='uuid-url43')):

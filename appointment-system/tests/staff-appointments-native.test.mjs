@@ -15,17 +15,14 @@ test('staff cancellation and reschedule preserve revision, practice time, and se
  await open(page,state);state.handlers.set('/api/studio/appointments/cancel',({reply})=>reply({code:'cancelled',revision:3}));await cancel(page);await waitText(page,'#appointment-status','No refund has been issued');assert.match(await page.locator('#appointment-summary').textContent(),/Status: cancelled/);
  assert.equal(await page.evaluate(()=>window.PracticeStaffActions('client').get().length),0);
 }));
-test('saved support code and contact correction only follow verified staff evidence and are never persisted',{skip:!available},()=>staffFixture(async(page,state)=>{
- for(const action of ['receipt_recovery','contact_correction']){
-  await lookup(page,state);await page.selectOption('#support-action',action);if(action==='contact_correction'){await page.fill('#support-email','corrected@example.test');await page.fill('#support-phone','+918888888888');}
-  await page.fill('#support-payment','pay_fixture');await page.fill('#support-reason','Synthetic verified evidence');await page.check('#support-verified');
-  state.handlers.set('/api/studio/appointments/support',({body,reply})=>reply({code:'support_saved',revision:body.expected_revision+(body.action==='contact_correction'?1:0),active:true,activation_code:'12345678',expires_at:'2031-04-04T10:45:00Z'}));
-  await page.locator('#booking-support-change button').click();await page.locator('#support-code-result').waitFor();assert.equal(await page.locator('#support-code').textContent(),'12345678');
-  const saved=state.calls.filter(x=>x.path.endsWith('/appointments/support')).at(-1);assert.equal(saved.body.verification_confirmed,true);assert.equal(saved.body.reference,id);
-  assert.equal(Object.hasOwn(saved.body,'email'),action==='contact_correction');
-  const stored=await page.evaluate(()=>JSON.stringify(localStorage));for(const privateValue of ['12345678','corrected@example.test','Synthetic verified evidence'])assert.equal(stored.includes(privateValue),false);
- }
- assert.match(await page.locator('#booking-support-status').textContent(),/Old receipt access is revoked/);
+test('contact correction follows verified staff evidence without persisting contacts or issuing access',{skip:!available},()=>staffFixture(async(page,state)=>{
+ await lookup(page,state);await page.fill('#support-email','corrected@example.test');await page.fill('#support-phone','+918888888888');
+ await page.fill('#support-payment','pay_fixture');await page.fill('#support-reason','Synthetic verified evidence');await page.check('#support-verified');
+ state.handlers.set('/api/studio/appointments/support',({body,reply})=>reply({code:'contact_corrected',revision:body.expected_revision+1,reference:body.reference,operation_id:body.operation_id}));
+ await page.locator('#booking-support-change button').click();await waitText(page,'#booking-support-status','Contact details corrected');
+ const saved=state.calls.find(x=>x.path.endsWith('/appointments/support'));assert.equal(saved.body.verification_confirmed,true);assert.equal(saved.body.reference,id);
+ assert.equal(await page.locator('#support-code-result').count(),0);
+ const stored=await page.evaluate(()=>JSON.stringify(localStorage));for(const value of ['corrected@example.test','Synthetic verified evidence'])assert.equal(stored.includes(value),false);
 }));
 test('lost staff change reply remains pending when the returned result belongs to another action',{skip:!available},()=>staffFixture(async(page,state)=>{
  await open(page,state);let operation;
@@ -59,19 +56,14 @@ test('unconfirmed cancellation checks the saved result without sending another c
  state.handlers.set('/api/studio/appointments/action-result',({body,reply})=>reply({code:'cancelled',operation_id:body.operation_id}));await page.click('#appointment-repeat');await waitText(page,'#appointment-status','Earlier actions checked');
  assert.equal(state.calls.filter(x=>x.path.endsWith('/cancel')).length,1);assert.equal(submitted.expected_revision,2);
 }));
-test('support result validation preserves uncertain work and recovers only its matching saved code',{skip:!available},()=>staffFixture(async(page,state)=>{
- await lookup(page,state);await page.fill('#support-payment','pay_fixture');await page.fill('#support-reason','Synthetic saved evidence');await page.check('#support-verified');
- state.handlers.set('/api/studio/appointments/support',({reply})=>reply({code:'support_saved',revision:2,active:true,expires_at:'invalid',activation_code:'12345678'}));
- await page.locator('#booking-support-change button').click();await waitText(page,'#booking-support-status','could not confirm');assert.equal(await page.locator('#support-code-result').isVisible(),false);
- state.handlers.set('/api/studio/appointments/action-result',({body,reply})=>reply({code:'support_saved',operation_id:body.operation_id,active:true,activation_code:'12345678'}));await page.click('#support-repeat');await waitText(page,'#appointment-status','Earlier actions checked');assert.equal(await page.locator('#support-code').textContent(),'12345678');
- assert.equal(state.calls.filter(x=>x.path.endsWith('/support')).length,1);assert.equal(await page.evaluate(()=>window.PracticeStaffActions('client').get().length),0);
-}));
-test('inactive support code is never displayed and rejected evidence cannot change a contact',{skip:!available},()=>staffFixture(async(page,state)=>{
- for(const rejection of [false,true]){
-  await lookup(page,state);await page.fill('#support-payment','pay_fixture');await page.fill('#support-reason','Synthetic saved evidence');await page.check('#support-verified');
-  state.handlers.set('/api/studio/appointments/support',({reply})=>rejection?reply({code:'support_verification_unavailable'},409):reply({code:'support_saved',revision:2,active:false,expires_at:'2031-04-04T10:45:00Z'}));
-  await page.locator('#booking-support-change button').click();await waitText(page,'#booking-support-status',rejection?'No change has been made':'no longer active');assert.equal(await page.locator('#support-code-result').isVisible(),false);assert.equal(await page.locator('#booking-support-change').isVisible(),false);assert.equal(await page.evaluate(()=>window.PracticeStaffActions('client').get().length),0);
- }
+test('uncertain contact correction checks its saved result without repeating the write',{skip:!available},()=>staffFixture(async(page,state)=>{
+ await lookup(page,state);await page.fill('#support-phone','+918888888888');await page.fill('#support-payment','pay_fixture');await page.fill('#support-reason','Synthetic saved evidence');await page.check('#support-verified');
+ state.handlers.set('/api/studio/appointments/support',({reply})=>reply({code:'contact_corrected',revision:99}));
+ await page.locator('#booking-support-change button').click();await waitText(page,'#booking-support-status','could not confirm');
+ state.handlers.set('/api/studio/appointments/action-result',({body,reply})=>reply({code:'contact_corrected',operation_id:body.operation_id,revision:3,reference:id}));
+ await page.click('#support-repeat');await waitText(page,'#appointment-status','Earlier actions checked');
+ assert.equal(state.calls.filter(x=>x.path.endsWith('/support')).length,1);assert.equal(await page.locator('#support-code-result').count(),0);
+ assert.equal(await page.evaluate(()=>window.PracticeStaffActions('client').get().length),0);
 }));
 test('practice time rejection never submits a move and unacknowledged cancellation is blocked',{skip:!available},()=>staffFixture(async(page,state)=>{
  await open(page,state);await page.locator('#appointment-cancel').evaluate(form=>form.dispatchEvent(new Event('submit',{bubbles:true,cancelable:true})));assert.equal(state.calls.filter(x=>x.path.endsWith('/cancel')).length,0);
@@ -93,7 +85,7 @@ for(const path of ['lookup','cancel','support','action-result'])test(`late appoi
  if(path==='action-result'){
   state.handlers.set('/api/studio/appointments/cancel',({reply})=>reply({code:'unknown'},503));await cancel(page);await waitText(page,'#appointment-status','could not confirm');
  }
- state.handlers.set('/api/studio/appointments/'+path,({body,reply})=>{received.resolve(()=>reply(path==='lookup'?record():path==='support'?{code:'support_saved',revision:2,active:true,activation_code:'12345678',expires_at:'2031-04-04T10:45:00Z'}:{code:'cancelled',revision:3,operation_id:body.operation_id}));});
+ state.handlers.set('/api/studio/appointments/'+path,({body,reply})=>{received.resolve(()=>reply(path==='lookup'?record():path==='support'?{code:'contact_corrected',revision:3,reference:id,operation_id:body.operation_id}:{code:'cancelled',revision:3,operation_id:body.operation_id}));});
  if(path==='cancel')await cancel(page);
  else if(path==='lookup'){await page.fill('#booking-reference',id);await page.locator('#booking-lookup button').click();}
  else if(path==='action-result')await page.click('#appointment-repeat');
@@ -112,5 +104,5 @@ test('private support cannot submit without verification or while browser storag
  await lookup(page,state);await page.locator('#booking-support-change').evaluate(form=>form.dispatchEvent(new Event('submit',{cancelable:true})));assert.equal(state.calls.filter(x=>x.path.endsWith('/appointments/support')).length,0);
  await page.fill('#support-payment','pay_fixture');await page.fill('#support-reason','Synthetic verified evidence');await page.check('#support-verified');
  await page.evaluate(()=>{Storage.prototype.setItem=()=>{throw Error('Synthetic unavailable storage');};});await page.locator('#booking-support-change button').click();await waitText(page,'#booking-support-status','could not safely save');
- assert.equal(state.calls.filter(x=>x.path.endsWith('/appointments/support')).length,0);assert.equal(await page.locator('#support-code-result').isVisible(),false);
+ assert.equal(state.calls.filter(x=>x.path.endsWith('/appointments/support')).length,0);assert.equal(await page.locator('#support-code-result').count(),0);
 }));

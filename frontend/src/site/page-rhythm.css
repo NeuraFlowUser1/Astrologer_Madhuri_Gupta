@@ -1,0 +1,63 @@
+/* Stationary paint layers. They do not own or transform the original scenes. */
+.sarsa-booking .booking-opener,.sarsa-booking .story-section,.sarsa-booking .booking-questions,
+.services-directory-page :is(.service-intro-frame,.service-directory,.service-guide,.service-preparation),
+.sarsa-contact :is(#scene-listening,#scene-routes,.desk-section,#scene-answers,#scene-weave,.contact-location){position:relative;isolation:isolate}
+.sarsa-booking :is(.booking-opener,.story-section,.booking-questions)::before,
+.services-directory-page :is(.service-intro-frame,.service-directory,.service-guide,.service-preparation)::before,
+.sarsa-contact :is(#scene-listening,#scene-routes,.desk-section,#scene-answers,#scene-weave,.contact-location)::before{
+ content:"";position:absolute;inset:0;z-index:-1;background:var(--chapter-paper,#f7f5ef);box-shadow:0 0 0 100vmax var(--chapter-paper,#f7f5ef);clip-path:inset(0 -100vmax);pointer-events:none}
+.sarsa-booking .booking-opener{--chapter-paper:#f2e9da;min-height:238px;padding-top:42px;padding-bottom:34px}
+.sarsa-booking .booking-opener h1{font-size:40px;line-height:1.2;max-width:720px;position:relative;z-index:1}
+.sarsa-booking .booking-opener>p{font-size:17px;line-height:1.65;max-width:720px;margin:18px 0 12px;position:relative;z-index:1}
+.sarsa-booking .booking-opener>a{position:relative;z-index:1;display:inline-flex;align-items:center;min-height:44px;font-size:15px;font-weight:700;text-underline-offset:5px}
+.sarsa-booking #service{--chapter-paper:#f7f5ef}.sarsa-booking #appointment{--chapter-paper:#e5ebdf}
+.sarsa-booking #details{--chapter-paper:#f2e9da}.sarsa-booking #review{--chapter-paper:#e9eee3}
+.sarsa-booking .booking-questions{--chapter-paper:#fffdf8}.sarsa-booking .journey-nav{background:#fffdf8}
+.sarsa-booking .journey-nav button[aria-current=step]{font-weight:700}.sarsa-booking .journey-nav button[aria-current=step]>span{box-shadow:0 0 0 3px #a6814d35}
+.sarsa-booking .service-card .booking-service-photo{height:100px;width:100%;border-radius:12px;overflow:hidden;margin-bottom:16px;flex:none}
+.sarsa-booking .booking-service-photo img{height:100%;width:100%;object-fit:cover}.sarsa-booking .booking-service-photo .service-media-fallback{height:100%}
+.sarsa-booking .service-card{border-radius:20px;transition:translate 220ms cubic-bezier(.2,.7,.2,1),box-shadow 220ms cubic-bezier(.2,.7,.2,1)}
+.sarsa-booking .service-card:has(input:checked){box-shadow:0 0 0 3px #a6814d30,0 12px 24px #26483d18}
+.sarsa-booking .service-card:has(input:focus-visible){outline:3px solid #955d45;outline-offset:3px}
+.booking-ornament{position:absolute;right:24px;top:18px;width:226px;height:226px;pointer-events:none;opacity:.58;z-index:0;color:#7c8e68}
+.booking-ornament svg{width:100%;height:100%;stroke:currentColor;stroke-width:1.2}.booking-ornament .ornament-dashed{stroke-dasharray:2 7;opacity:.65}
+.booking-ornament .ornament-gold{stroke:#a6814d;stroke-width:2}.booking-ornament [data-art=points]{fill:#a6814d;stroke:#f2e9da;transform-origin:120px 120px}
+.booking-ornament [data-art=kundli]>circle{fill:#a6814d;stroke:none}
+.booking-orbit{transform-origin:120px 120px;animation:sarsa-booking-orbit 24s linear infinite;animation-play-state:paused}
+.booking-ornament[data-motion=running] .booking-orbit{animation-play-state:running}
+@keyframes sarsa-booking-orbit{to{transform:rotate(360deg)}}
+.services-directory-page .service-intro-frame{display:flow-root;--chapter-paper:#f2e9da}
+.services-directory-page .service-directory{--chapter-paper:#f7f5ef}
+.services-directory-page .first-service-guide{--chapter-paper:#e5ebdf}
+.services-directory-page .jyotish-guide{--chapter-paper:#f2e9da;background:transparent}
+.services-directory-page .service-preparation{--chapter-paper:#26483d;color:#fffdf8}
+.services-directory-page .service-preparation .eyebrow{color:#e0d2af}.services-directory-page .service-preparation .service-button{background:#fffdf8;color:#26483d}
+.services-directory-page .service-guide{border-top-color:transparent}
+.services-directory-page :is(.service-guide,.service-preparation)::after{content:"";position:absolute;left:0;right:0;top:-3px;height:7px;pointer-events:none;
+ background:radial-gradient(circle at center,#a6814d 0 2px,transparent 2.5px),linear-gradient(90deg,transparent,#a6814d70 30%,#a6814d70 70%,transparent) center/100% 1px no-repeat}
+.sarsa-contact #scene-listening{--chapter-paper:#f7f2e7}.sarsa-contact #scene-routes{--chapter-paper:#e9eddf}
+.sarsa-contact .desk-section{--chapter-paper:#fffdf8}.sarsa-contact #scene-answers{--chapter-paper:#eee9db}
+.sarsa-contact #scene-weave{--chapter-paper:#183d31}.sarsa-contact .contact-location{--chapter-paper:#f2e9da}
+.sarsa-contact .answer-body .booking-details-link,.sarsa-booking .booking-questions a{display:inline-flex;align-items:center;min-height:44px;font-weight:700;text-decoration:underline;text-underline-offset:5px}
+.sarsa-booking.booking-access-shell{min-height:70vh;background:radial-gradient(ellipse at 85% 18%,#e5ebdf99,transparent 55%),linear-gradient(145deg,#f2e9da,#f7f5ef 76%)}
+.sarsa-booking .booking-access-page{max-width:1040px;padding:64px 0 80px}.sarsa-booking .booking-access-page h1{font-size:40px;line-height:1.16;max-width:none}
+.sarsa-booking .booking-access-page .abs-lookup-intro{font-size:17px;line-height:1.65}
+.sarsa-booking .abs-lookup-opening{display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:start}
+.sarsa-booking .abs-lookup-introduction{position:relative;min-width:0}.sarsa-booking .abs-lookup-introduction .booking-ornament{position:relative;top:auto;right:auto;width:200px;height:200px;margin-top:30px;opacity:.65}
+.sarsa-booking .abs-lookup-form{padding:32px;border:1px solid #bec9b4;border-radius:24px;background:#fffdf8;box-shadow:0 18px 40px #26483d18}
+.sarsa-booking .abs-lookup-inputs{grid-template-columns:1fr;gap:0}.sarsa-booking .abs-lookup-form>button{width:100%;min-height:48px;font-weight:700}
+.sarsa-booking .abs-lookup-phone{display:grid;grid-template-columns:112px minmax(0,1fr);gap:0 8px}
+.sarsa-booking .abs-lookup-phone>label{grid-column:1}.sarsa-booking .abs-lookup-phone>select{grid-column:1;grid-row:2;align-self:start}
+.sarsa-booking .abs-lookup-phone>.abs-lookup-field{grid-column:2;grid-row:1/4}.sarsa-booking .abs-lookup-phone select{font-size:14px;padding-inline:8px}
+.sarsa-booking .abs-lookup-results{padding:32px;border:1px solid #bec9b4;border-radius:24px;background:#fffdf8;box-shadow:0 18px 40px #26483d12}
+.sarsa-booking .abs-receipt-facts{grid-template-columns:1fr 1fr}.sarsa-booking .abs-lookup-list button{grid-template-columns:1fr auto}
+@media(hover:hover) and (pointer:fine){.sarsa-booking .service-card:not(:has(input:disabled)):hover{translate:0 -4px;box-shadow:0 12px 24px #26483d20}}
+@media(min-width:651px) and (max-width:800px){.sarsa-booking .booking-opener h1,.sarsa-booking .booking-opener>p{max-width:70%}.booking-ornament{width:190px;height:190px;right:0}.sarsa-booking .abs-lookup-opening{gap:32px}}
+@media(max-width:650px){.sarsa-booking .booking-opener{padding-top:28px;padding-bottom:28px;min-height:0}.sarsa-booking .booking-opener h1{font-size:30px;line-height:1.2}.sarsa-booking .booking-opener>p{font-size:16px}
+ .booking-ornament{width:210px;height:210px;opacity:.12;right:-10px;top:10px}.sarsa-booking .service-card .booking-service-photo{height:88px}
+ .sarsa-booking .booking-access-page{width:calc(100% - 40px);padding:40px 0 56px}.sarsa-booking .booking-access-page h1{font-size:32px}
+ .sarsa-booking .abs-lookup-opening{grid-template-columns:1fr;gap:28px}.sarsa-booking .abs-lookup-introduction .booking-ornament{display:none}
+ .sarsa-booking .abs-lookup-form,.sarsa-booking .abs-lookup-results{padding:24px}.sarsa-booking .abs-lookup-list button{grid-template-columns:1fr}.sarsa-booking .abs-lookup-list button>span:last-child{grid-row:auto;grid-column:1;text-align:right}}
+@media(max-width:380px){.sarsa-booking .abs-receipt-facts{grid-template-columns:1fr}.sarsa-booking .abs-lookup-phone{grid-template-columns:1fr}.sarsa-booking .abs-lookup-phone>.abs-lookup-field{grid-column:1;grid-row:3}.sarsa-booking .abs-lookup-phone>select{margin-bottom:18px}}
+@media(max-width:340px){.sarsa-contact [data-route=existing] .lane-action{min-height:54px}}
+@media(prefers-reduced-motion:reduce){.booking-orbit{animation:none}.sarsa-booking .service-card{transition:none}.sarsa-booking .service-card:hover{translate:none}}

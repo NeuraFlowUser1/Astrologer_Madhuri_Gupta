@@ -118,11 +118,11 @@ def add_studio_routes(app, store, settings, services, limit, browser_request, wa
     from .studio_calendar import add_calendar_routes
     add_calendar_routes(app, store, client_id, origin, actor, browser_request, limit)
 
-    from .receipt_recovery import add_staff_recovery_routes
-    add_staff_recovery_routes(app,store,client_id,origin,actor,browser_request,limit,settings.receipt_key,wake)
+    from .contact_correction import add_staff_correction_routes
+    add_staff_correction_routes(app,store,client_id,origin,actor,browser_request,limit,wake)
 
     from .studio_appointments import add_appointment_routes
-    add_appointment_routes(app,store,client_id,origin,actor,browser_request,limit,wake,settings.receipt_key)
+    add_appointment_routes(app,store,client_id,origin,actor,browser_request,limit,wake)
 
     from .studio_inbox import add_inbox_routes
     add_inbox_routes(app, store, client_id, origin, actor, browser_request, limit,wake)

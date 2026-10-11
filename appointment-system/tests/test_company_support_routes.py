@@ -12,22 +12,20 @@ from appointment_system.company_support import router
 from appointment_system.credentials import ReceiptKeys
 from appointment_system.errors import Rejected
 from appointment_system.service_control import COOKIE,ORIGIN,ControlError
-from appointment_system.receipt_recovery import recovery_code,code_digest
 from .test_keys import ring
 
 class CompanySupportRoutes(TestCase):
     def setUp(self):
-        self.store=Mock(spec=['_call','studio_time_context','studio_resolve_time','studio_action_result','recovery_protection'])
+        self.store=Mock(spec=['_call','studio_time_context','studio_resolve_time','studio_action_result'])
         self.database=Mock(spec=['call']);self.database.call.return_value=True
         self.settings=SimpleNamespace(digest=lambda purpose,value:hmac.new(b'C'*32,(purpose+':'+value).encode(),hashlib.sha256).hexdigest(),google_client_id='synthetic-client')
         self.receipt=ReceiptKeys(ring());self.wake=Mock(spec=['publish']);self.token='x'*43
         self.headers={'Origin':ORIGIN,'X-Company-CSRF':self.settings.digest('csrf',self.token)}
         self.client=self.client_for();self.reference=str(uuid4());self.operation=str(uuid4());self.claim=str(uuid4())
         self.store._call.return_value={'code':'ok'}
-        self.store.recovery_protection.return_value=None
 
     def client_for(self,**changes):
-        values=dict(settings=self.settings,store=self.store,receipt_key=self.receipt,wake=self.wake,database=self.database)|changes
+        values=dict(settings=self.settings,store=self.store,wake=self.wake,database=self.database)|changes
         app=FastAPI();app.include_router(router(**values))
         @app.exception_handler(ControlError)
         async def control_error(request,error):return JSONResponse({'code':error.code},error.status)
@@ -99,33 +97,28 @@ class CompanySupportRoutes(TestCase):
         self.store.studio_resolve_time.assert_called_once_with(token,client,audience,'2026-10-09T10:00','Asia/Kolkata')
 
     def support(self):
-        return {'operation_id':self.operation,'reference':self.reference,'expected_revision':1,'action':'receipt_recovery',
+        return {'operation_id':self.operation,'reference':self.reference,'expected_revision':1,'action':'contact_correction','phone':'+919999999999',
             'verified_payment_id':'pay_Synthetic','verification_confirmed':True,'reason':'Synthetic verified customer support'}
 
-    def test_recovery_code_is_reproducible_without_saving_or_returning_receipt_secrets(self):
-        self.store._call.return_value={'code':'support_saved','active':True,'reference':self.reference}
-        result=self.post('support',self.support());self.assertEqual(result.status_code,200,result.text)
-        code=recovery_code(self.receipt,self.operation,self.reference,key_id=self.receipt.ring.active)
-        self.assertEqual(result.json()['activation_code'],code)
+    def test_correction_and_replay_return_no_code_or_receipt_secret(self):
+        value={'code':'contact_corrected','operation_id':self.operation,'reference':self.reference,'revision':2}
+        self.store._call.return_value=value
+        result=self.post('support',self.support())
+        self.assertEqual(result.status_code,200)
+        self.assertEqual(result.json(),value)
         data=self.store._call.call_args.args[1][4].obj
-        self.assertEqual(data['code_digest'],code_digest(self.receipt,self.reference,code,key_id=self.receipt.ring.active))
-        self.assertNotIn('activation_code',data);self.assertNotIn('secret',data)
-        self.store.recovery_protection.return_value={'format':'v1','key_id':self.receipt.ring.active}
-        self.store.studio_action_result.return_value={'code':'support_saved','active':True,'reference':self.reference}
-        replay=self.client.get('/api/company/support/actions/'+self.operation)
-        self.assertEqual(replay.status_code,200,replay.text);self.assertEqual(replay.json()['activation_code'],code)
-        self.store.studio_action_result.return_value={'code':'support_saved','active':False,'reference':self.reference}
-        self.assertNotIn('activation_code',self.client.get('/api/company/support/actions/'+self.operation).json())
-        self.store._call.return_value={'code':'support_saved','active':False}
-        self.assertIsNone(self.post('support',self.support()).json()['activation_code'])
-        self.store._call.return_value={'code':'revision_changed'}
-        self.assertEqual(self.post('support',self.support()).status_code,409)
+        self.assertEqual(data['phone'],'+919999999999')
+        for retired in ('code_digest','code_key_id','activation_code','secret'):self.assertNotIn(retired,data)
+        self.store.studio_action_result.return_value=value
+        self.assertEqual(self.client.get('/api/company/support/actions/'+self.operation).json(),value)
+        self.store.studio_action_result.return_value=value|{'code':'operation_retired'}
+        self.assertEqual(self.client.get('/api/company/support/actions/'+self.operation).json()['code'],'operation_retired')
 
     def test_unverified_support_and_invalid_changes_do_not_generate_codes(self):
         for changed in ({'verification_confirmed':False},{'verification_confirmed':1},{'verified_payment_id':'wrong'},
-            {'action':'contact_correction'}, {'email':'synthetic@example.test'},{'expected_revision':True}):
+            {'action':'receipt_recovery'}, {'phone':None},{'expected_revision':True}):
             self.assertEqual(self.post('support',self.support()|changed).status_code,422)
-        self.store.recovery_protection.assert_not_called();self.store._call.assert_not_called()
+        self.store._call.assert_not_called()
 
     def test_company_shell_and_script_have_no_customer_content_or_cache(self):
         for path in ('/company/booking-support','/api/company/support.js'):

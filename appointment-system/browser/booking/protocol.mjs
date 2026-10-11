@@ -46,7 +46,7 @@ export function checkedAvailability(data,{service,day,questions,policy}){
  return data;
 }
 
-export function checkedReceipt(data,id){
+export function checkedReceiptFacts(data,id){
  requireValue(data?.request_id===id && ['held','expired','confirmed','cancelled','payment_review'].includes(data.appointment_state)
   && ['not_attempted','creating','creation_unknown','ready','failed'].includes(data.order_state)
   && ['unobserved','pending','captured','failed_observed','refunded','partially_refunded','needs_attention'].includes(data.payment_state)
@@ -54,18 +54,23 @@ export function checkedReceipt(data,id){
   && integer(data.amount_paise,1) && integer(data.captured_paise) && integer(data.refunded_paise)
   && data.refunded_paise<=data.captured_paise && instant(data.starts_at) && instant(data.ends_at)
   && Date.parse(data.ends_at)>Date.parse(data.starts_at) && instant(data.server_now) && instant(data.hold_expires_at)
-  && Array.isArray(data.next_actions) && unique(data.next_actions)
-  && data.next_actions.every(action=>['check_status','check_payment','resume_payment','contact_support','choose_new_time'].includes(action))
   && ['not_created','preparing','ready','needs_attention','cancelled'].includes(data.meeting_state));
  if(data.booking_revision!==undefined)requireValue(integer(data.booking_revision,1));
  if(data.meeting_mode!==undefined)requireValue(['google_meet','internal'].includes(data.meeting_mode));
- if(data.email_copy!==undefined && data.email_copy!==null)checkedEmailCopy(data.email_copy);
  if(data.appointment_state==='confirmed' && data.meeting_mode==='google_meet' && data.meeting_state==='ready' && data.meet_url===null)
   return {...data,meeting_state:'needs_attention'};
  if(!(data.meet_url===null || (data.appointment_state==='confirmed' && data.meeting_state==='ready'
   && typeof data.meet_url==='string' && /^https:\/\/meet\.google\.com\/[a-z]{3}-[a-z]{4}-[a-z]{3}$/.test(data.meet_url))))
   return {...data,meet_url:null,meeting_state:'needs_attention'};
  return data;
+}
+
+export function checkedReceipt(data,id){
+ const result=checkedReceiptFacts(data,id);
+ requireValue(Array.isArray(data.next_actions) && unique(data.next_actions)
+  && data.next_actions.every(action=>['check_status','check_payment','resume_payment','contact_support','choose_new_time'].includes(action)));
+ if(data.email_copy!==undefined && data.email_copy!==null)checkedEmailCopy(data.email_copy);
+ return result;
 }
 
 export function checkedEmailCopy(value){
