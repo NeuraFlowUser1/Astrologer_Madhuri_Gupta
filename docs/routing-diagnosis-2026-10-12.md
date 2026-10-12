@@ -14,9 +14,9 @@ The local contract check passes four groups: all three staff URL forms reach the
 
 The previous implementation was local and uncommitted. GitHub main and the published host still had the permanent `/testimonials` → `/about` redirect, independently observed as HTTP 308. Removing that exact redirect, exporting the public page and publishing the reviewed source addresses the cause.
 
-The shared header/footer each gain one Reviews entry. Booking's existing sticky header uses that same component. The natural extra Home placement is an existing-style FAQ linking to the page. It says reviews will be added there, matching the current waiting state. See [the Reviews record](testimonials-page.md).
+The shared header/footer each gain one Reviews entry. Booking's existing sticky header uses that same component. The natural extra Home placement is an existing-style FAQ linking to the page. It now points to the complete page and explains that people can read feedback by service or open a full account. See [the Reviews record](testimonials-page.md).
 
-No genuine feedback is supplied; fictional design records remain private fixtures. The current publication request allows the route/navigation with an honest waiting state, while quotations still require genuine permissioned accounts.
+The later one-section presentation had a separate deterministic cause: the public review collection was empty, so the existing component correctly hid its four content-dependent chapters. The owner now confirms all twelve accepted accounts were approved by Madhuri as legitimate and authorizes publication. Moving those exact accounts into the single public source restores the complete five-chapter design without changing its layout, styling or choreography. The current publication proof is in `design-review/2026-10-12-approved-reviews-publication/`.
 
 ## Booking cancellation: set aside
 

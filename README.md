@@ -4,11 +4,11 @@
 
 The About page now adds four supplied certificates after Madhuri's introduction, with short course explanations, full-document previews and an enlarged reader. The preferred AI presentation is used; the yellow certificate's course-name error was corrected against its source, and all originals remain accessible. Existing choreography is preserved, with measured height compensation for root-relative artwork. See [the certificate implementation and focused proof](docs/about-certifications.md).
 
-Reviews now has a public route, shared header/footer entries and one natural Home FAQ link. The old redirect to About is removed. No genuine feedback has been supplied, so the page says “Reviews will be added here”; fictional design accounts remain private and excluded from compiled output. The accepted design is retained for genuine future feedback. See [the Reviews record](docs/testimonials-page.md).
+Reviews contains the complete accepted five-section page and all twelve accounts confirmed by the owner as legitimate and approved by Madhuri for publication. The original design, exact review wording and choreography are preserved. The shared header/footer and natural Home FAQ link open the same public route; the old redirect to About is removed. Focused proof and publication readback are in [the Reviews record](docs/testimonials-page.md).
 
 The older `/studio/calendar` address is wired to the existing protected staff handler. Its missing backend export and host rewrite were deterministically diagnosed and repaired. The Booking state-read cancellation investigation is set aside at the owner's request; no guessed timeout or booking-system repair is included. See [the diagnosis](docs/routing-diagnosis-2026-10-12.md).
 
-The historical hosted assessment remains **105/107 cases passing (98.1%)**, not a clean full-suite result. This release uses focused verification only. Actual publication hashes and official-domain observations are recorded in the client study `design-review/2026-10-12-about-certifications/`; a push alone does not prove publication. Booking stays ON and Vercel stays disconnected from Codex.
+The historical hosted assessment remains **105/107 cases passing (98.1%)**, not a clean full-suite result. This release uses focused verification only. Actual publication hashes and official-domain observations are recorded in the client studies `design-review/2026-10-12-approved-reviews-publication/` and `design-review/2026-10-12-about-certifications/`; a push alone does not prove publication. Booking stays ON and Vercel stays disconnected from Codex.
 
 ## Current change — 11 October 2026
 

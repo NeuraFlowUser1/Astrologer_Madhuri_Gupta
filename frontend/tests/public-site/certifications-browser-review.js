@@ -24,13 +24,13 @@ globalThis.certificateBrowserReview=async(page)=>{
    await p.locator('.certificate-image-canvas img').evaluate(i=>i.decode());await p.screenshot({path:evidence+'certificate-dialog-'+width+'.png'});
    await p.keyboard.press('Escape');await dialog.waitFor({state:'detached'});check(await opener.evaluate(e=>document.activeElement===e),'Return focus');
    await opener.click();await p.mouse.click(2,2);await dialog.waitFor({state:'detached'});
-   await p.getByRole('navigation',{name:'Main navigation',exact:true}).getByRole('link',{name:'Reviews',exact:true}).click();await p.locator('.reviews-waiting-photo').waitFor();
-   check(await p.locator('.opening-intro[role=status]').innerText()==='Reviews will be added here.','Honest waiting state');
-   check(await p.locator('blockquote').count()===0,'Unexpected public endorsement');
+   await p.getByRole('navigation',{name:'Main navigation',exact:true}).getByRole('link',{name:'Reviews',exact:true}).click();await p.locator('.story-card').first().waitFor();
+   check(await p.locator('.sarsa-testimonials .chapter[data-scene]').count()===5,'Complete approved Reviews page missing');
+   check(await p.locator('.story-card').count()===6,'Initial approved reviews missing');
    check(await p.evaluate(()=>document.documentElement.scrollWidth<=innerWidth),'Reviews overflow '+width);
    check(await p.getByRole('navigation',{name:'Footer navigation',exact:true}).getByRole('link',{name:'Reviews',exact:true}).count()===1,'Footer Reviews missing');
    check(await p.getByRole('navigation',{name:'Main navigation',exact:true}).getByRole('link',{name:'Reviews',exact:true}).getAttribute('aria-current')==='page','Selected review');
-   await p.locator('.reviews-waiting-photo img').evaluate(i=>i.decode());await p.screenshot({path:evidence+'reviews-'+width+'.png',fullPage:true});results.push({width,height,certificates:4,overflow:false,readerControls:'passed',reviewNavigation:'passed',geometry});
+   await p.locator('.feature-photo img').evaluate(i=>{i.loading='eager';return i.decode();});await p.screenshot({path:evidence+'reviews-'+width+'.png',fullPage:true});results.push({width,height,certificates:4,overflow:false,readerControls:'passed',reviewNavigation:'passed',geometry});
   }
   await p.setViewportSize({width:1440,height:900});await p.route('**/media/certificates/jyotish-shastri-full.webp',r=>r.fulfill({status:404,body:'Synthetic missing image'}));
   await p.goto('http://127.0.0.1:4187/about');await p.getByRole('button',{name:'View Jyotish Shastri certificate',exact:true}).click();await p.locator('.certificate-image-error').waitFor();check(await p.locator('.certificate-image-error a').getAttribute('href')==='/media/certificates/jyotish-shastri-original.jpeg','Image failure lost original');

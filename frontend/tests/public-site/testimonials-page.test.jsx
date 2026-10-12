@@ -1,4 +1,4 @@
-/** Page-only integration checks. Invented records are imported from test fixtures;
+/** Page-only integration checks use the client-approved public review collection;
  * no real customer, booking, payment, email or provider operation is allowed. */
 import React, {act, StrictMode} from 'react';
 import {createRoot} from 'react-dom/client';
@@ -351,17 +351,35 @@ test('a displayed Book action cannot bypass a newer booking admission restrictio
   expect(model.location.pathname).toBe('/booking');
 });
 
-test('empty and production-default content never invent identities or expose dead story controls', async () => {
+test('an explicitly empty editorial collection exposes no identities or dead story controls', async () => {
   await renderPage({stories: []});
   expect(host.querySelector('h1')).not.toBeNull();
   expect(cards()).toHaveLength(0);
   expect(host.querySelector('button[data-story-id]')).toBeNull();
   expect(host.querySelector('a[href="/services"]')).not.toBeNull();
   for (const story of testimonialStories) expect(host.textContent).not.toContain(story.name);
+});
+
+test('the public route default contains all five approved chapters and all twelve complete reviews', async () => {
   await renderPage({useDefault: true});
-  expect(cards()).toHaveLength(0);
-  expect(host.querySelector('button[data-story-id]')).toBeNull();
-  for (const story of testimonialStories) expect(host.textContent).not.toContain(story.name);
+  expect([...host.querySelectorAll('.chapter[data-scene]')].map(section => section.dataset.scene)).toEqual([
+    'opening', 'featured', 'collection', 'echoes', 'invitation'
+  ]);
+  expect(host.querySelector('h1').textContent).toBe('What people sayabout Madhuri.');
+  expect(host.textContent).not.toContain('Reviews will be added here.');
+  expect(host.querySelectorAll('[data-paper]')).toHaveLength(3);
+  expect(cards()).toHaveLength(6);
+  await click(host.querySelector('#more-stories'));
+  expect(cards()).toHaveLength(12);
+  for (const story of testimonialStories) {
+    const card = cards().find(item => item.dataset.story === story.id);
+    expect(card.querySelector('blockquote').textContent).toBe(story.quote);
+    expect(card.textContent).toContain(story.name);
+    await click(card.querySelector('button[data-story-id]'));
+    const reader = host.querySelector('[data-inline]');
+    for (const paragraph of story.paragraphs) expect(reader.textContent).toContain(paragraph);
+    await click(host.querySelector('#dialog-close'));
+  }
 });
 
 test('one story works without carousel or theme controls and an empty service group can reset', async () => {

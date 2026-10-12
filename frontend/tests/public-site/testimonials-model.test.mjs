@@ -16,9 +16,14 @@ test('sparse real feedback works without fabricated filler, including a lone Num
   const fallback={...story,theme:'calm'};expect(buildTestimonialIndex([fallback]).themes[0].story).toBe(fallback);
   expect(buildTestimonialIndex([])).toEqual({stories:[],featured:[],themes:[],byId:new Map()});
 });
-test('public content contains no mockup endorsements or imports; private fixtures remain explicitly fictional',()=>{
-  expect(clientTestimonials).toEqual([]);expect(Object.isFrozen(clientTestimonials)).toBe(true);
-  expect(testimonialStories.every(story=>story.fictional===true)).toBe(true);
+test('the approved twelve-account public source is immutable and shared by the test alias',()=>{
+  expect(clientTestimonials).toBe(testimonialStories);expect(clientTestimonials).toHaveLength(12);
+  expect(Object.isFrozen(clientTestimonials)).toBe(true);
+  for(const story of clientTestimonials){
+    expect(Object.isFrozen(story)).toBe(true);expect(Object.isFrozen(story.paragraphs)).toBe(true);
+    expect(story).not.toHaveProperty('fictional');
+  }
+  for(const service of testimonialServices)expect(clientTestimonials.filter(story=>story.category===service.id)).toHaveLength(3);
 });
 test.each([
   null,{id:''},{...testimonialStories[0],id:7},{...testimonialStories[0],category:'unknown'},

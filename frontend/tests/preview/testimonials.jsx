@@ -1,5 +1,5 @@
 /** PRIVATE DEV-ONLY HARNESS. This HTML is not a Vite build entry or public asset.
- * Invented records exercise the real page and shared frame without publishing them.
+ * Approved records exercise the real page/frame in StrictMode with test navigation.
  * Browser checks intercept the local display-state read; no provider operation occurs.
  */
 import React,{StrictMode,useLayoutEffect,useRef} from 'react';

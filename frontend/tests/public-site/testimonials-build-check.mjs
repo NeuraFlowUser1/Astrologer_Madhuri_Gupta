@@ -2,7 +2,7 @@
 import assert from 'node:assert/strict';
 import {readFileSync,readdirSync} from 'node:fs';
 import {resolve,relative} from 'node:path';
-import {testimonialStories} from '../fixtures/testimonial-stories.mjs';
+import {clientTestimonials} from '../../src/site/testimonials-content.mjs';
 const dist=resolve(import.meta.dirname,'../../dist');
 function files(directory){return readdirSync(directory,{withFileTypes:true}).flatMap(entry=>entry.isDirectory()?files(resolve(directory,entry.name)):[resolve(directory,entry.name)]);}
 const entries=files(dist),manifest=JSON.parse(readFileSync(resolve(dist,'appointment-surface-manifest.json'),'utf8'));
@@ -19,7 +19,12 @@ for(const mode of ['on','off']){
   assert.match(readFileSync(resolve(dist,`__booking_display/${mode}/sitemap.xml`),'utf8'),/\/testimonials<\/loc>/);
 }
 const scripts=entries.filter(path=>/\.(?:js|html)$/.test(path)).map(path=>readFileSync(path,'utf8')).join('\n');
-for(const story of testimonialStories){assert(!scripts.includes(story.name),'Invented identity appeared in compiled public output: '+story.name);assert(!scripts.includes(story.quote),'Invented quotation appeared in compiled public output.');}
+assert.equal(clientTestimonials.length,12,'The approved collection must not be replaced by an empty source.');
+for(const story of clientTestimonials){
+  for(const text of [story.id,story.name,story.quote,story.context,...story.paragraphs]){
+    assert(scripts.includes(text),'Approved review text is absent from compiled public output: '+story.id);
+  }
+}
 assert(entries.every(path=>!/(?:^|\/)(?:tests|fixtures|preview)(?:\/|$)/.test(relative(dist,path))),'Private harness appeared in compiled public output.');
 assert(!scripts.includes('Private Testimonials integration review'));
 assert(!scripts.includes('Private Customer reviews integration review'));
@@ -29,4 +34,4 @@ for(const id of ['jyotish-shastri','jyotish-acharya','astro-research-institute',
   assert.equal(manifest.assets['/media/certificates/'+file],'general','Certificate must remain public independently of booking.');
  }
 }
-console.log(JSON.stringify({route:'/testimonials',modes:2,privateFixtureRecordsExcluded:testimonialStories.length,privateHarnessExcluded:true,compiledFilesChecked:entries.length,result:'passed'}));
+console.log(JSON.stringify({route:'/testimonials',modes:2,approvedReviewsIncluded:clientTestimonials.length,privateHarnessExcluded:true,compiledFilesChecked:entries.length,result:'passed'}));

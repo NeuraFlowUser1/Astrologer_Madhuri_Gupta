@@ -2,9 +2,9 @@
  * Fresh contexts use real responses. No customer operation or credential is used.
  * The controlling about:blank fragment selects one bounded phase; see docs.
  */
-async (page) => {
+globalThis.hostedReadOnlyReview=async (page) => {
   const origin='https://www.sarsajyotishsansthan.com';
-  const paths=['/','/about','/services','/services/kundli-prediction','/services/kundli-matching','/services/vastu-consultation','/services/numerology','/contact','/privacy','/terms','/booking','/booking-policy','/booking/receipt'];
+  const paths=['/','/about','/services','/testimonials','/services/kundli-prediction','/services/kundli-matching','/services/vastu-consultation','/services/numerology','/contact','/privacy','/terms','/booking','/booking-policy','/booking/receipt'];
   const services=['kundli-matching','kundli-prediction','vastu-consultation','numerology'];
   const phase=new URL(page.url()).hash.slice(1);
   if(!['routes-390','routes-1440','edges','interfaces','services','api','booking-layouts'].includes(phase))throw Error('Select a documented phase on the controlling about:blank tab.');
@@ -234,7 +234,7 @@ async (page) => {
         check(!urls.some(url=>url.includes('/booking/receipt')||url.includes('/studio')||url.includes('/company')),'Private path indexed');
         const robots=await context.request.get(origin+'/robots.txt');check(robots.status()===200,'Robots unavailable');check((await robots.text()).includes('Sitemap: '+origin+'/sitemap.xml'),'Robots missing sitemap');return {publicRoutes:urls.length};
       });
-      await run('Unpublished Testimonials redirect',async()=>{const response=await context.request.get(origin+'/testimonials',{maxRedirects:0});check([301,308].includes(response.status()),'Unexpected unpublished route behavior');check(response.headers().location==='/about','Unexpected redirect target');return {http:response.status(),location:'/about',newPageHostedAcceptance:false};});
+      await run('Published Customer reviews page',async()=>{await visit('/testimonials');check(await current.locator('.chapter[data-scene]').count()===5,'Approved review chapters missing');check(await current.locator('.story-card').count()===6,'Initial review collection missing');await current.locator('#more-stories').click();check(await current.locator('.story-card').count()===12,'Approved twelve-account collection missing');check(await current.locator('.sarsa-header a[href="/testimonials"]').getAttribute('aria-current')==='page','Selected Reviews navigation missing');return {http:200,chapters:5,approvedReviews:12};});
       for(const path of ['/studio','/studio/calendar','/enquiries-studio','/company/booking-control','/company/booking-support','/company/google-repair'])await run('Private sign-in '+path,async()=>{const response=await context.request.get(origin+path,{maxRedirects:0,timeout:45000});check(response.status()===200,'Sign-in page HTTP '+response.status());check((response.headers()['x-robots-tag']||'').includes('noindex'),'Private entry permits indexing');const body=await response.text();check(/sign.in|log.in|password|continue with google/i.test(body),'Missing sign-in boundary');return {path,http:200,signedIn:false};});
       await run('Unknown page',async()=>{const response=await context.request.get(origin+'/sarsa-hosted-check-page-does-not-exist',{maxRedirects:0});check(response.status()===404,'Unknown page does not return 404');return {http:404};});
     }

@@ -1,16 +1,18 @@
-/* Private, page-only browser checks, passed as a function to the browser tool.
- * Uses the real React page/frame and invented local fixtures. No live endpoints.
- * Requires the local Vite review server on port 4165. Not a production entry.
+/* Focused public-page browser checks, passed as a function to the browser tool.
+ * Uses the actual public route and approved content. Local display-state reads are intercepted.
+ * Requires the local Vite server on port 4187. Not a production entry.
  */
-async (page) => {
-  const browser=page.context().browser(),origin='http://127.0.0.1:4165';
-  const evidence='/mnt/d/coding/business/neuraflow-website-factory/03-client-projects/004-sarsa-jyotish-sansthan/design-review/2026-10-12-testimonials/evidence/';
-  const report={kind:'private-testimonials-integration',widths:[],interactions:[],contexts:[],failures:[],started:new Date().toISOString()};
+globalThis.approvedReviewsBrowserReview=async (page) => {
+  const browser=page.context().browser(),origin='http://127.0.0.1:4187';
+  const evidence='/mnt/d/coding/business/neuraflow-website-factory/03-client-projects/004-sarsa-jyotish-sansthan/design-review/2026-10-12-approved-reviews-publication/evidence/';
+  const report={kind:'approved-reviews-public-route',widths:[],interactions:[],contexts:[],failures:[],started:new Date().toISOString()};
   function check(condition,message){if(!condition)throw Error(message);}
   async function review(label,options,work){
     const context=await browser.newContext(options),errors=[],blocked=[];
     await context.route('**/*',route=>{
       const url=new URL(route.request().url());
+      // The actual application shell already loads these public font resources.
+      if(['https://fonts.googleapis.com','https://fonts.gstatic.com'].includes(url.origin)&&route.request().method()==='GET')return route.continue();
       if(url.origin!==origin){blocked.push(url.origin);return route.abort();}
       if(url.pathname==='/api/service-state')return route.fulfill({status:200,contentType:'application/json',body:JSON.stringify({enabled:options.bookingOff!==true,activation_epoch:'12345678-1234-4321-8123-123456789abc'})});
       if(url.pathname.startsWith('/api/')){blocked.push(url.pathname);return route.abort();}
@@ -19,7 +21,7 @@ async (page) => {
     if(options.inline)await context.addInitScript(()=>{HTMLDialogElement.prototype.showModal=undefined;});
     const current=await context.newPage();current.on('pageerror',error=>errors.push(error.message));
     try{
-      await current.goto(origin+'/tests/preview/testimonials.html');await current.locator('.story-card').first().waitFor();
+      await current.goto(origin+'/testimonials');await current.locator('.story-card').first().waitFor();
       await work(current);check(errors.length===0,'Browser errors: '+errors.join(', '));check(blocked.length===0,'Unexpected requests: '+blocked.join(', '));
       report.contexts.push({label,status:'passed',pageErrors:errors.length,unexpectedRequests:blocked.length});
     }catch(error){report.failures.push({label,message:error.message});await current.screenshot({path:evidence+'integration-failure-'+label+'.png',fullPage:true});}
@@ -56,7 +58,7 @@ async (page) => {
     await current.screenshot({path:evidence+'integration-reader-'+width+'.png'});
     await current.keyboard.press('Escape');check(await current.locator('dialog').count()===0,'Escape left reader open');check(await current.evaluate(el=>document.activeElement===el,handle),'Escape lost opening action');check(await current.evaluate(()=>document.body.style.overflow===''),'Escape left scrolling locked');
     await opener.click();await current.locator('#dialog-close').click();check(await current.evaluate(el=>document.activeElement===el,handle),'Close lost opening action');
-    await opener.click();await current.evaluate(()=>{history.pushState({},'','/services');dispatchEvent(new PopStateEvent('popstate'));});await current.locator('h1').filter({hasText:'Private navigation check'}).waitFor();check(await current.locator('dialog').count()===0,'Route exit retained reader');check(await current.evaluate(()=>document.body.style.overflow===''),'Route exit left scrolling locked');
+    await opener.click();await current.evaluate(()=>{history.pushState({},'','/services');dispatchEvent(new PopStateEvent('popstate'));});await current.locator('.sarsa-services').waitFor();check(await current.locator('dialog').count()===0,'Route exit retained reader');check(await current.evaluate(()=>document.body.style.overflow===''),'Route exit left scrolling locked');
     report.interactions.push({width,filterGroups:4,revealedStories:12,featuredHeightStable:true,themeHeightStable:true,reader:'keyboard/Close/Escape/unmount passed'});
   });
   await review('inline-reader',{viewport:{width:390,height:844},inline:true},async current=>{

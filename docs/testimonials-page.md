@@ -1,33 +1,33 @@
 # Customer reviews: implementation and publication
 
-12 October 2026. The owner authorized publication with shared header/footer links and a natural Home placement. The address remains `/testimonials`; visible wording is Reviews or Customer reviews.
+12 October 2026. The owner confirms Madhuri approved all twelve accounts in the accepted design as legitimate and explicitly authorizes their publication. The address remains `/testimonials`; visible wording is Reviews or Customer reviews. This is recorded client approval, not independent identity verification.
 
-## Public content
+## Public content and design
 
-No genuine customer feedback has been supplied. The single public source, `frontend/src/site/testimonials-content.mjs`, is empty. The page therefore shows **“Reviews will be added here”**, existing illustrative artwork, a Contact action for past clients to share feedback and a Services action. It displays no invented identity, quotation, rating or count. The latest publication instruction supersedes the earlier hold on the entire route; genuine permissioned feedback is still required for quotations.
+`frontend/src/site/testimonials-content.mjs` is the single immutable public review collection: twelve approved accounts, three for each of the four services, in English, Hinglish and Roman Hindi. Names, cities, quotations, excerpts, questions and complete story paragraphs exactly match the approved records. No new accounts, ratings, platform badges, customer portraits, verification claims or promised outcomes are added. Tests use a small alias to the same source instead of maintaining a conflicting duplicate.
 
-The accepted five-chapter design remains ready for real feedback: opening paper assembly, featured account with manual paging, service-filtered reading collection, theme accounts and closing invitation. Twelve fictional accounts remain exclusively in private fixtures and a development-only preview. They are absent from production output. Do not move them into the public content source.
+The complete accepted five-chapter page is active: opening paper assembly; featured account with manual paging; service-filtered reading collection; accounts grouped by what clients appreciated; and closing invitation. The finalized direct headings, paper/forest/sage surfaces, illustration, typography, layout and multi-stage choreography are preserved. Page, reader, CSS and motion source fingerprints match the previous implementation. The former one-section presentation was caused by an empty public collection, not missing design code. The explicit empty-content defense remains covered for a genuinely empty future collection; it is not the current presentation.
 
 ## Connections and behavior
 
 One Reviews entry appears between Services and Contact in the shared header, including Booking's existing sticky header, and one in the footer. Selected/hover states retain bold styling and reserved widths. The header becomes two rows below 1050px, with two-column navigation at 360px and below. Other pages' sticky behavior is unchanged.
 
-Home adds one existing-style FAQ: “Where will customer reviews be shared?” Its answer links to the page and explains that reviews will be added there. It remains available independently of booking. No full Home review section or forced promotional button is added.
+Home has one natural FAQ: “Can I read what other clients say?” Its answer links to the complete Customer reviews page and explains what can be read there. It remains available independently of booking. A full Home review section remains outside this scope.
 
-The exact legacy host redirect to About is removed. ON/OFF shells, metadata and sitemap classify Reviews as general; booking OFF/unknown does not hide it. See [the routing diagnosis](routing-diagnosis-2026-10-12.md). The Booking cancellation investigation stays set aside.
+The former exact host redirect to About is removed. ON/OFF shells, metadata and sitemap classify Reviews as general; booking OFF/unknown does not hide it. The accepted route and shared frame remain unchanged. See [the routing diagnosis](routing-diagnosis-2026-10-12.md). The Booking state-read cancellation investigation stays set aside.
 
-React owns content, filters and readers; page-local motion preserves the accepted staged assembly and cleanup. Real-data views use six initial cards, six-at-a-time expansion, a single selected service filter, manual featured/theme controls, and a native dialog or accessible inline reader when native opening is unavailable. No autoplay. Focus, reading, reduced motion, offscreen and hidden-tab states pause the decorative orbit. There are no shared booking package, database, provider, permission or stored customer-state changes.
+React owns content, filters and readers; page-local motion preserves staged assembly and cleanup. Six initial cards expand to twelve, with one selected service filter showing three accounts per service. Featured and theme selection is manual, with stable chapter heights and no autoplay. Native complete-story reading supports Close, Escape and return focus; an accessible inline reader handles unavailable native opening. Focus, reading, reduced motion, offscreen and hidden-tab states pause the decorative orbit. There are no shared booking package, database, provider, permission or stored customer-state changes.
 
 ## Current focused proof
 
-47/47 page/model/reader/motion/route checks pass. Coverage is 100% statements (269/269), lines (151/151) and functions (87/87); 95.85% branches (185/193). Every included file exceeds 90% in each applicable measure. This is Reviews coverage, not whole-site coverage.
+48/48 page/model/reader/motion/route checks pass, including a new default-public-source regression check for all five chapters and all twelve complete accounts. Explicit empty and sparse inputs remain covered. Coverage is 100% statements (269/269), lines (151/151) and functions (87/87); 95.85% branches (185/193). All five included files exceed 90% in every applicable measure, with no configured exclusions. This describes only the Reviews feature.
 
-The current waiting state and shared navigation were rendered at 320, 390, 768, 1440 and 1920px. All five have no sideways overflow, one selected Reviews header entry and one footer destination. Desktop/phone screenshots were inspected. The full-data private harness retains its earlier recorded interaction review; no fictional account is publicly visible.
+The actual public route was rendered at 320, 390, 768, 1050, 1051, 1440 and 1920px. All seven have no sideways overflow. Desktop/phone screenshots were compared with the original accepted study. Six browser contexts passed: responsive layout; desktop reading; phone reading; inline reader; reduced motion; and booking OFF. All four filters, six-to-twelve expansion, featured/theme stability, keyboard containment/return, route cleanup and Home FAQ navigation passed. No page errors or unexpected requests were observed. Existing public font requests are allowed; booking/display-state reads are intercepted only inside these local checks.
 
-Build, both display modes, exact route ownership and private-fixture exclusion pass. The compiled check also excludes the private certificate preview. No full local/hosted suite or provider transaction was run for this release. The historical 105/107 live assessment remains a dated report, not a passing current full suite.
+Normal-motion observation confirmed all five scene entries and the original opening paper delays of 150/270/390ms, plus focus/offscreen orbit suspension. Build, both display modes, public ownership, inclusion of every approved account's exact text and exclusion of private previews pass. The compiled check also preserves all twelve certificate asset classifications. No full local/hosted suite or provider transaction was run. The historical 105/107 hosted assessment remains a dated report.
 
-## Publication and remaining input
+## Publication and operating boundary
 
-Publication uses the existing GitHub main → Vercel connection → official domain. Verify the actual route, assets and header/footer/FAQ links. The client study `design-review/2026-10-12-about-certifications/` owns actual publication readback; a push alone is not online proof. Vercel stays disconnected from Codex.
+The owner-authorized publication path is existing GitHub main → existing Vercel connection → official domain. The client record `design-review/2026-10-12-approved-reviews-publication/` owns actual release status, screenshots, source fingerprints, live observations and served-file verification. A push or local build alone is not online proof. Vercel stays disconnected from Codex.
 
-Genuine feedback and permission to display it remain the only content input. Add that feedback to the single source, review its fit in the accepted design and publish through the same route. No second review system is needed. Recovery uses a normal scoped revert.
+No review-content input remains outstanding. Future changes belong in the single public collection after client approval. The independent HTML study remains a historical design reference, not a second production source. Recovery is a scoped source revert; no customer-data migration is involved.
