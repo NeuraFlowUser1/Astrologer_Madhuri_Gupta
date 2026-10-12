@@ -1,5 +1,5 @@
 import React, { useEffect, useLayoutEffect, useRef, lazy, Suspense } from 'react'
-import { BrowserRouter as Router, Routes, Route, useLocation, useNavigate, useNavigationType, Navigate } from 'react-router-dom'
+import { BrowserRouter as Router, Routes, Route, useLocation, useNavigate, useNavigationType } from 'react-router-dom'
 import {pages,origin,titleFor} from './site/page-metadata.mjs'
 import {useBookingProduct,ProductNavigationCheck,UnavailablePage,BookingRoute} from './site/BookingProduct.jsx'
 const BookingReceipt = lazy(() => import('./pages/BookingReceipt.jsx'))
@@ -14,6 +14,7 @@ const About = lazy(() => import('./pages/About.jsx'))
 const Services = lazy(() => import('./pages/Services.jsx'))
 const Booking = lazy(() => import('./pages/Booking.jsx'))
 const ContactPage = lazy(() => import('./pages/ContactPage.jsx'))
+const Testimonials = lazy(() => import('./pages/Testimonials.jsx'))
 
 function AppShell() {
   const location = useLocation()
@@ -58,7 +59,7 @@ function AppShell() {
               <Route path="/services/:serviceId" element={<ServiceDetail />} />
               <Route path="/services" element={<Services />} />
               <Route path="/booking" element={<BookingRoute><Booking headerRef={header} /></BookingRoute>} />
-              <Route path="/testimonials" element={<Navigate to="/about" replace />} />
+              <Route path="/testimonials" element={<Testimonials />} />
               <Route path="/booking/receipt" element={<BookingRoute><BookingReceipt/></BookingRoute>}/>
               <Route path="/booking-help" element={<BookingRoute><BookingAccess/></BookingRoute>}/>
               <Route path="/contact" element={<ContactPage />} />
@@ -67,7 +68,7 @@ function AppShell() {
           </main>
         </div>
       </div>
-      <SiteFooter home={location.pathname==='/'} scrollerRef={scroller} />
+      <SiteFooter home={location.pathname==='/'} showBackToTop={['/','/testimonials'].includes(location.pathname)} scrollerRef={scroller} />
     </div>
   )
 }

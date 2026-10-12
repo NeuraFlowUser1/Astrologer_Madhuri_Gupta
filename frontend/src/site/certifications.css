@@ -1,0 +1,49 @@
+/* The document gallery and its portal have their own namespace and type scale. */
+.sarsa-certifications{background:#f1ecdf;color:#21392f;padding:88px 0;font:17px/1.65 system-ui,sans-serif;position:relative;isolation:isolate}
+.sarsa-certifications *,.certificate-overlay *{box-sizing:border-box}
+.certifications-wrap{width:calc(100% - 96px);max-width:1200px;margin:auto}
+.sarsa-certifications .certifications-intro{max-width:730px;margin-bottom:44px}
+.certifications-rule{width:64px;height:2px;background:#a6814d;transform-origin:left center;margin-bottom:24px}
+.sarsa-certifications h2{font:400 42px/1.18 Georgia,serif;letter-spacing:-.025em;margin:0 0 20px}
+.sarsa-certifications .certifications-intro>p{margin:0;max-width:650px;font-size:17px}
+.sarsa-certifications .certifications-intro>.certifications-instruction{margin-top:14px;font-size:15px;color:#526456}
+.certificates-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:40px 28px}
+.certificate-item{min-width:0}
+.certificate-preview{appearance:none;width:100%;height:440px;display:flex;align-items:center;justify-content:center;padding:28px 28px 60px;position:relative;border:1px solid #c7cbb9;border-radius:22px;background:#e7e8de;color:#26483d;cursor:zoom-in;transition:translate 220ms cubic-bezier(.2,.7,.2,1),box-shadow 220ms}
+.certificate-preview img{display:block;width:auto;height:auto;max-width:100%;max-height:100%;object-fit:contain;box-shadow:0 8px 20px #21392f22}
+.certificate-item.landscape .certificate-preview{height:330px;background:#e5e7db}
+.certificate-view-label{position:absolute;bottom:16px;left:24px;right:24px;display:flex;align-items:center;justify-content:space-between;font:700 14px/1.5 system-ui;min-height:28px}
+.sarsa-certifications .certificate-caption{padding:22px 4px 0}
+.sarsa-certifications .certificate-period{font-size:13px;color:#526456;margin:0 0 9px}
+.sarsa-certifications h3{font:400 27px/1.25 Georgia,serif;letter-spacing:-.02em;margin:0}
+.sarsa-certifications .certificate-issuer{font-size:14px;color:#526456;margin:10px 0 0}
+.sarsa-certifications .certificate-explanation{font-size:16px;line-height:1.65;margin:12px 0 0;max-width:500px}
+.certificate-preview:focus-visible,.certificate-dialog :focus-visible{outline:3px solid #955d45;outline-offset:5px}
+.certificate-overlay{position:fixed;inset:0;z-index:1000;background:#142f28db;backdrop-filter:blur(7px);display:flex;align-items:center;justify-content:center;padding:20px;font:15px/1.5 system-ui,sans-serif;color:#21392f}
+.certificate-modal{width:min(1200px,100%);max-height:calc(100dvh - 40px);background:#fffdf8;border:1px solid #d0d5c7;border-radius:24px;box-shadow:0 28px 90px #0005;overflow:hidden}
+.certificate-dialog{display:flex;flex-direction:column;max-height:calc(100dvh - 42px);outline:none}
+.certificate-reader-top{display:flex;align-items:start;justify-content:space-between;gap:24px;padding:20px 24px;border-bottom:1px solid #d5d9ca}
+.certificate-reader-top h2{font:400 28px/1.2 Georgia,serif;letter-spacing:-.02em;margin:4px 0 8px}
+.certificate-reader-top p{margin:0;font-size:14px;color:#526456}
+.certificate-reader-top .certificate-reader-position{font-size:13px}
+.certificate-dialog button,.certificate-reader-controls>a{font:700 14px/1.35 system-ui,sans-serif;color:#26483d;min-height:44px;padding:11px 16px;border:1px solid #9dac91;background:#fffdf8;border-radius:12px;cursor:pointer;text-decoration:none;display:inline-flex;align-items:center;justify-content:center;gap:12px}
+.certificate-dialog .certificate-close{flex:none;border-color:#26483d;background:#26483d;color:#fffdf8}
+.certificate-image-pane{overflow:auto;min-height:160px;height:650px;background:#e7e8df;overscroll-behavior:contain;padding:16px;scrollbar-gutter:stable}
+.certificate-image-canvas{width:100%;height:100%;display:grid;place-items:center;position:relative}
+.certificate-loading{position:absolute;z-index:1;max-width:90%;padding:12px 18px;border-radius:12px;background:#fffdf8;color:#26483d;font-size:15px}
+.certificate-image-canvas img{display:block;max-width:100%;max-height:100%;width:auto;height:auto;object-fit:contain;box-shadow:0 4px 20px #21392f25}
+.certificate-image-canvas[data-zoomed=true]{width:max-content;min-width:100%;height:auto;min-height:100%}
+.certificate-image-canvas[data-zoomed=true] img{max-width:none;max-height:none;width:auto;height:auto}
+.certificate-image-error{font-size:16px;max-width:500px;margin:50px auto;color:#21392f;line-height:1.6}
+.certificate-image-error a{font-weight:700;color:inherit;text-underline-offset:4px}
+.certificate-reader-controls{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:16px 24px;border-top:1px solid #d5d9ca;flex-wrap:wrap}
+.certificate-paging{display:flex;gap:10px}
+.certificate-dialog button[data-disabled]{opacity:.45;cursor:default}
+.certificate-reader-controls>a{border-color:transparent;text-decoration:underline;text-underline-offset:4px}
+.certificate-dialog button[aria-pressed=true]{background:#e5ebdf}
+@media(hover:hover) and (pointer:fine){.certificate-preview:hover{translate:0 -3px;box-shadow:0 15px 26px #21392f1a}.certificate-dialog button:not([data-disabled]):hover{box-shadow:0 5px 12px #21392f20}}
+@media(max-width:950px){.certifications-wrap{width:calc(100% - 44px)}.certificate-preview{height:400px;padding-inline:20px}}
+@media(max-width:800px){.sarsa-certifications{padding:56px 0}.certificates-grid{grid-template-columns:1fr;gap:36px}.sarsa-certifications h2{font-size:34px}.sarsa-certifications .certifications-intro{margin-bottom:32px}.certificate-preview{height:440px}.certificate-item.landscape .certificate-preview{height:300px}.sarsa-certifications h3{font-size:25px}.sarsa-certifications .certifications-intro>p{font-size:16px}}
+@media(max-width:650px){.certificate-overlay{padding:10px}.certificate-modal{border-radius:18px;max-height:calc(100dvh - 20px)}.certificate-dialog{max-height:calc(100dvh - 22px)}.certificate-reader-top{padding:16px;gap:12px}.certificate-reader-top h2{font-size:24px}.certificate-reader-top>div{min-width:0}.certificate-close{padding-inline:12px!important}.certificate-reader-controls{padding:12px;gap:10px}.certificate-dialog button,.certificate-reader-controls>a{font-size:13px;padding:10px 12px}.certificate-image-pane{padding:10px}.certificate-reader-controls>a{width:100%;justify-content:flex-start}.certificate-paging{gap:8px}}
+@media(max-width:360px){.certifications-wrap{width:calc(100% - 32px)}.certificate-preview{height:400px;padding-inline:18px}.certificate-item.landscape .certificate-preview{height:260px}.sarsa-certifications h2{font-size:30px}.sarsa-certifications h3{font-size:23px}.certificate-reader-top h2{font-size:22px}.certificate-reader-controls{gap:8px}.certificate-dialog button{padding-inline:10px}}
+@media(prefers-reduced-motion:reduce){.certificate-preview{transition:none}.certificate-preview:hover{translate:none}.certificate-overlay,.certificate-modal{animation:none!important}}

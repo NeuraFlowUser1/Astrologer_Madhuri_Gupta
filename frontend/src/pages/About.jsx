@@ -6,6 +6,7 @@ import '../site/about.css';
 import catalogue from '../site/catalogue.json';
 import MarginArt from '../site/MarginArt.jsx';
 import {mountAboutLayout} from '../site/about-layout.mjs';
+import Certifications from '../site/Certifications.jsx';
 const serviceOrder=['kundli-prediction','kundli-matching','vastu-consultation','numerology'];
 export default function About(){
  const root=useRef(null),navigate=useNavigate();
@@ -115,7 +116,7 @@ export default function About(){
 <small className="signature-note">{"SARSA JYOTISH SANSTHAN"}</small>
 <BookingAnchor className="text-link" href="#consultations" data-public-scroll>{"Find your service \u2192"}</BookingAnchor>
 </div>
-</section>{"\n"}<MarginArt targetId="personal" /><span className="sarsa-scroll-destination" tabIndex="-1" data-scroll-destination="consultations">Find your service</span><section className="consultations" id="consultations">
+</section>{"\n"}<MarginArt targetId="personal" /><Certifications/><span className="sarsa-scroll-destination" tabIndex="-1" data-scroll-destination="consultations">Find your service</span><section className="consultations" id="consultations">
 <div className="wrap consultation-grid">
 <div>
 <p className="eyebrow">{"03 / YOUR STARTING POINT"}</p>

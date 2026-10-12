@@ -29,6 +29,14 @@
       "destination": "/api"
     },
     {
+      "source": "/studio/calendar",
+      "destination": "/api"
+    },
+    {
+      "source": "/studio/calendar/",
+      "destination": "/api"
+    },
+    {
       "source": "/enquiries-studio",
       "destination": "/api"
     },
@@ -90,13 +98,6 @@
   ],
   "fluid": true,
   "cleanUrls": false,
-  "redirects": [
-    {
-      "source": "/testimonials",
-      "destination": "/about",
-      "permanent": true
-    }
-  ],
   "proxy": {
     "entrypoint": "frontend/proxy.js"
   }

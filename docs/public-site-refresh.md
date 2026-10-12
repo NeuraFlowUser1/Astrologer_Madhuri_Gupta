@@ -1,5 +1,9 @@
 # Sarsa: current public website
 
+The later 12 October [hosted read-only assessment](hosted-checks-2026-10-12.md) has finished: 105/107 unique cases passed, with an intermittent Booking script 404 and the older staff calendar alias unresolved. It changes no application or live configuration. Its current results remain separate from the dated programme evidence below and from the unpublished Reviews page.
+
+The 12 October programme adds the supplied education/certificate showcase to About, publishes Reviews with shared header/footer and natural Home FAQ navigation, removes the old redirect and repairs the exact older staff URL. The public Reviews source remains empty, so an honest waiting state is shown until genuine feedback is supplied; invented accounts remain private. [The certificate record](about-certifications.md), [Reviews record](testimonials-page.md) and [routing diagnosis](routing-diagnosis-2026-10-12.md) own implementation and focused proof. Actual online readback is recorded in the client study `design-review/2026-10-12-about-certifications/`. The owner set aside the Booking cancellation investigation; no guard change is included. The earlier no-testing boundary and imagery release evidence below belong to the 10 October programme. A full Home review section is outside this scope.
+
 The approved imagery/choreography programme is implemented in `.local-runtime/version-a-restore`, on top of accepted commit `583cb65115698f0665bc66c9e2abce5bbd1075a0`. The owner explicitly authorized **implement and push, with no testing or release gates**, then requested recovery and completion after the interruption. See [the scope and publication boundary](public-site-imagery-release-2026-10-10.md).
 
 The current implementation/publication records are in client `design-review/2026-10-10-imagery-and-choreography/implementation/`, outside this application Git root. The dirty enclosing checkout and rejected workspace remain separate.

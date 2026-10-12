@@ -38,3 +38,8 @@
 .sarsa-header .sarsa-action[aria-current=page]{text-decoration:none;box-shadow:0 0 0 3px #a6814d65,0 8px 18px #26483d25}
 @media(hover:hover) and (pointer:fine){.sarsa-header nav a:hover .sarsa-nav-label{font-weight:700}.sarsa-header nav a:hover::after{transform:scaleX(1)}}
 @media(prefers-reduced-motion:reduce){.sarsa-header nav a::after{transition:none}}
+
+/* Four main links retain their bold-width reserves and readable phone targets. */
+@media(max-width:1050px) and (min-width:651px){.sarsa-header,.sarsa-header.booking-header{display:grid;grid-template-columns:minmax(0,1fr) auto;padding:16px 24px;gap:12px 16px}.sarsa-header nav{grid-column:1/-1;grid-row:2;justify-content:center;gap:28px}.sarsa-header .sarsa-action{grid-column:2;grid-row:1}}
+@media(max-width:520px){.sarsa-header nav{font-size:13px;gap:10px}}
+@media(max-width:360px){.sarsa-header nav{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0 12px;justify-items:start}}

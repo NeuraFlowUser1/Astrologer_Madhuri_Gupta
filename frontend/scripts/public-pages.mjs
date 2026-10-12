@@ -10,7 +10,7 @@ const dist=resolve(import.meta.dirname,'../dist');
 const bookingPaths=['/booking','/booking/receipt','/booking-help','/booking-policy'];
 const manifest=writeSurfaceManifest({dist,publicDirectory:resolve(import.meta.dirname,'../public'),project,
  publicPaths:Object.keys(pages).filter(path=>!bookingPaths.includes(path)),bookingPaths,
- backendPaths:['/studio','/enquiries-studio'],publicAssets});
+ backendPaths:['/studio','/studio/calendar','/enquiries-studio'],publicAssets});
 // A repeated invocation may read the already generated OFF shell. Remove its
 // marker before rendering; each route must contain exactly its own mode.
 const shell=readFileSync(resolve(dist,'index.html'),'utf8').replace(/<meta name="booking-display-mode" content="(?:on|off)">/g,'');

@@ -82,7 +82,7 @@ test('Contact retains topic/focus handoff, five stages and original plaque while
 
 test('the shared frame retains every destination, a single Top control, and capability-aware policy/access links',async()=>{
  const scrollerRef={current:{top:vi.fn()}},headerRef={current:null};await render(<><main id="page-content" tabIndex="-1"/><SiteHeader sticky headerRef={headerRef}/><SiteFooter home scrollerRef={scrollerRef}/></>);
- expect(headerRef.current.isConnected).toBe(true);expect(host.querySelectorAll('.sarsa-header')).toHaveLength(1);expect(host.querySelectorAll('nav[aria-label="Main navigation"] a')).toHaveLength(3);
+ expect(headerRef.current.isConnected).toBe(true);expect(host.querySelectorAll('.sarsa-header')).toHaveLength(1);expect(host.querySelectorAll('nav[aria-label="Main navigation"] a')).toHaveLength(4);
  const button=host.querySelector('.sarsa-top');await click(button,{detail:0});expect(scrollerRef.current.top).toHaveBeenLastCalledWith(true);await click(button);expect(scrollerRef.current.top).toHaveBeenLastCalledWith(false);
  await update({enabled:false,retained_on_epoch:null});expect(host.querySelector('a[href="/booking-help"]')).toBeNull();expect(host.querySelector('a[href="/services"]')).not.toBeNull();scrollerRef.current=null;await click(button);
 });

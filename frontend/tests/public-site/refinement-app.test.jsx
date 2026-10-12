@@ -9,6 +9,7 @@ vi.mock('../../src/site/BookingProduct.jsx',async()=>{
 vi.mock('../../src/pages/Home.jsx',()=>({default:()=> <h1>Home</h1>}));
 vi.mock('../../src/pages/About.jsx',()=>({default:()=> <h1>About</h1>}));
 vi.mock('../../src/pages/Services.jsx',()=>({default:()=> <h1>Services</h1>}));
+vi.mock('../../src/pages/Testimonials.jsx',()=>({default:()=> <h1>Customer reviews</h1>}));
 vi.mock('../../src/pages/ContactPage.jsx',()=>({default:()=> <h1>Contact</h1>}));
 vi.mock('../../src/pages/ServiceDetail.jsx',()=>({default:()=> <h1>Service</h1>}));
 vi.mock('../../src/pages/KundliPrediction.jsx',()=>({default:()=> <h1>Prediction</h1>}));
@@ -31,10 +32,10 @@ beforeEach(async()=>{
 afterEach(async()=>{await act(async()=>root.unmount());host.remove();vi.restoreAllMocks();vi.unstubAllGlobals();});
 test('every public route has the same persistent frame and metadata, while receipt/help remain noindex',async()=>{
  const header=host.querySelector('.sarsa-header'),footer=host.querySelector('.sarsa-footer');
- for(const path of ['/about','/services','/services/kundli-prediction','/services/numerology','/contact','/booking','/privacy','/terms','/booking-policy','/booking/receipt','/booking-help','/missing']){
+ for(const path of ['/about','/services','/testimonials','/services/kundli-prediction','/services/numerology','/contact','/booking','/privacy','/terms','/booking-policy','/booking/receipt','/booking-help','/missing']){
   await go(path);expect(host.querySelector('.sarsa-header')).toBe(header);expect(host.querySelector('.sarsa-footer')).toBe(footer);expect(document.title).toBe(titleFor(path));expect(host.querySelectorAll('.sarsa-header')).toHaveLength(1);
  }
- await go('/testimonials');expect(window.location.pathname).toBe('/about');
+ await go('/testimonials');expect(window.location.pathname).toBe('/testimonials');expect(host.querySelector('main h1').textContent).toBe('Customer reviews');expect(host.querySelector('.sarsa-header a[href="/testimonials"]').getAttribute('aria-current')).toBe('page');expect(host.querySelector('.sarsa-header a[href="/testimonials"] .sarsa-nav-label').textContent).toBe('Reviews');expect(host.querySelector('.sarsa-footer a[href="/testimonials"]').textContent).toBe('Reviews');
 });
 test('shared frame updates preserve the booking input and the existing retention/unmount rules',async()=>{
  await go('/booking');const input=host.querySelector('input');input.value='Saved draft';const header=model.header.current;expect(header).toBe(host.querySelector('.sarsa-header'));expect(header.closest('main')).toBeNull();expect(model.bookingMounts).toBe(1);
