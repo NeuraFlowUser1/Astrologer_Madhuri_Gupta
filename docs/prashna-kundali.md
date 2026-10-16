@@ -8,7 +8,7 @@ Prashna is the fifth marketing service on Home, About and Services, with its own
 
 **Saved-service activation requires the existing company sign-in.** The available browser returned HTTP 401 from `GET /api/company/settings`; the password is owner-held separately from encrypted provider settings. No reset, direct database write, alternate account or replacement settings document was used. Public policy currently offers the original four services. Until the protected addition is completed, `/booking?service=prashna-kundali` shows an unavailable notice and leaves the service unselected. Deliberately choosing another service removes it. Existing booking remains ON.
 
-Website implementation/publication and protected activation are separate completion facts. Do not call the fifth service fully bookable until saved settings and the actual public selector are read back. Actual publication identities and read-only observations belong to client `design-review/2026-10-16-prashna-implementation/`, outside this Git root. A push alone does not prove publication.
+Website implementation/publication and protected activation are separate completion facts. Do not call the fifth service fully bookable until saved settings and the actual public selector are read back. The new unavailable notice separates its two bold actions by a 20px gap and lets them wrap on narrow phones, with at least 44px tap height. Actual publication identities and read-only observations belong to client `design-review/2026-10-16-prashna-implementation/`, outside this Git root. A push alone does not prove publication.
 
 ## Agreed service contract
 
