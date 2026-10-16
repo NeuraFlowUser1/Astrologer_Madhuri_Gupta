@@ -1,4 +1,4 @@
-.sarsa-prashna{width:100%;color:#21392f;background:#f7f5ef;font:17px/1.65 system-ui}
+.sarsa-prashna{width:100%;overflow-x:clip;color:#21392f;background:#f7f5ef;font:17px/1.65 system-ui}
 .sarsa-prashna .prashna-wrap{width:calc(100% - 96px);max-width:1104px;margin-inline:auto;min-width:0}
 .sarsa-prashna h1,.sarsa-prashna h2,.sarsa-prashna h3{font-family:Georgia,serif;font-weight:400;letter-spacing:-.025em;line-height:1.18;margin:0 0 24px}
 .sarsa-prashna h1{font-size:clamp(44px,4vw,56px);line-height:1.08}.sarsa-prashna h2{font-size:38px}.sarsa-prashna h3{font-size:25px}
