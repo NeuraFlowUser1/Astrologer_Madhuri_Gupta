@@ -163,6 +163,10 @@
       "class": "general"
     },
     {
+      "path": "/services/prashna-kundali",
+      "class": "general"
+    },
+    {
       "path": "/services/vastu-consultation",
       "class": "general"
     },

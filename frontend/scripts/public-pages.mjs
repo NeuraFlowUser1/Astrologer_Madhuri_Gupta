@@ -16,6 +16,6 @@ const manifest=writeSurfaceManifest({dist,publicDirectory:resolve(import.meta.di
 const shell=readFileSync(resolve(dist,'index.html'),'utf8').replace(/<meta name="booking-display-mode" content="(?:on|off)">/g,'');
 generateModes({dist,shell,pages,project,manifest,brand:project.label,offDescriptions:{
  '/':'Explore astrology, Numerology and Vastu guidance with Madhuri Gupta at Sarsa Jyotish Sansthan. Contact the practice with your questions.',
- '/services':'Explore Kundli Prediction, Kundli Matching, Vastu and Numerology guidance. Contact the practice with your questions.',
+ '/services':'Explore Kundli Prediction, Kundli Matching, Vastu, Numerology and Prashna Kundali guidance. Contact the practice with your questions.',
  '/contact':'Send Sarsa Jyotish Sansthan a question or contact the practice for help.'}});
 console.log('Generated public pages and classified asset boundary from the contained release.');

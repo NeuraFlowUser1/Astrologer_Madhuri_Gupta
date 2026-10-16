@@ -1,14 +1,16 @@
 # Sarsa Jyotish Sansthan — Project 004
 
-## Current website work — 12 October 2026
+## Current website work — 16 October 2026
 
-The About page now adds four supplied certificates after Madhuri's introduction, with short course explanations, full-document previews and an enlarged reader. The preferred AI presentation is used; the yellow certificate's course-name error was corrected against its source, and all originals remain accessible. Existing choreography is preserved, with measured height compensation for root-relative artwork. See [the certificate implementation and focused proof](docs/about-certifications.md).
+Prashna Kundali is added across Home, About, Services and a new six-section service page, with two purpose-made photographs and scoped multi-stage movement. Booking supports ₹1,100 per question, 1–10 questions and one 30-minute Google Meet appointment. **Live service activation still needs the existing company sign-in**; the public policy currently retains four services and the new deep link shows a clear unavailable notice without selecting another service. See [the current feature, review and activation guide](docs/prashna-kundali.md).
+
+At the owner's request, About's four certificates/course gallery, reader and active public media are removed. Originals, comparisons and the earlier clean worktree remain intact. The personal introduction leads directly into five service choices, with the original choreography and measured backdrop compensation preserved. See [certificate retirement](docs/about-certifications.md).
 
 Reviews contains the complete accepted five-section page and all twelve accounts confirmed by the owner as legitimate and approved by Madhuri for publication. The original design, exact review wording and choreography are preserved. The shared header/footer and natural Home FAQ link open the same public route; the old redirect to About is removed. Focused proof and publication readback are in [the Reviews record](docs/testimonials-page.md).
 
 The older `/studio/calendar` address is wired to the existing protected staff handler. Its missing backend export and host rewrite were deterministically diagnosed and repaired. The Booking state-read cancellation investigation is set aside at the owner's request; no guessed timeout or booking-system repair is included. See [the diagnosis](docs/routing-diagnosis-2026-10-12.md).
 
-The historical hosted assessment remains **105/107 cases passing (98.1%)**, not a clean full-suite result. This release uses focused verification only. Actual publication hashes and official-domain observations are recorded in the client studies `design-review/2026-10-12-approved-reviews-publication/` and `design-review/2026-10-12-about-certifications/`; a push alone does not prove publication. Booking stays ON and Vercel stays disconnected from Codex.
+The historical hosted assessment remains **105/107 cases passing (98.1%)**, not a clean full-suite result. The current programme uses source/browser review and necessary compilation, with no tests or release gates. Actual publication hashes and official-domain observations are recorded in the client studies `design-review/2026-10-12-approved-reviews-publication/` and `design-review/2026-10-12-about-certifications/`; a push alone does not prove publication. Booking stays ON and Vercel stays disconnected from Codex.
 
 ## Current change — 11 October 2026
 
@@ -18,7 +20,7 @@ Migration 037 retires old code authority in one changeover while preserving audi
 
 ## Retained earlier release evidence
 
-Sarsa's public website introduces Madhuri Gupta and four services: Kundli Matching, Kundli Prediction, Vastu Consultation and Numerology. Its public appearance builds on the owner-selected checkpoint A from 8 October 2026, with the subsequently approved additive imagery, combined Home chapter, section backgrounds and Google Map. The original animation owners and later shared booking repairs remain. The current public-site guide below owns those refinements; the unrefined checkpoint's map absence is historical.
+Sarsa's public website introduces Madhuri Gupta and five services: Kundli Matching, Kundli Prediction, Vastu Consultation, Numerology and Prashna Kundali. Saved booking activation is separately recorded above. Its public appearance builds on the owner-selected checkpoint A from 8 October 2026, with the subsequently approved additive imagery, combined Home chapter, section backgrounds and Google Map. The original animation owners and later shared booking repairs remain. The current public-site guide below owns those refinements; the unrefined checkpoint's map absence is historical.
 
 The public-site implementation and its checks are described in [the public-site guide](docs/public-site-refresh.md). The separate [booking operating guide](docs/appointment-system-release.md) owns booking, staff access, provider connections and recovery. Source implementation, local qualification and actual online release are separate evidence stages; the release record identifies the exact tested and published commit.
 
@@ -37,9 +39,11 @@ The public-site implementation and its checks are described in [the public-site 
 | `appointment-settings/` | This installation's public profile and settings contracts. Secrets are stored outside source. |
 | `workers/` and `.github/workflows/` | Existing background processing, monitoring and independent backups. |
 
-This programme changes the Sarsa public pages and local frame/scroll integration. AstroAdvice, booking-master bytes, database rules, prices, Google approvals, payment/email contracts, worker configuration and private portal permissions are preserved.
+This programme changes only Sarsa public presentation and its client-owned service/route/media configuration. AstroAdvice, contained booking bytes, database rules, existing four fees, Google approvals, payment/email contracts, worker and private permissions are preserved. The approved new-service settings addition must use the existing protected endpoint and latest revision.
 
 ## Local development and checks
+
+The commands below document existing tools. The current 16 October programme excludes tests, lint, coverage and release gates; only the necessary build and ordinary visual/source review are run.
 
 Use Node 22 and the committed frontend lockfile:
 
@@ -68,4 +72,4 @@ The contained package is `54af467afbe152286f1f81f28f904a8b59b51e31111e6a81d93b1d
 
 Use the existing route only: `NeuraFlowUser1/Astrologer_Madhuri_Gupta` → `main` → Vercel `neura-flow1/astrologer-madhuri-gupta` → `https://www.sarsajyotishsansthan.com`.
 
-Vercel stays disconnected from Codex. Publish the same locally qualified commit through Git, then verify its actual public asset identities and read-only page journeys on the official domain. A successful Git push alone does not establish a successful online release. Booking remains ON for this public-site programme; no live price, enquiry, payment or company-setting mutation is required.
+Vercel stays disconnected from Codex. Publish the same locally qualified commit through Git, then verify its actual public asset identities and read-only page journeys on the official domain. A successful Git push alone does not establish a successful online release. Booking remains ON. The only approved operational change is appending Prashna through the existing protected current-revision settings endpoint after website readback; it remains pending owner-held company sign-in. Do not overwrite the full saved document from bootstrap.

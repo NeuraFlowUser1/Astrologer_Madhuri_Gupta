@@ -354,5 +354,66 @@
         ]
       }
     ]
+  },
+  "prashna-kundali": {
+    "provenance": "Two purpose-made Prashna still-life compositions generated with the built-in image tool, 16 October 2026. Decorative service imagery, not a person or office photograph. Primary crop revised after inspection.",
+    "images": [
+      {
+        "variant": "primary",
+        "width": 1536,
+        "height": 1024,
+        "alt": "A question note, chart and brass clock on handmade paper.",
+        "caption": "Bring the specific question you want to discuss.",
+        "focal": "50% 50%",
+        "renditions": [
+          {
+            "src": "./media/services/prashna-kundali-primary-480.webp",
+            "width": 480,
+            "height": 320,
+            "bytes": 43342
+          },
+          {
+            "src": "./media/services/prashna-kundali-primary-800.webp",
+            "width": 800,
+            "height": 533,
+            "bytes": 115140
+          },
+          {
+            "src": "./media/services/prashna-kundali-primary-960.webp",
+            "width": 960,
+            "height": 640,
+            "bytes": 128022
+          },
+          {
+            "src": "./media/services/prashna-kundali-primary-1200.webp",
+            "width": 1200,
+            "height": 800,
+            "bytes": 185076
+          }
+        ]
+      },
+      {
+        "variant": "supporting",
+        "width": 1536,
+        "height": 1024,
+        "alt": "A folded question note and writing tools beside a clock.",
+        "caption": "Keep your questions ready for the conversation.",
+        "focal": "50% 50%",
+        "renditions": [
+          {
+            "src": "./media/services/prashna-kundali-supporting-800.webp",
+            "width": 800,
+            "height": 533,
+            "bytes": 66016
+          },
+          {
+            "src": "./media/services/prashna-kundali-supporting-1200.webp",
+            "width": 1200,
+            "height": 800,
+            "bytes": 124770
+          }
+        ]
+      }
+    ]
   }
 }

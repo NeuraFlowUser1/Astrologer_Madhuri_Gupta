@@ -7,6 +7,7 @@ const BookingAccess = lazy(() => import('./pages/BookingAccess.jsx'))
 import {SiteHeader,SiteFooter} from './site/SiteFrame.jsx'
 import {observeHeader,createPublicScroller} from './site/public-scroll.mjs'
 const KundliPrediction = lazy(() => import('./pages/KundliPrediction.jsx'))
+const PrashnaKundali = lazy(() => import('./pages/PrashnaKundali.jsx'))
 const ServiceDetail = lazy(() => import('./pages/ServiceDetail.jsx'))
 const PolicyPage = lazy(() => import('./pages/PolicyPage.jsx'))
 const Home = lazy(() => import('./pages/Home.jsx'))
@@ -30,7 +31,7 @@ function AppShell() {
   const {enabled}=useBookingProduct();
   useEffect(() => {
     const path=location.pathname, data=pages[path];
-    const description=!enabled ? ({'/':'Explore astrology, Numerology and Vastu guidance with Madhuri Gupta. Contact the practice with your questions.','/services':'Explore Kundli Prediction, Kundli Matching, Vastu and Numerology guidance. Contact the practice with your questions.','/contact':'Send the practice a question or ask for help with an existing booking.'}[path] || data?.[1]):data?.[1];
+    const description=!enabled ? ({'/':'Explore astrology, Numerology and Vastu guidance with Madhuri Gupta. Contact the practice with your questions.','/services':'Explore Kundli Prediction, Kundli Matching, Vastu, Numerology and Prashna Kundali guidance. Contact the practice with your questions.','/contact':'Send the practice a question or ask for help with an existing booking.'}[path] || data?.[1]):data?.[1];
     document.title=titleFor(path);
     for(const selector of ['meta[name="title"]','meta[property="og:title"]','meta[name="twitter:title"]']) document.querySelector(selector)?.setAttribute('content',titleFor(path));
     for(const selector of ['meta[name="description"]','meta[property="og:description"]','meta[name="twitter:description"]']) document.querySelector(selector)?.setAttribute('content',description||'We could not find that page.');
@@ -56,6 +57,7 @@ function AppShell() {
               <Route path="/" element={<Home />} />
               <Route path="/about" element={<About />} />
               <Route path="/services/kundli-prediction" element={<KundliPrediction />} />
+              <Route path="/services/prashna-kundali" element={<PrashnaKundali />} />
               <Route path="/services/:serviceId" element={<ServiceDetail />} />
               <Route path="/services" element={<Services />} />
               <Route path="/booking" element={<BookingRoute><Booking headerRef={header} /></BookingRoute>} />

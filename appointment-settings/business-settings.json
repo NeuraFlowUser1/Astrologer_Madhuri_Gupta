@@ -49,6 +49,18 @@
       },
       "duration_minutes": 30,
       "required_preparation": []
+    },
+    {
+      "id": "prashna-kundali",
+      "name": "Prashna Kundali",
+      "enabled": true,
+      "pricing": {
+        "kind": "per_question",
+        "amount_paise": 110000,
+        "maximum_questions": 10
+      },
+      "duration_minutes": 30,
+      "required_preparation": []
     }
   ],
   "timezone": "Asia/Kolkata",

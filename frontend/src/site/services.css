@@ -49,3 +49,12 @@
 @media(max-width:700px){.jyotish-visual{grid-template-columns:1fr;gap:32px}.knowledge-diagram{max-width:280px}.jyotish-visual dl{grid-template-columns:1fr 1fr;gap:28px 20px}}
 @media(max-width:650px){.services-directory-page .service-directory article{padding:24px}.directory-photo{height:190px;margin-bottom:24px}.directory-motif{width:96px;height:56px}.services-directory-page .service-directory h2{font-size:30px}.services-directory-page .service-directory p{font-size:16px}.services-directory-page .service-actions a{width:100%;font-size:16px}.services-directory-page .first-service-guide{margin-top:32px;padding-top:32px}}
 @media(prefers-reduced-motion:reduce){.services-directory-page .service-directory article,.sarsa-services .service-button,.services-directory-page .service-actions a,.services-directory-page .question-guide a{transition:none}.services-directory-page [data-directory-card]:hover,.sarsa-services .service-button:hover,.services-directory-page .service-actions a:hover,.services-directory-page .question-guide a:hover{translate:none}}
+
+/* Deliberate full-row fifth offering, with the original directory timeline. */
+.services-directory-page .service-directory .directory-card--prashna{grid-column:1/-1;display:grid;grid-template-columns:41% minmax(0,1fr);gap:0 36px;align-items:center}
+.directory-card--prashna .directory-photo{grid-column:1;grid-row:1/3;height:240px;margin:0}
+.directory-card--prashna [data-directory-part=copy],.directory-card--prashna .service-actions{grid-column:2;min-width:0}
+.services-directory-page .question-guide--prashna{grid-column:1/-1;padding-top:28px}
+@media(min-width:651px) and (max-width:899px){.services-directory-page .service-directory .directory-card--prashna{grid-template-columns:1fr;gap:24px}.directory-card--prashna .directory-photo{grid-column:1;grid-row:auto;width:100%;height:auto;aspect-ratio:2/1}.directory-card--prashna [data-directory-part=copy],.directory-card--prashna .service-actions{grid-column:1}}
+@media(max-width:650px){.services-directory-page .service-directory .directory-card--prashna{grid-template-columns:1fr;gap:24px}.directory-card--prashna .directory-photo{grid-column:1;grid-row:auto;height:190px;margin:0}.directory-card--prashna [data-directory-part=copy],.directory-card--prashna .service-actions{grid-column:1}.services-directory-page .question-guide--prashna{padding-top:0}}
+@media(max-width:350px){.services-directory-page .directory-card--prashna .service-actions a{font-size:15px;padding-inline:12px;gap:8px}}

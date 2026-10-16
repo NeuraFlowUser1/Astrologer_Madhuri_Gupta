@@ -6,8 +6,7 @@ import '../site/about.css';
 import catalogue from '../site/catalogue.json';
 import MarginArt from '../site/MarginArt.jsx';
 import {mountAboutLayout} from '../site/about-layout.mjs';
-import Certifications from '../site/Certifications.jsx';
-const serviceOrder=['kundli-prediction','kundli-matching','vastu-consultation','numerology'];
+const serviceOrder=['kundli-prediction','kundli-matching','vastu-consultation','numerology','prashna-kundali'];
 export default function About(){
  const root=useRef(null),navigate=useNavigate();
  useLayoutEffect(()=>{document.title='About Madhuri Gupta | Sarsa Jyotish Sansthan';const stopMotion=mountAboutMotion(root.current),stopLayout=mountAboutLayout(root.current);return()=>{stopLayout();stopMotion();};},[]);
@@ -108,7 +107,7 @@ export default function About(){
 <p className="eyebrow">{"02 / THE PERSON & THE PRACTICE"}</p>
 <h2>{"A name."}<br />{"A face."}<br /><em>{"A personal connection."}</em>
 </h2>
-<p>{"Behind Sarsa Jyotish Sansthan is Madhuri Gupta. The practice offers Kundli Prediction, Kundli Matching, Numerology and Vastu Consultation."}</p>
+<p>{"Behind Sarsa Jyotish Sansthan is Madhuri Gupta. The practice offers Kundli Prediction, Kundli Matching, Numerology, Vastu Consultation and Prashna Kundali."}</p>
 <p>{"Getting to know the person behind the practice is part of choosing where to begin. Explore the services below, or contact the practice if you have a question before booking."}</p>
 <div className="signature-rule">
 </div>
@@ -116,7 +115,7 @@ export default function About(){
 <small className="signature-note">{"SARSA JYOTISH SANSTHAN"}</small>
 <BookingAnchor className="text-link" href="#consultations" data-public-scroll>{"Find your service \u2192"}</BookingAnchor>
 </div>
-</section>{"\n"}<MarginArt targetId="personal" /><Certifications/><span className="sarsa-scroll-destination" tabIndex="-1" data-scroll-destination="consultations">Find your service</span><section className="consultations" id="consultations">
+</section>{"\n"}<MarginArt targetId="personal" /><span className="sarsa-scroll-destination" tabIndex="-1" data-scroll-destination="consultations">Find your service</span><section className="consultations" id="consultations">
 <div className="wrap consultation-grid">
 <div>
 <p className="eyebrow">{"03 / YOUR STARTING POINT"}</p>
@@ -126,7 +125,7 @@ export default function About(){
 <BookingAnchor className="text-link" href="/services/kundli-prediction">{"Explore Kundli Prediction \u2197"}</BookingAnchor>
 </div>
 <div className="service-list">
-{serviceOrder.map((id,i)=>{const service=catalogue.services.find(item=>item.id===id);return <div className="service-row" key={id}>
+{serviceOrder.map((id,i)=>{const service=catalogue.services.find(item=>item.id===id);return <div className="service-row" data-service-id={id} key={id}>
 <div className="row-identity"><span>{'0'+(i+1)}</span><strong>{service.name}</strong><b aria-hidden="true">↗</b></div>
 <div className="row-actions"><BookingLink to={'/services/'+service.id} aria-label={'Explore '+service.name}>Explore</BookingLink><BookingLink to={'/booking?service='+service.id} bookingMode="hide" aria-label={'Book '+service.name}>Book</BookingLink></div>
 </div>;})}

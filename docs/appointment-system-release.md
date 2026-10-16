@@ -1,5 +1,11 @@
 # Current contained booking release — 8 October 2026
 
+## Current client-service addition — 16 October 2026
+
+The contained package remains `54af467afbe152286f1f81f28f904a8b59b51e31111e6a81d93b1d340bd3720a`: 576 files, migrations 001–037, unchanged. Sarsa's public presentation/bootstrap adds Prashna Kundali at ₹1,100 per question, 1–10 questions, one 30-minute Google Meet appointment, with no additional required preparation. Its existing per-question coordinator/server contract already supports this; no shared engine, schema, worker or provider change is required.
+
+The actual saved-service append is pending existing company sign-in: protected GET `/api/company/settings` returned 401 in the available browser. The live public policy retains four services. A Prashna booking link truthfully reports unavailable with no fallback selection until activation. Read current full settings/revision and append only this service through the protected POST endpoint; preserve all other choices and operation identity on an uncertain response. See [the feature/activation guide](prashna-kundali.md). No direct database write, password reset or bootstrap replacement is used. No current suite, coverage, release gate, payment, email or customer lookup is claimed.
+
 ## Current change — 11 October 2026
 
 The approved name-and-phone booking-details replacement is published, using contained release `54af467afbe152286f1f81f28f904a8b59b51e31111e6a81d93b1d340bd3720a` (576 files; migrations 001–037). The official application, database and existing worker independently report this release. Booking is ON again under the original owner intent. Source publication: `0b4d4e1422bfe731aa527393709124be86d8827b`. These are publication/read-only observations; no real customer lookup or provider acceptance journey was run. Customers use `/booking/receipt` with the full name and phone saved when booking. Old booking-help/access links redirect there. Lookup grants viewing, refresh and a local PDF for a confirmed appointment; it grants no payment, cancellation, rescheduling, email-send or contact-change action. The original saved-browser receipt remains separate. Contact and appointment booking provide the entry links.

@@ -29,9 +29,6 @@ assert(entries.every(path=>!/(?:^|\/)(?:tests|fixtures|preview)(?:\/|$)/.test(re
 assert(!scripts.includes('Private Testimonials integration review'));
 assert(!scripts.includes('Private Customer reviews integration review'));
 assert(!scripts.includes('Private About certificates design review'));
-for(const id of ['jyotish-shastri','jyotish-acharya','astro-research-institute','trinity-vaastu-numerology']){
- for(const file of [`${id}-preview.webp`,`${id}-full.webp`,`${id}-original.${id==='astro-research-institute'?'pdf':'jpeg'}`]){
-  assert.equal(manifest.assets['/media/certificates/'+file],'general','Certificate must remain public independently of booking.');
- }
-}
+assert(Object.keys(manifest.assets).every(path=>!path.startsWith('/media/certificates/')&&path!=='/certificate.webp'),'Retired certificates must not be published.');
+assert(entries.every(path=>!relative(dist,path).replaceAll('\\','/').startsWith('media/certificates/')),'Retired certificate files remain in output.');
 console.log(JSON.stringify({route:'/testimonials',modes:2,approvedReviewsIncluded:clientTestimonials.length,privateHarnessExcluded:true,compiledFilesChecked:entries.length,result:'passed'}));

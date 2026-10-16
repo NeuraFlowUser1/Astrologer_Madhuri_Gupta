@@ -9,7 +9,7 @@ test('protected-path checks reject every backend boundary and retain the public 
  expect(()=>checkProtectedPaths(['frontend/src/App.jsx','appointment-settings/public-assets.json'])).not.toThrow();
 });
 test('release preflight inventories all active source and rejects an unclassified public file',()=>{
- const result=runChecks();expect(result.source).toContain('src/booking/booking-ui.jsx');expect(result.routes).toHaveLength(12);
+ const result=runChecks();expect(result.source).toContain('src/booking/booking-ui.jsx');expect(result.routes).toHaveLength(16);
  const publicRoot=new URL('../../public',import.meta.url).pathname,assets=JSON.parse(readFileSync(new URL('../../../appointment-settings/public-assets.json',import.meta.url)));
  delete assets['/media/consultation-still-life.png'];expect(()=>checkAssets(assets,publicRoot)).toThrow('Unclassified public asset');
 });

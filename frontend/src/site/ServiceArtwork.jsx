@@ -1,5 +1,7 @@
-/** Decorative directory artwork uses the same four motifs as the existing site. */
+import PrashnaArtwork from './PrashnaArtwork.jsx';
+/** Decorative service motifs; the new variant has its own explicit identity. */
 export default function ServiceArtwork({id}){
+  if(id==='prashna-kundali')return <div className="directory-art"><PrashnaArtwork compact/></div>;
   const art={
     'kundli-matching':<><circle cx="134" cy="88" r="62"/><circle cx="218" cy="88" r="62"/><path d="M134 38l50 50-50 50-50-50ZM218 38l50 50-50 50-50-50Z"/><circle cx="176" cy="88" r="13" className="art-accent"/></>,
     'kundli-prediction':<><path d="M176 14l74 74-74 74-74-74ZM102 14h148v148H102ZM102 14l148 148M250 14 102 162M176 14v148M102 88h148"/><circle cx="176" cy="88" r="23" className="art-accent"/><circle cx="176" cy="88" r="8"/></>,

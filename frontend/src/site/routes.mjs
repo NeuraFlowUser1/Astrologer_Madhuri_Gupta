@@ -1,7 +1,7 @@
 /** Only known legacy marketing routes are migrated; private data never enters links. */
 const pages=new Set(['/','/about','/services','/booking','/contact','/testimonials','/privacy','/terms','/booking-policy',
- '/services/kundli-prediction','/services/kundli-matching','/services/vastu-consultation','/services/numerology']);
-const services=new Set(['kundli-prediction','kundli-matching','vastu-consultation','numerology']);
+ '/services/kundli-prediction','/services/kundli-matching','/services/vastu-consultation','/services/numerology','/services/prashna-kundali']);
+const services=new Set(['kundli-prediction','kundli-matching','vastu-consultation','numerology','prashna-kundali']);
 export function legacyDestination(hash){
  if(typeof hash!=='string'||!hash.startsWith('#/')||hash.startsWith('#//'))return null;
  let url;try{url=new URL(hash.slice(1),'https://sarsa.invalid');}catch{return null;}

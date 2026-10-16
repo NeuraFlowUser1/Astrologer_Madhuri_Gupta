@@ -7,7 +7,7 @@ import '../site/page-rhythm.css';
 import ServiceArtwork from '../site/ServiceArtwork.jsx';
 import ServiceMedia from '../site/ServiceMedia.jsx';
 import {mountDirectoryMotion} from '../site/directory-motion.mjs';
-const descriptions={'kundli-prediction':'Questions about work, marriage, family or a changing phase of life? Explore your birth chart, grah and dasha in simple words.','kundli-matching':'Thinking about marriage? Explore what two kundlis can tell you about compatibility and the questions you want to discuss.','vastu-consultation':'Questions about your home or workspace? Understand its layout and directions through the principles of Vastu.',numerology:'Curious about your name, date of birth or numbers? Explore their meaning in the numerology tradition.'};
+const descriptions={'kundli-prediction':'Questions about work, marriage, family or a changing phase of life? Explore your birth chart, grah and dasha in simple words.','kundli-matching':'Thinking about marriage? Explore what two kundlis can tell you about compatibility and the questions you want to discuss.','vastu-consultation':'Questions about your home or workspace? Understand its layout and directions through the principles of Vastu.','prashna-kundali':'Have a specific question about work, family or a decision? Discuss it with Madhuri through a question-time chart. Birth details are not required to book.',numerology:'Curious about your name, date of birth or numbers? Explore their meaning in the numerology tradition.'};
 export default function Services(){const root=useRef(null);useLayoutEffect(()=>{document.title='Services | Sarsa Jyotish Sansthan';return mountDirectoryMotion(root.current);},[]);return <div className="sarsa-services services-directory-page" ref={root}>
 <div className="service-intro-frame"><section className="service-intro">
 <p className="eyebrow">FIND YOUR STARTING POINT</p>
@@ -17,12 +17,12 @@ export default function Services(){const root=useRef(null);useLayoutEffect(()=>{
 <p>Start with the question you have. Explore Jyotish, Vastu and Numerology with Madhuri Gupta. <BookingCopy off="Contact the practice with your questions.">Read about a service, then book an appointment when you are ready.</BookingCopy></p>
 </section></div>
 <section className="service-directory" aria-label="Services">{catalogue.services.map((s,i)=>
-<article key={s.id} data-directory-card>
+<article key={s.id} className={s.id==='prashna-kundali'?'directory-card--prashna':undefined} data-directory-card>
 <div className="directory-photo" data-directory-part="photo"><ServiceMedia serviceId={s.id}/><div className="directory-motif" data-directory-part="motif"><ServiceArtwork id={s.id}/></div></div>
 <div data-directory-part="copy"><span className="service-number">0{i+1}</span>
 <h2>{s.name}</h2>
 <p>{descriptions[s.id]}</p>
-<BookingOnly><p className="service-facts">₹{(s.amount_paise/100).toLocaleString('en-IN')} · {s.duration_minutes} minutes · Google Meet</p></BookingOnly>
+<BookingOnly><p className="service-facts">₹{(s.amount_paise/100).toLocaleString('en-IN')}{s.pricing_kind==='per_question'?' per question':''} · {s.duration_minutes} minutes · Google Meet</p>{s.pricing_kind==='per_question'&&<p className="service-facts">Choose 1–{s.maximum_questions} questions for one appointment.</p>}</BookingOnly>
 </div><div className="service-actions" data-directory-part="actions">
 <Link to={'/services/'+s.id}>Explore the service ↗</Link>
 <Link className="service-button" to={'/booking?service='+s.id} bookingMode="hide">Book an appointment</Link>
@@ -34,8 +34,9 @@ export default function Services(){const root=useRef(null);useLayoutEffect(()=>{
 ['kundli-matching','Planning a marriage?','Start with Kundli Matching.'],
 ['kundli-prediction','Thinking about your next phase in life?','Explore Kundli Prediction.'],
 ['vastu-consultation','Questions about your home or workspace?','Read about Vastu Consultation.'],
-['numerology','Curious about names, dates and numbers?','Explore Numerology.']
-].map(([id,question,label])=><div key={id} data-guide-part><div className="guide-motif" aria-hidden="true"><ServiceArtwork id={id}/></div><h3>{question}</h3><Link to={'/services/'+id}>{label} ↗</Link></div>)}</div>
+['numerology','Curious about names, dates and numbers?','Explore Numerology.'],
+['prashna-kundali','A specific question on your mind?','Explore Prashna Kundali.']
+].map(([id,question,label])=><div key={id} className={id==='prashna-kundali'?'question-guide--prashna':undefined} data-guide-part><div className="guide-motif" aria-hidden="true"><ServiceArtwork id={id}/></div><h3>{question}</h3><Link to={'/services/'+id}>{label} ↗</Link></div>)}</div>
 <p>These are starting points. Read the service details, or ask the practice which area fits your question.</p>
 </section>
 <section className="service-guide jyotish-guide" data-directory-guide="jyotish" aria-labelledby="jyotish-guide-title">
@@ -46,7 +47,7 @@ export default function Services(){const root=useRef(null);useLayoutEffect(()=>{
 ['Dasha','A planetary period in the traditional astrological system.'],
 ['Gochar','The movement of planets considered in relation to a birth chart.']
 ].map(([term,meaning])=><div key={term} data-guide-part><dt>{term}</dt><dd>{meaning}</dd></div>)}</dl></div>
-<p>Vastu looks at the layout and directions of a space. Numerology explores names, dates and numbers. These are traditional ideas; you can ask what an unfamiliar term means.</p>
+<p>Prashna Kundali starts with the time a specific question is asked. Vastu looks at the layout and directions of a space. Numerology explores names, dates and numbers. These are traditional ideas; you can ask what an unfamiliar term means.</p>
 </section>
 <section className="service-preparation">
 <p className="eyebrow">BEFORE WE BEGIN</p>

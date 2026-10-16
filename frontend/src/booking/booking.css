@@ -60,3 +60,12 @@
 .booking-access-selector button[aria-pressed=true]{background:#24473b;color:#fff;border-color:#24473b}
 .booking-access-selector button:focus-visible,.booking-access-actions button:focus-visible{outline:2px solid currentColor;outline-offset:4px}
 @media(max-width:767px){.booking-access-page{width:calc(100% - 36px);padding:42px 0 64px}.booking-access-selector{gap:10px}.booking-access-selector button{flex:1 1 180px}}
+
+/* New per-question card only; the four original thumbnails keep their crop. */
+.sarsa-booking .service-card.service-card--prashna{grid-column:1/-1;display:grid;grid-template-columns:180px minmax(0,1fr);gap:24px;align-items:center}
+.sarsa-booking .service-card.service-card--prashna .booking-service-photo{width:180px;height:120px;margin:0;aspect-ratio:3/2}
+.sarsa-booking .booking-service-copy{display:flex;flex-direction:column;gap:12px;min-width:0}
+.sarsa-booking .question-fee{font-size:15px;font-weight:600}.sarsa-booking .question-limit{font-size:15px}
+.sarsa-booking .submit-button{gap:6px;flex-wrap:wrap}.sarsa-booking .payment-amount{white-space:nowrap}
+@media(max-width:650px){.sarsa-booking .service-card.service-card--prashna{grid-template-columns:1fr}.sarsa-booking .service-card.service-card--prashna .booking-service-photo{width:100%;height:auto;aspect-ratio:3/2}}
+@media(max-width:430px){.sarsa-booking .amount-plaque{flex-direction:column;align-items:flex-start;gap:8px}.sarsa-booking .submit-button{flex-direction:column;gap:2px;min-height:68px}}

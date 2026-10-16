@@ -6,6 +6,7 @@ import '../site/home.css';
 import {mountHomeEnhancements,exclusiveFaq} from '../site/home-enhancements.mjs';
 import MarginArt from '../site/MarginArt.jsx';
 import ServiceMedia from '../site/ServiceMedia.jsx';
+import PrashnaArtwork from '../site/PrashnaArtwork.jsx';
 export default function Home(){
  const root=useRef(null),navigate=useNavigate();
  useLayoutEffect(()=>{document.title="Sarsa Jyotish Sansthan | Madhuri Gupta";const stopMotion=mountHomeMotion(root.current),stopExtras=mountHomeEnhancements(root.current);return()=>{stopExtras();stopMotion();};},[]);
@@ -124,7 +125,15 @@ export default function Home(){
 <p>{"Explore what names, dates and numbers mean in Numerology."}</p>
 <BookingAnchor href="/services/numerology" data-service="Numerology">{"Explore the service "}<span aria-hidden="true">{"\u2197"}</span>
 </BookingAnchor>
-</article>{"\n"}</div>
+</article>{"\n"}<article className="service service--prashna">
+<div className="service-glow" aria-hidden="true"/>
+<div className="home-service-photo"><ServiceMedia serviceId="prashna-kundali"/></div>
+<div className="prashna-card-copy"><div className="service-top"><span className="index">05</span><div className="service-icon" aria-hidden="true"><PrashnaArtwork compact/></div></div>
+<h3>Prashna Kundali</h3><p>Have a specific question about work, family or a decision? Explore it through Prashna Kundali. You can book without your birth details.</p>
+<p className="prashna-card-fact">One question or several, in one appointment.</p>
+<BookingAnchor href="/services/prashna-kundali">Explore the service <span aria-hidden="true">↗</span></BookingAnchor></div>
+</article>
+</div>
 <p className="service-foot">{"Not sure where to begin? "}<button className="nav-contact" data-contact><BookingCopy off="Ask the practice.">{"Ask before booking."}</BookingCopy></button>
 </p>
 </section>{"\n"}<span id="process" className="process-anchor" aria-hidden="true"/><span className="sarsa-scroll-destination" tabIndex="-1" data-scroll-destination="process">How to begin</span><span className="sarsa-scroll-destination" tabIndex="-1" data-scroll-destination="conversation">From a question to your next step</span><section id="conversation" className="connection combined-chapter" data-chapter="conversation" data-effect="hc">
@@ -188,9 +197,9 @@ export default function Home(){
 </div>
 </div>
 <div className="faq-list">
-<details name="sarsa-home-faq" onToggle={exclusiveFaq}><summary>Which service should I choose?<span aria-hidden="true">+</span></summary><p>Kundli Matching is for marriage compatibility. Kundli Prediction explores birth-chart questions. Vastu concerns your home or workspace, and Numerology concerns names, dates and numbers. <BookingAnchor href="/services">Read about the services</BookingAnchor>, or <BookingAnchor href="/contact">ask the practice</BookingAnchor> if you are unsure.</p></details>
+<details name="sarsa-home-faq" onToggle={exclusiveFaq}><summary>Which service should I choose?<span aria-hidden="true">+</span></summary><p>Kundli Matching is for marriage compatibility. Kundli Prediction explores birth-chart questions. Vastu concerns your home or workspace, and Numerology concerns names, dates and numbers. For a specific question without a birth-chart reading, explore <BookingAnchor href="/services/prashna-kundali">Prashna Kundali</BookingAnchor>. <BookingAnchor href="/services">Read about the services</BookingAnchor>, or <BookingAnchor href="/contact">ask the practice</BookingAnchor> if you are unsure.</p></details>
 <details name="sarsa-home-faq" onToggle={exclusiveFaq}><summary>What should I keep ready?<span aria-hidden="true">+</span></summary><p>Read your selected service’s preparation notes. For birth-chart questions, keep the birth date, time and place you know nearby, along with the questions you want to discuss.</p></details>
-<details name="sarsa-home-faq" onToggle={exclusiveFaq}><summary>What if I do not know my exact birth time?<span aria-hidden="true">+</span></summary><p>Tell the practice before booking. Ask what information would be useful for your appointment.</p></details>
+<details name="sarsa-home-faq" onToggle={exclusiveFaq}><summary>What if I do not know my exact birth time?<span aria-hidden="true">+</span></summary><p>Tell the practice before booking. Ask what information would be useful for your appointment. <BookingAnchor href="/services/prashna-kundali">Prashna Kundali</BookingAnchor> can be booked without birth details.</p></details>
 <BookingOnly><details name="sarsa-home-faq" onToggle={exclusiveFaq}><summary>How do online appointments work?<span aria-hidden="true">+</span></summary><p>Online consultations use Google Meet. Your saved booking shows its status and the available appointment details.</p></details>
 <details name="sarsa-home-faq" onToggle={exclusiveFaq}><summary>When is my appointment confirmed?<span aria-hidden="true">+</span></summary><p>After payment is verified and the appointment is secured. Selecting a time or sending an enquiry alone does not confirm an appointment.</p></details>
 <details name="sarsa-home-faq" onToggle={exclusiveFaq}><summary>Do I need to enter an email address?<span aria-hidden="true">+</span></summary><p>The booking form will tell you whether an email check is needed. Your mobile number is required. Contact enquiries use a separate email check.</p></details>
