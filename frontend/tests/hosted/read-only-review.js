@@ -4,10 +4,12 @@
  */
 globalThis.hostedReadOnlyReview=async (page) => {
   const origin='https://www.sarsajyotishsansthan.com';
-  const paths=['/','/about','/services','/testimonials','/services/kundli-prediction','/services/kundli-matching','/services/vastu-consultation','/services/numerology','/contact','/privacy','/terms','/booking','/booking-policy','/booking/receipt'];
-  const services=['kundli-matching','kundli-prediction','vastu-consultation','numerology'];
-  const phase=new URL(page.url()).hash.slice(1);
-  if(!['routes-390','routes-1440','edges','interfaces','services','api','booking-layouts'].includes(phase))throw Error('Select a documented phase on the controlling about:blank tab.');
+  const paths=['/','/about','/services','/testimonials','/services/kundli-prediction','/services/kundli-matching','/services/vastu-consultation','/services/numerology','/services/prashna-kundali','/contact','/privacy','/terms','/booking','/booking-policy','/booking/receipt'];
+  const services=['kundli-matching','kundli-prediction','vastu-consultation','numerology','prashna-kundali'];
+  const illustratedServices=services.filter(id=>id!=='prashna-kundali');
+  const fixedFees={'kundli-matching':210000,'kundli-prediction':250000,'vastu-consultation':450000,numerology:210000};
+  const fragment=new URL(page.url()).hash.slice(1),[phase]=fragment.split('?');
+  if(!['routes-390','routes-1440','edges','interfaces','services','api','booking-layouts','prashna','links'].includes(phase))throw Error('Select a documented phase on the controlling about:blank tab.');
   const report={kind:'actual-hosted-read-only',origin,phase,started:new Date().toISOString(),cases:[],blockedWrites:[],externalFailures:[],warnings:[],internalLinks:[],assets:[]};
   const browser=page.context().browser();
   let assertions=0;
@@ -34,7 +36,7 @@ globalThis.hostedReadOnlyReview=async (page) => {
   async function run(label,work){
     const start=Date.now(),before=assertions;
     pageErrors=[];firstPartyFailures=[];
-    try{const detail=await work();check(pageErrors.length===0,'Page errors: '+pageErrors.join('; '));check(firstPartyFailures.length===0,'First-party errors: '+JSON.stringify(firstPartyFailures));report.cases.push({label,status:'passed',assertions:assertions-before,elapsed_ms:Date.now()-start,...detail});}
+    try{const detail=await work();check(report.blockedWrites.length===0,'An unsafe request was attempted and blocked');check(pageErrors.length===0,'Page errors: '+pageErrors.join('; '));check(firstPartyFailures.length===0,'First-party errors: '+JSON.stringify(firstPartyFailures));report.cases.push({label,status:'passed',assertions:assertions-before,elapsed_ms:Date.now()-start,...detail});}
     catch(error){report.cases.push({label,status:'failed',assertions:assertions-before,elapsed_ms:Date.now()-start,error:error.message,pageErrors,firstPartyFailures});}
   }
   async function visit(path,width=1440,height=900){
@@ -42,12 +44,31 @@ globalThis.hostedReadOnlyReview=async (page) => {
     const response=await current.goto(origin+path,{waitUntil:'domcontentloaded',timeout:45000});
     check(response?.status()===200,'Page HTTP status '+response?.status());
     await current.locator('#page-content h1').waitFor({state:'visible',timeout:30000});
-    if(path==='/booking'){
+    if(new URL(path,origin).pathname==='/booking'){
       await current.locator('input[name=service]').last().waitFor({state:'attached',timeout:30000});
-      check(await current.locator('input[name=service]').count()===4,'Live service choices have not finished loading');
+      check(await current.locator('input[name=service]').count()===services.length,'Live service choices have not finished loading');
     }
     await current.evaluate(()=>document.fonts.ready);
     await current.waitForTimeout(250);
+  }
+  async function availableDay(policy,service,questions){
+    // Choose from real availability; tomorrow can correctly be a closed Sunday.
+    const timezone=policy.policy.timezone,days=Math.min(policy.policy.horizon_days,10),checked=[];
+    for(let offset=1;offset<=days;offset++){
+      const date=new Date(Date.parse(policy.server_now)+offset*86400000);
+      const day=new Intl.DateTimeFormat('en-CA',{timeZone:timezone,year:'numeric',month:'2-digit',day:'2-digit'}).format(date);
+      const response=await context.request.get(origin+'/api/availability?'+new URLSearchParams({service_id:service,day,questions:String(questions)}),{timeout:45000});
+      check(response.status()===200,'Availability lookup HTTP '+response.status());
+      const data=await response.json();check(Array.isArray(data.slots),'Missing available-slot list');checked.push({day,slots:data.slots.length});
+      if(data.slots.length)return {day,dateLabel:new Intl.DateTimeFormat('en-GB',{timeZone:timezone,weekday:'long',day:'numeric',month:'long',year:'numeric'}).format(date),data,checked};
+    }
+    throw Error('No available appointment within the inspected saved horizon: '+JSON.stringify(checked));
+  }
+  async function chooseDate(dateLabel){
+    await current.locator('.abs-date-group button[aria-haspopup="dialog"]').click();
+    await current.getByRole('button',{name:new RegExp(dateLabel)}).click();
+    await current.locator('.slot-option').first().waitFor({state:'visible',timeout:25000});
+    await current.locator('.slot-option').first().click();
   }
   async function layout(path,width,height){
     await visit(path,width,height);
@@ -57,6 +78,7 @@ globalThis.hostedReadOnlyReview=async (page) => {
       for(let y=0;y<document.documentElement.scrollHeight;y+=distance){scrollTo(0,y);await new Promise(resolve=>setTimeout(resolve,45));}
       scrollTo(0,0);
     });
+    await current.waitForFunction(()=>[...document.querySelectorAll('main img')].every(img=>img.complete),{},{timeout:20000});
     await current.waitForTimeout(600);
     const detail=await current.evaluate(()=>({
       path:location.pathname,title:document.title,canonical:document.querySelector('link[rel=canonical]')?.href,
@@ -80,7 +102,7 @@ globalThis.hostedReadOnlyReview=async (page) => {
     check(!!detail.description,'Missing description');
     check(detail.images.every(image=>image.loaded&&image.altPresent),'Broken image or missing alt attribute: '+JSON.stringify(detail.images.filter(image=>!image.loaded||!image.altPresent)));
     if(path==='/booking/receipt')check(detail.robots.includes('noindex'),'Private lookup must be noindex');
-    if(path==='/about'||path.startsWith('/services')||path==='/contact'){
+    if(path==='/about'||path.startsWith('/services')||path==='/contact'||path==='/testimonials'){
       const target=path.startsWith('/services')?'/services':path;
       check(detail.active.some(link=>link.href===target&&link.weight>=600),'Selected navigation does not stand out');
     }
@@ -94,13 +116,13 @@ globalThis.hostedReadOnlyReview=async (page) => {
       const width=phase==='routes-390'?390:1440,height=width===390?844:900;
       for(const path of paths)await run('route '+path+' '+width,()=>layout(path,width,height));
     }
-    if(phase==='edges')for(const [width,height] of [[320,740],[768,1024],[1920,1080]])for(const path of ['/','/services','/contact','/booking'])await run('edge '+path+' '+width,()=>layout(path,width,height));
+    if(phase==='edges')for(const [width,height] of [[320,740],[768,1024],[1920,1080]])for(const path of ['/','/about','/services','/services/prashna-kundali','/contact','/booking'])await run('edge '+path+' '+width,()=>layout(path,width,height));
     if(phase==='booking-layouts'){
-      for(const [width,height] of [[390,844],[1440,900],[320,740],[768,1024],[1920,1080]])await run((width===390||width===1440?'route':'edge')+' /booking '+width,()=>layout('/booking',width,height));
+      for(const [width,height] of [[390,844],[1440,900],[320,740],[768,1024],[1920,1080]])await run('Booking readiness /booking '+width,()=>layout('/booking',width,height));
       await run('Booking through review without submitting',async()=>{
         await visit('/booking');
         const response=await context.request.get(origin+'/api/booking-policy',{timeout:45000});check(response.status()===200,'Policy unavailable');const policy=await response.json();
-        const tomorrow=new Date(Date.parse(policy.server_now)+86400000),dateLabel=new Intl.DateTimeFormat('en-GB',{timeZone:policy.policy.timezone,weekday:'long',day:'numeric',month:'long',year:'numeric'}).format(tomorrow);
+        const {day,dateLabel}=await availableDay(policy,'kundli-matching',1);
         await current.locator('.service-card').filter({hasText:'Kundli Matching'}).click();
         await current.locator('.abs-date-group button[aria-haspopup="dialog"]').click();
         await current.getByRole('button',{name:new RegExp(dateLabel)}).click();
@@ -118,7 +140,7 @@ globalThis.hostedReadOnlyReview=async (page) => {
     }
     if(phase==='interfaces'){
       await run('Home FAQs and back to top',async()=>{
-        await visit('/');const items=current.locator('.faq-list details');check(await items.count()===8,'Expected eight Home FAQs');
+        await visit('/');check(await current.locator('.service-grid article.service').count()===services.length,'Home is missing a service');check(await current.locator('.service--prashna a[href="/services/prashna-kundali"]').count()===1,'Home Prashna destination missing');const items=current.locator('.faq-list details');check(await items.count()===9,'Expected nine Home FAQs including approved Customer Reviews');check(await items.filter({hasText:'Can I read what other clients say?'}).locator('a[href="/testimonials"]').count()===1,'Approved Reviews FAQ destination missing');
         await items.nth(0).locator('summary').click();check(await items.nth(0).getAttribute('open')!==null,'FAQ did not open');
         await items.nth(1).locator('summary').click();check(await current.locator('.faq-list details[open]').count()===1,'FAQ opening did not collapse the previous answer');
         await current.locator('footer').scrollIntoViewIfNeeded();await current.getByRole('button',{name:'Back to top',exact:true}).click();
@@ -145,8 +167,9 @@ globalThis.hostedReadOnlyReview=async (page) => {
         const card=current.locator('#approach-scene article').first();const before=await card.evaluate(node=>getComputedStyle(node).translate);
         await card.hover();await current.waitForTimeout(400);const after=await card.evaluate(node=>getComputedStyle(node).translate);
         check(before!==after,'Approach card does not react to hover');
-        const rows=current.locator('.service-row');check(await rows.count()===4,'Missing service rows');
-        for(let i=0;i<4;i++){check(await rows.nth(i).locator('.row-actions a').count()===2,'Explore/Book pair missing');}
+        const rows=current.locator('.service-row');check(await rows.count()===services.length,'Missing service rows');
+        check(await current.locator('.sarsa-certifications').count()===0,'Retired certificates are still shown');
+        for(let i=0;i<services.length;i++){check(await rows.nth(i).locator('.row-actions a').count()===2,'Explore/Book pair missing');}
         const action=current.locator('.approach-action');check(await action.evaluate(node=>parseInt(getComputedStyle(node).fontWeight,10))>=600,'Services action is not emphasized');
         await current.emulateMedia({reducedMotion:'reduce'});
       });
@@ -162,7 +185,7 @@ globalThis.hostedReadOnlyReview=async (page) => {
       });
       await run('Booking choices, date picker and optional email',async()=>{
         await visit('/booking');await current.locator('input[name=service]').last().waitFor({state:'attached',timeout:30000});
-        check(await current.locator('input[name=service]').count()===4,'Missing live service choices');
+        check(await current.locator('input[name=service]').count()===services.length,'Missing live service choices');
         check(await current.locator('#full_name').getAttribute('required')!==null,'Name is not required');
         check(await current.locator('#phone').getAttribute('required')!==null,'Phone is not required');
         check(await current.locator('#email').getAttribute('required')===null,'Email unexpectedly required with verification OFF');
@@ -178,7 +201,7 @@ globalThis.hostedReadOnlyReview=async (page) => {
         check(await current.locator('#full_name').inputValue()==='Read-only Browser Check','Draft name lost on tab return');
         check(await current.locator('#phone').inputValue()==='0000000000','Draft phone lost on tab return');
         check(await current.locator('.submit-button').isDisabled(),'Payment button active without a complete appointment');
-        return {serviceCount:4,createdBooking:false,submittedDetails:false};
+        return {serviceCount:services.length,createdBooking:false,submittedDetails:false};
       });
       await run('Name-and-phone access and old entry',async()=>{
         await visit('/booking/receipt');const form=current.locator('.abs-lookup-form');check(await form.count()===1,'Missing lookup form');
@@ -197,22 +220,108 @@ globalThis.hostedReadOnlyReview=async (page) => {
     }
     if(phase==='services'){
       await run('Service directory imagery, buttons and divider',async()=>{
-        await visit('/services');const cards=current.locator('[data-directory-card]');check(await cards.count()===4,'Expected four service cards');
-        for(let i=0;i<4;i++){const card=cards.nth(i);await card.scrollIntoViewIfNeeded();check(await card.locator('.directory-photo img').count()===1,'Service photograph missing');check(await card.locator('.service-actions a').count()===2,'Explore/Book actions missing');
+        await visit('/services');const cards=current.locator('[data-directory-card]');check(await cards.count()===services.length,'Expected five service cards');
+        for(let i=0;i<services.length;i++){const card=cards.nth(i);await card.scrollIntoViewIfNeeded();check(await card.locator('.directory-photo img').count()===1,'Service photograph missing');check(await card.locator('.service-actions a').count()===2,'Explore/Book actions missing');
           const values=await card.locator('.service-actions').evaluate(node=>({alignment:getComputedStyle(node).justifyContent,weights:[...node.querySelectorAll('a')].map(a=>parseInt(getComputedStyle(a).fontWeight,10))}));
           check(values.alignment==='flex-end','Service buttons not right aligned');check(values.weights.every(weight=>weight>=600),'Service actions not emphasized');}
         const gap=await current.locator('.first-service-guide').evaluate(node=>({top:node.getBoundingClientRect().top,directoryBottom:document.querySelector('.service-directory').getBoundingClientRect().bottom}));check(gap.top-gap.directoryBottom>=40,'Divider touches service cards');
       });
-      for(const service of services)await run('Service illustrations '+service,async()=>{
+      for(const service of illustratedServices)await run('Service illustrations '+service,async()=>{
         await visit('/services/'+service);const story=current.locator('.service-visual-story');await story.scrollIntoViewIfNeeded();
         const choices=story.locator('.story-choices button');check(await choices.count()===3,'Expected three explanation choices');
         for(let i=0;i<3;i++){await choices.nth(i).click();check(await choices.nth(i).getAttribute('aria-pressed')==='true','Topic selection not updated');check(await story.locator('.story-choices button[aria-pressed=true]').count()===1,'Multiple selected topics');}
         const first=await story.locator('.story-picture img').last().getAttribute('src');await story.getByRole('button',{name:'Next →',exact:true}).click();
         await story.locator('.story-controls').getByText('2 of 2',{exact:true}).waitFor({state:'visible',timeout:20000});
         const second=await story.locator('.story-picture img').last().getAttribute('src');check(first!==second,'Picture did not change');
+        // The picture counter changes before the browser finishes selecting/loading srcset.
+        // Wait for that real lifecycle; a completed broken image still fails the next assertion.
+        await current.waitForFunction(source=>{const image=[...document.querySelectorAll('.service-visual-story .story-picture img')].at(-1);return image?.getAttribute('src')===source&&image.complete;},second,{timeout:20000});
         check(await story.locator('.story-picture img').last().evaluate(node=>node.complete&&node.naturalWidth>0),'Second picture failed to load');
         await story.getByRole('button',{name:'← Previous',exact:true}).click();await story.locator('.story-controls').getByText('1 of 2',{exact:true}).waitFor({state:'visible'});
         check(await story.locator('.story-picture img').last().getAttribute('src')===first,'Previous picture not restored');return {service,topics:3,pictures:2};
+      });
+    }
+    if(phase==='prashna'){
+      for(const [width,height] of [[390,844],[1440,900]])await run('Prashna booking quantity and fixed-service switch '+width,async()=>{
+        await visit('/booking?service=prashna-kundali',width,height);
+        const selected=current.locator('input[name=service][value="prashna-kundali"]');
+        check(await selected.isChecked(),'Direct Prashna link did not select its enabled service');
+        check(await current.locator('.booking-alert-actions').count()===0,'Enabled Prashna still reports unavailable');
+        const card=current.locator('.service-card--prashna');await card.scrollIntoViewIfNeeded();
+        await current.waitForFunction(()=>{const img=document.querySelector('.service-card--prashna img');return img?.complete&&img.naturalWidth>0;});
+        check((await card.innerText()).includes('per question'),'Card does not explain unit pricing');
+        const quantity=current.locator('#question-count');
+        check((await quantity.locator('option').evaluateAll(options=>options.map(o=>o.value))).join(',')==='1,2,3,4,5,6,7,8,9,10','Count choices differ from1–10');
+        const totals=[];
+        for(const count of [1,3,10]){
+          await quantity.selectOption(String(count));
+          const expected=new Intl.NumberFormat('en-IN',{style:'currency',currency:'INR',maximumFractionDigits:0}).format(count*1100);
+          await current.waitForFunction(value=>document.querySelector('.amount-plaque strong')?.textContent===value,expected);
+          check((await current.locator('#question-count-hint').innerText()).includes('One 30-minute appointment'),'Count incorrectly changes appointment duration');
+          totals.push({questions:count,total:await current.locator('.amount-plaque strong').innerText()});
+        }
+        check(await current.evaluate(()=>document.documentElement.scrollWidth-innerWidth)<=1,'Prashna booking overflows on '+width);
+        await current.locator('.service-card').filter({has:current.locator('input[value="kundli-matching"]')}).click();
+        check(await quantity.count()===0,'Fixed service kept the quantity selector');
+        check(await current.locator('.summary-row').filter({hasText:'Questions'}).count()===0,'Fixed service kept question pricing');
+        check((await current.locator('.amount-plaque strong').innerText())==='₹2,100','Fixed service price multiplied after switch');
+        check(await current.locator('.submit-button').isDisabled(),'Payment became available without a complete appointment');
+        return {width,totals,fixedServiceRestored:true,submitted:false};
+      });
+      await run('Prashna native topics, FAQs and fee examples',async()=>{
+        await visit('/services/prashna-kundali');
+        check(await current.locator('[data-prashna-scene]').count()===6,'Missing Prashna sections');
+        const tabs=current.getByRole('tab');check(await tabs.count()===3,'Missing question topics');
+        for(let i=0;i<3;i++){await tabs.nth(i).click();check(await tabs.nth(i).getAttribute('aria-selected')==='true','Topic selection missing');check(await current.getByRole('tabpanel').locator('.example-sheet').count()===2,'Expected two examples per topic');}
+        await tabs.first().focus();await current.keyboard.press('End');check(await tabs.last().getAttribute('aria-selected')==='true','End did not select final topic');
+        await current.keyboard.press('ArrowRight');check(await tabs.first().getAttribute('aria-selected')==='true','Topic keyboard wrap failed');
+        const faqs=current.locator('details[name="prashna-faq"]');check(await faqs.count()===5,'Missing Prashna FAQs');
+        await faqs.nth(0).locator('summary').click();await faqs.nth(1).locator('summary').click();
+        check(await current.locator('details[name="prashna-faq"][open]').count()===1,'Prashna FAQs are not exclusive');
+        const fees=await current.locator('.amount-example').allTextContents();
+        check(fees.join(' ').includes('₹1,100')&&fees.join(' ').includes('₹3,300')&&fees.join(' ').includes('₹11,000'),'Fee examples are incorrect');
+        return {sections:6,topics:3,examplesPerTopic:2,faqs:5};
+      });
+      await run('Prashna assembly, ambient pause and reduced movement',async()=>{
+        await current.emulateMedia({reducedMotion:'no-preference'});await current.mouse.move(0,0);await visit('/services/prashna-kundali');
+        await current.waitForFunction(()=>document.querySelector('.prashna-hero')?.dataset.motionProgress==='1.000',{},{timeout:10000});
+        const ambient=current.locator('.prashna-art-stage [data-ambient-part="note"]');
+        const before=await ambient.evaluate(el=>getComputedStyle(el).transform);await current.waitForTimeout(400);const after=await ambient.evaluate(el=>getComputedStyle(el).transform);
+        check(before!==after,'Settled Prashna artwork is not looping');
+        await current.locator('.prashna-art-stage').hover();await current.waitForTimeout(50);
+        const paused=await ambient.evaluate(el=>getComputedStyle(el).transform);await current.waitForTimeout(300);
+        check(paused===await ambient.evaluate(el=>getComputedStyle(el).transform),'Artwork does not pause on hover');
+        await current.emulateMedia({reducedMotion:'reduce'});
+        check(await ambient.evaluate(el=>getComputedStyle(el).animationName)==='none','System reduced motion is not respected');
+        return {heroSettled:true,ambientMoves:true,hoverPauses:true,reducedMotionStops:true};
+      });
+      await run('Prashna through review and quantity invalidation without submitting',async()=>{
+        await visit('/booking?service=prashna-kundali');
+        const response=await context.request.get(origin+'/api/booking-policy',{timeout:45000});check(response.status()===200,'Policy unavailable');const policy=await response.json();
+        await current.locator('#question-count').selectOption('3');
+        const selected=await availableDay(policy,'prashna-kundali',3);await chooseDate(selected.dateLabel);
+        await current.getByRole('button',{name:'Fill your details →',exact:true}).click();
+        await current.locator('#full_name').fill('Read-only Browser Check');await current.locator('#phone').fill('0000000000');
+        await current.getByRole('button',{name:'Review your booking →',exact:true}).click();
+        const summary=await current.locator('.summary-sheet').innerText();
+        check(summary.includes('Prashna Kundali')&&summary.includes('3 × ₹1,100')&&summary.includes('₹3,300'),'Prashna review lost count/unit/total');
+        check(summary.includes('30 minutes · Google Meet'),'Prashna appointment is not one30-minute Google Meet');
+        check(await current.locator('.submit-button').isDisabled(),'Payment active without acknowledgement');
+        await current.locator('#question-count').selectOption('10');
+        check(await current.locator('input[name=time]:checked').count()===0,'Quantity change kept the previous selected time');
+        check(await current.locator('.submit-button').isDisabled(),'Quantity change left payment enabled');
+        await current.waitForFunction(()=>document.querySelector('.amount-plaque strong')?.textContent==='₹11,000');
+        return {day:selected.day,questions:3,reachedReview:true,amountPaise:330000,selectedTimeClearedOnCountChange:true,customerDetailsSubmitted:false,bookingCreated:false};
+      });
+    }
+    if(phase==='links'){
+      const payload=fragment.slice(phase.length+1);check(!!payload,'Links phase needs the actual collected public targets');
+      const targets=[...new Set(JSON.parse(decodeURIComponent(payload)))];check(targets.length>0,'No observed internal links supplied');
+      for(const target of targets)await run('Internal link '+target,async()=>{
+        const url=new URL(target);check(url.origin===origin,'Unexpected external target');
+        const response=await context.request.get(url.href,{timeout:45000});check(response.status()===200,'Internal destination HTTP '+response.status());
+        if(url.hash){await current.goto(url.href,{waitUntil:'domcontentloaded',timeout:45000});await current.locator('#page-content h1').waitFor({state:'visible',timeout:30000});check(await current.locator('[id]').evaluateAll((nodes,id)=>nodes.some(n=>n.id===id),decodeURIComponent(url.hash.slice(1))),'Internal anchor is missing: '+url.hash);}
+        return {url:target,http:200,anchorChecked:!!url.hash};
       });
     }
     if(phase==='api'){
@@ -223,11 +332,26 @@ globalThis.hostedReadOnlyReview=async (page) => {
         check((response.headers()['cache-control']||'').includes('no-store'),'Response permits storage');
         const data=await response.json();if(path==='/api/health')check(data.status==='online','Application is offline');
         if(path==='/api/service-state')check(data.enabled===true,'Booking is not ON');
-        if(path==='/api/booking-policy'){policy=data;check(data.policy.services.length===4,'Policy missing services');check(data.policy.required_contacts.includes('phone'),'Phone not required');check(data.policy.booking_verification.email===false,'Email verification differs from saved OFF choice');}
+        if(path==='/api/booking-policy'){policy=data;check(data.policy.services.length===services.length,'Policy missing services');check([...data.policy.services.map(s=>s.id)].sort().join(',')===[...services].sort().join(','),'Unexpected service identities');for(const s of data.policy.services){check(s.enabled===true,'Expected service disabled: '+s.id);check(s.duration_minutes===30,'Appointment duration changed: '+s.id);if(s.id==='prashna-kundali'){check(s.pricing.kind==='per_question'&&s.pricing.amount_paise===110000&&s.pricing.maximum_questions===10,'Incorrect Prashna pricing/count');check(s.required_preparation.length===0,'Unexpected required Prashna preparation');}else check(s.pricing.kind==='fixed'&&s.pricing.amount_paise===fixedFees[s.id],'Original service fee changed: '+s.id);}check(data.policy.meeting==='google_meet','Meeting arrangement changed');check(data.policy.required_contacts.includes('phone'),'Phone not required');check(data.policy.booking_verification.email===false,'Email verification differs from saved OFF choice');}
         return {path,http:response.status(),noStore:true};
       });
       if(policy){const tomorrow=new Date(Date.parse(policy.server_now)+86400000);const day=new Intl.DateTimeFormat('en-CA',{timeZone:policy.policy.timezone,year:'numeric',month:'2-digit',day:'2-digit'}).format(tomorrow);
         for(const service of services)await run('Availability '+service,async()=>{const response=await context.request.get(origin+'/api/availability?'+new URLSearchParams({service_id:service,day,questions:'1'}),{timeout:45000});check(response.status()===200,'Availability HTTP '+response.status());const data=await response.json();check(Array.isArray(data.slots),'Availability has no slots array');return {service,day,availableSlots:data.slots.length};});}
+      if(policy){
+        let selectedDate;
+        for(const count of [1,3,10])await run('Prashna server quantity '+count,async()=>{
+          selectedDate??=availableDay(policy,'prashna-kundali',1);const selected=await selectedDate;
+          const response=await context.request.get(origin+'/api/availability?'+new URLSearchParams({service_id:'prashna-kundali',day:selected.day,questions:String(count)}),{timeout:45000});
+          check(response.status()===200,'Prashna availability HTTP '+response.status());const data=await response.json(),quote=data.service;
+          check(quote.questions===count&&quote.amount_paise===110000*count,'Server count/fee total mismatch');
+          check(quote.duration_minutes===30&&quote.meeting==='google_meet','Count changed appointment duration or platform');
+          check(quote.quote_version===policy.quote_version,'Quote is not bound to the current live policy');
+          check(data.slots.length>0,'No slots on the inspected available day');check(data.slots.every(slot=>Date.parse(slot.ends_at)-Date.parse(slot.starts_at)===30*60000),'A Prashna slot is not30 minutes');
+          return {questions:count,amountPaise:quote.amount_paise,durationMinutes:quote.duration_minutes,day:selected.day,slots:data.slots.length};
+        });
+      }
+      const retired=['/certificate.webp',...['jyotish-shastri','jyotish-acharya','astro-research-institute','trinity-vaastu-numerology'].flatMap(name=>['preview.webp','full.webp','original.'+(name==='astro-research-institute'?'pdf':'jpeg')].map(file=>'/media/certificates/'+name+'-'+file))];
+      for(const path of retired)await run('Retired certificate '+path,async()=>{const response=await context.request.get(origin+path,{maxRedirects:0,timeout:45000});check(response.status()===404,'Retired certificate is still published');return {path,http:404};});
       await run('Public sitemap and robots',async()=>{
         const response=await context.request.get(origin+'/sitemap.xml');check(response.status()===200,'Sitemap unavailable');const xml=await response.text(),urls=[...xml.matchAll(/<loc>([^<]+)<\/loc>/g)].map(match=>match[1]);
         const expected=paths.filter(path=>path!=='/booking/receipt');check(urls.length===expected.length,'Unexpected sitemap route count '+urls.length);check(expected.every(path=>urls.includes(origin+path)),'Public route absent from sitemap');

@@ -2,7 +2,7 @@
 
 ## Current website work — 16 October 2026
 
-Prashna Kundali is added across Home, About, Services and a new six-section service page, with two purpose-made photographs and scoped multi-stage movement. Booking supports ₹1,100 per question, 1–10 questions and one 30-minute Google Meet appointment. **Live service activation still needs the existing company sign-in**; the public policy currently retains four services and the new deep link shows a clear unavailable notice without selecting another service. See [the current feature, review and activation guide](docs/prashna-kundali.md).
+Prashna Kundali is added across Home, About, Services and a new six-section service page, with two purpose-made photographs and scoped multi-stage movement. Booking supports ₹1,100 per question, 1–10 questions and one 30-minute Google Meet appointment. **Prashna is enabled in the actual saved service policy.** The direct booking link selects it, the native 1–10 question choices and server totals agree, and the original four service prices remain unchanged. See [the current feature, review and activation guide](docs/prashna-kundali.md).
 
 At the owner's request, About's four certificates/course gallery, reader and active public media are removed. Originals, comparisons and the earlier clean worktree remain intact. The personal introduction leads directly into five service choices, with the original choreography and measured backdrop compensation preserved. See [certificate retirement](docs/about-certifications.md).
 
@@ -10,7 +10,7 @@ Reviews contains the complete accepted five-section page and all twelve accounts
 
 The older `/studio/calendar` address is wired to the existing protected staff handler. Its missing backend export and host rewrite were deterministically diagnosed and repaired. The Booking state-read cancellation investigation is set aside at the owner's request; no guessed timeout or booking-system repair is included. See [the diagnosis](docs/routing-diagnosis-2026-10-12.md).
 
-The historical hosted assessment remains **105/107 cases passing (98.1%)**, not a clean full-suite result. The current programme uses source/browser review and necessary compilation, with no tests or release gates. Actual publication hashes and official-domain observations are recorded in the client studies `design-review/2026-10-12-approved-reviews-publication/` and `design-review/2026-10-12-about-certifications/`; a push alone does not prove publication. Booking stays ON and Vercel stays disconnected from Codex.
+The owner-authorized [16 October hosted release gate](docs/hosted-checks-2026-10-16.md) passes **151/151 unique cases (100%)** across all nine phases, with 1, 390 assertions and zero blocked/attempted unsafe requests. Both earlier attempts and the test-expectation/image-lifecycle corrections are retained; no product code changed during gate closeout. The12 October 105/107 result is historical. Initial implementation used no tests; the later explicit hosted-gate instruction superseded that boundary for this run. No entire local suite or real provider/customer transaction was run. Actual publication identities and evidence remain in client `design-review/2026-10-16-prashna-implementation/` and `design-review/2026-10-16-prashna-hosted-gate/`. Booking stays ON and Vercel stays disconnected from Codex.
 
 ## Current change — 11 October 2026
 
@@ -43,7 +43,7 @@ This programme changes only Sarsa public presentation and its client-owned servi
 
 ## Local development and checks
 
-The commands below document existing tools. The current 16 October programme excludes tests, lint, coverage and release gates; only the necessary build and ordinary visual/source review are run.
+The commands below document existing local tools. The current closeout ran the complete actual hosted read-only gate, documented in [its report](docs/hosted-checks-2026-10-16.md). It did not run the entire local suite, lint, coverage or release preflight. Necessary compilation is separate proof.
 
 Use Node 22 and the committed frontend lockfile:
 
@@ -72,4 +72,4 @@ The contained package is `54af467afbe152286f1f81f28f904a8b59b51e31111e6a81d93b1d
 
 Use the existing route only: `NeuraFlowUser1/Astrologer_Madhuri_Gupta` → `main` → Vercel `neura-flow1/astrologer-madhuri-gupta` → `https://www.sarsajyotishsansthan.com`.
 
-Vercel stays disconnected from Codex. Publish the same locally qualified commit through Git, then verify its actual public asset identities and read-only page journeys on the official domain. A successful Git push alone does not establish a successful online release. Booking remains ON. The only approved operational change is appending Prashna through the existing protected current-revision settings endpoint after website readback; it remains pending owner-held company sign-in. Do not overwrite the full saved document from bootstrap.
+Vercel stays disconnected from Codex. Publish the same locally qualified commit through Git, then verify its actual public asset identities and read-only page journeys on the official domain. A successful Git push alone does not establish a successful online release. Booking remains ON. The owner completed the single approved protected Prashna addition after website publication. Public policy, native choices and server totals confirm activation. No further service-setting save is pending. Do not overwrite the full saved document from bootstrap.

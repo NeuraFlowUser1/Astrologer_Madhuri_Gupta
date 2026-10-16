@@ -2,6 +2,8 @@
 
 12 October 2026. The owner confirms Madhuri approved all twelve accounts in the accepted design as legitimate and explicitly authorizes their publication. The address remains `/testimonials`; visible wording is Reviews or Customer reviews. This is recorded client approval, not independent identity verification.
 
+The subsequent [16 October complete hosted read-only gate](hosted-checks-2026-10-16.md) passes 151/151 cases, including the real five-chapter Reviews page, six-to-twelve expansion, selected navigation and internal destinations. Its nine Home FAQs include the approved Reviews question. The dated focused proof below remains12 October evidence, not a fresh local coverage run.
+
 ## Public content and design
 
 `frontend/src/site/testimonials-content.mjs` is the single immutable public review collection: twelve approved accounts, three for each of the four services, in English, Hinglish and Roman Hindi. Names, cities, quotations, excerpts, questions and complete story paragraphs exactly match the approved records. No new accounts, ratings, platform badges, customer portraits, verification claims or promised outcomes are added. Tests use a small alias to the same source instead of maintaining a conflicting duplicate.
@@ -24,7 +26,7 @@ React owns content, filters and readers; page-local motion preserves staged asse
 
 The actual public route was rendered at 320, 390, 768, 1050, 1051, 1440 and 1920px. All seven have no sideways overflow. Desktop/phone screenshots were compared with the original accepted study. Six browser contexts passed: responsive layout; desktop reading; phone reading; inline reader; reduced motion; and booking OFF. All four filters, six-to-twelve expansion, featured/theme stability, keyboard containment/return, route cleanup and Home FAQ navigation passed. No page errors or unexpected requests were observed. Existing public font requests are allowed; booking/display-state reads are intercepted only inside these local checks.
 
-Normal-motion observation confirmed all five scene entries and the original opening paper delays of 150/270/390ms, plus focus/offscreen orbit suspension. Build, both display modes, public ownership, inclusion of every approved account's exact text and exclusion of private previews pass. That dated compiled check preserved the then-public twelve certificate classifications. The current 16 October source instead requires certificate retirement, while retaining all twelve approved reviews and private-harness protections; no current check run is implied. No full local/hosted suite or provider transaction was run. The historical 105/107 hosted assessment remains a dated report.
+Normal-motion observation confirmed all five scene entries and the original opening paper delays of 150/270/390ms, plus focus/offscreen orbit suspension. Build, both display modes, public ownership, inclusion of every approved account's exact text and exclusion of private previews pass. That dated compiled check preserved the then-public twelve certificate classifications. The current 16 October source instead requires certificate retirement, while retaining all twelve approved reviews and private-harness protections; no current check run is implied. No full local/hosted suite or provider transaction was run during that 12 October publication. The later 16 October hosted result is linked above; the historical 105/107 assessment remains dated evidence.
 
 ## Publication and operating boundary
 

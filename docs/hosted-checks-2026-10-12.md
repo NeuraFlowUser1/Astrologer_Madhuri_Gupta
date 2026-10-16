@@ -1,5 +1,7 @@
 # Sarsa hosted verification — 12 October 2026
 
+**Historical assessment.** The [16 October current hosted gate](hosted-checks-2026-10-16.md) supersedes this result and passes 151/151 cases against the now-published Reviews, staff-alias repair and enabled Prashna service. The evidence below describes only the 12 October website/run; its then-unpublished/unfinished statements are historical.
+
 The owner requested documentation alignment and the entire hosted test suite on 12 October. The current checkout has local unit, compiled-browser and isolated booking-system tests, but no existing full hosted runner. Those commands must not be relabelled as live tests. The new repeatable read-only browser review is `frontend/tests/hosted/read-only-review.js`.
 
 ## Scope and boundaries
