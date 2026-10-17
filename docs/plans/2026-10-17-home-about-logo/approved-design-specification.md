@@ -6,7 +6,7 @@
 
 Help a visitor recognise Sarsa, identify Madhuri, understand what she can help with, and read her actual studies without a long paragraph. Build on the existing cream/forest identity and opening choreography. The certificate gallery remains removed. A Home portrait is deferred until a later owner request; the existing authentic About portrait remains.
 
-The actual application is `../../.local-runtime/prashna-service-20261016`, source commit `7775006bee0065b7a497bc6573f001013c7687f5`, branch `work/prashna-service-and-certificate-removal`. The enclosing imported application is older dirty material. This study is separate from both application and prior studies. Project 003 is a read-only reference. No shared factory asset, booking package, policy, database, payment, availability, staff access or provider connection changes.
+The original private study baseline was client-relative `.local-runtime/prashna-service-20261016`, source commit `7775006bee0065b7a497bc6573f001013c7687f5`, branch `work/prashna-service-and-certificate-removal`. The enclosing imported application is older dirty material. This study is separate from both application and prior studies. Project 003 is a read-only reference. No shared factory asset, booking package, policy, database, payment, availability, staff access or provider connection changes.
 
 Use the established spelling **Sarsa Jyotish Sansthan**. The owner's latest spelling is treated as an informal transcription, not a requested legal name change. The name, `by Madhuri Gupta`, and **Astro & Jyotish guidance** appear clearly in the proposed Home hero. The future page title would be `Astro Guidance by Madhuri Gupta | Sarsa Jyotish Sansthan`; About would be `About Madhuri Gupta — Astro & Jyotish | Sarsa Jyotish Sansthan`.
 

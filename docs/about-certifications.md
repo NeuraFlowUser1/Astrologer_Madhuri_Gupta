@@ -1,6 +1,6 @@
 # About Madhuri: certificates removed
 
-16 October 2026. The owner requested removal of the four-document certificate/course gallery and enlarged reader. The personal introduction now leads directly into five service choices. The subsequently approved17 October hero adds text-only, source-backed course names/issuers and owner-confirmed15+ experience in an attached band; it does not restore the gallery or claim awards, university degrees or accreditation. See [the current Home/About guide](hero-brand-2026-10-17.md).
+16 October 2026. The owner requested removal of the four-document certificate/course gallery and enlarged reader. The personal introduction now leads directly into five service choices. The subsequently approved17 October hero adds text-only, source-backed course names/issuers and owner-confirmed 15+ experience in an attached band; it does not restore the gallery or claim awards, university degrees or accreditation. See [the current Home/About guide](hero-brand-2026-10-17.md).
 
 The retired application owners are `Certifications.jsx`, `certificates-content.mjs`, `certifications.css`, `certifications-motion.mjs`, their dedicated preview/check/config files and thirteen active public certificate files, including the unused older `certificate.webp`. Classification/export entries are removed, and fresh build output excludes them. React Aria/date/dialog dependencies and the committed lockfile remain because Booking uses them.
 

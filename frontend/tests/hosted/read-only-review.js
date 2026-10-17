@@ -48,6 +48,11 @@ globalThis.hostedReadOnlyReview=async (page) => {
       await current.locator('input[name=service]').last().waitFor({state:'attached',timeout:30000});
       check(await current.locator('input[name=service]').count()===services.length,'Live service choices have not finished loading');
     }
+    if(new URL(path,origin).pathname==='/booking/receipt'){
+      // Admission starts unavailable until the actual ON state arrives. A generic
+      // heading can belong to that initial boundary, rather than the lookup page.
+      await current.locator('.abs-lookup-form').waitFor({state:'visible',timeout:30000});
+    }
     await current.evaluate(()=>document.fonts.ready);
     await current.waitForTimeout(250);
   }
@@ -154,7 +159,10 @@ globalThis.hostedReadOnlyReview=async (page) => {
         check(await current.locator('.service-choice').count()===services.length,'Quick services are incomplete');
         for(const service of services)check(await current.locator('.service-choice[href="/services/'+service+'"]').count()===1,'Quick service missing: '+service);
         check(await current.title()==='Astro Guidance by Madhuri Gupta | Sarsa Jyotish Sansthan','Home browser title differs from approval');
-        await current.locator('.hero-meet').click();await current.waitForFunction(()=>location.hash==='#madhuri');
+        await current.locator('.hero-meet').click();await current.waitForFunction(()=>location.hash==='#madhuri'&&Math.abs(document.querySelector('#madhuri').getBoundingClientRect().top)<20);
+        check(await current.locator('.hero-meet').evaluate(node=>document.activeElement===node),'Pointer navigation should retain the activated link focus');
+        await current.locator('.hero-meet').focus();await current.keyboard.press('Enter');
+        await current.waitForFunction(()=>document.activeElement?.dataset.scrollDestination==='madhuri');
         check(await current.evaluate(()=>document.activeElement?.dataset.scrollDestination==='madhuri'),'Meet Madhuri must retain its measured scroll/focus destination');
         await visit('/about',width,width===390?844:900);
         check(await current.locator('main h1').innerText()==='Madhuri Gupta','Approved About name missing');
