@@ -6,10 +6,15 @@ import '../site/about.css';
 import catalogue from '../site/catalogue.json';
 import MarginArt from '../site/MarginArt.jsx';
 import {mountAboutLayout} from '../site/about-layout.mjs';
+import {AboutHeroBand} from '../site/HeroDetails.jsx';
+import {mountHeroBand} from '../site/hero-band-motion.mjs';
+import {titleFor} from '../site/page-metadata.mjs';
+import {madhuriIntroduction} from '../site/hero-content.mjs';
+import '../site/hero-refinement.css';
 const serviceOrder=['kundli-prediction','kundli-matching','vastu-consultation','numerology','prashna-kundali'];
 export default function About(){
  const root=useRef(null),navigate=useNavigate();
- useLayoutEffect(()=>{document.title='About Madhuri Gupta | Sarsa Jyotish Sansthan';const stopMotion=mountAboutMotion(root.current),stopLayout=mountAboutLayout(root.current);return()=>{stopLayout();stopMotion();};},[]);
+ useLayoutEffect(()=>{document.title=titleFor('/about');const stopMotion=mountAboutMotion(root.current),stopLayout=mountAboutLayout(root.current),stopBand=mountHeroBand(root.current,'#opening');return()=>{stopBand();stopLayout();stopMotion();};},[]);
  function actions(event){const button=event.target.closest('[data-book],#contact');if(button)navigate(button.id==='contact'?'/contact':'/booking');}
  return <div className="sarsa-about settled" ref={root} onClick={actions}>
 <section className="opening" id="opening">
@@ -23,38 +28,33 @@ export default function About(){
 <div className="portrait-wash">
 </div>
 </div>
-<div className="curtain curtain-left" id="curtain-left">
-<span className="eyebrow">{"BEHIND THE PRACTICE"}</span>
-<h1>{"Every story"}<br />{"begins with"}<br />
-<em>{"a person."}</em>
-</h1>
-<p>{"Meet Madhuri Gupta."}</p>
-<span className="scroll-note">{"MEET THE PERSON BEHIND THE PRACTICE"}</span>
+<div className="curtain curtain-left" id="curtain-left" aria-hidden="true">
+<span className="eyebrow">MEET MADHURI GUPTA</span>
+<p className="curtain-title">The person<br/>behind<br/><em>Sarsa.</em></p>
+<p>Madhuri Gupta.</p>
+<span className="scroll-note">ASTRO &amp; JYOTISH GUIDANCE</span>
 </div>
-<div className="curtain curtain-right" id="curtain-right">
+<div className="curtain curtain-right" id="curtain-right" aria-hidden="true">
 </div>
 <div className="carry" id="carry" aria-hidden="true">
 <i>
 </i>
 <span>{"\u2726"}</span>
 </div>
-<div className="moment" id="moment">
+<div className="moment" id="moment" aria-hidden="true">
 <span>{"THE PERSON BEHIND SARSA"}</span>
 <strong>{"Madhuri Gupta"}</strong>
 </div>
 <div className="introduction" id="introduction">
 <p className="eyebrow" data-enter="0">{"MEET MADHURI GUPTA"}</p>
-<h2 data-enter="1">{"A personal practice."}<br />
-<em>{"A thoughtful"}<br />{"conversation."}</em>
-</h2>
-<div className="rule" id="intro-rule">
+<div className="name-group" data-enter="1"><h1>Madhuri Gupta</h1><p className="intro-role">Astro &amp; Jyotish guidance</p></div>
+<div className="rule" id="intro-rule" aria-hidden="true">
 </div>
-<p data-enter="2">{"The person behind Sarsa Jyotish Sansthan."}<br />{"A place to begin with your questions."}</p>
-<BookingButton className="button" data-book="General consultation" data-enter="3">{"Book an appointment "}<span>{"\u2197"}</span>
-</BookingButton>
-<BookingAnchor href="#approach" data-public-scroll className="text-link" data-enter="3">{"Discover her approach \u2193"}</BookingAnchor>
+<p className="intro-body" data-enter="2">{madhuriIntroduction}</p>
+<div className="intro-actions" data-enter="3"><BookingLink className="hero-action" to="/booking">Book an appointment <span aria-hidden="true">↗</span></BookingLink><BookingAnchor href="#approach" data-public-scroll className="text-link">Discover her approach <span aria-hidden="true">↓</span></BookingAnchor></div>
 </div>
 </div>
+<AboutHeroBand/>
 </section>{"\n"}<section className="welcome wrap" id="welcome">
 <span className="eyebrow">{"A PERSONAL INTRODUCTION"}</span>
 <h2>{"Meet the person."}<br />

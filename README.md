@@ -1,6 +1,12 @@
 # Sarsa Jyotish Sansthan — Project 004
 
-## Current website work — 16 October 2026
+## Current website work — 17 October 2026
+
+The approved Home/About/logo mockup is implemented in the separate `work/home-about-logo-20261017` branch and `.local-runtime/hero-brand-20261017` worktree. Home has the full Sarsa/by Madhuri identity, Astro wording, confirmed15+ years, two clear actions and all five service shortcuts. About has a name-led introduction and source-backed experience/studies strip. The approved lotus/kundli logo is shared across public headers with a matching favicon. Original imagery, choreography and all lower content remain. Certificate media/gallery stay removed. See [the full current implementation guide](docs/hero-brand-2026-10-17.md) and [approved design specification](docs/plans/2026-10-17-home-about-logo/approved-design-specification.md).
+
+The compiled Home/About pages match all16 approved desktop/phone layouts at320–1920px. Native traces preserve4200/7150ms timing; measured lower About backdrops retain their sizes. The script-free reading view uses the same confirmed facts and existing ON/OFF modes. Production compilation and scoped source checks pass. Publication and the newly authorized full [17 October hosted gate](docs/hosted-checks-2026-10-17.md) are being completed; this source checkpoint does not claim an online result before it is observed.
+
+## Active services and previous release evidence — 16 October 2026
 
 Prashna Kundali is added across Home, About, Services and a new six-section service page, with two purpose-made photographs and scoped multi-stage movement. Booking supports ₹1,100 per question, 1–10 questions and one 30-minute Google Meet appointment. **Prashna is enabled in the actual saved service policy.** The direct booking link selects it, the native 1–10 question choices and server totals agree, and the original four service prices remain unchanged. See [the current feature, review and activation guide](docs/prashna-kundali.md).
 
@@ -10,7 +16,7 @@ Reviews contains the complete accepted five-section page and all twelve accounts
 
 The older `/studio/calendar` address is wired to the existing protected staff handler. Its missing backend export and host rewrite were deterministically diagnosed and repaired. The Booking state-read cancellation investigation is set aside at the owner's request; no guessed timeout or booking-system repair is included. See [the diagnosis](docs/routing-diagnosis-2026-10-12.md).
 
-The owner-authorized [16 October hosted release gate](docs/hosted-checks-2026-10-16.md) passes **151/151 unique cases (100%)** across all nine phases, with 1, 390 assertions and zero blocked/attempted unsafe requests. Both earlier attempts and the test-expectation/image-lifecycle corrections are retained; no product code changed during gate closeout. The12 October 105/107 result is historical. Initial implementation used no tests; the later explicit hosted-gate instruction superseded that boundary for this run. No entire local suite or real provider/customer transaction was run. Actual publication identities and evidence remain in client `design-review/2026-10-16-prashna-implementation/` and `design-review/2026-10-16-prashna-hosted-gate/`. Booking stays ON and Vercel stays disconnected from Codex.
+The previous owner-authorized [16 October hosted release gate](docs/hosted-checks-2026-10-16.md) passes **151/151 unique cases (100%)** across all nine phases, with 1,390 assertions and zero blocked/attempted unsafe requests. Both earlier attempts and the test-expectation/image-lifecycle corrections are retained; no product code changed during gate closeout. The12 October 105/107 result is historical. Initial implementation used no tests; the later explicit hosted-gate instruction superseded that boundary for this run. No entire local suite or real provider/customer transaction was run. Actual publication identities and evidence remain in client `design-review/2026-10-16-prashna-implementation/` and `design-review/2026-10-16-prashna-hosted-gate/`. Booking stays ON and Vercel stays disconnected from Codex.
 
 ## Current change — 11 October 2026
 
@@ -33,7 +39,7 @@ The public-site implementation and its checks are described in [the public-site 
 | `frontend/src/contact/` | Enquiry presentation and the existing shared enquiry coordinator. |
 | `frontend/src/booking/` | Client-owned appointment presentation, measured scrolling and contained-system adapters. |
 | `frontend/scripts/` | Public route generation and release preflight. |
-| `frontend/tests/public-site/` | Focused restoration unit/browser checks. Coverage is scoped to two retained functional owners; browser application responses are synthetic. |
+| `frontend/tests/public-site/` | Focused restoration unit/browser checks. Focused configurations declare their owners explicitly; the Home/About configuration covers every changed code owner without exclusions. Local fixtures are test-only; the hosted runner uses actual responses. |
 | `api/index.py` | Existing Python hosting entrypoint. |
 | `appointment-system/` | Complete independently contained booking system; no factory runtime dependency. |
 | `appointment-settings/` | This installation's public profile and settings contracts. Secrets are stored outside source. |
@@ -43,7 +49,7 @@ This programme changes only Sarsa public presentation and its client-owned servi
 
 ## Local development and checks
 
-The commands below document existing local tools. The current closeout ran the complete actual hosted read-only gate, documented in [its report](docs/hosted-checks-2026-10-16.md). It did not run the entire local suite, lint, coverage or release preflight. Necessary compilation is separate proof.
+The commands below document existing local tools. The current Home/About programme runs focused tests/coverage, targeted lint and necessary compilation, with the complete actual hosted read-only gate after publication. It does not run the entire local suite. [The current implementation guide](docs/hero-brand-2026-10-17.md) and [hosted report](docs/hosted-checks-2026-10-17.md) distinguish these results; older gate evidence remains dated.
 
 Use Node 22 and the committed frontend lockfile:
 

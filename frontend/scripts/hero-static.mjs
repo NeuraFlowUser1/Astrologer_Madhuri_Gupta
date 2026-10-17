@@ -1,0 +1,12 @@
+/** Progressive reading content for Home/About only. Booking still uses the official journey. */
+import {madhuriExperience,madhuriIntroduction,madhuriStudies} from '../src/site/hero-content.mjs';
+import catalogue from '../src/site/catalogue.json' with {type:'json'};
+const escape=value=>String(value).replaceAll('&','&amp;').replaceAll('"','&quot;').replaceAll('<','&lt;').replaceAll('>','&gt;');
+export function heroStatic(path,mode){
+ if(!['/','/about'].includes(path))return '';
+ const about=path==='/about';
+ const heading=about?'Madhuri Gupta':'Sarsa Jyotish Sansthan';
+ const introduction=about?madhuriIntroduction:'Marriage, work, family, or a new beginning. Bring the questions that matter to you.';
+ const facts=about?'<section data-hero-band><h2>Her experience and studies</h2>'+madhuriStudies.map(study=>'<h3>'+study.titles.map(escape).join('<br>')+'</h3><p>'+escape(study.institute)+'</p>').join('')+'</section>':'<section data-hero-band><h2>How can we help?</h2><p>Explore a service.</p><ul>'+catalogue.services.map(service=>'<li><a href="/services/'+escape(service.id)+'">'+escape(service.name)+'</a></li>').join('')+'</ul></section>';
+ return '<noscript data-sarsa-static><style>.sarsa-static-reading{max-width:900px;margin:40px auto;padding:24px;color:#21392f;background:#f7f5ef;font:17px/1.6 system-ui}.sarsa-static-reading h1{font:400 clamp(34px,5vw,52px)/1.15 Georgia}.sarsa-static-reading h2{font:400 28px/1.3 Georgia}.sarsa-static-reading h3{font:700 17px/1.5 system-ui}.sarsa-static-reading a{display:inline-block;padding:10px 0;margin-right:20px;color:#26483d;font-weight:700}.sarsa-static-reading section{margin-top:28px;padding:24px;border-radius:20px;background:#e9eddf}.sarsa-static-reading img{width:64px;height:64px}.sarsa-static-reading li{margin-block:4px}</style><main class="sarsa-static-reading"><a href="/"><img src="/media/sarsa-kundli-lotus-logo-128.png" alt=""> Sarsa Jyotish Sansthan</a><p>Astro &amp; Jyotish guidance</p><h1>'+heading+'</h1>'+(!about?'<p>by Madhuri Gupta</p><h2>Questions about life?<br>Let’s look at your kundli.</h2>':'')+'<p>'+escape(introduction)+'</p><p>'+madhuriExperience+' years of experience</p><nav aria-label="Your next step">'+(mode==='on'?'<a href="/booking">Book an appointment ↗</a>':'')+'<a href="/contact">Ask a question</a><a href="'+(about?'/':'/about')+'">'+(about?'Home':'Meet Madhuri')+'</a></nav>'+facts+'</main></noscript>';
+}

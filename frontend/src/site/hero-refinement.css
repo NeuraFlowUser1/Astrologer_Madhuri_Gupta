@@ -1,0 +1,71 @@
+/* Exact approved hero study values. Original scene owners and media remain unchanged. */
+.sarsa-home,.sarsa-about{--paper:#f7f5ef;--ink:#21392f;--forest:#26483d;--accent:#876137;--line:#b9c5ae;--action-ease:cubic-bezier(.2,.7,.2,1)}
+.hero-action:active{translate:0 1px}
+.sarsa-site .hero-action{min-height:52px;display:inline-flex;align-items:center;justify-content:center;gap:14px;border-radius:14px;padding:13px 20px;font:700 15px/1.4 system-ui;text-decoration:none;border:1px solid var(--forest);background:var(--forest);color:#fffdf8;box-shadow:0 8px 22px #26483d25;transition:translate 220ms var(--action-ease),box-shadow 220ms var(--action-ease),background 220ms var(--action-ease)}
+.sarsa-site .hero-action.secondary{background:#f7f5efe8;color:var(--forest);border-color:#879880;box-shadow:none}
+.hero-action svg,.service-choice svg{width:19px;height:19px;flex:none;fill:currentColor;stroke:none}
+.sarsa-site :is(.hero-action,.service-choice,.hero-meet):focus-visible{outline:3px solid #955d45;outline-offset:4px;box-shadow:0 0 0 7px #fffdf8}
+.sarsa-site .hero-band{position:relative;background:#e9eddf;padding:26px max(7vw,calc((100% - 1240px)/2));isolation:isolate}
+.hero-band-inner{display:flex;align-items:center;gap:30px;max-width:1240px;margin:auto}.band-intro{flex:none;min-width:135px}.band-intro h2{font:400 23px/1.2 Georgia,serif;letter-spacing:-.02em;margin:0}.band-intro p{font:14px/1.4 system-ui;color:#526456;margin:6px 0 0}
+.service-choices{display:flex;flex-wrap:wrap;gap:8px;margin:0;padding:0;list-style:none}.service-choice{min-height:46px;display:inline-flex;align-items:center;gap:9px;background:#fafbf5;border:1px solid #b5c2a8;border-radius:12px;padding:10px 13px;font:650 14px/1.35 system-ui;text-decoration:none;box-shadow:0 3px 8px #26483d08;transition:translate 220ms var(--action-ease),box-shadow 220ms var(--action-ease),border-color 220ms var(--action-ease)}
+/* Home retains the current scene, photograph and original curtain geometry. */
+.sarsa-home #welcome{height:auto;--hero-height:max(620px,calc(100svh - var(--public-header-height,85px)),var(--hero-content-height,620px))}
+.sarsa-home #welcome .hero-scene{height:var(--hero-height)}
+.sarsa-home .hero-copy{width:min(660px,86vw);padding-top:clamp(120px,14svh,152px)}
+.sarsa-home .hero-copy .eyebrow{font:700 13px/1.5 system-ui;letter-spacing:.09em;margin:0 0 15px;color:#486044}
+.sarsa-home .hero-copy h1{font:400 clamp(46px,3.6vw,52px)/1.08 Georgia,serif;letter-spacing:-.025em;max-width:none;margin:0}
+.sarsa-home .hero-byline{font:italic 33px/1.25 Georgia,serif;color:var(--accent);margin:10px 0 25px}
+.sarsa-home .hero-question{font:400 26px/1.3 Georgia,serif;letter-spacing:-.015em;margin:0 0 14px;max-width:35ch}
+.sarsa-home .hero-copy .lead{font:18px/1.6 system-ui;max-width:48ch;margin:0 0 26px}
+.sarsa-home .actions{gap:12px;display:flex;flex-wrap:wrap;margin:0}
+.sarsa-home .hero-meet{display:inline-flex;align-items:center;gap:12px;font:700 15px/1.5 system-ui;text-decoration:underline;text-underline-offset:6px;margin-top:19px;min-height:44px;transition:translate 220ms var(--action-ease)}
+.hero-experience{display:inline-flex;align-items:center;gap:8px;margin:18px 0 0;font:650 14px/1.4 system-ui;color:#375740;background:#f7f5eff0;border:1px solid #b6c1aa;border-radius:12px;padding:8px 11px}.hero-experience svg{width:18px;height:18px;fill:currentColor;flex:none}
+.sarsa-home .hero-bottom{bottom:28px}.sarsa-home .hero-bottom>span[lang=hi]{max-width:70%;font-size:17px}
+.sarsa-home .hero-band{padding-block:24px}
+/* About uses the exact incumbent 660/940px animation surface. New facts sit outside it. */
+.sarsa-about .opening{height:auto;max-width:1440px}
+.sarsa-about .scene{height:660px;position:relative;top:auto}
+.sarsa-about .curtain-left .curtain-title{font:400 52px/1.13 Georgia,serif;letter-spacing:-.025em;margin-top:25px}
+.sarsa-about .introduction{left:54%;right:5%;top:31%}
+.sarsa-about .introduction .eyebrow{font:700 12px/1.6 system-ui;letter-spacing:.1em;margin:0 0 14px;color:var(--accent)}
+.sarsa-about .name-group h1{font:400 52px/1.12 Georgia,serif;letter-spacing:-.025em;margin:0}
+.sarsa-about .intro-role{font:italic 24px/1.3 Georgia,serif;color:var(--accent);margin:9px 0 0}
+.sarsa-about #intro-rule{margin:22px 0;width:70px;height:1px;background:#9da996;transform-origin:left}
+.sarsa-about .intro-body{font:17px/1.6 system-ui;max-width:43ch;margin:0 0 24px}
+.sarsa-about .intro-actions{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+.sarsa-about .intro-actions .hero-action{font-size:15px;padding-inline:18px}
+.sarsa-about .intro-actions .text-link{margin:0;display:inline-flex;align-items:center;gap:8px;min-height:48px;font-size:14px;font-weight:700;text-decoration:none;padding:10px 0}
+.sarsa-about .hero-band{padding:27px 5%;max-width:1440px;margin:auto;background:#e9eddf}
+.sarsa-about .hero-band-inner{display:grid;grid-template-columns:.65fr 1fr 1.2fr 1.2fr;gap:24px;align-items:start}
+.study-fact{display:flex;gap:12px;align-items:flex-start;min-width:0}.fact-icon{width:31px;height:31px;flex:none;padding:6px;border-radius:10px;background:#dce4cf;color:#375740}.fact-icon svg{display:block;width:100%;height:100%;fill:currentColor}
+.study-fact h3{font:700 15px/1.4 system-ui;letter-spacing:0;margin:0}.study-fact p{font:14px/1.5 system-ui;letter-spacing:0;color:#526456;margin:6px 0 0;max-width:30ch}
+.experience-fact h3{font:400 30px/1 Georgia,serif}.experience-fact h3 span{display:block;font:700 15px/1.4 system-ui;margin-top:6px}
+@media(hover:hover) and (pointer:fine){.hero-action:hover{translate:0 -3px;box-shadow:0 13px 26px #26483d32}.hero-action.secondary:hover{background:#f7f5ef;box-shadow:0 10px 22px #26483d1c}.service-choice:hover{translate:0 -3px;box-shadow:0 9px 18px #26483d20;border-color:#6f8564}.hero-meet:hover{translate:0 -2px}}
+@media(min-width:1600px){.sarsa-home .hero-copy{margin-left:max(7vw,calc((100vw - 1240px)/2));padding-left:0}}
+@media(max-width:1150px) and (min-width:701px){.sarsa-home .hero-copy{width:min(620px,86vw)}.hero-band-inner{flex-wrap:wrap;gap:18px}.band-intro{min-width:0}.sarsa-about .hero-band-inner{grid-template-columns:1fr 1fr;gap:24px}.sarsa-about .introduction{right:4%}.sarsa-about .name-group h1{font-size:44px}.sarsa-about .intro-role{font-size:22px}.sarsa-about .intro-body{font-size:16px}.sarsa-about .intro-actions{gap:10px 12px}.sarsa-about .intro-actions .hero-action{font-size:14px;padding-inline:12px}.sarsa-about .intro-actions .text-link{font-size:13px}}
+@media(max-width:700px){
+ .sarsa-home #welcome{--hero-height:max(700px,calc(100svh - var(--public-header-height,135px)),var(--hero-content-height,700px))}
+ .sarsa-home .hero-copy{width:calc(100% - 48px);margin-left:24px;padding:clamp(56px,8svh,72px) 0 0}
+ .sarsa-home .hero-copy .eyebrow{font-size:11px;letter-spacing:.07em;margin-bottom:14px}
+ .sarsa-home .hero-copy h1{font-size:36px;line-height:1.1;max-width:15ch}
+ .sarsa-home .hero-byline{font-size:28px;margin:8px 0 22px}.sarsa-home .hero-question{font-size:23px;line-height:1.32;max-width:26ch;margin-bottom:14px}
+ .sarsa-home .hero-copy .lead{font-size:17px;line-height:1.55;margin-bottom:24px}.sarsa-home .actions{gap:10px}.sarsa-site .hero-action{font-size:14px;min-height:49px;padding:12px 16px}.sarsa-home .hero-meet{margin-top:10px;font-size:14px}.hero-experience{font-size:13px;margin-top:12px}.sarsa-home .hero-bottom{left:24px;right:24px;bottom:24px}.sarsa-home .hero-bottom>span[lang=hi]{font-size:15px;max-width:75%}
+ .sarsa-site .hero-band{padding:25px 24px 29px}.hero-band-inner{display:block}.band-intro{margin-bottom:17px}.band-intro h2{font-size:22px}.band-intro p{font-size:14px}.service-choices{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}.service-choices li{min-width:0}.service-choices li:last-child{grid-column:1/-1}.service-choices li:last-child a{justify-content:center}.service-choice{display:flex;width:100%;height:100%;font-size:14px;min-height:48px;padding:9px 11px;gap:8px}.service-choice svg{width:17px;height:17px}
+ .sarsa-about .scene{height:940px}.sarsa-about .curtain-left .curtain-title{font-size:34px}.sarsa-about .introduction{left:8%;right:7%;top:55%}
+ .sarsa-about .introduction .eyebrow{font-size:10px;padding-left:max(40px,calc(4vw + 35px));margin-bottom:14px}.sarsa-about .name-group h1{font-size:36px;line-height:1.15}.sarsa-about .intro-role{font-size:22px;margin-top:7px}.sarsa-about #intro-rule{margin:18px 0}.sarsa-about .intro-body{font-size:16px;line-height:1.55;margin-bottom:19px}.sarsa-about .intro-actions{display:flex;gap:10px 12px;align-items:center}.sarsa-about .intro-actions .hero-action{font-size:14px;min-height:49px;padding-inline:16px}.sarsa-about .intro-actions .text-link{font-size:13px;min-height:44px}
+ .sarsa-about .hero-band-inner{display:grid;grid-template-columns:1fr;gap:22px}.sarsa-about .band-intro{margin-bottom:0}.sarsa-about .hero-band{padding:28px 24px 32px}.study-fact h3{font-size:15px}.study-fact p{font-size:14px;max-width:none}.experience-fact h3{font-size:29px}.experience-fact h3 span{display:inline;margin-left:8px}.experience-fact p{margin-top:5px}.fact-icon{width:31px;height:31px}.context-edge{padding:28px 24px}
+}
+@media(min-width:651px) and (max-width:700px){.sarsa-about .scene{height:660px}.sarsa-about .introduction{left:54%;right:5%;top:31%}.sarsa-about .introduction .eyebrow{padding-left:0}.sarsa-about .name-group h1{font-size:38px}.sarsa-about .intro-role{font-size:20px}.sarsa-about .intro-body{font-size:15px}.sarsa-about .hero-band-inner{grid-template-columns:1fr 1fr}}
+@media(max-width:360px){.sarsa-home .hero-copy h1{font-size:34px}.sarsa-home .hero-question{font-size:21px}.sarsa-home .hero-copy .lead{font-size:16px}.sarsa-home .actions{gap:8px}.sarsa-site .hero-action{font-size:14px;padding-inline:14px}.service-choices{grid-template-columns:1fr}.service-choices li:last-child{grid-column:auto}.service-choice{justify-content:flex-start}.service-choices li:last-child a{justify-content:flex-start}.sarsa-about .name-group h1{font-size:34px}.sarsa-about .intro-body{font-size:15px}.sarsa-about .intro-actions .hero-action{font-size:14px}.sarsa-about .intro-actions .text-link{font-size:13px}}
+@media(prefers-reduced-motion:reduce){.sarsa-site :is(.hero-action,.service-choice,.hero-meet){transition:none!important;translate:none!important}.portrait-light{animation:none!important}}
+
+/* Translate root-relative lower backdrops by the added normal-flow band; do not resize them. */
+.sarsa-about .welcome-seal{top:calc(95px + var(--about-hero-band-growth,0px))}
+.sarsa-about .welcome-sheet{top:calc(65px + var(--about-hero-band-growth,0px))}
+.sarsa-about .invite-layer{top:var(--about-hero-band-growth,0px)}
+@media(max-width:650px){
+ .sarsa-about .welcome-seal{top:calc(65px + var(--about-hero-band-growth,0px))}
+ .sarsa-about .welcome-sheet{top:calc(42px + var(--about-hero-band-growth,0px))}
+ .sarsa-about .invite-layer-one{bottom:calc(40% + var(--about-row-growth-60,0px) - var(--about-hero-band-growth-40,0px))}
+ .sarsa-about .invite-layer-two{top:calc(56% - var(--about-row-growth-56,0px) + var(--about-hero-band-growth-44,0px))}
+}

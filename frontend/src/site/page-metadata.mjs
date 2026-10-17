@@ -1,7 +1,7 @@
 export const origin='https://www.sarsajyotishsansthan.com';
 export const pages={
- '/':['Madhuri Gupta','Personal astrology consultations with Madhuri Gupta at Sarsa Jyotish Sansthan. Explore consultations and book an appointment.'],
- '/about':['About Madhuri Gupta','Meet Madhuri Gupta, who leads Sarsa Jyotish Sansthan, and explore her approach to personal consultations.'],
+ '/':['Astro Guidance by Madhuri Gupta','Explore Astro and Jyotish guidance with Madhuri Gupta at Sarsa Jyotish Sansthan. Read about five services and book an appointment.'],
+ '/about':['About Madhuri Gupta — Astro & Jyotish','Meet Madhuri Gupta, who leads Sarsa Jyotish Sansthan in Agra. Read about her 15+ years of experience, Jyotish studies and approach.'],
  '/services':['Services','Explore Kundli Prediction, Kundli Matching, Vastu, Numerology and Prashna Kundali services with Madhuri Gupta. Read about each service and book an appointment.'],
  '/testimonials':['Customer reviews','Customer feedback on Kundli, Vastu and Numerology consultations with Madhuri Gupta at Sarsa Jyotish Sansthan.'],
  '/services/kundli-prediction':['Kundli Prediction','Explore your birth chart and the questions you bring to a personal Kundli Prediction consultation with Madhuri Gupta.'],

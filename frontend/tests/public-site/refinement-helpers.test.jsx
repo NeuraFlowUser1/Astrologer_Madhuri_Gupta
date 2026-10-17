@@ -71,7 +71,7 @@ test.each([{ctrlKey:true},{metaKey:true},{altKey:true},{shiftKey:true},{button:1
 });
 
 function attentionFixture(){const root=el('<div class="hero-copy"></div><div class="hero-bottom"></div><section id="consultations" data-motion-progress="1.000">'+Array.from({length:4},(_,i)=>`<article class="service" data-card="${i}"><div class="service-glow"></div><a href="#">Explore</a></article>`).join('')+'</section>');return {root,cards:[...root.querySelectorAll('.service')],section:root.querySelector('section')};}
-const visible=(cards,ratio=1)=>intersections.at(-1).fn(cards.map(target=>({target,isIntersecting:ratio>0,intersectionRatio:ratio})));
+const visible=(cards,ratio=1)=>intersections.at(-1).fn(cards.map(target=>({target,isIntersecting:ratio>0,intersectionRatio:ratio,boundingClientRect:rect(0,0,300,200),intersectionRect:rect(0,0,300,200*ratio)})));
 test('card attention begins only after the original entrance and meaningful individual visibility',async()=>{
  const f=attentionFixture();f.section.dataset.motionProgress='.500';const stop=mountCardAttention(f.root,{random:()=>.5});visible(f.cards,.4);vi.advanceTimersByTime(10000);expect(animations).toHaveLength(0);
  visible(f.cards);f.section.dataset.motionProgress='1.000';await Promise.resolve();vi.advanceTimersByTime(5499);expect(animations).toHaveLength(0);vi.advanceTimersByTime(1);expect(animations).toHaveLength(1);expect(Element.prototype.animate.mock.calls[0][1].duration).toBe(1400);
@@ -90,9 +90,9 @@ test('hidden tabs preserve remaining wait, offscreen events reset and reduced mo
  const card=animations[0].element.parentElement;visible([card],0);vi.advanceTimersByTime(5500);expect(animations).toHaveLength(2);media.matches=true;media.dispatchEvent(new Event('change'));expect(animations[1].cancel).toHaveBeenCalled();vi.advanceTimersByTime(20000);expect(animations).toHaveLength(2);
  stop();await Promise.resolve();visible(f.cards);expect(vi.getTimerCount()).toBe(0);
 });
-test('one visible last card waits for visibility changes, and missing animation APIs retain static manual feedback',async()=>{
- const f=attentionFixture(),stop=mountCardAttention(f.root,{random:()=>.5});visible([f.cards[0]]);vi.advanceTimersByTime(5500);animations[0].complete();await Promise.resolve();expect(vi.getTimerCount()).toBe(0);visible(f.cards);vi.advanceTimersByTime(5500);expect(animations).toHaveLength(2);stop();
- delete Element.prototype.animate;const g=attentionFixture(),fallback=mountHomeEnhancements(g.root);g.cards[1].dispatchEvent(new Event('pointerover',{bubbles:true}));expect(g.cards[1].firstChild.style.opacity).toBe('1');fallback();
+test('one visible card can repeat after its rest, and missing animation APIs retain static manual feedback',async()=>{
+ const f=attentionFixture(),stop=mountCardAttention(f.root,{random:()=>.5});visible([f.cards[0]]);vi.advanceTimersByTime(5500);animations[0].complete();await Promise.resolve();expect(vi.getTimerCount()).toBe(1);vi.advanceTimersByTime(5500);expect(animations).toHaveLength(2);expect(animations[1].element).toBe(f.cards[0].firstChild);stop();
+ delete Element.prototype.animate;const g=attentionFixture(),fallback=mountCardAttention(g.root);g.cards[1].dispatchEvent(new Event('pointerover',{bubbles:true}));expect(g.cards[1].firstChild.style.opacity).toBe('1');fallback();
 });
 test('failed decorative animation cannot block static actions; touch does not act as hover',()=>{
  const f=attentionFixture();Element.prototype.animate=()=>{throw Error('unsupported');};const stop=mountCardAttention(f.root,{random:()=>.5});visible(f.cards);vi.advanceTimersByTime(5500);const event=new Event('pointerover',{bubbles:true});event.pointerType='touch';f.cards[0].dispatchEvent(event);expect(f.cards[0].firstChild.style.opacity).toBe('0');const out=new Event('pointerout',{bubbles:true});out.pointerType='touch';f.cards[0].dispatchEvent(out);stop();
@@ -148,7 +148,7 @@ test('failed optional observers leave margin art static and Top in its footer sl
 });
 
 test('About background bounds subtract only the service-list growth and follow resizing and cleanup',async()=>{
- const root=el('<div class="consultation-grid"><div><p>Intro</p></div><div class="service-list"><div class="service-row"><div class="row-actions" style="margin-top:12px"></div></div></div></div>');
+ const root=el('<div class="consultation-grid"><div><p>Intro</p></div><div class="service-list"><div class="service-row" data-service-id="kundli-prediction"><div class="row-actions" style="margin-top:12px"></div></div></div></div>');
  const intro=root.querySelector('.consultation-grid>div'),list=root.querySelector('.service-list'),row=root.querySelector('.service-row'),actions=root.querySelector('.row-actions');
  intro.getBoundingClientRect=()=>rect(0,100,300,300);let natural=60;intro.firstChild.getBoundingClientRect=()=>rect(0,100,300,natural);
  let listHeight=156;list.getBoundingClientRect=()=>rect(0,100,300,listHeight);row.getBoundingClientRect=()=>rect(0,100,300,listHeight);actions.getBoundingClientRect=()=>rect(0,200,100,44);

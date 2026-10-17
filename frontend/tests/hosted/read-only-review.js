@@ -79,6 +79,7 @@ globalThis.hostedReadOnlyReview=async (page) => {
       scrollTo(0,0);
     });
     await current.waitForFunction(()=>[...document.querySelectorAll('main img')].every(img=>img.complete),{},{timeout:20000});
+    await current.waitForFunction(()=>document.querySelector('.brand-logo')?.complete,{},{timeout:15000});
     await current.waitForTimeout(600);
     const detail=await current.evaluate(()=>({
       path:location.pathname,title:document.title,canonical:document.querySelector('link[rel=canonical]')?.href,
@@ -86,6 +87,8 @@ globalThis.hostedReadOnlyReview=async (page) => {
       robots:document.querySelector('meta[name=robots]')?.content,
       h1:document.querySelectorAll('#page-content h1').length,
       headers:document.querySelectorAll('.sarsa-header').length,footers:document.querySelectorAll('.sarsa-footer').length,
+      logo:(()=>{const node=document.querySelector('.sarsa-header .brand-logo');return node&&{src:node.getAttribute('src'),loaded:node.complete&&node.naturalWidth===128,alt:node.getAttribute('alt')};})(),
+      favicon:document.querySelector('link[rel=icon]')?.getAttribute('href'),
       overflow:document.documentElement.scrollWidth-innerWidth,
       images:[...document.querySelectorAll('main img')].map(node=>({src:node.currentSrc||node.src,loaded:node.complete&&node.naturalWidth>0,altPresent:node.hasAttribute('alt')})),
       links:[...document.querySelectorAll('a[href]')].map(node=>node.href),
@@ -96,6 +99,8 @@ globalThis.hostedReadOnlyReview=async (page) => {
     check(detail.path===path,'Unexpected destination '+detail.path);
     check(detail.h1===1,'Expected one main title');
     check(detail.headers===1&&detail.footers===1,'Expected one shared header and footer');
+    check(detail.logo?.loaded&&detail.logo.src==='/media/sarsa-kundli-lotus-logo-128.png'&&detail.logo.alt==='','Approved shared logo is missing, broken or duplicated in the accessible name');
+    check(detail.favicon==='/media/sarsa-kundli-lotus-favicon.png','Approved favicon is missing');
     check(detail.overflow<=1,'Sideways overflow '+detail.overflow+'px');
     check(detail.title.includes('Sarsa')&&!detail.title.includes('Page not found'),'Missing route title');
     check(detail.canonical===origin+path,'Incorrect canonical '+detail.canonical);
@@ -122,7 +127,7 @@ globalThis.hostedReadOnlyReview=async (page) => {
       await run('Booking through review without submitting',async()=>{
         await visit('/booking');
         const response=await context.request.get(origin+'/api/booking-policy',{timeout:45000});check(response.status()===200,'Policy unavailable');const policy=await response.json();
-        const {day,dateLabel}=await availableDay(policy,'kundli-matching',1);
+        const {dateLabel}=await availableDay(policy,'kundli-matching',1);
         await current.locator('.service-card').filter({hasText:'Kundli Matching'}).click();
         await current.locator('.abs-date-group button[aria-haspopup="dialog"]').click();
         await current.getByRole('button',{name:new RegExp(dateLabel)}).click();
@@ -139,6 +144,29 @@ globalThis.hostedReadOnlyReview=async (page) => {
       });
     }
     if(phase==='interfaces'){
+      for(const width of [1440,390])await run('Approved Home/About identity and information '+width,async()=>{
+        await current.emulateMedia({reducedMotion:'reduce'});await visit('/',width,width===390?844:900);
+        check(await current.locator('main h1').innerText()==='Sarsa Jyotish Sansthan','Approved Home name missing');
+        check(await current.locator('.hero-byline').innerText()==='by Madhuri Gupta','Approved person byline missing');
+        check(await current.locator('.hero-experience').innerText()==='15+ years of experience','Confirmed experience missing');
+        check(await current.locator('.hero-action').count()===2,'Both Home actions must remain');
+        check(await current.locator('.hero-action.secondary').getAttribute('href')==='/contact','Question action destination changed');
+        check(await current.locator('.service-choice').count()===services.length,'Quick services are incomplete');
+        for(const service of services)check(await current.locator('.service-choice[href="/services/'+service+'"]').count()===1,'Quick service missing: '+service);
+        check(await current.title()==='Astro Guidance by Madhuri Gupta | Sarsa Jyotish Sansthan','Home browser title differs from approval');
+        await current.locator('.hero-meet').click();await current.waitForFunction(()=>location.hash==='#madhuri');
+        check(await current.evaluate(()=>document.activeElement?.dataset.scrollDestination==='madhuri'),'Meet Madhuri must retain its measured scroll/focus destination');
+        await visit('/about',width,width===390?844:900);
+        check(await current.locator('main h1').innerText()==='Madhuri Gupta','Approved About name missing');
+        check(await current.locator('.intro-role').innerText()==='Astro & Jyotish guidance','About role missing');
+        const facts=await current.locator('[data-hero-band]').innerText();
+        for(const text of ['15+','Jyotish Shastri','Jyotish Acharya','Shri Vedang Jyotish Sansthan','Bhrigu Nandi Nadi Astrology','Yogrishi Astro Research Institute'])check(facts.includes(text),'Approved fact missing: '+text);
+        check(await current.locator('[data-enter]').count()===4,'About entry groups changed');
+        check(await current.locator('#scene').evaluate(node=>node.offsetHeight)===(width<=650?940:660),'Original About scene size changed');
+        check(await current.locator('[data-hero-band]').evaluate(node=>getComputedStyle(node).opacity)==='1','Facts must settle with reduced motion');
+        check(await current.title()==='About Madhuri Gupta — Astro & Jyotish | Sarsa Jyotish Sansthan','About browser title differs from approval');
+        return {width,quickServices:5,confirmedExperience:'15+',courseTitles:3};
+      });
       await run('Home FAQs and back to top',async()=>{
         await visit('/');check(await current.locator('.service-grid article.service').count()===services.length,'Home is missing a service');check(await current.locator('.service--prashna a[href="/services/prashna-kundali"]').count()===1,'Home Prashna destination missing');const items=current.locator('.faq-list details');check(await items.count()===9,'Expected nine Home FAQs including approved Customer Reviews');check(await items.filter({hasText:'Can I read what other clients say?'}).locator('a[href="/testimonials"]').count()===1,'Approved Reviews FAQ destination missing');
         await items.nth(0).locator('summary').click();check(await items.nth(0).getAttribute('open')!==null,'FAQ did not open');
@@ -332,7 +360,7 @@ globalThis.hostedReadOnlyReview=async (page) => {
         check((response.headers()['cache-control']||'').includes('no-store'),'Response permits storage');
         const data=await response.json();if(path==='/api/health')check(data.status==='online','Application is offline');
         if(path==='/api/service-state')check(data.enabled===true,'Booking is not ON');
-        if(path==='/api/booking-policy'){policy=data;check(data.policy.services.length===services.length,'Policy missing services');check([...data.policy.services.map(s=>s.id)].sort().join(',')===[...services].sort().join(','),'Unexpected service identities');for(const s of data.policy.services){check(s.enabled===true,'Expected service disabled: '+s.id);check(s.duration_minutes===30,'Appointment duration changed: '+s.id);if(s.id==='prashna-kundali'){check(s.pricing.kind==='per_question'&&s.pricing.amount_paise===110000&&s.pricing.maximum_questions===10,'Incorrect Prashna pricing/count');check(s.required_preparation.length===0,'Unexpected required Prashna preparation');}else check(s.pricing.kind==='fixed'&&s.pricing.amount_paise===fixedFees[s.id],'Original service fee changed: '+s.id);}check(data.policy.meeting==='google_meet','Meeting arrangement changed');check(data.policy.required_contacts.includes('phone'),'Phone not required');check(data.policy.booking_verification.email===false,'Email verification differs from saved OFF choice');}
+        if(path==='/api/booking-policy'){policy=data;check(data.policy.services.length===services.length,'Policy missing services');check(data.policy.services.map(s=>s.id).sort().join(',')===[...services].sort().join(','),'Unexpected service identities');for(const s of data.policy.services){check(s.enabled===true,'Expected service disabled: '+s.id);check(s.duration_minutes===30,'Appointment duration changed: '+s.id);if(s.id==='prashna-kundali'){check(s.pricing.kind==='per_question'&&s.pricing.amount_paise===110000&&s.pricing.maximum_questions===10,'Incorrect Prashna pricing/count');check(s.required_preparation.length===0,'Unexpected required Prashna preparation');}else check(s.pricing.kind==='fixed'&&s.pricing.amount_paise===fixedFees[s.id],'Original service fee changed: '+s.id);}check(data.policy.meeting==='google_meet','Meeting arrangement changed');check(data.policy.required_contacts.includes('phone'),'Phone not required');check(data.policy.booking_verification.email===false,'Email verification differs from saved OFF choice');}
         return {path,http:response.status(),noStore:true};
       });
       if(policy){const tomorrow=new Date(Date.parse(policy.server_now)+86400000);const day=new Intl.DateTimeFormat('en-CA',{timeZone:policy.policy.timezone,year:'numeric',month:'2-digit',day:'2-digit'}).format(tomorrow);

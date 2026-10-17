@@ -7,9 +7,13 @@ import {mountHomeEnhancements,exclusiveFaq} from '../site/home-enhancements.mjs'
 import MarginArt from '../site/MarginArt.jsx';
 import ServiceMedia from '../site/ServiceMedia.jsx';
 import PrashnaArtwork from '../site/PrashnaArtwork.jsx';
+import {HeroIcon,HomeHeroBand,madhuriExperience} from '../site/HeroDetails.jsx';
+import {mountHeroBand} from '../site/hero-band-motion.mjs';
+import {titleFor} from '../site/page-metadata.mjs';
+import '../site/hero-refinement.css';
 export default function Home(){
  const root=useRef(null),navigate=useNavigate();
- useLayoutEffect(()=>{document.title="Sarsa Jyotish Sansthan | Madhuri Gupta";const stopMotion=mountHomeMotion(root.current),stopExtras=mountHomeEnhancements(root.current);return()=>{stopExtras();stopMotion();};},[]);
+ useLayoutEffect(()=>{document.title=titleFor('/');const stopMotion=mountHomeMotion(root.current),stopExtras=mountHomeEnhancements(root.current),stopBand=mountHeroBand(root.current,'#welcome');return()=>{stopBand();stopExtras();stopMotion();};},[]);
  function actions(event){if(event.defaultPrevented)return;const el=event.target.closest('[data-contact],#enquire,a');if(!el)return;if(el.matches('[data-contact]')){event.preventDefault();navigate('/contact');}else if(el.id==='enquire'){event.preventDefault();navigate('/booking');}else if(el.getAttribute('href')?.startsWith('/')&&!event.ctrlKey&&!event.metaKey&&!event.shiftKey&&event.button===0){event.preventDefault();navigate(el.getAttribute('href'));}}
  return <div className="sarsa-home settled" ref={root} onClick={actions}>{"\n"}<section id="welcome" className="scroll-scene hero" data-chapter="welcome" data-effect="g">
 <div className="scene hero-scene">
@@ -22,14 +26,18 @@ export default function Home(){
 <div className="hero-foreground right" aria-hidden="true">
 </div>
 <div className="hero-copy">
-<p className="eyebrow">{"Jyotish guidance with Madhuri Gupta"}</p>
-<h1>{"Questions about life?"}<br />{"Let’s look at your kundli."}</h1>
+<p className="eyebrow">ASTRO &amp; JYOTISH GUIDANCE</p>
+<h1>Sarsa Jyotish Sansthan</h1>
+<p className="hero-byline">by Madhuri Gupta</p>
+<h2 className="hero-question">Questions about life?<br/>Let’s look at your kundli.</h2>
 <p className="lead">Marriage, work, family, or a new beginning. Bring the questions that matter to you.</p>
 <div className="actions">
-<BookingAnchor className="button" href="/booking">{"Book an appointment "}<span aria-hidden="true">{"\u2197"}</span>
+<BookingAnchor className="hero-action" href="/booking"><HeroIcon name="calendar"/>{"Book an appointment "}<span aria-hidden="true">{"\u2197"}</span>
 </BookingAnchor>
-<BookingAnchor className="text-link" href="#madhuri" data-public-scroll>{"Meet Madhuri"}</BookingAnchor>
+<BookingAnchor className="hero-action secondary" href="/contact"><HeroIcon name="chat"/>Ask a question</BookingAnchor>
 </div>
+<BookingAnchor className="hero-meet" href="#madhuri" data-public-scroll>Meet Madhuri <span aria-hidden="true">→</span></BookingAnchor><br/>
+<p className="hero-experience"><HeroIcon name="sun"/>{madhuriExperience} years of experience</p>
 </div>
 <div className="hero-bottom">
 <span lang="hi">जीवन के सवाल, ज्योतिष की समझ के साथ।</span>
@@ -37,6 +45,7 @@ export default function Home(){
 </BookingAnchor>
 </div>
 </div>
+<HomeHeroBand/>
 </section>{"\n"}<span className="sarsa-scroll-destination" tabIndex="-1" data-scroll-destination="madhuri">Meet Madhuri Gupta</span><section id="madhuri" className="scroll-scene about" data-chapter="madhuri" data-effect="e">
 <div className="scene about-scene">
 <div className="about-image">
