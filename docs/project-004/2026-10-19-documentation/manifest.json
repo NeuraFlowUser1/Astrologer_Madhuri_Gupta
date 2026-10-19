@@ -1,0 +1,31 @@
+{
+  "date": "2026-10-19",
+  "purpose": "Portable documentation only; no duplicate application, credentials, dependencies or private customer records.",
+  "files": [
+    {
+      "source": "03-client-projects/004-sarsa-jyotish-sansthan/README.md",
+      "saved": "client-readme.md",
+      "source_sha256": "d253d76600daa35cb8ea930b231b3eaef5f01066ed9882b4faea3d2cfdb9aac3",
+      "saved_sha256": "e5203cb38bdbbe8ab038c20bbc70aeae580e196bdbdf007761c042bcc400eb63"
+    },
+    {
+      "source": "03-client-projects/004-sarsa-jyotish-sansthan/PROJECT-STATUS.md",
+      "saved": "PROJECT-STATUS.md",
+      "source_sha256": "88da27dfacd76018bac23f45faab5716ff123b036d4c89185f8fe98b1e0eab29",
+      "saved_sha256": "a58b206332a455271604f5b8e52190741291e5d5576729ae6409c2f0cfd09251"
+    },
+    {
+      "source": "03-client-projects/004-sarsa-jyotish-sansthan/design-review/2026-10-11-booking-access-and-page-rhythm/execution-status.md",
+      "saved": "design-review/2026-10-11-booking-access-and-page-rhythm/execution-status.md",
+      "source_sha256": "fc1526e51c288eb1b7c98a4e611d6c4fedb7dc5e1439346538c5a524184a617a",
+      "saved_sha256": "72aec6bd3ebd880c8e3da1dc99e860a7bf85a3c05de9b1d050953bc18a8237b2"
+    },
+    {
+      "source": "03-client-projects/004-sarsa-jyotish-sansthan/design-review/2026-10-11-booking-access-and-page-rhythm/execution-evidence/README.md",
+      "saved": "design-review/2026-10-11-booking-access-and-page-rhythm/execution-evidence/README.md",
+      "source_sha256": "6ee60e1da4896447488faf1da564bebb24384d9547b26192cec89b1071fb6216",
+      "saved_sha256": "a38f8a773e79a527d516fb279cb845fbc250681ca3dc553f2009c121c082b317"
+    }
+  ],
+  "local_only_references": []
+}
