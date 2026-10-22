@@ -1,0 +1,113 @@
+{
+  "observed_at": "2026-10-22T17:36:08.600Z",
+  "scope": "Actual public GET HTML while the approved same-owner maintenance intent is OFF; complete ON gate follows separately",
+  "public": [
+    {
+      "path": "/",
+      "status": 200,
+      "title": "Astrologer Madhuri Gupta in Agra | Sarsa Jyotish Sansthan",
+      "actualInitialMain": true,
+      "canonical": "https://www.sarsajyotishsansthan.com/"
+    },
+    {
+      "path": "/about",
+      "status": 200,
+      "title": "About Madhuri Gupta — Astro & Jyotish | Sarsa Jyotish Sansthan",
+      "actualInitialMain": true,
+      "canonical": "https://www.sarsajyotishsansthan.com/about"
+    },
+    {
+      "path": "/services",
+      "status": 200,
+      "title": "Astrology Services with Madhuri Gupta | Sarsa Jyotish Sansthan",
+      "actualInitialMain": true,
+      "canonical": "https://www.sarsajyotishsansthan.com/services"
+    },
+    {
+      "path": "/services/kundli-prediction",
+      "status": 200,
+      "title": "Kundli Prediction | Sarsa Jyotish Sansthan",
+      "actualInitialMain": true,
+      "canonical": "https://www.sarsajyotishsansthan.com/services/kundli-prediction"
+    },
+    {
+      "path": "/services/kundli-matching",
+      "status": 200,
+      "title": "Kundli Matching | Sarsa Jyotish Sansthan",
+      "actualInitialMain": true,
+      "canonical": "https://www.sarsajyotishsansthan.com/services/kundli-matching"
+    },
+    {
+      "path": "/services/vastu-consultation",
+      "status": 200,
+      "title": "Vastu Consultation | Sarsa Jyotish Sansthan",
+      "actualInitialMain": true,
+      "canonical": "https://www.sarsajyotishsansthan.com/services/vastu-consultation"
+    },
+    {
+      "path": "/services/prashna-kundali",
+      "status": 200,
+      "title": "Prashna Kundali | Sarsa Jyotish Sansthan",
+      "actualInitialMain": true,
+      "canonical": "https://www.sarsajyotishsansthan.com/services/prashna-kundali"
+    },
+    {
+      "path": "/services/numerology",
+      "status": 200,
+      "title": "Numerology | Sarsa Jyotish Sansthan",
+      "actualInitialMain": true,
+      "canonical": "https://www.sarsajyotishsansthan.com/services/numerology"
+    },
+    {
+      "path": "/testimonials",
+      "status": 200,
+      "title": "Customer Reviews | Sarsa Jyotish Sansthan",
+      "actualInitialMain": true,
+      "canonical": "https://www.sarsajyotishsansthan.com/testimonials"
+    },
+    {
+      "path": "/contact",
+      "status": 200,
+      "title": "Contact Madhuri Gupta in Agra | Sarsa Jyotish Sansthan",
+      "actualInitialMain": true,
+      "canonical": "https://www.sarsajyotishsansthan.com/contact"
+    },
+    {
+      "path": "/privacy",
+      "status": 200,
+      "title": "Privacy Policy | Sarsa Jyotish Sansthan",
+      "actualInitialMain": true,
+      "canonical": "https://www.sarsajyotishsansthan.com/privacy"
+    },
+    {
+      "path": "/terms",
+      "status": 200,
+      "title": "Terms of Service | Sarsa Jyotish Sansthan",
+      "actualInitialMain": true,
+      "canonical": "https://www.sarsajyotishsansthan.com/terms"
+    }
+  ],
+  "utilities": [
+    {
+      "path": "/booking",
+      "status": 404,
+      "withheld": true
+    },
+    {
+      "path": "/booking/receipt",
+      "status": 404,
+      "withheld": true
+    },
+    {
+      "path": "/booking-help",
+      "status": 404,
+      "withheld": true
+    },
+    {
+      "path": "/booking-policy",
+      "status": 404,
+      "withheld": true
+    }
+  ],
+  "customer_actions": 0
+}

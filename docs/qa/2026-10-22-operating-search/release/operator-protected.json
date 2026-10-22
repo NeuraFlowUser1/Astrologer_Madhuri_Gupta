@@ -1,7 +1,7 @@
 {
-  "observed_at": "2026-10-22T16:59:44.799470+00:00",
+  "observed_at": "2026-10-22T17:45:08.552243+00:00",
   "application": "004",
-  "release_digest": "54af467afbe152286f1f81f28f904a8b59b51e31111e6a81d93b1d340bd3720a",
+  "release_digest": "1bb6cb1cc00a2ead7cec70de052ea78330005d7644dfc0d2e2a40ea7c287b31f",
   "configured": {
     "staff_connection": true,
     "worker_connection": true,

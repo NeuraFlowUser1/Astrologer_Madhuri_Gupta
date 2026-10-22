@@ -1,5 +1,5 @@
 {
-  "observed_at": "2026-10-22T16:59:44.674296+00:00",
+  "observed_at": "2026-10-22T17:45:53.279054+00:00",
   "status": {
     "installation_id": "87b35f80-71bc-4ee1-bf34-a7316006f95c",
     "project": "004",
@@ -7,10 +7,10 @@
     "environment": "production",
     "enabled": true,
     "restore_generation": "bb459a74-676d-4d7b-a56d-e243868341a6",
-    "revision": "12",
+    "revision": "14",
     "requested_mode": "on",
     "admission_mode": "on",
-    "operation_id": "8500071c-e95a-471e-add1-868974abbf22",
+    "operation_id": "02726341-5df7-425b-816b-beb27bfacfee",
     "progress": "effective"
   },
   "business_settings_revision": "13",

@@ -1,0 +1,66 @@
+{
+  "status": "Matching release published, original ON restored and final hosted/visual acceptance complete",
+  "runtimeCommit": "3355508c0c3f796324cd3743598617c95f96d736",
+  "priorCompatibleCommit": "7f6fc4eddc4b67a3265329a13696d2be488613b7",
+  "package": {
+    "release": "1.0.1-rc.3",
+    "files": 579,
+    "digest": "1bb6cb1cc00a2ead7cec70de052ea78330005d7644dfc0d2e2a40ea7c287b31f"
+  },
+  "workerVersion": "a4110a77-ba93-4537-9bc7-8e7b30d9af1e",
+  "workerDeployment": "e072ddb4-79c1-4875-ae18-7b86170279fd",
+  "websiteDeployment": "https://vercel.com/neura-flow1/astrologer-madhuri-gupta/J8bJ1QrXYNvjPnPV1CbsSzsvrKNT",
+  "maintenance": {
+    "start": "2026-10-22T17:25:22.758140+00:00",
+    "restored": "2026-10-22T17:45:12.012426+00:00",
+    "elapsedSeconds": 1189.254286,
+    "measurement": "Conservative saved OFF intent to effective ON readback",
+    "targetSeconds": 1200,
+    "withinTarget": true,
+    "offOperation": "5973b614-7700-4efd-bf70-5552c9c4de2f",
+    "restoredOnOperation": "02726341-5df7-425b-816b-beb27bfacfee",
+    "revision": "14",
+    "generation": "bb459a74-676d-4d7b-a56d-e243868341a6",
+    "initialOffProjection": "First ordinary publication was unconfirmed; one exact saved-operation idempotent replay became effective; no new OFF operation",
+    "naturalHealth": {
+      "observed_at": "2026-10-22T17:45:07.111755+00:00",
+      "status": 200,
+      "health": {
+        "status": "healthy"
+      }
+    },
+    "forcedWorkerRuns": 0
+  },
+  "settings": {
+    "revision": "13",
+    "sha256": "55f62a8ef929c6a12f71b5e5959329c8326a3fa3234b36c63ced355ae4480c11",
+    "unchanged": true
+  },
+  "existingBindingsPreserved": 16,
+  "existingSecretNamesPreserved": 8,
+  "queueAndCronUnchanged": true,
+  "migrationFilesExact": 37,
+  "migrationsApplied": 0,
+  "realCustomerActions": 0,
+  "messagesSentByVerification": 0,
+  "paymentsMadeByVerification": 0,
+  "calendarWritesByVerification": 0,
+  "remaining": [
+    "Correct-owner Search Console submissions for eligible ordinary pages; no booking indexing request",
+    "Later crawling/indexing/ranking, 24-hour/7-day usage, and physical-device/native-screen-reader observations"
+  ],
+  "existingDurableObjectNamespacesPreserved": 2,
+  "hostedAcceptance": {
+    "casesPassed": 153,
+    "casesFailed": 0,
+    "assertions": 1552,
+    "phases": 9,
+    "settledPageViewsManuallyOpened": 24,
+    "mapInViewCropsManuallyOpened": 2,
+    "sameOriginCustomerWrites": 0,
+    "summary": "../hosted/summary.json",
+    "rawPublicReadback": "../hosted/public-readback.json",
+    "visualReview": "../hosted/visual-review.json",
+    "mapReadback": "../hosted/map-readback.json"
+  }
+}

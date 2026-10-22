@@ -1,0 +1,47 @@
+{
+  "observed_at": "2026-10-22T17:34:28Z",
+  "rows": [
+    {
+      "diagnostics": {
+        "runs": [
+          {
+            "id": "68ef4d83-6446-4e04-9d4e-c272736c9d3d",
+            "generation": "bb459a74-676d-4d7b-a56d-e243868341a6",
+            "finished_at": null,
+            "evaluated_at": "2026-10-22T17:15:07.124149+00:00",
+            "scheduled_at": "2026-10-22T17:15:01.606+00:00",
+            "final_summary": null,
+            "release_digest": "54af467afbe152286f1f81f28f904a8b59b51e31111e6a81d93b1d340bd3720a"
+          },
+          {
+            "id": "04f1141b-5c00-4de0-9c6f-d3b7c1a3c9f5",
+            "generation": "bb459a74-676d-4d7b-a56d-e243868341a6",
+            "finished_at": null,
+            "evaluated_at": "2026-10-22T17:00:03.84569+00:00",
+            "scheduled_at": "2026-10-22T17:00:01.606+00:00",
+            "final_summary": null,
+            "release_digest": "54af467afbe152286f1f81f28f904a8b59b51e31111e6a81d93b1d340bd3720a"
+          },
+          {
+            "id": "fb58bda5-7819-459d-92a8-c471e00bff63",
+            "generation": "bb459a74-676d-4d7b-a56d-e243868341a6",
+            "finished_at": null,
+            "evaluated_at": "2026-10-22T16:45:07.049132+00:00",
+            "scheduled_at": "2026-10-22T16:45:01.606+00:00",
+            "final_summary": null,
+            "release_digest": "54af467afbe152286f1f81f28f904a8b59b51e31111e6a81d93b1d340bd3720a"
+          }
+        ],
+        "lanes": null,
+        "binding": {
+          "active_run": null,
+          "active_until": null,
+          "release_digest": "1bb6cb1cc00a2ead7cec70de052ea78330005d7644dfc0d2e2a40ea7c287b31f"
+        },
+        "attention": false,
+        "incidents": null
+      }
+    }
+  ],
+  "readOnly": true
+}

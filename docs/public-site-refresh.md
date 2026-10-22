@@ -1,6 +1,6 @@
 # Sarsa: current public website
 
-Current receiving implementation: [22 October delivery/search](operating-search-2026-10-22.md), in the separate operating-search-efficiency-20261022 candidate. It supersedes the earlier short noscript helper and page-local metadata writers with actual twelve-page initial HTML, one metadata owner and safe hydration, while retaining approved sections/artwork/motion. The dates/source identities below describe the preserved earlier programme.
+Current published receiving implementation: [22 October delivery/search](operating-search-2026-10-22.md), runtime `3355508c0c3f796324cd3743598617c95f96d736` from the separate operating-search-efficiency-20261022 branch. It supersedes the earlier short noscript helper and page-local metadata writers with actual twelve-page initial HTML, one metadata owner and safe hydration, while retaining approved sections/artwork/motion. Matching app/Worker/database release is accepted and original ON restored. The dates/source identities below describe the preserved earlier programme, not current qualification counts.
 
 The previous [16 October hosted read-only gate](hosted-checks-2026-10-16.md) passes 151/151 unique cases. The dated 12 October [hosted read-only assessment](hosted-checks-2026-10-12.md) recorded 105/107 unique cases passing, with an intermittent Booking script 404 and the older staff calendar alias failing at that time. The subsequent bounded staff-address repair and Reviews publication are separately recorded below; the historical assessment is not a current passing full suite.
 

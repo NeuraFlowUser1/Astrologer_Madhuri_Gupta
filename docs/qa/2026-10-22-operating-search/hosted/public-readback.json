@@ -1,0 +1,222 @@
+{
+  "started": "2026-10-22T18:07:49.619Z",
+  "scope": "Official unauthenticated GET responses; no submissions or account operations.",
+  "pages": [
+    {
+      "path": "/",
+      "status": 200,
+      "title": "Astrologer Madhuri Gupta in Agra | Sarsa Jyotish Sansthan",
+      "utility": false,
+      "canonicalCount": 1,
+      "mainH1": 1,
+      "htmlCharacters": 27599,
+      "robotsHeader": null
+    },
+    {
+      "path": "/about",
+      "status": 200,
+      "title": "About Madhuri Gupta — Astro & Jyotish | Sarsa Jyotish Sansthan",
+      "utility": false,
+      "canonicalCount": 1,
+      "mainH1": 1,
+      "htmlCharacters": 18493,
+      "robotsHeader": null
+    },
+    {
+      "path": "/services",
+      "status": 200,
+      "title": "Astrology Services with Madhuri Gupta | Sarsa Jyotish Sansthan",
+      "utility": false,
+      "canonicalCount": 1,
+      "mainH1": 1,
+      "htmlCharacters": 25764,
+      "robotsHeader": null
+    },
+    {
+      "path": "/services/kundli-prediction",
+      "status": 200,
+      "title": "Kundli Prediction | Sarsa Jyotish Sansthan",
+      "utility": false,
+      "canonicalCount": 1,
+      "mainH1": 1,
+      "htmlCharacters": 20829,
+      "robotsHeader": null
+    },
+    {
+      "path": "/services/kundli-matching",
+      "status": 200,
+      "title": "Kundli Matching | Sarsa Jyotish Sansthan",
+      "utility": false,
+      "canonicalCount": 1,
+      "mainH1": 1,
+      "htmlCharacters": 14814,
+      "robotsHeader": null
+    },
+    {
+      "path": "/services/vastu-consultation",
+      "status": 200,
+      "title": "Vastu Consultation | Sarsa Jyotish Sansthan",
+      "utility": false,
+      "canonicalCount": 1,
+      "mainH1": 1,
+      "htmlCharacters": 14813,
+      "robotsHeader": null
+    },
+    {
+      "path": "/services/prashna-kundali",
+      "status": 200,
+      "title": "Prashna Kundali | Sarsa Jyotish Sansthan",
+      "utility": false,
+      "canonicalCount": 1,
+      "mainH1": 1,
+      "htmlCharacters": 20007,
+      "robotsHeader": null
+    },
+    {
+      "path": "/services/numerology",
+      "status": 200,
+      "title": "Numerology | Sarsa Jyotish Sansthan",
+      "utility": false,
+      "canonicalCount": 1,
+      "mainH1": 1,
+      "htmlCharacters": 14976,
+      "robotsHeader": null
+    },
+    {
+      "path": "/testimonials",
+      "status": 200,
+      "title": "Customer Reviews | Sarsa Jyotish Sansthan",
+      "utility": false,
+      "canonicalCount": 1,
+      "mainH1": 1,
+      "htmlCharacters": 28496,
+      "robotsHeader": null
+    },
+    {
+      "path": "/contact",
+      "status": 200,
+      "title": "Contact Madhuri Gupta in Agra | Sarsa Jyotish Sansthan",
+      "utility": false,
+      "canonicalCount": 1,
+      "mainH1": 1,
+      "htmlCharacters": 19687,
+      "robotsHeader": null
+    },
+    {
+      "path": "/privacy",
+      "status": 200,
+      "title": "Privacy Policy | Sarsa Jyotish Sansthan",
+      "utility": false,
+      "canonicalCount": 1,
+      "mainH1": 1,
+      "htmlCharacters": 11916,
+      "robotsHeader": null
+    },
+    {
+      "path": "/terms",
+      "status": 200,
+      "title": "Terms of Service | Sarsa Jyotish Sansthan",
+      "utility": false,
+      "canonicalCount": 1,
+      "mainH1": 1,
+      "htmlCharacters": 10522,
+      "robotsHeader": null
+    },
+    {
+      "path": "/booking",
+      "status": 200,
+      "title": "Book an appointment | Sarsa Jyotish Sansthan",
+      "utility": true,
+      "canonicalCount": 0,
+      "mainH1": 0,
+      "htmlCharacters": 4113,
+      "robotsHeader": "noindex, nofollow"
+    },
+    {
+      "path": "/booking/receipt",
+      "status": 200,
+      "title": "View my booking | Sarsa Jyotish Sansthan",
+      "utility": true,
+      "canonicalCount": 0,
+      "mainH1": 0,
+      "htmlCharacters": 4012,
+      "robotsHeader": "noindex, nofollow"
+    },
+    {
+      "path": "/booking-help",
+      "status": 200,
+      "title": "View my booking | Sarsa Jyotish Sansthan",
+      "utility": true,
+      "canonicalCount": 0,
+      "mainH1": 0,
+      "htmlCharacters": 3841,
+      "robotsHeader": "noindex, nofollow"
+    },
+    {
+      "path": "/booking-policy",
+      "status": 200,
+      "title": "Booking policy | Sarsa Jyotish Sansthan",
+      "utility": true,
+      "canonicalCount": 0,
+      "mainH1": 0,
+      "htmlCharacters": 4053,
+      "robotsHeader": "noindex, nofollow"
+    }
+  ],
+  "utilityQueries": [
+    {
+      "path": "/booking?source=identity-review",
+      "status": 200,
+      "canonicalCount": 0,
+      "graphs": 0,
+      "noindex": true
+    },
+    {
+      "path": "/booking/receipt?source=identity-review",
+      "status": 200,
+      "canonicalCount": 0,
+      "graphs": 0,
+      "noindex": true
+    },
+    {
+      "path": "/booking-help?source=identity-review",
+      "status": 200,
+      "canonicalCount": 0,
+      "graphs": 0,
+      "noindex": true
+    },
+    {
+      "path": "/booking-policy?source=identity-review",
+      "status": 200,
+      "canonicalCount": 0,
+      "graphs": 0,
+      "noindex": true
+    }
+  ],
+  "assets": [
+    {
+      "name": "sarsa-madhuri-share-20261022.webp",
+      "bytes": 51098,
+      "sha256": "b2e9e985074615e79d3cedada815adb5680cb27f4a6cc1a3799ffa74e0a8648b"
+    },
+    {
+      "name": "consultation-still-life-768.webp",
+      "bytes": 38022,
+      "sha256": "a95b5d64e9fba6acb8e468b9f055dbbb50c8ff9182a02faecfb13b4343e8a76f"
+    },
+    {
+      "name": "consultation-still-life-1280.webp",
+      "bytes": 86562,
+      "sha256": "b102e1282118df4315b648dc86803ac56a580d379587806bb385e52278119f61"
+    },
+    {
+      "name": "consultation-still-life-1920.webp",
+      "bytes": 145112,
+      "sha256": "78b345b00b3cb4057d58b45e8e58c3cf4fa743614e8e703c4081cc5c46418f2b"
+    }
+  ],
+  "passed": true,
+  "unknownStatus": 404,
+  "sitemapRoutes": 12,
+  "finished": "2026-10-22T18:07:58.179Z"
+}

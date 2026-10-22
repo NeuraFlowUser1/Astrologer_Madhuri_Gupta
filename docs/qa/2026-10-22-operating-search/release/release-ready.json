@@ -43,5 +43,7 @@
       "sha256": "59deed4e5be384a8b6a24b080178ebf3fe8acbaf2e9bc2573e61bb8f45b2519e",
       "bytes": 33404
     }
-  ]
+  ],
+  "scope": "Historical pre-cutover preparation receipt; actual published identities and ON restoration are in publication.json.",
+  "supersededBy": "publication.json"
 }

@@ -1,0 +1,76 @@
+{
+  "scope": "Preserved failed full runs; never credited as final acceptance",
+  "runs": [
+    {
+      "started": "2026-10-22T17:46:44.591Z",
+      "finished": "2026-10-22T17:51:47.845Z",
+      "passed": 152,
+      "failed": 1,
+      "assertions": 1545,
+      "rawDirectory": "/tmp/sarsa004-hosted-operating-search-first-failed",
+      "failures": [
+        {
+          "label": "Booking through review without submitting",
+          "status": "failed",
+          "assertions": 5,
+          "elapsed_ms": 25712,
+          "error": "locator.waitFor: Timeout 20000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('.slot-option').first() to be visible\u001b[22m\n",
+          "pageErrors": [],
+          "firstPartyFailures": []
+        }
+      ]
+    },
+    {
+      "started": "2026-10-22T17:56:13.830Z",
+      "finished": "2026-10-22T18:00:40.021Z",
+      "passed": 152,
+      "failed": 1,
+      "assertions": 1545,
+      "rawDirectory": "/tmp/sarsa004-hosted-operating-search-second-failed",
+      "failures": [
+        {
+          "label": "Booking through review without submitting",
+          "status": "failed",
+          "assertions": 5,
+          "elapsed_ms": 25862,
+          "error": "locator.waitFor: Timeout 20000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('.slot-option').first() to be visible\u001b[22m\n",
+          "pageErrors": [],
+          "firstPartyFailures": [],
+          "availabilityObservations": [
+            {
+              "observedAt": "2026-10-22T17:59:29.740Z",
+              "query": "?service_id=kundli-prediction&day=2026-10-22&questions=1",
+              "status": 200,
+              "slots": 0,
+              "service": "kundli-prediction"
+            },
+            {
+              "observedAt": "2026-10-22T17:59:32.731Z",
+              "query": "?service_id=kundli-matching&day=2026-10-22&questions=1",
+              "status": 200,
+              "slots": 0,
+              "service": "kundli-matching"
+            }
+          ],
+          "diagnostics": {
+            "utc": "2026-10-22T17:59:51.795Z",
+            "clinicTime": "Thursday, 22 October 2026 at 23:29:51 GMT+5:30",
+            "path": "/booking",
+            "selectedService": "kundli-matching",
+            "date": "22\n/\n10\n/\n2026",
+            "slotCount": 0,
+            "appointmentState": {
+              "hidden": false,
+              "display": "block",
+              "visibility": "visible",
+              "text": "Select a suitable date and time\n\nKundli Matching\n\nTimes shown in Asia/Kolkata\n\nAppointment date\n22\n/\n10\n/\n2026\n\nNo times are available on this date. Please choose another date.\n\nAvailable start times\n\nYour time is reserved when you continue to payment.\n\n\u2190 Service\nFill your details \u2192"
+            }
+          }
+        }
+      ]
+    }
+  ],
+  "causeProof": "calendar-readiness.json",
+  "productChanged": false,
+  "existingWaitsAndCadenceRetained": true
+}

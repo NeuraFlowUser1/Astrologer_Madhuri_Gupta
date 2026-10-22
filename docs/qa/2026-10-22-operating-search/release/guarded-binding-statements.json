@@ -1,0 +1,17 @@
+{
+  "exact_guard_values": {
+    "installation": "87b35f80-71bc-4ee1-bf34-a7316006f95c",
+    "project": "004",
+    "origin": "https://www.sarsajyotishsansthan.com",
+    "expected_digest": "54af467afbe152286f1f81f28f904a8b59b51e31111e6a81d93b1d340bd3720a",
+    "new_digest": "1bb6cb1cc00a2ead7cec70de052ea78330005d7644dfc0d2e2a40ea7c287b31f",
+    "generation": "bb459a74-676d-4d7b-a56d-e243868341a6",
+    "operation": "5973b614-7700-4efd-bf70-5552c9c4de2f",
+    "revision": "13"
+  },
+  "statements": [
+    "SET LOCAL lock_timeout='3s';",
+    "SET LOCAL statement_timeout='5s';",
+    "DO $guarded_worker_binding$\nDECLARE installation_row appointment_system.installation%ROWTYPE;\n control_row appointment_system.control_product_state%ROWTYPE;\n runtime appointment_system.worker_release%ROWTYPE;\nBEGIN\n IF current_user IS DISTINCT FROM 'neondb_owner' THEN\n  RAISE EXCEPTION USING ERRCODE='P0403',MESSAGE='guarded_binding_owner_mismatch';\n END IF;\n -- Same restore barrier and worker lock ordering used by the installed engine.\n PERFORM pg_advisory_xact_lock_shared(83124,5);\n PERFORM pg_advisory_xact_lock(83124,4);\n SELECT * INTO STRICT installation_row FROM appointment_system.installation WHERE singleton FOR UPDATE;\n SELECT * INTO STRICT control_row FROM appointment_system.control_product_state WHERE singleton FOR UPDATE;\n SELECT * INTO STRICT runtime FROM appointment_system.worker_release WHERE singleton FOR UPDATE;\n IF installation_row.installation_id IS DISTINCT FROM '87b35f80-71bc-4ee1-bf34-a7316006f95c'::uuid\n  OR installation_row.project_id IS DISTINCT FROM '004'\n  OR installation_row.environment IS DISTINCT FROM 'production'\n  OR control_row.project IS DISTINCT FROM '004'\n  OR control_row.environment IS DISTINCT FROM 'production'\n  OR control_row.origin IS DISTINCT FROM 'https://www.sarsajyotishsansthan.com' THEN\n  RAISE EXCEPTION USING ERRCODE='P0409',MESSAGE='guarded_binding_installation_mismatch';\n END IF;\n IF control_row.enabled IS DISTINCT FROM false OR control_row.requested_enabled IS DISTINCT FROM false\n  OR control_row.restore_generation IS DISTINCT FROM 'bb459a74-676d-4d7b-a56d-e243868341a6'::uuid\n  OR control_row.winning_operation IS DISTINCT FROM '5973b614-7700-4efd-bf70-5552c9c4de2f'::uuid\n  OR control_row.revision IS DISTINCT FROM 13::bigint THEN\n  RAISE EXCEPTION USING ERRCODE='P0409',MESSAGE='guarded_binding_company_intent_changed';\n END IF;\n -- Check under both advisory and row locks immediately before the old function.\n IF runtime.release_digest IS DISTINCT FROM '54af467afbe152286f1f81f28f904a8b59b51e31111e6a81d93b1d340bd3720a' THEN\n  RAISE EXCEPTION USING ERRCODE='P0409',MESSAGE='guarded_binding_release_changed';\n END IF;\n IF runtime.active_until>clock_timestamp()\n  OR (runtime.active_run IS NOT NULL AND runtime.active_until IS NULL) THEN\n  RAISE EXCEPTION USING ERRCODE='P0409',MESSAGE='guarded_binding_lease_not_idle';\n END IF;\n PERFORM appointment_system.configure_worker_release('1bb6cb1cc00a2ead7cec70de052ea78330005d7644dfc0d2e2a40ea7c287b31f');\n IF NOT EXISTS(SELECT 1 FROM appointment_system.worker_release WHERE singleton\n  AND release_digest='1bb6cb1cc00a2ead7cec70de052ea78330005d7644dfc0d2e2a40ea7c287b31f' AND active_run IS NULL AND active_until IS NULL) THEN\n  RAISE EXCEPTION USING ERRCODE='P0409',MESSAGE='guarded_binding_readback_mismatch';\n END IF;\nEND $guarded_worker_binding$;"
+  ]
+}

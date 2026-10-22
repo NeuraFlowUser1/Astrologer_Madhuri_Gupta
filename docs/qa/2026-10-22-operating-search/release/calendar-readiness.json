@@ -1,0 +1,59 @@
+{
+  "passed": true,
+  "scope": "Actual hosted picker; bounded test-only delay of one genuine GET, no response or product mutation",
+  "choice": {
+    "day": "2026-10-23",
+    "label": "Friday, 23 October 2026"
+  },
+  "during": {
+    "utc": "2026-10-22T18:05:50.348Z",
+    "clinicTime": "Thursday, 22 October 2026 at 23:35:50 GMT+5:30",
+    "checking": true,
+    "draftDisabled": true,
+    "date": "22\n/\n10\n/\n2026",
+    "readonly": "true"
+  },
+  "afterReadonlyClick": {
+    "utc": "2026-10-22T18:05:50.392Z",
+    "clinicTime": "Thursday, 22 October 2026 at 23:35:50 GMT+5:30",
+    "checking": true,
+    "draftDisabled": true,
+    "date": "22\n/\n10\n/\n2026",
+    "readonly": "true"
+  },
+  "fresh": {
+    "utc": "2026-10-22T18:05:52.508Z",
+    "clinicTime": "Thursday, 22 October 2026 at 23:35:52 GMT+5:30",
+    "checking": false,
+    "draftDisabled": false,
+    "date": "23\n/\n10\n/\n2026"
+  },
+  "requests": [
+    {
+      "utc": "2026-10-22T18:05:48.170Z",
+      "query": "?service_id=kundli-prediction&day=2026-10-22&questions=1",
+      "status": 200,
+      "slots": 0,
+      "service": "kundli-prediction"
+    },
+    {
+      "utc": "2026-10-22T18:05:50.692Z",
+      "query": "?service_id=kundli-matching&day=2026-10-22&questions=1",
+      "status": 200,
+      "slots": 0,
+      "service": "kundli-matching"
+    },
+    {
+      "utc": "2026-10-22T18:05:52.238Z",
+      "query": "?service_id=kundli-matching&day=2026-10-23&questions=1",
+      "status": 200,
+      "slots": 10,
+      "service": "kundli-matching"
+    }
+  ],
+  "slots": 10,
+  "writes": [],
+  "errors": [],
+  "forcedWorkerRuns": 0,
+  "customerSubmissions": 0
+}

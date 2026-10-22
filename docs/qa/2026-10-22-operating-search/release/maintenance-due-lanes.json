@@ -1,0 +1,59 @@
+{
+  "rows": [
+    {
+      "lane": "booking_records",
+      "due": "0",
+      "total": "4",
+      "next_due": "2026-10-22T20:22:33.996Z"
+    },
+    {
+      "lane": "control_publication",
+      "due": "0",
+      "total": "1",
+      "next_due": "2026-10-22T17:49:55.540Z"
+    },
+    {
+      "lane": "email_events",
+      "due": "0",
+      "total": "0",
+      "next_due": null
+    },
+    {
+      "lane": "enquiry_records",
+      "due": "0",
+      "total": "2",
+      "next_due": "2026-10-22T20:49:22.305Z"
+    },
+    {
+      "lane": "maintenance",
+      "due": "0",
+      "total": "4",
+      "next_due": "2026-10-23T08:40:00.000Z"
+    },
+    {
+      "lane": "notification_email",
+      "due": "0",
+      "total": "0",
+      "next_due": null
+    },
+    {
+      "lane": "payment",
+      "due": "0",
+      "total": "1",
+      "next_due": "2026-10-23T11:51:07.199Z"
+    },
+    {
+      "lane": "payment_events",
+      "due": "0",
+      "total": "0",
+      "next_due": null
+    },
+    {
+      "lane": "verification_email",
+      "due": "0",
+      "total": "0",
+      "next_due": null
+    }
+  ],
+  "readOnly": true
+}

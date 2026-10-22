@@ -25,19 +25,25 @@ globalThis.hostedReadOnlyReview=async (page) => {
     return route.continue();
   });
   const current=await context.newPage();
-  let pageErrors=[],firstPartyFailures=[];
+  let pageErrors=[],firstPartyFailures=[],availabilityObservations=[];
   current.on('pageerror',error=>pageErrors.push(error.message));
   current.on('console',message=>{if(message.type()==='warning')report.warnings.push(message.text().slice(0,240));if(message.type()==='error'&&/hydration|Minified React error #418|server rendered HTML/i.test(message.text()))pageErrors.push(message.text());});
-  current.on('response',response=>{
+  current.on('response',async response=>{
     const url=new URL(response.url());
+    if(url.origin===origin&&url.pathname==='/api/availability'){
+      try{const value=await response.json();availabilityObservations.push({observedAt:new Date().toISOString(),query:url.search,status:response.status(),slots:value.slots?.length,service:value.service?.id,code:value.code});}catch{}
+    }
     if(url.origin===origin && response.status()>=400)firstPartyFailures.push({path:url.pathname,status:response.status()});
     if(url.origin!==origin && response.status()>=400)report.externalFailures.push({origin:url.origin,status:response.status()});
   });
   async function run(label,work){
     const start=Date.now(),before=assertions;
-    pageErrors=[];firstPartyFailures=[];
+    pageErrors=[];firstPartyFailures=[];availabilityObservations=[];
     try{const detail=await work();check(report.blockedWrites.length===0,'An unsafe request was attempted and blocked');check(pageErrors.length===0,'Page errors: '+pageErrors.join('; '));check(firstPartyFailures.length===0,'First-party errors: '+JSON.stringify(firstPartyFailures));report.cases.push({label,status:'passed',assertions:assertions-before,elapsed_ms:Date.now()-start,...detail});}
-    catch(error){report.cases.push({label,status:'failed',assertions:assertions-before,elapsed_ms:Date.now()-start,error:error.message,pageErrors,firstPartyFailures});}
+    catch(error){
+      const diagnostics=await current.evaluate(()=>({utc:new Date().toISOString(),clinicTime:new Intl.DateTimeFormat('en-GB',{timeZone:'Asia/Kolkata',dateStyle:'full',timeStyle:'long'}).format(new Date()),path:location.pathname,selectedService:document.querySelector('input[name="service"]:checked')?.value,date:document.querySelector('.abs-date-group')?.innerText,slotCount:document.querySelectorAll('.slot-option').length,appointmentState:(()=>{const node=document.querySelector('#appointment');return node?{hidden:node.hidden,display:getComputedStyle(node).display,visibility:getComputedStyle(node).visibility,text:node.innerText}:null;})()})).catch(()=>({unavailable:true}));
+      report.cases.push({label,status:'failed',assertions:assertions-before,elapsed_ms:Date.now()-start,error:error.message,pageErrors,firstPartyFailures,availabilityObservations,diagnostics});
+    }
   }
   async function visit(path,width=1440,height=900){
     await current.setViewportSize({width,height});
@@ -69,10 +75,13 @@ globalThis.hostedReadOnlyReview=async (page) => {
     }
     throw Error('No available appointment within the inspected saved horizon: '+JSON.stringify(checked));
   }
-  async function chooseDate(dateLabel){
+  async function chooseDate(dateLabel,slotTimeout=25000){
     await current.locator('.abs-date-group button[aria-haspopup="dialog"]').click();
-    await current.getByRole('button',{name:new RegExp(dateLabel)}).click();
-    await current.locator('.slot-option').first().waitFor({state:'visible',timeout:25000});
+    // An open picker intentionally remains read-only during the real freshness
+    // check. Button actionability alone does not include aria-readonly on its
+    // ancestor grid; choose only from the actual editable calendar.
+    await current.locator('.abs-booking-picker [role="grid"]:not([aria-readonly="true"])').getByRole('button',{name:new RegExp(dateLabel)}).click();
+    await current.locator('.slot-option').first().waitFor({state:'visible',timeout:slotTimeout});
     await current.locator('.slot-option').first().click();
   }
   async function layout(path,width,height){
@@ -108,7 +117,8 @@ globalThis.hostedReadOnlyReview=async (page) => {
     check(detail.favicon==='/media/sarsa-kundli-lotus-favicon.png','Approved favicon is missing');
     check(detail.overflow<=1,'Sideways overflow '+detail.overflow+'px');
     check(detail.title.includes('Sarsa')&&!detail.title.includes('Page not found'),'Missing route title');
-    check(detail.canonical===origin+path,'Incorrect canonical '+detail.canonical);
+    const utility=['/booking','/booking/receipt','/booking-help','/booking-policy'].includes(path);
+    check(utility?detail.canonical==null:detail.canonical===origin+path,'Incorrect canonical '+detail.canonical);
     check(!!detail.description,'Missing description');
     check(detail.images.every(image=>image.loaded&&image.altPresent),'Broken image or missing alt attribute: '+JSON.stringify(detail.images.filter(image=>!image.loaded||!image.altPresent)));
     if(path==='/booking/receipt')check(detail.robots.includes('noindex'),'Private lookup must be noindex');
@@ -134,10 +144,7 @@ globalThis.hostedReadOnlyReview=async (page) => {
         const response=await context.request.get(origin+'/api/booking-policy',{timeout:45000});check(response.status()===200,'Policy unavailable');const policy=await response.json();
         const {dateLabel}=await availableDay(policy,'kundli-matching',1);
         await current.locator('.service-card').filter({hasText:'Kundli Matching'}).click();
-        await current.locator('.abs-date-group button[aria-haspopup="dialog"]').click();
-        await current.getByRole('button',{name:new RegExp(dateLabel)}).click();
-        await current.locator('.slot-option').first().waitFor({state:'visible',timeout:20000});
-        await current.locator('.slot-option').first().click();
+        await chooseDate(dateLabel,20000);
         await current.getByRole('button',{name:'Fill your details →',exact:true}).click();
         await current.locator('#full_name').fill('Read-only Browser Check');await current.locator('#phone').fill('0000000000');
         await current.getByRole('button',{name:'Review your booking →',exact:true}).click();

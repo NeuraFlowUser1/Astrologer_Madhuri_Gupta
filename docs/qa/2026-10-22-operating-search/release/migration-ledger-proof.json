@@ -1,0 +1,13 @@
+{
+  "rows": [
+    {
+      "entries": "37",
+      "ordered_ledger_sha256": "05cfeef7d2992446809b8497b42719335003f4c13bbbddd200d2a88986bc470b"
+    }
+  ],
+  "sourceRows": 37,
+  "sourceOrderedLedgerSha256": "05cfeef7d2992446809b8497b42719335003f4c13bbbddd200d2a88986bc470b",
+  "exactSourceMatch": true,
+  "readOnly": true,
+  "migrationsApplied": 0
+}

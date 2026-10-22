@@ -1,0 +1,55 @@
+{
+  "schedules": {
+    "result": {
+      "schedules": [
+        {
+          "cron": "*/15 * * * *",
+          "created_on": "2026-09-30T10:16:09.571214Z",
+          "modified_on": "2026-10-11T10:27:18.002254Z"
+        }
+      ]
+    },
+    "success": true,
+    "errors": [],
+    "messages": [],
+    "status": 200
+  },
+  "queue": {
+    "result": {
+      "queue_id": "8d602c4b56f44eca8ae5bcfa6cde1fab",
+      "queue_name": "sarsa-booking-recovery",
+      "settings": {
+        "delivery_delay": 0,
+        "message_retention_period": 86400
+      },
+      "created_on": "2026-09-29T06:47:41.645445Z",
+      "modified_on": "2026-09-29T06:47:41.645445Z",
+      "producers_total_count": 1,
+      "producers": [
+        {
+          "script": "sarsa-booking-recovery",
+          "type": "worker"
+        }
+      ],
+      "consumers_total_count": 1,
+      "consumers": [
+        {
+          "script": "sarsa-booking-recovery",
+          "settings": {
+            "batch_size": 1,
+            "max_retries": 5,
+            "max_wait_time_ms": 1000,
+            "max_concurrency": 1,
+            "retry_delay": 60
+          },
+          "consumer_id": "2a273de0510d414fbf0565b36716bef3",
+          "type": "worker"
+        }
+      ]
+    },
+    "success": true,
+    "errors": [],
+    "messages": [],
+    "status": 200
+  }
+}

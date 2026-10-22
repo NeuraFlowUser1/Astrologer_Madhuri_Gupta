@@ -1,6 +1,6 @@
 # Project 004 — documentation index
 
-Reviewed **22 October 2026** for the isolated operating/search candidate; coordinated publication and hosted readback remain owned by the parent programme. This is the maintained application's current reading path. Current feature guides explain behavior/decisions; dated plans and reports preserve exact scope and proof. There is one owner per topic.
+Reviewed **22 October 2026** after matching application/Worker/database publication and original ON restoration. This is the maintained application's current reading path. Current feature guides explain behavior/decisions; dated plans and reports preserve exact scope and proof. There is one owner per topic.
 
 The [19 October client handoff](project-004/2026-10-19-documentation/README.md) publishes the current outer working status/navigation and relevant historical notices alongside this application. Its manifest distinguishes original working text from link-adapted copies; no private storage or application duplicate is included.
 
@@ -15,7 +15,9 @@ The [19 October client handoff](project-004/2026-10-19-documentation/README.md) 
 | [Reviews](testimonials-page.md) | Exact12 approved accounts, five chapters, four original-service filters, reader/motion and navigation; public route stays /testimonials. |
 | [Routing diagnosis](routing-diagnosis-2026-10-12.md) | Deterministic staff-alias/Reviews causes and repairs; separately parked state-request cancellation investigation. |
 | [Booking operation](appointment-system-release.md) | Installed release, name/phone lookup, public/private boundaries, setup and dated acceptance. |
-| [Latest hosted result](hosted-checks-2026-10-17.md) |153 unique cases/1,558 assertions/nine phases and 16/16 hosted mockup layouts; exact commands/runner and limitations. |
+| [Current hosted result](hosted-checks-2026-10-22.md) | Actual 22 October public HTML, utility/query exclusions, GET/HEAD browser checks and 24 settled desktop/phone captures, with exact counts and limits. |
+| [Release handover](qa/2026-10-22-operating-search/release/handover.md) | Published source, matching package/Worker/binding, original ON restoration, unchanged resources/settings and account/field follow-up. |
+| [17 October hosted result](hosted-checks-2026-10-17.md) | Historical 153 unique cases/1,558 assertions/nine phases and 16/16 mockup layouts; not today's count. |
 | [Previous hosted16 October](hosted-checks-2026-10-16.md), [12 October](hosted-checks-2026-10-12.md) | Dated earlier results/failures, not another current release state. |
 
 ## Source and resumption
@@ -24,6 +26,6 @@ The [19 October client handoff](project-004/2026-10-19-documentation/README.md) 
 
 `api/index.py` composes only sibling appointment-system/appointment-settings. Its sealed [details contract](../appointment-system/docs/booking-details.md), [booking experience](../appointment-system/docs/booking-experience.md), [setup](../appointment-system/docs/contained-setup.md), [company recovery](../appointment-system/docs/company-recovery.md) and [handover](../appointment-system/docs/handover-commands.md) own applicable common behavior. Public lookup does not grant cancellation/payment/contact editing. Never edit sealed docs/files in place or apply Project 001's later policy here.
 
-Client working status/design-review records live outside this application in the enclosing Project 004 folder; the factory register identifies it. Prior12/16 October worktrees preserve old source, certificates and comparison evidence. Old guides are history, not permission to replay setup or restore retired assets. The approved 22 October programme includes coordinated release and complete qualification. The supported shared RC3 qualification and complete receiving-source gate are clean, with local visual proof linked above. Actual app/worker/binding publication and readback remain separately tracked. Dated hosted reports do not certify this candidate.
+Client working status/design-review records live outside this application in the enclosing Project 004 folder; the factory register identifies it. Prior worktrees preserve source, certificates and comparison evidence. Old guides are history, not permission to replay setup or restore retired assets. The approved 22 October programme has executed shared qualification, the complete receiving-source gate and matching coordinated release. Original ON is restored, with unchanged saved settings/resources; exact local/live evidence and remaining account/field work are linked above. Earlier dated hosted reports retain only their original scope.
 
 The future Home portrait/full Home review section, shared visible note history and unproved display-request cancellation cause remain parked for their recorded reasons. Existing credentials, saved choices, account resources and earlier source versions remain.

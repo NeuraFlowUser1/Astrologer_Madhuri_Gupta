@@ -1,0 +1,75 @@
+{
+  "scope": "Actual normal official Google embed, in-view settled crops; no product changes",
+  "observations": [
+    {
+      "width": 1440,
+      "height": 900,
+      "source": "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3548.1317929548013!2d77.9792861!3d27.215011699999998!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3974777e796c18f7%3A0x1c795a01f595a149!2s8%2C%20Gailana%20Rd%2C%20Shivpuri%20Colony%2C%20Sulabh%20Vihar%2C%20Nirbhay%20Nagar%2C%20Agra%2C%20Uttar%20Pradesh%20282007!5e0!3m2!1sen!2sin!4v1791488095982!5m2!1sen!2sin",
+      "events": [
+        {
+          "host": "www.google.com",
+          "status": 200
+        }
+      ],
+      "frames": [
+        {
+          "url": "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3548.1317929548013!2d77.9792861!3d27.215011699999998!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3974777e796c18f7%3A0x1c795a01f595a149!2s8%2C%20Gailana%20Rd%2C%20Shivpuri%20Colony%2C%20Sulabh%20Vihar%2C%20Nirbhay%20Nagar%2C%20Agra%2C%20Uttar%20Pradesh%20282007!5e0!3m2!1sen!2sin!4v1791488095982!5m2!1sen!2sin",
+          "title": "",
+          "body": "Keyboard shortcuts\nMap data \u00a92026 Google\nTerms\nReport a map error"
+        },
+        {
+          "url": "about:blank",
+          "title": "",
+          "body": ""
+        },
+        {
+          "url": "about:blank",
+          "title": "",
+          "body": ""
+        }
+      ],
+      "sameOriginWrites": [],
+      "normalOfficialGoogleReads": true,
+      "settledMap": "contact-map-1440.png",
+      "recapturedContact": "1440-contact.png",
+      "sha256": "64459b0846528d24b35f2662ed99b4e12792f8f7c20cf8fd4eb7e28e00d01dcc"
+    },
+    {
+      "width": 390,
+      "height": 844,
+      "source": "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3548.1317929548013!2d77.9792861!3d27.215011699999998!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3974777e796c18f7%3A0x1c795a01f595a149!2s8%2C%20Gailana%20Rd%2C%20Shivpuri%20Colony%2C%20Sulabh%20Vihar%2C%20Nirbhay%20Nagar%2C%20Agra%2C%20Uttar%20Pradesh%20282007!5e0!3m2!1sen!2sin!4v1791488095982!5m2!1sen!2sin",
+      "events": [
+        {
+          "host": "www.google.com",
+          "status": 200
+        }
+      ],
+      "frames": [
+        {
+          "url": "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3548.1317929548013!2d77.9792861!3d27.215011699999998!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3974777e796c18f7%3A0x1c795a01f595a149!2s8%2C%20Gailana%20Rd%2C%20Shivpuri%20Colony%2C%20Sulabh%20Vihar%2C%20Nirbhay%20Nagar%2C%20Agra%2C%20Uttar%20Pradesh%20282007!5e0!3m2!1sen!2sin!4v1791488095982!5m2!1sen!2sin",
+          "title": "",
+          "body": "Map data \u00a92026 Google\nTerms\nReport a map error"
+        },
+        {
+          "url": "about:blank",
+          "title": "",
+          "body": ""
+        },
+        {
+          "url": "about:blank",
+          "title": "",
+          "body": ""
+        }
+      ],
+      "sameOriginWrites": [],
+      "normalOfficialGoogleReads": true,
+      "settledMap": "contact-map-390.png",
+      "recapturedContact": "390-contact.png",
+      "sha256": "01c553a39e6082883c7a07203acd732cc8fa79ad27791b32415ab6992a10f282"
+    }
+  ],
+  "sameOriginCustomerWrites": 0,
+  "externalReadBoundary": "Google public place-information RPC may use POST for a read; the normal embed may perform those official external reads. Same-origin customer writes remain blocked.",
+  "captureLimit": "The Chromium full-page Contact capture omits the cross-origin map when it is offscreen after returning to the top. In-view map crops, document 200 and actual tiles/address pin own map acceptance; full-page map paint is not claimed.",
+  "manualReview": "Both in-view crops were actually opened. Desktop shows 8 Gailana Rd, the address pin, tiles, Open in Maps and directions; phone shows the pin, tiles and Open in Maps."
+}

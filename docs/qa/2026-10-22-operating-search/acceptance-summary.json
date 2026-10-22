@@ -1,5 +1,5 @@
 {
-  "scope": "Disconnected local receiving-app proof; no actual provider, booking, enquiry, login or payment action.",
+  "scope": "Disconnected local receiving-app proof only; actual coordinated publication and hosted acceptance are recorded separately under release/ and hosted/.",
   "package": {
     "release": "1.0.1-rc.3",
     "files": 579,
@@ -65,7 +65,7 @@
     }
   ],
   "fidelityBoundary": "Timeline samples include observed progress; baseline client-only mount and generated candidate have different load offsets. Crop equivalence separately verified for20 width/phase combinations. No claim of raw timestamp pixel identity.",
-  "remaining": "Project004 coordinated application/worker/database publication and official hosted readback; correct-owner Search Console actions and later observation remain separate. No maintenance has started.",
+  "remaining": "Implementation, coordinated publication and hosted acceptance are complete. Correct-owner Search Console submissions and later indexing/usage/device observations remain separate owner/field work.",
   "additionalBoundaryScenarios": 16,
   "additionalBoundaryScope": "320px, reduced motion, CSS 200% zoom (not native browser zoom), keyboard skip focus and blocked session storage; no submissions.",
   "initialLocalProofPackage": {
@@ -192,5 +192,18 @@
     "additionalBoundaryScenarios": 16,
     "additionalBoundaryReceipt": "quick-review.json",
     "noScriptPublicBodies": 12
-  }
+  },
+  "receivingPythonEntry": {
+    "owner": "api/index.py",
+    "cases": 3,
+    "executableLines": 11,
+    "coveredLines": 11,
+    "branches": 2,
+    "coveredBranches": 2,
+    "excluded": [],
+    "sourceUnchanged": true,
+    "providerCalls": 0,
+    "receipt": "release/entry-contract-coverage.json"
+  },
+  "publicationReceipt": "release/publication.json"
 }

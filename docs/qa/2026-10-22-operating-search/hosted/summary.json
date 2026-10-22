@@ -1,0 +1,3447 @@
+{
+  "started": "2026-10-22T18:07:58.391Z",
+  "finished": "2026-10-22T18:11:47.459Z",
+  "phases": 9,
+  "passed": 153,
+  "failed": 0,
+  "assertions": 1552,
+  "blockedWrites": [],
+  "cases": [
+    {
+      "label": "route / 390",
+      "status": "passed",
+      "assertions": 14,
+      "elapsed_ms": 2245,
+      "width": 390,
+      "height": 844,
+      "path": "/",
+      "title": "Astrologer Madhuri Gupta in Agra | Sarsa Jyotish Sansthan",
+      "canonical": "https://www.sarsajyotishsansthan.com/",
+      "description": "Explore Astro, Numerology and Vastu guidance with Madhuri Gupta at Sarsa Jyotish Sansthan in Agra. Read about the five services and contact the practice.",
+      "robots": "index, follow",
+      "h1": 1,
+      "headers": 1,
+      "footers": 1,
+      "logo": {
+        "src": "/media/sarsa-kundli-lotus-logo-128.png",
+        "loaded": true,
+        "alt": ""
+      },
+      "favicon": "/media/sarsa-kundli-lotus-favicon.png",
+      "overflow": 0,
+      "images": [
+        {
+          "src": "https://www.sarsajyotishsansthan.com/media/consultation-still-life-768.webp",
+          "loaded": true,
+          "altPresent": true
+        },
+        {
+          "src": "https://www.sarsajyotishsansthan.com/media/madhuri-gupta-portrait.jpeg",
+          "loaded": true,
+          "altPresent": true
+        },
+        {
+          "src": "https://www.sarsajyotishsansthan.com/assets/kundli-matching-primary-480-AK388GU-.webp",
+          "loaded": true,
+          "altPresent": true
+        },
+        {
+          "src": "https://www.sarsajyotishsansthan.com/assets/kundli-prediction-primary-480-2krxOrhO.webp",
+          "loaded": true,
+          "altPresent": true
+        },
+        {
+          "src": "https://www.sarsajyotishsansthan.com/assets/vastu-consultation-primary-480-BNKz_Bpe.webp",
+          "loaded": true,
+          "altPresent": true
+        },
+        {
+          "src": "https://www.sarsajyotishsansthan.com/assets/numerology-primary-480-D28EDIoc.webp",
+          "loaded": true,
+          "altPresent": true
+        },
+        {
+          "src": "https://www.sarsajyotishsansthan.com/assets/prashna-kundali-primary-480-4_7Qhvxk.webp",
+          "loaded": true,
+          "altPresent": true
+        }
+      ],
+      "active": [],
+      "api": [
+        "/api/service-state"
+      ],
+      "entryScripts": [
+        "https://www.sarsajyotishsansthan.com/assets/index-104z-RDZ.js"
+      ]
+    },
+    {
+      "label": "route /about 390",
+      "status": "passed",
+      "assertions": 15,
+      "elapsed_ms": 2085,
+      "width": 390,
+      "height": 844,
+      "path": "/about",
+      "title": "About Madhuri Gupta — Astro & Jyotish | Sarsa Jyotish Sansthan",
+      "canonical": "https://www.sarsajyotishsansthan.com/about",
+      "description": "Meet Madhuri Gupta, who leads Sarsa Jyotish Sansthan in Agra. Read about her 15+ years of experience, Jyotish studies and approach.",
+      "robots": "index, follow",
+      "h1": 1,
+      "headers": 1,
+      "footers": 1,
+      "logo": {
+        "src": "/media/sarsa-kundli-lotus-logo-128.png",
+        "loaded": true,
+        "alt": ""
+      },
+      "favicon": "/media/sarsa-kundli-lotus-favicon.png",
+      "overflow": 0,
+      "images": [
+        {
+          "src": "https://www.sarsajyotishsansthan.com/media/madhuri-gupta-portrait.jpeg",
+          "loaded": true,
+          "altPresent": true
+        },
+        {
+          "src": "https://www.sarsajyotishsansthan.com/media/madhuri-gupta-portrait.jpeg",
+          "loaded": true,
+          "altPresent": true
+        }
+      ],
+      "active": [
+        {
+          "href": "/about",
+          "weight": 700
+        }
+      ],
+      "api": [
+        "/api/service-state"
+      ],
+      "entryScripts": [
+        "https://www.sarsajyotishsansthan.com/assets/index-104z-RDZ.js"
+      ]
+    },
+    {
+      "label": "route /services 390",
+      "status": "passed",
+      "assertions": 15,
+      "elapsed_ms": 2072,
+      "width": 390,
+      "height": 844,
+      "path": "/services",
+      "title": "Astrology Services with Madhuri Gupta | Sarsa Jyotish Sansthan",
+      "canonical": "https://www.sarsajyotishsansthan.com/services",
+      "description": "Explore Kundli Prediction, Kundli Matching, Vastu, Numerology and Prashna Kundali services with Madhuri Gupta. Read about each service and contact the practice.",
+      "robots": "index, follow",
+      "h1": 1,
+      "headers": 1,
+      "footers": 1,
+      "logo": {
+        "src": "/media/sarsa-kundli-lotus-logo-128.png",
+        "loaded": true,
+        "alt": ""
+      },
+      "favicon": "/media/sarsa-kundli-lotus-favicon.png",
+      "overflow": 0,
+      "images": [
+        {
+          "src": "https://www.sarsajyotishsansthan.com/assets/kundli-matching-primary-480-AK388GU-.webp",
+          "loaded": true,
+          "altPresent": true
+        },
+        {
+          "src": "https://www.sarsajyotishsansthan.com/assets/kundli-prediction-primary-480-2krxOrhO.webp",
+          "loaded": true,
+          "altPresent": true
+        },
+        {
+          "src": "https://www.sarsajyotishsansthan.com/assets/vastu-consultation-primary-480-BNKz_Bpe.webp",
+          "loaded": true,
+          "altPresent": true
+        },
+        {
+          "src": "https://www.sarsajyotishsansthan.com/assets/numerology-primary-480-D28EDIoc.webp",
+          "loaded": true,
+          "altPresent": true
+        },
+        {
+          "src": "https://www.sarsajyotishsansthan.com/assets/prashna-kundali-primary-480-4_7Qhvxk.webp",
+          "loaded": true,
+          "altPresent": true
+        }
+      ],
+      "active": [
+        {
+          "href": "/services",
+          "weight": 700
+        }
+      ],
+      "api": [
+        "/api/service-state"
+      ],
+      "entryScripts": [
+        "https://www.sarsajyotishsansthan.com/assets/index-104z-RDZ.js"
+      ]
+    },
+    {
+      "label": "route /testimonials 390",
+      "status": "passed",
+      "assertions": 15,
+      "elapsed_ms": 1937,
+      "width": 390,
+      "height": 844,
+      "path": "/testimonials",
+      "title": "Customer Reviews | Sarsa Jyotish Sansthan",
+      "canonical": "https://www.sarsajyotishsansthan.com/testimonials",
+      "description": "Customer feedback on Kundli, Vastu and Numerology consultations with Madhuri Gupta at Sarsa Jyotish Sansthan.",
+      "robots": "index, follow",
+      "h1": 1,
+      "headers": 1,
+      "footers": 1,
+      "logo": {
+        "src": "/media/sarsa-kundli-lotus-logo-128.png",
+        "loaded": true,
+        "alt": ""
+      },
+      "favicon": "/media/sarsa-kundli-lotus-favicon.png",
+      "overflow": 0,
+      "images": [
+        {
+          "src": "https://www.sarsajyotishsansthan.com/assets/kundli-prediction-primary-800-DMqks9s5.webp",
+          "loaded": true,
+          "altPresent": true
+        }
+      ],
+      "active": [
+        {
+          "href": "/testimonials",
+          "weight": 700
+        }
+      ],
+      "api": [
+        "/api/service-state"
+      ],
+      "entryScripts": [
+        "https://www.sarsajyotishsansthan.com/assets/index-104z-RDZ.js"
+      ]
+    },
+    {
+      "label": "route /services/kundli-prediction 390",
+      "status": "passed",
+      "assertions": 15,
+      "elapsed_ms": 2603,
+      "width": 390,
+      "height": 844,
+      "path": "/services/kundli-prediction",
+      "title": "Kundli Prediction | Sarsa Jyotish Sansthan",
+      "canonical": "https://www.sarsajyotishsansthan.com/services/kundli-prediction",
+      "description": "Explore your birth chart and the questions you bring to a personal Kundli Prediction consultation with Madhuri Gupta.",
+      "robots": "index, follow",
+      "h1": 1,
+      "headers": 1,
+      "footers": 1,
+      "logo": {
+        "src": "/media/sarsa-kundli-lotus-logo-128.png",
+        "loaded": true,
+        "alt": ""
+      },
+      "favicon": "/media/sarsa-kundli-lotus-favicon.png",
+      "overflow": 0,
+      "images": [
+        {
+          "src": "https://www.sarsajyotishsansthan.com/assets/kundli-prediction-primary-800-DMqks9s5.webp",
+          "loaded": true,
+          "altPresent": true
+        },
+        {
+          "src": "https://www.sarsajyotishsansthan.com/media/consultation-still-life.png",
+          "loaded": true,
+          "altPresent": true
+        }
+      ],
+      "active": [
+        {
+          "href": "/services",
+          "weight": 700
+        }
+      ],
+      "api": [
+        "/api/service-state"
+      ],
+      "entryScripts": [
+        "https://www.sarsajyotishsansthan.com/assets/index-104z-RDZ.js"
+      ]
+    },
+    {
+      "label": "route /services/kundli-matching 390",
+      "status": "passed",
+      "assertions": 15,
+      "elapsed_ms": 1667,
+      "width": 390,
+      "height": 844,
+      "path": "/services/kundli-matching",
+      "title": "Kundli Matching | Sarsa Jyotish Sansthan",
+      "canonical": "https://www.sarsajyotishsansthan.com/services/kundli-matching",
+      "description": "Bring your questions about compatibility to a personal Kundli Matching consultation with Madhuri Gupta.",
+      "robots": "index, follow",
+      "h1": 1,
+      "headers": 1,
+      "footers": 1,
+      "logo": {
+        "src": "/media/sarsa-kundli-lotus-logo-128.png",
+        "loaded": true,
+        "alt": ""
+      },
+      "favicon": "/media/sarsa-kundli-lotus-favicon.png",
+      "overflow": 0,
+      "images": [
+        {
+          "src": "https://www.sarsajyotishsansthan.com/assets/kundli-matching-primary-800-ClNKX3Ty.webp",
+          "loaded": true,
+          "altPresent": true
+        }
+      ],
+      "active": [
+        {
+          "href": "/services",
+          "weight": 700
+        }
+      ],
+      "api": [
+        "/api/service-state"
+      ],
+      "entryScripts": [
+        "https://www.sarsajyotishsansthan.com/assets/index-104z-RDZ.js"
+      ]
+    },
+    {
+      "label": "route /services/vastu-consultation 390",
+      "status": "passed",
+      "assertions": 15,
+      "elapsed_ms": 1852,
+      "width": 390,
+      "height": 844,
+      "path": "/services/vastu-consultation",
+      "title": "Vastu Consultation | Sarsa Jyotish Sansthan",
+      "canonical": "https://www.sarsajyotishsansthan.com/services/vastu-consultation",
+      "description": "Discuss questions about your home or workspace in a Vastu consultation with Madhuri Gupta.",
+      "robots": "index, follow",
+      "h1": 1,
+      "headers": 1,
+      "footers": 1,
+      "logo": {
+        "src": "/media/sarsa-kundli-lotus-logo-128.png",
+        "loaded": true,
+        "alt": ""
+      },
+      "favicon": "/media/sarsa-kundli-lotus-favicon.png",
+      "overflow": 0,
+      "images": [
+        {
+          "src": "https://www.sarsajyotishsansthan.com/assets/vastu-consultation-primary-800-SZcj9mf8.webp",
+          "loaded": true,
+          "altPresent": true
+        }
+      ],
+      "active": [
+        {
+          "href": "/services",
+          "weight": 700
+        }
+      ],
+      "api": [
+        "/api/service-state"
+      ],
+      "entryScripts": [
+        "https://www.sarsajyotishsansthan.com/assets/index-104z-RDZ.js"
+      ]
+    },
+    {
+      "label": "route /services/numerology 390",
+      "status": "passed",
+      "assertions": 15,
+      "elapsed_ms": 1799,
+      "width": 390,
+      "height": 844,
+      "path": "/services/numerology",
+      "title": "Numerology | Sarsa Jyotish Sansthan",
+      "canonical": "https://www.sarsajyotishsansthan.com/services/numerology",
+      "description": "Explore your questions about names and dates in a Numerology consultation with Madhuri Gupta.",
+      "robots": "index, follow",
+      "h1": 1,
+      "headers": 1,
+      "footers": 1,
+      "logo": {
+        "src": "/media/sarsa-kundli-lotus-logo-128.png",
+        "loaded": true,
+        "alt": ""
+      },
+      "favicon": "/media/sarsa-kundli-lotus-favicon.png",
+      "overflow": 0,
+      "images": [
+        {
+          "src": "https://www.sarsajyotishsansthan.com/assets/numerology-primary-800-CuHyDARR.webp",
+          "loaded": true,
+          "altPresent": true
+        }
+      ],
+      "active": [
+        {
+          "href": "/services",
+          "weight": 700
+        }
+      ],
+      "api": [
+        "/api/service-state"
+      ],
+      "entryScripts": [
+        "https://www.sarsajyotishsansthan.com/assets/index-104z-RDZ.js"
+      ]
+    },
+    {
+      "label": "route /services/prashna-kundali 390",
+      "status": "passed",
+      "assertions": 15,
+      "elapsed_ms": 4585,
+      "width": 390,
+      "height": 844,
+      "path": "/services/prashna-kundali",
+      "title": "Prashna Kundali | Sarsa Jyotish Sansthan",
+      "canonical": "https://www.sarsajyotishsansthan.com/services/prashna-kundali",
+      "description": "Discuss a specific question with Madhuri through Prashna Kundali. Birth details are not required to book.",
+      "robots": "index, follow",
+      "h1": 1,
+      "headers": 1,
+      "footers": 1,
+      "logo": {
+        "src": "/media/sarsa-kundli-lotus-logo-128.png",
+        "loaded": true,
+        "alt": ""
+      },
+      "favicon": "/media/sarsa-kundli-lotus-favicon.png",
+      "overflow": 0,
+      "images": [
+        {
+          "src": "https://www.sarsajyotishsansthan.com/assets/prashna-kundali-supporting-800-CAGM6wWe.webp",
+          "loaded": true,
+          "altPresent": true
+        }
+      ],
+      "active": [
+        {
+          "href": "/services",
+          "weight": 700
+        }
+      ],
+      "api": [
+        "/api/service-state"
+      ],
+      "entryScripts": [
+        "https://www.sarsajyotishsansthan.com/assets/index-104z-RDZ.js"
+      ]
+    },
+    {
+      "label": "route /contact 390",
+      "status": "passed",
+      "assertions": 15,
+      "elapsed_ms": 1928,
+      "width": 390,
+      "height": 844,
+      "path": "/contact",
+      "title": "Contact Madhuri Gupta in Agra | Sarsa Jyotish Sansthan",
+      "canonical": "https://www.sarsajyotishsansthan.com/contact",
+      "description": "Find Sarsa Jyotish Sansthan's contact details in Agra. Ask the practice a question or contact it for help with an existing appointment.",
+      "robots": "index, follow",
+      "h1": 1,
+      "headers": 1,
+      "footers": 1,
+      "logo": {
+        "src": "/media/sarsa-kundli-lotus-logo-128.png",
+        "loaded": true,
+        "alt": ""
+      },
+      "favicon": "/media/sarsa-kundli-lotus-favicon.png",
+      "overflow": 0,
+      "images": [],
+      "active": [
+        {
+          "href": "/contact",
+          "weight": 700
+        }
+      ],
+      "api": [
+        "/api/service-state"
+      ],
+      "entryScripts": [
+        "https://www.sarsajyotishsansthan.com/assets/index-104z-RDZ.js"
+      ]
+    },
+    {
+      "label": "route /privacy 390",
+      "status": "passed",
+      "assertions": 14,
+      "elapsed_ms": 1818,
+      "width": 390,
+      "height": 844,
+      "path": "/privacy",
+      "title": "Privacy Policy | Sarsa Jyotish Sansthan",
+      "canonical": "https://www.sarsajyotishsansthan.com/privacy",
+      "description": "How Sarsa Jyotish Sansthan handles booking and enquiry information, including practice and agency records.",
+      "robots": "index, follow",
+      "h1": 1,
+      "headers": 1,
+      "footers": 1,
+      "logo": {
+        "src": "/media/sarsa-kundli-lotus-logo-128.png",
+        "loaded": true,
+        "alt": ""
+      },
+      "favicon": "/media/sarsa-kundli-lotus-favicon.png",
+      "overflow": 0,
+      "images": [],
+      "active": [],
+      "api": [
+        "/api/service-state"
+      ],
+      "entryScripts": [
+        "https://www.sarsajyotishsansthan.com/assets/index-104z-RDZ.js"
+      ]
+    },
+    {
+      "label": "route /terms 390",
+      "status": "passed",
+      "assertions": 14,
+      "elapsed_ms": 1755,
+      "width": 390,
+      "height": 844,
+      "path": "/terms",
+      "title": "Terms of Service | Sarsa Jyotish Sansthan",
+      "canonical": "https://www.sarsajyotishsansthan.com/terms",
+      "description": "Read the terms for consultations, booking and support at Sarsa Jyotish Sansthan.",
+      "robots": "index, follow",
+      "h1": 1,
+      "headers": 1,
+      "footers": 1,
+      "logo": {
+        "src": "/media/sarsa-kundli-lotus-logo-128.png",
+        "loaded": true,
+        "alt": ""
+      },
+      "favicon": "/media/sarsa-kundli-lotus-favicon.png",
+      "overflow": 0,
+      "images": [],
+      "active": [],
+      "api": [
+        "/api/service-state"
+      ],
+      "entryScripts": [
+        "https://www.sarsajyotishsansthan.com/assets/index-104z-RDZ.js"
+      ]
+    },
+    {
+      "label": "route /booking 390",
+      "status": "passed",
+      "assertions": 15,
+      "elapsed_ms": 4680,
+      "width": 390,
+      "height": 844,
+      "path": "/booking",
+      "title": "Book an appointment | Sarsa Jyotish Sansthan",
+      "description": "Choose a consultation and an available appointment time with Madhuri Gupta. Online appointments use Google Meet.",
+      "robots": "noindex, nofollow",
+      "h1": 1,
+      "headers": 1,
+      "footers": 1,
+      "logo": {
+        "src": "/media/sarsa-kundli-lotus-logo-128.png",
+        "loaded": true,
+        "alt": ""
+      },
+      "favicon": "/media/sarsa-kundli-lotus-favicon.png",
+      "overflow": 0,
+      "images": [
+        {
+          "src": "https://www.sarsajyotishsansthan.com/assets/kundli-matching-primary-480-AK388GU-.webp",
+          "loaded": true,
+          "altPresent": true
+        },
+        {
+          "src": "https://www.sarsajyotishsansthan.com/assets/kundli-prediction-primary-480-2krxOrhO.webp",
+          "loaded": true,
+          "altPresent": true
+        },
+        {
+          "src": "https://www.sarsajyotishsansthan.com/assets/vastu-consultation-primary-480-BNKz_Bpe.webp",
+          "loaded": true,
+          "altPresent": true
+        },
+        {
+          "src": "https://www.sarsajyotishsansthan.com/assets/numerology-primary-480-D28EDIoc.webp",
+          "loaded": true,
+          "altPresent": true
+        },
+        {
+          "src": "https://www.sarsajyotishsansthan.com/assets/prashna-kundali-primary-480-4_7Qhvxk.webp",
+          "loaded": true,
+          "altPresent": true
+        }
+      ],
+      "active": [],
+      "api": [
+        "/api/service-state",
+        "/api/booking-policy",
+        "/api/availability"
+      ],
+      "entryScripts": [
+        "https://www.sarsajyotishsansthan.com/assets/index-104z-RDZ.js"
+      ]
+    },
+    {
+      "label": "route /booking-policy 390",
+      "status": "passed",
+      "assertions": 14,
+      "elapsed_ms": 1599,
+      "width": 390,
+      "height": 844,
+      "path": "/booking-policy",
+      "title": "Booking policy | Sarsa Jyotish Sansthan",
+      "description": "Read the cancellation, rescheduling and refund rules for Sarsa Jyotish Sansthan consultations.",
+      "robots": "noindex, nofollow",
+      "h1": 1,
+      "headers": 1,
+      "footers": 1,
+      "logo": {
+        "src": "/media/sarsa-kundli-lotus-logo-128.png",
+        "loaded": true,
+        "alt": ""
+      },
+      "favicon": "/media/sarsa-kundli-lotus-favicon.png",
+      "overflow": 0,
+      "images": [],
+      "active": [],
+      "api": [
+        "/api/service-state"
+      ],
+      "entryScripts": [
+        "https://www.sarsajyotishsansthan.com/assets/index-104z-RDZ.js"
+      ]
+    },
+    {
+      "label": "route /booking/receipt 390",
+      "status": "passed",
+      "assertions": 15,
+      "elapsed_ms": 2744,
+      "width": 390,
+      "height": 844,
+      "path": "/booking/receipt",
+      "title": "View my booking | Sarsa Jyotish Sansthan",
+      "description": "View your appointment details with the full name and phone number saved when booking.",
+      "robots": "noindex, nofollow",
+      "h1": 1,
+      "headers": 1,
+      "footers": 1,
+      "logo": {
+        "src": "/media/sarsa-kundli-lotus-logo-128.png",
+        "loaded": true,
+        "alt": ""
+      },
+      "favicon": "/media/sarsa-kundli-lotus-favicon.png",
+      "overflow": 0,
+      "images": [],
+      "active": [],
+      "api": [
+        "/api/service-state"
+      ],
+      "entryScripts": [
+        "https://www.sarsajyotishsansthan.com/assets/index-104z-RDZ.js"
+      ]
+    },
+    {
+      "label": "route / 1440",
+      "status": "passed",
+      "assertions": 14,
+      "elapsed_ms": 2059,
+      "width": 1440,
+      "height": 900,
+      "path": "/",
+      "title": "Astrologer Madhuri Gupta in Agra | Sarsa Jyotish Sansthan",
+      "canonical": "https://www.sarsajyotishsansthan.com/",
+      "description": "Explore Astro, Numerology and Vastu guidance with Madhuri Gupta at Sarsa Jyotish Sansthan in Agra. Read about the five services and contact the practice.",
+      "robots": "index, follow",
+      "h1": 1,
+      "headers": 1,
+      "footers": 1,
+      "logo": {
+        "src": "/media/sarsa-kundli-lotus-logo-128.png",
+        "loaded": true,
+        "alt": ""
+      },
+      "favicon": "/media/sarsa-kundli-lotus-favicon.png",
+      "overflow": 0,
+      "images": [
+        {
+          "src": "https://www.sarsajyotishsansthan.com/media/consultation-still-life-1920.webp",
+          "loaded": true,
+          "altPresent": true
+        },
+        {
+          "src": "https://www.sarsajyotishsansthan.com/media/madhuri-gupta-portrait.jpeg",
+          "loaded": true,
+          "altPresent": true
+        },
+        {
+          "src": "https://www.sarsajyotishsansthan.com/assets/kundli-matching-primary-800-ClNKX3Ty.webp",
+          "loaded": true,
+          "altPresent": true
+        },
+        {
+          "src": "https://www.sarsajyotishsansthan.com/assets/kundli-prediction-primary-800-DMqks9s5.webp",
+          "loaded": true,
+          "altPresent": true
+        },
+        {
+          "src": "https://www.sarsajyotishsansthan.com/assets/vastu-consultation-primary-800-SZcj9mf8.webp",
+          "loaded": true,
+          "altPresent": true
+        },
+        {
+          "src": "https://www.sarsajyotishsansthan.com/assets/numerology-primary-800-CuHyDARR.webp",
+          "loaded": true,
+          "altPresent": true
+        },
+        {
+          "src": "https://www.sarsajyotishsansthan.com/assets/prashna-kundali-primary-800-BxAYEf8Q.webp",
+          "loaded": true,
+          "altPresent": true
+        }
+      ],
+      "active": [],
+      "api": [
+        "/api/service-state"
+      ],
+      "entryScripts": [
+        "https://www.sarsajyotishsansthan.com/assets/index-104z-RDZ.js"
+      ]
+    },
+    {
+      "label": "route /about 1440",
+      "status": "passed",
+      "assertions": 15,
+      "elapsed_ms": 1685,
+      "width": 1440,
+      "height": 900,
+      "path": "/about",
+      "title": "About Madhuri Gupta — Astro & Jyotish | Sarsa Jyotish Sansthan",
+      "canonical": "https://www.sarsajyotishsansthan.com/about",
+      "description": "Meet Madhuri Gupta, who leads Sarsa Jyotish Sansthan in Agra. Read about her 15+ years of experience, Jyotish studies and approach.",
+      "robots": "index, follow",
+      "h1": 1,
+      "headers": 1,
+      "footers": 1,
+      "logo": {
+        "src": "/media/sarsa-kundli-lotus-logo-128.png",
+        "loaded": true,
+        "alt": ""
+      },
+      "favicon": "/media/sarsa-kundli-lotus-favicon.png",
+      "overflow": 0,
+      "images": [
+        {
+          "src": "https://www.sarsajyotishsansthan.com/media/madhuri-gupta-portrait.jpeg",
+          "loaded": true,
+          "altPresent": true
+        },
+        {
+          "src": "https://www.sarsajyotishsansthan.com/media/madhuri-gupta-portrait.jpeg",
+          "loaded": true,
+          "altPresent": true
+        }
+      ],
+      "active": [
+        {
+          "href": "/about",
+          "weight": 700
+        }
+      ],
+      "api": [
+        "/api/service-state"
+      ],
+      "entryScripts": [
+        "https://www.sarsajyotishsansthan.com/assets/index-104z-RDZ.js"
+      ]
+    },
+    {
+      "label": "route /services 1440",
+      "status": "passed",
+      "assertions": 15,
+      "elapsed_ms": 1762,
+      "width": 1440,
+      "height": 900,
+      "path": "/services",
+      "title": "Astrology Services with Madhuri Gupta | Sarsa Jyotish Sansthan",
+      "canonical": "https://www.sarsajyotishsansthan.com/services",
+      "description": "Explore Kundli Prediction, Kundli Matching, Vastu, Numerology and Prashna Kundali services with Madhuri Gupta. Read about each service and contact the practice.",
+      "robots": "index, follow",
+      "h1": 1,
+      "headers": 1,
+      "footers": 1,
+      "logo": {
+        "src": "/media/sarsa-kundli-lotus-logo-128.png",
+        "loaded": true,
+        "alt": ""
+      },
+      "favicon": "/media/sarsa-kundli-lotus-favicon.png",
+      "overflow": 0,
+      "images": [
+        {
+          "src": "https://www.sarsajyotishsansthan.com/assets/kundli-matching-primary-800-ClNKX3Ty.webp",
+          "loaded": true,
+          "altPresent": true
+        },
+        {
+          "src": "https://www.sarsajyotishsansthan.com/assets/kundli-prediction-primary-800-DMqks9s5.webp",
+          "loaded": true,
+          "altPresent": true
+        },
+        {
+          "src": "https://www.sarsajyotishsansthan.com/assets/vastu-consultation-primary-800-SZcj9mf8.webp",
+          "loaded": true,
+          "altPresent": true
+        },
+        {
+          "src": "https://www.sarsajyotishsansthan.com/assets/numerology-primary-800-CuHyDARR.webp",
+          "loaded": true,
+          "altPresent": true
+        },
+        {
+          "src": "https://www.sarsajyotishsansthan.com/assets/prashna-kundali-primary-800-BxAYEf8Q.webp",
+          "loaded": true,
+          "altPresent": true
+        }
+      ],
+      "active": [
+        {
+          "href": "/services",
+          "weight": 700
+        }
+      ],
+      "api": [
+        "/api/service-state"
+      ],
+      "entryScripts": [
+        "https://www.sarsajyotishsansthan.com/assets/index-104z-RDZ.js"
+      ]
+    },
+    {
+      "label": "route /testimonials 1440",
+      "status": "passed",
+      "assertions": 15,
+      "elapsed_ms": 1785,
+      "width": 1440,
+      "height": 900,
+      "path": "/testimonials",
+      "title": "Customer Reviews | Sarsa Jyotish Sansthan",
+      "canonical": "https://www.sarsajyotishsansthan.com/testimonials",
+      "description": "Customer feedback on Kundli, Vastu and Numerology consultations with Madhuri Gupta at Sarsa Jyotish Sansthan.",
+      "robots": "index, follow",
+      "h1": 1,
+      "headers": 1,
+      "footers": 1,
+      "logo": {
+        "src": "/media/sarsa-kundli-lotus-logo-128.png",
+        "loaded": true,
+        "alt": ""
+      },
+      "favicon": "/media/sarsa-kundli-lotus-favicon.png",
+      "overflow": 0,
+      "images": [
+        {
+          "src": "https://www.sarsajyotishsansthan.com/assets/kundli-prediction-primary-800-DMqks9s5.webp",
+          "loaded": true,
+          "altPresent": true
+        }
+      ],
+      "active": [
+        {
+          "href": "/testimonials",
+          "weight": 700
+        }
+      ],
+      "api": [
+        "/api/service-state"
+      ],
+      "entryScripts": [
+        "https://www.sarsajyotishsansthan.com/assets/index-104z-RDZ.js"
+      ]
+    },
+    {
+      "label": "route /services/kundli-prediction 1440",
+      "status": "passed",
+      "assertions": 15,
+      "elapsed_ms": 2390,
+      "width": 1440,
+      "height": 900,
+      "path": "/services/kundli-prediction",
+      "title": "Kundli Prediction | Sarsa Jyotish Sansthan",
+      "canonical": "https://www.sarsajyotishsansthan.com/services/kundli-prediction",
+      "description": "Explore your birth chart and the questions you bring to a personal Kundli Prediction consultation with Madhuri Gupta.",
+      "robots": "index, follow",
+      "h1": 1,
+      "headers": 1,
+      "footers": 1,
+      "logo": {
+        "src": "/media/sarsa-kundli-lotus-logo-128.png",
+        "loaded": true,
+        "alt": ""
+      },
+      "favicon": "/media/sarsa-kundli-lotus-favicon.png",
+      "overflow": 0,
+      "images": [
+        {
+          "src": "https://www.sarsajyotishsansthan.com/assets/kundli-prediction-primary-800-DMqks9s5.webp",
+          "loaded": true,
+          "altPresent": true
+        },
+        {
+          "src": "https://www.sarsajyotishsansthan.com/media/consultation-still-life.png",
+          "loaded": true,
+          "altPresent": true
+        }
+      ],
+      "active": [
+        {
+          "href": "/services",
+          "weight": 700
+        }
+      ],
+      "api": [
+        "/api/service-state"
+      ],
+      "entryScripts": [
+        "https://www.sarsajyotishsansthan.com/assets/index-104z-RDZ.js"
+      ]
+    },
+    {
+      "label": "route /services/kundli-matching 1440",
+      "status": "passed",
+      "assertions": 15,
+      "elapsed_ms": 1727,
+      "width": 1440,
+      "height": 900,
+      "path": "/services/kundli-matching",
+      "title": "Kundli Matching | Sarsa Jyotish Sansthan",
+      "canonical": "https://www.sarsajyotishsansthan.com/services/kundli-matching",
+      "description": "Bring your questions about compatibility to a personal Kundli Matching consultation with Madhuri Gupta.",
+      "robots": "index, follow",
+      "h1": 1,
+      "headers": 1,
+      "footers": 1,
+      "logo": {
+        "src": "/media/sarsa-kundli-lotus-logo-128.png",
+        "loaded": true,
+        "alt": ""
+      },
+      "favicon": "/media/sarsa-kundli-lotus-favicon.png",
+      "overflow": 0,
+      "images": [
+        {
+          "src": "https://www.sarsajyotishsansthan.com/assets/kundli-matching-primary-800-ClNKX3Ty.webp",
+          "loaded": true,
+          "altPresent": true
+        }
+      ],
+      "active": [
+        {
+          "href": "/services",
+          "weight": 700
+        }
+      ],
+      "api": [
+        "/api/service-state"
+      ],
+      "entryScripts": [
+        "https://www.sarsajyotishsansthan.com/assets/index-104z-RDZ.js"
+      ]
+    },
+    {
+      "label": "route /services/vastu-consultation 1440",
+      "status": "passed",
+      "assertions": 15,
+      "elapsed_ms": 1652,
+      "width": 1440,
+      "height": 900,
+      "path": "/services/vastu-consultation",
+      "title": "Vastu Consultation | Sarsa Jyotish Sansthan",
+      "canonical": "https://www.sarsajyotishsansthan.com/services/vastu-consultation",
+      "description": "Discuss questions about your home or workspace in a Vastu consultation with Madhuri Gupta.",
+      "robots": "index, follow",
+      "h1": 1,
+      "headers": 1,
+      "footers": 1,
+      "logo": {
+        "src": "/media/sarsa-kundli-lotus-logo-128.png",
+        "loaded": true,
+        "alt": ""
+      },
+      "favicon": "/media/sarsa-kundli-lotus-favicon.png",
+      "overflow": 0,
+      "images": [
+        {
+          "src": "https://www.sarsajyotishsansthan.com/assets/vastu-consultation-primary-800-SZcj9mf8.webp",
+          "loaded": true,
+          "altPresent": true
+        }
+      ],
+      "active": [
+        {
+          "href": "/services",
+          "weight": 700
+        }
+      ],
+      "api": [
+        "/api/service-state"
+      ],
+      "entryScripts": [
+        "https://www.sarsajyotishsansthan.com/assets/index-104z-RDZ.js"
+      ]
+    },
+    {
+      "label": "route /services/numerology 1440",
+      "status": "passed",
+      "assertions": 15,
+      "elapsed_ms": 1602,
+      "width": 1440,
+      "height": 900,
+      "path": "/services/numerology",
+      "title": "Numerology | Sarsa Jyotish Sansthan",
+      "canonical": "https://www.sarsajyotishsansthan.com/services/numerology",
+      "description": "Explore your questions about names and dates in a Numerology consultation with Madhuri Gupta.",
+      "robots": "index, follow",
+      "h1": 1,
+      "headers": 1,
+      "footers": 1,
+      "logo": {
+        "src": "/media/sarsa-kundli-lotus-logo-128.png",
+        "loaded": true,
+        "alt": ""
+      },
+      "favicon": "/media/sarsa-kundli-lotus-favicon.png",
+      "overflow": 0,
+      "images": [
+        {
+          "src": "https://www.sarsajyotishsansthan.com/assets/numerology-primary-800-CuHyDARR.webp",
+          "loaded": true,
+          "altPresent": true
+        }
+      ],
+      "active": [
+        {
+          "href": "/services",
+          "weight": 700
+        }
+      ],
+      "api": [
+        "/api/service-state"
+      ],
+      "entryScripts": [
+        "https://www.sarsajyotishsansthan.com/assets/index-104z-RDZ.js"
+      ]
+    },
+    {
+      "label": "route /services/prashna-kundali 1440",
+      "status": "passed",
+      "assertions": 15,
+      "elapsed_ms": 1832,
+      "width": 1440,
+      "height": 900,
+      "path": "/services/prashna-kundali",
+      "title": "Prashna Kundali | Sarsa Jyotish Sansthan",
+      "canonical": "https://www.sarsajyotishsansthan.com/services/prashna-kundali",
+      "description": "Discuss a specific question with Madhuri through Prashna Kundali. Birth details are not required to book.",
+      "robots": "index, follow",
+      "h1": 1,
+      "headers": 1,
+      "footers": 1,
+      "logo": {
+        "src": "/media/sarsa-kundli-lotus-logo-128.png",
+        "loaded": true,
+        "alt": ""
+      },
+      "favicon": "/media/sarsa-kundli-lotus-favicon.png",
+      "overflow": 0,
+      "images": [
+        {
+          "src": "https://www.sarsajyotishsansthan.com/assets/prashna-kundali-supporting-800-CAGM6wWe.webp",
+          "loaded": true,
+          "altPresent": true
+        }
+      ],
+      "active": [
+        {
+          "href": "/services",
+          "weight": 700
+        }
+      ],
+      "api": [
+        "/api/service-state"
+      ],
+      "entryScripts": [
+        "https://www.sarsajyotishsansthan.com/assets/index-104z-RDZ.js"
+      ]
+    },
+    {
+      "label": "route /contact 1440",
+      "status": "passed",
+      "assertions": 15,
+      "elapsed_ms": 1655,
+      "width": 1440,
+      "height": 900,
+      "path": "/contact",
+      "title": "Contact Madhuri Gupta in Agra | Sarsa Jyotish Sansthan",
+      "canonical": "https://www.sarsajyotishsansthan.com/contact",
+      "description": "Find Sarsa Jyotish Sansthan's contact details in Agra. Ask the practice a question or contact it for help with an existing appointment.",
+      "robots": "index, follow",
+      "h1": 1,
+      "headers": 1,
+      "footers": 1,
+      "logo": {
+        "src": "/media/sarsa-kundli-lotus-logo-128.png",
+        "loaded": true,
+        "alt": ""
+      },
+      "favicon": "/media/sarsa-kundli-lotus-favicon.png",
+      "overflow": 0,
+      "images": [],
+      "active": [
+        {
+          "href": "/contact",
+          "weight": 700
+        }
+      ],
+      "api": [
+        "/api/service-state"
+      ],
+      "entryScripts": [
+        "https://www.sarsajyotishsansthan.com/assets/index-104z-RDZ.js"
+      ]
+    },
+    {
+      "label": "route /privacy 1440",
+      "status": "passed",
+      "assertions": 14,
+      "elapsed_ms": 1623,
+      "width": 1440,
+      "height": 900,
+      "path": "/privacy",
+      "title": "Privacy Policy | Sarsa Jyotish Sansthan",
+      "canonical": "https://www.sarsajyotishsansthan.com/privacy",
+      "description": "How Sarsa Jyotish Sansthan handles booking and enquiry information, including practice and agency records.",
+      "robots": "index, follow",
+      "h1": 1,
+      "headers": 1,
+      "footers": 1,
+      "logo": {
+        "src": "/media/sarsa-kundli-lotus-logo-128.png",
+        "loaded": true,
+        "alt": ""
+      },
+      "favicon": "/media/sarsa-kundli-lotus-favicon.png",
+      "overflow": 0,
+      "images": [],
+      "active": [],
+      "api": [
+        "/api/service-state"
+      ],
+      "entryScripts": [
+        "https://www.sarsajyotishsansthan.com/assets/index-104z-RDZ.js"
+      ]
+    },
+    {
+      "label": "route /terms 1440",
+      "status": "passed",
+      "assertions": 14,
+      "elapsed_ms": 1561,
+      "width": 1440,
+      "height": 900,
+      "path": "/terms",
+      "title": "Terms of Service | Sarsa Jyotish Sansthan",
+      "canonical": "https://www.sarsajyotishsansthan.com/terms",
+      "description": "Read the terms for consultations, booking and support at Sarsa Jyotish Sansthan.",
+      "robots": "index, follow",
+      "h1": 1,
+      "headers": 1,
+      "footers": 1,
+      "logo": {
+        "src": "/media/sarsa-kundli-lotus-logo-128.png",
+        "loaded": true,
+        "alt": ""
+      },
+      "favicon": "/media/sarsa-kundli-lotus-favicon.png",
+      "overflow": 0,
+      "images": [],
+      "active": [],
+      "api": [
+        "/api/service-state"
+      ],
+      "entryScripts": [
+        "https://www.sarsajyotishsansthan.com/assets/index-104z-RDZ.js"
+      ]
+    },
+    {
+      "label": "route /booking 1440",
+      "status": "passed",
+      "assertions": 15,
+      "elapsed_ms": 3958,
+      "width": 1440,
+      "height": 900,
+      "path": "/booking",
+      "title": "Book an appointment | Sarsa Jyotish Sansthan",
+      "description": "Choose a consultation and an available appointment time with Madhuri Gupta. Online appointments use Google Meet.",
+      "robots": "noindex, nofollow",
+      "h1": 1,
+      "headers": 1,
+      "footers": 1,
+      "logo": {
+        "src": "/media/sarsa-kundli-lotus-logo-128.png",
+        "loaded": true,
+        "alt": ""
+      },
+      "favicon": "/media/sarsa-kundli-lotus-favicon.png",
+      "overflow": 0,
+      "images": [
+        {
+          "src": "https://www.sarsajyotishsansthan.com/assets/kundli-matching-primary-800-ClNKX3Ty.webp",
+          "loaded": true,
+          "altPresent": true
+        },
+        {
+          "src": "https://www.sarsajyotishsansthan.com/assets/kundli-prediction-primary-800-DMqks9s5.webp",
+          "loaded": true,
+          "altPresent": true
+        },
+        {
+          "src": "https://www.sarsajyotishsansthan.com/assets/vastu-consultation-primary-800-SZcj9mf8.webp",
+          "loaded": true,
+          "altPresent": true
+        },
+        {
+          "src": "https://www.sarsajyotishsansthan.com/assets/numerology-primary-800-CuHyDARR.webp",
+          "loaded": true,
+          "altPresent": true
+        },
+        {
+          "src": "https://www.sarsajyotishsansthan.com/assets/prashna-kundali-primary-800-BxAYEf8Q.webp",
+          "loaded": true,
+          "altPresent": true
+        }
+      ],
+      "active": [],
+      "api": [
+        "/api/service-state",
+        "/api/booking-policy",
+        "/api/availability"
+      ],
+      "entryScripts": [
+        "https://www.sarsajyotishsansthan.com/assets/index-104z-RDZ.js"
+      ]
+    },
+    {
+      "label": "route /booking-policy 1440",
+      "status": "passed",
+      "assertions": 14,
+      "elapsed_ms": 1567,
+      "width": 1440,
+      "height": 900,
+      "path": "/booking-policy",
+      "title": "Booking policy | Sarsa Jyotish Sansthan",
+      "description": "Read the cancellation, rescheduling and refund rules for Sarsa Jyotish Sansthan consultations.",
+      "robots": "noindex, nofollow",
+      "h1": 1,
+      "headers": 1,
+      "footers": 1,
+      "logo": {
+        "src": "/media/sarsa-kundli-lotus-logo-128.png",
+        "loaded": true,
+        "alt": ""
+      },
+      "favicon": "/media/sarsa-kundli-lotus-favicon.png",
+      "overflow": 0,
+      "images": [],
+      "active": [],
+      "api": [
+        "/api/service-state"
+      ],
+      "entryScripts": [
+        "https://www.sarsajyotishsansthan.com/assets/index-104z-RDZ.js"
+      ]
+    },
+    {
+      "label": "route /booking/receipt 1440",
+      "status": "passed",
+      "assertions": 15,
+      "elapsed_ms": 2328,
+      "width": 1440,
+      "height": 900,
+      "path": "/booking/receipt",
+      "title": "View my booking | Sarsa Jyotish Sansthan",
+      "description": "View your appointment details with the full name and phone number saved when booking.",
+      "robots": "noindex, nofollow",
+      "h1": 1,
+      "headers": 1,
+      "footers": 1,
+      "logo": {
+        "src": "/media/sarsa-kundli-lotus-logo-128.png",
+        "loaded": true,
+        "alt": ""
+      },
+      "favicon": "/media/sarsa-kundli-lotus-favicon.png",
+      "overflow": 0,
+      "images": [],
+      "active": [],
+      "api": [
+        "/api/service-state"
+      ],
+      "entryScripts": [
+        "https://www.sarsajyotishsansthan.com/assets/index-104z-RDZ.js"
+      ]
+    },
+    {
+      "label": "edge / 320",
+      "status": "passed",
+      "assertions": 14,
+      "elapsed_ms": 2310,
+      "width": 320,
+      "height": 740,
+      "path": "/",
+      "title": "Astrologer Madhuri Gupta in Agra | Sarsa Jyotish Sansthan",
+      "canonical": "https://www.sarsajyotishsansthan.com/",
+      "description": "Explore Astro, Numerology and Vastu guidance with Madhuri Gupta at Sarsa Jyotish Sansthan in Agra. Read about the five services and contact the practice.",
+      "robots": "index, follow",
+      "h1": 1,
+      "headers": 1,
+      "footers": 1,
+      "logo": {
+        "src": "/media/sarsa-kundli-lotus-logo-128.png",
+        "loaded": true,
+        "alt": ""
+      },
+      "favicon": "/media/sarsa-kundli-lotus-favicon.png",
+      "overflow": 0,
+      "images": [
+        {
+          "src": "https://www.sarsajyotishsansthan.com/media/consultation-still-life-768.webp",
+          "loaded": true,
+          "altPresent": true
+        },
+        {
+          "src": "https://www.sarsajyotishsansthan.com/media/madhuri-gupta-portrait.jpeg",
+          "loaded": true,
+          "altPresent": true
+        },
+        {
+          "src": "https://www.sarsajyotishsansthan.com/assets/kundli-matching-primary-480-AK388GU-.webp",
+          "loaded": true,
+          "altPresent": true
+        },
+        {
+          "src": "https://www.sarsajyotishsansthan.com/assets/kundli-prediction-primary-480-2krxOrhO.webp",
+          "loaded": true,
+          "altPresent": true
+        },
+        {
+          "src": "https://www.sarsajyotishsansthan.com/assets/vastu-consultation-primary-480-BNKz_Bpe.webp",
+          "loaded": true,
+          "altPresent": true
+        },
+        {
+          "src": "https://www.sarsajyotishsansthan.com/assets/numerology-primary-480-D28EDIoc.webp",
+          "loaded": true,
+          "altPresent": true
+        },
+        {
+          "src": "https://www.sarsajyotishsansthan.com/assets/prashna-kundali-primary-480-4_7Qhvxk.webp",
+          "loaded": true,
+          "altPresent": true
+        }
+      ],
+      "active": [],
+      "api": [
+        "/api/service-state"
+      ],
+      "entryScripts": [
+        "https://www.sarsajyotishsansthan.com/assets/index-104z-RDZ.js"
+      ]
+    },
+    {
+      "label": "edge /about 320",
+      "status": "passed",
+      "assertions": 15,
+      "elapsed_ms": 1990,
+      "width": 320,
+      "height": 740,
+      "path": "/about",
+      "title": "About Madhuri Gupta — Astro & Jyotish | Sarsa Jyotish Sansthan",
+      "canonical": "https://www.sarsajyotishsansthan.com/about",
+      "description": "Meet Madhuri Gupta, who leads Sarsa Jyotish Sansthan in Agra. Read about her 15+ years of experience, Jyotish studies and approach.",
+      "robots": "index, follow",
+      "h1": 1,
+      "headers": 1,
+      "footers": 1,
+      "logo": {
+        "src": "/media/sarsa-kundli-lotus-logo-128.png",
+        "loaded": true,
+        "alt": ""
+      },
+      "favicon": "/media/sarsa-kundli-lotus-favicon.png",
+      "overflow": 0,
+      "images": [
+        {
+          "src": "https://www.sarsajyotishsansthan.com/media/madhuri-gupta-portrait.jpeg",
+          "loaded": true,
+          "altPresent": true
+        },
+        {
+          "src": "https://www.sarsajyotishsansthan.com/media/madhuri-gupta-portrait.jpeg",
+          "loaded": true,
+          "altPresent": true
+        }
+      ],
+      "active": [
+        {
+          "href": "/about",
+          "weight": 700
+        }
+      ],
+      "api": [
+        "/api/service-state"
+      ],
+      "entryScripts": [
+        "https://www.sarsajyotishsansthan.com/assets/index-104z-RDZ.js"
+      ]
+    },
+    {
+      "label": "edge /services 320",
+      "status": "passed",
+      "assertions": 15,
+      "elapsed_ms": 2011,
+      "width": 320,
+      "height": 740,
+      "path": "/services",
+      "title": "Astrology Services with Madhuri Gupta | Sarsa Jyotish Sansthan",
+      "canonical": "https://www.sarsajyotishsansthan.com/services",
+      "description": "Explore Kundli Prediction, Kundli Matching, Vastu, Numerology and Prashna Kundali services with Madhuri Gupta. Read about each service and contact the practice.",
+      "robots": "index, follow",
+      "h1": 1,
+      "headers": 1,
+      "footers": 1,
+      "logo": {
+        "src": "/media/sarsa-kundli-lotus-logo-128.png",
+        "loaded": true,
+        "alt": ""
+      },
+      "favicon": "/media/sarsa-kundli-lotus-favicon.png",
+      "overflow": 0,
+      "images": [
+        {
+          "src": "https://www.sarsajyotishsansthan.com/assets/kundli-matching-primary-480-AK388GU-.webp",
+          "loaded": true,
+          "altPresent": true
+        },
+        {
+          "src": "https://www.sarsajyotishsansthan.com/assets/kundli-prediction-primary-480-2krxOrhO.webp",
+          "loaded": true,
+          "altPresent": true
+        },
+        {
+          "src": "https://www.sarsajyotishsansthan.com/assets/vastu-consultation-primary-480-BNKz_Bpe.webp",
+          "loaded": true,
+          "altPresent": true
+        },
+        {
+          "src": "https://www.sarsajyotishsansthan.com/assets/numerology-primary-480-D28EDIoc.webp",
+          "loaded": true,
+          "altPresent": true
+        },
+        {
+          "src": "https://www.sarsajyotishsansthan.com/assets/prashna-kundali-primary-480-4_7Qhvxk.webp",
+          "loaded": true,
+          "altPresent": true
+        }
+      ],
+      "active": [
+        {
+          "href": "/services",
+          "weight": 700
+        }
+      ],
+      "api": [
+        "/api/service-state"
+      ],
+      "entryScripts": [
+        "https://www.sarsajyotishsansthan.com/assets/index-104z-RDZ.js"
+      ]
+    },
+    {
+      "label": "edge /services/prashna-kundali 320",
+      "status": "passed",
+      "assertions": 15,
+      "elapsed_ms": 2051,
+      "width": 320,
+      "height": 740,
+      "path": "/services/prashna-kundali",
+      "title": "Prashna Kundali | Sarsa Jyotish Sansthan",
+      "canonical": "https://www.sarsajyotishsansthan.com/services/prashna-kundali",
+      "description": "Discuss a specific question with Madhuri through Prashna Kundali. Birth details are not required to book.",
+      "robots": "index, follow",
+      "h1": 1,
+      "headers": 1,
+      "footers": 1,
+      "logo": {
+        "src": "/media/sarsa-kundli-lotus-logo-128.png",
+        "loaded": true,
+        "alt": ""
+      },
+      "favicon": "/media/sarsa-kundli-lotus-favicon.png",
+      "overflow": 0,
+      "images": [
+        {
+          "src": "https://www.sarsajyotishsansthan.com/assets/prashna-kundali-supporting-800-CAGM6wWe.webp",
+          "loaded": true,
+          "altPresent": true
+        }
+      ],
+      "active": [
+        {
+          "href": "/services",
+          "weight": 700
+        }
+      ],
+      "api": [
+        "/api/service-state"
+      ],
+      "entryScripts": [
+        "https://www.sarsajyotishsansthan.com/assets/index-104z-RDZ.js"
+      ]
+    },
+    {
+      "label": "edge /contact 320",
+      "status": "passed",
+      "assertions": 15,
+      "elapsed_ms": 2027,
+      "width": 320,
+      "height": 740,
+      "path": "/contact",
+      "title": "Contact Madhuri Gupta in Agra | Sarsa Jyotish Sansthan",
+      "canonical": "https://www.sarsajyotishsansthan.com/contact",
+      "description": "Find Sarsa Jyotish Sansthan's contact details in Agra. Ask the practice a question or contact it for help with an existing appointment.",
+      "robots": "index, follow",
+      "h1": 1,
+      "headers": 1,
+      "footers": 1,
+      "logo": {
+        "src": "/media/sarsa-kundli-lotus-logo-128.png",
+        "loaded": true,
+        "alt": ""
+      },
+      "favicon": "/media/sarsa-kundli-lotus-favicon.png",
+      "overflow": 0,
+      "images": [],
+      "active": [
+        {
+          "href": "/contact",
+          "weight": 700
+        }
+      ],
+      "api": [
+        "/api/service-state"
+      ],
+      "entryScripts": [
+        "https://www.sarsajyotishsansthan.com/assets/index-104z-RDZ.js"
+      ]
+    },
+    {
+      "label": "edge /booking 320",
+      "status": "passed",
+      "assertions": 15,
+      "elapsed_ms": 3703,
+      "width": 320,
+      "height": 740,
+      "path": "/booking",
+      "title": "Book an appointment | Sarsa Jyotish Sansthan",
+      "description": "Choose a consultation and an available appointment time with Madhuri Gupta. Online appointments use Google Meet.",
+      "robots": "noindex, nofollow",
+      "h1": 1,
+      "headers": 1,
+      "footers": 1,
+      "logo": {
+        "src": "/media/sarsa-kundli-lotus-logo-128.png",
+        "loaded": true,
+        "alt": ""
+      },
+      "favicon": "/media/sarsa-kundli-lotus-favicon.png",
+      "overflow": 0,
+      "images": [
+        {
+          "src": "https://www.sarsajyotishsansthan.com/assets/kundli-matching-primary-480-AK388GU-.webp",
+          "loaded": true,
+          "altPresent": true
+        },
+        {
+          "src": "https://www.sarsajyotishsansthan.com/assets/kundli-prediction-primary-480-2krxOrhO.webp",
+          "loaded": true,
+          "altPresent": true
+        },
+        {
+          "src": "https://www.sarsajyotishsansthan.com/assets/vastu-consultation-primary-480-BNKz_Bpe.webp",
+          "loaded": true,
+          "altPresent": true
+        },
+        {
+          "src": "https://www.sarsajyotishsansthan.com/assets/numerology-primary-480-D28EDIoc.webp",
+          "loaded": true,
+          "altPresent": true
+        },
+        {
+          "src": "https://www.sarsajyotishsansthan.com/assets/prashna-kundali-primary-480-4_7Qhvxk.webp",
+          "loaded": true,
+          "altPresent": true
+        }
+      ],
+      "active": [],
+      "api": [
+        "/api/service-state",
+        "/api/booking-policy",
+        "/api/availability"
+      ],
+      "entryScripts": [
+        "https://www.sarsajyotishsansthan.com/assets/index-104z-RDZ.js"
+      ]
+    },
+    {
+      "label": "edge / 768",
+      "status": "passed",
+      "assertions": 14,
+      "elapsed_ms": 1878,
+      "width": 768,
+      "height": 1024,
+      "path": "/",
+      "title": "Astrologer Madhuri Gupta in Agra | Sarsa Jyotish Sansthan",
+      "canonical": "https://www.sarsajyotishsansthan.com/",
+      "description": "Explore Astro, Numerology and Vastu guidance with Madhuri Gupta at Sarsa Jyotish Sansthan in Agra. Read about the five services and contact the practice.",
+      "robots": "index, follow",
+      "h1": 1,
+      "headers": 1,
+      "footers": 1,
+      "logo": {
+        "src": "/media/sarsa-kundli-lotus-logo-128.png",
+        "loaded": true,
+        "alt": ""
+      },
+      "favicon": "/media/sarsa-kundli-lotus-favicon.png",
+      "overflow": 0,
+      "images": [
+        {
+          "src": "https://www.sarsajyotishsansthan.com/media/consultation-still-life-768.webp",
+          "loaded": true,
+          "altPresent": true
+        },
+        {
+          "src": "https://www.sarsajyotishsansthan.com/media/madhuri-gupta-portrait.jpeg",
+          "loaded": true,
+          "altPresent": true
+        },
+        {
+          "src": "https://www.sarsajyotishsansthan.com/assets/kundli-matching-primary-480-AK388GU-.webp",
+          "loaded": true,
+          "altPresent": true
+        },
+        {
+          "src": "https://www.sarsajyotishsansthan.com/assets/kundli-prediction-primary-480-2krxOrhO.webp",
+          "loaded": true,
+          "altPresent": true
+        },
+        {
+          "src": "https://www.sarsajyotishsansthan.com/assets/vastu-consultation-primary-480-BNKz_Bpe.webp",
+          "loaded": true,
+          "altPresent": true
+        },
+        {
+          "src": "https://www.sarsajyotishsansthan.com/assets/numerology-primary-480-D28EDIoc.webp",
+          "loaded": true,
+          "altPresent": true
+        },
+        {
+          "src": "https://www.sarsajyotishsansthan.com/assets/prashna-kundali-primary-480-4_7Qhvxk.webp",
+          "loaded": true,
+          "altPresent": true
+        }
+      ],
+      "active": [],
+      "api": [
+        "/api/service-state"
+      ],
+      "entryScripts": [
+        "https://www.sarsajyotishsansthan.com/assets/index-104z-RDZ.js"
+      ]
+    },
+    {
+      "label": "edge /about 768",
+      "status": "passed",
+      "assertions": 15,
+      "elapsed_ms": 1677,
+      "width": 768,
+      "height": 1024,
+      "path": "/about",
+      "title": "About Madhuri Gupta — Astro & Jyotish | Sarsa Jyotish Sansthan",
+      "canonical": "https://www.sarsajyotishsansthan.com/about",
+      "description": "Meet Madhuri Gupta, who leads Sarsa Jyotish Sansthan in Agra. Read about her 15+ years of experience, Jyotish studies and approach.",
+      "robots": "index, follow",
+      "h1": 1,
+      "headers": 1,
+      "footers": 1,
+      "logo": {
+        "src": "/media/sarsa-kundli-lotus-logo-128.png",
+        "loaded": true,
+        "alt": ""
+      },
+      "favicon": "/media/sarsa-kundli-lotus-favicon.png",
+      "overflow": 0,
+      "images": [
+        {
+          "src": "https://www.sarsajyotishsansthan.com/media/madhuri-gupta-portrait.jpeg",
+          "loaded": true,
+          "altPresent": true
+        },
+        {
+          "src": "https://www.sarsajyotishsansthan.com/media/madhuri-gupta-portrait.jpeg",
+          "loaded": true,
+          "altPresent": true
+        }
+      ],
+      "active": [
+        {
+          "href": "/about",
+          "weight": 700
+        }
+      ],
+      "api": [
+        "/api/service-state"
+      ],
+      "entryScripts": [
+        "https://www.sarsajyotishsansthan.com/assets/index-104z-RDZ.js"
+      ]
+    },
+    {
+      "label": "edge /services 768",
+      "status": "passed",
+      "assertions": 15,
+      "elapsed_ms": 1917,
+      "width": 768,
+      "height": 1024,
+      "path": "/services",
+      "title": "Astrology Services with Madhuri Gupta | Sarsa Jyotish Sansthan",
+      "canonical": "https://www.sarsajyotishsansthan.com/services",
+      "description": "Explore Kundli Prediction, Kundli Matching, Vastu, Numerology and Prashna Kundali services with Madhuri Gupta. Read about each service and contact the practice.",
+      "robots": "index, follow",
+      "h1": 1,
+      "headers": 1,
+      "footers": 1,
+      "logo": {
+        "src": "/media/sarsa-kundli-lotus-logo-128.png",
+        "loaded": true,
+        "alt": ""
+      },
+      "favicon": "/media/sarsa-kundli-lotus-favicon.png",
+      "overflow": 0,
+      "images": [
+        {
+          "src": "https://www.sarsajyotishsansthan.com/assets/kundli-matching-primary-480-AK388GU-.webp",
+          "loaded": true,
+          "altPresent": true
+        },
+        {
+          "src": "https://www.sarsajyotishsansthan.com/assets/kundli-prediction-primary-480-2krxOrhO.webp",
+          "loaded": true,
+          "altPresent": true
+        },
+        {
+          "src": "https://www.sarsajyotishsansthan.com/assets/vastu-consultation-primary-480-BNKz_Bpe.webp",
+          "loaded": true,
+          "altPresent": true
+        },
+        {
+          "src": "https://www.sarsajyotishsansthan.com/assets/numerology-primary-480-D28EDIoc.webp",
+          "loaded": true,
+          "altPresent": true
+        },
+        {
+          "src": "https://www.sarsajyotishsansthan.com/assets/prashna-kundali-primary-480-4_7Qhvxk.webp",
+          "loaded": true,
+          "altPresent": true
+        }
+      ],
+      "active": [
+        {
+          "href": "/services",
+          "weight": 700
+        }
+      ],
+      "api": [
+        "/api/service-state"
+      ],
+      "entryScripts": [
+        "https://www.sarsajyotishsansthan.com/assets/index-104z-RDZ.js"
+      ]
+    },
+    {
+      "label": "edge /services/prashna-kundali 768",
+      "status": "passed",
+      "assertions": 15,
+      "elapsed_ms": 1831,
+      "width": 768,
+      "height": 1024,
+      "path": "/services/prashna-kundali",
+      "title": "Prashna Kundali | Sarsa Jyotish Sansthan",
+      "canonical": "https://www.sarsajyotishsansthan.com/services/prashna-kundali",
+      "description": "Discuss a specific question with Madhuri through Prashna Kundali. Birth details are not required to book.",
+      "robots": "index, follow",
+      "h1": 1,
+      "headers": 1,
+      "footers": 1,
+      "logo": {
+        "src": "/media/sarsa-kundli-lotus-logo-128.png",
+        "loaded": true,
+        "alt": ""
+      },
+      "favicon": "/media/sarsa-kundli-lotus-favicon.png",
+      "overflow": 0,
+      "images": [
+        {
+          "src": "https://www.sarsajyotishsansthan.com/assets/prashna-kundali-supporting-800-CAGM6wWe.webp",
+          "loaded": true,
+          "altPresent": true
+        }
+      ],
+      "active": [
+        {
+          "href": "/services",
+          "weight": 700
+        }
+      ],
+      "api": [
+        "/api/service-state"
+      ],
+      "entryScripts": [
+        "https://www.sarsajyotishsansthan.com/assets/index-104z-RDZ.js"
+      ]
+    },
+    {
+      "label": "edge /contact 768",
+      "status": "passed",
+      "assertions": 15,
+      "elapsed_ms": 1729,
+      "width": 768,
+      "height": 1024,
+      "path": "/contact",
+      "title": "Contact Madhuri Gupta in Agra | Sarsa Jyotish Sansthan",
+      "canonical": "https://www.sarsajyotishsansthan.com/contact",
+      "description": "Find Sarsa Jyotish Sansthan's contact details in Agra. Ask the practice a question or contact it for help with an existing appointment.",
+      "robots": "index, follow",
+      "h1": 1,
+      "headers": 1,
+      "footers": 1,
+      "logo": {
+        "src": "/media/sarsa-kundli-lotus-logo-128.png",
+        "loaded": true,
+        "alt": ""
+      },
+      "favicon": "/media/sarsa-kundli-lotus-favicon.png",
+      "overflow": 0,
+      "images": [],
+      "active": [
+        {
+          "href": "/contact",
+          "weight": 700
+        }
+      ],
+      "api": [
+        "/api/service-state"
+      ],
+      "entryScripts": [
+        "https://www.sarsajyotishsansthan.com/assets/index-104z-RDZ.js"
+      ]
+    },
+    {
+      "label": "edge /booking 768",
+      "status": "passed",
+      "assertions": 15,
+      "elapsed_ms": 3503,
+      "width": 768,
+      "height": 1024,
+      "path": "/booking",
+      "title": "Book an appointment | Sarsa Jyotish Sansthan",
+      "description": "Choose a consultation and an available appointment time with Madhuri Gupta. Online appointments use Google Meet.",
+      "robots": "noindex, nofollow",
+      "h1": 1,
+      "headers": 1,
+      "footers": 1,
+      "logo": {
+        "src": "/media/sarsa-kundli-lotus-logo-128.png",
+        "loaded": true,
+        "alt": ""
+      },
+      "favicon": "/media/sarsa-kundli-lotus-favicon.png",
+      "overflow": 0,
+      "images": [
+        {
+          "src": "https://www.sarsajyotishsansthan.com/assets/kundli-matching-primary-480-AK388GU-.webp",
+          "loaded": true,
+          "altPresent": true
+        },
+        {
+          "src": "https://www.sarsajyotishsansthan.com/assets/kundli-prediction-primary-480-2krxOrhO.webp",
+          "loaded": true,
+          "altPresent": true
+        },
+        {
+          "src": "https://www.sarsajyotishsansthan.com/assets/vastu-consultation-primary-480-BNKz_Bpe.webp",
+          "loaded": true,
+          "altPresent": true
+        },
+        {
+          "src": "https://www.sarsajyotishsansthan.com/assets/numerology-primary-480-D28EDIoc.webp",
+          "loaded": true,
+          "altPresent": true
+        },
+        {
+          "src": "https://www.sarsajyotishsansthan.com/assets/prashna-kundali-primary-480-4_7Qhvxk.webp",
+          "loaded": true,
+          "altPresent": true
+        }
+      ],
+      "active": [],
+      "api": [
+        "/api/service-state",
+        "/api/booking-policy",
+        "/api/availability"
+      ],
+      "entryScripts": [
+        "https://www.sarsajyotishsansthan.com/assets/index-104z-RDZ.js"
+      ]
+    },
+    {
+      "label": "edge / 1920",
+      "status": "passed",
+      "assertions": 14,
+      "elapsed_ms": 1961,
+      "width": 1920,
+      "height": 1080,
+      "path": "/",
+      "title": "Astrologer Madhuri Gupta in Agra | Sarsa Jyotish Sansthan",
+      "canonical": "https://www.sarsajyotishsansthan.com/",
+      "description": "Explore Astro, Numerology and Vastu guidance with Madhuri Gupta at Sarsa Jyotish Sansthan in Agra. Read about the five services and contact the practice.",
+      "robots": "index, follow",
+      "h1": 1,
+      "headers": 1,
+      "footers": 1,
+      "logo": {
+        "src": "/media/sarsa-kundli-lotus-logo-128.png",
+        "loaded": true,
+        "alt": ""
+      },
+      "favicon": "/media/sarsa-kundli-lotus-favicon.png",
+      "overflow": 0,
+      "images": [
+        {
+          "src": "https://www.sarsajyotishsansthan.com/media/consultation-still-life-1920.webp",
+          "loaded": true,
+          "altPresent": true
+        },
+        {
+          "src": "https://www.sarsajyotishsansthan.com/media/madhuri-gupta-portrait.jpeg",
+          "loaded": true,
+          "altPresent": true
+        },
+        {
+          "src": "https://www.sarsajyotishsansthan.com/assets/kundli-matching-primary-800-ClNKX3Ty.webp",
+          "loaded": true,
+          "altPresent": true
+        },
+        {
+          "src": "https://www.sarsajyotishsansthan.com/assets/kundli-prediction-primary-800-DMqks9s5.webp",
+          "loaded": true,
+          "altPresent": true
+        },
+        {
+          "src": "https://www.sarsajyotishsansthan.com/assets/vastu-consultation-primary-800-SZcj9mf8.webp",
+          "loaded": true,
+          "altPresent": true
+        },
+        {
+          "src": "https://www.sarsajyotishsansthan.com/assets/numerology-primary-800-CuHyDARR.webp",
+          "loaded": true,
+          "altPresent": true
+        },
+        {
+          "src": "https://www.sarsajyotishsansthan.com/assets/prashna-kundali-primary-800-BxAYEf8Q.webp",
+          "loaded": true,
+          "altPresent": true
+        }
+      ],
+      "active": [],
+      "api": [
+        "/api/service-state"
+      ],
+      "entryScripts": [
+        "https://www.sarsajyotishsansthan.com/assets/index-104z-RDZ.js"
+      ]
+    },
+    {
+      "label": "edge /about 1920",
+      "status": "passed",
+      "assertions": 15,
+      "elapsed_ms": 1916,
+      "width": 1920,
+      "height": 1080,
+      "path": "/about",
+      "title": "About Madhuri Gupta — Astro & Jyotish | Sarsa Jyotish Sansthan",
+      "canonical": "https://www.sarsajyotishsansthan.com/about",
+      "description": "Meet Madhuri Gupta, who leads Sarsa Jyotish Sansthan in Agra. Read about her 15+ years of experience, Jyotish studies and approach.",
+      "robots": "index, follow",
+      "h1": 1,
+      "headers": 1,
+      "footers": 1,
+      "logo": {
+        "src": "/media/sarsa-kundli-lotus-logo-128.png",
+        "loaded": true,
+        "alt": ""
+      },
+      "favicon": "/media/sarsa-kundli-lotus-favicon.png",
+      "overflow": 0,
+      "images": [
+        {
+          "src": "https://www.sarsajyotishsansthan.com/media/madhuri-gupta-portrait.jpeg",
+          "loaded": true,
+          "altPresent": true
+        },
+        {
+          "src": "https://www.sarsajyotishsansthan.com/media/madhuri-gupta-portrait.jpeg",
+          "loaded": true,
+          "altPresent": true
+        }
+      ],
+      "active": [
+        {
+          "href": "/about",
+          "weight": 700
+        }
+      ],
+      "api": [
+        "/api/service-state"
+      ],
+      "entryScripts": [
+        "https://www.sarsajyotishsansthan.com/assets/index-104z-RDZ.js"
+      ]
+    },
+    {
+      "label": "edge /services 1920",
+      "status": "passed",
+      "assertions": 15,
+      "elapsed_ms": 1887,
+      "width": 1920,
+      "height": 1080,
+      "path": "/services",
+      "title": "Astrology Services with Madhuri Gupta | Sarsa Jyotish Sansthan",
+      "canonical": "https://www.sarsajyotishsansthan.com/services",
+      "description": "Explore Kundli Prediction, Kundli Matching, Vastu, Numerology and Prashna Kundali services with Madhuri Gupta. Read about each service and contact the practice.",
+      "robots": "index, follow",
+      "h1": 1,
+      "headers": 1,
+      "footers": 1,
+      "logo": {
+        "src": "/media/sarsa-kundli-lotus-logo-128.png",
+        "loaded": true,
+        "alt": ""
+      },
+      "favicon": "/media/sarsa-kundli-lotus-favicon.png",
+      "overflow": 0,
+      "images": [
+        {
+          "src": "https://www.sarsajyotishsansthan.com/assets/kundli-matching-primary-800-ClNKX3Ty.webp",
+          "loaded": true,
+          "altPresent": true
+        },
+        {
+          "src": "https://www.sarsajyotishsansthan.com/assets/kundli-prediction-primary-800-DMqks9s5.webp",
+          "loaded": true,
+          "altPresent": true
+        },
+        {
+          "src": "https://www.sarsajyotishsansthan.com/assets/vastu-consultation-primary-800-SZcj9mf8.webp",
+          "loaded": true,
+          "altPresent": true
+        },
+        {
+          "src": "https://www.sarsajyotishsansthan.com/assets/numerology-primary-800-CuHyDARR.webp",
+          "loaded": true,
+          "altPresent": true
+        },
+        {
+          "src": "https://www.sarsajyotishsansthan.com/assets/prashna-kundali-primary-800-BxAYEf8Q.webp",
+          "loaded": true,
+          "altPresent": true
+        }
+      ],
+      "active": [
+        {
+          "href": "/services",
+          "weight": 700
+        }
+      ],
+      "api": [
+        "/api/service-state"
+      ],
+      "entryScripts": [
+        "https://www.sarsajyotishsansthan.com/assets/index-104z-RDZ.js"
+      ]
+    },
+    {
+      "label": "edge /services/prashna-kundali 1920",
+      "status": "passed",
+      "assertions": 15,
+      "elapsed_ms": 1642,
+      "width": 1920,
+      "height": 1080,
+      "path": "/services/prashna-kundali",
+      "title": "Prashna Kundali | Sarsa Jyotish Sansthan",
+      "canonical": "https://www.sarsajyotishsansthan.com/services/prashna-kundali",
+      "description": "Discuss a specific question with Madhuri through Prashna Kundali. Birth details are not required to book.",
+      "robots": "index, follow",
+      "h1": 1,
+      "headers": 1,
+      "footers": 1,
+      "logo": {
+        "src": "/media/sarsa-kundli-lotus-logo-128.png",
+        "loaded": true,
+        "alt": ""
+      },
+      "favicon": "/media/sarsa-kundli-lotus-favicon.png",
+      "overflow": 0,
+      "images": [
+        {
+          "src": "https://www.sarsajyotishsansthan.com/assets/prashna-kundali-supporting-800-CAGM6wWe.webp",
+          "loaded": true,
+          "altPresent": true
+        }
+      ],
+      "active": [
+        {
+          "href": "/services",
+          "weight": 700
+        }
+      ],
+      "api": [
+        "/api/service-state"
+      ],
+      "entryScripts": [
+        "https://www.sarsajyotishsansthan.com/assets/index-104z-RDZ.js"
+      ]
+    },
+    {
+      "label": "edge /contact 1920",
+      "status": "passed",
+      "assertions": 15,
+      "elapsed_ms": 1684,
+      "width": 1920,
+      "height": 1080,
+      "path": "/contact",
+      "title": "Contact Madhuri Gupta in Agra | Sarsa Jyotish Sansthan",
+      "canonical": "https://www.sarsajyotishsansthan.com/contact",
+      "description": "Find Sarsa Jyotish Sansthan's contact details in Agra. Ask the practice a question or contact it for help with an existing appointment.",
+      "robots": "index, follow",
+      "h1": 1,
+      "headers": 1,
+      "footers": 1,
+      "logo": {
+        "src": "/media/sarsa-kundli-lotus-logo-128.png",
+        "loaded": true,
+        "alt": ""
+      },
+      "favicon": "/media/sarsa-kundli-lotus-favicon.png",
+      "overflow": 0,
+      "images": [],
+      "active": [
+        {
+          "href": "/contact",
+          "weight": 700
+        }
+      ],
+      "api": [
+        "/api/service-state"
+      ],
+      "entryScripts": [
+        "https://www.sarsajyotishsansthan.com/assets/index-104z-RDZ.js"
+      ]
+    },
+    {
+      "label": "edge /booking 1920",
+      "status": "passed",
+      "assertions": 15,
+      "elapsed_ms": 3973,
+      "width": 1920,
+      "height": 1080,
+      "path": "/booking",
+      "title": "Book an appointment | Sarsa Jyotish Sansthan",
+      "description": "Choose a consultation and an available appointment time with Madhuri Gupta. Online appointments use Google Meet.",
+      "robots": "noindex, nofollow",
+      "h1": 1,
+      "headers": 1,
+      "footers": 1,
+      "logo": {
+        "src": "/media/sarsa-kundli-lotus-logo-128.png",
+        "loaded": true,
+        "alt": ""
+      },
+      "favicon": "/media/sarsa-kundli-lotus-favicon.png",
+      "overflow": 0,
+      "images": [
+        {
+          "src": "https://www.sarsajyotishsansthan.com/assets/kundli-matching-primary-800-ClNKX3Ty.webp",
+          "loaded": true,
+          "altPresent": true
+        },
+        {
+          "src": "https://www.sarsajyotishsansthan.com/assets/kundli-prediction-primary-800-DMqks9s5.webp",
+          "loaded": true,
+          "altPresent": true
+        },
+        {
+          "src": "https://www.sarsajyotishsansthan.com/assets/vastu-consultation-primary-800-SZcj9mf8.webp",
+          "loaded": true,
+          "altPresent": true
+        },
+        {
+          "src": "https://www.sarsajyotishsansthan.com/assets/numerology-primary-800-CuHyDARR.webp",
+          "loaded": true,
+          "altPresent": true
+        },
+        {
+          "src": "https://www.sarsajyotishsansthan.com/assets/prashna-kundali-primary-800-BxAYEf8Q.webp",
+          "loaded": true,
+          "altPresent": true
+        }
+      ],
+      "active": [],
+      "api": [
+        "/api/service-state",
+        "/api/booking-policy",
+        "/api/availability"
+      ],
+      "entryScripts": [
+        "https://www.sarsajyotishsansthan.com/assets/index-104z-RDZ.js"
+      ]
+    },
+    {
+      "label": "Approved Home/About identity and information 1440",
+      "status": "passed",
+      "assertions": 31,
+      "elapsed_ms": 1978,
+      "width": 1440,
+      "quickServices": 5,
+      "confirmedExperience": "15+",
+      "courseTitles": 3
+    },
+    {
+      "label": "Approved Home/About identity and information 390",
+      "status": "passed",
+      "assertions": 31,
+      "elapsed_ms": 1835,
+      "width": 390,
+      "quickServices": 5,
+      "confirmedExperience": "15+",
+      "courseTitles": 3
+    },
+    {
+      "label": "Home FAQs and back to top",
+      "status": "passed",
+      "assertions": 11,
+      "elapsed_ms": 1104
+    },
+    {
+      "label": "Home combined chapter and staged motion",
+      "status": "passed",
+      "assertions": 7,
+      "elapsed_ms": 10318,
+      "heroSettled": true,
+      "combinedChapterSettled": true,
+      "steps": 3
+    },
+    {
+      "label": "About approach, hover and service actions",
+      "status": "passed",
+      "assertions": 14,
+      "elapsed_ms": 9175
+    },
+    {
+      "label": "Contact links, enquiry fields and Google Maps",
+      "status": "passed",
+      "assertions": 10,
+      "elapsed_ms": 867,
+      "mapFramePresent": true,
+      "thirdPartyMapAcceptance": "not claimed; visible embed inspected separately"
+    },
+    {
+      "label": "Booking choices, date picker and optional email",
+      "status": "passed",
+      "assertions": 15,
+      "elapsed_ms": 3387,
+      "serviceCount": 5,
+      "createdBooking": false,
+      "submittedDetails": false
+    },
+    {
+      "label": "Name-and-phone access and old entry",
+      "status": "passed",
+      "assertions": 10,
+      "elapsed_ms": 2695,
+      "lookupSubmitted": false
+    },
+    {
+      "label": "Client navigation and selected link",
+      "status": "passed",
+      "assertions": 7,
+      "elapsed_ms": 894
+    },
+    {
+      "label": "Service directory imagery, buttons and divider",
+      "status": "passed",
+      "assertions": 26,
+      "elapsed_ms": 1179
+    },
+    {
+      "label": "Service illustrations kundli-matching",
+      "status": "passed",
+      "assertions": 14,
+      "elapsed_ms": 1288,
+      "service": "kundli-matching",
+      "topics": 3,
+      "pictures": 2
+    },
+    {
+      "label": "Service illustrations kundli-prediction",
+      "status": "passed",
+      "assertions": 14,
+      "elapsed_ms": 1313,
+      "service": "kundli-prediction",
+      "topics": 3,
+      "pictures": 2
+    },
+    {
+      "label": "Service illustrations vastu-consultation",
+      "status": "passed",
+      "assertions": 14,
+      "elapsed_ms": 1152,
+      "service": "vastu-consultation",
+      "topics": 3,
+      "pictures": 2
+    },
+    {
+      "label": "Service illustrations numerology",
+      "status": "passed",
+      "assertions": 14,
+      "elapsed_ms": 1171,
+      "service": "numerology",
+      "topics": 3,
+      "pictures": 2
+    },
+    {
+      "label": "HTTP /api/health",
+      "status": "passed",
+      "assertions": 7,
+      "elapsed_ms": 342,
+      "path": "/api/health",
+      "http": 200,
+      "noStore": true
+    },
+    {
+      "label": "HTTP /api/service-state",
+      "status": "passed",
+      "assertions": 7,
+      "elapsed_ms": 359,
+      "path": "/api/service-state",
+      "http": 200,
+      "noStore": true
+    },
+    {
+      "label": "HTTP /api/booking-policy",
+      "status": "passed",
+      "assertions": 27,
+      "elapsed_ms": 1053,
+      "path": "/api/booking-policy",
+      "http": 200,
+      "noStore": true
+    },
+    {
+      "label": "HTTP /api/contact/policy",
+      "status": "passed",
+      "assertions": 6,
+      "elapsed_ms": 148,
+      "path": "/api/contact/policy",
+      "http": 200,
+      "noStore": true
+    },
+    {
+      "label": "HTTP /api/studio/status",
+      "status": "passed",
+      "assertions": 6,
+      "elapsed_ms": 995,
+      "path": "/api/studio/status",
+      "http": 401,
+      "noStore": true
+    },
+    {
+      "label": "HTTP /api/enquiry-studio/status",
+      "status": "passed",
+      "assertions": 6,
+      "elapsed_ms": 171,
+      "path": "/api/enquiry-studio/status",
+      "http": 401,
+      "noStore": true
+    },
+    {
+      "label": "HTTP /api/company/support/status",
+      "status": "passed",
+      "assertions": 6,
+      "elapsed_ms": 129,
+      "path": "/api/company/support/status",
+      "http": 401,
+      "noStore": true
+    },
+    {
+      "label": "Availability kundli-matching",
+      "status": "passed",
+      "assertions": 5,
+      "elapsed_ms": 976,
+      "service": "kundli-matching",
+      "day": "2026-10-23",
+      "availableSlots": 10
+    },
+    {
+      "label": "Availability kundli-prediction",
+      "status": "passed",
+      "assertions": 5,
+      "elapsed_ms": 1023,
+      "service": "kundli-prediction",
+      "day": "2026-10-23",
+      "availableSlots": 10
+    },
+    {
+      "label": "Availability vastu-consultation",
+      "status": "passed",
+      "assertions": 5,
+      "elapsed_ms": 975,
+      "service": "vastu-consultation",
+      "day": "2026-10-23",
+      "availableSlots": 10
+    },
+    {
+      "label": "Availability numerology",
+      "status": "passed",
+      "assertions": 5,
+      "elapsed_ms": 1038,
+      "service": "numerology",
+      "day": "2026-10-23",
+      "availableSlots": 10
+    },
+    {
+      "label": "Availability prashna-kundali",
+      "status": "passed",
+      "assertions": 5,
+      "elapsed_ms": 1010,
+      "service": "prashna-kundali",
+      "day": "2026-10-23",
+      "availableSlots": 10
+    },
+    {
+      "label": "Prashna server quantity 1",
+      "status": "passed",
+      "assertions": 11,
+      "elapsed_ms": 1950,
+      "questions": 1,
+      "amountPaise": 110000,
+      "durationMinutes": 30,
+      "day": "2026-10-23",
+      "slots": 10
+    },
+    {
+      "label": "Prashna server quantity 3",
+      "status": "passed",
+      "assertions": 9,
+      "elapsed_ms": 1020,
+      "questions": 3,
+      "amountPaise": 330000,
+      "durationMinutes": 30,
+      "day": "2026-10-23",
+      "slots": 10
+    },
+    {
+      "label": "Prashna server quantity 10",
+      "status": "passed",
+      "assertions": 9,
+      "elapsed_ms": 981,
+      "questions": 10,
+      "amountPaise": 1100000,
+      "durationMinutes": 30,
+      "day": "2026-10-23",
+      "slots": 10
+    },
+    {
+      "label": "Retired certificate /certificate.webp",
+      "status": "passed",
+      "assertions": 4,
+      "elapsed_ms": 82,
+      "path": "/certificate.webp",
+      "http": 404
+    },
+    {
+      "label": "Retired certificate /media/certificates/jyotish-shastri-preview.webp",
+      "status": "passed",
+      "assertions": 4,
+      "elapsed_ms": 77,
+      "path": "/media/certificates/jyotish-shastri-preview.webp",
+      "http": 404
+    },
+    {
+      "label": "Retired certificate /media/certificates/jyotish-shastri-full.webp",
+      "status": "passed",
+      "assertions": 4,
+      "elapsed_ms": 64,
+      "path": "/media/certificates/jyotish-shastri-full.webp",
+      "http": 404
+    },
+    {
+      "label": "Retired certificate /media/certificates/jyotish-shastri-original.jpeg",
+      "status": "passed",
+      "assertions": 4,
+      "elapsed_ms": 83,
+      "path": "/media/certificates/jyotish-shastri-original.jpeg",
+      "http": 404
+    },
+    {
+      "label": "Retired certificate /media/certificates/jyotish-acharya-preview.webp",
+      "status": "passed",
+      "assertions": 4,
+      "elapsed_ms": 56,
+      "path": "/media/certificates/jyotish-acharya-preview.webp",
+      "http": 404
+    },
+    {
+      "label": "Retired certificate /media/certificates/jyotish-acharya-full.webp",
+      "status": "passed",
+      "assertions": 4,
+      "elapsed_ms": 88,
+      "path": "/media/certificates/jyotish-acharya-full.webp",
+      "http": 404
+    },
+    {
+      "label": "Retired certificate /media/certificates/jyotish-acharya-original.jpeg",
+      "status": "passed",
+      "assertions": 4,
+      "elapsed_ms": 70,
+      "path": "/media/certificates/jyotish-acharya-original.jpeg",
+      "http": 404
+    },
+    {
+      "label": "Retired certificate /media/certificates/astro-research-institute-preview.webp",
+      "status": "passed",
+      "assertions": 4,
+      "elapsed_ms": 60,
+      "path": "/media/certificates/astro-research-institute-preview.webp",
+      "http": 404
+    },
+    {
+      "label": "Retired certificate /media/certificates/astro-research-institute-full.webp",
+      "status": "passed",
+      "assertions": 4,
+      "elapsed_ms": 59,
+      "path": "/media/certificates/astro-research-institute-full.webp",
+      "http": 404
+    },
+    {
+      "label": "Retired certificate /media/certificates/astro-research-institute-original.pdf",
+      "status": "passed",
+      "assertions": 4,
+      "elapsed_ms": 57,
+      "path": "/media/certificates/astro-research-institute-original.pdf",
+      "http": 404
+    },
+    {
+      "label": "Retired certificate /media/certificates/trinity-vaastu-numerology-preview.webp",
+      "status": "passed",
+      "assertions": 4,
+      "elapsed_ms": 53,
+      "path": "/media/certificates/trinity-vaastu-numerology-preview.webp",
+      "http": 404
+    },
+    {
+      "label": "Retired certificate /media/certificates/trinity-vaastu-numerology-full.webp",
+      "status": "passed",
+      "assertions": 4,
+      "elapsed_ms": 72,
+      "path": "/media/certificates/trinity-vaastu-numerology-full.webp",
+      "http": 404
+    },
+    {
+      "label": "Retired certificate /media/certificates/trinity-vaastu-numerology-original.jpeg",
+      "status": "passed",
+      "assertions": 4,
+      "elapsed_ms": 85,
+      "path": "/media/certificates/trinity-vaastu-numerology-original.jpeg",
+      "http": 404
+    },
+    {
+      "label": "Public sitemap and robots",
+      "status": "passed",
+      "assertions": 9,
+      "elapsed_ms": 416,
+      "publicRoutes": 12
+    },
+    {
+      "label": "Published Customer reviews page",
+      "status": "passed",
+      "assertions": 8,
+      "elapsed_ms": 867,
+      "http": 200,
+      "chapters": 5,
+      "approvedReviews": 12
+    },
+    {
+      "label": "Private sign-in /studio",
+      "status": "passed",
+      "assertions": 6,
+      "elapsed_ms": 893,
+      "path": "/studio",
+      "http": 200,
+      "signedIn": false
+    },
+    {
+      "label": "Private sign-in /studio/calendar",
+      "status": "passed",
+      "assertions": 6,
+      "elapsed_ms": 934,
+      "path": "/studio/calendar",
+      "http": 200,
+      "signedIn": false
+    },
+    {
+      "label": "Private sign-in /enquiries-studio",
+      "status": "passed",
+      "assertions": 6,
+      "elapsed_ms": 129,
+      "path": "/enquiries-studio",
+      "http": 200,
+      "signedIn": false
+    },
+    {
+      "label": "Private sign-in /company/booking-control",
+      "status": "passed",
+      "assertions": 6,
+      "elapsed_ms": 145,
+      "path": "/company/booking-control",
+      "http": 200,
+      "signedIn": false
+    },
+    {
+      "label": "Private sign-in /company/booking-support",
+      "status": "passed",
+      "assertions": 6,
+      "elapsed_ms": 129,
+      "path": "/company/booking-support",
+      "http": 200,
+      "signedIn": false
+    },
+    {
+      "label": "Private sign-in /company/google-repair",
+      "status": "passed",
+      "assertions": 6,
+      "elapsed_ms": 184,
+      "path": "/company/google-repair",
+      "http": 200,
+      "signedIn": false
+    },
+    {
+      "label": "Unknown page",
+      "status": "passed",
+      "assertions": 4,
+      "elapsed_ms": 116,
+      "http": 404
+    },
+    {
+      "label": "Booking readiness /booking 390",
+      "status": "passed",
+      "assertions": 15,
+      "elapsed_ms": 4277,
+      "width": 390,
+      "height": 844,
+      "path": "/booking",
+      "title": "Book an appointment | Sarsa Jyotish Sansthan",
+      "description": "Choose a consultation and an available appointment time with Madhuri Gupta. Online appointments use Google Meet.",
+      "robots": "noindex, nofollow",
+      "h1": 1,
+      "headers": 1,
+      "footers": 1,
+      "logo": {
+        "src": "/media/sarsa-kundli-lotus-logo-128.png",
+        "loaded": true,
+        "alt": ""
+      },
+      "favicon": "/media/sarsa-kundli-lotus-favicon.png",
+      "overflow": 0,
+      "images": [
+        {
+          "src": "https://www.sarsajyotishsansthan.com/assets/kundli-matching-primary-480-AK388GU-.webp",
+          "loaded": true,
+          "altPresent": true
+        },
+        {
+          "src": "https://www.sarsajyotishsansthan.com/assets/kundli-prediction-primary-480-2krxOrhO.webp",
+          "loaded": true,
+          "altPresent": true
+        },
+        {
+          "src": "https://www.sarsajyotishsansthan.com/assets/vastu-consultation-primary-480-BNKz_Bpe.webp",
+          "loaded": true,
+          "altPresent": true
+        },
+        {
+          "src": "https://www.sarsajyotishsansthan.com/assets/numerology-primary-480-D28EDIoc.webp",
+          "loaded": true,
+          "altPresent": true
+        },
+        {
+          "src": "https://www.sarsajyotishsansthan.com/assets/prashna-kundali-primary-480-4_7Qhvxk.webp",
+          "loaded": true,
+          "altPresent": true
+        }
+      ],
+      "active": [],
+      "api": [
+        "/api/service-state",
+        "/api/booking-policy",
+        "/api/availability"
+      ],
+      "entryScripts": [
+        "https://www.sarsajyotishsansthan.com/assets/index-104z-RDZ.js"
+      ]
+    },
+    {
+      "label": "Booking readiness /booking 1440",
+      "status": "passed",
+      "assertions": 15,
+      "elapsed_ms": 4305,
+      "width": 1440,
+      "height": 900,
+      "path": "/booking",
+      "title": "Book an appointment | Sarsa Jyotish Sansthan",
+      "description": "Choose a consultation and an available appointment time with Madhuri Gupta. Online appointments use Google Meet.",
+      "robots": "noindex, nofollow",
+      "h1": 1,
+      "headers": 1,
+      "footers": 1,
+      "logo": {
+        "src": "/media/sarsa-kundli-lotus-logo-128.png",
+        "loaded": true,
+        "alt": ""
+      },
+      "favicon": "/media/sarsa-kundli-lotus-favicon.png",
+      "overflow": 0,
+      "images": [
+        {
+          "src": "https://www.sarsajyotishsansthan.com/assets/kundli-matching-primary-800-ClNKX3Ty.webp",
+          "loaded": true,
+          "altPresent": true
+        },
+        {
+          "src": "https://www.sarsajyotishsansthan.com/assets/kundli-prediction-primary-800-DMqks9s5.webp",
+          "loaded": true,
+          "altPresent": true
+        },
+        {
+          "src": "https://www.sarsajyotishsansthan.com/assets/vastu-consultation-primary-800-SZcj9mf8.webp",
+          "loaded": true,
+          "altPresent": true
+        },
+        {
+          "src": "https://www.sarsajyotishsansthan.com/assets/numerology-primary-800-CuHyDARR.webp",
+          "loaded": true,
+          "altPresent": true
+        },
+        {
+          "src": "https://www.sarsajyotishsansthan.com/assets/prashna-kundali-primary-800-BxAYEf8Q.webp",
+          "loaded": true,
+          "altPresent": true
+        }
+      ],
+      "active": [],
+      "api": [
+        "/api/service-state",
+        "/api/booking-policy",
+        "/api/availability"
+      ],
+      "entryScripts": [
+        "https://www.sarsajyotishsansthan.com/assets/index-104z-RDZ.js"
+      ]
+    },
+    {
+      "label": "Booking readiness /booking 320",
+      "status": "passed",
+      "assertions": 15,
+      "elapsed_ms": 3654,
+      "width": 320,
+      "height": 740,
+      "path": "/booking",
+      "title": "Book an appointment | Sarsa Jyotish Sansthan",
+      "description": "Choose a consultation and an available appointment time with Madhuri Gupta. Online appointments use Google Meet.",
+      "robots": "noindex, nofollow",
+      "h1": 1,
+      "headers": 1,
+      "footers": 1,
+      "logo": {
+        "src": "/media/sarsa-kundli-lotus-logo-128.png",
+        "loaded": true,
+        "alt": ""
+      },
+      "favicon": "/media/sarsa-kundli-lotus-favicon.png",
+      "overflow": 0,
+      "images": [
+        {
+          "src": "https://www.sarsajyotishsansthan.com/assets/kundli-matching-primary-480-AK388GU-.webp",
+          "loaded": true,
+          "altPresent": true
+        },
+        {
+          "src": "https://www.sarsajyotishsansthan.com/assets/kundli-prediction-primary-480-2krxOrhO.webp",
+          "loaded": true,
+          "altPresent": true
+        },
+        {
+          "src": "https://www.sarsajyotishsansthan.com/assets/vastu-consultation-primary-480-BNKz_Bpe.webp",
+          "loaded": true,
+          "altPresent": true
+        },
+        {
+          "src": "https://www.sarsajyotishsansthan.com/assets/numerology-primary-480-D28EDIoc.webp",
+          "loaded": true,
+          "altPresent": true
+        },
+        {
+          "src": "https://www.sarsajyotishsansthan.com/assets/prashna-kundali-primary-480-4_7Qhvxk.webp",
+          "loaded": true,
+          "altPresent": true
+        }
+      ],
+      "active": [],
+      "api": [
+        "/api/service-state",
+        "/api/booking-policy",
+        "/api/availability"
+      ],
+      "entryScripts": [
+        "https://www.sarsajyotishsansthan.com/assets/index-104z-RDZ.js"
+      ]
+    },
+    {
+      "label": "Booking readiness /booking 768",
+      "status": "passed",
+      "assertions": 15,
+      "elapsed_ms": 3571,
+      "width": 768,
+      "height": 1024,
+      "path": "/booking",
+      "title": "Book an appointment | Sarsa Jyotish Sansthan",
+      "description": "Choose a consultation and an available appointment time with Madhuri Gupta. Online appointments use Google Meet.",
+      "robots": "noindex, nofollow",
+      "h1": 1,
+      "headers": 1,
+      "footers": 1,
+      "logo": {
+        "src": "/media/sarsa-kundli-lotus-logo-128.png",
+        "loaded": true,
+        "alt": ""
+      },
+      "favicon": "/media/sarsa-kundli-lotus-favicon.png",
+      "overflow": 0,
+      "images": [
+        {
+          "src": "https://www.sarsajyotishsansthan.com/assets/kundli-matching-primary-480-AK388GU-.webp",
+          "loaded": true,
+          "altPresent": true
+        },
+        {
+          "src": "https://www.sarsajyotishsansthan.com/assets/kundli-prediction-primary-480-2krxOrhO.webp",
+          "loaded": true,
+          "altPresent": true
+        },
+        {
+          "src": "https://www.sarsajyotishsansthan.com/assets/vastu-consultation-primary-480-BNKz_Bpe.webp",
+          "loaded": true,
+          "altPresent": true
+        },
+        {
+          "src": "https://www.sarsajyotishsansthan.com/assets/numerology-primary-480-D28EDIoc.webp",
+          "loaded": true,
+          "altPresent": true
+        },
+        {
+          "src": "https://www.sarsajyotishsansthan.com/assets/prashna-kundali-primary-480-4_7Qhvxk.webp",
+          "loaded": true,
+          "altPresent": true
+        }
+      ],
+      "active": [],
+      "api": [
+        "/api/service-state",
+        "/api/booking-policy",
+        "/api/availability"
+      ],
+      "entryScripts": [
+        "https://www.sarsajyotishsansthan.com/assets/index-104z-RDZ.js"
+      ]
+    },
+    {
+      "label": "Booking readiness /booking 1920",
+      "status": "passed",
+      "assertions": 15,
+      "elapsed_ms": 3692,
+      "width": 1920,
+      "height": 1080,
+      "path": "/booking",
+      "title": "Book an appointment | Sarsa Jyotish Sansthan",
+      "description": "Choose a consultation and an available appointment time with Madhuri Gupta. Online appointments use Google Meet.",
+      "robots": "noindex, nofollow",
+      "h1": 1,
+      "headers": 1,
+      "footers": 1,
+      "logo": {
+        "src": "/media/sarsa-kundli-lotus-logo-128.png",
+        "loaded": true,
+        "alt": ""
+      },
+      "favicon": "/media/sarsa-kundli-lotus-favicon.png",
+      "overflow": 0,
+      "images": [
+        {
+          "src": "https://www.sarsajyotishsansthan.com/assets/kundli-matching-primary-800-ClNKX3Ty.webp",
+          "loaded": true,
+          "altPresent": true
+        },
+        {
+          "src": "https://www.sarsajyotishsansthan.com/assets/kundli-prediction-primary-800-DMqks9s5.webp",
+          "loaded": true,
+          "altPresent": true
+        },
+        {
+          "src": "https://www.sarsajyotishsansthan.com/assets/vastu-consultation-primary-800-SZcj9mf8.webp",
+          "loaded": true,
+          "altPresent": true
+        },
+        {
+          "src": "https://www.sarsajyotishsansthan.com/assets/numerology-primary-800-CuHyDARR.webp",
+          "loaded": true,
+          "altPresent": true
+        },
+        {
+          "src": "https://www.sarsajyotishsansthan.com/assets/prashna-kundali-primary-800-BxAYEf8Q.webp",
+          "loaded": true,
+          "altPresent": true
+        }
+      ],
+      "active": [],
+      "api": [
+        "/api/service-state",
+        "/api/booking-policy",
+        "/api/availability"
+      ],
+      "entryScripts": [
+        "https://www.sarsajyotishsansthan.com/assets/index-104z-RDZ.js"
+      ]
+    },
+    {
+      "label": "Booking through review without submitting",
+      "status": "passed",
+      "assertions": 12,
+      "elapsed_ms": 6561,
+      "day": "Friday, 23 October 2026",
+      "selectedSlot": true,
+      "reachedReview": true,
+      "customerDetailsSubmitted": false,
+      "bookingCreated": false
+    },
+    {
+      "label": "Prashna booking quantity and fixed-service switch 390",
+      "status": "passed",
+      "assertions": 17,
+      "elapsed_ms": 4104,
+      "width": 390,
+      "totals": [
+        {
+          "questions": 1,
+          "total": "₹1,100"
+        },
+        {
+          "questions": 3,
+          "total": "₹3,300"
+        },
+        {
+          "questions": 10,
+          "total": "₹11,000"
+        }
+      ],
+      "fixedServiceRestored": true,
+      "submitted": false
+    },
+    {
+      "label": "Prashna booking quantity and fixed-service switch 1440",
+      "status": "passed",
+      "assertions": 17,
+      "elapsed_ms": 2777,
+      "width": 1440,
+      "totals": [
+        {
+          "questions": 1,
+          "total": "₹1,100"
+        },
+        {
+          "questions": 3,
+          "total": "₹3,300"
+        },
+        {
+          "questions": 10,
+          "total": "₹11,000"
+        }
+      ],
+      "fixedServiceRestored": true,
+      "submitted": false
+    },
+    {
+      "label": "Prashna native topics, FAQs and fee examples",
+      "status": "passed",
+      "assertions": 17,
+      "elapsed_ms": 955,
+      "sections": 6,
+      "topics": 3,
+      "examplesPerTopic": 2,
+      "faqs": 5
+    },
+    {
+      "label": "Prashna assembly, ambient pause and reduced movement",
+      "status": "passed",
+      "assertions": 7,
+      "elapsed_ms": 5007,
+      "heroSettled": true,
+      "ambientMoves": true,
+      "hoverPauses": true,
+      "reducedMotionStops": true
+    },
+    {
+      "label": "Prashna through review and quantity invalidation without submitting",
+      "status": "passed",
+      "assertions": 13,
+      "elapsed_ms": 6440,
+      "day": "2026-10-23",
+      "questions": 3,
+      "reachedReview": true,
+      "amountPaise": 330000,
+      "selectedTimeClearedOnCountChange": true,
+      "customerDetailsSubmitted": false,
+      "bookingCreated": false
+    },
+    {
+      "label": "Internal link https://www.sarsajyotishsansthan.com/",
+      "status": "passed",
+      "assertions": 5,
+      "elapsed_ms": 375,
+      "url": "https://www.sarsajyotishsansthan.com/",
+      "http": 200,
+      "anchorChecked": false
+    },
+    {
+      "label": "Internal link https://www.sarsajyotishsansthan.com/about",
+      "status": "passed",
+      "assertions": 5,
+      "elapsed_ms": 313,
+      "url": "https://www.sarsajyotishsansthan.com/about",
+      "http": 200,
+      "anchorChecked": false
+    },
+    {
+      "label": "Internal link https://www.sarsajyotishsansthan.com/services",
+      "status": "passed",
+      "assertions": 5,
+      "elapsed_ms": 328,
+      "url": "https://www.sarsajyotishsansthan.com/services",
+      "http": 200,
+      "anchorChecked": false
+    },
+    {
+      "label": "Internal link https://www.sarsajyotishsansthan.com/testimonials",
+      "status": "passed",
+      "assertions": 5,
+      "elapsed_ms": 300,
+      "url": "https://www.sarsajyotishsansthan.com/testimonials",
+      "http": 200,
+      "anchorChecked": false
+    },
+    {
+      "label": "Internal link https://www.sarsajyotishsansthan.com/contact",
+      "status": "passed",
+      "assertions": 5,
+      "elapsed_ms": 342,
+      "url": "https://www.sarsajyotishsansthan.com/contact",
+      "http": 200,
+      "anchorChecked": false
+    },
+    {
+      "label": "Internal link https://www.sarsajyotishsansthan.com/booking",
+      "status": "passed",
+      "assertions": 5,
+      "elapsed_ms": 365,
+      "url": "https://www.sarsajyotishsansthan.com/booking",
+      "http": 200,
+      "anchorChecked": false
+    },
+    {
+      "label": "Internal link https://www.sarsajyotishsansthan.com/#page-content",
+      "status": "passed",
+      "assertions": 6,
+      "elapsed_ms": 1134,
+      "url": "https://www.sarsajyotishsansthan.com/#page-content",
+      "http": 200,
+      "anchorChecked": true
+    },
+    {
+      "label": "Internal link https://www.sarsajyotishsansthan.com/#madhuri",
+      "status": "passed",
+      "assertions": 6,
+      "elapsed_ms": 324,
+      "url": "https://www.sarsajyotishsansthan.com/#madhuri",
+      "http": 200,
+      "anchorChecked": true
+    },
+    {
+      "label": "Internal link https://www.sarsajyotishsansthan.com/services/kundli-matching",
+      "status": "passed",
+      "assertions": 5,
+      "elapsed_ms": 331,
+      "url": "https://www.sarsajyotishsansthan.com/services/kundli-matching",
+      "http": 200,
+      "anchorChecked": false
+    },
+    {
+      "label": "Internal link https://www.sarsajyotishsansthan.com/services/kundli-prediction",
+      "status": "passed",
+      "assertions": 5,
+      "elapsed_ms": 342,
+      "url": "https://www.sarsajyotishsansthan.com/services/kundli-prediction",
+      "http": 200,
+      "anchorChecked": false
+    },
+    {
+      "label": "Internal link https://www.sarsajyotishsansthan.com/services/vastu-consultation",
+      "status": "passed",
+      "assertions": 5,
+      "elapsed_ms": 329,
+      "url": "https://www.sarsajyotishsansthan.com/services/vastu-consultation",
+      "http": 200,
+      "anchorChecked": false
+    },
+    {
+      "label": "Internal link https://www.sarsajyotishsansthan.com/services/numerology",
+      "status": "passed",
+      "assertions": 5,
+      "elapsed_ms": 307,
+      "url": "https://www.sarsajyotishsansthan.com/services/numerology",
+      "http": 200,
+      "anchorChecked": false
+    },
+    {
+      "label": "Internal link https://www.sarsajyotishsansthan.com/services/prashna-kundali",
+      "status": "passed",
+      "assertions": 5,
+      "elapsed_ms": 318,
+      "url": "https://www.sarsajyotishsansthan.com/services/prashna-kundali",
+      "http": 200,
+      "anchorChecked": false
+    },
+    {
+      "label": "Internal link https://www.sarsajyotishsansthan.com/booking-policy",
+      "status": "passed",
+      "assertions": 5,
+      "elapsed_ms": 356,
+      "url": "https://www.sarsajyotishsansthan.com/booking-policy",
+      "http": 200,
+      "anchorChecked": false
+    },
+    {
+      "label": "Internal link https://www.sarsajyotishsansthan.com/booking-help",
+      "status": "passed",
+      "assertions": 5,
+      "elapsed_ms": 300,
+      "url": "https://www.sarsajyotishsansthan.com/booking-help",
+      "http": 200,
+      "anchorChecked": false
+    },
+    {
+      "label": "Internal link https://www.sarsajyotishsansthan.com/privacy",
+      "status": "passed",
+      "assertions": 5,
+      "elapsed_ms": 341,
+      "url": "https://www.sarsajyotishsansthan.com/privacy",
+      "http": 200,
+      "anchorChecked": false
+    },
+    {
+      "label": "Internal link https://www.sarsajyotishsansthan.com/terms",
+      "status": "passed",
+      "assertions": 5,
+      "elapsed_ms": 319,
+      "url": "https://www.sarsajyotishsansthan.com/terms",
+      "http": 200,
+      "anchorChecked": false
+    },
+    {
+      "label": "Internal link https://www.sarsajyotishsansthan.com/about#page-content",
+      "status": "passed",
+      "assertions": 6,
+      "elapsed_ms": 962,
+      "url": "https://www.sarsajyotishsansthan.com/about#page-content",
+      "http": 200,
+      "anchorChecked": true
+    },
+    {
+      "label": "Internal link https://www.sarsajyotishsansthan.com/about#approach",
+      "status": "passed",
+      "assertions": 6,
+      "elapsed_ms": 360,
+      "url": "https://www.sarsajyotishsansthan.com/about#approach",
+      "http": 200,
+      "anchorChecked": true
+    },
+    {
+      "label": "Internal link https://www.sarsajyotishsansthan.com/about#consultations",
+      "status": "passed",
+      "assertions": 6,
+      "elapsed_ms": 348,
+      "url": "https://www.sarsajyotishsansthan.com/about#consultations",
+      "http": 200,
+      "anchorChecked": true
+    },
+    {
+      "label": "Internal link https://www.sarsajyotishsansthan.com/booking?service=kundli-prediction",
+      "status": "passed",
+      "assertions": 5,
+      "elapsed_ms": 358,
+      "url": "https://www.sarsajyotishsansthan.com/booking?service=kundli-prediction",
+      "http": 200,
+      "anchorChecked": false
+    },
+    {
+      "label": "Internal link https://www.sarsajyotishsansthan.com/booking?service=kundli-matching",
+      "status": "passed",
+      "assertions": 5,
+      "elapsed_ms": 335,
+      "url": "https://www.sarsajyotishsansthan.com/booking?service=kundli-matching",
+      "http": 200,
+      "anchorChecked": false
+    },
+    {
+      "label": "Internal link https://www.sarsajyotishsansthan.com/booking?service=vastu-consultation",
+      "status": "passed",
+      "assertions": 5,
+      "elapsed_ms": 367,
+      "url": "https://www.sarsajyotishsansthan.com/booking?service=vastu-consultation",
+      "http": 200,
+      "anchorChecked": false
+    },
+    {
+      "label": "Internal link https://www.sarsajyotishsansthan.com/booking?service=numerology",
+      "status": "passed",
+      "assertions": 5,
+      "elapsed_ms": 327,
+      "url": "https://www.sarsajyotishsansthan.com/booking?service=numerology",
+      "http": 200,
+      "anchorChecked": false
+    },
+    {
+      "label": "Internal link https://www.sarsajyotishsansthan.com/booking?service=prashna-kundali",
+      "status": "passed",
+      "assertions": 5,
+      "elapsed_ms": 320,
+      "url": "https://www.sarsajyotishsansthan.com/booking?service=prashna-kundali",
+      "http": 200,
+      "anchorChecked": false
+    },
+    {
+      "label": "Internal link https://www.sarsajyotishsansthan.com/services#page-content",
+      "status": "passed",
+      "assertions": 6,
+      "elapsed_ms": 885,
+      "url": "https://www.sarsajyotishsansthan.com/services#page-content",
+      "http": 200,
+      "anchorChecked": true
+    },
+    {
+      "label": "Internal link https://www.sarsajyotishsansthan.com/testimonials#page-content",
+      "status": "passed",
+      "assertions": 6,
+      "elapsed_ms": 1035,
+      "url": "https://www.sarsajyotishsansthan.com/testimonials#page-content",
+      "http": 200,
+      "anchorChecked": true
+    },
+    {
+      "label": "Internal link https://www.sarsajyotishsansthan.com/testimonials#stories",
+      "status": "passed",
+      "assertions": 6,
+      "elapsed_ms": 331,
+      "url": "https://www.sarsajyotishsansthan.com/testimonials#stories",
+      "http": 200,
+      "anchorChecked": true
+    },
+    {
+      "label": "Internal link https://www.sarsajyotishsansthan.com/services/kundli-prediction#page-content",
+      "status": "passed",
+      "assertions": 6,
+      "elapsed_ms": 942,
+      "url": "https://www.sarsajyotishsansthan.com/services/kundli-prediction#page-content",
+      "http": 200,
+      "anchorChecked": true
+    },
+    {
+      "label": "Internal link https://www.sarsajyotishsansthan.com/services/kundli-prediction#understand",
+      "status": "passed",
+      "assertions": 6,
+      "elapsed_ms": 339,
+      "url": "https://www.sarsajyotishsansthan.com/services/kundli-prediction#understand",
+      "http": 200,
+      "anchorChecked": true
+    },
+    {
+      "label": "Internal link https://www.sarsajyotishsansthan.com/services/kundli-matching#page-content",
+      "status": "passed",
+      "assertions": 6,
+      "elapsed_ms": 1000,
+      "url": "https://www.sarsajyotishsansthan.com/services/kundli-matching#page-content",
+      "http": 200,
+      "anchorChecked": true
+    },
+    {
+      "label": "Internal link https://www.sarsajyotishsansthan.com/services/vastu-consultation#page-content",
+      "status": "passed",
+      "assertions": 6,
+      "elapsed_ms": 925,
+      "url": "https://www.sarsajyotishsansthan.com/services/vastu-consultation#page-content",
+      "http": 200,
+      "anchorChecked": true
+    },
+    {
+      "label": "Internal link https://www.sarsajyotishsansthan.com/services/numerology#page-content",
+      "status": "passed",
+      "assertions": 6,
+      "elapsed_ms": 940,
+      "url": "https://www.sarsajyotishsansthan.com/services/numerology#page-content",
+      "http": 200,
+      "anchorChecked": true
+    },
+    {
+      "label": "Internal link https://www.sarsajyotishsansthan.com/services/prashna-kundali#page-content",
+      "status": "passed",
+      "assertions": 6,
+      "elapsed_ms": 836,
+      "url": "https://www.sarsajyotishsansthan.com/services/prashna-kundali#page-content",
+      "http": 200,
+      "anchorChecked": true
+    },
+    {
+      "label": "Internal link https://www.sarsajyotishsansthan.com/services/prashna-kundali#prashna-examples",
+      "status": "passed",
+      "assertions": 6,
+      "elapsed_ms": 319,
+      "url": "https://www.sarsajyotishsansthan.com/services/prashna-kundali#prashna-examples",
+      "http": 200,
+      "anchorChecked": true
+    },
+    {
+      "label": "Internal link https://www.sarsajyotishsansthan.com/contact#page-content",
+      "status": "passed",
+      "assertions": 6,
+      "elapsed_ms": 911,
+      "url": "https://www.sarsajyotishsansthan.com/contact#page-content",
+      "http": 200,
+      "anchorChecked": true
+    },
+    {
+      "label": "Internal link https://www.sarsajyotishsansthan.com/contact#desk",
+      "status": "passed",
+      "assertions": 6,
+      "elapsed_ms": 378,
+      "url": "https://www.sarsajyotishsansthan.com/contact#desk",
+      "http": 200,
+      "anchorChecked": true
+    },
+    {
+      "label": "Internal link https://www.sarsajyotishsansthan.com/booking/receipt",
+      "status": "passed",
+      "assertions": 5,
+      "elapsed_ms": 324,
+      "url": "https://www.sarsajyotishsansthan.com/booking/receipt",
+      "http": 200,
+      "anchorChecked": false
+    },
+    {
+      "label": "Internal link https://www.sarsajyotishsansthan.com/privacy#page-content",
+      "status": "passed",
+      "assertions": 6,
+      "elapsed_ms": 970,
+      "url": "https://www.sarsajyotishsansthan.com/privacy#page-content",
+      "http": 200,
+      "anchorChecked": true
+    },
+    {
+      "label": "Internal link https://www.sarsajyotishsansthan.com/terms#page-content",
+      "status": "passed",
+      "assertions": 6,
+      "elapsed_ms": 822,
+      "url": "https://www.sarsajyotishsansthan.com/terms#page-content",
+      "http": 200,
+      "anchorChecked": true
+    },
+    {
+      "label": "Internal link https://www.sarsajyotishsansthan.com/booking#page-content",
+      "status": "passed",
+      "assertions": 6,
+      "elapsed_ms": 860,
+      "url": "https://www.sarsajyotishsansthan.com/booking#page-content",
+      "http": 200,
+      "anchorChecked": true
+    },
+    {
+      "label": "Internal link https://www.sarsajyotishsansthan.com/booking-policy#page-content",
+      "status": "passed",
+      "assertions": 6,
+      "elapsed_ms": 935,
+      "url": "https://www.sarsajyotishsansthan.com/booking-policy#page-content",
+      "http": 200,
+      "anchorChecked": true
+    },
+    {
+      "label": "Internal link https://www.sarsajyotishsansthan.com/booking/receipt#page-content",
+      "status": "passed",
+      "assertions": 6,
+      "elapsed_ms": 914,
+      "url": "https://www.sarsajyotishsansthan.com/booking/receipt#page-content",
+      "http": 200,
+      "anchorChecked": true
+    }
+  ]
+}
