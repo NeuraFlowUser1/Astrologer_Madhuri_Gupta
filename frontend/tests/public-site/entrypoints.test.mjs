@@ -21,7 +21,7 @@ test('the real public-page build entrypoint creates both modes and exact asset c
  for(const mode of ['on','off'])for(const path of Object.keys(pages)){
   const file=new URL('../../dist/__booking_display/'+mode+'/'+(path==='/'?'index':path.slice(1))+'.html',import.meta.url);
   if(mode==='off'&&['/booking','/booking/receipt','/booking-help','/booking-policy'].includes(path)){expect(existsSync(file)).toBe(false);continue;}
-  const html=readFileSync(file,'utf8');expect(html).toContain('<title>'+escapeHtml(titleFor(path))+'</title>');expect(html).toContain('rel="canonical" href="'+origin+path+'"');expect(html).toContain('name="robots" content="'+(manifest.booking_paths.includes(path)?'noindex, nofollow':'index, follow')+'"');expect(html.match(/name="booking-display-mode"/g)).toHaveLength(1);expect(html).toContain('name="booking-display-mode" content="'+mode+'"');
+  const html=readFileSync(file,'utf8'),utility=manifest.booking_paths.includes(path);expect(html).toContain('<title>'+escapeHtml(titleFor(path))+'</title>');if(utility){expect(html).not.toContain('rel="canonical"');expect(html).not.toContain('application/ld+json');}else expect(html).toContain('rel="canonical" href="'+origin+path+'"');expect(html).toContain('name="robots" content="'+(utility?'noindex, nofollow':'index, follow')+'"');expect(html.match(/name="booking-display-mode"/g)).toHaveLength(1);expect(html).toContain('name="booking-display-mode" content="'+mode+'"');
  }
  for(const path of ['booking/receipt','booking-help'])expect(readFileSync(new URL('../../dist/__booking_display/on/'+path+'.html',import.meta.url),'utf8')).toContain('name="robots" content="noindex, nofollow"');
  const {default:routing}=await import('../../proxy.js');expect(typeof routing).toBe('function');

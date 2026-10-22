@@ -1,0 +1,55 @@
+{
+  "passed": true,
+  "files": [
+    {
+      "file": "booking.html",
+      "canonical": 0,
+      "graphs": 0,
+      "noindex": true
+    },
+    {
+      "file": "__booking_display/on/booking.html",
+      "canonical": 0,
+      "graphs": 0,
+      "noindex": true
+    },
+    {
+      "file": "booking/receipt.html",
+      "canonical": 0,
+      "graphs": 0,
+      "noindex": true
+    },
+    {
+      "file": "__booking_display/on/booking/receipt.html",
+      "canonical": 0,
+      "graphs": 0,
+      "noindex": true
+    },
+    {
+      "file": "booking-help.html",
+      "canonical": 0,
+      "graphs": 0,
+      "noindex": true
+    },
+    {
+      "file": "__booking_display/on/booking-help.html",
+      "canonical": 0,
+      "graphs": 0,
+      "noindex": true
+    },
+    {
+      "file": "booking-policy.html",
+      "canonical": 0,
+      "graphs": 0,
+      "noindex": true
+    },
+    {
+      "file": "__booking_display/on/booking-policy.html",
+      "canonical": 0,
+      "graphs": 0,
+      "noindex": true
+    }
+  ],
+  "offUtilitiesAbsent": 4,
+  "codeBrowserRequired": false
+}

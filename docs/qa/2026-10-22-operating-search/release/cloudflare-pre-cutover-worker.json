@@ -1,0 +1,93 @@
+{
+  "current_old_version": "97b97333-0743-48b0-aa16-4f222738377e",
+  "deployment": {
+    "id": "c00cdd9b-8b0f-4832-b087-e6344efb44a4",
+    "versions": [
+      {
+        "version_id": "97b97333-0743-48b0-aa16-4f222738377e",
+        "percentage": 100
+      }
+    ],
+    "created_on": "2026-10-11T10:27:12.783002Z"
+  },
+  "compatibility_date": "2026-09-29",
+  "compatibility_flags": [],
+  "bindings": [
+    {
+      "name": "BOOKING_CONTROL_PUBLISH_KEY",
+      "type": "secret_text"
+    },
+    {
+      "name": "BOOKING_CONTROL_READ_KEY",
+      "type": "secret_text"
+    },
+    {
+      "name": "BOOKING_CONTROL_RECONCILE_KEY",
+      "type": "secret_text"
+    },
+    {
+      "name": "BOOKING_EMAIL_WORKER_KEY",
+      "type": "secret_text"
+    },
+    {
+      "name": "BOOKING_ENVIRONMENT",
+      "type": "plain_text",
+      "text": "production"
+    },
+    {
+      "name": "BOOKING_GOOGLE_WORKER_KEY",
+      "type": "secret_text"
+    },
+    {
+      "name": "BOOKING_INSTALLATION_ID",
+      "type": "plain_text",
+      "text": "87b35f80-71bc-4ee1-bf34-a7316006f95c"
+    },
+    {
+      "name": "BOOKING_MONITOR_KEY",
+      "type": "secret_text"
+    },
+    {
+      "name": "BOOKING_PRODUCT_STATE",
+      "type": "durable_object_namespace",
+      "namespace_id": "25310ea52b5146c1ac5ba68916ea968e",
+      "class_name": "BookingProductState"
+    },
+    {
+      "name": "BOOKING_PROJECT_ID",
+      "type": "plain_text",
+      "text": "004"
+    },
+    {
+      "name": "BOOKING_PUBLIC_ORIGIN",
+      "type": "plain_text",
+      "text": "https://www.sarsajyotishsansthan.com"
+    },
+    {
+      "name": "BOOKING_RECOVERY_STATE",
+      "type": "durable_object_namespace",
+      "namespace_id": "b2ac685092dd475b9439ad45b4c5768b",
+      "class_name": "BookingRecoveryState"
+    },
+    {
+      "name": "BOOKING_RECOVERY_WORKER_KEY",
+      "type": "secret_text"
+    },
+    {
+      "name": "BOOKING_RELEASE_DIGEST",
+      "type": "plain_text",
+      "text": "54af467afbe152286f1f81f28f904a8b59b51e31111e6a81d93b1d340bd3720a"
+    },
+    {
+      "name": "BOOKING_WAKE_KEY",
+      "type": "secret_text"
+    },
+    {
+      "name": "BOOKING_WAKE_QUEUE",
+      "type": "queue",
+      "queue_name": "sarsa-booking-recovery"
+    }
+  ],
+  "preserves_exact_baseline_binding_identities": true,
+  "credential_values_recorded": false
+}

@@ -12,8 +12,14 @@ for(const mode of ['on','off']){
  for(const [path,meta] of Object.entries(pageRegistry)){
   const file=resolve(dist,'__booking_display',mode,path==='/'?'index.html':path.slice(1)+'.html');if(meta.utility&&mode==='off'){assert.equal(existsSync(file),false);continue;}
   const document=new JSDOM(readFileSync(file,'utf8')).window.document;
-  assert.equal(document.querySelectorAll('title').length,1);assert.equal(document.title,meta.title);assert.equal(document.querySelectorAll('meta[name="description"]').length,1);assert.equal(document.querySelector('meta[name="description"]').content,meta.description);assert.equal(document.querySelectorAll('link[rel="canonical"]').length,1);assert.equal(document.querySelector('link[rel="canonical"]').getAttribute('href'),origin+path);
+  assert.equal(document.querySelectorAll('title').length,1);assert.equal(document.title,meta.title);assert.equal(document.querySelectorAll('meta[name="description"]').length,1);assert.equal(document.querySelector('meta[name="description"]').content,meta.description);assert.equal(document.querySelectorAll('link[rel="canonical"]').length,meta.utility?0:1);assert.equal(document.querySelector('link[rel="canonical"]')?.getAttribute('href')||null,meta.utility?null:origin+path);
   assert.equal(document.querySelector('meta[name="robots"]').content,meta.utility?'noindex, nofollow':'index, follow');
+  if(meta.utility){
+   assert.equal(document.querySelectorAll('script[type="application/ld+json"]').length,0);
+   const base=new JSDOM(readFileSync(resolve(dist,path.slice(1)+'.html'),'utf8')).window.document;
+   assert.equal(base.querySelectorAll('link[rel="canonical"],script[type="application/ld+json"]').length,0);
+   assert.equal(base.querySelector('meta[name="robots"]').content,'noindex, nofollow');
+  }
   if(!meta.utility){assert.equal(document.querySelectorAll('main h1').length,1);assert.equal(document.querySelector('#root').getAttribute('data-public-path'),path);documents++;}
  }
 }

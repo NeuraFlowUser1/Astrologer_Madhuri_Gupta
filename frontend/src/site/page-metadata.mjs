@@ -32,7 +32,7 @@ export const safeJson=value=>JSON.stringify(value).replace(/[<>&\u2028\u2029]/g,
 
 export function metadataFor(path){
  const data=pageRegistry[path],privatePage=['/booking/receipt','/booking-help'].includes(path);
- return {title:titleFor(path),description:data?.description||'We could not find that page.',canonical:data?origin+path:null,
+ return {title:titleFor(path),description:data?.description||'We could not find that page.',canonical:data&&!data.utility?origin+path:null,
   robots:data&&!data.utility?'index, follow':'noindex, nofollow',referrer:privatePage?'no-referrer':'strict-origin-when-cross-origin',image:shareImage,imageAlt:shareAlt};
 }
 

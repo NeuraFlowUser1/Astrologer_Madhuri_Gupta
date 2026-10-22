@@ -5,16 +5,16 @@
   "excluded": [],
   "totals": {
     "lines": {
-      "total": 1161,
-      "covered": 1139,
+      "total": 1166,
+      "covered": 1144,
       "skipped": 0,
-      "pct": 98.1
+      "pct": 98.11
     },
     "statements": {
-      "total": 2674,
-      "covered": 2555,
+      "total": 2680,
+      "covered": 2560,
       "skipped": 0,
-      "pct": 95.54
+      "pct": 95.52
     },
     "functions": {
       "total": 621,
@@ -23,10 +23,10 @@
       "pct": 94.68
     },
     "branches": {
-      "total": 1606,
-      "covered": 1453,
+      "total": 1610,
+      "covered": 1457,
       "skipped": 0,
-      "pct": 90.47
+      "pct": 90.49
     },
     "branchesTrue": {
       "total": 0,
@@ -35,34 +35,34 @@
       "pct": "Unknown"
     }
   },
-  "owners": [
+  "joins": [
     {
-      "file": "proxy.js",
-      "lines": {
-        "total": 0,
-        "covered": 0,
-        "skipped": 0,
-        "pct": 100
-      },
-      "functions": {
-        "total": 0,
-        "covered": 0,
-        "skipped": 0,
-        "pct": 100
-      },
-      "statements": {
-        "total": 0,
-        "covered": 0,
-        "skipped": 0,
-        "pct": 100
-      },
-      "branches": {
-        "total": 0,
-        "covered": 0,
-        "skipped": 0,
-        "pct": 100
-      }
+      "source": "coverage/public-site/native-coverage.json",
+      "matched": 2,
+      "unmatched": 0
     },
+    {
+      "source": "coverage/operating-browser/server-coverage.json",
+      "matched": 3185,
+      "unmatched": 21
+    },
+    {
+      "source": "coverage/operating-browser/browser-coverage.json",
+      "matched": 3220,
+      "unmatched": 23
+    },
+    {
+      "source": "coverage/operating-browser/native-source-coverage.json",
+      "matched": 167,
+      "unmatched": 0
+    },
+    {
+      "source": "coverage/operating-browser/public-build-coverage.json",
+      "matched": 162,
+      "unmatched": 0
+    }
+  ],
+  "owners": [
     {
       "file": "scripts/check-public-site.mjs",
       "lines": {
@@ -93,8 +93,8 @@
     {
       "file": "scripts/public-pages.mjs",
       "lines": {
-        "total": 17,
-        "covered": 17,
+        "total": 22,
+        "covered": 22,
         "skipped": 0,
         "pct": 100
       },
@@ -105,16 +105,16 @@
         "pct": 100
       },
       "statements": {
-        "total": 26,
-        "covered": 24,
+        "total": 32,
+        "covered": 29,
         "skipped": 0,
-        "pct": 92.3
+        "pct": 90.62
       },
       "branches": {
-        "total": 10,
-        "covered": 8,
+        "total": 12,
+        "covered": 9,
         "skipped": 0,
-        "pct": 80
+        "pct": 75
       }
     },
     {
@@ -142,6 +142,60 @@
         "covered": 4,
         "skipped": 0,
         "pct": 100
+      }
+    },
+    {
+      "file": "src/main.jsx",
+      "lines": {
+        "total": 10,
+        "covered": 10,
+        "skipped": 0,
+        "pct": 100
+      },
+      "functions": {
+        "total": 3,
+        "covered": 3,
+        "skipped": 0,
+        "pct": 100
+      },
+      "statements": {
+        "total": 14,
+        "covered": 14,
+        "skipped": 0,
+        "pct": 100
+      },
+      "branches": {
+        "total": 6,
+        "covered": 5,
+        "skipped": 0,
+        "pct": 83.33
+      }
+    },
+    {
+      "file": "src/render-public.jsx",
+      "lines": {
+        "total": 6,
+        "covered": 6,
+        "skipped": 0,
+        "pct": 100
+      },
+      "functions": {
+        "total": 2,
+        "covered": 2,
+        "skipped": 0,
+        "pct": 100
+      },
+      "statements": {
+        "total": 9,
+        "covered": 8,
+        "skipped": 0,
+        "pct": 88.88
+      },
+      "branches": {
+        "total": 8,
+        "covered": 7,
+        "skipped": 0,
+        "pct": 87.5
       }
     },
     {
@@ -242,33 +296,6 @@
       "statements": {
         "total": 1,
         "covered": 1,
-        "skipped": 0,
-        "pct": 100
-      },
-      "branches": {
-        "total": 0,
-        "covered": 0,
-        "skipped": 0,
-        "pct": 100
-      }
-    },
-    {
-      "file": "src/booking/protocol.mjs",
-      "lines": {
-        "total": 0,
-        "covered": 0,
-        "skipped": 0,
-        "pct": 100
-      },
-      "functions": {
-        "total": 0,
-        "covered": 0,
-        "skipped": 0,
-        "pct": 100
-      },
-      "statements": {
-        "total": 0,
-        "covered": 0,
         "skipped": 0,
         "pct": 100
       },
@@ -385,33 +412,6 @@
         "covered": 0,
         "skipped": 0,
         "pct": 100
-      }
-    },
-    {
-      "file": "src/main.jsx",
-      "lines": {
-        "total": 10,
-        "covered": 10,
-        "skipped": 0,
-        "pct": 100
-      },
-      "functions": {
-        "total": 3,
-        "covered": 3,
-        "skipped": 0,
-        "pct": 100
-      },
-      "statements": {
-        "total": 14,
-        "covered": 14,
-        "skipped": 0,
-        "pct": 100
-      },
-      "branches": {
-        "total": 6,
-        "covered": 5,
-        "skipped": 0,
-        "pct": 83.33
       }
     },
     {
@@ -736,33 +736,6 @@
         "covered": 78,
         "skipped": 0,
         "pct": 97.5
-      }
-    },
-    {
-      "file": "src/render-public.jsx",
-      "lines": {
-        "total": 6,
-        "covered": 6,
-        "skipped": 0,
-        "pct": 100
-      },
-      "functions": {
-        "total": 2,
-        "covered": 2,
-        "skipped": 0,
-        "pct": 100
-      },
-      "statements": {
-        "total": 9,
-        "covered": 8,
-        "skipped": 0,
-        "pct": 88.88
-      },
-      "branches": {
-        "total": 8,
-        "covered": 7,
-        "skipped": 0,
-        "pct": 87.5
       }
     },
     {
@@ -1353,10 +1326,10 @@
         "pct": 100
       },
       "branches": {
-        "total": 43,
-        "covered": 42,
+        "total": 45,
+        "covered": 45,
         "skipped": 0,
-        "pct": 97.67
+        "pct": 100
       }
     },
     {
@@ -1684,6 +1657,33 @@
       }
     },
     {
+      "file": "proxy.js",
+      "lines": {
+        "total": 0,
+        "covered": 0,
+        "skipped": 0,
+        "pct": 100
+      },
+      "functions": {
+        "total": 0,
+        "covered": 0,
+        "skipped": 0,
+        "pct": 100
+      },
+      "statements": {
+        "total": 0,
+        "covered": 0,
+        "skipped": 0,
+        "pct": 100
+      },
+      "branches": {
+        "total": 0,
+        "covered": 0,
+        "skipped": 0,
+        "pct": 100
+      }
+    },
+    {
       "file": "vite.config.js",
       "lines": {
         "total": 9,
@@ -1709,38 +1709,38 @@
         "skipped": 0,
         "pct": 100
       }
-    }
-  ],
-  "joins": [
-    {
-      "source": "coverage/public-site/native-coverage.json",
-      "matched": 2,
-      "unmatched": 0
     },
     {
-      "source": "coverage/operating-browser/server-coverage.json",
-      "matched": 3184,
-      "unmatched": 21
-    },
-    {
-      "source": "coverage/operating-browser/browser-coverage.json",
-      "matched": 3219,
-      "unmatched": 23
-    },
-    {
-      "source": "coverage/operating-browser/native-source-coverage.json",
-      "matched": 166,
-      "unmatched": 0
-    },
-    {
-      "source": "coverage/operating-browser/public-build-coverage.json",
-      "matched": 154,
-      "unmatched": 0
+      "file": "src/booking/protocol.mjs",
+      "lines": {
+        "total": 0,
+        "covered": 0,
+        "skipped": 0,
+        "pct": 100
+      },
+      "functions": {
+        "total": 0,
+        "covered": 0,
+        "skipped": 0,
+        "pct": 100
+      },
+      "statements": {
+        "total": 0,
+        "covered": 0,
+        "skipped": 0,
+        "pct": 100
+      },
+      "branches": {
+        "total": 0,
+        "covered": 0,
+        "skipped": 0,
+        "pct": 100
+      }
     }
   ],
   "rawEvidence": {
     "file": "frontend/coverage/operating-browser/coverage-audit.json",
-    "sha256": "0ab14ad295e9719a83448311ab3f2c145b3043017a1f723d80e9c3a63778d68e",
-    "scope": "Full source-region joining details remain in ignored local QA; this checked-in receipt retains every working owner and the unchanged complete denominator."
+    "sha256": "e78f89ee6b8d27965154aa250e9bec1373f7ed4600d64d5ac5ccb12c28899754",
+    "scope": "Full original source-region joins remain ignored local QA; every working owner and the complete denominator are retained here."
   }
 }

@@ -73,29 +73,74 @@
     "files": 579,
     "digest": "d3038ed0fef05f9c4cf469f9ee8f2ab3cf63d8ed2c2b77cd541cf2e68b72eca6"
   },
-  "requalification": "Supported RC3 installed with the corrected repeated metadata generation and qualified test fixtures; final whole-source receiving gate and coordinated hosted release are tracked separately.",
+  "requalification": "Supported RC3 and the complete receiving-source gate are qualified, including raw ON/base utility noindex with no canonical/JSON-LD after final generation. App/Worker/binding publication and hosted readback are a separate recorded stage.",
   "finalLocalGate": {
     "passed": true,
+    "phases": [
+      {
+        "label": "production-build",
+        "status": 0,
+        "partialMeasurement": false
+      },
+      {
+        "label": "public-build",
+        "status": 0,
+        "partialMeasurement": false
+      },
+      {
+        "label": "source-checkpoint",
+        "status": 0,
+        "partialMeasurement": false
+      },
+      {
+        "label": "unit-cases",
+        "status": 1,
+        "partialMeasurement": true
+      },
+      {
+        "label": "instrumented-source-build",
+        "status": 0,
+        "partialMeasurement": false
+      },
+      {
+        "label": "actual-browser-cases",
+        "status": 0,
+        "partialMeasurement": false
+      },
+      {
+        "label": "native-cases",
+        "status": 0,
+        "partialMeasurement": false
+      },
+      {
+        "label": "native-public-generation",
+        "status": 0,
+        "partialMeasurement": false
+      },
+      {
+        "label": "complete-source-audit",
+        "status": 0,
+        "partialMeasurement": false
+      }
+    ],
     "unitCases": 246,
-    "unitFiles": 20,
-    "nativeCases": 13,
     "browserObservations": 32,
-    "actualPublicDocuments": 24,
+    "serverPublicDocuments": 24,
     "sourceOwners": 62,
-    "excluded": [],
     "threshold": 90,
+    "excluded": [],
     "totals": {
       "lines": {
-        "total": 1161,
-        "covered": 1139,
+        "total": 1166,
+        "covered": 1144,
         "skipped": 0,
-        "pct": 98.1
+        "pct": 98.11
       },
       "statements": {
-        "total": 2674,
-        "covered": 2555,
+        "total": 2680,
+        "covered": 2560,
         "skipped": 0,
-        "pct": 95.54
+        "pct": 95.52
       },
       "functions": {
         "total": 621,
@@ -104,10 +149,10 @@
         "pct": 94.68
       },
       "branches": {
-        "total": 1606,
-        "covered": 1453,
+        "total": 1610,
+        "covered": 1457,
         "skipped": 0,
-        "pct": 90.47
+        "pct": 90.49
       },
       "branchesTrue": {
         "total": 0,
@@ -116,7 +161,22 @@
         "pct": "Unknown"
       }
     },
-    "evidence": "local-gate-summary.json"
+    "scope": "Disconnected local app only; supported package full qualification and official hosted/provider acceptance are separate.",
+    "supportedPackage": {
+      "release": "1.0.1-rc.3",
+      "files": 579,
+      "digest": "1bb6cb1cc00a2ead7cec70de052ea78330005d7644dfc0d2e2a40ea7c287b31f"
+    },
+    "nativeCases": 13,
+    "sourceCheckpointSha256": "a11439a52ff5267070c3de4daecceddc8ca9ac22a627fe21e7be5b367a3d30dd",
+    "utilityRawIdentity": {
+      "onFiles": 4,
+      "withheldBaseFiles": 4,
+      "absentOffFiles": 4,
+      "canonicalCount": 0,
+      "structuredGraphs": 0,
+      "robots": "noindex, nofollow"
+    }
   },
   "finalVisualReview": {
     "generated": "2026-10-22T16:15:49.555Z",

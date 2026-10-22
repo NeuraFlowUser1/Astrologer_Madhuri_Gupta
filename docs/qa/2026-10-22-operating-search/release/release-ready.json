@@ -1,0 +1,47 @@
+{
+  "status": "Qualified and prepared; maintenance not started",
+  "package": {
+    "release": "1.0.1-rc.3",
+    "files": 579,
+    "digest": "1bb6cb1cc00a2ead7cec70de052ea78330005d7644dfc0d2e2a40ea7c287b31f"
+  },
+  "priorGitMain": "7f6fc4eddc4b67a3265329a13696d2be488613b7",
+  "neon": {
+    "project": "cold-art-76378232",
+    "branch": "br-cool-bird-b39eiccm",
+    "database": "neondb",
+    "owner": "neondb_owner",
+    "installation": "87b35f80-71bc-4ee1-bf34-a7316006f95c",
+    "oldRelease": "54af467afbe152286f1f81f28f904a8b59b51e31111e6a81d93b1d340bd3720a"
+  },
+  "sourceExport": {
+    "bytes": 39061538,
+    "deployed": false,
+    "destination": "/tmp/appointment-hosting-source-kl0_6_ca",
+    "files": 765,
+    "manifest": "/tmp/appointment-hosting-source-kl0_6_ca.manifest.json",
+    "release_digest": "1bb6cb1cc00a2ead7cec70de052ea78330005d7644dfc0d2e2a40ea7c287b31f"
+  },
+  "sourceExportManifestSha256": "a1cbf039177a4c3b16eac9f6b0aa84e3ce6fbc8875d3974fc25bb0a513fd6332",
+  "workerDryRun": "/tmp/sarsa004-worker-prepared-rc3",
+  "companyStatus": "Existing original ON intent; refresh before OFF",
+  "settingsRevision": 13,
+  "settingsSha256": "55f62a8ef929c6a12f71b5e5959329c8326a3fa3234b36c63ced355ae4480c11",
+  "customerActions": 0,
+  "sharedQualification": "Final supported neutral RC3 qualified in both SQL targets and every original coverage domain; receipts owned by programme.",
+  "remaining": [
+    "003 final lane signal",
+    "Official bounded matching cutover",
+    "Hosted GET/HEAD gate and actual settled captures",
+    "Current publication/ON identity documentation",
+    "Owner search-account submission and later field observations"
+  ],
+  "sourceExportContentDigest": "e06bd823e315b3e31bb4c237cd9a4b42529442f7a67f51c66c31fb5a8fa090b9",
+  "workerArtifact": [
+    {
+      "file": "/tmp/sarsa004-worker-prepared-rc3/index.js",
+      "sha256": "59deed4e5be384a8b6a24b080178ebf3fe8acbaf2e9bc2573e61bb8f45b2519e",
+      "bytes": 33404
+    }
+  ]
+}

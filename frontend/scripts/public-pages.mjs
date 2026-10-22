@@ -1,5 +1,5 @@
 /** Render the actual public components in both display modes, without live reads. */
-import {readFileSync,rmSync} from 'node:fs';
+import {readFileSync,writeFileSync,existsSync,rmSync} from 'node:fs';
 import {resolve} from 'node:path';
 import {pathToFileURL} from 'node:url';
 import {build} from 'vite';
@@ -25,5 +25,15 @@ try{
   if(!target.test(html))throw Error('Expected a single empty client root before generation.');
   return renderMetadata(html.replace(target,()=>'<div id="root"'+marker+'>'+content+'</div>'),path);
  }});
+ // The neutral generator enforces a canonical after its renderer callback.
+ // Booking utilities keep the receiving registry's noindex/no-canonical policy
+ // in the actual delivered files too, before any browser code can run.
+ for(const path of bookingPaths){
+  const relative=path.slice(1)+'.html';
+  for(const file of [resolve(dist,relative),resolve(dist,'__booking_display/on',relative)]){
+   writeFileSync(file,renderMetadata(readFileSync(file,'utf8'),path));
+  }
+  if(existsSync(resolve(dist,'__booking_display/off',relative)))throw Error('Booking utility must remain withheld while OFF: '+path);
+ }
 }finally{rmSync(serverOutput,{recursive:true,force:true});}
 console.log('Generated 12 actual public pages in both display modes; booking utilities remain excluded.');

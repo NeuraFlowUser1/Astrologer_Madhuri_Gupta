@@ -7,7 +7,7 @@ import {portraitTransform} from '../../src/site/about-portrait.mjs';
 test('the 12 reviewed public routes and four utilities have one exact identity',()=>{
  assert.equal(publicPaths.length,12);assert.equal(Object.keys(pageRegistry).length,16);
  for(const [path,data] of Object.entries(pageRegistry)){
-  const meta=metadataFor(path);assert.equal(meta.canonical,origin+path);assert.equal(meta.title,data.title);
+  const meta=metadataFor(path);assert.equal(meta.canonical,data.utility?null:origin+path);assert.equal(meta.title,data.title);
   assert.equal(meta.robots,data.utility?'noindex, nofollow':'index, follow');
   assert.equal((data.title.match(/Sarsa Jyotish Sansthan/g)||[]).length,1);
   assert.equal(graphFor(path)===null,data.utility);
