@@ -55,7 +55,7 @@ export default function Booking({headerRef}){
  const selectedName=configured?.name||'Select your service',timezone=state.policy?.policy.timezone||'Asia/Kolkata';
  const range=state.policy?dateRange(state.policy):null,appointment=state.slot?appointmentLabel(state.slot.starts_at,timezone):'Choose a date and time';
  const verificationRequired=state.policy?.policy.booking_verification.email===true;
- useEffect(()=>{document.title='Book your appointment | Sarsa Jyotish Sansthan';window.scrollTo(0,0);},[]);
+ useEffect(()=>{window.scrollTo(0,0);},[]);
  useLayoutEffect(()=>{layout.current=mountBookingLayout(root.current,setActive,{headerBar:headerRef?.current});return()=>{layout.current.dispose();layout.current=null;};},[]);
  function go(id){
   if(state.credential)id='review';

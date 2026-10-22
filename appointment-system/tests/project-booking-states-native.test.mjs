@@ -60,7 +60,11 @@ test('actual project booking and receipt views distinguish payment, meeting, ref
      if(saved.meet_url)assert.equal(await page.locator('a[href="'+saved.meet_url+'"]').count(),1);
      else assert.equal(await page.locator('a[href^="https://meet.google.com/"]').count(),0);
      if(path==='/booking/receipt'){
-      await page.getByRole('button',{name:'Check status',exact:true}).click();await page.waitForFunction(()=>!document.querySelector('button[type=button]')?.disabled);
+      const before=calls.filter(call=>call.path==='/api/checkout/status').length;
+      await Promise.all([page.waitForResponse(response=>new URL(response.url()).pathname==='/api/checkout/status'),
+       page.getByRole('button',{name:'Refresh saved booking',exact:true}).click()]);
+      await page.waitForFunction(()=>[...document.querySelectorAll('button')].some(button=>button.textContent==='Refresh saved booking'&&!button.disabled));
+      assert.ok(calls.filter(call=>call.path==='/api/checkout/status').length>before,'Explicit refresh reads the saved receipt');
      }
     }
     assert.ok(calls.some(call=>call.path==='/api/checkout/status'),scenario.name+' did not check the saved booking');
@@ -69,9 +73,14 @@ test('actual project booking and receipt views distinguish payment, meeting, ref
    }catch(error){throw new Error(JSON.stringify({path,scenario:scenario.name,calls:calls.map(call=>call.path),errors,displayed:await page.locator('body').innerText()})+'\n'+error.message,{cause:error});}
    finally{await context.close();}
   }
-  const context=await browser.newContext(),page=await context.newPage();page.setDefaultTimeout(10000);
-  await context.route('**/*',route=>new URL(route.request().url()).origin===proof.origin?route.continue():route.abort());
-  await page.goto(proof.origin+'/booking/receipt');await page.getByText('This browser has no saved receipt.',{exact:false}).waitFor();
-  assert.equal(await page.getByRole('button',{name:'Check status',exact:true}).isDisabled(),true);await context.close();
+  const context=await browser.newContext(),page=await context.newPage();page.setDefaultTimeout(10000);const emptyCalls=[];
+  await context.route('**/*',route=>{const url=new URL(route.request().url());if(url.origin!==proof.origin)return route.abort();if(url.pathname.startsWith('/api/'))emptyCalls.push(url.pathname);return route.continue();});
+  await page.goto(proof.origin+'/booking/receipt');
+  await page.getByLabel('Full name',{exact:true}).waitFor();await page.getByLabel('Phone number',{exact:true}).waitFor();
+  assert.equal(await page.getByLabel('Full name',{exact:true}).inputValue(),'');assert.equal(await page.getByLabel('Phone number',{exact:true}).inputValue(),'');
+  assert.equal(await page.getByLabel('Full name',{exact:true}).getAttribute('required'),'');assert.equal(await page.getByLabel('Phone number',{exact:true}).getAttribute('required'),'');
+  assert.equal(await page.getByRole('button',{name:'Refresh saved booking',exact:true}).count(),0,'No saved credential can expose a saved-receipt refresh');
+  assert.ok(emptyCalls.every(path=>path==='/api/service-state'),'Merely opening the empty lookup must not read a customer booking or create an operation');
+  await context.close();
  }finally{await browser.close();await proof.close();}
 });

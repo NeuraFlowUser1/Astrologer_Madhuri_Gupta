@@ -17,6 +17,7 @@ vi.mock('../../src/site/BookingProduct.jsx', async () => {
     getSnapshot: () => model.snapshot,
     getServerSnapshot: () => model.snapshot,
     start: () => () => {},
+    setProfile: () => {},
     refresh: async () => {}
   }});
 });
@@ -28,7 +29,7 @@ const originalDialogMethods = Object.fromEntries(['showModal', 'close'].map(name
 ]));
 let root, host, fetchSpy, media;
 
-function LocationRecorder() {model.location = useLocation(); return null;}
+function LocationRecorder() {model.location = useLocation(); window.history.replaceState({},'',model.location.pathname+model.location.search); return null;}
 function cards() {return [...host.querySelectorAll('.story-card[data-story]')];}
 function readButton() {return host.querySelector('.story-card button[data-story-id]');}
 function shownIds() {return cards().map(card => card.dataset.story);}
@@ -345,7 +346,8 @@ test('a displayed Book action cannot bypass a newer booking admission restrictio
   const book = host.querySelector('a[href="/booking"]');
   model.snapshot = {...model.snapshot, checking: true};
   await click(book);
-  expect(model.location.pathname).toBe('/testimonials');
+  expect(model.location.pathname).toBe('/contact'); // Mock refresh did not establish admission.
+
   model.snapshot = {...model.snapshot, checking: false};
   await click(book);
   expect(model.location.pathname).toBe('/booking');

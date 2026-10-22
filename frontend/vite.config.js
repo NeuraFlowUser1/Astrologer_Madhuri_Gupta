@@ -2,13 +2,15 @@ import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 import tailwindcss from '@tailwindcss/vite'
 import {surfaceManifestPlugin} from '../appointment-system/tools/build/surfaces.mjs'
+import {renderMetadata} from './src/site/page-metadata.mjs'
 
 // https://vite.dev/config/
-export default defineConfig({
+export default defineConfig(({isSsrBuild})=>({
   plugins: [
+    {name:'sarsa-base-public-metadata',transformIndexHtml:html=>renderMetadata(html,'/')},
     react(),
     tailwindcss(),
-    surfaceManifestPlugin({bookingModules:['src/pages/Booking.jsx','src/pages/BookingReceipt.jsx','src/pages/BookingAccess.jsx','src/booking/browser.mjs']}),
+    !isSsrBuild && surfaceManifestPlugin({bookingModules:['src/pages/Booking.jsx','src/pages/BookingReceipt.jsx','src/pages/BookingAccess.jsx','src/booking/browser.mjs']}),
   ],
   server: {
     port: 3000,
@@ -36,4 +38,4 @@ export default defineConfig({
       }
     }
   }
-})
+}))

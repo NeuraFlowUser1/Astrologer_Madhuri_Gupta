@@ -1,23 +1,23 @@
 import React, { useEffect, useLayoutEffect, useRef, lazy, Suspense } from 'react'
 import { BrowserRouter as Router, Routes, Route, useLocation, useNavigate, useNavigationType } from 'react-router-dom'
-import {pages,origin,titleFor} from './site/page-metadata.mjs'
+import {writePageMetadata} from './site/page-metadata.mjs'
 import {useBookingProduct,ProductNavigationCheck,UnavailablePage,BookingRoute} from './site/BookingProduct.jsx'
 const BookingReceipt = lazy(() => import('./pages/BookingReceipt.jsx'))
 const BookingAccess = lazy(() => import('./pages/BookingAccess.jsx'))
 import {SiteHeader,SiteFooter} from './site/SiteFrame.jsx'
 import {observeHeader,createPublicScroller} from './site/public-scroll.mjs'
-const KundliPrediction = lazy(() => import('./pages/KundliPrediction.jsx'))
-const PrashnaKundali = lazy(() => import('./pages/PrashnaKundali.jsx'))
-const ServiceDetail = lazy(() => import('./pages/ServiceDetail.jsx'))
-const PolicyPage = lazy(() => import('./pages/PolicyPage.jsx'))
-const Home = lazy(() => import('./pages/Home.jsx'))
-const About = lazy(() => import('./pages/About.jsx'))
-const Services = lazy(() => import('./pages/Services.jsx'))
+import KundliPrediction from './pages/KundliPrediction.jsx'
+import PrashnaKundali from './pages/PrashnaKundali.jsx'
+import ServiceDetail from './pages/ServiceDetail.jsx'
+import PolicyPage from './pages/PolicyPage.jsx'
+import Home from './pages/Home.jsx'
+import About from './pages/About.jsx'
+import Services from './pages/Services.jsx'
 const Booking = lazy(() => import('./pages/Booking.jsx'))
-const ContactPage = lazy(() => import('./pages/ContactPage.jsx'))
-const Testimonials = lazy(() => import('./pages/Testimonials.jsx'))
+import ContactPage from './pages/ContactPage.jsx'
+import Testimonials from './pages/Testimonials.jsx'
 
-function AppShell() {
+export function AppShell() {
   const location = useLocation()
   const navigate=useNavigate(),navigationType=useNavigationType();
   const navigation=useRef(navigate);navigation.current=navigate;
@@ -30,21 +30,8 @@ function AppShell() {
   useLayoutEffect(()=>{scroller.current?.route(location,navigationType);},[location,navigationType]);
   const {enabled}=useBookingProduct();
   useEffect(() => {
-    const path=location.pathname, data=pages[path];
-    const description=!enabled ? ({'/':'Explore astrology, Numerology and Vastu guidance with Madhuri Gupta. Contact the practice with your questions.','/services':'Explore Kundli Prediction, Kundli Matching, Vastu, Numerology and Prashna Kundali guidance. Contact the practice with your questions.','/contact':'Send the practice a question or ask for help with an existing booking.'}[path] || data?.[1]):data?.[1];
-    document.title=titleFor(path);
-    for(const selector of ['meta[name="title"]','meta[property="og:title"]','meta[name="twitter:title"]']) document.querySelector(selector)?.setAttribute('content',titleFor(path));
-    for(const selector of ['meta[name="description"]','meta[property="og:description"]','meta[name="twitter:description"]']) document.querySelector(selector)?.setAttribute('content',description||'We could not find that page.');
-    document.querySelector('link[rel="canonical"]')?.setAttribute('href',origin+path);
-    for(const selector of ['meta[property="og:url"]','meta[name="twitter:url"]']) document.querySelector(selector)?.setAttribute('content',origin+path);
-    const privatePage=['/booking/receipt','/booking-help'].includes(path);
-    const robots=!privatePage && data && (enabled || !['/booking','/booking-policy'].includes(path)) ? 'index, follow':'noindex, nofollow';
-    for(const name of ['robots','googlebot','referrer']){
-      let meta=document.querySelector(`meta[name="${name}"]`);
-      if(!meta){meta=document.createElement('meta');meta.name=name;document.head.append(meta);}
-      meta.content=name==='referrer'?(privatePage?'no-referrer':'strict-origin-when-cross-origin'):robots;
-    }
-  }, [location.pathname,enabled]);
+    writePageMetadata(document,location.pathname);
+  }, [location.pathname]);
 
   return (
     <div className="sarsa-site" ref={shell}>
@@ -53,7 +40,7 @@ function AppShell() {
           <SiteHeader headerRef={header} sticky={location.pathname==='/booking'} />
           <a className="sarsa-skip" href="#page-content">Skip to content</a>
           <main id="page-content" ref={main} tabIndex="-1" className="flex-grow relative z-10">
-            <Suspense fallback={<p role="status" className="p-8">Loading the page…</p>}><Routes>
+            <Suspense fallback={<section className="sarsa-page-loading" aria-busy="true"><p role="status">Loading the page…</p></section>}><Routes>
               <Route path="/" element={<Home />} />
               <Route path="/about" element={<About />} />
               <Route path="/services/kundli-prediction" element={<KundliPrediction />} />

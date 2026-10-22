@@ -1,5 +1,7 @@
 # Sarsa — current booking and operating guide
 
+The [22 October public delivery/search guide](operating-search-2026-10-22.md) owns the current separate candidate and local proof. The dated 11/16 October receipts below retain their original package identities; they are not current candidate identities. Coordinated publication and protected app/worker/database readback are tracked separately.
+
 ## Enabled client services — 16 October 2026
 
 The contained package remains `54af467afbe152286f1f81f28f904a8b59b51e31111e6a81d93b1d340bd3720a`: 576 manifest entries plus release.json, migrations 001–037, unchanged. Sarsa's public presentation/bootstrap adds Prashna Kundali at ₹1,100 per question, 1–10 questions, one 30-minute Google Meet appointment, with no additional required preparation. Its existing per-question coordinator/server contract already supports this; no shared engine, schema, worker or provider change is required.
@@ -15,21 +17,21 @@ Migration 037 retires old code authority in one changeover while preserving audi
 
 ## Operation, source ownership and remaining boundaries
 
-Reviewed 19 October 2026. The 17 October hero/logo presentation preserves this exact package. The [current documentation index](README.md) and [public-site guide](public-site-refresh.md) own public structure; this guide owns booking operation.
+Reviewed 22 October 2026. The current separate operating/search candidate contains supported package 1.0.1-rc.3, digest 1bb6cb1cc00a2ead7cec70de052ea78330005d7644dfc0d2e2a40ea7c287b31f, with 579 manifest entries. Its coordinated publication is not inferred from local installation. The [current documentation index](README.md) and [public-site guide](public-site-refresh.md) own public structure; this guide owns booking operation.
 
-- api/index.py composes only sibling appointment-system and appointment-settings/project.json. The sealed package has 576 manifest entries plus release.json. Migrations 001–037 are unchanged by later public-site work. Saved protected policy/server quotes, not bootstrap JSON or a static catalogue, own live fees/availability.
+- api/index.py composes only sibling appointment-system and appointment-settings/project.json. The supported sealed package has 579 manifest entries plus release.json. Migrations 001–037 retain their original bytes. Saved protected policy/server quotes, not bootstrap JSON or a static catalogue, own live fees/availability.
 - Phone is required; booking email is optional with its code check OFF and required/verified with it ON. Supplied invalid email remains an error. Ordinary enquiries keep independent verification. Drafts survive tab/app changes in memory; deliberate refresh may clear them.
 - `/studio` and `/studio/calendar` use existing authenticated staff handling; `/enquiries-studio` handles enquiries independently. `/company/booking-control`, `/company/booking-support` and `/company/google-repair` retain separate company permissions. Google sign-in, Calendar and the two record-copy consents are distinct resources.
 - OFF denies booking admission, receipts/lookup, dashboard and exclusive assets while ordinary pages/enquiries remain. It does not cancel/refund paid obligations. The original saved-browser receipt retains separate stronger authority; read-only name/phone lookup never inherits it.
 - The database owns booking facts/capacity; Google Sheets are reporting copies. Durable worker lanes and existing monitor/backup/validation workflows handle independent operation. No production restore is an acceptance test.
 - Use installed [booking-details](../appointment-system/docs/booking-details.md), [booking-experience](../appointment-system/docs/booking-experience.md), [contained setup](../appointment-system/docs/contained-setup.md), [company recovery](../appointment-system/docs/company-recovery.md) and [historical handover](../appointment-system/docs/handover-commands.md) contracts. Never reset a working credential or reinitialize saved settings merely because an old plan says setup was pending.
-- This is the astrology 1.0.0-rc.1 installation. Project 001's separate doctor/clinic-payment/staff-discretion extension is not installed here. Preserve Sarsa's current saved cancellation/rescheduling/refund contract; a cancellation is not automatic proof of a refund.
+- This candidate is the neutral astrology 1.0.1-rc.3 installation. Project 001's separate doctor/clinic-payment/staff-discretion extension is not installed here. Preserve Sarsa's current saved cancellation/rescheduling/refund contract; a cancellation is not automatic proof of a refund.
 
 ## Evidence and deferred work
 
 The 11 October name/phone changeover matched source/database/worker/application identity and restored original ON intent, preserving records and audit. It expressly ran no tests/gates or real customer lookup/payment/email journey. Earlier 8 October 93/93 focused receipt checks, two approved no-email ₹1 booking journeys, actual Meet/PDF/mail/dual-Sheet outcomes and restored normal fees remain dated parent proof. Earlier 7 October encrypted backup/independent isolated restore/retention and monitor/protection receipts remain their own source-bound observations. They are not fresh acceptance of every later migration or today's provider health.
 
-The latest [17 October hosted gate](hosted-checks-2026-10-17.md) is 153/153 read-only cases with 1,558 assertions/nine phases, not fresh authenticated staff/provider/backup/customer acceptance. No new suite ran in this documentation review.
+The latest [17 October hosted gate](hosted-checks-2026-10-17.md) is 153/153 read-only cases with 1,558 assertions/nine phases, not fresh authenticated staff/provider/backup/customer acceptance. The 22 October receiving candidate separately passed 98 regression cases and four named metadata/crop cases with scoped coverage, native build/preflight and a disconnected public-browser matrix. These do not claim current production provider acceptance or whole-application coverage.
 
 The detailed prior guide is preserved outside this worktree in client documentation-review/2026-10-19/originals/.local-runtime/hero-brand-20261017/docs/appointment-system-release.md. Original shared evidence remains under factory-relative 04-shared-tools/003-appointment-booking-system/001-implementation-evidence/. Frozen historical links use their original location as context.
 

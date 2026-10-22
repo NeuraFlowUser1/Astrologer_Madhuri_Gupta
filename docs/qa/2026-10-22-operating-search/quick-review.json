@@ -1,0 +1,243 @@
+{
+  "generated": "2026-10-22T16:11:54.239Z",
+  "scope": "Disconnected local rendering; no real enquiry, booking, payment, login or provider action.",
+  "pages": [],
+  "timelines": [],
+  "interactions": [
+    {
+      "action": "narrow, reduced motion, focus and storage",
+      "path": "/",
+      "width": 320,
+      "height": 740,
+      "reduced": true,
+      "overflow": false,
+      "running": 0
+    },
+    {
+      "action": "narrow, reduced motion, focus and storage",
+      "path": "/about",
+      "width": 320,
+      "height": 740,
+      "reduced": true,
+      "overflow": false,
+      "running": 0,
+      "portrait": "1.000"
+    },
+    {
+      "action": "narrow, reduced motion, focus and storage",
+      "path": "/contact",
+      "width": 320,
+      "height": 740,
+      "reduced": true,
+      "overflow": false,
+      "running": 0,
+      "formDisabled": false
+    },
+    {
+      "action": "narrow, reduced motion, focus and storage",
+      "path": "/services/kundli-matching",
+      "width": 320,
+      "height": 740,
+      "reduced": true,
+      "overflow": false,
+      "running": 0
+    },
+    {
+      "action": "narrow, reduced motion, focus and storage",
+      "path": "/services/numerology",
+      "width": 320,
+      "height": 740,
+      "reduced": true,
+      "overflow": false,
+      "running": 0
+    },
+    {
+      "action": "narrow, reduced motion, focus and storage",
+      "path": "/",
+      "width": 390,
+      "height": 844,
+      "reduced": true,
+      "overflow": false,
+      "running": 0
+    },
+    {
+      "action": "narrow, reduced motion, focus and storage",
+      "path": "/about",
+      "width": 390,
+      "height": 844,
+      "reduced": true,
+      "overflow": false,
+      "running": 0,
+      "portrait": "1.000"
+    },
+    {
+      "action": "narrow, reduced motion, focus and storage",
+      "path": "/contact",
+      "width": 390,
+      "height": 844,
+      "reduced": true,
+      "overflow": false,
+      "running": 0,
+      "formDisabled": false
+    },
+    {
+      "action": "narrow, reduced motion, focus and storage",
+      "path": "/services/kundli-matching",
+      "width": 390,
+      "height": 844,
+      "reduced": true,
+      "overflow": false,
+      "running": 0
+    },
+    {
+      "action": "narrow, reduced motion, focus and storage",
+      "path": "/services/numerology",
+      "width": 390,
+      "height": 844,
+      "reduced": true,
+      "overflow": false,
+      "running": 0
+    },
+    {
+      "action": "narrow, reduced motion, focus and storage",
+      "path": "/",
+      "width": 1440,
+      "height": 900,
+      "reduced": true,
+      "zoom": true,
+      "overflow": false,
+      "running": 0
+    },
+    {
+      "action": "narrow, reduced motion, focus and storage",
+      "path": "/about",
+      "width": 1440,
+      "height": 900,
+      "reduced": true,
+      "zoom": true,
+      "overflow": false,
+      "running": 0,
+      "portrait": "1.000"
+    },
+    {
+      "action": "narrow, reduced motion, focus and storage",
+      "path": "/contact",
+      "width": 1440,
+      "height": 900,
+      "reduced": true,
+      "zoom": true,
+      "overflow": false,
+      "running": 0,
+      "formDisabled": false
+    },
+    {
+      "action": "narrow, reduced motion, focus and storage",
+      "path": "/services/kundli-matching",
+      "width": 1440,
+      "height": 900,
+      "reduced": true,
+      "zoom": true,
+      "overflow": false,
+      "running": 0
+    },
+    {
+      "action": "narrow, reduced motion, focus and storage",
+      "path": "/services/numerology",
+      "width": 1440,
+      "height": 900,
+      "reduced": true,
+      "zoom": true,
+      "overflow": false,
+      "running": 0
+    },
+    {
+      "action": "narrow, reduced motion, focus and storage",
+      "path": "/contact",
+      "width": 390,
+      "height": 844,
+      "reduced": true,
+      "blocked": true,
+      "overflow": false,
+      "running": 0,
+      "formDisabled": true
+    },
+    {
+      "action": "no-script public body",
+      "path": "/",
+      "h1": 1,
+      "characters": 4004
+    },
+    {
+      "action": "no-script public body",
+      "path": "/about",
+      "h1": 1,
+      "characters": 2127
+    },
+    {
+      "action": "no-script public body",
+      "path": "/services",
+      "h1": 1,
+      "characters": 2542
+    },
+    {
+      "action": "no-script public body",
+      "path": "/services/kundli-prediction",
+      "h1": 1,
+      "characters": 3850
+    },
+    {
+      "action": "no-script public body",
+      "path": "/services/kundli-matching",
+      "h1": 1,
+      "characters": 1597
+    },
+    {
+      "action": "no-script public body",
+      "path": "/services/vastu-consultation",
+      "h1": 1,
+      "characters": 1631
+    },
+    {
+      "action": "no-script public body",
+      "path": "/services/prashna-kundali",
+      "h1": 1,
+      "characters": 2652
+    },
+    {
+      "action": "no-script public body",
+      "path": "/services/numerology",
+      "h1": 1,
+      "characters": 1726
+    },
+    {
+      "action": "no-script public body",
+      "path": "/testimonials",
+      "h1": 1,
+      "characters": 4642
+    },
+    {
+      "action": "no-script public body",
+      "path": "/contact",
+      "h1": 1,
+      "characters": 3154
+    },
+    {
+      "action": "no-script public body",
+      "path": "/privacy",
+      "h1": 1,
+      "characters": 2626
+    },
+    {
+      "action": "no-script public body",
+      "path": "/terms",
+      "h1": 1,
+      "characters": 1410
+    },
+    {
+      "action": "unbound enquiry cannot submit personal data",
+      "method": "post",
+      "fieldsetDisabled": true,
+      "email": 1
+    }
+  ]
+}

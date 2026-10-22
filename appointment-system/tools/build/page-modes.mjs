@@ -5,20 +5,38 @@ import {checkedManifest} from '../../hosting/routing.mjs';
 const escape=value=>String(value).replaceAll('&','&amp;').replaceAll('"','&quot;').replaceAll('<','&lt;').replaceAll('>','&gt;');
 const save=(path,value)=>{mkdirSync(dirname(path),{recursive:true});writeFileSync(path,value);};
 
-export function generateModes({dist,shell,pages,project,manifest,brand,offDescriptions={}}){
+export function generateModes({dist,shell,pages,project,manifest,brand,offDescriptions={},renderPage}){
  checkedManifest(manifest,project);
+ if(renderPage!==undefined && typeof renderPage!=='function')throw TypeError('A page renderer must be a function.');
+ function metadata(html,{title,description,canonical,robots,mode}){
+  if(typeof html!=='string' || !html.includes('</head>') || !html.includes('</body>'))throw Error('A complete page document is required.');
+  const tag=(pattern,value)=>{
+   let found=false;
+   html=html.replace(pattern,()=>{if(found)return '';found=true;return value;});
+   if(!found)html=html.replace('</head>',value+'</head>');
+  };
+  tag(/<title>[\s\S]*?<\/title>/gi,`<title>${escape(title)}</title>`);
+  for(const [name,value] of Object.entries({description,robots,'booking-display-mode':mode})){
+   const pattern=new RegExp(`<meta\\s+name=(?:"${name}"|'${name}')\\s+content=(?:"[^"]*"|'[^']*')\\s*\\/?>\\s*`,'gi');
+   tag(pattern,`<meta name="${name}" content="${escape(value)}">`);
+  }
+  html=html.replace(/(<meta name="googlebot" content=")[^"]*/g,`$1${robots}`);
+  tag(/<link\s+rel=["']canonical["']\s+href=["'][^"']*["']\s*\/?>/gi,`<link rel="canonical" href="${escape(canonical)}">`);
+  html=html.replace(/(<meta (?:name|property)="(?:title|og:title|twitter:title)" content=")[^"]*/g,`$1${escape(title)}`)
+   .replace(/(<meta (?:name|property)="(?:og:description|twitter:description)" content=")[^"]*/g,`$1${escape(description)}`)
+   .replace(/(<meta (?:name|property)="(?:og:url|twitter:url)" content=")[^"]*/g,`$1${escape(canonical)}`);
+  return html;
+ }
  function render(path,mode,booking){
   const entry=pages[path] || (booking?['Appointment','View your appointment details.']:null);
-  if(!entry || entry.length!==2)throw Error('Every public page requires reviewed metadata.');
-  const title=entry[0]+' | '+brand,description=mode==='off'?(offDescriptions[path] || entry[1]):entry[1];
-  let html=shell.replace(/<title>[\s\S]*?<\/title>/,`<title>${escape(title)}</title>`);
-  html=html.replace(/(<meta (?:name|property)="(?:title|og:title|twitter:title)" content=")[^"]*/g,`$1${escape(title)}`)
-   .replace(/(<meta (?:name|property)="(?:description|og:description|twitter:description)" content=")[^"]*/g,`$1${escape(description)}`)
-   .replace(/(<link rel="canonical" href=")[^"]*/g,`$1${escape(project.origin+path)}`)
-   .replace(/(<meta (?:name|property)="(?:og:url|twitter:url)" content=")[^"]*/g,`$1${escape(project.origin+path)}`)
-   .replace(/(<meta name="(?:robots|googlebot)" content=")[^"]*/g,`$1${booking?'noindex, nofollow':'index, follow'}`)
-   .replace('</head>',`<meta name="booking-display-mode" content="${mode}"></head>`);
-  if(booking && !html.includes('name="robots"'))html=html.replace('</head>','<meta name="robots" content="noindex, nofollow"></head>');
+  const legacy=Array.isArray(entry);
+  if(!entry || (legacy?entry.length!==2:typeof entry!=='object') || typeof(legacy?entry[0]:entry.title)!=='string'
+   || typeof(legacy?entry[1]:entry.description)!=='string')throw Error('Every public page requires reviewed metadata.');
+  const title=legacy?entry[0]+' | '+brand:entry.title;
+  const description=mode==='off'?(offDescriptions[path] || (legacy?entry[1]:entry.description)):(legacy?entry[1]:entry.description);
+  const intent={title,description,canonical:project.origin+path,robots:booking?'noindex, nofollow':'index, follow',mode};
+  let html=metadata(shell,intent);
+  if(renderPage)html=metadata(renderPage({path,booking,html,...intent}),intent);
   return html;
  }
  for(const mode of ['on','off']){
@@ -29,7 +47,7 @@ export function generateModes({dist,shell,pages,project,manifest,brand,offDescri
    if(mode==='off')save(join(dist,file),html);
   }
   // Private receipts and operator pages are never search-engine listings.
-  const listed=manifest.public_paths.concat(mode==='on'?manifest.booking_paths.filter(path=>path==='/booking'||path==='/booking-policy'):[]);
+  const listed=manifest.public_paths;
   const xml='<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">'+listed.map(path=>`\n<url><loc>${escape(project.origin+path)}</loc></url>`).join('')+'\n</urlset>\n';
   save(join(dist,'__booking_display',mode,'sitemap.xml'),xml);if(mode==='off')save(join(dist,'sitemap.xml'),xml);
  }

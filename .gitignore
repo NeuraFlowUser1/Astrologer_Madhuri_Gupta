@@ -61,3 +61,7 @@ scratch/
 # Windows-user-encrypted operational handoff copies; never publish.
 tools/worker-settings/private/
 tools/payments/private/
+
+# Supported installer lock and preserved package rollback, local only.
+.appointment-install.lock
+.appointment-rollbacks/

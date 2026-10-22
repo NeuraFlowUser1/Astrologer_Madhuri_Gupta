@@ -73,7 +73,7 @@ export function createDateTimeFields(React,dependencies){
   return h(I18nProvider,{locale:'en-GB-u-ca-gregory'},h(React.Fragment,null,
    h(TimeField,{className:'abs-date-picker '+theme,name,value:selected,onChange:next=>{if(usable)commit(next);},isRequired:required,isDisabled:!usable,isInvalid:!!error,
     hourCycle:12,granularity:'minute',shouldForceLeadingZeros:true},h(Label,{className:'abs-field-label'},label),
-    h(Group,{ref:group,className:'abs-date-group',onClickCapture:event=>{if(event.currentTarget.contains(event.target) && !event.target.closest('button'))begin();}},
+    h('div',{ref:group,className:'abs-date-group',onClickCapture:event=>{if(event.currentTarget.contains(event.target) && !event.target.closest('button'))begin();}},
      h(DateInput,{className:'abs-date-input'},segments),h(Button,{type:'button',isDisabled:!usable,'aria-label':'Choose '+label,onPress:begin},icon('time'))),...hints(description,error)),
    h(Popover,{triggerRef:group,UNSTABLE_portalContainer:portal||undefined,isOpen:open && usable,onOpenChange:setOpen,placement:'bottom start',offset:8,className:'abs-booking-picker '+theme},
     h(Dialog,{'aria-label':label},h('div',{className:'abs-time-choices'},

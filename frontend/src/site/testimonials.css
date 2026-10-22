@@ -1990,3 +1990,5 @@
 .sarsa-testimonials dialog:not([open]) {
   display: none;
 }
+
+.sarsa-testimonials .echoes-intro>.eyebrow{color:#526148}

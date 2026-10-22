@@ -43,3 +43,5 @@
 @media(max-width:1050px) and (min-width:651px){.sarsa-header,.sarsa-header.booking-header{display:grid;grid-template-columns:minmax(0,1fr) auto;padding:16px 24px;gap:12px 16px}.sarsa-header nav{grid-column:1/-1;grid-row:2;justify-content:center;gap:28px}.sarsa-header .sarsa-action{grid-column:2;grid-row:1}}
 @media(max-width:520px){.sarsa-header nav{font-size:13px;gap:10px}}
 @media(max-width:360px){.sarsa-header nav{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0 12px;justify-items:start}}
+
+.sarsa-page-loading{min-block-size:max(28rem,calc(100svh - var(--public-header-height,135px) - var(--public-footer-height,220px)));padding:32px 24px}

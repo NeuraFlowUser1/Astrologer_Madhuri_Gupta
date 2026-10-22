@@ -95,7 +95,7 @@ test('company access expiry removes previously loaded customer details while kee
  assert.equal(await page.locator('#detail').isVisible(),false);assert.equal(await page.locator('#summary').textContent(),'');assert.equal(await page.locator('#appointments li').count(),0);
 }));
 test('retired earlier code actions reconcile without displaying customer access',{skip:!available},()=>fixture(async(page,state)=>{
- state.failure='lost';await action(page,'contact_correction');await page.fill('#phone','+918888888888');await page.fill('#payment','pay_fixture');await page.check('#verified');await page.click('#submit-change');await page.locator('#retry').waitFor();
+ state.failure='lost';await action(page,'contact_correction');await page.fill('#email','corrected@example.test');await page.fill('#phone','+918888888888');await page.fill('#payment','pay_fixture');await page.check('#verified');await page.click('#submit-change');await page.locator('#retry').waitFor();
  const sent=state.calls.find(x=>x.path.endsWith('/support'));state.results.set(sent.body.operation_id,{code:'operation_retired',revision:2,reference});
  await page.click('#retry');await page.waitForFunction(()=>document.querySelector('#status').textContent.startsWith('Earlier results checked'));
  assert.equal(await page.locator('#activation').count(),0);assert.equal(await page.evaluate(()=>window.PracticeStaffActions('company').get().length),0);

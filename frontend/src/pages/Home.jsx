@@ -9,16 +9,17 @@ import ServiceMedia from '../site/ServiceMedia.jsx';
 import PrashnaArtwork from '../site/PrashnaArtwork.jsx';
 import {HeroIcon,HomeHeroBand,madhuriExperience} from '../site/HeroDetails.jsx';
 import {mountHeroBand} from '../site/hero-band-motion.mjs';
-import {titleFor} from '../site/page-metadata.mjs';
 import '../site/hero-refinement.css';
 export default function Home(){
  const root=useRef(null),navigate=useNavigate();
- useLayoutEffect(()=>{document.title=titleFor('/');const stopMotion=mountHomeMotion(root.current),stopExtras=mountHomeEnhancements(root.current),stopBand=mountHeroBand(root.current,'#welcome');return()=>{stopBand();stopExtras();stopMotion();};},[]);
- function actions(event){if(event.defaultPrevented)return;const el=event.target.closest('[data-contact],#enquire,a');if(!el)return;if(el.matches('[data-contact]')){event.preventDefault();navigate('/contact');}else if(el.id==='enquire'){event.preventDefault();navigate('/booking');}else if(el.getAttribute('href')?.startsWith('/')&&!event.ctrlKey&&!event.metaKey&&!event.shiftKey&&event.button===0){event.preventDefault();navigate(el.getAttribute('href'));}}
+ useLayoutEffect(()=>{const stopMotion=mountHomeMotion(root.current),stopExtras=mountHomeEnhancements(root.current),stopBand=mountHeroBand(root.current,'#welcome');return()=>{stopBand();stopExtras();stopMotion();};},[]);
+ function actions(event){if(event.defaultPrevented)return;const el=event.target.closest('[data-contact],#enquire,a');if(!el)return;if(el.matches('[data-contact]')){event.preventDefault();navigate('/contact');}else if(el.id==='enquire'){event.preventDefault();navigate('/booking');}else if(el.getAttribute('href')?.startsWith('/')&&!event.ctrlKey&&!event.metaKey&&!event.shiftKey&&!event.altKey&&event.button===0&&!el.hasAttribute('download')&&(!el.target||el.target==='_self')){event.preventDefault();navigate(el.getAttribute('href'));}}
  return <div className="sarsa-home settled" ref={root} onClick={actions}>{"\n"}<section id="welcome" className="scroll-scene hero" data-chapter="welcome" data-effect="g">
 <div className="scene hero-scene">
-<div className="hero-photo">
-</div>
+<div className="hero-photo"><picture>
+<source type="image/webp" srcSet="/media/consultation-still-life-768.webp 768w, /media/consultation-still-life-1280.webp 1280w, /media/consultation-still-life-1920.webp 1920w" sizes="100vw"/>
+<img src="/media/consultation-still-life.png" width="1672" height="941" alt="" fetchPriority="high" decoding="async"/>
+</picture></div>
 <div className="hero-soften">
 </div>
 <div className="hero-foreground left" aria-hidden="true">
@@ -224,7 +225,7 @@ export default function Home(){
 <p>{"Bring the questions you would like to understand."}</p>
 <div id="chosen-service" hidden>
 </div>
-<BookingButton className="button" id="enquire">{"Book an appointment "}<span aria-hidden="true">{"\u2197"}</span>
+<BookingButton onClick={()=>navigate('/booking')} className="button" id="enquire">{"Book an appointment "}<span aria-hidden="true">{"\u2197"}</span>
 </BookingButton>
 </section>{"\n"}</div>;
 }

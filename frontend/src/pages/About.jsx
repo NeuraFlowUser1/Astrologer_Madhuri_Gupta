@@ -8,13 +8,12 @@ import MarginArt from '../site/MarginArt.jsx';
 import {mountAboutLayout} from '../site/about-layout.mjs';
 import {AboutHeroBand} from '../site/HeroDetails.jsx';
 import {mountHeroBand} from '../site/hero-band-motion.mjs';
-import {titleFor} from '../site/page-metadata.mjs';
 import {madhuriIntroduction} from '../site/hero-content.mjs';
 import '../site/hero-refinement.css';
 const serviceOrder=['kundli-prediction','kundli-matching','vastu-consultation','numerology','prashna-kundali'];
 export default function About(){
  const root=useRef(null),navigate=useNavigate();
- useLayoutEffect(()=>{document.title=titleFor('/about');const stopMotion=mountAboutMotion(root.current),stopLayout=mountAboutLayout(root.current),stopBand=mountHeroBand(root.current,'#opening');return()=>{stopBand();stopLayout();stopMotion();};},[]);
+ useLayoutEffect(()=>{const stopLayout=mountAboutLayout(root.current),stopMotion=mountAboutMotion(root.current),stopBand=mountHeroBand(root.current,'#opening');return()=>{stopBand();stopLayout();stopMotion();};},[]);
  function actions(event){const button=event.target.closest('[data-book],#contact');if(button)navigate(button.id==='contact'?'/contact':'/booking');}
  return <div className="sarsa-about settled" ref={root} onClick={actions}>
 <section className="opening" id="opening">
@@ -24,7 +23,7 @@ export default function About(){
 <div className="portrait-plane" id="portrait-plane">
 <div className="portrait-light" aria-hidden="true">
 </div>
-<img id="portrait" src="/media/madhuri-gupta-portrait.jpeg" alt="Madhuri Gupta, lead of Sarsa Jyotish Sansthan" />
+<img id="portrait" src="/media/madhuri-gupta-portrait.jpeg" width="960" height="1440" alt="Madhuri Gupta, lead of Sarsa Jyotish Sansthan" />
 <div className="portrait-wash">
 </div>
 </div>
@@ -137,7 +136,7 @@ export default function About(){
 <h2>{"Your questions."}<br />
 <em>{"Your own conversation."}</em>
 </h2>
-<BookingButton className="button" data-book="General consultation">{"Book an appointment "}<span>{"\u2197"}</span>
+<BookingButton onClick={()=>navigate('/booking')} className="button" data-book="General consultation">{"Book an appointment "}<span>{"\u2197"}</span>
 </BookingButton>
 </div>
 <div className="contact-side">

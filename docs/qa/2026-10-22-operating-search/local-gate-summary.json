@@ -1,0 +1,96 @@
+{
+  "passed": true,
+  "phases": [
+    {
+      "label": "production-build",
+      "status": 0,
+      "partialMeasurement": false
+    },
+    {
+      "label": "public-build",
+      "status": 0,
+      "partialMeasurement": false
+    },
+    {
+      "label": "source-checkpoint",
+      "status": 0,
+      "partialMeasurement": false
+    },
+    {
+      "label": "unit-cases",
+      "status": 1,
+      "partialMeasurement": true
+    },
+    {
+      "label": "instrumented-source-build",
+      "status": 0,
+      "partialMeasurement": false
+    },
+    {
+      "label": "actual-browser-cases",
+      "status": 0,
+      "partialMeasurement": false
+    },
+    {
+      "label": "native-cases",
+      "status": 0,
+      "partialMeasurement": false
+    },
+    {
+      "label": "native-public-generation",
+      "status": 0,
+      "partialMeasurement": false
+    },
+    {
+      "label": "complete-source-audit",
+      "status": 0,
+      "partialMeasurement": false
+    }
+  ],
+  "unitCases": 246,
+  "browserObservations": 32,
+  "serverPublicDocuments": 24,
+  "sourceOwners": 62,
+  "threshold": 90,
+  "excluded": [],
+  "totals": {
+    "lines": {
+      "total": 1161,
+      "covered": 1139,
+      "skipped": 0,
+      "pct": 98.1
+    },
+    "statements": {
+      "total": 2674,
+      "covered": 2555,
+      "skipped": 0,
+      "pct": 95.54
+    },
+    "functions": {
+      "total": 621,
+      "covered": 588,
+      "skipped": 0,
+      "pct": 94.68
+    },
+    "branches": {
+      "total": 1606,
+      "covered": 1453,
+      "skipped": 0,
+      "pct": 90.47
+    },
+    "branchesTrue": {
+      "total": 0,
+      "covered": 0,
+      "skipped": 0,
+      "pct": "Unknown"
+    }
+  },
+  "scope": "Disconnected local app only; supported package full qualification and official hosted/provider acceptance are separate.",
+  "supportedPackage": {
+    "release": "1.0.1-rc.3",
+    "files": 579,
+    "digest": "1bb6cb1cc00a2ead7cec70de052ea78330005d7644dfc0d2e2a40ea7c287b31f"
+  },
+  "nativeCases": 13,
+  "sourceCheckpointSha256": "53436a25d2f154e8779be76041808e88c784d7ac9cdd63e1572067c144efa649"
+}

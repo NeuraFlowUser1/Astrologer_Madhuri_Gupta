@@ -66,10 +66,10 @@ test('unresponsive display service times out and explicit invalidation resolves 
  const pending=store.refresh({force:true});store.invalidate();await pending;
 });
 
-test('shared React bindings have no saved receipt exception and clicks use current state',()=>{
+test('shared React bindings have no saved receipt exception and clicks use fresh state',async()=>{
  let current={enabled:false},navigation,clicks=0,hooks=0;
- const store={getSnapshot:()=>current,getServerSnapshot:()=>current,subscribe:()=>()=>{},start:()=>()=>{},refresh:async()=>{}};
- const React={createElement:(type,props,...children)=>({type,props,children}),useEffect:()=>{},useRef:()=>({current:false}),Fragment:'Fragment',
+ const store={getSnapshot:()=>current,getServerSnapshot:()=>current,subscribe:()=>()=>{},start:()=>()=>{},setProfile:()=>{},refresh:async()=>{}};
+ const React={createContext:()=>({}),useContext:()=>null,createElement:(type,props,...children)=>({type,props,children}),useEffect:()=>{},useRef:value=>({current:value}),Fragment:'Fragment',
   useSyncExternalStore:(_subscribe,get)=>{++hooks;return get();}};
  const Router={Link:'Link',useLocation:()=>({pathname:'/'}),useNavigate:()=>value=>navigation=value};
  const ui=createReactBindings(React,Router,{surfaces:[{path:'/booking-policy',class:'booking'}],state:store});
@@ -81,20 +81,20 @@ test('shared React bindings have no saved receipt exception and clicks use curre
  assert.equal(ui.BookingLink({to:'/about',children:'About'}).props.to,'/about');assert.equal(hooks,7);
  assert.equal(ui.BookingRoute({children:'receipt',readSavedReceipt:()=>{throw Error('must never read a saved receipt');}}).children[1].type,ui.UnavailablePage);
  current={enabled:true,verified:true,checking:false,activation_epoch:epoch,retained_on_epoch:epoch};const button=ui.BookingButton({children:'Book',onClick:()=>clicks++});
- current={enabled:false};button.props.onClick({preventDefault(){},stopPropagation(){}});assert.equal(navigation,'/contact');assert.equal(clicks,0);
+ current={enabled:false};button.props.onClick({preventDefault(){},stopPropagation(){}});await tick();assert.equal(navigation,'/contact');assert.equal(clicks,0);
  assert.equal(ui.BookingButton({bookingMode:'hide'}),null);
- current={enabled:true,verified:true,checking:false,activation_epoch:epoch,retained_on_epoch:epoch};button.props.onClick({});assert.equal(clicks,1);assert.equal(ui.BookingRoute({children:'booking'}).children[0].children[0],'booking');
+ current={enabled:true,verified:true,checking:false,activation_epoch:epoch,retained_on_epoch:epoch};button.props.onClick({preventDefault(){}});await tick();assert.equal(clicks,1);assert.equal(ui.BookingRoute({children:'booking'}).children[0].children[0],'booking');
  assert.equal(ui.BookingNavigationLink({to:'/booking'}).props.bookingMode,'hide');
  assert.equal(ui.UnavailablePage().children[0].children[0],'Page not found');ui.ProductNavigationCheck();
 });
 
 test('React visibility preserves ordinary destinations and uses explicit contact alternatives when OFF',()=>{
  let current={enabled:false},started=0,refreshed=0,navigated;const effects=[];
- const store={getSnapshot:()=>current,getServerSnapshot:()=>current,subscribe:()=>()=>{},start:()=>{started++;return()=>{};},refresh:async()=>{refreshed++;}};
- const React={createElement:(type,props,...children)=>({type,props,children}),useEffect:fn=>effects.push(fn),useRef:()=>({current:false}),Fragment:'Fragment',useSyncExternalStore:(_,get)=>get()};
+ const store={getSnapshot:()=>current,getServerSnapshot:()=>current,subscribe:()=>()=>{},start:()=>{started++;return()=>{};},setProfile:()=>{},refresh:async()=>{refreshed++;}};
+ const React={createContext:()=>({}),useContext:()=>null,createElement:(type,props,...children)=>({type,props,children}),useEffect:fn=>effects.push(fn),useRef:value=>({current:value}),Fragment:'Fragment',useSyncExternalStore:(_,get)=>get()};
  const ui=createReactBindings(React,{Link:'Link',useLocation:()=>({pathname:'/booking'}),useNavigate:()=>value=>navigated=value},{surfaces:[],state:store});
  for(const target of [null,{},'relative','//other.test/path','https://other.test/path','/%E0%A4%A'])assert.equal(ui.BookingAnchor({href:target,children:'Original'}).props.href,target);
  const off=ui.BookingButton({children:'Book',offText:'Call us',offPath:'/phone'});assert.equal(off.children[0],'Call us');off.props.onClick({preventDefault(){},stopPropagation(){}});assert.equal(navigated,'/phone');
- current={enabled:true,verified:true,checking:false,activation_epoch:epoch,retained_on_epoch:epoch};assert.equal(ui.BookingOnly({children:'Booking'}),'Booking');assert.equal(ui.BookingCopy({children:'Online',off:'Call'}),'Online');assert.equal(ui.BookingAnchor({href:'/booking',children:'Book'}).props.href,'/booking');ui.BookingButton({}).props.onClick({});
+ current={enabled:true,verified:true,checking:false,activation_epoch:epoch,retained_on_epoch:epoch};assert.equal(ui.BookingOnly({children:'Booking'}),'Booking');assert.equal(ui.BookingCopy({children:'Online',off:'Call'}),'Online');assert.equal(ui.BookingAnchor({href:'/booking',children:'Book'}).props.href,'/booking');ui.BookingButton({}).props.onClick({preventDefault(){}});
  ui.ProductNavigationCheck();for(const effect of effects)effect();assert.equal(started,1);assert.equal(refreshed,1);
 });

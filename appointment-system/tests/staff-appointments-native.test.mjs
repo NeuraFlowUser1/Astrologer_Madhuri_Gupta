@@ -91,7 +91,7 @@ for(const path of ['lookup','cancel','support','action-result'])test(`late appoi
  else if(path==='action-result')await page.click('#appointment-repeat');
  else{await page.fill('#support-payment','pay_fixture');await page.fill('#support-reason','Synthetic verified evidence');await page.check('#support-verified');await page.locator('#booking-support-change button').click();}
  const finish=await within(received.promise);state.enabled=false;await page.evaluate(()=>window.bookingVisibility.refresh({force:true}));finish();await page.waitForTimeout(50);
- assert.equal(await page.locator('#booking-support-content').textContent(),'');assert.equal(await page.locator('#appointment-summary').textContent(),'');assert.equal(await page.locator('#support-code').textContent(),'');
+ assert.equal(await page.locator('#booking-support-content').textContent(),'');assert.equal(await page.locator('#appointment-summary').textContent(),'');assert.equal(await page.locator('#support-code').count(),0,'The retired customer-code control must stay absent');
  if(path!=='lookup')assert.equal(await page.evaluate(()=>window.PracticeStaffActions('client').get().length),1);
 }));
 test('a definitively missing old action releases its saved marker without repeating a booking change',{skip:!available},()=>staffFixture(async(page,state)=>{

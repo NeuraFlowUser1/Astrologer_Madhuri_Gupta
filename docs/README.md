@@ -1,11 +1,12 @@
 # Project 004 — documentation index
 
-Reviewed **19 October 2026**. This is the maintained application's current reading path. Current feature guides explain behavior/decisions; dated plans and reports preserve exact scope and proof. There is one owner per topic.
+Reviewed **22 October 2026** for the isolated operating/search candidate; coordinated publication and hosted readback remain owned by the parent programme. This is the maintained application's current reading path. Current feature guides explain behavior/decisions; dated plans and reports preserve exact scope and proof. There is one owner per topic.
 
 The [19 October client handoff](project-004/2026-10-19-documentation/README.md) publishes the current outer working status/navigation and relevant historical notices alongside this application. Its manifest distinguishes original working text from link-adapted copies; no private storage or application duplicate is included.
 
 | Read | What it owns |
 | --- | --- |
+| [Public delivery/search](operating-search-2026-10-22.md) | Actual twelve-page HTML/hydration, exact metadata, intentional utility exclusion, responsive media, stable portrait and local proof/release boundaries. |
 | [Application README](../README.md) | Published source, local build, navigation, protection and remaining scope. |
 | [Public website](public-site-refresh.md) | Current sections, copy, responsive media, interactions, motion and page/service ownership. |
 | [Home/About/logo](hero-brand-2026-10-17.md) | Approved 17 October identity,15+ experience/studies, transparent symbol, numeric implementation, parity and recovery. |
@@ -23,6 +24,6 @@ The [19 October client handoff](project-004/2026-10-19-documentation/README.md) 
 
 `api/index.py` composes only sibling appointment-system/appointment-settings. Its sealed [details contract](../appointment-system/docs/booking-details.md), [booking experience](../appointment-system/docs/booking-experience.md), [setup](../appointment-system/docs/contained-setup.md), [company recovery](../appointment-system/docs/company-recovery.md) and [handover](../appointment-system/docs/handover-commands.md) own applicable common behavior. Public lookup does not grant cancellation/payment/contact editing. Never edit sealed docs/files in place or apply Project 001's later policy here.
 
-Client working status/design-review records live outside this application in the enclosing Project 004 folder; the factory register identifies it. Prior12/16 October worktrees preserve old source, certificates and comparison evidence. Old guides are history, not permission to replay setup or restore retired assets. Full local/hosted suites, provider writes and publication need their applicable explicit scope; this documentation review runs none.
+Client working status/design-review records live outside this application in the enclosing Project 004 folder; the factory register identifies it. Prior12/16 October worktrees preserve old source, certificates and comparison evidence. Old guides are history, not permission to replay setup or restore retired assets. The approved 22 October programme includes coordinated release and complete qualification. Its receiving candidate has the focused/local visual proof linked above; complete shared qualification and actual app/worker/binding publication/readback remain separately tracked. Dated hosted reports do not certify this candidate.
 
 The future Home portrait/full Home review section, shared visible note history and unproved display-request cancellation cause remain parked for their recorded reasons. Existing credentials, saved choices, account resources and earlier source versions remain.

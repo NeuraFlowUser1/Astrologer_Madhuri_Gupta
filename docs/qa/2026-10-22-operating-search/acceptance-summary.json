@@ -1,0 +1,136 @@
+{
+  "scope": "Disconnected local receiving-app proof; no actual provider, booking, enquiry, login or payment action.",
+  "package": {
+    "release": "1.0.1-rc.3",
+    "files": 579,
+    "digest": "1bb6cb1cc00a2ead7cec70de052ea78330005d7644dfc0d2e2a40ea7c287b31f"
+  },
+  "publicRoutes": 12,
+  "generatedDisplayDocuments": 24,
+  "renderedDesktopPhonePages": 24,
+  "aboutTimelineFrames": 20,
+  "defaultInteractions": 19,
+  "hydrationOrPageErrors": 0,
+  "renderedContrastViolations": 0,
+  "localShiftWindows": [
+    {
+      "width": 1440,
+      "path": "/",
+      "largestSessionWindow": 0,
+      "nodes": []
+    },
+    {
+      "width": 1440,
+      "path": "/about",
+      "largestSessionWindow": 0.0006370956776727538,
+      "nodes": [
+        "carry"
+      ]
+    },
+    {
+      "width": 390,
+      "path": "/",
+      "largestSessionWindow": 0,
+      "nodes": []
+    },
+    {
+      "width": 390,
+      "path": "/about",
+      "largestSessionWindow": 0.015199253105636119,
+      "nodes": [
+        "carry"
+      ]
+    }
+  ],
+  "media": [
+    {
+      "width": 1440,
+      "requests": [
+        {
+          "url": "http://127.0.0.1:39917/media/consultation-still-life-1920.webp",
+          "bytes": 145412,
+          "bodyBytes": 145112
+        }
+      ]
+    },
+    {
+      "width": 390,
+      "requests": [
+        {
+          "url": "http://127.0.0.1:39917/media/consultation-still-life-768.webp",
+          "bytes": 38322,
+          "bodyBytes": 38022
+        }
+      ]
+    }
+  ],
+  "fidelityBoundary": "Timeline samples include observed progress; baseline client-only mount and generated candidate have different load offsets. Crop equivalence separately verified for20 width/phase combinations. No claim of raw timestamp pixel identity.",
+  "remaining": "Project004 coordinated application/worker/database publication and official hosted readback; correct-owner Search Console actions and later observation remain separate. No maintenance has started.",
+  "additionalBoundaryScenarios": 16,
+  "additionalBoundaryScope": "320px, reduced motion, CSS 200% zoom (not native browser zoom), keyboard skip focus and blocked session storage; no submissions.",
+  "initialLocalProofPackage": {
+    "release": "1.0.1-rc.1",
+    "files": 579,
+    "digest": "d3038ed0fef05f9c4cf469f9ee8f2ab3cf63d8ed2c2b77cd541cf2e68b72eca6"
+  },
+  "requalification": "Supported RC3 installed with the corrected repeated metadata generation and qualified test fixtures; final whole-source receiving gate and coordinated hosted release are tracked separately.",
+  "finalLocalGate": {
+    "passed": true,
+    "unitCases": 246,
+    "unitFiles": 20,
+    "nativeCases": 13,
+    "browserObservations": 32,
+    "actualPublicDocuments": 24,
+    "sourceOwners": 62,
+    "excluded": [],
+    "threshold": 90,
+    "totals": {
+      "lines": {
+        "total": 1161,
+        "covered": 1139,
+        "skipped": 0,
+        "pct": 98.1
+      },
+      "statements": {
+        "total": 2674,
+        "covered": 2555,
+        "skipped": 0,
+        "pct": 95.54
+      },
+      "functions": {
+        "total": 621,
+        "covered": 588,
+        "skipped": 0,
+        "pct": 94.68
+      },
+      "branches": {
+        "total": 1606,
+        "covered": 1453,
+        "skipped": 0,
+        "pct": 90.47
+      },
+      "branchesTrue": {
+        "total": 0,
+        "covered": 0,
+        "skipped": 0,
+        "pct": "Unknown"
+      }
+    },
+    "evidence": "local-gate-summary.json"
+  },
+  "finalVisualReview": {
+    "generated": "2026-10-22T16:15:49.555Z",
+    "package": "1.0.1-rc.3",
+    "rawCaptures": "/tmp/sarsa004-operating-search-settled",
+    "desktopPhonePages": 24,
+    "aboutTimelineFrames": 20,
+    "interactions": 19,
+    "hydrationOrPageErrors": 0,
+    "brokenCompletedImages": 0,
+    "contrastViolations": 0,
+    "method": "Scroll the entire page, await lazy images and shared progress, then await original finite Web Animations while retaining infinite loops; capture the actual normal-motion result.",
+    "additionalBoundaryScenarios": 16,
+    "additionalBoundaryReceipt": "quick-review.json",
+    "noScriptPublicBodies": 12
+  }
+}

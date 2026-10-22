@@ -1,5 +1,7 @@
 # Home, About Madhuri and the Sarsa logo
 
+> **22 October continuation:** the [current public-delivery guide](operating-search-2026-10-22.md) supersedes this dated guide's short-noscript and page-owned metadata implementation. Approved content, 4.2/7.15-second clocks and appearance remain; the later portrait change uses transforms to preserve its crop. The numerical results below describe the original 17 October acceptance.
+
 17 October 2026. The owner approved the complete reviewed mockup, official publication, the full hosted read-only gate and current-state documentation. The implementation uses the separate `work/home-about-logo-20261017` branch and `.local-runtime/hero-brand-20261017` worktree, starting from freshly verified GitHub main `7775006bee0065b7a497bc6573f001013c7687f5`. Previous worktrees and the approved private study remain intact.
 
 ## Implemented presentation

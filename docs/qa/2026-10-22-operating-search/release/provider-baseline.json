@@ -1,0 +1,27 @@
+{
+  "project": "004",
+  "neon_project": "cold-art-76378232",
+  "installation": "87b35f80-71bc-4ee1-bf34-a7316006f95c",
+  "github_parent": "7f6fc4eddc4b67a3265329a13696d2be488613b7",
+  "worker_version": "97b97333-0743-48b0-aa16-4f222738377e",
+  "worker_deployment": "c00cdd9b-8b0f-4832-b087-e6344efb44a4",
+  "old_release": "54af467afbe152286f1f81f28f904a8b59b51e31111e6a81d93b1d340bd3720a",
+  "new_release": "e73d257cf5db72413843133eed25e4ec28953c0d0b1fe3ea7b49616b70782519",
+  "current_database_worker_idle": true,
+  "durable_object_namespaces": {
+    "BOOKING_PRODUCT_STATE": "25310ea52b5146c1ac5ba68916ea968e",
+    "BOOKING_RECOVERY_STATE": "b2ac685092dd475b9439ad45b4c5768b"
+  },
+  "worker_queue": "sarsa-booking-recovery",
+  "worker_schedule": "*/15 * * * *",
+  "source_export": {
+    "destination": "/tmp/appointment-hosting-source-inhhe8oe",
+    "manifest": "/tmp/appointment-hosting-source-inhhe8oe.manifest.json",
+    "files": 765,
+    "bytes": 39055191,
+    "deployed": false
+  },
+  "candidate_worker_sha256": "59deed4e5be384a8b6a24b080178ebf3fe8acbaf2e9bc2573e61bb8f45b2519e",
+  "maintenance_started": false,
+  "customer_writes": false
+}

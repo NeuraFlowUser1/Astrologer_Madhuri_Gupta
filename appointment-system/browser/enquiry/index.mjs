@@ -20,10 +20,11 @@ export function createEnquiryBrowser(profile,{storage=()=>window.sessionStorage,
 }
 
 /** React is supplied by the containing website; all workflow decisions stay shared. */
-export function createUseEnquiry(React,browser){
+export function createUseEnquiry(React,browser,{serverSnapshot}={}){
+ if(serverSnapshot!==undefined && typeof serverSnapshot!=='function')throw new TypeError('An enquiry server snapshot reader is required.');
  return function useEnquiry(channel='contact'){
   const controller=React.useMemo(()=>browser.controller(channel),[channel]);
-  const state=React.useSyncExternalStore(controller.subscribe,controller.getSnapshot,controller.getSnapshot);
+  const state=React.useSyncExternalStore(controller.subscribe,controller.getSnapshot,serverSnapshot||controller.getSnapshot);
   React.useEffect(()=>controller.start(),[controller]);
   return {...state,start:controller.submit,check:controller.check,verify:controller.verify,resend:controller.resend,
    retryRequest:controller.retryRequest,restart:controller.restart};

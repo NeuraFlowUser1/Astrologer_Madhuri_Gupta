@@ -14,8 +14,18 @@ export function checkedDisplay(value){
 export const displayAllowed=value=>value?.enabled===true && (value.verified===true || value.checking===true);
 export const admissionAllowed=value=>value?.enabled===true && value.verified===true && value.checking!==true;
 export const retainView=value=>typeof value?.retained_on_epoch==='string';
-export function createStateController({fetcher=globalThis.fetch,clock=Date.now}={}){
- let state=disabled(),sequence=0,pending=null,controller=null,lastAttempt=-Infinity,lastForeground=-Infinity,stop=null;
+/** Build snapshots describe public copy only; they never grant admission. */
+export function publicDisplaySnapshot(enabled){
+ if(typeof enabled!=='boolean')throw TypeError('Invalid public display mode.');
+ return Object.freeze({...OFF,enabled,checking:enabled});
+}
+export function createStateController({fetcher=globalThis.fetch,clock=Date.now,serverSnapshot=disabled,initialDisplay=false,
+ setTimer=(fn,delay)=>globalThis.setTimeout(fn,delay),clearTimer=id=>globalThis.clearTimeout(id)}={}){
+ if(typeof serverSnapshot!=='function')throw TypeError('A server snapshot reader is required.');
+ if(typeof initialDisplay!=='boolean')throw TypeError('Invalid initial public display choice.');
+ // Retain only the reviewed display boolean. Never copy verification, epochs or credentials from HTML.
+ let state=initialDisplay?publicDisplaySnapshot(serverSnapshot()?.enabled):disabled(),sequence=0,pending=null,controller=null,lastAttempt=-Infinity,lastForeground=-Infinity,stop=null;
+ let profile='active',schedule=null,isVisible=()=>false;
  const listeners=new Set();
  const emit=value=>{state=Object.freeze(value);for(const listener of [...listeners])listener();};
  function cancel(){++sequence;controller?.abort();pending=null;controller=null;}
@@ -43,32 +53,63 @@ export function createStateController({fetcher=globalThis.fetch,clock=Date.now}=
     })(),new Promise((_,reject)=>{
      const rejectUnavailable=()=>reject(Error('display_state_unavailable'));
      abort.signal.addEventListener('abort',rejectUnavailable,{once:true});
-     if(abort.signal.aborted)rejectUnavailable();timer=setTimeout(rejectUnavailable,2000);
+     if(abort.signal.aborted)rejectUnavailable();timer=setTimer(rejectUnavailable,2000);
     })]);
     if(turn===sequence)emit({...value,checking:false,retained_on_epoch:value.enabled?value.activation_epoch:null,
      foreground_revision:state.foreground_revision});
    }catch{if(turn===sequence)emit({...state,enabled:false,verified:false,checking:false});}
    finally{
-    clearTimeout(timer);abort.abort();if(reader)void reader.cancel().catch(()=>{});
-    if(turn===sequence){pending=null;controller=null;}
+    clearTimer(timer);abort.abort();if(reader)void reader.cancel().catch(()=>{});
+    if(turn===sequence){pending=null;controller=null;schedule?.();}
    }
    return state;
   };
   // Assign before notifying: a listener asking for freshness shares this read.
-  pending=Promise.resolve().then(work);emit({...state,verified:false,checking:true});return pending;
+  pending=Promise.resolve().then(work);emit({...state,verified:false,checking:true});schedule?.();return pending;
  }
- function start(windowObject=window,documentObject=document){
+ function setProfile(next){
+  if(next!=='public' && next!=='active')throw TypeError('Invalid display profile.');
+  if(next===profile)return;
+  profile=next;
+  if(stop && isVisible() && next==='active')void refresh({force:true});
+  schedule?.();
+ }
+ function start(windowObject=window,documentObject=document,{profile:initial='active',refreshOnStart=true}={}){
   if(stop)return stop;
-  const visible=()=>documentObject.visibilityState!=='hidden';
-  const activity=()=>{if(visible())void refresh({force:true,foreground:true});};
-  const timer=setInterval(()=>{if(visible())void refresh({force:true});},5000);
-  windowObject.addEventListener('focus',activity);windowObject.addEventListener('pageshow',activity);
-  windowObject.addEventListener('pagehide',pause);documentObject.addEventListener('visibilitychange',activity);
-  stop=()=>{clearInterval(timer);windowObject.removeEventListener('focus',activity);windowObject.removeEventListener('pageshow',activity);
-   windowObject.removeEventListener('pagehide',pause);documentObject.removeEventListener('visibilitychange',activity);stop=null;invalidate();};
-  if(visible())void refresh({force:true});return stop;
+  if(initial!=='public' && initial!=='active')throw TypeError('Invalid display profile.');
+  profile=initial;let timer=null,pageHidden=false;
+  isVisible=()=>!pageHidden && documentObject.visibilityState!=='hidden';
+  const clear=()=>{if(timer!==null)clearTimer(timer);timer=null;};
+  schedule=()=>{
+   clear();if(!isVisible())return;
+   const period=profile==='public'?60000:5000;
+   const elapsed=Number.isFinite(lastAttempt)?Math.max(0,clock()-lastAttempt):0;
+   timer=setTimer(()=>{timer=null;if(isVisible())void refresh({force:true});},Math.max(1,period-elapsed));
+  };
+  const activity=()=>{if(isVisible())void refresh({force:true,foreground:true});schedule?.();};
+  const visibilityChanged=()=>{if(documentObject.visibilityState!=='hidden')pageHidden=false;activity();};
+  const shown=event=>{
+   const resumed=pageHidden;pageHidden=false;
+   // The initial pageshow belongs to this same bootstrap, not a new visit.
+   // A restored page, a hidden lifetime or a not-yet-started one still refreshes.
+   if(event?.persisted===false && !resumed && Number.isFinite(lastAttempt)){schedule?.();return;}
+   activity();
+  };
+  const hidden=()=>{pageHidden=true;clear();pause();};
+  windowObject.addEventListener('focus',activity);windowObject.addEventListener('pageshow',shown);
+  windowObject.addEventListener('pagehide',hidden);documentObject.addEventListener('visibilitychange',visibilityChanged);
+  const dispose=()=>{
+   if(stop!==dispose)return;
+   clear();schedule=null;isVisible=()=>false;
+   windowObject.removeEventListener('focus',activity);windowObject.removeEventListener('pageshow',shown);
+   windowObject.removeEventListener('pagehide',hidden);documentObject.removeEventListener('visibilitychange',visibilityChanged);
+   stop=null;invalidate();
+  };
+  stop=dispose;
+  if(isVisible() && refreshOnStart)void refresh({force:true});
+  schedule();return stop;
  }
- return Object.freeze({getSnapshot:()=>state,getServerSnapshot:disabled,
-  subscribe:listener=>{listeners.add(listener);return()=>listeners.delete(listener);},refresh,start,invalidate});
+ return Object.freeze({getSnapshot:()=>state,getServerSnapshot:serverSnapshot,
+  subscribe:listener=>{listeners.add(listener);return()=>listeners.delete(listener);},refresh,start,setProfile,invalidate});
 }
 export const productState=createStateController();

@@ -37,8 +37,12 @@ test('built project in Chrome removes booking pages, assets and links while pres
   for(const path of requests)assert.notEqual(proof.manifest.assets[path],'booking','OFF page loaded booking-only code: '+path);
   await page.goto(proof.origin+'/');await page.waitForFunction(()=>document.querySelector('h1') && document.body.innerText.trim().length>60 && !document.body.innerText.includes('Loading the page'));
   proof.setEnabled(true);
+  // A genuine foreground event reads fresh state immediately; public idle reads
+  // intentionally run once per minute rather than within this 10-second check.
+  await page.waitForTimeout(110);await page.evaluate(()=>window.dispatchEvent(new Event('focus')));
   await page.waitForFunction(()=>[...document.querySelectorAll('a[href]')].some(node=>/^\/booking(?:[/?#]|$)/.test(node.getAttribute('href'))),undefined,{timeout:10000});
   proof.setEnabled(false);
+  await page.waitForTimeout(110);await page.evaluate(()=>window.dispatchEvent(new Event('focus')));
   await page.waitForFunction(()=>![...document.querySelectorAll('a[href]')].some(node=>/^\/booking(?:[/?#]|$)/.test(node.getAttribute('href'))),undefined,{timeout:10000});
   await page.goto(proof.origin+'/contact');await page.waitForFunction(()=>document.querySelector('h1') && document.body.innerText.trim().length>60 && !document.body.innerText.includes('Loading the page'));
   assert.ok(await page.locator('input,textarea').count()>0,'Contact fields disappeared OFF');

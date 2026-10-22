@@ -27,7 +27,7 @@ globalThis.hostedReadOnlyReview=async (page) => {
   const current=await context.newPage();
   let pageErrors=[],firstPartyFailures=[];
   current.on('pageerror',error=>pageErrors.push(error.message));
-  current.on('console',message=>{if(message.type()==='warning')report.warnings.push(message.text().slice(0,240));});
+  current.on('console',message=>{if(message.type()==='warning')report.warnings.push(message.text().slice(0,240));if(message.type()==='error'&&/hydration|Minified React error #418|server rendered HTML/i.test(message.text()))pageErrors.push(message.text());});
   current.on('response',response=>{
     const url=new URL(response.url());
     if(url.origin===origin && response.status()>=400)firstPartyFailures.push({path:url.pathname,status:response.status()});
@@ -158,7 +158,7 @@ globalThis.hostedReadOnlyReview=async (page) => {
         check(await current.locator('.hero-action.secondary').getAttribute('href')==='/contact','Question action destination changed');
         check(await current.locator('.service-choice').count()===services.length,'Quick services are incomplete');
         for(const service of services)check(await current.locator('.service-choice[href="/services/'+service+'"]').count()===1,'Quick service missing: '+service);
-        check(await current.title()==='Astro Guidance by Madhuri Gupta | Sarsa Jyotish Sansthan','Home browser title differs from approval');
+        check(await current.title()==='Astrologer Madhuri Gupta in Agra | Sarsa Jyotish Sansthan','Home browser title differs from approval');
         await current.locator('.hero-meet').click();await current.waitForFunction(()=>location.hash==='#madhuri'&&Math.abs(document.querySelector('#madhuri').getBoundingClientRect().top)<20);
         check(await current.locator('.hero-meet').evaluate(node=>document.activeElement===node),'Pointer navigation should retain the activated link focus');
         await current.locator('.hero-meet').focus();await current.keyboard.press('Enter');
@@ -390,7 +390,7 @@ globalThis.hostedReadOnlyReview=async (page) => {
       for(const path of retired)await run('Retired certificate '+path,async()=>{const response=await context.request.get(origin+path,{maxRedirects:0,timeout:45000});check(response.status()===404,'Retired certificate is still published');return {path,http:404};});
       await run('Public sitemap and robots',async()=>{
         const response=await context.request.get(origin+'/sitemap.xml');check(response.status()===200,'Sitemap unavailable');const xml=await response.text(),urls=[...xml.matchAll(/<loc>([^<]+)<\/loc>/g)].map(match=>match[1]);
-        const expected=paths.filter(path=>path!=='/booking/receipt');check(urls.length===expected.length,'Unexpected sitemap route count '+urls.length);check(expected.every(path=>urls.includes(origin+path)),'Public route absent from sitemap');
+        const expected=paths.filter(path=>!['/booking','/booking-policy','/booking/receipt'].includes(path));check(urls.length===expected.length,'Unexpected sitemap route count '+urls.length);check(expected.every(path=>urls.includes(origin+path)),'Public route absent from sitemap');
         check(!urls.some(url=>url.includes('/booking/receipt')||url.includes('/studio')||url.includes('/company')),'Private path indexed');
         const robots=await context.request.get(origin+'/robots.txt');check(robots.status()===200,'Robots unavailable');check((await robots.text()).includes('Sitemap: '+origin+'/sitemap.xml'),'Robots missing sitemap');return {publicRoutes:urls.length};
       });

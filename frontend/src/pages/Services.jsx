@@ -8,7 +8,7 @@ import ServiceArtwork from '../site/ServiceArtwork.jsx';
 import ServiceMedia from '../site/ServiceMedia.jsx';
 import {mountDirectoryMotion} from '../site/directory-motion.mjs';
 const descriptions={'kundli-prediction':'Questions about work, marriage, family or a changing phase of life? Explore your birth chart, grah and dasha in simple words.','kundli-matching':'Thinking about marriage? Explore what two kundlis can tell you about compatibility and the questions you want to discuss.','vastu-consultation':'Questions about your home or workspace? Understand its layout and directions through the principles of Vastu.','prashna-kundali':'Have a specific question about work, family or a decision? Discuss it with Madhuri through a question-time chart. Birth details are not required to book.',numerology:'Curious about your name, date of birth or numbers? Explore their meaning in the numerology tradition.'};
-export default function Services(){const root=useRef(null);useLayoutEffect(()=>{document.title='Services | Sarsa Jyotish Sansthan';return mountDirectoryMotion(root.current);},[]);return <div className="sarsa-services services-directory-page" ref={root}>
+export default function Services(){const root=useRef(null);useLayoutEffect(()=>{return mountDirectoryMotion(root.current);},[]);return <div className="sarsa-services services-directory-page" ref={root}>
 <div className="service-intro-frame"><section className="service-intro">
 <p className="eyebrow">FIND YOUR STARTING POINT</p>
 <h1>Different questions.<br/>

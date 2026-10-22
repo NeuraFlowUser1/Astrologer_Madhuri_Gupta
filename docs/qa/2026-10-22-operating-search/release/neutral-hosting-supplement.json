@@ -1,0 +1,54 @@
+{
+  "scope": "Separate successful supplemental contract run only; original frozen product and initial counter pool unchanged.",
+  "release_digest": "1bb6cb1cc00a2ead7cec70de052ea78330005d7644dfc0d2e2a40ea7c287b31f",
+  "measurement_root": "/tmp/astro-neutral-measurement-hosting-3cmsfp1e",
+  "run": {
+    "exit": 0,
+    "namedCases": 8,
+    "passed": 8,
+    "failed": 0,
+    "skipped": 0,
+    "source": "Actual node --test process exit and named run.log readback"
+  },
+  "harness": "docs/qa/2026-10-22-operating-search/release/neutral-hosting-supplement.test.mjs",
+  "harness_sha256": "4717e648c301b89eb9bf77a01229d5adbe47f7105ac27161ebdef4224b4d839c",
+  "source_hashes_verified": true,
+  "original_maps_reconstructed": true,
+  "counter_rejections": [],
+  "counter_observations": 6,
+  "five_hosting_build_export_owners": {
+    "lines": {
+      "total": 213,
+      "covered": 213,
+      "skipped": 0,
+      "pct": 100
+    },
+    "statements": {
+      "total": 332,
+      "covered": 332,
+      "skipped": 0,
+      "pct": 100
+    },
+    "functions": {
+      "total": 51,
+      "covered": 50,
+      "skipped": 0,
+      "pct": 98.03
+    },
+    "branches": {
+      "total": 357,
+      "covered": 350,
+      "skipped": 0,
+      "pct": 98.03
+    },
+    "branchesTrue": {
+      "total": 0,
+      "covered": 0,
+      "skipped": 0,
+      "pct": "Unknown"
+    }
+  },
+  "domain_boundary": "Original named-domain aggregation belongs to the shared qualification owner; this number is the stated five-owner subset, not the whole shared package.",
+  "provider_actions": 0,
+  "customer_actions": 0
+}

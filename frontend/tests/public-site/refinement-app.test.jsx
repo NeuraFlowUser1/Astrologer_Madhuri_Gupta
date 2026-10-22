@@ -4,7 +4,7 @@ import {beforeEach,afterEach,test,expect,vi} from 'vitest';
 const model=vi.hoisted(()=>({snapshot:{},listeners:new Set(),bookingMounts:0,header:null}));
 vi.mock('../../src/site/BookingProduct.jsx',async()=>{
  const React=await import('react'),Router=await import('react-router-dom'),{createReactBindings}=await import('../../../appointment-system/browser/react-bindings.mjs'),{surfaces}=await import('../../../appointment-settings/project.json');
- return createReactBindings(React,Router,{surfaces,state:{subscribe:fn=>{model.listeners.add(fn);return()=>model.listeners.delete(fn);},getSnapshot:()=>model.snapshot,getServerSnapshot:()=>model.snapshot,start:()=>()=>{},refresh:async()=>{}}});
+ return createReactBindings(React,Router,{surfaces,state:{subscribe:fn=>{model.listeners.add(fn);return()=>model.listeners.delete(fn);},getSnapshot:()=>model.snapshot,getServerSnapshot:()=>model.snapshot,start:()=>()=>{},setProfile:()=>{},refresh:async()=>{}}});
 });
 vi.mock('../../src/pages/Home.jsx',()=>({default:()=> <h1>Home</h1>}));
 vi.mock('../../src/pages/About.jsx',()=>({default:()=> <h1>About</h1>}));

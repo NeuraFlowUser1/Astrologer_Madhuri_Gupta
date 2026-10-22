@@ -5,7 +5,7 @@ import {beforeEach,afterEach,test,expect,vi} from 'vitest';
 const model=vi.hoisted(()=>({snapshot:{},listeners:new Set(),location:null,scenes:[],cleanups:0}));
 vi.mock('../../src/site/BookingProduct.jsx',async()=>{
  const React=await import('react'),Router=await import('react-router-dom');const {createReactBindings}=await import('../../../appointment-system/browser/react-bindings.mjs');const {surfaces}=await import('../../../appointment-settings/project.json');
- return createReactBindings(React,Router,{surfaces,state:{subscribe:fn=>{model.listeners.add(fn);return()=>model.listeners.delete(fn);},getSnapshot:()=>model.snapshot,getServerSnapshot:()=>model.snapshot,start:()=>()=>{},refresh:async()=>{}}});
+ return createReactBindings(React,Router,{surfaces,state:{subscribe:fn=>{model.listeners.add(fn);return()=>model.listeners.delete(fn);},getSnapshot:()=>model.snapshot,getServerSnapshot:()=>model.snapshot,start:()=>()=>{},setProfile:()=>{},refresh:async()=>{}}});
 });
 vi.mock('../../src/site/scenes.mjs',()=>({mountScenes:(root,definitions)=>{model.scenes=definitions;definitions.forEach(d=>d.render(1));return()=>{model.cleanups++;};}}));
 vi.mock('../../src/contact/motion.mjs',()=>({mountContactMotion:()=>()=>{}}));
@@ -20,7 +20,7 @@ import PolicyPage from '../../src/pages/PolicyPage.jsx';
 import ServiceArtwork from '../../src/site/ServiceArtwork.jsx';
 import {SiteHeader,SiteFooter} from '../../src/site/SiteFrame.jsx';
 let host,root;
-function Recorder(){model.location=useLocation();return null;}
+function Recorder(){model.location=useLocation();window.history.replaceState({},'',model.location.pathname+model.location.search);return null;}
 const click=async(node,options={})=>act(async()=>node.dispatchEvent(new MouseEvent('click',{bubbles:true,cancelable:true,button:0,detail:1,...options})));
 const render=async(node,path='/')=>act(async()=>root.render(<MemoryRouter initialEntries={[path]}>{node}<Recorder/></MemoryRouter>));
 const update=async(snapshot)=>act(async()=>{model.snapshot={...model.snapshot,...snapshot};model.listeners.forEach(fn=>fn());});
@@ -36,20 +36,21 @@ afterEach(async()=>{await act(async()=>root.unmount());host.remove();vi.restoreA
 
 test.each([[Home,'/','/booking'],[KundliPrediction,'/services/kundli-prediction','/booking?service=kundli-prediction']])('original page actions keep their routes and cannot bypass latest booking admission',async(Page,path,booking)=>{
  await render(<Page/>,path);await click(host.querySelector('h1'));expect(model.location.pathname).toBe(path);
- const paid=host.querySelector('a[href^="/booking"]');model.snapshot={...model.snapshot,checking:true};await click(paid);expect(model.location.pathname).toBe(path);
+ const paid=host.querySelector('a[href^="/booking"]');model.snapshot={...model.snapshot,checking:true};await click(paid);expect(model.location.pathname).toBe('/contact'); // Freshness was not established: fail closed to enquiry.
+
  model.snapshot={...model.snapshot,checking:false};await click(host.querySelector('#enquire'));expect(model.location.pathname+model.location.search).toBe(booking);
  await click(host.querySelector('[data-contact]'));expect(model.location.pathname).toBe('/contact');
  const link=host.querySelector('a[href="/services"],a[href="/about"]');await click(link,{ctrlKey:true});expect(model.location.pathname).toBe('/contact');await click(link);expect(['/about','/services']).toContain(model.location.pathname);
  await update({enabled:false,verified:true,retained_on_epoch:null});expect(host.querySelectorAll('#questions details').length).toBeGreaterThan(2);
 });
 
-test('About keeps four permanent row identities and selected service handoffs in both availability modes',async()=>{
- await render(<About/>,'/about');expect(host.querySelectorAll('.service-row')).toHaveLength(4);
- for(const [i,id] of ['kundli-prediction','kundli-matching','vastu-consultation','numerology'].entries()){
+test('About keeps five permanent row identities and selected service handoffs in both availability modes',async()=>{
+ await render(<About/>,'/about');expect(host.querySelectorAll('.service-row')).toHaveLength(5);
+ for(const [i,id] of ['kundli-prediction','kundli-matching','vastu-consultation','numerology','prashna-kundali'].entries()){
   const row=host.querySelectorAll('.service-row')[i];expect(row.querySelector('span').textContent).toBe('0'+(i+1));await click(row.querySelector('a'));expect(model.location.pathname).toBe('/services/'+id);await click(row.querySelectorAll('a')[1]);expect(model.location.pathname+model.location.search).toBe('/booking?service='+id);
  }
  await click(host.querySelector('h1'));await click(host.querySelector('[data-book]'));expect(model.location.pathname).toBe('/booking');await click(host.querySelector('#contact'));expect(model.location.pathname).toBe('/contact');
- await update({enabled:false,retained_on_epoch:null});expect(host.querySelectorAll('.row-identity b')).toHaveLength(4);expect(host.querySelectorAll('.row-actions a')).toHaveLength(4);expect(host.querySelector('[data-motion-fallback]')).toBeNull();
+ await update({enabled:false,retained_on_epoch:null});expect(host.querySelectorAll('.row-identity b')).toHaveLength(5);expect(host.querySelectorAll('.row-actions a')).toHaveLength(5);expect(host.querySelector('[data-motion-fallback]')).toBeNull();
 });
 
 test.each([false,true])('About motion preserves all phases and row transforms with phone=%s',async(phone)=>{
@@ -60,20 +61,21 @@ test.each([false,true])('About motion preserves all phases and row transforms wi
 });
 
 test('Services uses real catalogue destinations and artwork, with one Explore action per card when OFF',async()=>{
- await render(<Services/>,'/services');expect(document.title).toBe('Services | Sarsa Jyotish Sansthan');expect(host.querySelectorAll('.directory-art')).toHaveLength(4);expect(host.querySelectorAll('.service-guide')).toHaveLength(2);
+ await render(<Services/>,'/services');expect(document.title).toBe(''); // Metadata belongs to AppShell, absent in this page-only fixture.
+ expect(host.querySelectorAll('[data-directory-card] .directory-photo img')).toHaveLength(5);expect(host.querySelectorAll('.service-guide')).toHaveLength(2);
  for(const link of host.querySelectorAll('.service-actions a[href^="/booking"]')){await click(link);expect(model.location.search).toContain('service=');}
- await update({enabled:false,retained_on_epoch:null});expect(host.querySelectorAll('.service-actions a')).toHaveLength(4);expect(host.querySelector('a[href^="/booking"]')).toBeNull();await render(<ServiceArtwork id="unknown"/>);expect(host.querySelector('svg')).toBeNull();
+ await update({enabled:false,retained_on_epoch:null});expect(host.querySelectorAll('.service-actions a')).toHaveLength(5);expect(host.querySelector('a[href^="/booking"]')).toBeNull();await render(<ServiceArtwork id="unknown"/>);expect(host.querySelector('svg')).toBeNull();
 });
 
-test.each(['kundli-matching','vastu-consultation','numerology','unknown'])('detail %s keeps its four scenes or redirects an invalid ID',async(id)=>{
+test.each(['kundli-matching','vastu-consultation','numerology','unknown'])('detail %s keeps four original scenes plus its story or redirects an invalid ID',async(id)=>{
  await render(<Routes><Route path="/services/:serviceId" element={<ServiceDetail/>}/><Route path="/services" element={<h1>Services</h1>}/></Routes>,'/services/'+id);
  if(id==='unknown'){expect(model.location.pathname).toBe('/services');return;}
- expect(host.querySelectorAll('section')).toHaveLength(4);expect(host.querySelectorAll('.service-art [data-layer]')).toHaveLength(3);await click(host.querySelector('a[href^="/booking"]'));expect(model.location.search).toBe('?service='+id);
+ expect(host.querySelectorAll('section')).toHaveLength(5);expect(host.querySelectorAll('.service-art [data-layer]')).toHaveLength(3);await click(host.querySelector('a[href^="/booking"]'));expect(model.location.search).toBe('?service='+id);
 });
 
 test('Contact retains topic/focus handoff, five stages and original plaque while adding a separate map and process',async()=>{
  await render(<ContactPage/>,'/contact');expect(host.querySelectorAll('.stage')).toHaveLength(5);expect(host.querySelector('.contact-location').closest('.stage')).toBeNull();expect(host.querySelector('.contact-booking-steps').closest('.stage')).toBeNull();
- await click(host.querySelector('h1'));await click(host.querySelector('[data-route="existing"]'));expect(host.querySelector('#topic').value).toBe('Existing booking');expect(document.activeElement.id).toBe('visitor-name');
+ await click(host.querySelector('h1'));await click(host.querySelector('[data-route="existing"]'));expect(model.location.pathname).toBe('/booking/receipt');
  vi.stubGlobal('matchMedia',()=>({matches:false}));await click(host.querySelector('[data-route="question"]'));expect(host.querySelector('#topic').value).toBe('Before booking');await click(host.querySelector('[data-book]'));expect(model.location.pathname).toBe('/booking');
  expect(host.querySelector('address').textContent).toBe('8, Gailana Road, LIC Colony, Agra - 282007');expect(host.querySelector('.contact-location a').href).toBe('https://maps.app.goo.gl/CwQftW8iYfxAZFDo8');expect(host.querySelector('iframe').title).toContain('Google Maps');
  const arrow=host.querySelector('.weave-book-link');model.snapshot={...model.snapshot,checking:true};await click(arrow);model.snapshot={...model.snapshot,checking:false};await click(arrow);expect(model.location.pathname).toBe('/booking');

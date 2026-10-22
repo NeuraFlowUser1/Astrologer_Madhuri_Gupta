@@ -7,20 +7,19 @@ vi.mock('../../src/site/BookingProduct.jsx',async()=>{
  const React=await import('react'),Router=await import('react-router-dom');
  const {createReactBindings}=await import('../../../appointment-system/browser/react-bindings.mjs');
  const {surfaces}=await import('../../../appointment-settings/project.json');
- return createReactBindings(React,Router,{surfaces,state:{subscribe:fn=>{model.listeners.add(fn);return()=>model.listeners.delete(fn);},getSnapshot:()=>model.snapshot,getServerSnapshot:()=>model.snapshot,start:()=>()=>{},refresh:async()=>{}}});
+ return createReactBindings(React,Router,{surfaces,state:{subscribe:fn=>{model.listeners.add(fn);return()=>model.listeners.delete(fn);},getSnapshot:()=>model.snapshot,getServerSnapshot:()=>model.snapshot,start:()=>()=>{},setProfile:()=>{},refresh:async()=>{}}});
 });
 import Home from '../../src/pages/Home.jsx';
 import About from '../../src/pages/About.jsx';
 import {SiteHeader,SiteFooter} from '../../src/site/SiteFrame.jsx';
 import {mountHeroBand} from '../../src/site/hero-band-motion.mjs';
 import {mountAboutLayout} from '../../src/site/about-layout.mjs';
-import {titleFor} from '../../src/site/page-metadata.mjs';
 let root,host;
-function Recorder(){model.location=useLocation();return null;}
+function Recorder(){const location=useLocation();model.location=location;React.useLayoutEffect(()=>{window.history.replaceState({},'',location.pathname+location.search);},[location]);return null;}
 async function render(Page,path){await act(async()=>root.render(<MemoryRouter initialEntries={[path]}><SiteHeader/><Page/><SiteFooter/><Recorder/></MemoryRouter>));}
 async function click(node,extra={}){await act(async()=>node.dispatchEvent(new MouseEvent('click',{bubbles:true,cancelable:true,button:0,...extra})));}
 beforeEach(()=>{
- globalThis.IS_REACT_ACT_ENVIRONMENT=true;model.snapshot={enabled:true,verified:true,checking:false,retained_on_epoch:'test-only'};model.listeners.clear();
+ globalThis.IS_REACT_ACT_ENVIRONMENT=true;document.title='Shell owns page identity';model.snapshot={enabled:true,verified:true,checking:false,retained_on_epoch:'test-only'};model.listeners.clear();
  host=document.createElement('div');document.body.append(host);root=createRoot(host);
  vi.stubGlobal('matchMedia',()=>({matches:true,addEventListener:vi.fn(),removeEventListener:vi.fn()}));
  vi.stubGlobal('ResizeObserver',class{observe(){}disconnect(){}});
@@ -30,7 +29,7 @@ beforeEach(()=>{
 afterEach(async()=>{await act(async()=>root.unmount());host.remove();vi.restoreAllMocks();vi.unstubAllGlobals();delete document.fonts;});
 
 test.each([[Home,'/','Sarsa Jyotish Sansthan'],[About,'/about','Madhuri Gupta']])('approved hero has one meaningful title and all original lower content, in both booking modes',async(Page,path,title)=>{
- await render(Page,path);expect(host.querySelectorAll('h1')).toHaveLength(1);expect(host.querySelector('h1').textContent).toBe(title);expect(document.title).toBe(titleFor(path));
+ await render(Page,path);expect(host.querySelectorAll('h1')).toHaveLength(1);expect(host.querySelector('h1').textContent).toBe(title);expect(document.title).toBe('Shell owns page identity');
  expect(host.querySelector('[data-hero-band]').style.opacity).toBe('1');expect(host.textContent).toContain('15+');expect(host.querySelector('[data-motion-fallback]')).toBeNull();
  const logo=host.querySelector('.sarsa-header img');expect(logo.getAttribute('src')).toBe('/media/sarsa-kundli-lotus-logo-128.png');expect(logo.getAttribute('alt')).toBe('');expect(host.querySelector('.brand-copy').textContent).toBe('SarsaJYOTISH SANSTHAN');
  expect(host.querySelectorAll('.sarsa-header nav a')).toHaveLength(4);expect(host.querySelector('a[href="/testimonials"]')).not.toBeNull();

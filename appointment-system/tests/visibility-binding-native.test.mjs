@@ -12,7 +12,7 @@ test('plain HTML binding hides all marked booking content and updates inserted c
  const server=createServer(async(req,res)=>{try{
   const path=new URL(req.url,'http://fixture.invalid').pathname;
   if(path==='/api/service-state'){res.setHeader('content-type','application/json');return res.end(JSON.stringify({enabled,activation_epoch:'11111111-1111-4111-8111-111111111111'}));}
-  if(['/visibility.js','/product-state.mjs'].includes(path)){res.setHeader('content-type','text/javascript');return res.end(await readFile(resolve(root,path.slice(1)),'utf8'));}
+  if(['/visibility.js','/visibility.mjs','/product-state.mjs'].includes(path)){res.setHeader('content-type','text/javascript');return res.end(await readFile(resolve(root,path.slice(1)),'utf8'));}
   res.setHeader('content-type','text/html');res.end('<!doctype html><main><section id="booking" data-booking-only>Book online</section><p id="copy" data-booking-on="Book online" data-booking-off="Call the practice">Call the practice</p><p id="ordinary">Ordinary enquiries remain available</p></main><script type="module" src="/visibility.js"></script>');
  }catch(error){errors.push(error.message);res.destroy();}});
  await new Promise(resolve=>server.listen(0,'127.0.0.1',resolve));const origin='http://127.0.0.1:'+server.address().port;

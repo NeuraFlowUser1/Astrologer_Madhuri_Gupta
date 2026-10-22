@@ -8,8 +8,8 @@ import ServiceVisualStory from '../site/ServiceVisualStory.jsx';
 const consultation=catalogue.services.find(s=>s.id==='kundli-prediction');
 export default function KundliPrediction(){
  const root=useRef(null),navigate=useNavigate();
- useLayoutEffect(()=>{document.title="Kundli Prediction | Sarsa Jyotish Sansthan";return mountKundliPredictionMotion(root.current);},[]);
- function actions(event){if(event.defaultPrevented)return;const el=event.target.closest('[data-contact],#enquire,a');if(!el)return;if(el.matches('[data-contact]')){event.preventDefault();navigate('/contact');}else if(el.id==='enquire'){event.preventDefault();navigate('/booking?service=kundli-prediction');}else if(el.getAttribute('href')?.startsWith('/')&&!event.ctrlKey&&!event.metaKey&&!event.shiftKey&&event.button===0){event.preventDefault();navigate(el.getAttribute('href'));}}
+ useLayoutEffect(()=>{return mountKundliPredictionMotion(root.current);},[]);
+ function actions(event){if(event.defaultPrevented)return;const el=event.target.closest('[data-contact],#enquire,a');if(!el)return;if(el.matches('[data-contact]')){event.preventDefault();navigate('/contact');}else if(el.id==='enquire'){event.preventDefault();navigate('/booking?service=kundli-prediction');}else if(el.getAttribute('href')?.startsWith('/')&&!event.ctrlKey&&!event.metaKey&&!event.shiftKey&&!event.altKey&&event.button===0&&!el.hasAttribute('download')&&(!el.target||el.target==='_self')){event.preventDefault();navigate(el.getAttribute('href'));}}
  return <div className="sarsa-kundli settled" ref={root} onClick={actions}>
 <section className="hero wrap" id="welcome" data-kundli-scene="welcome">
 <div className="hero-copy">
@@ -246,7 +246,7 @@ export default function KundliPrediction(){
 <em>{"Explore your kundli."}</em>
 </h2>
 <p>{"Explore a Kundli Prediction consultation with Madhuri Gupta."}</p>
-<BookingButton className="button" id="enquire">{"Book Kundli Prediction "}<span aria-hidden="true">{"\u2197"}</span>
+<BookingButton onClick={()=>navigate('/booking?service=kundli-prediction')} className="button" id="enquire">{"Book Kundli Prediction "}<span aria-hidden="true">{"\u2197"}</span>
 </BookingButton>
 <BookingOnly><p className="small">{"Choose a time and review your details before payment."}</p></BookingOnly>
 <button className="text-link contact-link" data-contact>{"Ask a question before booking \u2192"}</button>

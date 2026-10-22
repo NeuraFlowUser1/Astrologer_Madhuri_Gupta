@@ -39,3 +39,6 @@
 @media(max-width:650px){.approach-scene{margin-top:41px}}
 @media(prefers-reduced-motion:reduce){.approach-scene article,.moving-paper,.approach-action,.button,.text-link,.contact-button,.row-actions a{transition:none!important}.approach-scene article:hover,.approach-action:hover,.button:hover,.text-link:hover,.contact-button:hover,.row-actions a:hover{translate:none!important}}
 }
+
+/* Transform-only movement retains the original portrait crop and scene bounds. */
+.sarsa-about .portrait-plane[data-portrait-animating] #portrait{left:0;top:0;width:100%;height:auto;max-width:none;object-fit:fill;transform-origin:0 0}

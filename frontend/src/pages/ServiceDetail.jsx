@@ -6,11 +6,11 @@ import {mountServiceMotion} from '../site/service-motion.mjs';
 import '../site/services.css';
 import ServiceVisualStory from '../site/ServiceVisualStory.jsx';
 const content={
- 'kundli-matching':{word:'Before marriage.',line:'Look at both kundlis.',intro:'Planning marriage? Bring both birth charts and your questions about compatibility.',heading:'Understanding two kundlis.',points:['The questions you share','The context each person brings','What you would like to understand'],prepare:'Have the birth details you know for both people available. If any details are uncertain, ask the practice what is useful to bring.',art:'matching'},
+ 'kundli-matching':{word:'Before marriage.',line:'Look at both kundlis.',intro:'Planning marriage? Bring both birth charts and your questions about compatibility.',heading:'Understanding two kundlis.',points:['The questions you share','The context each person brings','What you would like to understand'],prepare:'Bring the birth details of both people. If a time is uncertain, ask the practice before booking.',art:'matching'},
  'vastu-consultation':{word:'The spaces around you.',line:'A Vastu perspective.',intro:'Explore questions about your home or workspace through a Vastu consultation.',heading:'Begin with the space you know.',points:['How you use the space','The questions you have','The context for your consultation'],prepare:'Make a note of the space you would like to discuss. Contact the practice to check whether a layout or photographs would be useful for your appointment.',art:'vastu'},
  numerology:{word:'Names. Dates. Numbers.',line:'Let’s understand them.',intro:'A personal conversation about the numbers linked to your names and dates.',heading:'Start with what matters to you.',points:['The name or date you want to discuss','The question behind your interest','The perspective you are looking for'],prepare:'Have the names and dates you would like to discuss available. Write down your questions so the conversation can focus on what matters to you.',art:'numerology'}
 };
-function Detail({service,data}){const root=useRef(null);useLayoutEffect(()=>{document.title=service.name+' | Sarsa Jyotish Sansthan';return mountServiceMotion(root.current,data.art);},[service.name,data.art]);return <div className={'sarsa-services detail-'+data.art} ref={root}>
+function Detail({service,data}){const root=useRef(null);useLayoutEffect(()=>{return mountServiceMotion(root.current,data.art);},[service.name,data.art]);return <div className={'sarsa-services detail-'+data.art} ref={root}>
 <section className="detail-hero" data-service-scene="hero">
 <div>
 <p className="eyebrow">{service.name.toUpperCase()}</p>
@@ -54,7 +54,7 @@ function Detail({service,data}){const root=useRef(null);useLayoutEffect(()=>{doc
 </h2>
 </div>
 <div data-copy>
-<p>{data.prepare}</p>
+<p>{data.prepare}</p>{service.id==='numerology'&&<p>This consultation focuses on names and dates. For broader birth-chart questions, <Link to="/services/kundli-prediction">read about Kundli Prediction</Link>.</p>}
 <p><BookingCopy off="Ask the practice what to prepare when you send your question.">All appointment times are shown in India time. After payment is verified and the appointment is confirmed, your Google Meet details will be prepared.</BookingCopy></p>
 <Link to="/contact">Ask the practice before booking ↗</Link>
 </div>

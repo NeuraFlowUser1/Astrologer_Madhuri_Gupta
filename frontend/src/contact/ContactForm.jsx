@@ -6,6 +6,8 @@ export default function ContactForm({topicRequest}){
  const {enabled}=useBookingProduct();
  const flow=useEnquiry(),result=useRef(null),codeInput=useRef(null);
  const [draft,setDraft]=useState({name:'',email:'',phone:'',subject:'Before booking',reference:'',message:''});
+ const [bound,setBound]=useState(false);
+ useEffect(()=>{setBound(true);},[]);
  const [code,setCode]=useState(''),[localError,setLocalError]=useState(''),consumed=useRef(null);
  useEffect(()=>{
   if(!topicRequest||consumed.current===topicRequest.id)return;
@@ -30,8 +32,8 @@ export default function ContactForm({topicRequest}){
  const delivery=flow.receipt?.verification_delivery;
  const received=flow.receipt?.state==='received';
  return <>
-  {!received&&<form id="enquiry" onSubmit={submit} aria-busy={flow.busy}>
-   <fieldset disabled={disabled||flow.blocked}>
+  {!received&&<form id="enquiry" method="post" onSubmit={submit} aria-busy={flow.busy} aria-describedby="form-status">
+   <fieldset disabled={!bound||disabled||flow.blocked}>
     {!flow.started?<div id="writing"><div className="fields">
      <div className="field"><label htmlFor="visitor-name">Your name <small>Required</small></label><input id="visitor-name" name="name" autoComplete="name" maxLength={100} minLength={2} required value={draft.name} onChange={change}/></div>
      <div className="field"><label htmlFor="visitor-email">Email address <small>Required</small></label><input id="visitor-email" name="email" type="email" autoComplete="email" maxLength={254} required value={draft.email} onChange={change}/></div>
@@ -53,6 +55,7 @@ export default function ContactForm({topicRequest}){
    </fieldset>
   </form>}
   {received&&<div id="outcome" ref={result} tabIndex={-1}><div className="state-seal" aria-hidden="true">✓</div><p className="eyebrow">ENQUIRY RECEIVED</p><h3>Your note.<br/><em>Safely received.</em></h3><p>Your enquiry has been saved for the practice. This does not reserve an appointment.</p><p className="enquiry-reference">Reference: <span>{flow.receipt.request_id}</span></p>{enabled&&<a className="button" href="/booking">Choose a consultation ↗</a>}<button type="button" className="text-button" disabled={flow.busy||flow.blocked} onClick={async()=>{if(await flow.restart())setDraft({name:'',email:'',phone:'',subject:'Before booking',reference:'',message:''});}}>Write another enquiry</button></div>}
+  <p className="form-help">You can also <a href="mailto:sarsajyotish@gmail.com">email the practice</a>.</p>
   <p id="form-status" role="status" aria-live="polite">{localError||flow.error||(flow.busy?'Checking your enquiry…':'')}</p>
   {(flow.error||flow.blocked||flow.receipt?.state==='locked'||flow.receipt?.state==='expired')&&<p className="form-help">Need help? <a href="mailto:sarsajyotish@gmail.com">Email the practice</a>. Do not send payment or bank details.</p>}
  </>;

@@ -1,0 +1,1746 @@
+{
+  "inventory": 62,
+  "files": 62,
+  "threshold": 90,
+  "excluded": [],
+  "totals": {
+    "lines": {
+      "total": 1161,
+      "covered": 1139,
+      "skipped": 0,
+      "pct": 98.1
+    },
+    "statements": {
+      "total": 2674,
+      "covered": 2555,
+      "skipped": 0,
+      "pct": 95.54
+    },
+    "functions": {
+      "total": 621,
+      "covered": 588,
+      "skipped": 0,
+      "pct": 94.68
+    },
+    "branches": {
+      "total": 1606,
+      "covered": 1453,
+      "skipped": 0,
+      "pct": 90.47
+    },
+    "branchesTrue": {
+      "total": 0,
+      "covered": 0,
+      "skipped": 0,
+      "pct": "Unknown"
+    }
+  },
+  "owners": [
+    {
+      "file": "proxy.js",
+      "lines": {
+        "total": 0,
+        "covered": 0,
+        "skipped": 0,
+        "pct": 100
+      },
+      "functions": {
+        "total": 0,
+        "covered": 0,
+        "skipped": 0,
+        "pct": 100
+      },
+      "statements": {
+        "total": 0,
+        "covered": 0,
+        "skipped": 0,
+        "pct": 100
+      },
+      "branches": {
+        "total": 0,
+        "covered": 0,
+        "skipped": 0,
+        "pct": 100
+      }
+    },
+    {
+      "file": "scripts/check-public-site.mjs",
+      "lines": {
+        "total": 37,
+        "covered": 37,
+        "skipped": 0,
+        "pct": 100
+      },
+      "functions": {
+        "total": 17,
+        "covered": 17,
+        "skipped": 0,
+        "pct": 100
+      },
+      "statements": {
+        "total": 70,
+        "covered": 69,
+        "skipped": 0,
+        "pct": 98.57
+      },
+      "branches": {
+        "total": 19,
+        "covered": 18,
+        "skipped": 0,
+        "pct": 94.73
+      }
+    },
+    {
+      "file": "scripts/public-pages.mjs",
+      "lines": {
+        "total": 17,
+        "covered": 17,
+        "skipped": 0,
+        "pct": 100
+      },
+      "functions": {
+        "total": 3,
+        "covered": 3,
+        "skipped": 0,
+        "pct": 100
+      },
+      "statements": {
+        "total": 26,
+        "covered": 24,
+        "skipped": 0,
+        "pct": 92.3
+      },
+      "branches": {
+        "total": 10,
+        "covered": 8,
+        "skipped": 0,
+        "pct": 80
+      }
+    },
+    {
+      "file": "src/App.jsx",
+      "lines": {
+        "total": 18,
+        "covered": 18,
+        "skipped": 0,
+        "pct": 100
+      },
+      "functions": {
+        "total": 11,
+        "covered": 10,
+        "skipped": 0,
+        "pct": 90.9
+      },
+      "statements": {
+        "total": 31,
+        "covered": 30,
+        "skipped": 0,
+        "pct": 96.77
+      },
+      "branches": {
+        "total": 4,
+        "covered": 4,
+        "skipped": 0,
+        "pct": 100
+      }
+    },
+    {
+      "file": "src/booking/booking-layout.mjs",
+      "lines": {
+        "total": 43,
+        "covered": 43,
+        "skipped": 0,
+        "pct": 100
+      },
+      "functions": {
+        "total": 28,
+        "covered": 28,
+        "skipped": 0,
+        "pct": 100
+      },
+      "statements": {
+        "total": 158,
+        "covered": 156,
+        "skipped": 0,
+        "pct": 98.73
+      },
+      "branches": {
+        "total": 89,
+        "covered": 84,
+        "skipped": 0,
+        "pct": 94.38
+      }
+    },
+    {
+      "file": "src/booking/booking-ui.jsx",
+      "lines": {
+        "total": 14,
+        "covered": 11,
+        "skipped": 0,
+        "pct": 78.57
+      },
+      "functions": {
+        "total": 7,
+        "covered": 5,
+        "skipped": 0,
+        "pct": 71.42
+      },
+      "statements": {
+        "total": 22,
+        "covered": 18,
+        "skipped": 0,
+        "pct": 81.81
+      },
+      "branches": {
+        "total": 15,
+        "covered": 10,
+        "skipped": 0,
+        "pct": 66.66
+      }
+    },
+    {
+      "file": "src/booking/browser.mjs",
+      "lines": {
+        "total": 1,
+        "covered": 1,
+        "skipped": 0,
+        "pct": 100
+      },
+      "functions": {
+        "total": 0,
+        "covered": 0,
+        "skipped": 0,
+        "pct": 100
+      },
+      "statements": {
+        "total": 1,
+        "covered": 1,
+        "skipped": 0,
+        "pct": 100
+      },
+      "branches": {
+        "total": 0,
+        "covered": 0,
+        "skipped": 0,
+        "pct": 100
+      }
+    },
+    {
+      "file": "src/booking/payment-recovery.mjs",
+      "lines": {
+        "total": 1,
+        "covered": 1,
+        "skipped": 0,
+        "pct": 100
+      },
+      "functions": {
+        "total": 0,
+        "covered": 0,
+        "skipped": 0,
+        "pct": 100
+      },
+      "statements": {
+        "total": 1,
+        "covered": 1,
+        "skipped": 0,
+        "pct": 100
+      },
+      "branches": {
+        "total": 0,
+        "covered": 0,
+        "skipped": 0,
+        "pct": 100
+      }
+    },
+    {
+      "file": "src/booking/protocol.mjs",
+      "lines": {
+        "total": 0,
+        "covered": 0,
+        "skipped": 0,
+        "pct": 100
+      },
+      "functions": {
+        "total": 0,
+        "covered": 0,
+        "skipped": 0,
+        "pct": 100
+      },
+      "statements": {
+        "total": 0,
+        "covered": 0,
+        "skipped": 0,
+        "pct": 100
+      },
+      "branches": {
+        "total": 0,
+        "covered": 0,
+        "skipped": 0,
+        "pct": 100
+      }
+    },
+    {
+      "file": "src/booking/useBooking.jsx",
+      "lines": {
+        "total": 1,
+        "covered": 1,
+        "skipped": 0,
+        "pct": 100
+      },
+      "functions": {
+        "total": 0,
+        "covered": 0,
+        "skipped": 0,
+        "pct": 100
+      },
+      "statements": {
+        "total": 1,
+        "covered": 1,
+        "skipped": 0,
+        "pct": 100
+      },
+      "branches": {
+        "total": 0,
+        "covered": 0,
+        "skipped": 0,
+        "pct": 100
+      }
+    },
+    {
+      "file": "src/contact/ContactForm.jsx",
+      "lines": {
+        "total": 28,
+        "covered": 28,
+        "skipped": 0,
+        "pct": 100
+      },
+      "functions": {
+        "total": 12,
+        "covered": 12,
+        "skipped": 0,
+        "pct": 100
+      },
+      "statements": {
+        "total": 53,
+        "covered": 53,
+        "skipped": 0,
+        "pct": 100
+      },
+      "branches": {
+        "total": 84,
+        "covered": 84,
+        "skipped": 0,
+        "pct": 100
+      }
+    },
+    {
+      "file": "src/contact/motion.mjs",
+      "lines": {
+        "total": 88,
+        "covered": 88,
+        "skipped": 0,
+        "pct": 100
+      },
+      "functions": {
+        "total": 37,
+        "covered": 36,
+        "skipped": 0,
+        "pct": 97.29
+      },
+      "statements": {
+        "total": 202,
+        "covered": 190,
+        "skipped": 0,
+        "pct": 94.05
+      },
+      "branches": {
+        "total": 83,
+        "covered": 63,
+        "skipped": 0,
+        "pct": 75.9
+      }
+    },
+    {
+      "file": "src/contact/useEnquiry.jsx",
+      "lines": {
+        "total": 2,
+        "covered": 2,
+        "skipped": 0,
+        "pct": 100
+      },
+      "functions": {
+        "total": 1,
+        "covered": 1,
+        "skipped": 0,
+        "pct": 100
+      },
+      "statements": {
+        "total": 3,
+        "covered": 3,
+        "skipped": 0,
+        "pct": 100
+      },
+      "branches": {
+        "total": 0,
+        "covered": 0,
+        "skipped": 0,
+        "pct": 100
+      }
+    },
+    {
+      "file": "src/main.jsx",
+      "lines": {
+        "total": 10,
+        "covered": 10,
+        "skipped": 0,
+        "pct": 100
+      },
+      "functions": {
+        "total": 3,
+        "covered": 3,
+        "skipped": 0,
+        "pct": 100
+      },
+      "statements": {
+        "total": 14,
+        "covered": 14,
+        "skipped": 0,
+        "pct": 100
+      },
+      "branches": {
+        "total": 6,
+        "covered": 5,
+        "skipped": 0,
+        "pct": 83.33
+      }
+    },
+    {
+      "file": "src/pages/About.jsx",
+      "lines": {
+        "total": 7,
+        "covered": 7,
+        "skipped": 0,
+        "pct": 100
+      },
+      "functions": {
+        "total": 7,
+        "covered": 7,
+        "skipped": 0,
+        "pct": 100
+      },
+      "statements": {
+        "total": 19,
+        "covered": 19,
+        "skipped": 0,
+        "pct": 100
+      },
+      "branches": {
+        "total": 4,
+        "covered": 3,
+        "skipped": 0,
+        "pct": 75
+      }
+    },
+    {
+      "file": "src/pages/Booking.jsx",
+      "lines": {
+        "total": 58,
+        "covered": 56,
+        "skipped": 0,
+        "pct": 96.55
+      },
+      "functions": {
+        "total": 54,
+        "covered": 50,
+        "skipped": 0,
+        "pct": 92.59
+      },
+      "statements": {
+        "total": 125,
+        "covered": 120,
+        "skipped": 0,
+        "pct": 96
+      },
+      "branches": {
+        "total": 215,
+        "covered": 191,
+        "skipped": 0,
+        "pct": 88.83
+      }
+    },
+    {
+      "file": "src/pages/BookingAccess.jsx",
+      "lines": {
+        "total": 1,
+        "covered": 1,
+        "skipped": 0,
+        "pct": 100
+      },
+      "functions": {
+        "total": 1,
+        "covered": 1,
+        "skipped": 0,
+        "pct": 100
+      },
+      "statements": {
+        "total": 1,
+        "covered": 1,
+        "skipped": 0,
+        "pct": 100
+      },
+      "branches": {
+        "total": 0,
+        "covered": 0,
+        "skipped": 0,
+        "pct": 100
+      }
+    },
+    {
+      "file": "src/pages/BookingReceipt.jsx",
+      "lines": {
+        "total": 8,
+        "covered": 5,
+        "skipped": 0,
+        "pct": 62.5
+      },
+      "functions": {
+        "total": 6,
+        "covered": 3,
+        "skipped": 0,
+        "pct": 50
+      },
+      "statements": {
+        "total": 12,
+        "covered": 8,
+        "skipped": 0,
+        "pct": 66.66
+      },
+      "branches": {
+        "total": 17,
+        "covered": 16,
+        "skipped": 0,
+        "pct": 94.11
+      }
+    },
+    {
+      "file": "src/pages/ContactPage.jsx",
+      "lines": {
+        "total": 14,
+        "covered": 11,
+        "skipped": 0,
+        "pct": 78.57
+      },
+      "functions": {
+        "total": 7,
+        "covered": 4,
+        "skipped": 0,
+        "pct": 57.14
+      },
+      "statements": {
+        "total": 23,
+        "covered": 16,
+        "skipped": 0,
+        "pct": 69.56
+      },
+      "branches": {
+        "total": 10,
+        "covered": 8,
+        "skipped": 0,
+        "pct": 80
+      }
+    },
+    {
+      "file": "src/pages/Home.jsx",
+      "lines": {
+        "total": 5,
+        "covered": 5,
+        "skipped": 0,
+        "pct": 100
+      },
+      "functions": {
+        "total": 5,
+        "covered": 5,
+        "skipped": 0,
+        "pct": 100
+      },
+      "statements": {
+        "total": 26,
+        "covered": 24,
+        "skipped": 0,
+        "pct": 92.3
+      },
+      "branches": {
+        "total": 19,
+        "covered": 17,
+        "skipped": 0,
+        "pct": 89.47
+      }
+    },
+    {
+      "file": "src/pages/KundliPrediction.jsx",
+      "lines": {
+        "total": 6,
+        "covered": 6,
+        "skipped": 0,
+        "pct": 100
+      },
+      "functions": {
+        "total": 5,
+        "covered": 5,
+        "skipped": 0,
+        "pct": 100
+      },
+      "statements": {
+        "total": 22,
+        "covered": 20,
+        "skipped": 0,
+        "pct": 90.9
+      },
+      "branches": {
+        "total": 19,
+        "covered": 17,
+        "skipped": 0,
+        "pct": 89.47
+      }
+    },
+    {
+      "file": "src/pages/PolicyPage.jsx",
+      "lines": {
+        "total": 4,
+        "covered": 4,
+        "skipped": 0,
+        "pct": 100
+      },
+      "functions": {
+        "total": 3,
+        "covered": 3,
+        "skipped": 0,
+        "pct": 100
+      },
+      "statements": {
+        "total": 7,
+        "covered": 7,
+        "skipped": 0,
+        "pct": 100
+      },
+      "branches": {
+        "total": 4,
+        "covered": 4,
+        "skipped": 0,
+        "pct": 100
+      }
+    },
+    {
+      "file": "src/pages/PrashnaKundali.jsx",
+      "lines": {
+        "total": 21,
+        "covered": 21,
+        "skipped": 0,
+        "pct": 100
+      },
+      "functions": {
+        "total": 17,
+        "covered": 16,
+        "skipped": 0,
+        "pct": 94.11
+      },
+      "statements": {
+        "total": 61,
+        "covered": 57,
+        "skipped": 0,
+        "pct": 93.44
+      },
+      "branches": {
+        "total": 36,
+        "covered": 32,
+        "skipped": 0,
+        "pct": 88.88
+      }
+    },
+    {
+      "file": "src/pages/ServiceDetail.jsx",
+      "lines": {
+        "total": 4,
+        "covered": 4,
+        "skipped": 0,
+        "pct": 100
+      },
+      "functions": {
+        "total": 5,
+        "covered": 5,
+        "skipped": 0,
+        "pct": 100
+      },
+      "statements": {
+        "total": 11,
+        "covered": 11,
+        "skipped": 0,
+        "pct": 100
+      },
+      "branches": {
+        "total": 10,
+        "covered": 10,
+        "skipped": 0,
+        "pct": 100
+      }
+    },
+    {
+      "file": "src/pages/Services.jsx",
+      "lines": {
+        "total": 5,
+        "covered": 5,
+        "skipped": 0,
+        "pct": 100
+      },
+      "functions": {
+        "total": 5,
+        "covered": 5,
+        "skipped": 0,
+        "pct": 100
+      },
+      "statements": {
+        "total": 8,
+        "covered": 8,
+        "skipped": 0,
+        "pct": 100
+      },
+      "branches": {
+        "total": 8,
+        "covered": 8,
+        "skipped": 0,
+        "pct": 100
+      }
+    },
+    {
+      "file": "src/pages/Testimonials.jsx",
+      "lines": {
+        "total": 44,
+        "covered": 44,
+        "skipped": 0,
+        "pct": 100
+      },
+      "functions": {
+        "total": 42,
+        "covered": 42,
+        "skipped": 0,
+        "pct": 100
+      },
+      "statements": {
+        "total": 84,
+        "covered": 84,
+        "skipped": 0,
+        "pct": 100
+      },
+      "branches": {
+        "total": 80,
+        "covered": 78,
+        "skipped": 0,
+        "pct": 97.5
+      }
+    },
+    {
+      "file": "src/render-public.jsx",
+      "lines": {
+        "total": 6,
+        "covered": 6,
+        "skipped": 0,
+        "pct": 100
+      },
+      "functions": {
+        "total": 2,
+        "covered": 2,
+        "skipped": 0,
+        "pct": 100
+      },
+      "statements": {
+        "total": 9,
+        "covered": 8,
+        "skipped": 0,
+        "pct": 88.88
+      },
+      "branches": {
+        "total": 8,
+        "covered": 7,
+        "skipped": 0,
+        "pct": 87.5
+      }
+    },
+    {
+      "file": "src/site/BackToTop.jsx",
+      "lines": {
+        "total": 29,
+        "covered": 29,
+        "skipped": 0,
+        "pct": 100
+      },
+      "functions": {
+        "total": 12,
+        "covered": 12,
+        "skipped": 0,
+        "pct": 100
+      },
+      "statements": {
+        "total": 69,
+        "covered": 69,
+        "skipped": 0,
+        "pct": 100
+      },
+      "branches": {
+        "total": 40,
+        "covered": 40,
+        "skipped": 0,
+        "pct": 100
+      }
+    },
+    {
+      "file": "src/site/BookingOrnament.jsx",
+      "lines": {
+        "total": 3,
+        "covered": 3,
+        "skipped": 0,
+        "pct": 100
+      },
+      "functions": {
+        "total": 2,
+        "covered": 2,
+        "skipped": 0,
+        "pct": 100
+      },
+      "statements": {
+        "total": 4,
+        "covered": 4,
+        "skipped": 0,
+        "pct": 100
+      },
+      "branches": {
+        "total": 0,
+        "covered": 0,
+        "skipped": 0,
+        "pct": 100
+      }
+    },
+    {
+      "file": "src/site/BookingProduct.jsx",
+      "lines": {
+        "total": 1,
+        "covered": 1,
+        "skipped": 0,
+        "pct": 100
+      },
+      "functions": {
+        "total": 0,
+        "covered": 0,
+        "skipped": 0,
+        "pct": 100
+      },
+      "statements": {
+        "total": 1,
+        "covered": 1,
+        "skipped": 0,
+        "pct": 100
+      },
+      "branches": {
+        "total": 0,
+        "covered": 0,
+        "skipped": 0,
+        "pct": 100
+      }
+    },
+    {
+      "file": "src/site/HeroDetails.jsx",
+      "lines": {
+        "total": 5,
+        "covered": 5,
+        "skipped": 0,
+        "pct": 100
+      },
+      "functions": {
+        "total": 7,
+        "covered": 7,
+        "skipped": 0,
+        "pct": 100
+      },
+      "statements": {
+        "total": 9,
+        "covered": 9,
+        "skipped": 0,
+        "pct": 100
+      },
+      "branches": {
+        "total": 4,
+        "covered": 4,
+        "skipped": 0,
+        "pct": 100
+      }
+    },
+    {
+      "file": "src/site/MarginArt.jsx",
+      "lines": {
+        "total": 22,
+        "covered": 22,
+        "skipped": 0,
+        "pct": 100
+      },
+      "functions": {
+        "total": 8,
+        "covered": 8,
+        "skipped": 0,
+        "pct": 100
+      },
+      "statements": {
+        "total": 57,
+        "covered": 57,
+        "skipped": 0,
+        "pct": 100
+      },
+      "branches": {
+        "total": 27,
+        "covered": 27,
+        "skipped": 0,
+        "pct": 100
+      }
+    },
+    {
+      "file": "src/site/PrashnaArtwork.jsx",
+      "lines": {
+        "total": 2,
+        "covered": 2,
+        "skipped": 0,
+        "pct": 100
+      },
+      "functions": {
+        "total": 1,
+        "covered": 1,
+        "skipped": 0,
+        "pct": 100
+      },
+      "statements": {
+        "total": 6,
+        "covered": 6,
+        "skipped": 0,
+        "pct": 100
+      },
+      "branches": {
+        "total": 21,
+        "covered": 21,
+        "skipped": 0,
+        "pct": 100
+      }
+    },
+    {
+      "file": "src/site/ServiceArtwork.jsx",
+      "lines": {
+        "total": 3,
+        "covered": 3,
+        "skipped": 0,
+        "pct": 100
+      },
+      "functions": {
+        "total": 1,
+        "covered": 1,
+        "skipped": 0,
+        "pct": 100
+      },
+      "statements": {
+        "total": 4,
+        "covered": 4,
+        "skipped": 0,
+        "pct": 100
+      },
+      "branches": {
+        "total": 4,
+        "covered": 4,
+        "skipped": 0,
+        "pct": 100
+      }
+    },
+    {
+      "file": "src/site/ServiceMedia.jsx",
+      "lines": {
+        "total": 9,
+        "covered": 8,
+        "skipped": 0,
+        "pct": 88.88
+      },
+      "functions": {
+        "total": 6,
+        "covered": 5,
+        "skipped": 0,
+        "pct": 83.33
+      },
+      "statements": {
+        "total": 16,
+        "covered": 12,
+        "skipped": 0,
+        "pct": 75
+      },
+      "branches": {
+        "total": 20,
+        "covered": 15,
+        "skipped": 0,
+        "pct": 75
+      }
+    },
+    {
+      "file": "src/site/ServiceVisualStory.jsx",
+      "lines": {
+        "total": 34,
+        "covered": 31,
+        "skipped": 0,
+        "pct": 91.17
+      },
+      "functions": {
+        "total": 16,
+        "covered": 13,
+        "skipped": 0,
+        "pct": 81.25
+      },
+      "statements": {
+        "total": 75,
+        "covered": 56,
+        "skipped": 0,
+        "pct": 74.66
+      },
+      "branches": {
+        "total": 47,
+        "covered": 26,
+        "skipped": 0,
+        "pct": 55.31
+      }
+    },
+    {
+      "file": "src/site/SiteFrame.jsx",
+      "lines": {
+        "total": 5,
+        "covered": 5,
+        "skipped": 0,
+        "pct": 100
+      },
+      "functions": {
+        "total": 3,
+        "covered": 3,
+        "skipped": 0,
+        "pct": 100
+      },
+      "statements": {
+        "total": 5,
+        "covered": 5,
+        "skipped": 0,
+        "pct": 100
+      },
+      "branches": {
+        "total": 12,
+        "covered": 12,
+        "skipped": 0,
+        "pct": 100
+      }
+    },
+    {
+      "file": "src/site/TestimonialReader.jsx",
+      "lines": {
+        "total": 21,
+        "covered": 21,
+        "skipped": 0,
+        "pct": 100
+      },
+      "functions": {
+        "total": 7,
+        "covered": 7,
+        "skipped": 0,
+        "pct": 100
+      },
+      "statements": {
+        "total": 37,
+        "covered": 37,
+        "skipped": 0,
+        "pct": 100
+      },
+      "branches": {
+        "total": 29,
+        "covered": 28,
+        "skipped": 0,
+        "pct": 96.55
+      }
+    },
+    {
+      "file": "src/site/about-layout.mjs",
+      "lines": {
+        "total": 24,
+        "covered": 24,
+        "skipped": 0,
+        "pct": 100
+      },
+      "functions": {
+        "total": 8,
+        "covered": 8,
+        "skipped": 0,
+        "pct": 100
+      },
+      "statements": {
+        "total": 49,
+        "covered": 49,
+        "skipped": 0,
+        "pct": 100
+      },
+      "branches": {
+        "total": 16,
+        "covered": 16,
+        "skipped": 0,
+        "pct": 100
+      }
+    },
+    {
+      "file": "src/site/about-motion.mjs",
+      "lines": {
+        "total": 22,
+        "covered": 22,
+        "skipped": 0,
+        "pct": 100
+      },
+      "functions": {
+        "total": 24,
+        "covered": 24,
+        "skipped": 0,
+        "pct": 100
+      },
+      "statements": {
+        "total": 129,
+        "covered": 129,
+        "skipped": 0,
+        "pct": 100
+      },
+      "branches": {
+        "total": 56,
+        "covered": 56,
+        "skipped": 0,
+        "pct": 100
+      }
+    },
+    {
+      "file": "src/site/about-portrait.mjs",
+      "lines": {
+        "total": 6,
+        "covered": 6,
+        "skipped": 0,
+        "pct": 100
+      },
+      "functions": {
+        "total": 1,
+        "covered": 1,
+        "skipped": 0,
+        "pct": 100
+      },
+      "statements": {
+        "total": 9,
+        "covered": 9,
+        "skipped": 0,
+        "pct": 100
+      },
+      "branches": {
+        "total": 10,
+        "covered": 10,
+        "skipped": 0,
+        "pct": 100
+      }
+    },
+    {
+      "file": "src/site/booking-ornament.mjs",
+      "lines": {
+        "total": 22,
+        "covered": 16,
+        "skipped": 0,
+        "pct": 72.72
+      },
+      "functions": {
+        "total": 8,
+        "covered": 4,
+        "skipped": 0,
+        "pct": 50
+      },
+      "statements": {
+        "total": 51,
+        "covered": 32,
+        "skipped": 0,
+        "pct": 62.74
+      },
+      "branches": {
+        "total": 30,
+        "covered": 14,
+        "skipped": 0,
+        "pct": 46.66
+      }
+    },
+    {
+      "file": "src/site/directory-motion.mjs",
+      "lines": {
+        "total": 16,
+        "covered": 16,
+        "skipped": 0,
+        "pct": 100
+      },
+      "functions": {
+        "total": 7,
+        "covered": 7,
+        "skipped": 0,
+        "pct": 100
+      },
+      "statements": {
+        "total": 31,
+        "covered": 31,
+        "skipped": 0,
+        "pct": 100
+      },
+      "branches": {
+        "total": 2,
+        "covered": 2,
+        "skipped": 0,
+        "pct": 100
+      }
+    },
+    {
+      "file": "src/site/hero-band-motion.mjs",
+      "lines": {
+        "total": 12,
+        "covered": 12,
+        "skipped": 0,
+        "pct": 100
+      },
+      "functions": {
+        "total": 4,
+        "covered": 4,
+        "skipped": 0,
+        "pct": 100
+      },
+      "statements": {
+        "total": 20,
+        "covered": 20,
+        "skipped": 0,
+        "pct": 100
+      },
+      "branches": {
+        "total": 6,
+        "covered": 6,
+        "skipped": 0,
+        "pct": 100
+      }
+    },
+    {
+      "file": "src/site/hero-content.mjs",
+      "lines": {
+        "total": 3,
+        "covered": 3,
+        "skipped": 0,
+        "pct": 100
+      },
+      "functions": {
+        "total": 0,
+        "covered": 0,
+        "skipped": 0,
+        "pct": 100
+      },
+      "statements": {
+        "total": 3,
+        "covered": 3,
+        "skipped": 0,
+        "pct": 100
+      },
+      "branches": {
+        "total": 0,
+        "covered": 0,
+        "skipped": 0,
+        "pct": 100
+      }
+    },
+    {
+      "file": "src/site/home-enhancements.mjs",
+      "lines": {
+        "total": 89,
+        "covered": 89,
+        "skipped": 0,
+        "pct": 100
+      },
+      "functions": {
+        "total": 44,
+        "covered": 44,
+        "skipped": 0,
+        "pct": 100
+      },
+      "statements": {
+        "total": 249,
+        "covered": 241,
+        "skipped": 0,
+        "pct": 96.78
+      },
+      "branches": {
+        "total": 106,
+        "covered": 94,
+        "skipped": 0,
+        "pct": 88.67
+      }
+    },
+    {
+      "file": "src/site/home-motion.mjs",
+      "lines": {
+        "total": 15,
+        "covered": 15,
+        "skipped": 0,
+        "pct": 100
+      },
+      "functions": {
+        "total": 12,
+        "covered": 12,
+        "skipped": 0,
+        "pct": 100
+      },
+      "statements": {
+        "total": 51,
+        "covered": 51,
+        "skipped": 0,
+        "pct": 100
+      },
+      "branches": {
+        "total": 18,
+        "covered": 18,
+        "skipped": 0,
+        "pct": 100
+      }
+    },
+    {
+      "file": "src/site/kundliprediction-motion.mjs",
+      "lines": {
+        "total": 18,
+        "covered": 18,
+        "skipped": 0,
+        "pct": 100
+      },
+      "functions": {
+        "total": 16,
+        "covered": 15,
+        "skipped": 0,
+        "pct": 93.75
+      },
+      "statements": {
+        "total": 65,
+        "covered": 64,
+        "skipped": 0,
+        "pct": 98.46
+      },
+      "branches": {
+        "total": 16,
+        "covered": 14,
+        "skipped": 0,
+        "pct": 87.5
+      }
+    },
+    {
+      "file": "src/site/page-metadata.mjs",
+      "lines": {
+        "total": 37,
+        "covered": 37,
+        "skipped": 0,
+        "pct": 100
+      },
+      "functions": {
+        "total": 18,
+        "covered": 18,
+        "skipped": 0,
+        "pct": 100
+      },
+      "statements": {
+        "total": 80,
+        "covered": 80,
+        "skipped": 0,
+        "pct": 100
+      },
+      "branches": {
+        "total": 43,
+        "covered": 42,
+        "skipped": 0,
+        "pct": 97.67
+      }
+    },
+    {
+      "file": "src/site/prashna-content.mjs",
+      "lines": {
+        "total": 2,
+        "covered": 2,
+        "skipped": 0,
+        "pct": 100
+      },
+      "functions": {
+        "total": 0,
+        "covered": 0,
+        "skipped": 0,
+        "pct": 100
+      },
+      "statements": {
+        "total": 2,
+        "covered": 2,
+        "skipped": 0,
+        "pct": 100
+      },
+      "branches": {
+        "total": 0,
+        "covered": 0,
+        "skipped": 0,
+        "pct": 100
+      }
+    },
+    {
+      "file": "src/site/prashna-motion.mjs",
+      "lines": {
+        "total": 40,
+        "covered": 40,
+        "skipped": 0,
+        "pct": 100
+      },
+      "functions": {
+        "total": 19,
+        "covered": 15,
+        "skipped": 0,
+        "pct": 78.94
+      },
+      "statements": {
+        "total": 106,
+        "covered": 95,
+        "skipped": 0,
+        "pct": 89.62
+      },
+      "branches": {
+        "total": 52,
+        "covered": 49,
+        "skipped": 0,
+        "pct": 94.23
+      }
+    },
+    {
+      "file": "src/site/product-state.mjs",
+      "lines": {
+        "total": 3,
+        "covered": 3,
+        "skipped": 0,
+        "pct": 100
+      },
+      "functions": {
+        "total": 2,
+        "covered": 2,
+        "skipped": 0,
+        "pct": 100
+      },
+      "statements": {
+        "total": 4,
+        "covered": 4,
+        "skipped": 0,
+        "pct": 100
+      },
+      "branches": {
+        "total": 2,
+        "covered": 2,
+        "skipped": 0,
+        "pct": 100
+      }
+    },
+    {
+      "file": "src/site/public-scroll.mjs",
+      "lines": {
+        "total": 76,
+        "covered": 76,
+        "skipped": 0,
+        "pct": 100
+      },
+      "functions": {
+        "total": 21,
+        "covered": 21,
+        "skipped": 0,
+        "pct": 100
+      },
+      "statements": {
+        "total": 132,
+        "covered": 130,
+        "skipped": 0,
+        "pct": 98.48
+      },
+      "branches": {
+        "total": 100,
+        "covered": 95,
+        "skipped": 0,
+        "pct": 95
+      }
+    },
+    {
+      "file": "src/site/routes.mjs",
+      "lines": {
+        "total": 12,
+        "covered": 12,
+        "skipped": 0,
+        "pct": 100
+      },
+      "functions": {
+        "total": 2,
+        "covered": 2,
+        "skipped": 0,
+        "pct": 100
+      },
+      "statements": {
+        "total": 19,
+        "covered": 19,
+        "skipped": 0,
+        "pct": 100
+      },
+      "branches": {
+        "total": 21,
+        "covered": 21,
+        "skipped": 0,
+        "pct": 100
+      }
+    },
+    {
+      "file": "src/site/scenes.mjs",
+      "lines": {
+        "total": 29,
+        "covered": 29,
+        "skipped": 0,
+        "pct": 100
+      },
+      "functions": {
+        "total": 23,
+        "covered": 22,
+        "skipped": 0,
+        "pct": 95.65
+      },
+      "statements": {
+        "total": 103,
+        "covered": 101,
+        "skipped": 0,
+        "pct": 98.05
+      },
+      "branches": {
+        "total": 44,
+        "covered": 41,
+        "skipped": 0,
+        "pct": 93.18
+      }
+    },
+    {
+      "file": "src/site/service-motion.mjs",
+      "lines": {
+        "total": 24,
+        "covered": 24,
+        "skipped": 0,
+        "pct": 100
+      },
+      "functions": {
+        "total": 12,
+        "covered": 12,
+        "skipped": 0,
+        "pct": 100
+      },
+      "statements": {
+        "total": 44,
+        "covered": 44,
+        "skipped": 0,
+        "pct": 100
+      },
+      "branches": {
+        "total": 18,
+        "covered": 18,
+        "skipped": 0,
+        "pct": 100
+      }
+    },
+    {
+      "file": "src/site/service-visual-content.mjs",
+      "lines": {
+        "total": 1,
+        "covered": 1,
+        "skipped": 0,
+        "pct": 100
+      },
+      "functions": {
+        "total": 0,
+        "covered": 0,
+        "skipped": 0,
+        "pct": 100
+      },
+      "statements": {
+        "total": 1,
+        "covered": 1,
+        "skipped": 0,
+        "pct": 100
+      },
+      "branches": {
+        "total": 0,
+        "covered": 0,
+        "skipped": 0,
+        "pct": 100
+      }
+    },
+    {
+      "file": "src/site/service-visual-motion.mjs",
+      "lines": {
+        "total": 38,
+        "covered": 38,
+        "skipped": 0,
+        "pct": 100
+      },
+      "functions": {
+        "total": 17,
+        "covered": 14,
+        "skipped": 0,
+        "pct": 82.35
+      },
+      "statements": {
+        "total": 96,
+        "covered": 91,
+        "skipped": 0,
+        "pct": 94.79
+      },
+      "branches": {
+        "total": 28,
+        "covered": 22,
+        "skipped": 0,
+        "pct": 78.57
+      }
+    },
+    {
+      "file": "src/site/testimonials-content.mjs",
+      "lines": {
+        "total": 1,
+        "covered": 1,
+        "skipped": 0,
+        "pct": 100
+      },
+      "functions": {
+        "total": 0,
+        "covered": 0,
+        "skipped": 0,
+        "pct": 100
+      },
+      "statements": {
+        "total": 1,
+        "covered": 1,
+        "skipped": 0,
+        "pct": 100
+      },
+      "branches": {
+        "total": 0,
+        "covered": 0,
+        "skipped": 0,
+        "pct": 100
+      }
+    },
+    {
+      "file": "src/site/testimonials-model.mjs",
+      "lines": {
+        "total": 18,
+        "covered": 18,
+        "skipped": 0,
+        "pct": 100
+      },
+      "functions": {
+        "total": 15,
+        "covered": 15,
+        "skipped": 0,
+        "pct": 100
+      },
+      "statements": {
+        "total": 27,
+        "covered": 27,
+        "skipped": 0,
+        "pct": 100
+      },
+      "branches": {
+        "total": 26,
+        "covered": 26,
+        "skipped": 0,
+        "pct": 100
+      }
+    },
+    {
+      "file": "src/site/testimonials-motion.mjs",
+      "lines": {
+        "total": 67,
+        "covered": 67,
+        "skipped": 0,
+        "pct": 100
+      },
+      "functions": {
+        "total": 23,
+        "covered": 23,
+        "skipped": 0,
+        "pct": 100
+      },
+      "statements": {
+        "total": 120,
+        "covered": 120,
+        "skipped": 0,
+        "pct": 100
+      },
+      "branches": {
+        "total": 58,
+        "covered": 53,
+        "skipped": 0,
+        "pct": 91.37
+      }
+    },
+    {
+      "file": "vite.config.js",
+      "lines": {
+        "total": 9,
+        "covered": 8,
+        "skipped": 0,
+        "pct": 88.88
+      },
+      "functions": {
+        "total": 4,
+        "covered": 3,
+        "skipped": 0,
+        "pct": 75
+      },
+      "statements": {
+        "total": 9,
+        "covered": 8,
+        "skipped": 0,
+        "pct": 88.88
+      },
+      "branches": {
+        "total": 10,
+        "covered": 10,
+        "skipped": 0,
+        "pct": 100
+      }
+    }
+  ],
+  "joins": [
+    {
+      "source": "coverage/public-site/native-coverage.json",
+      "matched": 2,
+      "unmatched": 0
+    },
+    {
+      "source": "coverage/operating-browser/server-coverage.json",
+      "matched": 3184,
+      "unmatched": 21
+    },
+    {
+      "source": "coverage/operating-browser/browser-coverage.json",
+      "matched": 3219,
+      "unmatched": 23
+    },
+    {
+      "source": "coverage/operating-browser/native-source-coverage.json",
+      "matched": 166,
+      "unmatched": 0
+    },
+    {
+      "source": "coverage/operating-browser/public-build-coverage.json",
+      "matched": 154,
+      "unmatched": 0
+    }
+  ],
+  "rawEvidence": {
+    "file": "frontend/coverage/operating-browser/coverage-audit.json",
+    "sha256": "0ab14ad295e9719a83448311ab3f2c145b3043017a1f723d80e9c3a63778d68e",
+    "scope": "Full source-region joining details remain in ignored local QA; this checked-in receipt retains every working owner and the unchanged complete denominator."
+  }
+}

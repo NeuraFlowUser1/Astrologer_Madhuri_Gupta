@@ -20,7 +20,7 @@ try{
  try{for(const [index,wsl,poll,expected] of [[0,undefined,undefined,false],[1,'Ubuntu',undefined,true],[2,undefined,'1',true]]){
   if(wsl===undefined)delete process.env.WSL_DISTRO_NAME;else process.env.WSL_DISTRO_NAME=wsl;
   if(poll===undefined)delete process.env.SARSA_DEV_POLL;else process.env.SARSA_DEV_POLL=poll;
-  const {default:config}=await import(pathToFileURL(files[1]).href+'?fixture='+index);assert.equal(config.server.watch.usePolling,expected);checks++;
+  const {default:definition}=await import(pathToFileURL(files[1]).href+'?fixture='+index);const config=typeof definition==='function'?definition({isSsrBuild:false}):definition;assert.equal(config.server.watch.usePolling,expected);checks++;
   if(index!==0)continue;let callback,writes=0,body;
   config.server.proxy['/api'].configure({on:(event,fn)=>{assert.equal(event,'error');callback=fn;}});
   callback({code:'ECONNREFUSED'},null,{headersSent:false,writeHead:(code,headers)=>{assert.equal(code,503);assert.equal(headers['Content-Type'],'application/json');writes++;},end:value=>body=value});assert.match(JSON.parse(body).error,/initializing/);checks++;
