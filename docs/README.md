@@ -1,6 +1,6 @@
 # Project 004 — documentation index
 
-Reviewed **23 October 2026** after matching application/Worker/database publication and original ON restoration. This is the maintained application's current reading path. Current feature guides explain behavior/decisions; dated plans and reports preserve exact scope and proof. There is one owner per topic.
+Reviewed **23 October 2026** after the home Vastu refinement and live readback. The matching package/Worker/database baseline and original ON restoration remain the accepted 22 October release. This is the maintained application's current reading path. Current feature guides explain behavior/decisions; dated plans and reports preserve exact scope and proof. There is one owner per topic.
 
 The [19 October client handoff](project-004/2026-10-19-documentation/README.md) publishes the current outer working status/navigation and relevant historical notices alongside this application. Its manifest distinguishes original working text from link-adapted copies; no private storage or application duplicate is included.
 

@@ -1,0 +1,333 @@
+{
+  "date": "2026-10-23",
+  "passed": true,
+  "pageCount": 1,
+  "canvasPixels": [
+    1080,
+    1440
+  ],
+  "pdfPoints": [
+    810,
+    1080
+  ],
+  "links": [
+    {
+      "key": "brand",
+      "url": "https://www.sarsajyotishsansthan.com/",
+      "label": "Visit Sarsa Jyotish Sansthan",
+      "rect": {
+        "x": 60,
+        "y": 48,
+        "width": 960,
+        "height": 108
+      },
+      "pdfRect": [
+        45.0,
+        36.0,
+        765.0,
+        117.0
+      ]
+    },
+    {
+      "key": "name",
+      "url": "https://www.sarsajyotishsansthan.com/about",
+      "label": "by Madhuri Gupta",
+      "rect": {
+        "x": 60,
+        "y": 217,
+        "width": 450.8125,
+        "height": 69.59375
+      },
+      "pdfRect": [
+        45.0,
+        162.75,
+        383.25,
+        215.25
+      ]
+    },
+    {
+      "key": "portrait",
+      "url": "https://www.sarsajyotishsansthan.com/about",
+      "label": "Meet Madhuri Gupta",
+      "rect": {
+        "x": 760,
+        "y": 178,
+        "width": 260,
+        "height": 286
+      },
+      "pdfRect": [
+        570.0,
+        133.5,
+        765.0,
+        348.0
+      ]
+    },
+    {
+      "key": "kundli-matching",
+      "url": "https://www.sarsajyotishsansthan.com/services/kundli-matching",
+      "label": "Kundli Matching \u2014 Marriage and compatibility",
+      "rect": {
+        "x": 60,
+        "y": 482,
+        "width": 960,
+        "height": 110
+      },
+      "pdfRect": [
+        45.0,
+        361.5,
+        765.0,
+        444.0
+      ]
+    },
+    {
+      "key": "kundli-prediction",
+      "url": "https://www.sarsajyotishsansthan.com/services/kundli-prediction",
+      "label": "Kundli Prediction \u2014 Your birth chart and life\u2019s questions",
+      "rect": {
+        "x": 60,
+        "y": 592,
+        "width": 960,
+        "height": 110
+      },
+      "pdfRect": [
+        45.0,
+        444.0,
+        765.0,
+        526.5
+      ]
+    },
+    {
+      "key": "vastu-consultation",
+      "url": "https://www.sarsajyotishsansthan.com/services/vastu-consultation",
+      "label": "Vastu Consultation \u2014 Your home\u2019s directions and layout",
+      "rect": {
+        "x": 60,
+        "y": 702,
+        "width": 960,
+        "height": 110
+      },
+      "pdfRect": [
+        45.0,
+        526.5,
+        765.0,
+        609.0
+      ]
+    },
+    {
+      "key": "numerology",
+      "url": "https://www.sarsajyotishsansthan.com/services/numerology",
+      "label": "Numerology \u2014 Names, dates and numbers",
+      "rect": {
+        "x": 60,
+        "y": 812,
+        "width": 960,
+        "height": 110
+      },
+      "pdfRect": [
+        45.0,
+        609.0,
+        765.0,
+        691.5
+      ]
+    },
+    {
+      "key": "prashna-kundali",
+      "url": "https://www.sarsajyotishsansthan.com/services/prashna-kundali",
+      "label": "Prashna Kundali \u2014 A specific question on your mind",
+      "rect": {
+        "x": 60,
+        "y": 922,
+        "width": 960,
+        "height": 110
+      },
+      "pdfRect": [
+        45.0,
+        691.5,
+        765.0,
+        774.0
+      ]
+    },
+    {
+      "key": "book",
+      "url": "https://www.sarsajyotishsansthan.com/booking",
+      "label": "Book an appointment",
+      "rect": {
+        "x": 60,
+        "y": 1050,
+        "width": 960,
+        "height": 100
+      },
+      "pdfRect": [
+        45.0,
+        787.5,
+        765.0,
+        862.5
+      ]
+    },
+    {
+      "key": "enquire",
+      "url": "https://www.sarsajyotishsansthan.com/contact",
+      "label": "Enquire before booking \u2197",
+      "rect": {
+        "x": 60,
+        "y": 1200,
+        "width": 469,
+        "height": 49.390625
+      },
+      "pdfRect": [
+        45.0,
+        900.0,
+        396.75,
+        936.75
+      ]
+    },
+    {
+      "key": "location",
+      "url": "https://maps.app.goo.gl/CwQftW8iYfxAZFDo8",
+      "label": "Agra \u00b7 View location \u2197",
+      "rect": {
+        "x": 60,
+        "y": 1268,
+        "width": 379,
+        "height": 49.390625
+      },
+      "pdfRect": [
+        45.0,
+        951.0,
+        329.25,
+        987.75
+      ]
+    },
+    {
+      "key": "website",
+      "url": "https://www.sarsajyotishsansthan.com/",
+      "label": "www.sarsajyotishsansthan.com",
+      "rect": {
+        "x": 60,
+        "y": 1345,
+        "width": 500,
+        "height": 46.796875
+      },
+      "pdfRect": [
+        45.0,
+        1008.75,
+        420.0,
+        1044.0
+      ]
+    },
+    {
+      "key": "qr",
+      "url": "https://www.sarsajyotishsansthan.com/",
+      "label": "Scan or tap to visit the Sarsa website",
+      "rect": {
+        "x": 798,
+        "y": 1154,
+        "width": 222,
+        "height": 252.390625
+      },
+      "pdfRect": [
+        598.5,
+        864.75,
+        765.0,
+        1054.5
+      ]
+    }
+  ],
+  "linkOverlapCount": 0,
+  "selectableText": true,
+  "readingOrderChecked": [
+    "Sarsa Jyotish Sansthan",
+    "by Madhuri Gupta",
+    "15+ years of experience",
+    "Kundli Matching",
+    "Kundli Prediction",
+    "Vastu Consultation",
+    "Numerology",
+    "Prashna Kundali",
+    "Book an appointment",
+    "Enquire before booking",
+    "Agra",
+    "www.sarsajyotishsansthan.com"
+  ],
+  "taggedPdf": true,
+  "embeddedFonts": [
+    "AAAAAA+Georgia",
+    "BAAAAA+ArialMT",
+    "CAAAAA+Georgia-Italic",
+    "DAAAAA+Arial-BoldMT",
+    "EAAAAA+DejaVuSans"
+  ],
+  "privateFontEmbeddingFlags": {
+    "arial-bold.ttf": 8,
+    "arial.ttf": 8,
+    "georgia-italic.ttf": 8,
+    "georgia.ttf": 8
+  },
+  "qr": {
+    "encoder": "qrcode 8.2",
+    "version": 3,
+    "errorCorrection": "M",
+    "quietZoneModules": 4,
+    "checks": [
+      {
+        "artifact": "image",
+        "pageWidthPixels": 1080,
+        "decoded": "https://www.sarsajyotishsansthan.com/"
+      },
+      {
+        "artifact": "pdf",
+        "pageWidthPixels": 1080,
+        "decoded": "https://www.sarsajyotishsansthan.com/"
+      },
+      {
+        "artifact": "image",
+        "pageWidthPixels": 780,
+        "decoded": "https://www.sarsajyotishsansthan.com/"
+      },
+      {
+        "artifact": "pdf",
+        "pageWidthPixels": 780,
+        "decoded": "https://www.sarsajyotishsansthan.com/"
+      },
+      {
+        "artifact": "image",
+        "pageWidthPixels": 390,
+        "decoded": "https://www.sarsajyotishsansthan.com/"
+      },
+      {
+        "artifact": "pdf",
+        "pageWidthPixels": 390,
+        "decoded": "https://www.sarsajyotishsansthan.com/"
+      }
+    ]
+  },
+  "imagePdfMeanAbsoluteChannelDifference": 1.9638507373113854,
+  "portraitUnchanged": true,
+  "logoUnchanged": true,
+  "outputs": {
+    "sarsa-clickable-poster.pdf": {
+      "bytes": 780814,
+      "sha256": "2aa9ae9266385639597fd4117988aba5a318ace75e5cf5e38272941bd9c0285b"
+    },
+    "sarsa-poster.png": {
+      "bytes": 279611,
+      "sha256": "675acd237a00d5f6a252f10fbf2252b83f0a7abbba5a2c65925450cf3caf4c77"
+    }
+  },
+  "sourceSHA256": {
+    "source/export-poster.mjs": "315ae817b03d4d44bb29df17850df69eef5fd8a431a1c78d952e9500c60872e6",
+    "source/poster.css": "ccd4c9d6eb612882c221f4f6a638e9520814223d6b4571c8b746b312849d38fa",
+    "source/poster.html": "896507bfa6a16ca684a557976a57b9fb67dd964946e9cacf969d7d0c434f61ac",
+    "source/verify-poster.py": "4defea97511a963682e7f602c20f3aa44fe5bb305fb43adfae96a439ece0580a",
+    "assets/madhuri-gupta-portrait.jpeg": "2dae81b5a9e796a2a3dd8b33023f1b21f4bc2b0a3c966ad1abf77e7abd391ab7",
+    "assets/sarsa-kundli-lotus-logo.png": "1272f5844fca27cd6a28b3f140cfcb7fb07f2d8aa9af13c1e7dc089dbe10c77a",
+    "assets/sarsa-website-qr.png": "73539bffb977575a34ff60ed38d2e5ffcaface6329e52efb8110131377bb4375",
+    "assets/sarsa-website-qr.svg": "b91b32107d916dbf6fd4e6e4eb033559bc6df86435b90b3568b42388432d3042",
+    "assets/fonts/arial-bold.ttf": "e8f4e3baf6cc35fed6fcce3a540e8b39e8f6cda1d22a28f2ec8f526fef7a43f5",
+    "assets/fonts/arial.ttf": "b3658eadae55e682b5f69eb64c439c1ecc8f196c0bb8d4756d145d13bc86476a",
+    "assets/fonts/georgia-italic.ttf": "d3e4bad27651d120ac8f2cea42cf4b4f077264fb243f66b3caffcfd35465f49b",
+    "assets/fonts/georgia.ttf": "38dffcaf1fac89492f7c56c600a14daf36ae42f7c21985cd4134ae113124a58f"
+  },
+  "physicalDeviceForwardingChecked": false,
+  "publicWebsiteUpload": false
+}

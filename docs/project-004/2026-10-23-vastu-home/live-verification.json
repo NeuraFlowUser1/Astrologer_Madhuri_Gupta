@@ -1,0 +1,81 @@
+{
+  "origin": "https://www.sarsajyotishsansthan.com",
+  "results": [
+    {
+      "path": "/",
+      "status": 200,
+      "title": "Astrologer Madhuri Gupta in Agra | Sarsa Jyotish Sansthan",
+      "canonical": "https://www.sarsajyotishsansthan.com/",
+      "homeOnly": true,
+      "sections": 6,
+      "description": "Explore Astro, Numerology and Vastu guidance with Madhuri Gupta at Sarsa Jyotish Sansthan in Agra. Read about the five services and contact the practice."
+    },
+    {
+      "path": "/services",
+      "status": 200,
+      "title": "Astrology Services with Madhuri Gupta | Sarsa Jyotish Sansthan",
+      "canonical": "https://www.sarsajyotishsansthan.com/services",
+      "homeOnly": true,
+      "sections": 5,
+      "description": "Explore Kundli Prediction, Kundli Matching, Vastu, Numerology and Prashna Kundali services with Madhuri Gupta. Read about each service and contact the practice."
+    },
+    {
+      "path": "/services/vastu-consultation",
+      "status": 200,
+      "title": "Vastu Consultation | Sarsa Jyotish Sansthan",
+      "canonical": "https://www.sarsajyotishsansthan.com/services/vastu-consultation",
+      "homeOnly": true,
+      "sections": 6,
+      "description": "Discuss questions about your home in a Vastu consultation with Madhuri Gupta."
+    }
+  ],
+  "heroImg": {
+    "src": "https://www.sarsajyotishsansthan.com/assets/vastu-home-cutaway-800-4Il3u9vR.webp",
+    "loaded": true
+  },
+  "bookHref": "/booking?service=vastu-consultation",
+  "booking": {
+    "url": "https://www.sarsajyotishsansthan.com/booking?service=vastu-consultation",
+    "title": "Book your appointment for expert guidance.",
+    "selectedService": "Vastu Consultation",
+    "feeRupees": 4500,
+    "publicReadResponses": [
+      {
+        "url": "https://www.sarsajyotishsansthan.com/api/service-state",
+        "status": 200
+      },
+      {
+        "url": "https://www.sarsajyotishsansthan.com/api/booking-policy",
+        "status": 200
+      },
+      {
+        "url": "https://www.sarsajyotishsansthan.com/api/availability",
+        "status": 200
+      },
+      {
+        "url": "https://www.sarsajyotishsansthan.com/api/service-state",
+        "status": 200
+      }
+    ]
+  },
+  "contact": {
+    "url": "https://www.sarsajyotishsansthan.com/contact",
+    "form": 1
+  },
+  "mobile": {
+    "overflow": false,
+    "h1": "Your home.\nA Vastu perspective.",
+    "principles": 1,
+    "artworkDecoded": true
+  },
+  "errors": [],
+  "submissions": 0,
+  "publication": {
+    "sourceCommit": "98fff507997c5d90ba5b21b86ca28bba4f4c701d",
+    "githubStatus": "success",
+    "context": "Vercel",
+    "deploymentStatusLink": "https://vercel.com/neura-flow1/astrologer-madhuri-gupta/FYrZHTGWwoiMycwzWCEVqhcSwQAQ",
+    "accountConnectedToCodex": false
+  },
+  "date": "2026-10-23"
+}

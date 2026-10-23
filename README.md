@@ -1,6 +1,6 @@
 # Sarsa Jyotish Sansthan — maintained application
 
-Reviewed **22 October 2026** after the coordinated release. Official website: **https://www.sarsajyotishsansthan.com**. Repository: **NeuraFlowUser1/Astrologer_Madhuri_Gupta**. Runtime source is `3355508c0c3f796324cd3743598617c95f96d736`; Git records any later documentation-only closeout revision. Start with [the documentation index](docs/README.md), then the relevant feature/operating guide and source-bound evidence.
+Reviewed **23 October 2026** after the home Vastu publication. Official website: **https://www.sarsajyotishsansthan.com**. Repository: **NeuraFlowUser1/Astrologer_Madhuri_Gupta**. Current presentation runtime is `98fff507997c5d90ba5b21b86ca28bba4f4c701d`, published from `work/vastu-home-poster-20261023`; Git records later documentation-only closeout revisions. The unchanged contained-package/Worker/database baseline remains the accepted 22 October release. Start with [the documentation index](docs/README.md), then the relevant feature/operating guide and source-bound evidence.
 
 ## Published result
 

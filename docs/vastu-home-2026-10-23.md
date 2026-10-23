@@ -1,6 +1,6 @@
 # Home Vastu — 23 October 2026
 
-The owner approved the reviewed six-chapter Vastu design, implementation, code push/publication through the existing Git-linked route, and subsequent clickable-poster design/presentation. The page is implemented and focused local qualification passes. Live publication is recorded separately after readback; a build alone is not deployment proof.
+The owner approved the reviewed six-chapter Vastu design, implementation, code push/publication through the existing Git-linked route, and subsequent clickable-poster design/presentation. The page is implemented and published at runtime `98fff507997c5d90ba5b21b86ca28bba4f4c701d`. The existing Vercel status is successful; actual Home, Services and Vastu pages and their destinations pass the separate [live readback](project-004/2026-10-23-vastu-home/live-verification.json). Vastu is selected at ₹4,500 on the live booking page, and Contact exposes its existing form. No data is submitted.
 
 ## Customer experience and content
 
@@ -16,7 +16,7 @@ Terminology was checked against [IGNCA's Vastu course outline](https://ignca.gov
 
 The original scene engine and service ambient owner are unchanged. The Vastu hero uses the existing 3000ms clock: surface 0–1200ms, image 600–2400ms, caption 1900–3000ms. The new definition in `vastu-motion.mjs` joins the same page controller: paper 0–700ms, grid 350–1500ms, plan 900–2200ms, emphasis 1500–2600ms; individual grid lines stagger by 25ms. Selection crossfades last 300ms with cubic-bezier(.2,.7,.2,1). Only opacity and transforms animate. Reduced motion settles immediately; focus/hidden/offscreen suspension and route cleanup retain their existing ownership. No automatic picture or principle switching is added.
 
-The palette remains cream/forest with gold detail. Hero title is 36–58px, story title 30–34px, principle title 30–42px, selected concept 27–30px, body 16–17px. The forest panel uses 28px corners/42px padding on desktop, 24px corners/padding on phone; its diagram/copy columns stack at 800px. The cutaway hero has a reserved 4:3 ratio and three responsive WebPs: 480px/31,920 bytes, 800px/73,924 bytes, 1200px/137,500 bytes. The private generated master is preserved outside deployment; no raster text/QR is part of the website.
+The palette remains cream/forest with gold detail. Hero title is 36–58px, story title 30–34px, principle title 30–42px, selected concept 27–30px, new-section body 16–17px. The forest panel uses 28px corners/42px padding on desktop, 24px corners/padding on phone; its diagram/copy columns stack at 800px. The cutaway hero has a reserved 4:3 ratio and three responsive WebPs: 480px/31,920 bytes, 800px/73,924 bytes, 1200px/137,500 bytes. The private generated master is preserved outside deployment; no raster text/QR is part of the website.
 
 ## Focused proof
 
@@ -32,6 +32,6 @@ The [focused receipt](project-004/2026-10-23-vastu-home/local-verification.json)
 
 Publication uses this repository's existing Git main → Vercel connection. Codex remains disconnected from the Vercel account. Existing fees, catalogue identities, booking package, all 37 migrations, saved settings, providers and accounts are unchanged. Only ordinary public pages and booking/contact destinations are read after publication.
 
-The separate poster uses the real portrait, approved logo, home-only Vastu wording, all five existing service pages, a genuine encoded QR and controlled text. Client deliverables belong under its media/ folder; editable poster source and proof belong in its dated design-review folder. Creating this poster does not add a public website download or send it to anyone.
+The separate poster is complete: client `media/sarsa-clickable-poster.pdf` (780,814 bytes) and `media/sarsa-poster.png` (279,611 bytes). One 1080 × 1440 composition uses the unchanged real portrait/logo, 73 visible words, five existing service pages and 13 non-overlapping links. The PDF has selectable text, embedded fonts and a tag tree. Both PDF and image decode the genuine website QR at 1080, 780 and 390px page widths (six checks). All nine unique website destinations and the supplied Maps pin open successfully. English-only copy and the existing enquiry route avoid adding an unconfirmed public phone number. Editable HTML/CSS, exporter, verification script, source hashes, link map and image/PDF/phone proof are in the client's `design-review/2026-10-23-clickable-poster/` folder, outside the deployed application. No raw font, collateral download, real message or new website asset is published. Physical-device forwarding/camera behavior is not claimed.
 
 Recovery is a normal bounded presentation revert through the same Git route. It needs no migration, saved-setting restoration, old booking-package rollback or removal/reset of prior working copies.
