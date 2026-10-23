@@ -5,9 +5,10 @@ import catalogue from '../site/catalogue.json';
 import {mountServiceMotion} from '../site/service-motion.mjs';
 import '../site/services.css';
 import ServiceVisualStory from '../site/ServiceVisualStory.jsx';
+import {VastuHero,VastuTopics,VastuPrinciples} from '../site/VastuDetails.jsx';
 const content={
  'kundli-matching':{word:'Before marriage.',line:'Look at both kundlis.',intro:'Planning marriage? Bring both birth charts and your questions about compatibility.',heading:'Understanding two kundlis.',points:['The questions you share','The context each person brings','What you would like to understand'],prepare:'Bring the birth details of both people. If a time is uncertain, ask the practice before booking.',art:'matching'},
- 'vastu-consultation':{word:'The spaces around you.',line:'A Vastu perspective.',intro:'Explore questions about your home or workspace through a Vastu consultation.',heading:'Begin with the space you know.',points:['How you use the space','The questions you have','The context for your consultation'],prepare:'Make a note of the space you would like to discuss. Contact the practice to check whether a layout or photographs would be useful for your appointment.',art:'vastu'},
+ 'vastu-consultation':{word:'Your home.',line:'A Vastu perspective.',intro:'Vastu is an Indian tradition concerned with the directions, layout and arrangement of a home. Bring your questions about its entrance, rooms and the way you live in it.',heading:'Start with the home you know.',prepare:'If you have a floor plan, keep it ready with the north direction marked where known. A few clear photographs and your main questions can also help. Ask the practice what will be useful before your appointment.',art:'vastu'},
  numerology:{word:'Names. Dates. Numbers.',line:'Let’s understand them.',intro:'A personal conversation about the numbers linked to your names and dates.',heading:'Start with what matters to you.',points:['The name or date you want to discuss','The question behind your interest','The perspective you are looking for'],prepare:'Have the names and dates you would like to discuss available. Write down your questions so the conversation can focus on what matters to you.',art:'numerology'}
 };
 function Detail({service,data}){const root=useRef(null);useLayoutEffect(()=>{return mountServiceMotion(root.current,data.art);},[service.name,data.art]);return <div className={'sarsa-services detail-'+data.art} ref={root}>
@@ -21,31 +22,28 @@ function Detail({service,data}){const root=useRef(null);useLayoutEffect(()=>{ret
 <BookingOnly><p className="service-facts">₹{(service.amount_paise/100).toLocaleString('en-IN')} · {service.duration_minutes} minutes · Google Meet</p></BookingOnly>
 <Link className="service-button" to={'/booking?service='+service.id}>Book an appointment ↗</Link>
 </div>
-<div className={'service-art art-'+data.art} aria-hidden="true">{data.art==='matching'?<>
+{data.art==='vastu'?<VastuHero/>:<div className={'service-art art-'+data.art} aria-hidden="true">{data.art==='matching'?<>
 <div data-layer className="chart-disc">✧</div>
 <div data-layer className="chart-disc">✧</div>
 <span data-layer className="art-seal">&amp;</span>
-</>:data.art==='vastu'?<>
-<div data-layer className="room-plane plane-back"/>
-<div data-layer className="room-plane plane-floor"/>
-<div data-layer className="room-object">⌂</div>
 </>:<>
 <span data-layer className="number-tile">3</span>
 <span data-layer className="number-tile">6</span>
 <span data-layer className="number-tile">9</span>
-</>}</div>
+</>}</div>}
 </section>
 <ServiceVisualStory key={service.id} serviceId={service.id} name={service.name}/>
 <section className="service-preparation" data-service-scene="topics">
 <p className="eyebrow">THE CONVERSATION</p>
 <h2>{data.heading}</h2>
-<div className="detail-topics">{data.points.map((point,i)=>
+{data.art==='vastu'?<VastuTopics/>:<div className="detail-topics">{data.points.map((point,i)=>
 <article data-layer key={point}>
 <span>0{i+1}</span>
 <h3>{point}</h3>
-</article>)}</div>
-<p data-copy>A consultation helps you explore your questions. It does not guarantee an outcome or replace qualified medical, legal or financial advice.</p>
+</article>)}</div>}
+<p className={data.art==='vastu'?'existing-note':undefined} data-copy>A consultation helps you explore your questions. It does not guarantee an outcome or replace qualified medical, legal or financial advice.</p>
 </section>
+{data.art==='vastu'&&<VastuPrinciples/>}
 <section className="detail-prepare" data-service-scene="prepare">
 <div className="preparation-paper" data-layer>
 <span>BEFORE YOUR APPOINTMENT</span>

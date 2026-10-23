@@ -1,0 +1,558 @@
+{
+  "date": "2026-10-23",
+  "baseCommit": "130f8249fdab6924b0425617d961afdfb00b947c",
+  "tests": {
+    "files": 6,
+    "cases": 51,
+    "passed": 51,
+    "sourceOwners": 10,
+    "excluded": [],
+    "thresholdsPerFile": 90,
+    "coverage": {
+      "lines": 100,
+      "statements": 98.55,
+      "functions": 100,
+      "branches": 97.04
+    }
+  },
+  "layout": {
+    "results": [
+      {
+        "overflow": false,
+        "width": 320,
+        "panelWidth": 288,
+        "panelHeight": 953.015625,
+        "settled": true,
+        "homeOnly": true,
+        "allModesKeyboard": true,
+        "storyForwardBack": true
+      },
+      {
+        "overflow": false,
+        "width": 390,
+        "panelWidth": 342,
+        "panelHeight": 983.21875,
+        "settled": true,
+        "homeOnly": true,
+        "allModesKeyboard": true,
+        "storyForwardBack": true
+      },
+      {
+        "overflow": false,
+        "width": 768,
+        "panelWidth": 672,
+        "panelHeight": 978.3125,
+        "settled": true,
+        "homeOnly": true,
+        "allModesKeyboard": true,
+        "storyForwardBack": true
+      },
+      {
+        "overflow": false,
+        "width": 1440,
+        "panelWidth": 1104,
+        "panelHeight": 777.125,
+        "settled": true,
+        "homeOnly": true,
+        "allModesKeyboard": true,
+        "storyForwardBack": true
+      },
+      {
+        "overflow": false,
+        "width": 1920,
+        "panelWidth": 1104,
+        "panelHeight": 777.125,
+        "settled": true,
+        "homeOnly": true,
+        "allModesKeyboard": true,
+        "storyForwardBack": true
+      }
+    ],
+    "errors": []
+  },
+  "parity": [
+    {
+      "width": 1440,
+      "selector": ".detail-hero",
+      "dx": 0,
+      "dy": 0,
+      "dw": 0,
+      "dh": 0,
+      "fontMatches": true
+    },
+    {
+      "width": 1440,
+      "selector": ".detail-hero h1",
+      "dx": 0,
+      "dy": 0,
+      "dw": 0,
+      "dh": 0,
+      "fontMatches": true
+    },
+    {
+      "width": 1440,
+      "selector": ".vastu-hero-art",
+      "dx": 0,
+      "dy": 0,
+      "dw": 0,
+      "dh": 0,
+      "fontMatches": true
+    },
+    {
+      "width": 1440,
+      "selector": ".service-visual-story",
+      "dx": 0,
+      "dy": 0,
+      "dw": 0,
+      "dh": 0,
+      "fontMatches": true
+    },
+    {
+      "width": 1440,
+      "selector": ".story-picture",
+      "dx": 0,
+      "dy": 0,
+      "dw": 0,
+      "dh": 0,
+      "fontMatches": true
+    },
+    {
+      "width": 1440,
+      "selector": ".story-heading-stack",
+      "dx": 0,
+      "dy": 0,
+      "dw": 0,
+      "dh": 0,
+      "fontMatches": true
+    },
+    {
+      "width": 1440,
+      "selector": ".story-choices",
+      "dx": 0,
+      "dy": 0,
+      "dw": 0,
+      "dh": 0,
+      "fontMatches": true
+    },
+    {
+      "width": 1440,
+      "selector": ".detail-topics",
+      "dx": 0,
+      "dy": 0,
+      "dw": 0,
+      "dh": 0,
+      "fontMatches": true
+    },
+    {
+      "width": 1440,
+      "selector": ".vastu-principles",
+      "dx": 0,
+      "dy": 0,
+      "dw": 0,
+      "dh": 0,
+      "fontMatches": true
+    },
+    {
+      "width": 390,
+      "selector": ".detail-hero",
+      "dx": 0,
+      "dy": 0,
+      "dw": 0,
+      "dh": 0,
+      "fontMatches": true
+    },
+    {
+      "width": 390,
+      "selector": ".detail-hero h1",
+      "dx": 0,
+      "dy": 0,
+      "dw": 0,
+      "dh": 0,
+      "fontMatches": true
+    },
+    {
+      "width": 390,
+      "selector": ".vastu-hero-art",
+      "dx": 0,
+      "dy": 0,
+      "dw": 0,
+      "dh": 0,
+      "fontMatches": true
+    },
+    {
+      "width": 390,
+      "selector": ".service-visual-story",
+      "dx": 0,
+      "dy": 0,
+      "dw": 0,
+      "dh": 0,
+      "fontMatches": true
+    },
+    {
+      "width": 390,
+      "selector": ".story-picture",
+      "dx": 0,
+      "dy": 0,
+      "dw": 0,
+      "dh": 0,
+      "fontMatches": true
+    },
+    {
+      "width": 390,
+      "selector": ".story-heading-stack",
+      "dx": 0,
+      "dy": 0,
+      "dw": 0,
+      "dh": 0,
+      "fontMatches": true
+    },
+    {
+      "width": 390,
+      "selector": ".story-choices",
+      "dx": 0,
+      "dy": 0,
+      "dw": 0,
+      "dh": 0,
+      "fontMatches": true
+    },
+    {
+      "width": 390,
+      "selector": ".detail-topics",
+      "dx": 0,
+      "dy": 0,
+      "dw": 0,
+      "dh": 0,
+      "fontMatches": true
+    },
+    {
+      "width": 390,
+      "selector": ".vastu-principles",
+      "dx": 0,
+      "dy": 0,
+      "dw": 0,
+      "dh": 0,
+      "fontMatches": true
+    }
+  ],
+  "motion": [
+    {
+      "width": 1440,
+      "heroProgress": 0.451,
+      "principlesMidpoint": 0.377,
+      "settled": 1,
+      "ambientVisible": true,
+      "ambientFocused": false,
+      "cleanupNavigation": true
+    },
+    {
+      "width": 390,
+      "heroProgress": 0.297,
+      "principlesMidpoint": 0.377,
+      "settled": 1,
+      "ambientVisible": true,
+      "ambientFocused": false,
+      "cleanupNavigation": true
+    }
+  ],
+  "imageFailure": {
+    "retainedDecoded": true,
+    "retryRecovers": true
+  },
+  "fullSuitesRun": false,
+  "realProviderWrites": 0,
+  "perOwnerCoverage": {
+    "src/pages/Home.jsx": {
+      "lines": {
+        "total": 5,
+        "covered": 5,
+        "skipped": 0,
+        "pct": 100
+      },
+      "functions": {
+        "total": 5,
+        "covered": 5,
+        "skipped": 0,
+        "pct": 100
+      },
+      "statements": {
+        "total": 26,
+        "covered": 24,
+        "skipped": 0,
+        "pct": 92.3
+      },
+      "branches": {
+        "total": 19,
+        "covered": 18,
+        "skipped": 0,
+        "pct": 94.73
+      }
+    },
+    "src/pages/ServiceDetail.jsx": {
+      "lines": {
+        "total": 4,
+        "covered": 4,
+        "skipped": 0,
+        "pct": 100
+      },
+      "functions": {
+        "total": 5,
+        "covered": 5,
+        "skipped": 0,
+        "pct": 100
+      },
+      "statements": {
+        "total": 11,
+        "covered": 11,
+        "skipped": 0,
+        "pct": 100
+      },
+      "branches": {
+        "total": 16,
+        "covered": 16,
+        "skipped": 0,
+        "pct": 100
+      }
+    },
+    "src/pages/Services.jsx": {
+      "lines": {
+        "total": 5,
+        "covered": 5,
+        "skipped": 0,
+        "pct": 100
+      },
+      "functions": {
+        "total": 5,
+        "covered": 5,
+        "skipped": 0,
+        "pct": 100
+      },
+      "statements": {
+        "total": 8,
+        "covered": 8,
+        "skipped": 0,
+        "pct": 100
+      },
+      "branches": {
+        "total": 8,
+        "covered": 8,
+        "skipped": 0,
+        "pct": 100
+      }
+    },
+    "src/site/ServiceVisualStory.jsx": {
+      "lines": {
+        "total": 35,
+        "covered": 35,
+        "skipped": 0,
+        "pct": 100
+      },
+      "functions": {
+        "total": 17,
+        "covered": 17,
+        "skipped": 0,
+        "pct": 100
+      },
+      "statements": {
+        "total": 78,
+        "covered": 76,
+        "skipped": 0,
+        "pct": 97.43
+      },
+      "branches": {
+        "total": 57,
+        "covered": 53,
+        "skipped": 0,
+        "pct": 92.98
+      }
+    },
+    "src/site/VastuDetails.jsx": {
+      "lines": {
+        "total": 7,
+        "covered": 7,
+        "skipped": 0,
+        "pct": 100
+      },
+      "functions": {
+        "total": 7,
+        "covered": 7,
+        "skipped": 0,
+        "pct": 100
+      },
+      "statements": {
+        "total": 9,
+        "covered": 9,
+        "skipped": 0,
+        "pct": 100
+      },
+      "branches": {
+        "total": 0,
+        "covered": 0,
+        "skipped": 0,
+        "pct": 100
+      }
+    },
+    "src/site/page-metadata.mjs": {
+      "lines": {
+        "total": 37,
+        "covered": 37,
+        "skipped": 0,
+        "pct": 100
+      },
+      "functions": {
+        "total": 18,
+        "covered": 18,
+        "skipped": 0,
+        "pct": 100
+      },
+      "statements": {
+        "total": 80,
+        "covered": 80,
+        "skipped": 0,
+        "pct": 100
+      },
+      "branches": {
+        "total": 45,
+        "covered": 45,
+        "skipped": 0,
+        "pct": 100
+      }
+    },
+    "src/site/service-motion.mjs": {
+      "lines": {
+        "total": 25,
+        "covered": 25,
+        "skipped": 0,
+        "pct": 100
+      },
+      "functions": {
+        "total": 12,
+        "covered": 12,
+        "skipped": 0,
+        "pct": 100
+      },
+      "statements": {
+        "total": 45,
+        "covered": 45,
+        "skipped": 0,
+        "pct": 100
+      },
+      "branches": {
+        "total": 18,
+        "covered": 18,
+        "skipped": 0,
+        "pct": 100
+      }
+    },
+    "src/site/service-visual-content.mjs": {
+      "lines": {
+        "total": 1,
+        "covered": 1,
+        "skipped": 0,
+        "pct": 100
+      },
+      "functions": {
+        "total": 0,
+        "covered": 0,
+        "skipped": 0,
+        "pct": 100
+      },
+      "statements": {
+        "total": 1,
+        "covered": 1,
+        "skipped": 0,
+        "pct": 100
+      },
+      "branches": {
+        "total": 0,
+        "covered": 0,
+        "skipped": 0,
+        "pct": 100
+      }
+    },
+    "src/site/vastu-content.mjs": {
+      "lines": {
+        "total": 1,
+        "covered": 1,
+        "skipped": 0,
+        "pct": 100
+      },
+      "functions": {
+        "total": 0,
+        "covered": 0,
+        "skipped": 0,
+        "pct": 100
+      },
+      "statements": {
+        "total": 1,
+        "covered": 1,
+        "skipped": 0,
+        "pct": 100
+      },
+      "branches": {
+        "total": 0,
+        "covered": 0,
+        "skipped": 0,
+        "pct": 100
+      }
+    },
+    "src/site/vastu-motion.mjs": {
+      "lines": {
+        "total": 13,
+        "covered": 13,
+        "skipped": 0,
+        "pct": 100
+      },
+      "functions": {
+        "total": 5,
+        "covered": 5,
+        "skipped": 0,
+        "pct": 100
+      },
+      "statements": {
+        "total": 17,
+        "covered": 17,
+        "skipped": 0,
+        "pct": 100
+      },
+      "branches": {
+        "total": 6,
+        "covered": 6,
+        "skipped": 0,
+        "pct": 100
+      }
+    }
+  },
+  "sourceSHA256": {
+    "frontend/src/pages/Home.jsx": "77004e14ae14d034784170d82d0fe3e2af2b65c2fe467d523abd6f10ca8ce452",
+    "frontend/src/pages/ServiceDetail.jsx": "606fb2cb97cc0071de1c258838b170b9d8896de51e206e1a550a9b3237105bd4",
+    "frontend/src/pages/Services.jsx": "eb2ebcd412b8175429bb4a96ee058df353044791a8cddccda9c4e76a87ce9ad9",
+    "frontend/src/site/ServiceVisualStory.jsx": "1754921029d7a665b897ffb64c69861afe7ad822ce357d7280c63ee2aa7feab6",
+    "frontend/src/site/VastuDetails.jsx": "23eeb08aa9bb9858f84ef6b7d1c081de5206a8fa80b1b8e46c618a91278f784e",
+    "frontend/src/site/media/vastu/vastu-home-cutaway-1200.webp": "d07888a704162661d7676c8dd6f1a42bd84f2abb86bc884c1c49cea8429581fa",
+    "frontend/src/site/media/vastu/vastu-home-cutaway-480.webp": "0535c5fe456afffc7a211d2ea6d8a467e5565f6753b516d0ab918bfe316b3d90",
+    "frontend/src/site/media/vastu/vastu-home-cutaway-800.webp": "9c3b63401cdabf0a72b7180e6885b89146c8546aa43c76da5a9713bc6b933472",
+    "frontend/src/site/page-metadata.mjs": "3078744e01e0ac2191a5410f89ee0215ac8b529802318a327993de9c341580d9",
+    "frontend/src/site/service-media.json": "f0896923f2d40ceedeadb086632debb47d1f8a4a9049b8cb4c7fe2a4ec810d4e",
+    "frontend/src/site/service-motion.mjs": "1e149d098f256e800b94d89e4c6df598a415c49451c231824d52bdf2d9d42477",
+    "frontend/src/site/service-visual-content.mjs": "4f3c59d54ba131d55cbbdd7c2df94ed747f09af09030d079c1d87c64ddb98cb7",
+    "frontend/src/site/vastu-content.mjs": "5f83466c4199e12f8e7089a8d2bf5ddbcf6813b320a491b93d6eb071c5f1b9ee",
+    "frontend/src/site/vastu-motion.mjs": "2af97255563bf52e48f042621aa7e7d417e6a6ff9a6ccf5e433e4c65da7f5569",
+    "frontend/src/site/vastu.css": "3902d99b13989b80ae41cec234d6eac7171cec6bfcc2f9e18ddc6ce03288fd4a"
+  },
+  "generatedHTML": [
+    {
+      "mode": "on",
+      "homeOnly": true,
+      "principlesPresent": true,
+      "bookingFactsRespectMode": true,
+      "sha256": "e3216ac70b83656a3ed75c9bd634db80f3eb91ab7c79547122e51bcc6f837618"
+    },
+    {
+      "mode": "off",
+      "homeOnly": true,
+      "principlesPresent": true,
+      "bookingFactsRespectMode": true,
+      "sha256": "596e9e15a2d6b3eed8ee4f4afa536de35295193f80b4c03fd67dfe3fd5f2aad8"
+    }
+  ]
+}

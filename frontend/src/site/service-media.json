@@ -185,20 +185,24 @@
         "width": 1536,
         "height": 1024,
         "alt": "Illustrative courtyard-house model, floor plan and compass",
-        "caption": "Start with the space you know.",
+        "caption": "An illustrative home and its layout.",
         "focal": "50% 50%",
         "markers": [
           [
-            37,
-            34
+            48,
+            47
           ],
           [
-            80,
-            54
+            49,
+            23
           ],
           [
-            47,
-            72
+            38,
+            33
+          ],
+          [
+            63,
+            40
           ]
         ],
         "renditions": [
@@ -233,20 +237,24 @@
         "width": 1536,
         "height": 1024,
         "alt": "Courtyard and rooms of an illustrative house model",
-        "caption": "A closer look at rooms and directions.",
+        "caption": "An illustrative home and its layout.",
         "focal": "50% 50%",
         "markers": [
           [
-            40,
-            34
+            29,
+            61
           ],
           [
-            76,
-            42
+            73,
+            37
           ],
           [
-            69,
-            76
+            49,
+            32
+          ],
+          [
+            36,
+            26
           ]
         ],
         "renditions": [

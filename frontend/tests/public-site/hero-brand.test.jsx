@@ -60,7 +60,10 @@ test('retained Home actions honour admission, prevent double navigation and keep
  await render(Home,'/');await click(host.querySelector('.hero-question'));expect(model.location.pathname).toBe('/');
  const read=host.querySelector('a[href="/about"]');
  await act(async()=>{const event=new MouseEvent('click',{bubbles:true,cancelable:true,button:0});event.preventDefault();read.dispatchEvent(event);});expect(model.location.pathname).toBe('/');
- for(const extra of [{ctrlKey:true},{metaKey:true},{shiftKey:true},{button:1}]){await click(read,extra);expect(model.location.pathname).toBe('/');}
+ for(const extra of [{ctrlKey:true},{metaKey:true},{shiftKey:true},{altKey:true},{button:1}]){await click(read,extra);expect(model.location.pathname).toBe('/');}
+ const native=document.createElement('a');native.href='/about';native.textContent='Synthetic native link';host.querySelector('.sarsa-home').append(native);
+ native.setAttribute('download','guide');await click(native);expect(model.location.pathname).toBe('/');native.removeAttribute('download');
+ native.target='_blank';await click(native);expect(model.location.pathname).toBe('/');native.target='_self';await click(native);expect(model.location.pathname).toBe('/about');
  await click(read);expect(model.location.pathname).toBe('/about');
  await click(host.querySelector('.hero-meet'));expect(model.location.pathname).toBe('/about');
  await click(host.querySelector('[data-contact]'));expect(model.location.pathname).toBe('/contact');

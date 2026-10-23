@@ -70,7 +70,7 @@ test('Services uses real catalogue destinations and artwork, with one Explore ac
 test.each(['kundli-matching','vastu-consultation','numerology','unknown'])('detail %s keeps four original scenes plus its story or redirects an invalid ID',async(id)=>{
  await render(<Routes><Route path="/services/:serviceId" element={<ServiceDetail/>}/><Route path="/services" element={<h1>Services</h1>}/></Routes>,'/services/'+id);
  if(id==='unknown'){expect(model.location.pathname).toBe('/services');return;}
- expect(host.querySelectorAll('section')).toHaveLength(5);expect(host.querySelectorAll('.service-art [data-layer]')).toHaveLength(3);await click(host.querySelector('a[href^="/booking"]'));expect(model.location.search).toBe('?service='+id);
+ expect(host.querySelectorAll('section')).toHaveLength(id==='vastu-consultation'?6:5);expect(host.querySelectorAll('.service-art [data-layer]')).toHaveLength(3);await click(host.querySelector('a[href^="/booking"]'));expect(model.location.search).toBe('?service='+id);
 });
 
 test('Contact retains topic/focus handoff, five stages and original plaque while adding a separate map and process',async()=>{

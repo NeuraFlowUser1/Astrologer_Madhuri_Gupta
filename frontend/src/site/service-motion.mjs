@@ -1,5 +1,6 @@
 import {mountScenes} from './scenes.mjs';
 import {createServiceVisualMotion} from './service-visual-motion.mjs';
+import {createVastuPrinciplesScene} from './vastu-motion.mjs';
 const phase=(p,a,b)=>{const t=Math.max(0,Math.min(1,(p-a)/(b-a)));return t*t*(3-2*t);};
 const style=(el,values)=>Object.assign(el.style,values);
 
@@ -11,11 +12,11 @@ function hero(element,p,art){
   parts.slice(0,2).forEach((el,i)=>{const t=phase(p,i*.18,.6+i*.18);style(el,{opacity:t,transform:`translateX(${(i?1:-1)*distance*(1-t)}px) rotate(${(i?1:-1)*35*(1-t)}deg)`});});
   const seal=phase(p,.68,1);style(parts[2],{opacity:seal,transform:`scale(${.4+.6*seal}) rotate(${-55*(1-seal)}deg)`});
  }else if(art==='vastu'){
-  // A wall rises, the floor unfolds, then the small house finds its place.
-  const wall=phase(p,0,.5),floor=phase(p,.27,.76),house=phase(p,.64,1);
-  style(parts[0],{opacity:wall,transformOrigin:'bottom',transform:`perspective(650px) rotateX(${55*(1-wall)}deg) translateY(${35*(1-wall)}px)`});
-  style(parts[1],{opacity:floor,transformOrigin:'top left',transform:`perspective(650px) rotateX(${-70*(1-floor)}deg) scaleY(${.2+.8*floor})`});
-  style(parts[2],{opacity:house,transform:`translateY(${45*(1-house)}px) scale(${.8+.2*house})`});
+  // The material surface, home illustration and finishing caption arrive in order.
+  const surface=phase(p,0,.4),home=phase(p,.2,.8),detail=phase(p,1900/3000,1);
+  style(parts[0],{opacity:surface});
+  style(parts[1],{opacity:home,transform:`translateY(${24*(1-home)}px) scale(${.98+.02*home})`});
+  style(parts[2],{opacity:detail,transform:`translateY(${8*(1-detail)}px)`});
  }else{
   // Number slips settle one by one, then separate gently into a readable rhythm.
   parts.forEach((el,i)=>{const arrival=phase(p,i*.13,.5+i*.13),fan=phase(p,.65,1);style(el,{opacity:arrival,transform:`translate(${(i-1)*12*fan}px,${65*(1-arrival)}px) rotate(${(i-1)*5*fan}deg)`});});
@@ -24,6 +25,7 @@ function hero(element,p,art){
 export function mountServiceMotion(root,art){
  const sections=['hero','topics','prepare','book'].map(key=>root.querySelector('[data-service-scene="'+key+'"]'));
  const visual=createServiceVisualMotion(root);
+ const principles=createVastuPrinciplesScene(root);
  const stop=mountScenes(root,[...sections.map((element,index)=>({element,duration:index===0?3000:2200,render:p=>{
   if(index===0){hero(element,p,art);return;}
   const layers=[...element.querySelectorAll('[data-layer]')];
@@ -33,6 +35,6 @@ export function mountServiceMotion(root,art){
    else style(el,{opacity:t,transformOrigin:'left center',transform:`perspective(750px) rotateY(${-24*(1-t)}deg) translateX(${-20*(1-t)}px)`});
   });
   element.querySelectorAll('[data-copy]').forEach(el=>{const t=phase(p,index===3?0:.45,1);style(el,{opacity:t,transform:`translateY(${18*(1-t)}px)`});});
- }})),...visual.definitions]);
+ }})),...visual.definitions,...principles]);
  return()=>{visual.dispose();stop();};
 }

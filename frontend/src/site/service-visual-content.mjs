@@ -11,9 +11,10 @@ export const visualStories={
   ['Dasha','A phase of life.','Dasha is a planetary period in Jyotish. It gives a traditional way to discuss the phase of life behind your question.']
  ],
  'vastu-consultation':[
-  ['Space','Begin with your space.','Every space has a layout and a purpose. Bring questions about your home or workplace, and how you use it.'],
-  ['Directions','Look at the directions.','Vastu considers how directions relate to the layout of a space. Start with the parts of your home or workplace you want to discuss.'],
-  ['Your layout','Bring a picture of your space.','A floor plan or a few clear photographs may help explain your space. Ask the practice what to bring before your appointment.']
+  ['Entrance','Facing and entrance.','The direction your home faces and the position of its main door are different details. Both can be considered alongside the complete layout.'],
+  ['Rooms','Rooms in relation to one another.','Kitchens, bedrooms, bathrooms and a puja space have different uses. Vastu considers their placement and directions as part of the whole home.'],
+  ['Centre','The plan as a whole.','The shape and centre of the plan, room connections, stairs and large fixed features give context to the arrangement of your home.'],
+  ['Openings','Water, light and openings.','Water points and storage, windows, daylight and ventilation add context to the plan, together with the home’s immediate surroundings.']
  ],
  numerology:[
   ['Names','Start with a name.','A name is one starting point in Numerology. Bring the name you want to explore and the question behind your interest.'],

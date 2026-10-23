@@ -10,7 +10,8 @@ export default function ServiceVisualStory({serviceId,name}){
   const [previous,setPrevious]=useState(null),[busy,setBusy]=useState(false),[error,setError]=useState(null),[reload,setReload]=useState(0);
   const token=useRef(0),disposed=useRef(false),fadeTimer=useRef(0),failedImages=useRef(new Set());
   useEffect(()=>{disposed.current=false;return()=>{disposed.current=true;token.current++;clearTimeout(fadeTimer.current);};},[]);
-  const image=imageSource(serviceId,displayed,true),story=stories[topic];
+  const image=imageSource(serviceId,displayed,true),story=stories[topic],home=serviceId==='vastu-consultation';
+  const markers=home?[{position:image.markers[topic],index:topic}]:image.markers.map((position,index)=>({position,index}));
 
   async function requestImage(index,retry=false){
     if(index<0||index>1)return;
@@ -48,10 +49,10 @@ export default function ServiceVisualStory({serviceId,name}){
             serviceId==='vastu-consultation'?<i className="space-sunlight" data-visual-ambient/>:
             image.markers.map(([x,y],i)=><i key={i} className="number-slip-light" data-visual-ambient style={{left:x+'%',top:y+'%'}}/>)}
           </div>
-          <div className="story-markers" data-visual-part="markers" aria-hidden="true">{image.markers.map(([x,y],i)=><span key={i} className="story-marker" data-active={topic===i} style={{left:x+'%',top:y+'%'}}>{i+1}</span>)}</div>
-          <span className="illustration-label">Illustration</span>
+          <div className="story-markers" data-visual-part="markers" aria-hidden="true">{markers.map(({position:[x,y],index:i})=><span key={i} className="story-marker" data-active={topic===i} style={{left:x+'%',top:y+'%'}}>{i+1}</span>)}</div>
+          <span className="illustration-label">{home?'Illustrative home':'Illustration'}</span>
         </div>
-        <div className="story-controls" data-visual-part="controls" aria-label="Service pictures">
+        <div className="story-controls" data-visual-part="controls" aria-label={home?'Home illustrations':'Service pictures'}>
           <button type="button" aria-disabled={requested===0} onClick={()=>{if(requested>0)void requestImage(requested-1);}}>← Previous</button>
           <span>{displayed+1} of 2</span>
           <button type="button" aria-disabled={requested===1} onClick={()=>{if(requested<1)void requestImage(requested+1);}}>Next →</button>
@@ -62,10 +63,10 @@ export default function ServiceVisualStory({serviceId,name}){
         </div>
       </figure>
       <div className="story-copy" data-visual-part="copy">
-        <p className="eyebrow">{name.toUpperCase()} · TAKE A CLOSER LOOK</p>
+        <p className="eyebrow">{home?'A CLOSER LOOK AT YOUR HOME':name.toUpperCase()+' · TAKE A CLOSER LOOK'}</p>
         <div className="story-heading-stack"><h2>{story[1]}</h2>{stories.map(s=><h2 key={s[0]} className="story-measure" aria-hidden="true">{s[1]}</h2>)}</div>
         <div className="story-caption-stack" aria-live="polite" aria-atomic="true"><p>{story[2]}</p>{stories.map(s=><p key={s[0]} className="story-measure" aria-hidden="true">{s[2]}</p>)}</div>
-        <div className="story-choices" aria-label="Explore the ideas">{stories.map((s,i)=><button key={s[0]} type="button" aria-pressed={topic===i} onClick={()=>setTopic(i)}>{i+1}. {s[0]}</button>)}</div>
+        <div className="story-choices" aria-label="Explore the ideas">{stories.map((s,i)=><button key={s[0]} type="button" aria-pressed={topic===i} onClick={()=>setTopic(i)}>{!home&&`${i+1}. `}{s[0]}</button>)}</div>
       </div>
     </div>
   </section>;

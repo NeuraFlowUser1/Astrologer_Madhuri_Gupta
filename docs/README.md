@@ -1,11 +1,12 @@
 # Project 004 — documentation index
 
-Reviewed **22 October 2026** after matching application/Worker/database publication and original ON restoration. This is the maintained application's current reading path. Current feature guides explain behavior/decisions; dated plans and reports preserve exact scope and proof. There is one owner per topic.
+Reviewed **23 October 2026** after matching application/Worker/database publication and original ON restoration. This is the maintained application's current reading path. Current feature guides explain behavior/decisions; dated plans and reports preserve exact scope and proof. There is one owner per topic.
 
 The [19 October client handoff](project-004/2026-10-19-documentation/README.md) publishes the current outer working status/navigation and relevant historical notices alongside this application. Its manifest distinguishes original working text from link-adapted copies; no private storage or application duplicate is included.
 
 | Read | What it owns |
 | --- | --- |
+| [Home Vastu](vastu-home-2026-10-23.md) | Six-section home-only page, generated cutaway hero, four home topics, three illustrated traditional principles, responsive motion and focused publication proof. |
 | [Public delivery/search](operating-search-2026-10-22.md) | Actual twelve-page HTML/hydration, exact metadata, intentional utility exclusion, responsive media, stable portrait and local proof/release boundaries. |
 | [Application README](../README.md) | Published source, local build, navigation, protection and remaining scope. |
 | [Public website](public-site-refresh.md) | Current sections, copy, responsive media, interactions, motion and page/service ownership. |

@@ -1,0 +1,77 @@
+.detail-vastu .detail-hero>div{min-width:0}
+.detail-vastu .detail-hero h1{font-size:clamp(36px,4.4vw,58px)}
+.detail-vastu .detail-hero>div>p:not(.eyebrow):not(.service-facts){max-width:47ch}
+.detail-vastu .vastu-hero-art{display:block;min-height:0;margin:0;aspect-ratio:4/3;border-radius:26px;background:#e9ece2;box-shadow:0 22px 42px #26483d20;overflow:hidden;isolation:isolate}
+.hero-material{position:absolute;inset:0;background:#e0e6d7}
+.vastu-hero-art>img{position:relative;display:block;width:100%;height:100%;object-fit:cover;transform-origin:center bottom}
+.vastu-hero-art>figcaption{position:absolute;bottom:14px;left:14px;right:auto;max-width:calc(100% - 28px);padding:7px 11px;border:1px solid #b9c5ae;border-radius:10px;background:#fffdf8ee;color:#26483d;font:13px/1.4 system-ui}
+.detail-vastu .service-visual-story{margin:28px 0 64px}
+.detail-vastu .story-copy .story-heading-stack h2{font-size:34px}
+.detail-vastu .story-choices{gap:8px}
+.detail-vastu .story-choices button{font-size:14px;padding-inline:12px}
+.detail-vastu .story-copy .story-caption-stack p{font-size:17px}
+.detail-vastu .detail-topics{gap:28px}
+.detail-vastu .detail-topics h3{font-size:25px;margin:16px 0}
+.detail-vastu .detail-topics article>p{font-size:17px;line-height:1.6;margin:0;max-width:30ch}
+.topic-illustration{width:120px;height:86px;max-width:100%}
+.topic-illustration svg{width:100%;height:100%;fill:none;stroke:#7c8e68;stroke-width:1.4;stroke-linecap:round;stroke-linejoin:round}
+.topic-illustration .diagram-wash{fill:#e5ebdc;stroke:none}
+.topic-illustration .diagram-gold{stroke:#a6814d;stroke-width:1.7}
+.detail-vastu .existing-note{max-width:65ch;font-size:16px}
+.detail-vastu :is(.service-button,.text-link){font-weight:700}
+@media(min-width:651px) and (max-width:850px){.detail-vastu .detail-hero{grid-template-columns:1fr;gap:32px;padding-block:60px}.detail-vastu .vastu-hero-art{width:min(100%,600px);justify-self:center}.detail-vastu .detail-hero>div>p:not(.eyebrow):not(.service-facts){max-width:60ch}.detail-vastu .detail-prepare{gap:30px}.detail-vastu .preparation-paper{padding:28px}}
+@media(max-width:1000px){.detail-vastu .story-copy .story-heading-stack h2{font-size:30px}}
+@media(max-width:700px){.sarsa-services.detail-vastu{padding-inline:24px}.detail-vastu .vastu-hero-art{border-radius:20px}.detail-vastu .story-copy .story-heading-stack h2{font-size:30px}.detail-vastu .detail-topics article>p{max-width:45ch}.detail-vastu .service-visual-story{padding:24px;margin-bottom:48px}.detail-vastu .story-choices button{min-height:46px}}
+@media(max-width:350px){.sarsa-services.detail-vastu{padding-inline:16px}.detail-vastu .service-visual-story{padding:16px}.detail-vastu .vastu-hero-art>figcaption{font-size:11px;bottom:10px;left:10px;max-width:calc(100% - 20px)}}
+/* Traditional principles: one scene owner, three manually selected states. */
+.sarsa-services .vastu-principles{--principles-paper:#fffdf8;--principles-muted:#dde4d4;--principles-gold:#c8ac6c;position:relative;margin:32px 0 40px;padding:42px;border-radius:28px;background:#26483d;color:var(--principles-paper);scroll-margin-top:112px;isolation:isolate}
+.sarsa-services .vastu-principles .principles-intro>.eyebrow{color:#d4dfc7;font-size:11px;letter-spacing:.1em;margin:0 0 16px}
+.sarsa-services .vastu-principles h2{color:var(--principles-paper);font-size:clamp(32px,3vw,42px);line-height:1.15;margin:0 0 14px;max-width:26ch}
+.sarsa-services .vastu-principles .principles-intro>p:not(.eyebrow){font-size:17px;line-height:1.6;color:var(--principles-muted);margin:0;max-width:55ch}
+.vastu-principles .principles-grid{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:36px;align-items:center;margin-top:30px}
+.vastu-principles .principles-visual{min-width:0;margin:0}
+.vastu-principles .principles-visual>svg{display:block;width:100%;height:auto;overflow:visible}
+.vastu-principles .principles-paper-shadow{fill:#19392d;opacity:.5}
+.vastu-principles .principles-paper{fill:#f7f5ef;stroke:#d6ddcc;stroke-width:1;filter:url(#principles-paper-shadow)}
+.vastu-principles [data-principles-stage]{transform-box:fill-box;transform-origin:center}
+.vastu-principles .principles-grid-lines{fill:none;stroke:#9da996;stroke-width:.85;transition:opacity 300ms cubic-bezier(.2,.7,.2,1)}
+.vastu-principles [data-grid-line]{transform-box:fill-box}
+.vastu-principles [data-grid-line=column]{transform-origin:center top}
+.vastu-principles [data-grid-line=row]{transform-origin:left center}
+.vastu-principles .principles-cardinals{fill:#526456;font:600 17px system-ui;text-anchor:middle;transition:opacity 300ms cubic-bezier(.2,.7,.2,1)}
+.vastu-principles .principles-home-plan{fill:none;stroke:#26483d;stroke-width:3;stroke-linecap:round;stroke-linejoin:round;transition:opacity 300ms cubic-bezier(.2,.7,.2,1)}
+.vastu-principles .principles-plan-door{stroke:#a6814d;stroke-width:1.7}
+.vastu-principles .principles-room-wash{fill:#cdd7c144;stroke:none}
+.vastu-principles .principles-centre{opacity:.18;transition:opacity 300ms cubic-bezier(.2,.7,.2,1)}
+.vastu-principles .principles-centre rect{fill:#c8ac6c;fill-opacity:.42;stroke:#a6814d;stroke-width:2}
+.vastu-principles .principles-centre path{fill:none;stroke:#a6814d;stroke-width:1}
+.vastu-principles .principles-centre circle{fill:#a6814d}
+.vastu-principles .principles-elements{opacity:0;pointer-events:none;transition:opacity 300ms cubic-bezier(.2,.7,.2,1)}
+.vastu-principles .element-connection{fill:none;stroke:#9da996;stroke-width:1;stroke-dasharray:3 7;opacity:.55}
+.vastu-principles .principles-element{fill:none;stroke:#26483d;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.vastu-principles .principles-element text{fill:#26483d;stroke:none;font:600 20px system-ui;text-anchor:middle}
+.vastu-principles .element-fire>path,.vastu-principles .element-water>path:first-child{fill:#c8ac6c44}
+.vastu-principles .element-earth>path{fill:#dde4d477}
+.vastu-principles .element-space circle:last-of-type{fill:#a6814d;stroke:none}
+.vastu-principles[data-principle=centre] .principles-grid-lines{opacity:.52}
+.vastu-principles[data-principle=centre] .principles-home-plan{opacity:.35}
+.vastu-principles[data-principle=centre] .principles-centre{opacity:1}
+.vastu-principles[data-principle=elements] :is(.principles-grid-lines,.principles-home-plan,.principles-cardinals,.principles-centre){opacity:0}
+.vastu-principles[data-principle=elements] .principles-elements{opacity:1}
+.vastu-principles .principles-visual>figcaption{position:static;font:13px/1.5 system-ui;color:#d4dfc7;text-align:center;margin:8px 0 0;min-height:39px}
+.vastu-principles .principles-copy{min-width:0}
+.vastu-principles .principles-choices{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:30px}
+.vastu-principles .principles-choices button{min-height:46px;border:1px solid #c5d0b9;border-radius:12px;background:transparent;color:#fffdf8;padding:10px 13px;font:650 14px/1.4 system-ui;cursor:pointer;transition:background 180ms cubic-bezier(.2,.7,.2,1),color 180ms cubic-bezier(.2,.7,.2,1),translate 180ms cubic-bezier(.2,.7,.2,1)}
+.vastu-principles .principles-choices button[aria-pressed=true]{background:#fffdf8;color:#26483d;border-color:#fffdf8}
+.vastu-principles .principles-choices button:focus-visible{outline:3px solid var(--principles-gold);outline-offset:4px}
+.vastu-principles .principles-heading-stack,.vastu-principles .principles-body-stack{display:grid}
+.sarsa-services .vastu-principles .principles-heading-stack>h3{grid-area:1/1;color:#fffdf8;font:400 30px/1.2 Georgia,serif;letter-spacing:-.015em;margin:0 0 10px}
+.sarsa-services .vastu-principles .principles-gloss{font:650 14px/1.5 system-ui;color:#dfc993;margin:0 0 20px}
+.sarsa-services .vastu-principles .principles-body-stack>p{grid-area:1/1;margin:0;color:#fffdf8;font:17px/1.65 system-ui;max-width:38ch}
+.vastu-principles .principles-measure{visibility:hidden;pointer-events:none;user-select:none}
+@media(hover:hover) and (pointer:fine){.vastu-principles .principles-choices button:hover{translate:0 -2px;background:#fffdf818}.vastu-principles .principles-choices button[aria-pressed=true]:hover{background:#fffdf8}}
+@media(max-width:1000px){.sarsa-services .vastu-principles{padding:30px}.vastu-principles .principles-grid{gap:24px}.sarsa-services .vastu-principles .principles-heading-stack>h3{font-size:28px}}
+@media(max-width:800px){.vastu-principles .principles-grid{grid-template-columns:1fr;gap:20px}.vastu-principles .principles-visual{width:min(100%,460px);justify-self:center}.vastu-principles .principles-copy{width:100%}.sarsa-services .vastu-principles .principles-body-stack>p{max-width:55ch}.vastu-principles .principles-choices{margin-bottom:24px}}
+@media(max-width:700px){.sarsa-services .vastu-principles{padding:24px;border-radius:24px;margin:24px 0 32px}.sarsa-services .vastu-principles h2{font-size:30px}.sarsa-services .vastu-principles .principles-intro>p:not(.eyebrow){font-size:16px}.sarsa-services .vastu-principles .principles-body-stack>p{font-size:16px}.sarsa-services .vastu-principles .principles-heading-stack>h3{font-size:27px}.vastu-principles .principles-grid{margin-top:20px}.vastu-principles .principles-visual>figcaption{font-size:12px;min-height:36px}.vastu-principles .principles-choices button{padding-inline:11px}}
+@media(max-width:350px){.sarsa-services .vastu-principles{padding:20px}.sarsa-services .vastu-principles h2{font-size:28px}.sarsa-services .vastu-principles .principles-heading-stack>h3{font-size:25px}.vastu-principles .principles-choices{gap:8px}.vastu-principles .principles-choices button{padding-inline:10px}}
+@media(prefers-reduced-motion:reduce){.vastu-principles :is(.principles-grid-lines,.principles-cardinals,.principles-home-plan,.principles-centre,.principles-elements,.principles-choices button){transition:none}.vastu-principles .principles-choices button:hover{translate:none}}
