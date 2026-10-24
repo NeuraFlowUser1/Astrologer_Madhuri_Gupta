@@ -1,0 +1,884 @@
+{
+  "version": 1,
+  "date": "2026-10-24",
+  "currentRound": "08",
+  "acceptedHeightWidthRange": [
+    1.7,
+    1.8
+  ],
+  "directUnmodifiedGeneratedImages": true,
+  "externalPixelModifications": [],
+  "comparisonPdf": "rounds/08/sarsa-tall-three-variations.pdf",
+  "variants": [
+    {
+      "key": "08-a",
+      "label": "Tall cream folio",
+      "description": "Warm cream paper, rounded portrait, celestial corner and broad contact rows.",
+      "nativeSize": [
+        941,
+        1672
+      ],
+      "heightWidthRatio": 1.7768331562167907,
+      "image": "rounds/08/sarsa-08-a-tall-cream-folio.png",
+      "pdf": "rounds/08/sarsa-08-a-tall-cream-folio.pdf",
+      "links": [
+        {
+          "key": "logo",
+          "label": "Sarsa logo",
+          "url": "https://www.sarsajyotishsansthan.com/",
+          "rect": [
+            307,
+            74,
+            451,
+            217
+          ]
+        },
+        {
+          "key": "brand",
+          "label": "Sarsa Jyotish Sansthan",
+          "url": "https://www.sarsajyotishsansthan.com/",
+          "rect": [
+            460,
+            110,
+            900,
+            182
+          ]
+        },
+        {
+          "key": "portrait",
+          "label": "Meet Madhuri Gupta",
+          "url": "https://www.sarsajyotishsansthan.com/about",
+          "rect": [
+            590,
+            225,
+            890,
+            615
+          ]
+        },
+        {
+          "key": "practitioner",
+          "label": "About Madhuri Gupta",
+          "url": "https://www.sarsajyotishsansthan.com/about",
+          "rect": [
+            65,
+            399,
+            565,
+            468
+          ]
+        },
+        {
+          "key": "kundli-matching",
+          "label": "Kundli Matching",
+          "url": "https://www.sarsajyotishsansthan.com/services/kundli-matching",
+          "rect": [
+            20,
+            686,
+            332,
+            961
+          ]
+        },
+        {
+          "key": "kundli-prediction",
+          "label": "Kundli Prediction",
+          "url": "https://www.sarsajyotishsansthan.com/services/kundli-prediction",
+          "rect": [
+            338,
+            686,
+            627,
+            961
+          ]
+        },
+        {
+          "key": "vastu-consultation",
+          "label": "Vastu Consultation for your home",
+          "url": "https://www.sarsajyotishsansthan.com/services/vastu-consultation",
+          "rect": [
+            632,
+            686,
+            926,
+            961
+          ]
+        },
+        {
+          "key": "numerology",
+          "label": "Numerology",
+          "url": "https://www.sarsajyotishsansthan.com/services/numerology",
+          "rect": [
+            130,
+            977,
+            476,
+            1228
+          ]
+        },
+        {
+          "key": "prashna-kundali",
+          "label": "Prashna Kundali",
+          "url": "https://www.sarsajyotishsansthan.com/services/prashna-kundali",
+          "rect": [
+            484,
+            977,
+            836,
+            1228
+          ]
+        },
+        {
+          "key": "book",
+          "label": "Book an appointment",
+          "url": "https://www.sarsajyotishsansthan.com/booking",
+          "rect": [
+            31,
+            1328,
+            279,
+            1400
+          ]
+        },
+        {
+          "key": "enquire",
+          "label": "Ask a question",
+          "url": "https://www.sarsajyotishsansthan.com/contact",
+          "rect": [
+            297,
+            1328,
+            490,
+            1400
+          ]
+        },
+        {
+          "key": "location",
+          "label": "View location in Agra",
+          "url": "https://maps.app.goo.gl/CwQftW8iYfxAZFDo8",
+          "rect": [
+            507,
+            1328,
+            703,
+            1400
+          ]
+        },
+        {
+          "key": "website-action",
+          "label": "Visit website",
+          "url": "https://www.sarsajyotishsansthan.com/",
+          "rect": [
+            721,
+            1328,
+            911,
+            1400
+          ]
+        },
+        {
+          "key": "phone",
+          "label": "Call Sarsa at +91 88815 73437",
+          "url": "tel:+918881573437",
+          "rect": [
+            243,
+            1415,
+            709,
+            1502
+          ]
+        },
+        {
+          "key": "email",
+          "label": "Email Sarsa",
+          "url": "mailto:sarsajyotish@gmail.com",
+          "rect": [
+            28,
+            1520,
+            287,
+            1595
+          ]
+        },
+        {
+          "key": "address",
+          "label": "Sarsa address in Agra",
+          "url": "https://maps.app.goo.gl/CwQftW8iYfxAZFDo8",
+          "rect": [
+            305,
+            1520,
+            604,
+            1595
+          ]
+        },
+        {
+          "key": "website-address",
+          "label": "Sarsa website address",
+          "url": "https://www.sarsajyotishsansthan.com/",
+          "rect": [
+            622,
+            1520,
+            917,
+            1595
+          ]
+        }
+      ]
+    },
+    {
+      "key": "08-b",
+      "label": "Tall pale sage atlas",
+      "description": "Pale sage paper, oval portrait, quieter olive details and broad contact rows.",
+      "nativeSize": [
+        941,
+        1672
+      ],
+      "heightWidthRatio": 1.7768331562167907,
+      "image": "rounds/08/sarsa-08-b-tall-pale-sage-atlas.png",
+      "pdf": "rounds/08/sarsa-08-b-tall-pale-sage-atlas.pdf",
+      "links": [
+        {
+          "key": "logo",
+          "label": "Sarsa logo",
+          "url": "https://www.sarsajyotishsansthan.com/",
+          "rect": [
+            276,
+            71,
+            421,
+            215
+          ]
+        },
+        {
+          "key": "brand",
+          "label": "Sarsa Jyotish Sansthan",
+          "url": "https://www.sarsajyotishsansthan.com/",
+          "rect": [
+            438,
+            105,
+            889,
+            181
+          ]
+        },
+        {
+          "key": "portrait",
+          "label": "Meet Madhuri Gupta",
+          "url": "https://www.sarsajyotishsansthan.com/about",
+          "rect": [
+            586,
+            217,
+            901,
+            639
+          ]
+        },
+        {
+          "key": "practitioner",
+          "label": "About Madhuri Gupta",
+          "url": "https://www.sarsajyotishsansthan.com/about",
+          "rect": [
+            61,
+            393,
+            565,
+            465
+          ]
+        },
+        {
+          "key": "kundli-matching",
+          "label": "Kundli Matching",
+          "url": "https://www.sarsajyotishsansthan.com/services/kundli-matching",
+          "rect": [
+            20,
+            694,
+            332,
+            978
+          ]
+        },
+        {
+          "key": "kundli-prediction",
+          "label": "Kundli Prediction",
+          "url": "https://www.sarsajyotishsansthan.com/services/kundli-prediction",
+          "rect": [
+            339,
+            694,
+            629,
+            978
+          ]
+        },
+        {
+          "key": "vastu-consultation",
+          "label": "Vastu Consultation for your home",
+          "url": "https://www.sarsajyotishsansthan.com/services/vastu-consultation",
+          "rect": [
+            635,
+            694,
+            925,
+            978
+          ]
+        },
+        {
+          "key": "numerology",
+          "label": "Numerology",
+          "url": "https://www.sarsajyotishsansthan.com/services/numerology",
+          "rect": [
+            128,
+            1002,
+            475,
+            1260
+          ]
+        },
+        {
+          "key": "prashna-kundali",
+          "label": "Prashna Kundali",
+          "url": "https://www.sarsajyotishsansthan.com/services/prashna-kundali",
+          "rect": [
+            487,
+            1002,
+            833,
+            1260
+          ]
+        },
+        {
+          "key": "book",
+          "label": "Book an appointment",
+          "url": "https://www.sarsajyotishsansthan.com/booking",
+          "rect": [
+            39,
+            1344,
+            280,
+            1408
+          ]
+        },
+        {
+          "key": "enquire",
+          "label": "Ask a question",
+          "url": "https://www.sarsajyotishsansthan.com/contact",
+          "rect": [
+            300,
+            1344,
+            490,
+            1408
+          ]
+        },
+        {
+          "key": "location",
+          "label": "View location in Agra",
+          "url": "https://maps.app.goo.gl/CwQftW8iYfxAZFDo8",
+          "rect": [
+            510,
+            1344,
+            696,
+            1408
+          ]
+        },
+        {
+          "key": "website-action",
+          "label": "Visit website",
+          "url": "https://www.sarsajyotishsansthan.com/",
+          "rect": [
+            719,
+            1344,
+            907,
+            1408
+          ]
+        },
+        {
+          "key": "phone",
+          "label": "Call Sarsa at +91 88815 73437",
+          "url": "tel:+918881573437",
+          "rect": [
+            260,
+            1425,
+            684,
+            1503
+          ]
+        },
+        {
+          "key": "email",
+          "label": "Email Sarsa",
+          "url": "mailto:sarsajyotish@gmail.com",
+          "rect": [
+            41,
+            1531,
+            300,
+            1600
+          ]
+        },
+        {
+          "key": "address",
+          "label": "Sarsa address in Agra",
+          "url": "https://maps.app.goo.gl/CwQftW8iYfxAZFDo8",
+          "rect": [
+            319,
+            1531,
+            601,
+            1600
+          ]
+        },
+        {
+          "key": "website-address",
+          "label": "Sarsa website address",
+          "url": "https://www.sarsajyotishsansthan.com/",
+          "rect": [
+            621,
+            1531,
+            917,
+            1600
+          ]
+        }
+      ]
+    },
+    {
+      "key": "08-c",
+      "label": "Tall light linen journal",
+      "description": "Light linen paper, arched portrait, lunar corner and broad contact rows.",
+      "nativeSize": [
+        941,
+        1672
+      ],
+      "heightWidthRatio": 1.7768331562167907,
+      "image": "rounds/08/sarsa-08-c-tall-light-linen-journal.png",
+      "pdf": "rounds/08/sarsa-08-c-tall-light-linen-journal.pdf",
+      "links": [
+        {
+          "key": "logo",
+          "label": "Sarsa logo",
+          "url": "https://www.sarsajyotishsansthan.com/",
+          "rect": [
+            260,
+            79,
+            414,
+            224
+          ]
+        },
+        {
+          "key": "brand",
+          "label": "Sarsa Jyotish Sansthan",
+          "url": "https://www.sarsajyotishsansthan.com/",
+          "rect": [
+            425,
+            113,
+            902,
+            192
+          ]
+        },
+        {
+          "key": "portrait",
+          "label": "Meet Madhuri Gupta",
+          "url": "https://www.sarsajyotishsansthan.com/about",
+          "rect": [
+            603,
+            211,
+            902,
+            613
+          ]
+        },
+        {
+          "key": "practitioner",
+          "label": "About Madhuri Gupta",
+          "url": "https://www.sarsajyotishsansthan.com/about",
+          "rect": [
+            48,
+            388,
+            565,
+            463
+          ]
+        },
+        {
+          "key": "kundli-matching",
+          "label": "Kundli Matching",
+          "url": "https://www.sarsajyotishsansthan.com/services/kundli-matching",
+          "rect": [
+            18,
+            680,
+            332,
+            976
+          ]
+        },
+        {
+          "key": "kundli-prediction",
+          "label": "Kundli Prediction",
+          "url": "https://www.sarsajyotishsansthan.com/services/kundli-prediction",
+          "rect": [
+            338,
+            680,
+            630,
+            976
+          ]
+        },
+        {
+          "key": "vastu-consultation",
+          "label": "Vastu Consultation for your home",
+          "url": "https://www.sarsajyotishsansthan.com/services/vastu-consultation",
+          "rect": [
+            635,
+            680,
+            925,
+            976
+          ]
+        },
+        {
+          "key": "numerology",
+          "label": "Numerology",
+          "url": "https://www.sarsajyotishsansthan.com/services/numerology",
+          "rect": [
+            126,
+            984,
+            472,
+            1237
+          ]
+        },
+        {
+          "key": "prashna-kundali",
+          "label": "Prashna Kundali",
+          "url": "https://www.sarsajyotishsansthan.com/services/prashna-kundali",
+          "rect": [
+            485,
+            984,
+            836,
+            1237
+          ]
+        },
+        {
+          "key": "book",
+          "label": "Book an appointment",
+          "url": "https://www.sarsajyotishsansthan.com/booking",
+          "rect": [
+            31,
+            1327,
+            287,
+            1400
+          ]
+        },
+        {
+          "key": "enquire",
+          "label": "Ask a question",
+          "url": "https://www.sarsajyotishsansthan.com/contact",
+          "rect": [
+            306,
+            1327,
+            495,
+            1400
+          ]
+        },
+        {
+          "key": "location",
+          "label": "View location in Agra",
+          "url": "https://maps.app.goo.gl/CwQftW8iYfxAZFDo8",
+          "rect": [
+            513,
+            1327,
+            708,
+            1400
+          ]
+        },
+        {
+          "key": "website-action",
+          "label": "Visit website",
+          "url": "https://www.sarsajyotishsansthan.com/",
+          "rect": [
+            727,
+            1327,
+            917,
+            1400
+          ]
+        },
+        {
+          "key": "phone",
+          "label": "Call Sarsa at +91 88815 73437",
+          "url": "tel:+918881573437",
+          "rect": [
+            255,
+            1416,
+            698,
+            1502
+          ]
+        },
+        {
+          "key": "email",
+          "label": "Email Sarsa",
+          "url": "mailto:sarsajyotish@gmail.com",
+          "rect": [
+            27,
+            1520,
+            298,
+            1598
+          ]
+        },
+        {
+          "key": "address",
+          "label": "Sarsa address in Agra",
+          "url": "https://maps.app.goo.gl/CwQftW8iYfxAZFDo8",
+          "rect": [
+            315,
+            1520,
+            600,
+            1598
+          ]
+        },
+        {
+          "key": "website-address",
+          "label": "Sarsa website address",
+          "url": "https://www.sarsajyotishsansthan.com/",
+          "rect": [
+            618,
+            1520,
+            919,
+            1598
+          ]
+        }
+      ]
+    }
+  ],
+  "files": [
+    {
+      "path": "rounds/01/sarsa-editorial-a-ivory.pdf",
+      "bytes": 1937074,
+      "sha256": "91ea237106530cf598505e6402a344e9782d77a9a3dbb889a2533a04352b5282"
+    },
+    {
+      "path": "rounds/01/sarsa-editorial-a-ivory.png",
+      "bytes": 1959665,
+      "sha256": "d66f5dd5c83eaa342adf126828b9852bb2d35a48f7f49f5752b6e8e4c1e95261"
+    },
+    {
+      "path": "rounds/01/sarsa-editorial-b-sage.pdf",
+      "bytes": 1868980,
+      "sha256": "84662a9f0c5b30f4de03862119fac6843d00ded92553757fd2a23a9870e5230d"
+    },
+    {
+      "path": "rounds/01/sarsa-editorial-b-sage.png",
+      "bytes": 1812092,
+      "sha256": "6c487a28ac013674b035a9bcf3d19453a6572c636cb3efa97d4129d482d45057"
+    },
+    {
+      "path": "rounds/01/sarsa-editorial-c-forest.pdf",
+      "bytes": 1815775,
+      "sha256": "fe6bc64551b361527f6ed142be5b942b6b7570beaaadd38526d1a06d1408e588"
+    },
+    {
+      "path": "rounds/01/sarsa-editorial-c-forest.png",
+      "bytes": 1711989,
+      "sha256": "857f2f24b3bc209b4b591d02fa2533dd06a01fe050042d1a8eda76458c8eabbb"
+    },
+    {
+      "path": "rounds/01/sarsa-editorial-three-versions.pdf",
+      "bytes": 5613478,
+      "sha256": "caa577d2f216912e989a5ae99d2402509ecaf06f0d9d847e8a6aefcba151686c"
+    },
+    {
+      "path": "rounds/02/sarsa-02-a-illustrated-parchment.pdf",
+      "bytes": 3048350,
+      "sha256": "679a660605f530b1815d8882e0f734ca5fd772aaae34cc46bc39b59808d306c7"
+    },
+    {
+      "path": "rounds/02/sarsa-02-a-illustrated-parchment.png",
+      "bytes": 2560204,
+      "sha256": "55059fdf7daa9160e156dda2e5eb9fde0b2a045e30291b648507e19ea2de406f"
+    },
+    {
+      "path": "rounds/02/sarsa-02-b-textured-forest.pdf",
+      "bytes": 2917723,
+      "sha256": "c3fd9be0b8e60059251eebcd32323703ee2d625116d9413d9a6998af2cbc5cd0"
+    },
+    {
+      "path": "rounds/02/sarsa-02-b-textured-forest.png",
+      "bytes": 2416503,
+      "sha256": "95de7908e54914711e4439b212679601389814be382ac504eb77979bb47b8785"
+    },
+    {
+      "path": "rounds/03/sarsa-03-a-balanced-parchment.pdf",
+      "bytes": 2751635,
+      "sha256": "1e923ddf7abeaaced1f24b602d678711ad4234b56b2f6fca53ecc829c8e57a6d"
+    },
+    {
+      "path": "rounds/03/sarsa-03-a-balanced-parchment.png",
+      "bytes": 2287463,
+      "sha256": "0af0aa947f06de9d39ad031cd6c869039faf585e596e5ec6d37ca3bd86b015b9"
+    },
+    {
+      "path": "rounds/03/sarsa-reviewed-background-options.pdf",
+      "bytes": 5670511,
+      "sha256": "82f303efd86788e8b7456f55eafd8cf024177f14fafb8ac5e0419c713e654a02"
+    },
+    {
+      "path": "rounds/05/sarsa-05-a-cream-folio.pdf",
+      "bytes": 2717127,
+      "sha256": "d8a6ba9c6450c77e1f04d5b6d61ce3a6415f558c96cdad2f883904eb672a17ac"
+    },
+    {
+      "path": "rounds/05/sarsa-05-a-cream-folio.png",
+      "bytes": 2360742,
+      "sha256": "da62ac4babbf84e0c545dcb9c0eb90abc153d44c48585193a539270a0f524c42"
+    },
+    {
+      "path": "rounds/05/sarsa-05-b-pale-sage-ledger.pdf",
+      "bytes": 2808482,
+      "sha256": "047ab15d5f61e4357431c61bb115f416b7452c7166399bbd1d81c8cd0cc2ce10"
+    },
+    {
+      "path": "rounds/05/sarsa-05-b-pale-sage-ledger.png",
+      "bytes": 2476503,
+      "sha256": "2f9cb9c680f20ad365d4f547ba64f3a5baacf412212851083040e5c5a6b6bd6b"
+    },
+    {
+      "path": "rounds/05/sarsa-05-c-warm-linen-journal.pdf",
+      "bytes": 2845953,
+      "sha256": "b4ae0355c02b629f38d5d89f58ccb9c6baf599c23c8aa543335e89d1a2e50db0"
+    },
+    {
+      "path": "rounds/05/sarsa-05-c-warm-linen-journal.png",
+      "bytes": 2558094,
+      "sha256": "aa2945e3b9a3b4e0b3438639e00d43103ca0ed20b48bc06beaae0171cf4198dd"
+    },
+    {
+      "path": "rounds/05/sarsa-light-three-variations.pdf",
+      "bytes": 8372780,
+      "sha256": "55d3ae1369b971e6eed0eb0c947e9229778d4a6dab37b6cf32d197588ab713e5"
+    },
+    {
+      "path": "rounds/08/sarsa-08-a-tall-cream-folio.pdf",
+      "bytes": 2992550,
+      "sha256": "994c7eb8bcb871320ac22fcd8af3d1d091bd921f30defcd087effedb8ce545a9"
+    },
+    {
+      "path": "rounds/08/sarsa-08-a-tall-cream-folio.png",
+      "bytes": 2622727,
+      "sha256": "dab451025e0a4a2f6fe01fcc08fc52d66621114bb299e6bdeb4a50daf5dc68be"
+    },
+    {
+      "path": "rounds/08/sarsa-08-b-tall-pale-sage-atlas.pdf",
+      "bytes": 3050023,
+      "sha256": "cf5790ff34ee232c8b5ddebf12ba68df03a25f4735f2f05df2c28f1aec212102"
+    },
+    {
+      "path": "rounds/08/sarsa-08-b-tall-pale-sage-atlas.png",
+      "bytes": 2736019,
+      "sha256": "201005413d45bd2f781deb1cab4ca0bd076038716ab79277c816d63cb1ccc0b3"
+    },
+    {
+      "path": "rounds/08/sarsa-08-c-tall-light-linen-journal.pdf",
+      "bytes": 3115916,
+      "sha256": "d6a93a80aa35d8d8105a125590dd34d12eadc2cdab536b4148b8762e4f5c1d73"
+    },
+    {
+      "path": "rounds/08/sarsa-08-c-tall-light-linen-journal.png",
+      "bytes": 2772754,
+      "sha256": "6a520f79d82b0c599b15b652e23709866ae0b4074b1c72cc11109d300e120b99"
+    },
+    {
+      "path": "rounds/08/sarsa-tall-three-variations.pdf",
+      "bytes": 9159699,
+      "sha256": "15166e30e2ccbadf67acbc4c08d57d025938eacef142a5351898839b55284247"
+    },
+    {
+      "path": "rounds/01/drafts/variant-a-ivory-01.png",
+      "bytes": 2187642,
+      "sha256": "3ee3c8e539ef40693e8ad13122555e061ecb45c5cd8b9b433d3dfa0eeedbf038"
+    },
+    {
+      "path": "rounds/01/drafts/variant-a-ivory-02.png",
+      "bytes": 1959665,
+      "sha256": "d66f5dd5c83eaa342adf126828b9852bb2d35a48f7f49f5752b6e8e4c1e95261"
+    },
+    {
+      "path": "rounds/01/drafts/variant-b-sage-01.png",
+      "bytes": 2022484,
+      "sha256": "378c72d66bef45067cb0be40b2a1ce5e480ded53492b41804fa1892e7b1b81ab"
+    },
+    {
+      "path": "rounds/01/drafts/variant-b-sage-02.png",
+      "bytes": 1812092,
+      "sha256": "6c487a28ac013674b035a9bcf3d19453a6572c636cb3efa97d4129d482d45057"
+    },
+    {
+      "path": "rounds/01/drafts/variant-c-forest-01.png",
+      "bytes": 1963870,
+      "sha256": "262b3072a1f00ebfeb1e89e488437b8fefe366cbf923bda9a2911e2a5e5f1efc"
+    },
+    {
+      "path": "rounds/01/drafts/variant-c-forest-02.png",
+      "bytes": 1711989,
+      "sha256": "857f2f24b3bc209b4b591d02fa2533dd06a01fe050042d1a8eda76458c8eabbb"
+    },
+    {
+      "path": "rounds/02/drafts/02-a-illustrated-parchment.png",
+      "bytes": 2560204,
+      "sha256": "55059fdf7daa9160e156dda2e5eb9fde0b2a045e30291b648507e19ea2de406f"
+    },
+    {
+      "path": "rounds/02/drafts/02-b-textured-forest.png",
+      "bytes": 2416503,
+      "sha256": "95de7908e54914711e4439b212679601389814be382ac504eb77979bb47b8785"
+    },
+    {
+      "path": "rounds/03/drafts/03-a-balanced-parchment.png",
+      "bytes": 2287463,
+      "sha256": "0af0aa947f06de9d39ad031cd6c869039faf585e596e5ec6d37ca3bd86b015b9"
+    },
+    {
+      "path": "rounds/04/drafts/04-a-cream-folio.png",
+      "bytes": 2474316,
+      "sha256": "b3d032d5b861bb8d6c18674de2b3c74f1236001c8a8c3d2c8b78b3d84b8533a2"
+    },
+    {
+      "path": "rounds/04/drafts/04-b-pale-sage-ledger.png",
+      "bytes": 2647057,
+      "sha256": "519f1a3a9a033b13850a8b59758d69517501435e305e3182d9ff12b57d473eca"
+    },
+    {
+      "path": "rounds/04/drafts/04-c-warm-linen-journal.png",
+      "bytes": 2623658,
+      "sha256": "bdcdda96fc00fe8d879d7d557f6bdc54baaec91aff58ad3fbaa0125ba005b314"
+    },
+    {
+      "path": "rounds/05/drafts/05-a-cream-folio.png",
+      "bytes": 2360742,
+      "sha256": "da62ac4babbf84e0c545dcb9c0eb90abc153d44c48585193a539270a0f524c42"
+    },
+    {
+      "path": "rounds/05/drafts/05-b-pale-sage-ledger.png",
+      "bytes": 2476503,
+      "sha256": "2f9cb9c680f20ad365d4f547ba64f3a5baacf412212851083040e5c5a6b6bd6b"
+    },
+    {
+      "path": "rounds/05/drafts/05-c-warm-linen-journal.png",
+      "bytes": 2558094,
+      "sha256": "aa2945e3b9a3b4e0b3438639e00d43103ca0ed20b48bc06beaae0171cf4198dd"
+    },
+    {
+      "path": "rounds/06/drafts/06-a-tall-cream-draft.png",
+      "bytes": 2797459,
+      "sha256": "586a91972423ab9a8900d6cabf73fef6f668325e4f2d88d64e1e07ce7abf6923"
+    },
+    {
+      "path": "rounds/07/drafts/07-a-cream-correction.png",
+      "bytes": 2631317,
+      "sha256": "09b389073c9958df72b39b721f22d315862809de8c95aed3a4a40cfc2789568d"
+    },
+    {
+      "path": "rounds/08/drafts/08-a-tall-cream-folio.png",
+      "bytes": 2622727,
+      "sha256": "dab451025e0a4a2f6fe01fcc08fc52d66621114bb299e6bdeb4a50daf5dc68be"
+    },
+    {
+      "path": "rounds/08/drafts/08-b-tall-pale-sage-atlas.png",
+      "bytes": 2736019,
+      "sha256": "201005413d45bd2f781deb1cab4ca0bd076038716ab79277c816d63cb1ccc0b3"
+    },
+    {
+      "path": "rounds/08/drafts/08-c-tall-light-linen-journal.png",
+      "bytes": 2772754,
+      "sha256": "6a520f79d82b0c599b15b652e23709866ae0b4074b1c72cc11109d300e120b99"
+    },
+    {
+      "path": "original-delivery/sarsa-poster.png",
+      "bytes": 2585883,
+      "sha256": "3b2cadbdfb58dbb7b36dcbd7b1611e9e3445b3cd95beeaff13d70661938c331c"
+    },
+    {
+      "path": "original-delivery/sarsa-clickable-poster.pdf",
+      "bytes": 3601464,
+      "sha256": "0d716dde06096cb12a60ccbff947a301be2b6c98138c800adf0dbc56590b053f"
+    },
+    {
+      "path": "original-delivery/sarsa-logo-enriched.png",
+      "bytes": 1277267,
+      "sha256": "6f32fa60bcb6ed8ed58ddc54cbfaf5dbd1495d36a90c9c5f030e1979ccff450f"
+    },
+    {
+      "path": "logo-references/sarsa-logo-inset-generated.png",
+      "bytes": 793098,
+      "sha256": "6d1927418519ffee6511ffcf5ed0629124d18eb024aed4a85ea3b957e027efac"
+    },
+    {
+      "path": "logo-references/sarsa-richer-circle-generated.png",
+      "bytes": 1240195,
+      "sha256": "8361d95c2142f98845d74b873d22e4f28c964ccc3af3cb76d921463b99395d5d"
+    }
+  ]
+}

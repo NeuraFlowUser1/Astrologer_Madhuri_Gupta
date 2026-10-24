@@ -1,0 +1,59 @@
+{
+  "date": "2026-10-24",
+  "passed": true,
+  "archiveAssets": 53,
+  "archiveBytes": 146081276,
+  "allArchiveHashesMatch": true,
+  "externalPixelChanges": [],
+  "variants": [
+    {
+      "key": "08-a",
+      "nativeSize": [
+        941,
+        1672
+      ],
+      "heightWidthRatio": 1.7768331562167907,
+      "links": 17,
+      "imageCount": 1,
+      "fontCount": 0,
+      "textCharacters": 0,
+      "pixelEquality": true,
+      "invisibleNonOverlappingLinks": true
+    },
+    {
+      "key": "08-b",
+      "nativeSize": [
+        941,
+        1672
+      ],
+      "heightWidthRatio": 1.7768331562167907,
+      "links": 17,
+      "imageCount": 1,
+      "fontCount": 0,
+      "textCharacters": 0,
+      "pixelEquality": true,
+      "invisibleNonOverlappingLinks": true
+    },
+    {
+      "key": "08-c",
+      "nativeSize": [
+        941,
+        1672
+      ],
+      "heightWidthRatio": 1.7768331562167907,
+      "links": 17,
+      "imageCount": 1,
+      "fontCount": 0,
+      "textCharacters": 0,
+      "pixelEquality": true,
+      "invisibleNonOverlappingLinks": true
+    }
+  ],
+  "comparisonPages": 3,
+  "apiBundleExcludesMarketing": true,
+  "providerCalls": 0,
+  "customerActions": 0,
+  "fullApplicationSuiteRun": false,
+  "localLinks": 102,
+  "missingLinks": []
+}

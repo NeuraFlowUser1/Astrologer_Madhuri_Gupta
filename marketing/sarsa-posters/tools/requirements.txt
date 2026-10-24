@@ -1,0 +1,4 @@
+# Tested offline collateral-verification environment; outside the website API.
+Pillow==13.0.0
+numpy==2.5.4
+PyMuPDF==2.0

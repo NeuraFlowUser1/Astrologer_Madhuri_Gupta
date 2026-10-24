@@ -1,0 +1,827 @@
+{
+  "date": "2026-10-24",
+  "passed": true,
+  "linkCentreChecks": 102,
+  "physicalDeviceTest": false,
+  "phoneOrEmailActivated": false,
+  "views": [
+    {
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "geometry": {
+        "viewport": 1440,
+        "scrollWidth": 1440,
+        "images": [
+          {
+            "width": 941,
+            "height": 1672,
+            "displayWidth": 442.65625,
+            "displayHeight": 786.515625
+          },
+          {
+            "width": 941,
+            "height": 1672,
+            "displayWidth": 442.671875,
+            "displayHeight": 786.546875
+          },
+          {
+            "width": 941,
+            "height": 1672,
+            "displayWidth": 442.65625,
+            "displayHeight": 786.515625
+          }
+        ],
+        "links": 51
+      },
+      "checks": [
+        {
+          "poster": "08-a",
+          "key": "logo",
+          "href": "https://www.sarsajyotishsansthan.com/",
+          "withinImage": true,
+          "centreHitsAnchor": true
+        },
+        {
+          "poster": "08-a",
+          "key": "brand",
+          "href": "https://www.sarsajyotishsansthan.com/",
+          "withinImage": true,
+          "centreHitsAnchor": true
+        },
+        {
+          "poster": "08-a",
+          "key": "portrait",
+          "href": "https://www.sarsajyotishsansthan.com/about",
+          "withinImage": true,
+          "centreHitsAnchor": true
+        },
+        {
+          "poster": "08-a",
+          "key": "practitioner",
+          "href": "https://www.sarsajyotishsansthan.com/about",
+          "withinImage": true,
+          "centreHitsAnchor": true
+        },
+        {
+          "poster": "08-a",
+          "key": "kundli-matching",
+          "href": "https://www.sarsajyotishsansthan.com/services/kundli-matching",
+          "withinImage": true,
+          "centreHitsAnchor": true
+        },
+        {
+          "poster": "08-a",
+          "key": "kundli-prediction",
+          "href": "https://www.sarsajyotishsansthan.com/services/kundli-prediction",
+          "withinImage": true,
+          "centreHitsAnchor": true
+        },
+        {
+          "poster": "08-a",
+          "key": "vastu-consultation",
+          "href": "https://www.sarsajyotishsansthan.com/services/vastu-consultation",
+          "withinImage": true,
+          "centreHitsAnchor": true
+        },
+        {
+          "poster": "08-a",
+          "key": "numerology",
+          "href": "https://www.sarsajyotishsansthan.com/services/numerology",
+          "withinImage": true,
+          "centreHitsAnchor": true
+        },
+        {
+          "poster": "08-a",
+          "key": "prashna-kundali",
+          "href": "https://www.sarsajyotishsansthan.com/services/prashna-kundali",
+          "withinImage": true,
+          "centreHitsAnchor": true
+        },
+        {
+          "poster": "08-a",
+          "key": "book",
+          "href": "https://www.sarsajyotishsansthan.com/booking",
+          "withinImage": true,
+          "centreHitsAnchor": true
+        },
+        {
+          "poster": "08-a",
+          "key": "enquire",
+          "href": "https://www.sarsajyotishsansthan.com/contact",
+          "withinImage": true,
+          "centreHitsAnchor": true
+        },
+        {
+          "poster": "08-a",
+          "key": "location",
+          "href": "https://maps.app.goo.gl/CwQftW8iYfxAZFDo8",
+          "withinImage": true,
+          "centreHitsAnchor": true
+        },
+        {
+          "poster": "08-a",
+          "key": "website-action",
+          "href": "https://www.sarsajyotishsansthan.com/",
+          "withinImage": true,
+          "centreHitsAnchor": true
+        },
+        {
+          "poster": "08-a",
+          "key": "phone",
+          "href": "tel:+918881573437",
+          "withinImage": true,
+          "centreHitsAnchor": true
+        },
+        {
+          "poster": "08-a",
+          "key": "email",
+          "href": "mailto:sarsajyotish@gmail.com",
+          "withinImage": true,
+          "centreHitsAnchor": true
+        },
+        {
+          "poster": "08-a",
+          "key": "address",
+          "href": "https://maps.app.goo.gl/CwQftW8iYfxAZFDo8",
+          "withinImage": true,
+          "centreHitsAnchor": true
+        },
+        {
+          "poster": "08-a",
+          "key": "website-address",
+          "href": "https://www.sarsajyotishsansthan.com/",
+          "withinImage": true,
+          "centreHitsAnchor": true
+        },
+        {
+          "poster": "08-b",
+          "key": "logo",
+          "href": "https://www.sarsajyotishsansthan.com/",
+          "withinImage": true,
+          "centreHitsAnchor": true
+        },
+        {
+          "poster": "08-b",
+          "key": "brand",
+          "href": "https://www.sarsajyotishsansthan.com/",
+          "withinImage": true,
+          "centreHitsAnchor": true
+        },
+        {
+          "poster": "08-b",
+          "key": "portrait",
+          "href": "https://www.sarsajyotishsansthan.com/about",
+          "withinImage": true,
+          "centreHitsAnchor": true
+        },
+        {
+          "poster": "08-b",
+          "key": "practitioner",
+          "href": "https://www.sarsajyotishsansthan.com/about",
+          "withinImage": true,
+          "centreHitsAnchor": true
+        },
+        {
+          "poster": "08-b",
+          "key": "kundli-matching",
+          "href": "https://www.sarsajyotishsansthan.com/services/kundli-matching",
+          "withinImage": true,
+          "centreHitsAnchor": true
+        },
+        {
+          "poster": "08-b",
+          "key": "kundli-prediction",
+          "href": "https://www.sarsajyotishsansthan.com/services/kundli-prediction",
+          "withinImage": true,
+          "centreHitsAnchor": true
+        },
+        {
+          "poster": "08-b",
+          "key": "vastu-consultation",
+          "href": "https://www.sarsajyotishsansthan.com/services/vastu-consultation",
+          "withinImage": true,
+          "centreHitsAnchor": true
+        },
+        {
+          "poster": "08-b",
+          "key": "numerology",
+          "href": "https://www.sarsajyotishsansthan.com/services/numerology",
+          "withinImage": true,
+          "centreHitsAnchor": true
+        },
+        {
+          "poster": "08-b",
+          "key": "prashna-kundali",
+          "href": "https://www.sarsajyotishsansthan.com/services/prashna-kundali",
+          "withinImage": true,
+          "centreHitsAnchor": true
+        },
+        {
+          "poster": "08-b",
+          "key": "book",
+          "href": "https://www.sarsajyotishsansthan.com/booking",
+          "withinImage": true,
+          "centreHitsAnchor": true
+        },
+        {
+          "poster": "08-b",
+          "key": "enquire",
+          "href": "https://www.sarsajyotishsansthan.com/contact",
+          "withinImage": true,
+          "centreHitsAnchor": true
+        },
+        {
+          "poster": "08-b",
+          "key": "location",
+          "href": "https://maps.app.goo.gl/CwQftW8iYfxAZFDo8",
+          "withinImage": true,
+          "centreHitsAnchor": true
+        },
+        {
+          "poster": "08-b",
+          "key": "website-action",
+          "href": "https://www.sarsajyotishsansthan.com/",
+          "withinImage": true,
+          "centreHitsAnchor": true
+        },
+        {
+          "poster": "08-b",
+          "key": "phone",
+          "href": "tel:+918881573437",
+          "withinImage": true,
+          "centreHitsAnchor": true
+        },
+        {
+          "poster": "08-b",
+          "key": "email",
+          "href": "mailto:sarsajyotish@gmail.com",
+          "withinImage": true,
+          "centreHitsAnchor": true
+        },
+        {
+          "poster": "08-b",
+          "key": "address",
+          "href": "https://maps.app.goo.gl/CwQftW8iYfxAZFDo8",
+          "withinImage": true,
+          "centreHitsAnchor": true
+        },
+        {
+          "poster": "08-b",
+          "key": "website-address",
+          "href": "https://www.sarsajyotishsansthan.com/",
+          "withinImage": true,
+          "centreHitsAnchor": true
+        },
+        {
+          "poster": "08-c",
+          "key": "logo",
+          "href": "https://www.sarsajyotishsansthan.com/",
+          "withinImage": true,
+          "centreHitsAnchor": true
+        },
+        {
+          "poster": "08-c",
+          "key": "brand",
+          "href": "https://www.sarsajyotishsansthan.com/",
+          "withinImage": true,
+          "centreHitsAnchor": true
+        },
+        {
+          "poster": "08-c",
+          "key": "portrait",
+          "href": "https://www.sarsajyotishsansthan.com/about",
+          "withinImage": true,
+          "centreHitsAnchor": true
+        },
+        {
+          "poster": "08-c",
+          "key": "practitioner",
+          "href": "https://www.sarsajyotishsansthan.com/about",
+          "withinImage": true,
+          "centreHitsAnchor": true
+        },
+        {
+          "poster": "08-c",
+          "key": "kundli-matching",
+          "href": "https://www.sarsajyotishsansthan.com/services/kundli-matching",
+          "withinImage": true,
+          "centreHitsAnchor": true
+        },
+        {
+          "poster": "08-c",
+          "key": "kundli-prediction",
+          "href": "https://www.sarsajyotishsansthan.com/services/kundli-prediction",
+          "withinImage": true,
+          "centreHitsAnchor": true
+        },
+        {
+          "poster": "08-c",
+          "key": "vastu-consultation",
+          "href": "https://www.sarsajyotishsansthan.com/services/vastu-consultation",
+          "withinImage": true,
+          "centreHitsAnchor": true
+        },
+        {
+          "poster": "08-c",
+          "key": "numerology",
+          "href": "https://www.sarsajyotishsansthan.com/services/numerology",
+          "withinImage": true,
+          "centreHitsAnchor": true
+        },
+        {
+          "poster": "08-c",
+          "key": "prashna-kundali",
+          "href": "https://www.sarsajyotishsansthan.com/services/prashna-kundali",
+          "withinImage": true,
+          "centreHitsAnchor": true
+        },
+        {
+          "poster": "08-c",
+          "key": "book",
+          "href": "https://www.sarsajyotishsansthan.com/booking",
+          "withinImage": true,
+          "centreHitsAnchor": true
+        },
+        {
+          "poster": "08-c",
+          "key": "enquire",
+          "href": "https://www.sarsajyotishsansthan.com/contact",
+          "withinImage": true,
+          "centreHitsAnchor": true
+        },
+        {
+          "poster": "08-c",
+          "key": "location",
+          "href": "https://maps.app.goo.gl/CwQftW8iYfxAZFDo8",
+          "withinImage": true,
+          "centreHitsAnchor": true
+        },
+        {
+          "poster": "08-c",
+          "key": "website-action",
+          "href": "https://www.sarsajyotishsansthan.com/",
+          "withinImage": true,
+          "centreHitsAnchor": true
+        },
+        {
+          "poster": "08-c",
+          "key": "phone",
+          "href": "tel:+918881573437",
+          "withinImage": true,
+          "centreHitsAnchor": true
+        },
+        {
+          "poster": "08-c",
+          "key": "email",
+          "href": "mailto:sarsajyotish@gmail.com",
+          "withinImage": true,
+          "centreHitsAnchor": true
+        },
+        {
+          "poster": "08-c",
+          "key": "address",
+          "href": "https://maps.app.goo.gl/CwQftW8iYfxAZFDo8",
+          "withinImage": true,
+          "centreHitsAnchor": true
+        },
+        {
+          "poster": "08-c",
+          "key": "website-address",
+          "href": "https://www.sarsajyotishsansthan.com/",
+          "withinImage": true,
+          "centreHitsAnchor": true
+        }
+      ],
+      "modes": [
+        {
+          "key": "08-a",
+          "visible": "08-a",
+          "pressed": "true"
+        },
+        {
+          "key": "08-b",
+          "visible": "08-b",
+          "pressed": "true"
+        },
+        {
+          "key": "08-c",
+          "visible": "08-c",
+          "pressed": "true"
+        }
+      ],
+      "overlayWorks": true,
+      "passed": true
+    },
+    {
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "geometry": {
+        "viewport": 390,
+        "scrollWidth": 390,
+        "images": [
+          {
+            "width": 941,
+            "height": 1672,
+            "displayWidth": 358,
+            "displayHeight": 636.09375
+          },
+          {
+            "width": 941,
+            "height": 1672,
+            "displayWidth": 358,
+            "displayHeight": 636.09375
+          },
+          {
+            "width": 941,
+            "height": 1672,
+            "displayWidth": 358,
+            "displayHeight": 636.09375
+          }
+        ],
+        "links": 51
+      },
+      "checks": [
+        {
+          "poster": "08-a",
+          "key": "logo",
+          "href": "https://www.sarsajyotishsansthan.com/",
+          "withinImage": true,
+          "centreHitsAnchor": true
+        },
+        {
+          "poster": "08-a",
+          "key": "brand",
+          "href": "https://www.sarsajyotishsansthan.com/",
+          "withinImage": true,
+          "centreHitsAnchor": true
+        },
+        {
+          "poster": "08-a",
+          "key": "portrait",
+          "href": "https://www.sarsajyotishsansthan.com/about",
+          "withinImage": true,
+          "centreHitsAnchor": true
+        },
+        {
+          "poster": "08-a",
+          "key": "practitioner",
+          "href": "https://www.sarsajyotishsansthan.com/about",
+          "withinImage": true,
+          "centreHitsAnchor": true
+        },
+        {
+          "poster": "08-a",
+          "key": "kundli-matching",
+          "href": "https://www.sarsajyotishsansthan.com/services/kundli-matching",
+          "withinImage": true,
+          "centreHitsAnchor": true
+        },
+        {
+          "poster": "08-a",
+          "key": "kundli-prediction",
+          "href": "https://www.sarsajyotishsansthan.com/services/kundli-prediction",
+          "withinImage": true,
+          "centreHitsAnchor": true
+        },
+        {
+          "poster": "08-a",
+          "key": "vastu-consultation",
+          "href": "https://www.sarsajyotishsansthan.com/services/vastu-consultation",
+          "withinImage": true,
+          "centreHitsAnchor": true
+        },
+        {
+          "poster": "08-a",
+          "key": "numerology",
+          "href": "https://www.sarsajyotishsansthan.com/services/numerology",
+          "withinImage": true,
+          "centreHitsAnchor": true
+        },
+        {
+          "poster": "08-a",
+          "key": "prashna-kundali",
+          "href": "https://www.sarsajyotishsansthan.com/services/prashna-kundali",
+          "withinImage": true,
+          "centreHitsAnchor": true
+        },
+        {
+          "poster": "08-a",
+          "key": "book",
+          "href": "https://www.sarsajyotishsansthan.com/booking",
+          "withinImage": true,
+          "centreHitsAnchor": true
+        },
+        {
+          "poster": "08-a",
+          "key": "enquire",
+          "href": "https://www.sarsajyotishsansthan.com/contact",
+          "withinImage": true,
+          "centreHitsAnchor": true
+        },
+        {
+          "poster": "08-a",
+          "key": "location",
+          "href": "https://maps.app.goo.gl/CwQftW8iYfxAZFDo8",
+          "withinImage": true,
+          "centreHitsAnchor": true
+        },
+        {
+          "poster": "08-a",
+          "key": "website-action",
+          "href": "https://www.sarsajyotishsansthan.com/",
+          "withinImage": true,
+          "centreHitsAnchor": true
+        },
+        {
+          "poster": "08-a",
+          "key": "phone",
+          "href": "tel:+918881573437",
+          "withinImage": true,
+          "centreHitsAnchor": true
+        },
+        {
+          "poster": "08-a",
+          "key": "email",
+          "href": "mailto:sarsajyotish@gmail.com",
+          "withinImage": true,
+          "centreHitsAnchor": true
+        },
+        {
+          "poster": "08-a",
+          "key": "address",
+          "href": "https://maps.app.goo.gl/CwQftW8iYfxAZFDo8",
+          "withinImage": true,
+          "centreHitsAnchor": true
+        },
+        {
+          "poster": "08-a",
+          "key": "website-address",
+          "href": "https://www.sarsajyotishsansthan.com/",
+          "withinImage": true,
+          "centreHitsAnchor": true
+        },
+        {
+          "poster": "08-b",
+          "key": "logo",
+          "href": "https://www.sarsajyotishsansthan.com/",
+          "withinImage": true,
+          "centreHitsAnchor": true
+        },
+        {
+          "poster": "08-b",
+          "key": "brand",
+          "href": "https://www.sarsajyotishsansthan.com/",
+          "withinImage": true,
+          "centreHitsAnchor": true
+        },
+        {
+          "poster": "08-b",
+          "key": "portrait",
+          "href": "https://www.sarsajyotishsansthan.com/about",
+          "withinImage": true,
+          "centreHitsAnchor": true
+        },
+        {
+          "poster": "08-b",
+          "key": "practitioner",
+          "href": "https://www.sarsajyotishsansthan.com/about",
+          "withinImage": true,
+          "centreHitsAnchor": true
+        },
+        {
+          "poster": "08-b",
+          "key": "kundli-matching",
+          "href": "https://www.sarsajyotishsansthan.com/services/kundli-matching",
+          "withinImage": true,
+          "centreHitsAnchor": true
+        },
+        {
+          "poster": "08-b",
+          "key": "kundli-prediction",
+          "href": "https://www.sarsajyotishsansthan.com/services/kundli-prediction",
+          "withinImage": true,
+          "centreHitsAnchor": true
+        },
+        {
+          "poster": "08-b",
+          "key": "vastu-consultation",
+          "href": "https://www.sarsajyotishsansthan.com/services/vastu-consultation",
+          "withinImage": true,
+          "centreHitsAnchor": true
+        },
+        {
+          "poster": "08-b",
+          "key": "numerology",
+          "href": "https://www.sarsajyotishsansthan.com/services/numerology",
+          "withinImage": true,
+          "centreHitsAnchor": true
+        },
+        {
+          "poster": "08-b",
+          "key": "prashna-kundali",
+          "href": "https://www.sarsajyotishsansthan.com/services/prashna-kundali",
+          "withinImage": true,
+          "centreHitsAnchor": true
+        },
+        {
+          "poster": "08-b",
+          "key": "book",
+          "href": "https://www.sarsajyotishsansthan.com/booking",
+          "withinImage": true,
+          "centreHitsAnchor": true
+        },
+        {
+          "poster": "08-b",
+          "key": "enquire",
+          "href": "https://www.sarsajyotishsansthan.com/contact",
+          "withinImage": true,
+          "centreHitsAnchor": true
+        },
+        {
+          "poster": "08-b",
+          "key": "location",
+          "href": "https://maps.app.goo.gl/CwQftW8iYfxAZFDo8",
+          "withinImage": true,
+          "centreHitsAnchor": true
+        },
+        {
+          "poster": "08-b",
+          "key": "website-action",
+          "href": "https://www.sarsajyotishsansthan.com/",
+          "withinImage": true,
+          "centreHitsAnchor": true
+        },
+        {
+          "poster": "08-b",
+          "key": "phone",
+          "href": "tel:+918881573437",
+          "withinImage": true,
+          "centreHitsAnchor": true
+        },
+        {
+          "poster": "08-b",
+          "key": "email",
+          "href": "mailto:sarsajyotish@gmail.com",
+          "withinImage": true,
+          "centreHitsAnchor": true
+        },
+        {
+          "poster": "08-b",
+          "key": "address",
+          "href": "https://maps.app.goo.gl/CwQftW8iYfxAZFDo8",
+          "withinImage": true,
+          "centreHitsAnchor": true
+        },
+        {
+          "poster": "08-b",
+          "key": "website-address",
+          "href": "https://www.sarsajyotishsansthan.com/",
+          "withinImage": true,
+          "centreHitsAnchor": true
+        },
+        {
+          "poster": "08-c",
+          "key": "logo",
+          "href": "https://www.sarsajyotishsansthan.com/",
+          "withinImage": true,
+          "centreHitsAnchor": true
+        },
+        {
+          "poster": "08-c",
+          "key": "brand",
+          "href": "https://www.sarsajyotishsansthan.com/",
+          "withinImage": true,
+          "centreHitsAnchor": true
+        },
+        {
+          "poster": "08-c",
+          "key": "portrait",
+          "href": "https://www.sarsajyotishsansthan.com/about",
+          "withinImage": true,
+          "centreHitsAnchor": true
+        },
+        {
+          "poster": "08-c",
+          "key": "practitioner",
+          "href": "https://www.sarsajyotishsansthan.com/about",
+          "withinImage": true,
+          "centreHitsAnchor": true
+        },
+        {
+          "poster": "08-c",
+          "key": "kundli-matching",
+          "href": "https://www.sarsajyotishsansthan.com/services/kundli-matching",
+          "withinImage": true,
+          "centreHitsAnchor": true
+        },
+        {
+          "poster": "08-c",
+          "key": "kundli-prediction",
+          "href": "https://www.sarsajyotishsansthan.com/services/kundli-prediction",
+          "withinImage": true,
+          "centreHitsAnchor": true
+        },
+        {
+          "poster": "08-c",
+          "key": "vastu-consultation",
+          "href": "https://www.sarsajyotishsansthan.com/services/vastu-consultation",
+          "withinImage": true,
+          "centreHitsAnchor": true
+        },
+        {
+          "poster": "08-c",
+          "key": "numerology",
+          "href": "https://www.sarsajyotishsansthan.com/services/numerology",
+          "withinImage": true,
+          "centreHitsAnchor": true
+        },
+        {
+          "poster": "08-c",
+          "key": "prashna-kundali",
+          "href": "https://www.sarsajyotishsansthan.com/services/prashna-kundali",
+          "withinImage": true,
+          "centreHitsAnchor": true
+        },
+        {
+          "poster": "08-c",
+          "key": "book",
+          "href": "https://www.sarsajyotishsansthan.com/booking",
+          "withinImage": true,
+          "centreHitsAnchor": true
+        },
+        {
+          "poster": "08-c",
+          "key": "enquire",
+          "href": "https://www.sarsajyotishsansthan.com/contact",
+          "withinImage": true,
+          "centreHitsAnchor": true
+        },
+        {
+          "poster": "08-c",
+          "key": "location",
+          "href": "https://maps.app.goo.gl/CwQftW8iYfxAZFDo8",
+          "withinImage": true,
+          "centreHitsAnchor": true
+        },
+        {
+          "poster": "08-c",
+          "key": "website-action",
+          "href": "https://www.sarsajyotishsansthan.com/",
+          "withinImage": true,
+          "centreHitsAnchor": true
+        },
+        {
+          "poster": "08-c",
+          "key": "phone",
+          "href": "tel:+918881573437",
+          "withinImage": true,
+          "centreHitsAnchor": true
+        },
+        {
+          "poster": "08-c",
+          "key": "email",
+          "href": "mailto:sarsajyotish@gmail.com",
+          "withinImage": true,
+          "centreHitsAnchor": true
+        },
+        {
+          "poster": "08-c",
+          "key": "address",
+          "href": "https://maps.app.goo.gl/CwQftW8iYfxAZFDo8",
+          "withinImage": true,
+          "centreHitsAnchor": true
+        },
+        {
+          "poster": "08-c",
+          "key": "website-address",
+          "href": "https://www.sarsajyotishsansthan.com/",
+          "withinImage": true,
+          "centreHitsAnchor": true
+        }
+      ],
+      "modes": [
+        {
+          "key": "08-a",
+          "visible": "08-a",
+          "pressed": "true"
+        },
+        {
+          "key": "08-b",
+          "visible": "08-b",
+          "pressed": "true"
+        },
+        {
+          "key": "08-c",
+          "visible": "08-c",
+          "pressed": "true"
+        }
+      ],
+      "overlayWorks": true,
+      "passed": true
+    }
+  ]
+}

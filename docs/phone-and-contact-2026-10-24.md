@@ -21,7 +21,7 @@ Only public presentation and metadata changed. Booking admission, fields/validat
 - Actual compiled Contact/Booking checked at 320, 390, 768, 1440 and 1920px: no horizontal overflow, four navigation links, correct shared/contextual phone destinations and actual observed booking header height. FAQ marker/spine centres match exactly, panel gaps remain 14/18px and the writing note/button gap is 12px.
 - Default, open FAQ, keyboard focus/hover, synthetic email-code/error states, normal entry/ambient motion and reduced motion are reviewed. Isolated review uses the existing test-only server and synthetic contracts, with no provider proxy. Source motion controllers remain unchanged.
 
-The enclosing client folder's `design-review/2026-10-24-phone-and-contact-refinement/` owns source snapshots, screenshots and detailed local/live receipts. Poster rounds 04/05 are separate untouched image-tool outputs and are not website assets or deployment proof.
+The enclosing client folder's `design-review/2026-10-24-phone-and-contact-refinement/` owns source snapshots, screenshots and detailed local/live receipts. The current tall poster round 08 and preserved earlier native generations are committed in the separate [marketing archive](../marketing/sarsa-posters/README.md); they are not website assets or deployment proof.
 
 ## Release and recovery
 

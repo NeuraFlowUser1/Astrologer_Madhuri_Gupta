@@ -1,8 +1,10 @@
 # Sarsa Jyotish Sansthan — maintained application
 
+The [24 October dev/prod consolidation](docs/dev-prod-consolidation-2026-10-24.md) prepares the two intended branches and commits the complete [generated poster archive](marketing/sarsa-posters/README.md). Main remains the default/live publishing compatibility branch until the supported monitoring/backup update and repository-owner action are complete. Do not delete main or claim the final two-branch cutover has happened before those checks.
+
 The [24 October public-phone/Contact refinement](docs/phone-and-contact-2026-10-24.md) adds the owner-confirmed +91 88815 73437 to the shared frame and useful Contact/Booking help, aligns FAQ markers on their existing spine and repairs both form-step spacing defects. Existing header/footer behaviour, complete artwork/motion, booking contracts and provider state are preserved. Focused qualification passes; actual publication/readback is recorded separately in the enclosing client review.
 
-Reviewed **23 October 2026** after the home Vastu publication. Official website: **https://www.sarsajyotishsansthan.com**. Repository: **NeuraFlowUser1/Astrologer_Madhuri_Gupta**. Current presentation runtime is `98fff507997c5d90ba5b21b86ca28bba4f4c701d`, published from `work/vastu-home-poster-20261023`; Git records later documentation-only closeout revisions. The unchanged contained-package/Worker/database baseline remains the accepted 22 October release. Start with [the documentation index](docs/README.md), then the relevant feature/operating guide and source-bound evidence.
+Reviewed **24 October 2026** after the public-phone/Contact publication and tall-poster delivery. Official website: **https://www.sarsajyotishsansthan.com**. Repository: **NeuraFlowUser1/Astrologer_Madhuri_Gupta**. The accepted presentation feature baseline is `1c4ccd3f759003a5f111f881eb0bbaba96e05274`; Git records subsequent collateral/configuration/documentation revisions. Dev is the maintained development branch and prod the intended production branch; main remains the publishing/default compatibility branch during the documented transition. The unchanged contained-package/Worker/database baseline remains the accepted 22 October release. Start with [the documentation index](docs/README.md), then the relevant feature/operating guide and source-bound evidence.
 
 ## Published result
 

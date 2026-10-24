@@ -1,0 +1,28 @@
+{
+  "date": "2026-10-24",
+  "passed": true,
+  "scope": "Poster archive, branch preparation, API bundle exclusion and unchanged receiving-source checks",
+  "presentationBaseline": "1c4ccd3f759003a5f111f881eb0bbaba96e05274",
+  "productionBuild": {
+    "passed": true,
+    "command": "npm run build --prefix frontend",
+    "publicPages": 12,
+    "bothDisplayModes": true
+  },
+  "receiving": {
+    "passed": true,
+    "sealedPackageVerified": true,
+    "frontendApiPackageSettingsWorkflowsUnchanged": true,
+    "hostingDiffOnlyExcludesMarketing": true,
+    "publicTextFilesScanned": 19,
+    "secretOrPrivatePathFindings": [],
+    "providerCalls": 0,
+    "fullSuiteRun": false
+  },
+  "posterVerification": "../../../marketing/sarsa-posters/verification.json",
+  "browserVerification": "../../../marketing/sarsa-posters/browser-verification.json",
+  "fullLocalOrHostedSuiteRun": false,
+  "databaseOrProviderWrite": false,
+  "twoRemoteBranchCutoverComplete": false,
+  "remaining": "Supported main-to-prod automation release and repository-owner default branch action"
+}

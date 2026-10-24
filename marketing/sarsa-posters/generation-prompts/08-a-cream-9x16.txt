@@ -1,0 +1,51 @@
+Create ONE new finished Sarsa promotional poster as a native tall smartphone canvas, 9:16 portrait aspect ratio (height 1.7778 times width). Use the highest native resolution available, ideally 2160 x 3840. The actual final IMAGE CANVAS must be 9:16, not a shorter portrait card surrounded by blank padding.
+
+Reference roles:
+1. FIRST image: 1080 x 1920 layout guide. Its CANVAS proportions, relative type sizes, smaller portrait size, airy service spacing and wide footer geometry are the controlling reference. It is only a layout guide: remove ALL dashed boxes/empty slots and replace them with finished art. Do not copy its plain background.
+2. SECOND image: finished prior artwork, for rendering style, exact logo core, detailed small service illustrations and information. Do NOT copy its shorter 1.62 canvas or oversized portrait/art/text.
+3. THIRD image: authentic photograph of Madhuri Gupta. Preserve her recognisable mature face, natural skin and features, black hair, brown kurta and pink dupatta. Do not make her younger or beautify her identity.
+
+Make the entire poster a polished, fully rasterised editorial artwork with all typography generated within it. Warm cream folio: tactile softly mottled ivory/linen paper, subtle visible woven/grain texture and faint fine Indian geometric traces. Balanced illustration: one partial delicate antique celestial instrument in upper LEFT margin and one compact sage botanical study at lower RIGHT edge. Their contrast is low, accents muted matte brass and dusty sage. No top-right ornament, no foliage bordering the portrait, no heavy ornate frame, no bright orange or yellow glow. Neither plain empty paper nor dense wallpaper. Text in readable restrained olive-grey (#505B4E), secondary muted brown-grey (#6A6858), matte brass dividers (#A18F73), cream #F3EFE3. Moderate gentle contrast and modest saturation; avoid dark forest green or near-black green headings, bright gold and vivid service scenes. Keep the portrait natural.
+
+Exact layout inside the NATIVE 9:16 canvas:
+- About 3% top margin. A HORIZONTAL masthead: small rich circular logo left of the single-line 'Sarsa Jyotish Sansthan' wordmark, group centred together across page. Logo approx 13% canvas width and 7.3% height; name approx 4.2% canvas width text. Refined concentric beaded brass rings with tiny accents, original lotus/star/kundli core fully inside with visible breathing room. No giant logo above the title. No empty top band.
+- Intro from roughly 14% to 35% page height: left text group and right small photographic portrait with a quiet fine rounded-rectangle brass frame. Portrait 25% canvas width, about 19.5% canvas height, NOT a huge face. Centre the text group vertically with the portrait. Four readable lines/groupings exactly as below. Name approx 4.4% canvas width, NOT huge. Supporting text 2.5–2.7% canvas width. Keep comfortable surrounding space.
+- 'Consultations' divider at about 37% height: fine horizontal rules from left and right of title, tiny central accents.
+- Five consultation groups, THREE evenly spaced across first row (40–54% height), TWO centred broadly across second row (57–70%). Each has a small rendered editorial watercolour/engraved illustrative scene above its title and caption; art approx 18–20% canvas width, never giant. Scene 1 two kundli charts with ribbon; scene 2 birth chart and compass; scene 3 home and directional compass; scene 4 numeral cards; scene 5 open question book and antique clock. Their paper, muted ink, sage and brass colours coordinate. No extraneous text in artwork.
+- 'Connect with Sarsa' fine-rule divider at about 74% height.
+- Four contact actions arranged SIDE BY SIDE in ONE full-width horizontal row around 79% height: small fine illustrated icon + readable label for each, thin vertical separators. Their labels fit on one line within each quarter; no vertical action stack.
+- ONE centred horizontal phone row at 86% height, small telephone icon + 'Call +91 88815 73437'. Phone text approx 3.6% canvas width; not huge or a pill. No extra floral flourishes around the phone.
+- Three information cells SIDE BY SIDE across the full width at 93–95% height: EMAIL on LEFT, postal ADDRESS in CENTRE (two lines), WEBSITE on RIGHT; tiny icons and delicate short vertical separators. Each cell uses about one third of width. Keep exact email and URL readable and unbroken. This is a WIDE HORIZONTAL ROW, never three lines stacked down the centre. Bottom safe margin around 3%. Balanced outer gutters approx 5–6%.
+All content must fit neatly in the native canvas with dividers visibly separating introduction / services / contact. Keep generous but purposeful space between rows, modest scale throughout, foreground hierarchy clear and no collisions. No oversized decorations, cramped lower stack or wasted blank top.
+
+Render this exact text, spell and proofread every word and digit:
+Sarsa Jyotish Sansthan
+Astro & Jyotish guidance
+by Madhuri Gupta
+Your questions. A personal conversation.
+15+ years of experience
+
+Consultations
+Kundli Matching
+Marriage & compatibility
+Kundli Prediction
+Your birth chart
+Vastu Consultation
+For your home
+Numerology
+Names, dates & numbers
+Prashna Kundali
+A specific question
+
+Connect with Sarsa
+Book an appointment
+Ask a question
+View location
+Visit website
+Call +91 88815 73437
+sarsajyotish@gmail.com
+8, Gailana Road, LIC Colony,
+Agra - 282007
+www.sarsajyotishsansthan.com
+
+No invented additional words, no QR codes, no mockup phone, no borders outside image, no layout notes. Finished native 9:16 tall poster, with calmer detailed artwork and correct broad horizontal contact rows.

@@ -1,11 +1,13 @@
 # Project 004 — documentation index
 
-Reviewed **23 October 2026** after the home Vastu refinement and live readback. The matching package/Worker/database baseline and original ON restoration remain the accepted 22 October release. This is the maintained application's current reading path. Current feature guides explain behavior/decisions; dated plans and reports preserve exact scope and proof. There is one owner per topic.
+Reviewed **24 October 2026** after public-phone/Contact delivery, tall-poster refinement and dev/prod preparation. Main remains the default/live publishing compatibility branch until the supported automation update and owner action are complete. The matching package/Worker/database baseline and original ON restoration remain the accepted 22 October release. This is the maintained application's current reading path. Current feature guides explain behavior/decisions; dated plans and reports preserve exact scope and proof. There is one owner per topic.
 
 The [19 October client handoff](project-004/2026-10-19-documentation/README.md) publishes the current outer working status/navigation and relevant historical notices alongside this application. Its manifest distinguishes original working text from link-adapted copies; no private storage or application duplicate is included.
 
 | Read | What it owns |
 | --- | --- |
+| [Dev/prod consolidation](dev-prod-consolidation-2026-10-24.md) | Completed-work publication, source preservation, intended two-branch model and the exact main-only automation/owner-access blockers. |
+| [Generated poster archive](../marketing/sarsa-posters/README.md) | Three current native tall posters, clickable PDFs, portable comparison, byte/pixel/link checks and all earlier generated drafts/exports. |
 | [Public phone and Contact](phone-and-contact-2026-10-24.md) | Confirmed business call link, shared/contextual placements, FAQ spine alignment, form spacing, preserved motion and focused proof/release boundaries. |
 | [Home Vastu](vastu-home-2026-10-23.md) | Six-section home-only page, generated cutaway hero, four home topics, three illustrated traditional principles, responsive motion and focused publication proof. |
 | [Public delivery/search](operating-search-2026-10-22.md) | Actual twelve-page HTML/hydration, exact metadata, intentional utility exclusion, responsive media, stable portrait and local proof/release boundaries. |
