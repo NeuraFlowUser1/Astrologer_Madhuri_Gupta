@@ -33,7 +33,7 @@ afterEach(async()=>{await act(async()=>root.unmount());host.remove();vi.restoreA
 test('every public route has the same persistent frame and metadata, while receipt/help remain noindex',async()=>{
  const header=host.querySelector('.sarsa-header'),footer=host.querySelector('.sarsa-footer');
  for(const path of ['/about','/services','/testimonials','/services/kundli-prediction','/services/numerology','/contact','/booking','/privacy','/terms','/booking-policy','/booking/receipt','/booking-help','/missing']){
-  await go(path);expect(host.querySelector('.sarsa-header')).toBe(header);expect(host.querySelector('.sarsa-footer')).toBe(footer);expect(document.title).toBe(titleFor(path));expect(host.querySelectorAll('.sarsa-header')).toHaveLength(1);
+  await go(path);expect(host.querySelector('.sarsa-header .header-phone').getAttribute('href')).toBe('tel:+918881573437');expect(host.querySelector('.sarsa-footer .footer-phone').textContent).toBe('+91 88815 73437');expect(host.querySelector('.sarsa-header')).toBe(header);expect(host.querySelector('.sarsa-footer')).toBe(footer);expect(document.title).toBe(titleFor(path));expect(host.querySelectorAll('.sarsa-header')).toHaveLength(1);
  }
  await go('/testimonials');expect(window.location.pathname).toBe('/testimonials');expect(host.querySelector('main h1').textContent).toBe('Customer reviews');expect(host.querySelector('.sarsa-header a[href="/testimonials"]').getAttribute('aria-current')).toBe('page');expect(host.querySelector('.sarsa-header a[href="/testimonials"] .sarsa-nav-label').textContent).toBe('Reviews');expect(host.querySelector('.sarsa-footer a[href="/testimonials"]').textContent).toBe('Reviews');
 });
@@ -43,6 +43,6 @@ test('shared frame updates preserve the booking input and the existing retention
  await state({enabled:true,verified:true});expect(input.value).toBe('Saved draft');await state({enabled:false,retained_on_epoch:null});expect(host.querySelector('input')).toBeNull();await state({enabled:true,verified:true,retained_on_epoch:'new'});expect(model.bookingMounts).toBe(2);
 });
 test('OFF metadata/actions and policy routes fail closed without losing Services or Contact',async()=>{
- await state({enabled:false,verified:true,retained_on_epoch:null});for(const path of ['/','/services','/contact','/booking-policy']){await go(path);expect(host.querySelector('a[href="/booking"]')).toBeNull();expect(host.querySelector('a[href="/services"]')).not.toBeNull();expect(document.querySelector('meta[name="description"]').content).not.toBe('');}
+ await state({enabled:false,verified:true,retained_on_epoch:null});for(const path of ['/','/services','/contact','/booking-policy']){await go(path);expect(host.querySelector('a[href="/booking"]')).toBeNull();expect(host.querySelector('.header-phone').getAttribute('href')).toBe('tel:+918881573437');expect(host.querySelector('.footer-phone').getAttribute('href')).toBe('tel:+918881573437');expect(host.querySelector('a[href="/services"]')).not.toBeNull();expect(document.querySelector('meta[name="description"]').content).not.toBe('');}
  expect(host.querySelector('main h1').textContent).toBe('Page not found');document.head.replaceChildren();await go('/unknown');expect(document.title).toBe(titleFor('/unknown'));
 });

@@ -6,6 +6,7 @@ The [19 October client handoff](project-004/2026-10-19-documentation/README.md) 
 
 | Read | What it owns |
 | --- | --- |
+| [Public phone and Contact](phone-and-contact-2026-10-24.md) | Confirmed business call link, shared/contextual placements, FAQ spine alignment, form spacing, preserved motion and focused proof/release boundaries. |
 | [Home Vastu](vastu-home-2026-10-23.md) | Six-section home-only page, generated cutaway hero, four home topics, three illustrated traditional principles, responsive motion and focused publication proof. |
 | [Public delivery/search](operating-search-2026-10-22.md) | Actual twelve-page HTML/hydration, exact metadata, intentional utility exclusion, responsive media, stable portrait and local proof/release boundaries. |
 | [Application README](../README.md) | Published source, local build, navigation, protection and remaining scope. |

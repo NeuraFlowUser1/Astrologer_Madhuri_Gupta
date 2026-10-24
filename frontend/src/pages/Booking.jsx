@@ -9,6 +9,7 @@ import '../booking/booking.css';
 import ServiceMedia from '../site/ServiceMedia.jsx';
 import BookingOrnament from '../site/BookingOrnament.jsx';
 import PrashnaArtwork from '../site/PrashnaArtwork.jsx';
+import PhoneLink from '../site/PhoneLink.jsx';
 const VerificationFields=createVerificationFields(React);
 function Symbol({id}) {
   if(id==='prashna-kundali')return <PrashnaArtwork compact/>;
@@ -73,7 +74,7 @@ export default function Booking({headerRef}){
  }
  function submit(event){event.preventDefault();if(!state.slot){dispatch({type:'error',message:'Please choose an available time first.'});go('appointment');return;}void flow.start();}
  return <div className="sarsa-booking" ref={root}>
-  <div className="booking-opener wrap"><h1>Book your appointment for expert guidance.</h1><p>Apne sawaalon ke saath shuru karein. Choose a service and a time that suits you, then share what you would like to discuss.</p><Link to="/booking/receipt">Already booked? View my booking ↗</Link><BookingOrnament/></div>
+  <div className="booking-opener wrap"><h1>Book your appointment for expert guidance.</h1><p>Apne sawaalon ke saath shuru karein. Choose a service and a time that suits you, then share what you would like to discuss.</p><div className="booking-phone-help"><span>Questions before booking?</span><PhoneLink/></div><Link to="/booking/receipt">Already booked? View my booking ↗</Link><BookingOrnament/></div>
   <nav className="journey-nav wrap" aria-label="Booking steps">{[['service','Service'],['appointment','Date & time'],['details','Your details'],['review','Review']].map(([id,label],i)=><button type="button" key={id} aria-current={active===id?'step':undefined} onClick={()=>go(id)}><span>0{i+1}</span>{label}</button>)}</nav>
   {!flow.available&&<p className="wrap booking-checking" role="status">Checking that booking is available. Your details are kept.</p>}
   {state.error&&<div className="booking-alert wrap" role="alert"><p>{state.error}</p>{!state.policy&&!state.credential&&<button type="button" onClick={flow.loadPolicy} disabled={locked}>Reload service details</button>}<Link to="/contact">Contact the practice</Link></div>}

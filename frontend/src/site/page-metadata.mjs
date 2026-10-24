@@ -1,3 +1,4 @@
+import {practiceContact} from './practice-contact.mjs';
 /** One public identity owner, shared by generated HTML and browser navigation. */
 import {madhuriExperience,madhuriStudies} from './hero-content.mjs';
 export const origin='https://www.sarsajyotishsansthan.com';
@@ -41,7 +42,7 @@ export function graphFor(path){
  if(!publicPaths.includes(path))return null;
  const data=metadataFor(path),business=origin+'/#practice',person=origin+'/#madhuri',website=origin+'/#website',page=origin+path+'#webpage';
  const graph=[
-  {'@type':'Organization','@id':business,name:brand,url:origin+'/',email:'sarsajyotish@gmail.com',logo:origin+'/media/sarsa-kundli-lotus-logo-128.png',founder:{'@id':person},address:{'@type':'PostalAddress',streetAddress:'8, Gailana Road, LIC Colony',addressLocality:'Agra',addressRegion:'Uttar Pradesh',postalCode:'282007',addressCountry:'IN'}},
+  {'@type':'Organization','@id':business,name:brand,url:origin+'/',email:'sarsajyotish@gmail.com',telephone:practiceContact.phone,logo:origin+'/media/sarsa-kundli-lotus-logo-128.png',founder:{'@id':person},address:{'@type':'PostalAddress',streetAddress:'8, Gailana Road, LIC Colony',addressLocality:'Agra',addressRegion:'Uttar Pradesh',postalCode:'282007',addressCountry:'IN'}},
   {'@type':'Person','@id':person,name:'Madhuri Gupta',url:origin+'/about',image:origin+'/media/madhuri-gupta-portrait.jpeg',description:madhuriExperience+' years of experience in Astro and Jyotish guidance.',worksFor:{'@id':business},alumniOf:madhuriStudies.map(study=>({'@type':'EducationalOrganization',name:study.institute})),knowsAbout:['Jyotish','Kundli Prediction','Kundli Matching','Vastu','Numerology','Prashna Kundali']},
   {'@type':'WebSite','@id':website,name:brand,url:origin+'/',publisher:{'@id':business},inLanguage:'en'},
   {'@type':path==='/about'?'AboutPage':path==='/contact'?'ContactPage':'WebPage','@id':page,url:origin+path,name:data.title,description:data.description,isPartOf:{'@id':website},about:{'@id':path==='/about'?person:business},primaryImageOfPage:{'@type':'ImageObject',url:shareImage,caption:shareAlt},inLanguage:'en'},

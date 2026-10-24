@@ -36,6 +36,7 @@ test('generated and navigated metadata agree without stale or duplicate tags',()
 
 test('structured facts are public and script-safe without new endorsements',()=>{
  assert.equal(safeJson('</script>&\u2028\u2029'), '"\\u003c/script\\u003e\\u0026\\u2028\\u2029"');
+ assert.equal(graphFor('/about')['@graph'].find(item=>item['@type']==='Organization').telephone,'+918881573437');
  const text=JSON.stringify(graphFor('/about'));assert.match(text,/15\+/);assert.match(text,/Shri Vedang/);assert.match(text,/Yogrishi/);
  assert.doesNotMatch(text,/AggregateRating|ReviewAction|verification|activation_epoch|hasCredential/);
  assert.equal(graphFor('/services/kundli-matching')['@graph'].find(item=>item['@type']==='BreadcrumbList').itemListElement.length,3);

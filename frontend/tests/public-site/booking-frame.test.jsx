@@ -25,7 +25,7 @@ beforeEach(()=>{
 });
 afterEach(async()=>{await act(async()=>root.unmount());host.remove();vi.useRealTimers();vi.restoreAllMocks();vi.unstubAllGlobals();});
 test('one frame adapter preserves optional email and blocks review before a selected time',async()=>{
- await render();expect(host.querySelectorAll('.sarsa-header')).toHaveLength(1);expect(host.querySelectorAll('.sarsa-footer')).toHaveLength(1);expect(host.querySelector('#email').required).toBe(false);expect(host.querySelector('#phone').required).toBe(true);await click(button('Review'));expect(mock.go).toHaveBeenLastCalledWith('appointment');await act(async()=>host.querySelector('form').dispatchEvent(new Event('submit',{bubbles:true,cancelable:true})));expect(mock.flow.dispatch).toHaveBeenCalledWith({type:'error',message:'Please choose an available time first.'});expect(mock.flow.start).not.toHaveBeenCalled();
+ await render();const call=host.querySelector('.booking-phone-help .practice-phone');expect(call.getAttribute('href')).toBe('tel:+918881573437');expect(call.closest('fieldset')).toBeNull();expect(call.getAttribute('aria-label')).toContain('Call Sarsa');expect(host.querySelectorAll('.sarsa-header')).toHaveLength(1);expect(host.querySelectorAll('.sarsa-footer')).toHaveLength(1);expect(host.querySelector('#email').required).toBe(false);expect(host.querySelector('#phone').required).toBe(true);await click(button('Review'));expect(mock.go).toHaveBeenLastCalledWith('appointment');await act(async()=>host.querySelector('form').dispatchEvent(new Event('submit',{bubbles:true,cancelable:true})));expect(mock.flow.dispatch).toHaveBeenCalledWith({type:'error',message:'Please choose an available time first.'});expect(mock.flow.start).not.toHaveBeenCalled();
  mock.flow.state.slot=slot;mock.flow.state.ack=true;await render();const validity=vi.spyOn(HTMLFormElement.prototype,'reportValidity').mockReturnValue(false);mock.go.mockClear();await click(button('Review'));expect(mock.go).not.toHaveBeenCalled();validity.mockReturnValue(true);await click(button('Review'));expect(mock.go).toHaveBeenLastCalledWith('review');await act(async()=>host.querySelector('form').dispatchEvent(new Event('submit',{bubbles:true,cancelable:true})));expect(mock.flow.start).toHaveBeenCalledOnce();
 });
 test('email-code mode, required preparation and per-question pricing retain existing contracts',async()=>{
@@ -49,4 +49,15 @@ test.each(['held','payment_review','confirmed'])('saved %s receipt routes every 
 });
 test('receipt pending view has no invented status; separate receipt page preserves access help and busy state',async()=>{
  mock.flow.state.credential={request_id:'synthetic'};await render();expect(host.textContent).toContain('Checking your saved booking');mock.flow.state.credential=null;mock.flow.state.error='Unavailable';await render(<BookingReceipt/>);expect(host.textContent).toContain('No receipt is saved here');expect(button('Refresh saved booking').disabled).toBe(true);mock.flow.state.credential={request_id:'synthetic'};await render(<BookingReceipt/>);await click(button('Refresh saved booking'));expect(mock.flow.check).toHaveBeenCalled();mock.flow.state.busy=true;await render(<BookingReceipt/>);expect(button('Checking').disabled).toBe(true);
+});
+
+test('a requested unavailable Prashna service preserves call help and the existing refresh recovery',async()=>{
+ mock.flow.state.service='';mock.flow.state.policy.policy.services=mock.flow.state.policy.policy.services.filter(service=>service.id!=='prashna-kundali');
+ const view=()=>act(async()=>root.render(<MemoryRouter initialEntries={['/booking?service=prashna-kundali']}><SiteHeader headerRef={mock.header}/><Booking headerRef={mock.header}/><SiteFooter/></MemoryRouter>));
+ await view();expect(host.textContent).toContain('Prashna Kundali is not available');
+ const call=host.querySelector('.booking-phone-help a');expect(call.getAttribute('href')).toBe('tel:+918881573437');expect(call.closest('fieldset')).toBeNull();
+ await click(button('Refresh services'));expect(mock.flow.loadPolicy).toHaveBeenCalled();
+ mock.flow.state.loadingPolicy=true;await view();expect(button('Refreshing services').disabled).toBe(true);
+ mock.flow.available=false;mock.flow.state.loadingPolicy=false;await view();expect(host.textContent).toContain('Checking that booking is available');
+ expect(host.querySelector('.booking-phone-help a').getAttribute('href')).toBe('tel:+918881573437');
 });
