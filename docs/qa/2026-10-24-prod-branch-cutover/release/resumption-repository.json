@@ -1,0 +1,34 @@
+{
+  "id": "1334034276",
+  "name": "Astrologer_Madhuri_Gupta",
+  "owner": {
+    "login": "NeuraFlowUser1",
+    "id": 334531029,
+    "type": "User",
+    "avatar_url": "https://avatars.githubusercontent.com/u/334531029?v=4",
+    "url": "https://api.github.com/users/NeuraFlowUser1"
+  },
+  "repository_full_name": "NeuraFlowUser1/Astrologer_Madhuri_Gupta",
+  "permissions": {
+    "admin": false,
+    "maintain": false,
+    "pull": true,
+    "push": true,
+    "triage": true
+  },
+  "allow_auto_merge": null,
+  "allow_merge_commit": null,
+  "allow_rebase_merge": null,
+  "allow_squash_merge": null,
+  "allow_update_branch": null,
+  "clone_url": "https://github.com/NeuraFlowUser1/Astrologer_Madhuri_Gupta.git",
+  "size": 291643,
+  "default_branch": "main",
+  "git_commits_url": "https://api.github.com/repos/NeuraFlowUser1/Astrologer_Madhuri_Gupta/git/commits{/sha}",
+  "git_refs_url": "https://api.github.com/repos/NeuraFlowUser1/Astrologer_Madhuri_Gupta/git/refs{/sha}",
+  "git_url": "git://github.com/NeuraFlowUser1/Astrologer_Madhuri_Gupta.git",
+  "master_branch": null,
+  "visibility": "public",
+  "archived": false,
+  "is_code_search_indexed": null
+}

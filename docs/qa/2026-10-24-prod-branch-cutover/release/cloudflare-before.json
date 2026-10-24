@@ -1,0 +1,101 @@
+{
+  "observed_at": "2026-10-24T12:58:46.834Z",
+  "account": "162c1ab1ba0619c1c78d9495f3260f18",
+  "settings": {
+    "compatibility_date": "2026-09-29",
+    "compatibility_flags": [],
+    "bindings": [
+      {
+        "name": "BOOKING_CONTROL_PUBLISH_KEY",
+        "type": "secret_text"
+      },
+      {
+        "name": "BOOKING_CONTROL_READ_KEY",
+        "type": "secret_text"
+      },
+      {
+        "name": "BOOKING_CONTROL_RECONCILE_KEY",
+        "type": "secret_text"
+      },
+      {
+        "name": "BOOKING_EMAIL_WORKER_KEY",
+        "type": "secret_text"
+      },
+      {
+        "name": "BOOKING_ENVIRONMENT",
+        "text": "production",
+        "type": "plain_text"
+      },
+      {
+        "name": "BOOKING_GOOGLE_WORKER_KEY",
+        "type": "secret_text"
+      },
+      {
+        "name": "BOOKING_INSTALLATION_ID",
+        "text": "87b35f80-71bc-4ee1-bf34-a7316006f95c",
+        "type": "plain_text"
+      },
+      {
+        "name": "BOOKING_MONITOR_KEY",
+        "type": "secret_text"
+      },
+      {
+        "class_name": "BookingProductState",
+        "name": "BOOKING_PRODUCT_STATE",
+        "namespace_id": "25310ea52b5146c1ac5ba68916ea968e",
+        "type": "durable_object_namespace"
+      },
+      {
+        "name": "BOOKING_PROJECT_ID",
+        "text": "004",
+        "type": "plain_text"
+      },
+      {
+        "name": "BOOKING_PUBLIC_ORIGIN",
+        "text": "https://www.sarsajyotishsansthan.com",
+        "type": "plain_text"
+      },
+      {
+        "class_name": "BookingRecoveryState",
+        "name": "BOOKING_RECOVERY_STATE",
+        "namespace_id": "b2ac685092dd475b9439ad45b4c5768b",
+        "type": "durable_object_namespace"
+      },
+      {
+        "name": "BOOKING_RECOVERY_WORKER_KEY",
+        "type": "secret_text"
+      },
+      {
+        "name": "BOOKING_RELEASE_DIGEST",
+        "text": "1bb6cb1cc00a2ead7cec70de052ea78330005d7644dfc0d2e2a40ea7c287b31f",
+        "type": "plain_text"
+      },
+      {
+        "name": "BOOKING_WAKE_KEY",
+        "type": "secret_text"
+      },
+      {
+        "name": "BOOKING_WAKE_QUEUE",
+        "queue_name": "sarsa-booking-recovery",
+        "type": "queue"
+      }
+    ]
+  },
+  "deployment": {
+    "id": "e072ddb4-79c1-4875-ae18-7b86170279fd",
+    "source": "wrangler",
+    "strategy": "percentage",
+    "author_email": "neuraflowindia@gmail.com",
+    "annotations": {
+      "workers/triggered_by": "deployment"
+    },
+    "versions": [
+      {
+        "version_id": "a4110a77-ba93-4537-9bc7-8e7b30d9af1e",
+        "percentage": 100
+      }
+    ],
+    "created_on": "2026-10-22T17:30:09.751952Z"
+  },
+  "latest_version": "a4110a77-ba93-4537-9bc7-8e7b30d9af1e"
+}

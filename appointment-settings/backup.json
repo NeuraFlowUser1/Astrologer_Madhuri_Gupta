@@ -1,5 +1,5 @@
 {
-  "version": 1,
+  "version": 2,
   "installation_id": "87b35f80-71bc-4ee1-bf34-a7316006f95c",
   "environment": "production",
   "owner_email": "sarsajyotish@gmail.com",
@@ -12,5 +12,6 @@
     "recent_copies": 2,
     "daily_days": 30,
     "monthly_months": 12
-  }
+  },
+  "production_branch": "prod"
 }

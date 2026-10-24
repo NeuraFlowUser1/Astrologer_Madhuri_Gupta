@@ -1,0 +1,28 @@
+{
+  "release_digest": "6b020c73bede414689243b6b8fae73a805cac9ccde1f8f6215570d48f7e9c65e",
+  "production_branch": "prod",
+  "files": {
+    "appointment-settings/monitor.json": {
+      "before": "6950e5ad36cd668401bc6324167ac06eadff838da5f7789be9cb157d98df97e7",
+      "after": "2bd03c1c61604242d764acb130cb35bbb68d1331ae2fee23095a81e62ff80aaa"
+    },
+    "appointment-settings/backup.json": {
+      "before": "fed6cbc5659bcbdbb7b5ebaa8d037db9ad78a4a0417324f3dbc3d3669e0ed2dc",
+      "after": "0a4227ea4d9e2ee6f31ea145b5afd766227bcb2db307ba6104f5ff29f6324c38"
+    },
+    ".github/workflows/appointment-background-monitor.yml": {
+      "before": "86e1b4c101eaa806193f98fd40d2d1218dc4bec1fe4077918fdd9e023f90ad76",
+      "after": "cc639db888b19c24bf6610f0106de396c0b2e1bb17cfdd38986f8f4a889f98ef"
+    },
+    ".github/workflows/appointment-database-backup.yml": {
+      "before": "170733fb0180f097fc1252999b2ef9986b6668675d197c79d94b43e91082224c",
+      "after": "5ab10796630a841443622cb0d0ca83e68e024728a59cf087cd58035ec5c5800a"
+    },
+    ".github/workflows/appointment-backup-validation.yml": {
+      "before": "117ac1b5b00d7d7ea66c6952bd73589f52909a4429614844c627c5133356d7e1",
+      "after": "77ec7d2eea6cf6a9736fe6ef450a4f9487a64586408472443e1673d846a44f97"
+    }
+  },
+  "installation_business_and_archive_contracts_unchanged": true,
+  "published": false
+}

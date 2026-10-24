@@ -1,6 +1,6 @@
 # Project 004 — documentation index
 
-Reviewed **24 October 2026** after public-phone/Contact delivery, tall-poster refinement and dev/prod preparation. Main remains the default/live publishing compatibility branch until the supported automation update and owner action are complete. The matching package/Worker/database baseline and original ON restoration remain the accepted 22 October release. This is the maintained application's current reading path. Current feature guides explain behavior/decisions; dated plans and reports preserve exact scope and proof. There is one owner per topic.
+Reviewed **24 October 2026** after public-phone/Contact delivery, tall-poster refinement and dev/prod preparation. The matching 24 October 1.0.2-rc.1 package/Worker/database release is accepted and original ON is restored at revision 16. Main remains the default/live publishing route until the owner settings and actual prod operation pass. This is the maintained application's current reading path. Current feature guides explain behavior/decisions; dated plans and reports preserve exact scope and proof. There is one owner per topic.
 
 The [19 October client handoff](project-004/2026-10-19-documentation/README.md) publishes the current outer working status/navigation and relevant historical notices alongside this application. Its manifest distinguishes original working text from link-adapted copies; no private storage or application duplicate is included.
 

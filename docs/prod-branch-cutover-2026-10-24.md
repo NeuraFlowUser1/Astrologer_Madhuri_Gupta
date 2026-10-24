@@ -2,7 +2,7 @@
 
 This approved programme moves the existing public website, independent monitor and encrypted backup/validation/retention pipeline to the explicit `prod` production branch. The website presentation and 53 poster/master exports are unchanged from `8cdba2a01c086d0572f8ba7f9f5c8fefd934830e`. Earlier branches survive as exact recovery tags; prior worktrees and dirty/index contents remain preserved.
 
-## Current prepared source
+## Current source and accepted live release
 
 The supported whole-package upgrade installs standard **1.0.2-rc.1**, 582 declared files, digest `6b020c73bede414689243b6b8fae73a805cac9ccde1f8f6215570d48f7e9c65e`. It preserves every existing receiving settings file. All 37 migrations, booking/business engine, browser/build/worker code, dependencies, provider configuration and saved business settings are unchanged. Only explicit branch metadata, trusted workflow rendering, corresponding guards/tests and documentation change.
 
@@ -18,4 +18,6 @@ A changed package digest still requires matching application, protected Worker r
 
 After matching live readback and original ON restoration, prepare both version-2 public configs and all three rendered prod workflows together. Finish any outstanding main export/validation/retention chain. The owner then changes the GitHub default to prod, all four existing protected job environment branch rules to prod, and Vercel production tracking to prod. Vercel remains disconnected from Codex. Prove actual prod publication/monitor/backup/validation/retention, preserve the final main head, delete main last and align dev/prod. The current GitHub login can publish source but lacks owner access; the owner has agreed to handle these settings when ready.
 
-Until those live/owner gates are recorded, this is prepared source and qualification, not a completed two-branch cutover. Booking remains on its currently accepted configuration. No customer booking, enquiry, payment, email or Calendar write is part of verification.
+The matching live release is accepted at application commit `7f97d4a1e91b393d58688630d3d801268237d999`, Worker version `a7b77f24-0a3b-4856-8dfd-95d768cca88d` and the same guarded database digest. Natural 13:15 health passed, and original ON was restored at 13:15:14 UTC, revision 16, in a conservative 16m59.068s window. All saved business settings and resource identities remain. After the power interruption, fresh owner/control, database, Worker and protected app reads still match and remain healthy; actual main monitor run `40112882488` passes. [Publication](qa/2026-10-24-prod-branch-cutover/release/publication.json) owns the receipts.
+
+Both version-2 prod configurations and all three rendered workflows are prepared and pass the receiving checks. GitHub default/protected environment rules and existing Vercel production tracking still need the owner change. Actual prod deployment/job proof and final main removal remain; this is not yet the completed two-branch state. No customer booking, enquiry, payment, email or Calendar write is part of verification.

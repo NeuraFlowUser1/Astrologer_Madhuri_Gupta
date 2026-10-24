@@ -1,0 +1,26 @@
+{
+  "observed_at": "2026-10-24T12:34:45.939323+00:00",
+  "application": "004",
+  "release_digest": "1bb6cb1cc00a2ead7cec70de052ea78330005d7644dfc0d2e2a40ea7c287b31f",
+  "configured": {
+    "staff_connection": true,
+    "worker_connection": true,
+    "company_connection": true,
+    "studio": true,
+    "google_resources": true,
+    "contact_protection": true,
+    "email_sender": true,
+    "email_webhook": true,
+    "payment_accounts": true,
+    "payment_webhook": true,
+    "projection_reader": true,
+    "recovery_contract": true
+  },
+  "worker_health_status": 200,
+  "worker_health": {
+    "status": "healthy"
+  },
+  "customer_actions": false,
+  "provider_dispatch": false,
+  "private_values_printed": false
+}

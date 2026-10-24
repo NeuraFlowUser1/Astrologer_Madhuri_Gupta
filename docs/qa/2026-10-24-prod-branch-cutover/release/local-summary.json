@@ -16,7 +16,7 @@
   "entry_branches": 2,
   "production_build": "passed; 12 actual public pages in each ON/OFF mode",
   "presentation_and_collateral_changes": 0,
-  "live_changeover": "not started",
+  "live_changeover": "Accepted matching release and original ON restored at revision 16; branch owner settings/prod proof remain",
   "preflight_cases": 4,
   "preflight_coverage": {
     "statements": 98.83,

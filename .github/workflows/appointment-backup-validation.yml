@@ -3,7 +3,7 @@ on:
   workflow_run:
     workflows: [Appointment database backup]
     types: [completed]
-    branches: [main]
+    branches: [prod]
   workflow_dispatch:
     inputs:
       source_run:
@@ -18,7 +18,7 @@ concurrency:
   cancel-in-progress: false
 jobs:
   verify:
-    if: github.repository == vars.BOOKING_REPOSITORY && github.event.repository.visibility == 'public' && toJSON(github.event.repository.private) == 'false' && toJSON(github.event.repository.fork) == 'false' && github.ref == 'refs/heads/main' && (github.event_name == 'workflow_dispatch' || (github.event_name == 'workflow_run' && github.event.workflow_run.conclusion == 'success'))
+    if: github.repository == vars.BOOKING_REPOSITORY && github.event.repository.visibility == 'public' && toJSON(github.event.repository.private) == 'false' && toJSON(github.event.repository.fork) == 'false' && github.ref == 'refs/heads/prod' && (github.event_name == 'workflow_dispatch' || (github.event_name == 'workflow_run' && github.event.workflow_run.conclusion == 'success'))
     environment: appointment-backup-validation
     runs-on: ubuntu-24.04
     timeout-minutes: 10
@@ -64,7 +64,7 @@ jobs:
   retain:
     needs: verify
     # Every job, including dependent jobs, has its own pre-allocation guard.
-    if: github.repository == vars.BOOKING_REPOSITORY && github.event.repository.visibility == 'public' && toJSON(github.event.repository.private) == 'false' && toJSON(github.event.repository.fork) == 'false' && github.ref == 'refs/heads/main' && (github.event_name == 'workflow_dispatch' || github.event_name == 'workflow_run') && needs.verify.result == 'success'
+    if: github.repository == vars.BOOKING_REPOSITORY && github.event.repository.visibility == 'public' && toJSON(github.event.repository.private) == 'false' && toJSON(github.event.repository.fork) == 'false' && github.ref == 'refs/heads/prod' && (github.event_name == 'workflow_dispatch' || github.event_name == 'workflow_run') && needs.verify.result == 'success'
     environment: appointment-backup-retention
     runs-on: ubuntu-24.04
     timeout-minutes: 6

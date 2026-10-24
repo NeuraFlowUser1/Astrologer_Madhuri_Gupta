@@ -1,0 +1,12 @@
+[
+  {
+    "release_digest": "6b020c73bede414689243b6b8fae73a805cac9ccde1f8f6215570d48f7e9c65e",
+    "active_run": null,
+    "active_until": null,
+    "enabled": true,
+    "requested_enabled": true,
+    "winning_operation": "84b48b8a-add9-4b42-9afe-018fb3d3f5fe",
+    "revision": "16",
+    "recovery_incidents": "0"
+  }
+]

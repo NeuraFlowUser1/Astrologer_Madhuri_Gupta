@@ -1,0 +1,107 @@
+{
+  "read_only": true,
+  "customer_actions": false,
+  "forced_worker_run": false,
+  "rows": [
+    {
+      "release_digest": "6b020c73bede414689243b6b8fae73a805cac9ccde1f8f6215570d48f7e9c65e",
+      "active_run": null,
+      "active_until": null,
+      "recovery_incidents": "0",
+      "recent": [
+        {
+          "id": "60d42d4e-f267-43cb-a5fc-163ab100fc0c",
+          "lanes": {
+            "payment": {
+              "attention": null,
+              "remaining_due": 0
+            },
+            "maintenance": {
+              "attention": null,
+              "remaining_due": 0
+            },
+            "email_events": {
+              "attention": null,
+              "remaining_due": 0
+            },
+            "payment_events": {
+              "attention": null,
+              "remaining_due": 0
+            },
+            "booking_records": {
+              "attention": null,
+              "remaining_due": 0
+            },
+            "enquiry_records": {
+              "attention": null,
+              "remaining_due": 0
+            },
+            "notification_email": {
+              "attention": null,
+              "remaining_due": 0
+            },
+            "verification_email": {
+              "attention": null,
+              "remaining_due": 0
+            },
+            "control_publication": {
+              "attention": null,
+              "remaining_due": 0
+            }
+          },
+          "attention": false,
+          "finished_at": "2026-10-24T13:05:07.424313+00:00",
+          "evaluated_at": "2026-10-24T13:05:05.832116+00:00",
+          "scheduled_at": "2026-10-24T13:01:19.665+00:00",
+          "release_digest": "6b020c73bede414689243b6b8fae73a805cac9ccde1f8f6215570d48f7e9c65e"
+        },
+        {
+          "id": "ff2def47-41b5-4975-8131-9ff50dd91b56",
+          "lanes": {
+            "payment": {
+              "attention": null,
+              "remaining_due": 0
+            },
+            "maintenance": {
+              "attention": null,
+              "remaining_due": 0
+            },
+            "email_events": {
+              "attention": null,
+              "remaining_due": 0
+            },
+            "payment_events": {
+              "attention": null,
+              "remaining_due": 0
+            },
+            "booking_records": {
+              "attention": null,
+              "remaining_due": 0
+            },
+            "enquiry_records": {
+              "attention": null,
+              "remaining_due": 0
+            },
+            "notification_email": {
+              "attention": null,
+              "remaining_due": 0
+            },
+            "verification_email": {
+              "attention": null,
+              "remaining_due": 0
+            },
+            "control_publication": {
+              "attention": null,
+              "remaining_due": 0
+            }
+          },
+          "attention": false,
+          "finished_at": null,
+          "evaluated_at": "2026-10-24T13:01:19.628+00:00",
+          "scheduled_at": "2026-10-24T13:00:43.829+00:00",
+          "release_digest": "6b020c73bede414689243b6b8fae73a805cac9ccde1f8f6215570d48f7e9c65e"
+        }
+      ]
+    }
+  ]
+}

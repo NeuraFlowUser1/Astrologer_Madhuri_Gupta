@@ -10,7 +10,7 @@ concurrency:
   cancel-in-progress: false
 jobs:
   monitor:
-    if: github.repository == vars.BOOKING_REPOSITORY && github.event.repository.visibility == 'public' && toJSON(github.event.repository.private) == 'false' && toJSON(github.event.repository.fork) == 'false' && github.ref == 'refs/heads/main' && (github.event_name == 'workflow_dispatch' || (github.event_name == 'schedule' && github.event.schedule == '8,23,38,53 * * * *'))
+    if: github.repository == vars.BOOKING_REPOSITORY && github.event.repository.visibility == 'public' && toJSON(github.event.repository.private) == 'false' && toJSON(github.event.repository.fork) == 'false' && github.ref == 'refs/heads/prod' && (github.event_name == 'workflow_dispatch' || (github.event_name == 'schedule' && github.event.schedule == '8,23,38,53 * * * *'))
     environment: appointment-monitor
     runs-on: ubuntu-24.04
     timeout-minutes: 2
