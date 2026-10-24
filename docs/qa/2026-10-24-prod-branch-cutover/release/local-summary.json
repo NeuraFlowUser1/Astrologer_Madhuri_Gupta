@@ -1,0 +1,30 @@
+{
+  "release": "1.0.2-rc.1",
+  "digest": "6b020c73bede414689243b6b8fae73a805cac9ccde1f8f6215570d48f7e9c65e",
+  "files": 582,
+  "automation_python_cases": 48,
+  "installer_export_python_cases": 35,
+  "native_workflow_cases": 15,
+  "installed_monitor_scenarios": {
+    "main": 7,
+    "prod": 7
+  },
+  "changed_executable_statement_and_branch_coverage_minimum": 90,
+  "exclusions": [],
+  "entry_cases": 3,
+  "entry_statements": 11,
+  "entry_branches": 2,
+  "production_build": "passed; 12 actual public pages in each ON/OFF mode",
+  "presentation_and_collateral_changes": 0,
+  "live_changeover": "not started",
+  "preflight_cases": 4,
+  "preflight_coverage": {
+    "statements": 98.83,
+    "branches": 96,
+    "functions": 100,
+    "lines": 100
+  },
+  "exported_source_files": 777,
+  "existing_phone_vastu_source_files_added_to_export_list": 9,
+  "source_checkpoint": "8cdba2a01c086d0572f8ba7f9f5c8fefd934830e"
+}

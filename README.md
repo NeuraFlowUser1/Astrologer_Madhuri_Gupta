@@ -1,5 +1,7 @@
 # Sarsa Jyotish Sansthan — maintained application
 
+The approved [supported prod-branch cutover](docs/prod-branch-cutover-2026-10-24.md) is qualified and prepared. Standard 1.0.2-rc.1 adds explicit production-branch automation, with unchanged business engine, migrations, artwork and motion. The live identity changeover and owner settings are separate gates; the existing main route remains active until they are accepted.
+
 The [24 October dev/prod consolidation](docs/dev-prod-consolidation-2026-10-24.md) prepares the two intended branches and commits the complete [generated poster archive](marketing/sarsa-posters/README.md). Main remains the default/live publishing compatibility branch until the supported monitoring/backup update and repository-owner action are complete. Do not delete main or claim the final two-branch cutover has happened before those checks.
 
 The [24 October public-phone/Contact refinement](docs/phone-and-contact-2026-10-24.md) adds the owner-confirmed +91 88815 73437 to the shared frame and useful Contact/Booking help, aligns FAQ markers on their existing spine and repairs both form-step spacing defects. Existing header/footer behaviour, complete artwork/motion, booking contracts and provider state are preserved. Focused qualification passes; actual publication/readback is recorded separately in the enclosing client review.

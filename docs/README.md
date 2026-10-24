@@ -6,6 +6,7 @@ The [19 October client handoff](project-004/2026-10-19-documentation/README.md) 
 
 | Read | What it owns |
 | --- | --- |
+| [Supported prod-branch cutover](prod-branch-cutover-2026-10-24.md) | Qualified branch-aware standard package, exact receiving guards/export, coordinated identity changeover, owner settings and final dev/prod proof. |
 | [Dev/prod consolidation](dev-prod-consolidation-2026-10-24.md) | Completed-work publication, source preservation, intended two-branch model and the exact main-only automation/owner-access blockers. |
 | [Generated poster archive](../marketing/sarsa-posters/README.md) | Three current native tall posters, clickable PDFs, portable comparison, byte/pixel/link checks and all earlier generated drafts/exports. |
 | [Public phone and Contact](phone-and-contact-2026-10-24.md) | Confirmed business call link, shared/contextual placements, FAQ spine alignment, form spacing, preserved motion and focused proof/release boundaries. |

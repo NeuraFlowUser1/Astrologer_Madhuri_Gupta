@@ -2,6 +2,8 @@
 import {test} from 'node:test';
 import assert from 'node:assert/strict';
 import {readFileSync} from 'node:fs';
+import {execFileSync} from 'node:child_process';
+import {fileURLToPath} from 'node:url';
 import {Lexer,Parser,Evaluator,data} from '../tools/checks/node_modules/@actions/expressions/dist/index.js';
 function value(input){
  if(input===null||input===undefined)return new data.Null();
@@ -65,3 +67,38 @@ test('dependent retention cannot allocate after failed, skipped or cancelled val
   const context=fixture();context.needs.verify.result=status;assert(!evaluate(guards[2],context));
  }
 });
+
+// Exercise the official renderer's real output with GitHub's expression engine.
+const packageRoot=fileURLToPath(new URL('..',import.meta.url));
+const renderer='import sys;from pathlib import Path;sys.path.insert(0,sys.argv[1]);from tools.automation.production import render_workflow;name=sys.argv[2];print(render_workflow(name,(Path(sys.argv[1])/"deploy/workflows"/name).read_bytes(),"prod").decode(),end="")';
+const prodGuards=sources.flatMap(name=>{
+ const source=execFileSync(process.env.ABS_PYTHON||'python3',['-c',renderer,packageRoot,name],{encoding:'utf8'});
+ if(name==='appointment-backup-validation.yml')assert(source.includes('branches: [prod]'));
+ return [...source.matchAll(/^    if: (.+)$/gm)].map((match,index)=>({name:name+':'+index,expression:match[1],source}));
+});
+test('rendered prod workflows keep four independent guards and standard runner boundaries',()=>{
+ assert.equal(prodGuards.length,4);
+ for(const guard of prodGuards){
+  assert(!guard.source.includes('refs/heads/main'));
+  assert(guard.source.includes('persist-credentials: false'));
+  assert(!guard.source.includes('secrets: inherit')&&!guard.source.includes('pull_request_target'));
+ }
+});
+for(const guard of prodGuards){
+ test('prod '+guard.name+' accepts its owned branch and refuses main, dev, tags, PRs and foreign authority',()=>{
+  const own=fixture();own.github.ref='refs/heads/prod';assert(evaluate(guard,own));
+  const scheduled=structuredClone(own);
+  scheduled.github.event_name=guard.name.startsWith(sources[1])?'workflow_run':'schedule';
+  if(guard.name.startsWith(sources[2]))scheduled.github.event.schedule='8,23,38,53 * * * *';
+  assert(evaluate(guard,scheduled));
+  for(const ref of ['refs/heads/main','refs/heads/dev','refs/tags/prod','refs/pull/1/merge']){
+   const other=structuredClone(own);other.github.ref=ref;assert(!evaluate(guard,other));
+  }
+  for(const field of ['private','fork'])for(const value of [true,null,0,'false',undefined]){
+   const other=structuredClone(own);other.github.event.repository[field]=value;assert(!evaluate(guard,other));
+  }
+  for(const change of [{repository:'Foreign/Repo'},{event_name:'pull_request'},{event_name:'push'}]){
+   const other=structuredClone(own);Object.assign(other.github,change);assert(!evaluate(guard,other));
+  }
+ });
+}

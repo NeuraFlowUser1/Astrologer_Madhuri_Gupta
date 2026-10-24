@@ -25,12 +25,12 @@ spec=importlib.util.spec_from_file_location('installed_monitor',package/'tools/a
 monitor=importlib.util.module_from_spec(spec);spec.loader.exec_module(monitor)
 profile=project/'appointment-settings/project.json';config,origins=monitor.public(profile)
 repository={'full_name':config['repository'],'visibility':'public','private':False,
-    'fork':False,'archived':False,'disabled':False,'default_branch':'main'}
+    'fork':False,'archived':False,'disabled':False,'default_branch':config.get('production_branch','main')}
 event=Path.cwd()/'event.json'
 event.write_text(json.dumps({'repository':repository,'schedule':monitor.CRON}))
 environment={'BOOKING_PROFILE':str(profile),'BOOKING_MONITOR_KEY':'a'*43+'=',
     'GITHUB_TOKEN':'synthetic-application-monitor-token','GITHUB_REPOSITORY':config['repository'],
-    'GITHUB_EVENT_PATH':str(event),'GITHUB_EVENT_NAME':'schedule','GITHUB_REF':'refs/heads/main',
+    'GITHUB_EVENT_PATH':str(event),'GITHUB_EVENT_NAME':'schedule','GITHUB_REF':'refs/heads/'+config.get('production_branch','main'),
     'RUNNER_ENVIRONMENT':'github-hosted','RUNNER_OS':'Linux'}
 repo_url='https://api.github.com/repos/'+config['repository']
 responses={repo_url:repository,origins[1]+'/health':{'status':'healthy'},

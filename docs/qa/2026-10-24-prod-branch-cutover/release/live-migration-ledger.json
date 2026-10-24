@@ -1,0 +1,14 @@
+{
+  "project": "cold-art-76378232",
+  "branch": "br-cool-bird-b39eiccm",
+  "read_only": true,
+  "migrations_applied": 0,
+  "exact_source_match": true,
+  "rows": [
+    {
+      "current_user": "neondb_owner",
+      "migrations": "37",
+      "ledger_sha256": "05cfeef7d2992446809b8497b42719335003f4c13bbbddd200d2a88986bc470b"
+    }
+  ]
+}

@@ -1,0 +1,24 @@
+{
+  "installation": {
+    "status": "installed",
+    "release_digest": "6b020c73bede414689243b6b8fae73a805cac9ccde1f8f6215570d48f7e9c65e",
+    "installation_id": "87b35f80-71bc-4ee1-bf34-a7316006f95c",
+    "project_id": "004",
+    "project_digest": "92a95f1312f91f351370ed1137d71226135930a34eb4fb0e586296707e8967aa",
+    "bootstrap_business_digest": "55f62a8ef929c6a12f71b5e5959329c8326a3fa3234b36c63ced355ae4480c11",
+    "rollback": ".appointment-rollbacks/1bb6cb1cc00a2ead7cec70de052ea78330005d7644dfc0d2e2a40ea7c287b31f-5551e654-0129-4526-917d-0f7e27f8fba2"
+  },
+  "settings_preserved": true,
+  "settings_hashes": {
+    "backup.json": "fed6cbc5659bcbdbb7b5ebaa8d037db9ad78a4a0417324f3dbc3d3669e0ed2dc",
+    "booking-browser.json": "28837202f35b978b077710e3bd7aed68280dda6aedf5833e2c52166f55923201",
+    "business-settings.json": "2cbfc6516acdad226f3edbba990aebb4bf6299073d108177ce7a34ccce5e84be",
+    "enquiry-browser.json": "d94307432e620090e7b5a077a78b57e0237c47560ebde4de4e3aec1d00831053",
+    "hosting-files.json": "5eac30c84bad0c6e3f8cddda2353b704313668f086ad04a6793b06a251958562",
+    "monitor.json": "6950e5ad36cd668401bc6324167ac06eadff838da5f7789be9cb157d98df97e7",
+    "project.json": "bbbc8cf994cdef20c8e11ca865adf18e898a26799cee052f161dc716bafc486c",
+    "public-assets.json": "1ac29c171658bc181683e8d1daa934297739a1941e5da5079cb05bbe6643264f",
+    "staff-browser.json": "25d23b759ab9211618eff59f73ab8d2ad966170b15b49bb9075d9d3e55a5521a"
+  },
+  "actual_receiver": "/mnt/d/Coding/Business/neuraflow-website-factory/03-client-projects/004-sarsa-jyotish-sansthan/.local-runtime/prod-branch-cutover-20261024"
+}

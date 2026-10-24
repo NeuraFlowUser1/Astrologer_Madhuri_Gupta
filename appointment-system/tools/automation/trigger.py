@@ -18,7 +18,8 @@ def main(source=None):
     if any(name.startswith('BOOKING_') and value and name!='BOOKING_PROFILE' for name,value in source.items()):raise BackupError('backup_trigger_private_authority_rejected')
     verify(ROOT)
     config=public_settings(source.get('BOOKING_PROFILE',''));event=unique_json(bounded_file(source.get('GITHUB_EVENT_PATH',''),65536))
-    runner(source,config['repository'],event)
+    branch=config.get('production_branch','main')
+    runner(source,config['repository'],event,branch=branch)
     if source.get('GITHUB_EVENT_NAME')=='workflow_run':run=str(event.get('workflow_run',{}).get('id',''))
     elif source.get('GITHUB_EVENT_NAME')=='workflow_dispatch':run=event.get('inputs',{}).get('source_run','')
     else:raise BackupError('backup_validator_trigger_rejected')
@@ -26,7 +27,7 @@ def main(source=None):
     with httpx.Client(timeout=httpx.Timeout(10,connect=3),follow_redirects=False,trust_env=False) as client:
         repository=github_read('',config['repository'],source.get('GITHUB_TOKEN'),client)
         record=github_read('actions/runs/'+run,config['repository'],source.get('GITHUB_TOKEN'),client)
-        run,attempt,commit=source_run(record,repository,config['repository'],run)
+        run,attempt,commit=source_run(record,repository,config['repository'],run,branch=branch)
     output=source.get('GITHUB_OUTPUT')
     if type(output) is not str or not output:raise BackupError('backup_output_missing')
     with open(output,'a',encoding='utf-8') as target:target.write('source_run='+run+'\nsource_attempt='+attempt+'\nsource_commit='+commit+'\n')

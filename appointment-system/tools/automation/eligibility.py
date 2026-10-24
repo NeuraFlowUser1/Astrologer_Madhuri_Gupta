@@ -2,6 +2,7 @@
 import re
 from appointment_system.backup.protocol import BackupError
 from appointment_system.backup.pipeline import run_identity
+from tools.automation.production import branch_name,ProductionBranchError
 
 WORKFLOW='.github/workflows/appointment-database-backup.yml'
 
@@ -10,22 +11,29 @@ def repository_name(value):
         raise BackupError('automation_repository_invalid')
     return value
 
-def eligible(repository,expected):
+def _branch(value):
+    try:return branch_name(value)
+    except ProductionBranchError:raise BackupError('automation_branch_invalid') from None
+
+def eligible(repository,expected,*,branch='main'):
+    branch=_branch(branch)
     repository_name(expected)
-    if (type(repository) is not dict or repository.get('full_name')!=expected or repository.get('default_branch')!='main'
+    if (type(repository) is not dict or repository.get('full_name')!=expected or repository.get('default_branch')!=branch
         or repository.get('visibility')!='public' or repository.get('private') is not False or repository.get('archived') is not False or repository.get('disabled') is not False
         or repository.get('fork') is not False):raise BackupError('automation_free_repository_required')
 
-def runner(environment,expected,event):
+def runner(environment,expected,event,*,branch='main'):
+    branch=_branch(branch)
     repository_name(expected)
-    if (environment.get('GITHUB_REPOSITORY')!=expected or environment.get('GITHUB_REF')!='refs/heads/main'
+    if (environment.get('GITHUB_REPOSITORY')!=expected or environment.get('GITHUB_REF')!='refs/heads/'+branch
         or environment.get('RUNNER_ENVIRONMENT')!='github-hosted' or environment.get('RUNNER_OS')!='Linux'
         or type(event) is not dict):raise BackupError('automation_runner_rejected')
-    eligible(event.get('repository'),expected)
+    eligible(event.get('repository'),expected,branch=branch)
 
-def source_run(value,repository,expected,run_id):
-    eligible(repository,expected)
-    if (type(value) is not dict or value.get('path')!=WORKFLOW or value.get('head_branch')!='main'
+def source_run(value,repository,expected,run_id,*,branch='main'):
+    branch=_branch(branch)
+    eligible(repository,expected,branch=branch)
+    if (type(value) is not dict or value.get('path')!=WORKFLOW or value.get('head_branch')!=branch
         or value.get('status')!='completed' or value.get('conclusion')!='success'
         or value.get('event') not in ('schedule','workflow_dispatch')
         or type(value.get('repository')) is not dict or value['repository'].get('full_name')!=expected

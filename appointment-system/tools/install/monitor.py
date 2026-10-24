@@ -8,6 +8,7 @@ from appointment_system.settings import Installation
 from appointment_system.backup.protocol import BackupError
 from tools.automation.eligibility import repository_name
 from tools.automation.monitor import CRON
+from tools.automation.production import branch_name,render_workflow,ProductionBranchError
 from .package import PackageError,git_root,locked,verify
 
 WORKFLOW='appointment-background-monitor.yml'
@@ -19,7 +20,9 @@ def _contained(root,path):
     if path.exists() and not path.is_file():raise PackageError('Monitor target must be a file.')
 
 
-def prepare(target,*,expected_root,repository):
+def prepare(target,*,expected_root,repository,production_branch='main'):
+    try:production_branch=branch_name(production_branch)
+    except ProductionBranchError:raise PackageError('An explicit valid production branch is required.') from None
     try:repository_name(repository)
     except BackupError:raise PackageError('An explicit owned repository name is required.') from None
     root=git_root(target,expected_root)
@@ -33,11 +36,14 @@ def prepare(target,*,expected_root,repository):
             raise PackageError('Scheduled monitoring requires a production profile.')
         config={'version':1,'installation_id':facts['installation_id'],'environment':facts['environment'],
                 'repository':repository,'cron':CRON}
+        if production_branch!='main':config.update(version=2,production_branch=production_branch)
         template=package/'deploy/workflows'/WORKFLOW
         if not template.is_file():
             raise PackageError('The contained monitoring workflow is missing.')
+        try:workflow=render_workflow(WORKFLOW,template.read_bytes(),production_branch)
+        except ProductionBranchError:raise PackageError('The contained monitoring workflow is invalid.') from None
         files={root/'appointment-settings/monitor.json':(json.dumps(config,indent=2)+'\n').encode(),
-               root/'.github/workflows'/WORKFLOW:template.read_bytes()}
+               root/'.github/workflows'/WORKFLOW:workflow}
         # Refuse changed owner work before creating either output. Interrupted
         # preparation can resume already-complete, byte-identical files.
         for path,body in files.items():
@@ -76,7 +82,8 @@ if __name__=='__main__':
     parser=argparse.ArgumentParser(description='Prepare contained monitoring files only; no network or publication.')
     parser.add_argument('target',type=Path);parser.add_argument('--expected-root',required=True,type=Path)
     parser.add_argument('--repository',required=True)
+    parser.add_argument('--production-branch',default='main')
     args=parser.parse_args()
-    try:result=prepare(args.target,expected_root=args.expected_root,repository=args.repository)
+    try:result=prepare(args.target,expected_root=args.expected_root,repository=args.repository,production_branch=args.production_branch)
     except (ValueError,OSError):raise SystemExit('Monitor preparation refused. Review the owned project and existing files.') from None
     print(json.dumps(result,sort_keys=True))

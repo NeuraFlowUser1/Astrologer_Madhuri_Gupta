@@ -1,0 +1,11 @@
+{
+  "result": {
+    "status": "prepared",
+    "worker": "sarsa-booking-recovery",
+    "release_digest": "6b020c73bede414689243b6b8fae73a805cac9ccde1f8f6215570d48f7e9c65e"
+  },
+  "only_release_binding_changed": true,
+  "prior_config_sha256": "99fa94c10be56a06dd2c8c478b87db74e79ad017f1d450cf1db6ea5d24679541",
+  "prepared_config_sha256": "8a8c8bc021c99d38350414bd7c2f35ffc10970b428537b398c65ccb66088d67e",
+  "published": false
+}

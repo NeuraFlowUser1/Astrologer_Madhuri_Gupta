@@ -1,0 +1,10 @@
+{
+  "destination": "/tmp/appointment-hosting-source-owju2a53",
+  "manifest": "/tmp/appointment-hosting-source-owju2a53.manifest.json",
+  "files": 777,
+  "bytes": 39359009,
+  "release_digest": "6b020c73bede414689243b6b8fae73a805cac9ccde1f8f6215570d48f7e9c65e",
+  "deployed": false,
+  "source_manifest_complete": true,
+  "nine_previously_omitted_accepted_phone_vastu_files": true
+}

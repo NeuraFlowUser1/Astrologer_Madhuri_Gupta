@@ -10,6 +10,7 @@ if any(part.is_symlink() for part in (_file,*_file.parents)):raise SystemExit('m
 ROOT=_file.resolve().parents[2]
 sys.path.insert(0,str(ROOT))
 from tools.install.package import verify
+from tools.automation.production import branch_name,configuration_branch,ProductionBranchError
 CRON='8,23,38,53 * * * *'
 
 class MonitorError(ValueError):pass
@@ -38,8 +39,9 @@ def public(profile):
     path=Path(profile)
     if path.resolve()!=ROOT.parent/'appointment-settings/project.json':raise MonitorError('monitor_profile_path_invalid')
     facts=file(path,131072);config=file(path.with_name('monitor.json'),4096)
-    if (type(config) is not dict or set(config)!={'version','installation_id','environment','repository','cron'}
-        or type(config['version']) is not int or config['version']!=1 or config['cron']!=CRON
+    try:configuration_branch(config,{'version','installation_id','environment','repository','cron'})
+    except ProductionBranchError:raise MonitorError('monitor_profile_invalid') from None
+    if (config['cron']!=CRON
         or type(facts) is not dict or config['installation_id']!=facts.get('installation_id')
         or config['environment']!=facts.get('environment') or config['environment']!='production'
         or type(config['repository']) is not str or not re.fullmatch(r'[A-Za-z0-9_.-]{1,100}/[A-Za-z0-9_.-]{1,100}',config['repository'])):
@@ -55,8 +57,10 @@ def public(profile):
     except (ValueError,TypeError,KeyError,AttributeError):raise MonitorError('monitor_profile_invalid') from None
     return config,origins
 
-def eligible(value,repository):
-    if (type(value) is not dict or value.get('full_name')!=repository or value.get('default_branch')!='main'
+def eligible(value,repository,*,branch='main'):
+    try:branch=branch_name(branch)
+    except ProductionBranchError:raise MonitorError('monitor_profile_invalid') from None
+    if (type(value) is not dict or value.get('full_name')!=repository or value.get('default_branch')!=branch
         or value.get('visibility')!='public' or any(value.get(name) is not False for name in ('private','fork','archived','disabled'))):
         raise MonitorError('monitor_repository_ineligible')
 
@@ -77,12 +81,13 @@ def run(source=None,*,opener=None):
     if any((name.startswith('PG') or name.startswith('BOOKING_') and name not in ('BOOKING_PROFILE','BOOKING_MONITOR_KEY')) and value for name,value in source.items()):
         raise MonitorError('monitor_private_authority_rejected')
     verify(ROOT);config,origins=public(source.get('BOOKING_PROFILE',''))
-    if (source.get('GITHUB_REPOSITORY')!=config['repository'] or source.get('GITHUB_REF')!='refs/heads/main'
+    branch=config.get('production_branch','main')
+    if (source.get('GITHUB_REPOSITORY')!=config['repository'] or source.get('GITHUB_REF')!='refs/heads/'+branch
         or source.get('RUNNER_ENVIRONMENT')!='github-hosted' or source.get('RUNNER_OS')!='Linux'
         or source.get('GITHUB_EVENT_NAME') not in ('schedule','workflow_dispatch')):raise MonitorError('monitor_runner_ineligible')
     event=file(source.get('GITHUB_EVENT_PATH',''),65536)
     if type(event) is not dict:raise MonitorError('monitor_event_invalid')
-    eligible(event.get('repository'),config['repository'])
+    eligible(event.get('repository'),config['repository'],branch=branch)
     if source['GITHUB_EVENT_NAME']=='schedule' and event.get('schedule')!=CRON:raise MonitorError('monitor_schedule_rejected')
     token=source.get('GITHUB_TOKEN');key=source.get('BOOKING_MONITOR_KEY')
     if (type(token) is not str or not 1<=len(token)<=8192 or '\n' in token or '\r' in token
@@ -90,7 +95,7 @@ def run(source=None,*,opener=None):
         raise MonitorError('monitor_credential_invalid')
     remote=document(read('https://api.github.com/repos/'+config['repository'],{
         'Authorization':'Bearer '+token,'Accept':'application/vnd.github+json','X-GitHub-Api-Version':'2022-11-28','User-Agent':'appointment-system-monitor'},maximum=65536,opener=opener))
-    eligible(remote,config['repository'])
+    eligible(remote,config['repository'],branch=branch)
     health=document(read(origins[1]+'/health',{'Authorization':'Bearer '+key},opener=opener))
     if health!={'status':'healthy'}:raise MonitorError('monitor_recovery_attention')
     process=document(read(origins[0]+'/api/health',opener=opener))

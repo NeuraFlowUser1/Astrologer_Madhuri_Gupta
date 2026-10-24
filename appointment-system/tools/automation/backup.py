@@ -12,6 +12,7 @@ sys.path.insert(0,str(ROOT));sys.path.insert(0,str(ROOT/'engine'))
 
 from tools.install.package import verify,PackageError
 from tools.automation.eligibility import runner,source_run,repository_name
+from tools.automation.production import configuration_branch,ProductionBranchError
 from appointment_system.configuration import load,installation
 from appointment_system.backup.protocol import Identity,BackupError,unique_json,canonical,keyring
 from appointment_system.backup import pipeline
@@ -52,8 +53,9 @@ def public_settings(profile):
         raise BackupError('backup_profile_path_invalid')
     load(path)
     value=unique_json(bounded_file(path.with_name('backup.json'),65536));facts=installation()
-    if (type(value) is not dict or set(value)!={'version','installation_id','environment','owner_email','folder','folder_name','repository','cron','retention'}
-        or type(value['version']) is not int or value['version']!=1 or value['installation_id']!=facts['installation_id']
+    try:configuration_branch(value,{'version','installation_id','environment','owner_email','folder','folder_name','repository','cron','retention'})
+    except ProductionBranchError:raise BackupError('backup_public_settings_invalid') from None
+    if (value['installation_id']!=facts['installation_id']
         or value['environment']!=facts['environment'] or value['owner_email']!=facts['owners']['client_email']
         or type(value['cron']) is not str or value['cron'] not in ('37 1 * * *','2 3 * * *')):
         raise BackupError('backup_public_settings_invalid')
@@ -81,7 +83,8 @@ def github_read(path,repository,token,client):
 def checked_source(source,event,config,mode,arguments):
     import httpx
     from tools.automation.eligibility import eligible
-    runner(source,config['repository'],event)
+    branch=config.get('production_branch','main')
+    runner(source,config['repository'],event,branch=branch)
     event_name=source.get('GITHUB_EVENT_NAME')
     if mode=='export':
         if event_name not in ('schedule','workflow_dispatch') or event_name=='schedule' and event.get('schedule')!=config['cron']:
@@ -93,10 +96,10 @@ def checked_source(source,event,config,mode,arguments):
         if str(requested)!=arguments.source_run:raise BackupError('backup_validator_trigger_rejected')
         result=pipeline.run_identity(arguments.source_run,arguments.source_attempt,arguments.source_commit)
     with httpx.Client(timeout=httpx.Timeout(10,connect=3),follow_redirects=False,trust_env=False) as client:
-        repository=github_read('',config['repository'],source.get('GITHUB_TOKEN'),client);eligible(repository,config['repository'])
+        repository=github_read('',config['repository'],source.get('GITHUB_TOKEN'),client);eligible(repository,config['repository'],branch=branch)
         if mode!='export':
             remote=github_read('actions/runs/'+result[0],config['repository'],source.get('GITHUB_TOKEN'),client)
-            if source_run(remote,repository,config['repository'],result[0])!=result:raise BackupError('backup_source_identity_mismatch')
+            if source_run(remote,repository,config['repository'],result[0],branch=branch)!=result:raise BackupError('backup_source_identity_mismatch')
     return result
 
 def main(argv=None,source=None):

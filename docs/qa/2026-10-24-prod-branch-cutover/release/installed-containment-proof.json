@@ -1,0 +1,26 @@
+{
+  "installed_package_digest": "6b020c73bede414689243b6b8fae73a805cac9ccde1f8f6215570d48f7e9c65e",
+  "native_runs": [
+    {
+      "branch": "main",
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "scenarios": 7,
+      "output": "test_installed_observer_is_independent_and_uses_only_its_own_declared_endpoints (tests.test_monitor_contained.ContainedMonitor.test_installed_observer_is_independent_and_uses_only_its_own_declared_endpoints) ... ok\n\n----------------------------------------------------------------------\nRan 1 test in 10.683s\n\nOK\n"
+    },
+    {
+      "branch": "prod",
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "scenarios": 7,
+      "output": "test_installed_observer_is_independent_and_uses_only_its_own_declared_endpoints (tests.test_monitor_contained.ContainedMonitor.test_installed_observer_is_independent_and_uses_only_its_own_declared_endpoints) ... ok\n\n----------------------------------------------------------------------\nRan 1 test in 8.407s\n\nOK\n"
+    }
+  ],
+  "network_calls": 0,
+  "database_import_or_access": false,
+  "public_config_restored": true
+}
