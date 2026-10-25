@@ -1,0 +1,24 @@
+{
+  "completed_at": "2026-10-25T11:27:27.258474+00:00",
+  "approved_scope": "Preserve reviewed final main head; retire obsolete main after prod-only owner controls and successful actual prod proof",
+  "retired_branch": "main",
+  "preserved_commit": "7f97d4a1e91b393d58688630d3d801268237d999",
+  "preserved_tags": {
+    "refs/tags/archive/2026-10-25/main-before-prod": "e64bcbc015d7b9bb83adc7ab5d402cfc623c63b7",
+    "refs/tags/archive/2026-10-25/main-before-prod^{}": "7f97d4a1e91b393d58688630d3d801268237d999",
+    "refs/tags/main": "e713ca11e252f3a50ed52f5371da9116564f17f2",
+    "refs/tags/main^{}": "7f97d4a1e91b393d58688630d3d801268237d999"
+  },
+  "head_guard": "Explicit expected-old lease on refs/heads/main only; atomic creation of new tags and branch deletion; no existing branch history was force-updated",
+  "remote_heads_after": {
+    "dev": "5932dbb2286938800baf10372866df65dc6bc3ac",
+    "prod": "5932dbb2286938800baf10372866df65dc6bc3ac"
+  },
+  "default_branch": "prod",
+  "remote_default": "refs/remotes/origin/prod",
+  "local_heads": [
+    "dev",
+    "prod"
+  ],
+  "earlier_feature_tags_worktrees_bundle_preserved": true
+}

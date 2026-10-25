@@ -1,0 +1,41 @@
+{
+  "checked_at": "2026-10-25T11:25:48.620996+00:00",
+  "environments": {
+    "appointment-monitor": [
+      {
+        "id": 64264517,
+        "name": "prod",
+        "type": "branch"
+      }
+    ],
+    "appointment-backup-export": [
+      {
+        "id": 64268849,
+        "name": "prod",
+        "type": "branch"
+      }
+    ],
+    "appointment-backup-validation": [
+      {
+        "id": 64269603,
+        "name": "prod",
+        "type": "branch"
+      }
+    ],
+    "appointment-backup-retention": [
+      {
+        "id": 64271793,
+        "name": "prod",
+        "type": "branch"
+      }
+    ]
+  },
+  "remote_heads": {
+    "dev": "5932dbb2286938800baf10372866df65dc6bc3ac",
+    "main": "7f97d4a1e91b393d58688630d3d801268237d999",
+    "prod": "5932dbb2286938800baf10372866df65dc6bc3ac"
+  },
+  "archive_tags_before": [],
+  "github_default_branch": "prod",
+  "reviewed_main_is_ancestor_of_prod": true
+}
