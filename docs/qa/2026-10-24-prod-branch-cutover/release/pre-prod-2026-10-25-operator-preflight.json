@@ -1,0 +1,18 @@
+{
+  "observed_at": "2026-10-25T09:58:05.415093+00:00",
+  "status": {
+    "installation_id": "87b35f80-71bc-4ee1-bf34-a7316006f95c",
+    "project": "004",
+    "origin": "https://www.sarsajyotishsansthan.com",
+    "environment": "production",
+    "enabled": true,
+    "restore_generation": "bb459a74-676d-4d7b-a56d-e243868341a6",
+    "revision": "16",
+    "requested_mode": "on",
+    "admission_mode": "on",
+    "operation_id": "84b48b8a-add9-4b42-9afe-018fb3d3f5fe",
+    "progress": "effective"
+  },
+  "business_settings_revision": "13",
+  "business_settings_sha256": "55f62a8ef929c6a12f71b5e5959329c8326a3fa3234b36c63ced355ae4480c11"
+}
