@@ -1,0 +1,32 @@
+{
+  "reviewed_at": "2026-10-25T10:32:12.616099+00:00",
+  "operational_proof_commit": "4d03ebe4b57f525c046834590c9415f7c1865c58",
+  "change_scope": "Documentation and existing prod readback receipts/captures only; no executable, configuration or generated-poster changes",
+  "tracked_document_paths": [
+    "README.md",
+    "docs/README.md",
+    "docs/appointment-system-release.md",
+    "docs/dev-prod-consolidation-2026-10-24.md",
+    "docs/prod-branch-cutover-2026-10-24.md"
+  ],
+  "added_evidence_paths": [
+    "docs/qa/2026-10-24-prod-branch-cutover/release/live-prod/booking-390.png",
+    "docs/qa/2026-10-24-prod-branch-cutover/release/live-prod/browser-readback.json",
+    "docs/qa/2026-10-24-prod-branch-cutover/release/live-prod/contact-faq-1440.png",
+    "docs/qa/2026-10-24-prod-branch-cutover/release/live-prod/contact-form-390.png",
+    "docs/qa/2026-10-24-prod-branch-cutover/release/live-prod/home-1440.png",
+    "docs/qa/2026-10-24-prod-branch-cutover/release/live-prod/vastu-1440.png",
+    "docs/qa/2026-10-24-prod-branch-cutover/release/post-prod-2026-10-25-operator-protected.json",
+    "docs/qa/2026-10-24-prod-branch-cutover/release/prod-deployment-callback-2026-10-25.json",
+    "docs/qa/2026-10-24-prod-branch-cutover/release/prod-job-proof-2026-10-25.json",
+    "docs/qa/2026-10-24-prod-branch-cutover/release/prod-runtime-acceptance-2026-10-25.json"
+  ],
+  "focused_public_source_seal_check": "passed",
+  "markdown_local_links": "all existing targets resolve",
+  "receipt_json_parse": "passed",
+  "new_receipt_credential_pattern_scan": "no credential values found",
+  "presentation_api_marketing_bytes": "exactly match accepted 8cdba2a01c086d0572f8ba7f9f5c8fefd934830e",
+  "whole_product_suites_rerun": false,
+  "real_backup_repeated_for_docs": false,
+  "remaining": "Owner removes four obsolete main rules; preserved-head branch retirement and final two-head readback follow"
+}

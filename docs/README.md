@@ -1,13 +1,13 @@
 # Project 004 — documentation index
 
-Reviewed **24 October 2026** after public-phone/Contact delivery, tall-poster refinement and dev/prod preparation. The matching 24 October 1.0.2-rc.1 package/Worker/database release is accepted and original ON is restored at revision 16. Main remains the default/live publishing route until the owner settings and actual prod operation pass. This is the maintained application's current reading path. Current feature guides explain behavior/decisions; dated plans and reports preserve exact scope and proof. There is one owner per topic.
+Reviewed **25 October 2026** after prod Production publication and actual monitor/export/independent validation/retention acceptance. The matching 24 October 1.0.2-rc.1 package/Worker/database release is accepted and original ON is restored at revision 16. Prod is now the default/live publishing branch, and all four real prod jobs pass. Main awaits only final obsolete-permission cleanup and preserved-head retirement. This is the maintained application's current reading path. Current feature guides explain behavior/decisions; dated plans and reports preserve exact scope and proof. There is one owner per topic.
 
 The [19 October client handoff](project-004/2026-10-19-documentation/README.md) publishes the current outer working status/navigation and relevant historical notices alongside this application. Its manifest distinguishes original working text from link-adapted copies; no private storage or application duplicate is included.
 
 | Read | What it owns |
 | --- | --- |
 | [Supported prod-branch cutover](prod-branch-cutover-2026-10-24.md) | Qualified branch-aware standard package, exact receiving guards/export, coordinated identity changeover, owner settings and final dev/prod proof. |
-| [Dev/prod consolidation](dev-prod-consolidation-2026-10-24.md) | Completed-work publication, source preservation, intended two-branch model and the exact main-only automation/owner-access blockers. |
+| [Initial dev/prod consolidation](dev-prod-consolidation-2026-10-24.md) | Dated source/collateral preparation and preservation; its earlier main-only blocker is superseded by the supported cutover above. |
 | [Generated poster archive](../marketing/sarsa-posters/README.md) | Three current native tall posters, clickable PDFs, portable comparison, byte/pixel/link checks and all earlier generated drafts/exports. |
 | [Public phone and Contact](phone-and-contact-2026-10-24.md) | Confirmed business call link, shared/contextual placements, FAQ spine alignment, form spacing, preserved motion and focused proof/release boundaries. |
 | [Home Vastu](vastu-home-2026-10-23.md) | Six-section home-only page, generated cutaway hero, four home topics, three illustrated traditional principles, responsive motion and focused publication proof. |

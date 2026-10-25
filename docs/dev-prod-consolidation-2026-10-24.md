@@ -1,4 +1,6 @@
-# Sarsa — dev/prod consolidation and final cutover boundary
+# Sarsa — initial dev/prod consolidation checkpoint
+
+This dated checkpoint records the initial source/collateral preparation. The [supported cutover guide](prod-branch-cutover-2026-10-24.md) and 25 October prod acceptance own the current state; the main-only blocker below is superseded by qualified standard 1.0.2-rc.1.
 
 The owner requested completed website/poster work be committed, pushed and merged, with only dev and prod remaining. The safe transition prepares dev/prod with the same approved source while **main remains the GitHub default and live publishing compatibility branch**. The final two-branch cutover is pending the supported automation update and repository-owner action below.
 

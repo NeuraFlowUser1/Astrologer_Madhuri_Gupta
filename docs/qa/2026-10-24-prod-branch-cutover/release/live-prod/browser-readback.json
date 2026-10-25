@@ -1,0 +1,184 @@
+{
+  "source_commit": "4d03ebe4b57f525c046834590c9415f7c1865c58",
+  "views": [
+    {
+      "name": "home",
+      "width": 1440,
+      "height": 1000,
+      "path": "/",
+      "status": 200,
+      "title": "Astrologer Madhuri Gupta in Agra | Sarsa Jyotish Sansthan",
+      "overflow": false,
+      "phoneLinks": [
+        "tel:+918881573437",
+        "tel:+918881573437"
+      ],
+      "headings": [
+        "Sarsa Jyotish Sansthan",
+        "Questions about life?Let\u2019s look at your kundli.",
+        "How can we help?",
+        "Meet MadhuriGupta.",
+        "What bringsyou here?",
+        "Somethingon your mind?",
+        "Bring yourquestions.",
+        "Three steps toyour appointment.",
+        "A few questions,answered simply.",
+        "Your questions.Your next appointment."
+      ],
+      "images": [
+        {
+          "alt": "",
+          "loaded": true
+        },
+        {
+          "alt": "",
+          "loaded": true
+        }
+      ],
+      "pageErrors": [],
+      "screenshot": "home-1440.png"
+    },
+    {
+      "name": "vastu",
+      "width": 1440,
+      "height": 1000,
+      "path": "/services/vastu-consultation",
+      "status": 200,
+      "title": "Vastu Consultation | Sarsa Jyotish Sansthan",
+      "overflow": false,
+      "phoneLinks": [
+        "tel:+918881573437",
+        "tel:+918881573437"
+      ],
+      "headings": [
+        "Your home.A Vastu perspective.",
+        "Facing and entrance.",
+        "Facing and entrance.",
+        "Rooms in relation to one another.",
+        "The plan as a whole.",
+        "Water, light and openings.",
+        "Start with the home you know.",
+        "The principles behind the plan.",
+        "A little preparation.A clearer starting point.",
+        "Your questions.Your next step."
+      ],
+      "images": [
+        {
+          "alt": "",
+          "loaded": true
+        },
+        {
+          "alt": "An illustrative home model showing an entrance, rooms and windows beside a compass.",
+          "loaded": true
+        },
+        {
+          "alt": "Illustrative courtyard-house model, floor plan and compass",
+          "loaded": true
+        }
+      ],
+      "pageErrors": [],
+      "screenshot": "vastu-1440.png"
+    },
+    {
+      "name": "contact-faq",
+      "width": 1440,
+      "height": 1000,
+      "path": "/contact",
+      "status": 200,
+      "title": "Contact Madhuri Gupta in Agra | Sarsa Jyotish Sansthan",
+      "overflow": false,
+      "phoneLinks": [
+        "tel:+918881573437",
+        "tel:+918881573437",
+        "tel:+918881573437",
+        "tel:+918881573437"
+      ],
+      "headings": [
+        "A question isa good beginning.",
+        "What brings you here?",
+        "There\u2019s room forwhat\u2019s on your mind.",
+        "A little clarity.A clearer way forward.",
+        "Your next step.In your own time.",
+        "Find Sarsa in Agra"
+      ],
+      "images": [],
+      "pageErrors": [],
+      "screenshot": "contact-faq-1440.png"
+    },
+    {
+      "name": "contact-form",
+      "width": 390,
+      "height": 844,
+      "path": "/contact",
+      "status": 200,
+      "title": "Contact Madhuri Gupta in Agra | Sarsa Jyotish Sansthan",
+      "overflow": false,
+      "phoneLinks": [
+        "tel:+918881573437",
+        "tel:+918881573437",
+        "tel:+918881573437",
+        "tel:+918881573437"
+      ],
+      "headings": [
+        "A question isa good beginning.",
+        "What brings you here?",
+        "There\u2019s room forwhat\u2019s on your mind.",
+        "A little clarity.A clearer way forward.",
+        "Your next step.In your own time.",
+        "Find Sarsa in Agra"
+      ],
+      "images": [],
+      "pageErrors": [],
+      "screenshot": "contact-form-390.png"
+    },
+    {
+      "name": "booking",
+      "width": 390,
+      "height": 844,
+      "path": "/booking",
+      "status": 200,
+      "title": "Book an appointment | Sarsa Jyotish Sansthan",
+      "overflow": false,
+      "phoneLinks": [
+        "tel:+918881573437",
+        "tel:+918881573437",
+        "tel:+918881573437"
+      ],
+      "headings": [
+        "Book your appointment for expert guidance.",
+        "Select your service",
+        "Select a suitable date and time",
+        "Fill your details",
+        "Review and book",
+        "Booking questions"
+      ],
+      "images": [
+        {
+          "alt": "",
+          "loaded": true
+        },
+        {
+          "alt": "",
+          "loaded": true
+        }
+      ],
+      "pageErrors": [],
+      "screenshot": "booking-390.png"
+    }
+  ],
+  "process": {
+    "status": 200,
+    "body": {
+      "status": "online"
+    }
+  },
+  "service": {
+    "status": 200,
+    "body": {
+      "enabled": true,
+      "activation_epoch": "2963691f-b266-497b-a1ad-f14de0aac35b"
+    }
+  },
+  "customer_submissions": 0,
+  "scope": "Actual public views and API reads after Production callback success; no customer form submission, payment, email or Calendar action. Contact captures allow 8.5 seconds for their existing entrance motion after scrolling."
+}

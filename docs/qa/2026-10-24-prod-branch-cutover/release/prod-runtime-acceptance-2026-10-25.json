@@ -1,0 +1,50 @@
+{
+  "recorded_at": "2026-10-25T10:23:26.827656+00:00",
+  "operational_commit": "4d03ebe4b57f525c046834590c9415f7c1865c58",
+  "github_default_branch": "prod",
+  "vercel_owner_confirmed_branch": "prod",
+  "production_callback": {
+    "deployment_id": 7311551849,
+    "environment": "Production",
+    "state": "success",
+    "environment_url": "https://astrologer-madhuri-gupta-j6xz4grys-neura-flow1.vercel.app"
+  },
+  "official_domain": "https://www.sarsajyotishsansthan.com",
+  "public_views": 5,
+  "public_http_results": [
+    200,
+    200,
+    200,
+    200,
+    200
+  ],
+  "public_script_errors": 0,
+  "public_horizontal_overflow": false,
+  "phone_target": "tel:+918881573437",
+  "api_health": "online",
+  "booking_enabled": true,
+  "company_on_revision": "16",
+  "release_digest": "6b020c73bede414689243b6b8fae73a805cac9ccde1f8f6215570d48f7e9c65e",
+  "saved_business_settings_revision": "13",
+  "prod_monitor_run": 40183220735,
+  "prod_export_run": 40183221861,
+  "prod_independent_verification_retention_run": 40183424598,
+  "job_outcomes": {
+    "monitor": "success",
+    "export": "success",
+    "verify": "success",
+    "retain": "success"
+  },
+  "customer_submissions": 0,
+  "production_database_restores": 0,
+  "forced_worker_runs": 0,
+  "remaining": [
+    "Owner removes obsolete main rule from four environments",
+    "Preserve final main head and delete remote main",
+    "Final documentation/head alignment and clean two-branch readback"
+  ],
+  "verification_limits": [
+    "Production success is reported by the existing Vercel integration on GitHub; direct Vercel workspace/domain-to-commit inspection is unavailable under the existing account boundary.",
+    "Public/protected checks and real prod backup/isolated validation/retention do not claim a new paid customer booking, mail or Calendar/Meet journey."
+  ]
+}

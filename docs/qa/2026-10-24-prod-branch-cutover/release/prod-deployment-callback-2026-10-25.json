@@ -1,0 +1,39 @@
+{
+  "source": "GitHub deployment/status callbacks from the existing Vercel integration",
+  "publication_sha": "4d03ebe4b57f525c046834590c9415f7c1865c58",
+  "observations": [
+    {
+      "id": 7311551849,
+      "ref": "4d03ebe4b57f525c046834590c9415f7c1865c58",
+      "sha": "4d03ebe4b57f525c046834590c9415f7c1865c58",
+      "environment": "Production",
+      "production_environment": false,
+      "created_at": "2026-10-25T10:03:22Z",
+      "statuses": [
+        {
+          "state": "success",
+          "environment_url": "https://astrologer-madhuri-gupta-j6xz4grys-neura-flow1.vercel.app",
+          "target_url": "https://astrologer-madhuri-gupta-j6xz4grys-neura-flow1.vercel.app",
+          "created_at": "2026-10-25T10:03:23Z"
+        }
+      ]
+    },
+    {
+      "id": 7311544916,
+      "ref": "4d03ebe4b57f525c046834590c9415f7c1865c58",
+      "sha": "4d03ebe4b57f525c046834590c9415f7c1865c58",
+      "environment": "Preview",
+      "production_environment": false,
+      "created_at": "2026-10-25T10:02:40Z",
+      "statuses": [
+        {
+          "state": "success",
+          "environment_url": "https://astrologer-madhuri-gupta-40bqz3xpt-neura-flow1.vercel.app",
+          "target_url": "https://astrologer-madhuri-gupta-40bqz3xpt-neura-flow1.vercel.app",
+          "created_at": "2026-10-25T10:02:40Z"
+        }
+      ]
+    }
+  ],
+  "scope": "Provider reports Production success for the exact fresh commit; official-domain live and protected checks follow separately. Direct Vercel workspace inspection remains unavailable and Vercel stays disconnected from Codex."
+}

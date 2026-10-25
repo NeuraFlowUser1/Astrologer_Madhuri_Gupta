@@ -1,0 +1,84 @@
+{
+  "recorded_at": "2026-10-25T10:16:09.452901+00:00",
+  "source_commit": "4d03ebe4b57f525c046834590c9415f7c1865c58",
+  "runs": [
+    {
+      "id": 40183424598,
+      "name": "Appointment stored backup verification",
+      "head_sha": "4d03ebe4b57f525c046834590c9415f7c1865c58",
+      "head_branch": "prod",
+      "status": "completed",
+      "conclusion": "success",
+      "created_at": "2026-10-25T10:06:49Z",
+      "updated_at": "2026-10-25T10:08:24Z",
+      "jobs": [
+        {
+          "id": 121139087443,
+          "name": "verify",
+          "status": "completed",
+          "conclusion": "success",
+          "started_at": "2026-10-25T10:06:52Z",
+          "completed_at": "2026-10-25T10:07:26Z"
+        },
+        {
+          "id": 121139214469,
+          "name": "retain",
+          "status": "completed",
+          "conclusion": "success",
+          "started_at": "2026-10-25T10:07:29Z",
+          "completed_at": "2026-10-25T10:08:23Z"
+        }
+      ]
+    },
+    {
+      "id": 40183221861,
+      "name": "Appointment database backup",
+      "head_sha": "4d03ebe4b57f525c046834590c9415f7c1865c58",
+      "head_branch": "prod",
+      "status": "completed",
+      "conclusion": "success",
+      "created_at": "2026-10-25T10:03:55Z",
+      "updated_at": "2026-10-25T10:06:47Z",
+      "jobs": [
+        {
+          "id": 121138482240,
+          "name": "export",
+          "status": "completed",
+          "conclusion": "success",
+          "started_at": "2026-10-25T10:03:59Z",
+          "completed_at": "2026-10-25T10:06:46Z"
+        }
+      ]
+    },
+    {
+      "id": 40183220735,
+      "name": "Appointment background monitor",
+      "head_sha": "4d03ebe4b57f525c046834590c9415f7c1865c58",
+      "head_branch": "prod",
+      "status": "completed",
+      "conclusion": "success",
+      "created_at": "2026-10-25T10:03:54Z",
+      "updated_at": "2026-10-25T10:04:08Z",
+      "jobs": [
+        {
+          "id": 121138479827,
+          "name": "monitor",
+          "status": "completed",
+          "conclusion": "success",
+          "started_at": "2026-10-25T10:03:58Z",
+          "completed_at": "2026-10-25T10:04:07Z"
+        }
+      ]
+    }
+  ],
+  "all_required_jobs_succeeded": true,
+  "job_names": [
+    "verify",
+    "retain",
+    "export",
+    "monitor"
+  ],
+  "customer_submissions": 0,
+  "production_restore": false,
+  "scope": "Real encrypted export, independent isolated restore validation and existing retention policy; no backup contents or credentials retrieved into this review."
+}
