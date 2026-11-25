@@ -6,7 +6,7 @@ from .worker_access import WakeRequest
 
 COMPONENTS=frozenset(('staff_connection','worker_connection','company_connection','studio',
     'google_resources','contact_protection','email_sender','email_webhook','payment_accounts',
-    'payment_webhook','projection_reader','recovery_contract'))
+    'payment_webhook','projection_reader','recovery_contract','wake_publisher'))
 
 def add_configuration_route(app,key,evidence,release_digest):
     if (type(evidence) is not dict or set(evidence)!=COMPONENTS

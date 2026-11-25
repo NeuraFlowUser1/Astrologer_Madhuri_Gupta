@@ -1,6 +1,7 @@
 // One implementation for every contained project worker. No database credentials.
 import {facts} from './installation.mjs';
 import {canonical} from './service-state.mjs';
+import {decide,followUp,healthy,summarise,failed,merged,usable} from './quiet-timer.mjs';
 export const LANES=Object.freeze(['verification_email','payment_events','payment','booking_records','email_events',
  'notification_email','enquiry_records','maintenance','control_publication']);
 const PERIOD=900000,DEADLINE=90000,HTTP_TIMEOUT=25000;
@@ -99,11 +100,11 @@ export async function execute(env,hint,{fetcher=fetch,now=Date.now,onPlan=()=>{}
  const expected={...declared,run_id:hint.run_id};
  const plan=checkedPlan(await call('/api/internal/worker/plan',{run_id:hint.run_id,
   release_digest:declared.release_digest,scheduled_at:hint.scheduled_at},'RECOVERY',deadline),expected,now());
- const acknowledgements={};let interrupted=false;
+ const acknowledgements={},attempted=[];let interrupted=false;
  onPlan(plan);
  if(Object.values(plan.lanes).every(item=>item.remaining_due===0)) {
   const pending=Object.values(plan.lanes).map(item=>item.next_due_at).filter(time);
-  return {plan,acknowledgements,healthy:!plan.attention,remaining_due:0,
+  return {plan,acknowledgements,attempted,final:null,complete:true,healthy:!plan.attention,remaining_due:0,
    next_due_at:pending.length?Math.min(...pending):null,interrupted:false};
  }
  let final=null;
@@ -114,6 +115,7 @@ export async function execute(env,hint,{fetcher=fetch,now=Date.now,onPlan=()=>{}
    if(deadline-now()<HTTP_TIMEOUT+1000) {interrupted=true;break;}
    const purpose=['verification_email','notification_email','email_events'].includes(lane)?'EMAIL'
     :['booking_records','enquiry_records'].includes(lane)?'GOOGLE':'RECOVERY';
+   attempted.push(lane);
    try {
     const ack=checkedAck(await call('/api/internal/worker/'+lane,{run_id:plan.run_id,
      release_digest:plan.release_digest,generation:plan.generation},purpose,deadline),plan,lane,now());
@@ -144,7 +146,7 @@ export async function execute(env,hint,{fetcher=fetch,now=Date.now,onPlan=()=>{}
   remaining=Math.min(10000,remaining+item.remaining_due);
   if(item.next_due_at!==null) nextDue=nextDue===null?item.next_due_at:Math.min(nextDue,item.next_due_at);
  }
- return {plan,acknowledgements,healthy,remaining_due:remaining,next_due_at:nextDue,interrupted};
+ return {plan,acknowledgements,attempted,final,complete:final!==null,healthy,remaining_due:remaining,next_due_at:nextDue,interrupted};
 }
 
 export function checkedHint(hint,env,now=Date.now()) {
@@ -163,52 +165,111 @@ function hint(env,source,scheduled,attempt=0) {
   run_id:crypto.randomUUID(),source,scheduled_at:scheduled,attempt};
 }
 
+const MARKS=['wake_pending_at','last_tick_at','hint_at'];
+const done=()=>Response.json({recorded:true},{headers:{'cache-control':'no-store'}});
 export class BookingRecoveryState {
  constructor(ctx,env) {
   this.ctx=ctx;this.env=env;
   ctx.storage.sql.exec('CREATE TABLE IF NOT EXISTS recovery_runs(id TEXT PRIMARY KEY,scheduled INTEGER NOT NULL,source TEXT NOT NULL,completed INTEGER,healthy INTEGER NOT NULL DEFAULT 0,details TEXT)');
   ctx.storage.sql.exec('CREATE TABLE IF NOT EXISTS recovery_lease(singleton INTEGER PRIMARY KEY CHECK(singleton=1),id TEXT NOT NULL,until_ms INTEGER NOT NULL)');
+  // The quiet timer's notebook and marks. Older code ignores both tables; a rollback shows as newer run rows.
+  ctx.storage.sql.exec('CREATE TABLE IF NOT EXISTS recovery_view(singleton INTEGER PRIMARY KEY CHECK(singleton=1),view TEXT NOT NULL)');
+  ctx.storage.sql.exec('CREATE TABLE IF NOT EXISTS recovery_marks(singleton INTEGER PRIMARY KEY CHECK(singleton=1),wake_pending_at INTEGER,last_tick_at INTEGER,hint_at INTEGER)');
+ }
+ view() {
+  const row=this.ctx.storage.sql.exec('SELECT view FROM recovery_view WHERE singleton=1').toArray()[0];
+  if(!row) return null;
+  try {const value=JSON.parse(row.view);return usable(value)?value:null;} catch {return null;}
+ }
+ marks() {
+  const row=this.ctx.storage.sql.exec('SELECT wake_pending_at,last_tick_at,hint_at FROM recovery_marks WHERE singleton=1').toArray()[0];
+  return Object.fromEntries(MARKS.map(name=>[name,row?.[name] ?? null]));
+ }
+ mark(name,value) {
+  if(!MARKS.includes(name)) throw Error('mark_invalid');
+  this.ctx.storage.sql.exec(`INSERT INTO recovery_marks(singleton,${name}) VALUES(1,?) ON CONFLICT(singleton) DO UPDATE SET ${name}=excluded.${name}`,value);
+ }
+ latest() {
+  return this.ctx.storage.sql.exec('SELECT max(completed) AS latest FROM recovery_runs').toArray()[0]?.latest ?? null;
  }
  async fetch(request) {
   const path=new URL(request.url).pathname;
   if(path==='/health') {
-   const latest=this.ctx.storage.sql.exec("SELECT scheduled,completed,healthy FROM recovery_runs WHERE source='scheduled' ORDER BY scheduled DESC LIMIT 1").toArray()[0];
-   const okay=latest && latest.healthy===1 && latest.completed!==null && latest.scheduled<=Date.now()
-    && latest.completed<=Date.now() && Date.now()-latest.scheduled<=1200000;
+   const legacy=this.ctx.storage.sql.exec("SELECT scheduled,completed,healthy FROM recovery_runs WHERE source='scheduled' ORDER BY scheduled DESC LIMIT 1").toArray()[0];
+   const okay=healthy(this.view(),this.marks(),this.latest(),legacy,Date.now());
    return Response.json({status:okay?'healthy':'attention'},{status:okay?200:503,headers:{'cache-control':'no-store'}});
   }
-  if(path!=='/run' || request.method!=='POST') return failure('not_found',404);
+  if(request.method!=='POST' || !['/run','/tick','/wake-note'].includes(path)) return failure('not_found',404);
+  if(path==='/wake-note') {
+   const pending=this.marks().wake_pending_at;
+   this.mark('wake_pending_at',Math.max(pending ?? 0,Date.now()));
+   return Response.json({noted:true},{headers:{'cache-control':'no-store'}});
+  }
   let work;
   try{work=checkedHint(await request.json(),this.env);}catch{return failure('wake_invalid',400);}
+  if(path==='/run') return this.runWork(work);
+  if(work.source!=='scheduled') return failure('wake_invalid',400);
+  return this.tick(work);
+ }
+ async tick(work) {
+  const now=Date.now();
+  this.mark('last_tick_at',now);
+  const active=this.ctx.storage.sql.exec('SELECT until_ms FROM recovery_lease WHERE singleton=1').toArray()[0];
+  const decision=active && active.until_ms>now?{run:false,reason:'busy'}
+   :decide(this.view(),this.marks(),this.latest(),now,configuration(this.env).release_digest);
+  console.log(canonical({event:'booking_recovery_tick',reason:decision.reason,run:decision.run}));
+  if(decision.run) await this.runWork(work);
+  else if(decision.hint_at!==undefined) await this.follow(Math.ceil((decision.hint_at-now)/1000),0);
+  return done();
+ }
+ async follow(delay,attempt) {
+  if(!this.env.BOOKING_WAKE_QUEUE) return;
+  const at=Date.now()+delay*1000;
+  try {
+   // The hint carries its intended delivery time, so a 15-minute delay is not refused on arrival.
+   await this.env.BOOKING_WAKE_QUEUE.send(hint(this.env,'continue',at,attempt),{delaySeconds:delay});
+   this.mark('hint_at',at);
+  } catch {/* The notebook keeps the due time; the next tick sends the hint again. */}
+ }
+ async runWork(work) {
   const admitted=this.ctx.storage.transactionSync(()=>{
    const active=this.ctx.storage.sql.exec('SELECT until_ms FROM recovery_lease WHERE singleton=1').toArray()[0];
    if(active && active.until_ms>Date.now()) return false;
    this.ctx.storage.sql.exec('INSERT INTO recovery_lease VALUES(1,?,?) ON CONFLICT(singleton) DO UPDATE SET id=excluded.id,until_ms=excluded.until_ms',work.run_id,Date.now()+DEADLINE);
    this.ctx.storage.sql.exec('INSERT OR IGNORE INTO recovery_runs(id,scheduled,source) VALUES(?,?,?)',work.run_id,work.scheduled_at,work.source);
+   this.mark('hint_at',null);
    return true;
   });
   if(!admitted) return failure('worker_busy',409);
-  let result;
+  const startedAt=Date.now(),digest=configuration(this.env).release_digest;
+  let result,planAt=null;
   try {
-   result=await execute(this.env,work,{onPlan:plan=>this.save(work,{plan,acknowledgements:{}}),
+   result=await execute(this.env,work,{onPlan:plan=>{planAt=Date.now();this.save(work,{plan,acknowledgements:{}});},
     onAck:ack=>{
      const row=this.ctx.storage.sql.exec('SELECT details FROM recovery_runs WHERE id=?',work.run_id).toArray()[0];
      const details=JSON.parse(row.details);details.acknowledgements[ack.lane]=ack;this.save(work,details);
     }});
    this.save(work,{plan:result.plan,acknowledgements:result.acknowledgements},result.healthy);
   } catch {
+   result=undefined;
    this.ctx.storage.sql.exec('UPDATE recovery_runs SET completed=?,healthy=0 WHERE id=?',Date.now(),work.run_id);
   } finally {
-   this.ctx.storage.sql.exec('DELETE FROM recovery_lease WHERE id=?',work.run_id);
-   this.ctx.storage.sql.exec('DELETE FROM recovery_runs WHERE id IN (SELECT id FROM recovery_runs ORDER BY scheduled DESC LIMIT -1 OFFSET 128)');
+   // One synchronous block: lease release, notebook and wake note, so no tick reads a half-written state.
+   const now=Date.now();
+   this.ctx.storage.transactionSync(()=>{
+    this.ctx.storage.sql.exec('DELETE FROM recovery_lease WHERE id=?',work.run_id);
+    this.ctx.storage.sql.exec('DELETE FROM recovery_runs WHERE id IN (SELECT id FROM recovery_runs ORDER BY scheduled DESC LIMIT -1 OFFSET 128)');
+    const previous=this.view();
+    const next=result?summarise(previous,result,{startedAt,now,planAt,digest}):failed(previous,{startedAt,now,digest});
+    this.ctx.storage.sql.exec('INSERT INTO recovery_view(singleton,view) VALUES(1,?) ON CONFLICT(singleton) DO UPDATE SET view=excluded.view',
+     JSON.stringify(merged(previous,next)));
+    const pending=this.marks().wake_pending_at;
+    if(result && pending!==null && pending<=startedAt) this.mark('wake_pending_at',null);
+   });
   }
-  const due=result?.next_due_at;
-  if(this.env.BOOKING_WAKE_QUEUE && work.attempt<5 && (result===undefined || result.remaining_due>0 || due!==null && due<=Date.now()+PERIOD)) {
-   const delay=result===undefined?30:Math.max(15,Math.min(900,Math.ceil(((due??Date.now())-Date.now())/1000)));
-   try{await this.env.BOOKING_WAKE_QUEUE.send(hint(this.env,'continue',Date.now(),work.attempt+1),{delaySeconds:delay});}
-   catch{/* Durable database work remains; scheduled rescue does not need the hint. */}
-  }
-  return Response.json({recorded:true},{headers:{'cache-control':'no-store'}});
+  const view=this.view(),next=view?followUp(view,work.attempt,Date.now(),result!==undefined):null;
+  if(next) await this.follow(next.delay,next.attempt);
+  return done();
  }
  save(work,details,healthy=null) {
   this.ctx.storage.sql.exec('UPDATE recovery_runs SET details=?,completed=?,healthy=? WHERE id=?',
@@ -238,7 +299,11 @@ export async function recoveryFetch(request,env) {
   const bytes=await boundedWakeBody(request);
   if(bytes.trim()!=='{}') return failure('request_invalid',422);
   if(!env.BOOKING_WAKE_QUEUE) return failure('worker_configuration');
-  await env.BOOKING_WAKE_QUEUE.send(hint(env,'wake',Date.now()));
+  // The note makes the next tick run even if the queue message is lost; the queue makes it run now.
+  let noted=false,queued=false;
+  try {noted=(await state(env).fetch('https://recovery.internal/wake-note',{method:'POST'})).status===200;} catch {}
+  try {await env.BOOKING_WAKE_QUEUE.send(hint(env,'wake',Date.now()));queued=true;} catch {}
+  if(!noted && !queued) return failure('worker_unavailable');
   return Response.json({application:declared.project,queued:true},{status:202,headers:{'cache-control':'no-store'}});
  } catch{return failure('worker_unavailable');}
 }
@@ -259,7 +324,8 @@ async function boundedWakeBody(request) {
 export async function scheduled(controller,env) {
  const now=Date.now();
  if(!time(controller.scheduledTime) || controller.scheduledTime>now || now-controller.scheduledTime>PERIOD) throw Error('stale_schedule');
- const result=await state(env).fetch('https://recovery.internal/run',{method:'POST',headers:{'content-type':'application/json'},
+ // The tick reads the notebook first and wakes the website and database only when work needs it.
+ const result=await state(env).fetch('https://recovery.internal/tick',{method:'POST',headers:{'content-type':'application/json'},
   body:canonical(hint(env,'scheduled',controller.scheduledTime))});
  if(result.status!==200) throw Error('scheduled_run_unavailable');
 }

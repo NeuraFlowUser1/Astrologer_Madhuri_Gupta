@@ -9,7 +9,7 @@ import httpx
 from starlette.requests import Request
 from appointment_system import diagnostics
 from appointment_system.configuration import project_id
-from appointment_system.request_budget import BudgetExpired
+from appointment_system.request_budget import BudgetExpired,budget
 from appointment_system.wake import WakePublisher,WAKE_URL
 
 WAKE_KEY=base64.urlsafe_b64encode(b"W"*32).decode()
@@ -55,6 +55,38 @@ class WakeBoundaries(TestCase):
         self.assertNotIn('private diagnostic',str(logs.output))
         with patch('appointment_system.wake.provider_timeout',side_effect=BudgetExpired()),self.assertLogs('appointment_system.wake'):
             self.assertFalse(self.publisher(provider).publish())
+
+    def test_one_failed_ring_is_retried_once_after_a_short_pause(self):
+        good=httpx.Response(202,json={'application':project_id(),'queued':True})
+        for first in (httpx.Response(503),httpx.ReadTimeout('private diagnostic detail')):
+            with self.subTest(first=type(first).__name__):
+                replies=[first,good];seen=[]
+                def provider(request):
+                    seen.append(request.content);reply=replies.pop(0)
+                    if isinstance(reply,Exception):raise reply
+                    return reply
+                with patch('appointment_system.wake.sleep') as pause,self.assertNoLogs('appointment_system.wake',level='WARNING'):
+                    self.assertIs(self.publisher(provider).publish(),True)
+                pause.assert_called_once_with(.25);self.assertEqual(seen,[b'{}',b'{}'])
+
+    def test_two_failed_rings_leave_one_rescue_warning_and_no_third_try(self):
+        seen=[]
+        def provider(request):seen.append(1);return httpx.Response(202,json={'application':project_id(),'queued':False})
+        with patch('appointment_system.wake.sleep') as pause,self.assertLogs('appointment_system.wake',level='WARNING') as logs:
+            self.assertIs(self.publisher(provider).publish(),False)
+        self.assertEqual(logs.output,['WARNING:appointment_system.wake:appointment_wake_pending_rescue'])
+        self.assertEqual(len(seen),2);pause.assert_called_once_with(.25)
+
+    def test_second_ring_is_skipped_when_the_request_budget_cannot_cover_it(self):
+        seen=[]
+        def provider(request):seen.append(1);return httpx.Response(500)
+        with budget(4),patch('appointment_system.wake.sleep') as pause,self.assertLogs('appointment_system.wake',level='WARNING') as logs:
+            self.assertIs(self.publisher(provider).publish(),False)
+        self.assertEqual(logs.output,['WARNING:appointment_system.wake:appointment_wake_pending_rescue'])
+        self.assertEqual(len(seen),1);pause.assert_not_called()
+        with budget(3),patch('appointment_system.wake.sleep') as pause,self.assertLogs('appointment_system.wake',level='WARNING') as logs:
+            self.assertIs(self.publisher(provider).publish(),False)
+        self.assertEqual(len(seen),1);pause.assert_not_called();self.assertEqual(len(logs.output),1)
 
 class OptionalDiagnostics(TestCase):
     def test_only_approved_codes_and_valid_references_are_recorded(self):

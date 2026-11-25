@@ -59,8 +59,22 @@ test('native queue wakes only saved work and does not require customer data',asy
   headers:{'content-type':'application/json',authorization:'Bearer '+key(24)},body:'{"recipient":"private@example.test"}'});
  assert.equal(response.status,422);assert.equal(calls,before+1);
 });
-test('a 200 HTML deployment page cannot mark the next scheduled run healthy',async()=>{
- bad=true;await worker.scheduled({scheduledTime:Date.now(),cron:'*/15 * * * *'});
- const response=await health();assert.equal(response.status,503);assert.deepEqual(await response.json(),{status:'attention'});
- const before=calls;await health();assert.equal(calls,before);
+test('a second idle tick reads only the notebook and makes no website or database call',async()=>{
+ const before=calls;
+ await worker.scheduled({scheduledTime:Date.now(),cron:'*/15 * * * *'});
+ assert.equal(calls,before);const response=await health();assert.equal(response.status,200);
+});
+test('a 200 HTML deployment page cannot mark a wake run healthy, and the failure is reported at once',async()=>{
+ bad=true;const before=calls;
+ const result=await runtime.dispatchFetch('https://worker.example.test/wake',{method:'POST',
+  headers:{'content-type':'application/json',authorization:'Bearer '+key(24)},body:'{}'});
+ assert.equal(result.status,202);
+ const until=Date.now()+5000;while(calls===before && Date.now()<until) await new Promise(resolve=>setTimeout(resolve,50));
+ assert.ok(calls>before);
+ let response=await health();
+ for(let i=0;i<40 && response.status===200;i++){await new Promise(resolve=>setTimeout(resolve,50));response=await health();}
+ assert.equal(response.status,503);assert.deepEqual(await response.json(),{status:'attention'});
+ const after=calls;await health();assert.equal(calls,after);
+ // The pending wake note makes the next tick try again rather than stay quiet.
+ await worker.scheduled({scheduledTime:Date.now(),cron:'*/15 * * * *'});assert.ok(calls>after);
 });

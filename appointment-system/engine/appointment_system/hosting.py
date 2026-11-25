@@ -138,7 +138,7 @@ def create_hosted_application(environment,*,release_digest):
             'contact_protection':contact is not None,'email_sender':sender is not None,
             'email_webhook':email_webhook is not None and not isinstance(ingress,UnavailableStore),'payment_accounts':accounts is not None,
             'payment_webhook':webhook is not None and not isinstance(ingress,UnavailableStore),'projection_reader':reader is not None,
-            'recovery_contract':True},runtime.release_digest)
+            'recovery_contract':True,'wake_publisher':wake is not None},runtime.release_digest)
         app.add_middleware(CanonicalHost)
         return app
     except (KeyError,ValueError,TypeError,Rejected,ControlError,StorageUnavailable):

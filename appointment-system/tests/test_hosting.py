@@ -40,7 +40,15 @@ class Hosting(unittest.TestCase):
         self.assertEqual(reply.status_code,200,reply.text);value=reply.json()
         self.assertEqual(value['release_digest'],'a'*64);self.assertEqual(value['provider_acceptance'],'not_checked')
         self.assertFalse(value['configured']['payment_accounts']);self.assertTrue(value['configured']['recovery_contract'])
+        self.assertIs(value['configured']['wake_publisher'],False)
         for secret in self.keys.values():self.assertNotIn(secret,reply.text)
+
+    def test_configuration_evidence_shows_whether_saved_work_can_ring_the_worker(self):
+        wake=encode(bytes([24])*32)
+        client=TestClient(create_hosted_application(self.env|{'BOOKING_WAKE_KEY':wake},release_digest='a'*64),base_url=installation()['origin'])
+        reply=client.post('/api/internal/recovery/configuration',json={},headers={'Authorization':'Bearer '+self.keys['RECOVERY']})
+        self.assertEqual(reply.status_code,200,reply.text);self.assertIs(reply.json()['configured']['wake_publisher'],True)
+        self.assertNotIn(wake,reply.text)
 
     def test_composed_worker_contract_gets_verified_release_and_only_matching_credentials(self):
         body={'run_id':str(uuid4()),'release_digest':'a'*64,'scheduled_at':1};path='/api/internal/worker/plan'
@@ -66,6 +74,19 @@ class Hosting(unittest.TestCase):
         env['BOOKING_RECOVERY_WORKER_KEY']=self.keys['EMAIL']
         client=TestClient(create_hosted_application(env,release_digest='a'*64),base_url=installation()['origin'])
         self.assertEqual(client.get('/api/health').status_code,503)
+
+class ConfigurationEvidence(unittest.TestCase):
+    def test_evidence_names_every_component_exactly_and_requires_the_recovery_key(self):
+        from fastapi import FastAPI
+        from appointment_system.configuration_evidence import COMPONENTS,add_configuration_route
+        self.assertIn('wake_publisher',COMPONENTS)
+        complete={name:True for name in COMPONENTS}
+        without={name:True for name in COMPONENTS-{'wake_publisher'}}
+        for evidence in (without,complete|{'unknown':True},complete|{'wake_publisher':1},None):
+            with self.subTest(evidence=evidence),self.assertRaises(ValueError):add_configuration_route(FastAPI(),None,evidence,'a'*64)
+        app=FastAPI();add_configuration_route(app,None,complete|{'wake_publisher':False},'a'*64)
+        reply=TestClient(app).post('/api/internal/recovery/configuration',json={})
+        self.assertEqual((reply.status_code,reply.json()),(503,{'code':'worker_unavailable'}))
 
 class StaffComposition(unittest.TestCase):
     def env(self):

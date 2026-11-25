@@ -41,11 +41,11 @@ class CompanyControlBoundaries(TestCase):
             return self.published
         return {'saved': True}
 
-    def make_client(self, configured=True, publish=True, worker=True):
+    def make_client(self, configured=True, publish=True, worker=True, wake=None):
         app = FastAPI()
         app.include_router(router(self.settings if configured else None,
             database=self.database if configured else None, publisher=self.publisher if publish else None,
-            worker_key=self.worker if worker else None))
+            worker_key=self.worker if worker else None, wake=wake))
         @app.exception_handler(ControlError)
         async def control_error(request, error):
             return JSONResponse({'code': error.code}, error.status)
@@ -73,6 +73,28 @@ class CompanyControlBoundaries(TestCase):
         with self.make_client(publish=False) as client:
             result = client.post('/api/company/control/change', json=command, headers=self.headers)
             self.assertEqual(result.status_code, 202)
+
+    def test_switch_change_rings_the_worker_only_while_publication_is_still_pending(self):
+        wake = Mock(spec=['publish']); wake.publish.return_value = True
+        with self.make_client(wake=wake) as client:
+            result = client.post('/api/company/control/change', json=self.command(), headers=self.headers)
+            self.assertEqual((result.status_code, result.json()), (200, self.published))
+            wake.publish.assert_not_called()
+            for outcome, ring in (('declined', Mock(return_value=False)), ('raised', Mock(side_effect=RuntimeError('ring failed')))):
+                with self.subTest(ring=outcome):
+                    self.published = {'progress': 'applying'}; wake.publish.reset_mock(); wake.publish.side_effect = ring
+                    result = client.post('/api/company/control/change', json=self.command(), headers=self.headers)
+                    self.assertEqual((result.status_code, result.json()), (202, {'progress': 'applying'}))
+                    wake.publish.assert_called_once_with()
+        with self.make_client(publish=False, wake=wake) as client:
+            wake.publish.reset_mock(); wake.publish.side_effect = None
+            result = client.post('/api/company/control/change', json=self.command(), headers=self.headers)
+            self.assertEqual((result.status_code, result.json()), (202, {'progress': 'applying'}))
+            wake.publish.assert_called_once_with()
+        self.database.command.side_effect = ControlError('company_request_rejected', 403); wake.publish.reset_mock()
+        with self.make_client(wake=wake) as client:
+            self.assertEqual(client.post('/api/company/control/change', json=self.command(), headers=self.headers).status_code, 403)
+        wake.publish.assert_not_called()
 
     def test_invalid_command_id_version_and_boolean_are_rejected_before_any_mode_write(self):
         for changed in ({'revision': '9223372036854775808'}, {'operation_id': '00000000-0000-0000-0000-000000000000'},

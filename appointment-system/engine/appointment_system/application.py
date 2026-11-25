@@ -166,7 +166,7 @@ def create_application(store,settings,*,verified_client_address,webhook_account=
     control_publisher=control_publisher or (Publisher(company_database,publication_settings()) if company_database else None)
     app.include_router(company_router(company_config,
         database=company_database,publisher=control_publisher,
-        worker_key=recovery_worker_key,address=verified_client_address))
+        worker_key=recovery_worker_key,address=verified_client_address,wake=wake_publisher))
     from .company_support import router as company_support_router
     app.include_router(company_support_router(company_config,company_store,wake_publisher,database=company_database))
 
@@ -196,7 +196,7 @@ def create_application(store,settings,*,verified_client_address,webhook_account=
         consume_limit(store,scope,verified_client_address(request),settings.risk_key,booking=booking)
 
     from .resource_consent import router as resource_consent_router
-    app.include_router(resource_consent_router(studio_services,company_config,company_database,staff_store,limit))
+    app.include_router(resource_consent_router(studio_services,company_config,company_database,staff_store,limit,wake=wake_publisher))
 
     from .contact_routes import add_contact_routes
     add_contact_routes(app,store,contact_secrets,browser_request,limit,wake_publisher,delivery_ready=contact_delivery_ready)

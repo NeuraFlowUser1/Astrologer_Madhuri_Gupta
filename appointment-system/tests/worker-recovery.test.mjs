@@ -169,7 +169,13 @@ test('wake method body limits and private health access do not expose database w
  for(const body of [null,'x'.repeat(1025),new Uint8Array([255])])assert.equal((await recoveryFetch(request('/wake','POST',{},body),bound)).status,503);
  assert.equal((await recoveryFetch(request('/wake'),env)).status,503);
  assert.equal((await recoveryFetch(request('/health','GET'),env)).status,503);
- assert.equal((await recoveryFetch(request('/wake'),{...bound,BOOKING_WAKE_QUEUE:{send:async()=>{throw Error('synthetic queue failure');}}})).status,503);
+ // A saved wake note alone is enough: the next tick runs even though the queue message was lost.
+ assert.equal((await recoveryFetch(request('/wake'),{...bound,BOOKING_WAKE_QUEUE:{send:async()=>{throw Error('synthetic queue failure');}}})).status,202);
+ const noteless={idFromName:()=> 'synthetic',get:()=>({fetch:async()=>{throw Error('synthetic state failure');}})};
+ assert.equal((await recoveryFetch(request('/wake'),{...bound,BOOKING_RECOVERY_STATE:noteless,BOOKING_WAKE_QUEUE:{send:async()=>{throw Error('synthetic queue failure');}}})).status,503);
+ const refused={idFromName:()=> 'synthetic',get:()=>({fetch:async()=>new Response('{}',{status:503})})};
+ assert.equal((await recoveryFetch(request('/wake'),{...bound,BOOKING_RECOVERY_STATE:refused,BOOKING_WAKE_QUEUE:{send:async()=>{throw Error('synthetic queue failure');}}})).status,503);
+ assert.equal((await recoveryFetch(request('/wake'),{...bound,BOOKING_RECOVERY_STATE:refused})).status,202);
 });
 
 test('scheduled and queued work preserve exact hint and report unavailable execution',async()=>{

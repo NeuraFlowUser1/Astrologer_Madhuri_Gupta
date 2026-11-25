@@ -3,6 +3,7 @@
 from .configuration import owners,sender,project_id,label,worker_origin,origin
 from .request_budget import BudgetExpired,provider_timeout,chunks,remaining
 import logging
+from time import sleep
 from dataclasses import dataclass,field
 import httpx
 from .worker_access import WorkerKey
@@ -10,6 +11,9 @@ from .serialization import decode
 
 log=logging.getLogger(__name__)
 WAKE_URL=worker_origin()+'/wake'
+RETRY_PAUSE=.25
+# A second try keeps provider_timeout's 3 s reserve and at least 1 s of its own.
+RETRY_RESERVE=3+RETRY_PAUSE+1
 
 
 @dataclass(frozen=True)
@@ -24,6 +28,16 @@ class WakePublisher:
             raise ValueError('Dedicated Practice wake address required.')
 
     def publish(self):
+        if self._attempt():return True
+        try:
+            remaining(RETRY_RESERVE)
+            sleep(RETRY_PAUSE)
+            if self._attempt():return True
+        except BudgetExpired:pass
+        log.warning('appointment_wake_pending_rescue')
+        return False
+
+    def _attempt(self):
         try:
             with httpx.Client(timeout=provider_timeout(3),follow_redirects=False,trust_env=False,
                               transport=self.transport) as client:
@@ -39,5 +53,4 @@ class WakePublisher:
                         or body['application']!=project_id() or body['queued'] is not True):raise ValueError()
             return True
         except (BudgetExpired,httpx.HTTPError,ValueError,UnicodeError):
-            log.warning('appointment_wake_pending_rescue')
             return False

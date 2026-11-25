@@ -32,7 +32,7 @@ class OwnerAccess(BaseModel):
     operation_id:UUID
     secret:str=Field(pattern=r'^[a-f0-9]{64}$',repr=False)
 
-def router(studio,company_settings,company_database,staff_store,limit):
+def router(studio,company_settings,company_database,staff_store,limit,wake=None):
     routes=APIRouter();resources=getattr(studio,'resources',None)
     def configured():
         if resources is None:raise ControlError('google_resource_setup_required',503)
@@ -185,5 +185,8 @@ def router(studio,company_settings,company_database,staff_store,limit):
         auth,token,csrf=parent(request)
         if body.attempt_id.int==0:raise ControlError('google_consent_unavailable',422)
         result=call(auth,'SELECT appointment_system.finish_resource_consent(%s,%s,%s,%s)',(auth,token,csrf,body.attempt_id))
+        if wake is not None:
+            try:wake.publish()
+            except Exception:pass
         return JSONResponse(result,headers=PRIVATE_HEADERS)
     return routes
