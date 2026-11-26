@@ -16,8 +16,10 @@ from .configuration import origin as public_origin,label,project_id,installation
 from .serialization import canonical
 from .errors import Rejected
 from .service_control import ControlDatabase,ControlError
+from .request_budget import BudgetExpired
 
 ASSETS=Path(__file__).parent/"company_assets"
+PENDING=frozenset(("accepted","publishing","published"))
 PRIVATE_HEADERS={"Cache-Control":"private, no-store","Pragma":"no-cache",
  "Referrer-Policy":"no-referrer","X-Content-Type-Options":"nosniff",
  "X-Robots-Tag":"noindex, nofollow","Content-Security-Policy":
@@ -150,9 +152,30 @@ def router(settings,*,database=None,publisher=None,worker_key=None,address=None,
         except Rejected as error:raise ControlError(error.code,error.status) from None
         return issued_response(fresh,{'changed':True})
 
+    def ring():
+        # Best effort: a lost ring never changes a company reply; the worker's own checks remain the safety net.
+        if wake is None:return
+        try:wake.publish()
+        except Exception:pass
+
     @routes.get("/api/company/control/status")
     def status(request:Request):
         token=session(request);result=database.status(token)
+        # The page's own 20-second re-checks send this header; they ring only when the change has just taken effect.
+        automatic=request.headers.get("x-company-recheck")=="1"
+        before=result.get("progress");unconfirmed=False
+        # A switch change still on its way to the website is published again (the same fenced job as the change
+        # route), so a lost publication cannot leave booking hidden while the page is open.
+        if publisher is not None and before in PENDING:
+            try:
+                outcome=publisher()
+                # The publisher reports an unanswered worker as a retry rather than an error.
+                unconfirmed=isinstance(outcome,dict) and outcome.get("retry") is True
+                result=database.status(token)
+            except (ControlError,BudgetExpired):unconfirmed=True
+        # Opening or refreshing this page nudges background work, also while booking is off and the timer sleeps.
+        # While a republication is unconfirmed the same worker is unlikely to answer a ring, so the page is not held up.
+        if not unconfirmed and (not automatic or (before in PENDING and result.get("progress")=="effective")):ring()
         result["csrf_token"]=settings.digest("csrf",request.cookies[COOKIE])
         return JSONResponse(result,headers=PRIVATE_HEADERS)
 
@@ -172,6 +195,7 @@ def router(settings,*,database=None,publisher=None,worker_key=None,address=None,
             raise ControlError('invalid_company_request',422)
         result=database.call('SELECT appointment_system.company_sheet_recheck(%s,%s,%s,%s,%s,%s,%s,%s)',
             (token,csrf,body.operation_id,body.role,body.record_kind,body.record_id,int(body.sequence),body.reason.strip()))
+        ring()
         return JSONResponse(result,headers=PRIVATE_HEADERS)
 
     @routes.get('/api/company/settings')
@@ -197,13 +221,18 @@ def router(settings,*,database=None,publisher=None,worker_key=None,address=None,
         if int(body.revision)>9223372036854775807 or body.operation_id.int==0 or body.generation.int==0:
             raise ControlError("invalid_company_request",422)
         result=database.command(token,csrf,body.operation_id,body.generation,body.revision,body.enabled,body.reason.strip())
+        expired=None
         if publisher is not None:
             try:publisher()
             except ControlError:pass
-            result=database.call("SELECT appointment_system.control_command_result(%s,%s)",(token,body.operation_id))
-        if wake is not None and result["progress"]!="effective":
-            try:wake.publish()
-            except Exception:pass
+            except BudgetExpired as error:expired=error
+            if expired is None:
+                try:result=database.call("SELECT appointment_system.control_command_result(%s,%s)",(token,body.operation_id))
+                except BudgetExpired as error:expired=error
+        # Every accepted change rings: OFF starts its drain at once and ON resumes at once. A spent request budget
+        # still answers as before (the saved change is checked again by the page), after the ring is tried.
+        ring()
+        if expired is not None:raise expired
         return JSONResponse(result,status_code=200 if result["progress"]=="effective" else 202,headers=PRIVATE_HEADERS)
 
     @routes.post('/api/company/logout')

@@ -3,6 +3,9 @@
 export const PERIOD=900000,GRACE=60000,TOLERANCE=120000,RESCUE=43200000;
 export const TICK_STALE=1200000,DUE_LATE=300000,WAKE_LATE=PERIOD+300000,CLAMP=899000,FOLLOW=15000;
 export const QUICK_RETRIES=Object.freeze([30,60]);
+// Sleep mode while every switchable database feature is OFF: one safety check a week (owner, 26 Nov 2026), and a
+// drain that counts only for a run started 150 s after the OFF copy was published (above the 120 s function limit).
+export const DORMANT_CHECK=604800000,DRAIN_MARGIN=150000;
 export const VERSION=1;
 const PUBLICATION='control_publication';
 const finite=value=>Number.isSafeInteger(value);
@@ -78,10 +81,40 @@ export function merged(previous,next) {
  return {...previous,observed_at:Math.max(previous.observed_at,next.observed_at)};
 }
 
-export function decide(view,marks,latestRunAt,now,digest) {
+// The worker's own signed ON/OFF copy as the tick read it: {idle,pending,published_at_ms}, or null when unreadable.
+// Only a readable, settled, idle copy can ever make the timer sleep; anything else keeps today's pace.
+const idle=state=>!!state && typeof state==='object' && state.idle===true && state.pending===false && finite(state.published_at_ms)
+ && state.published_at_ms>=0;
+export const drained=(view,state)=>finite(view.full_started_at) && view.full_started_at>=state.published_at_ms+DRAIN_MARGIN;
+
+// Resting: OFF and settled, drained after the margin, and the last full run healthy with nothing owed, stuck or waiting.
+// Known future due times do not prevent rest; they run on time.
+export function resting(view,state,marks) {
+ if(!usable(view) || !idle(state) || !drained(view,state) || view.full_at===null || !finite(view.full_at)) return false;
+ if(view.healthy!==true || view.attention!==false || view.failures!==0 || view.recheck===true) return false;
+ if(marks?.wake_pending_at!==null && marks?.wake_pending_at!==undefined) return false;
+ return Object.values(view.lanes).every(item=>!stalled(item) && !(item.remaining_due>0));
+}
+
+function hinting(due,marks,now) {
+ const covered=marks.hint_at!==null && marks.hint_at>=now && marks.hint_at<=due.earliest+GRACE;
+ return covered?{run:false,reason:'hinted'}:{run:false,reason:'hint',hint_at:Math.max(now+FOLLOW,due.earliest)};
+}
+
+export function decide(view,marks,latestRunAt,now,digest,state=undefined) {
  if(!usable(view) || latestRunAt!==null && latestRunAt>view.observed_at) return {run:true,reason:'unknown'};
  if(view.release_digest!==digest) return {run:true,reason:'release'};
  if(marks.wake_pending_at!==null) return {run:true,reason:'wake_pending'};
+ if(idle(state) && view.failures===0 && !drained(view,state)) {
+  // One full look after the margin finishes what OFF left owed; inside the margin today's rules apply.
+  if(now>=state.published_at_ms+DRAIN_MARGIN) return {run:true,reason:'drain'};
+ } else if(resting(view,state,marks)) {
+  const due=known(view),rest=decision=>({...decision,rest:true});
+  if(due.earliest!==null && due.earliest<=now+GRACE) return rest({run:true,reason:'due'});
+  if(now-view.full_at>=DORMANT_CHECK-TOLERANCE) return rest({run:true,reason:'dormant_check'});
+  if(due.earliest!==null && due.earliest<now+PERIOD) return rest(hinting(due,marks,now));
+  return rest({run:false,reason:'dormant'});
+ }
  if(view.full_at===null || now-view.full_at>=RESCUE-TOLERANCE) return {run:true,reason:'rescue'};
  const due=known(view);
  if(view.failures>0) {
@@ -94,8 +127,7 @@ export function decide(view,marks,latestRunAt,now,digest) {
  const counts=Object.values(view.lanes).filter(stalled).map(item=>item.stall-1);
  if(counts.length && now>=view.full_at+backoff(Math.min(...counts))) return {run:true,reason:'held'};
  if(due.earliest!==null && due.earliest<now+PERIOD) {
-  const covered=marks.hint_at!==null && marks.hint_at>=now && marks.hint_at<=due.earliest+GRACE;
-  return covered?{run:false,reason:'hinted'}:{run:false,reason:'hint',hint_at:Math.max(now+FOLLOW,due.earliest)};
+  return hinting(due,marks,now);
  }
  return {run:false,reason:'idle'};
 }
@@ -121,11 +153,14 @@ export function legacyHealthy(latest,now) {
   && latest.completed<=now && now-latest.scheduled<=TICK_STALE;
 }
 
-export function healthy(view,marks,latestRunAt,legacy,now) {
+// While the tick has found the site resting (restingAt), a full look may be up to a week old. The mark stays until
+// the first completed run after rest, so leaving rest never flickers red; a failed run is red at once either way.
+export function healthy(view,marks,latestRunAt,legacy,now,restingAt=null) {
  // Before the first tick of new code (a wake run may come first), and after a rollback, the old rule applies.
  if(!usable(view) || marks.last_tick_at===null || latestRunAt!==null && latestRunAt>view.observed_at) return legacyHealthy(legacy,now);
  if(now-marks.last_tick_at>TICK_STALE) return false;
- if(view.full_at===null || now-view.full_at>RESCUE+TICK_STALE) return false;
+ const allowed=finite(restingAt)?DORMANT_CHECK+TICK_STALE:RESCUE+TICK_STALE;
+ if(view.full_at===null || now-view.full_at>allowed) return false;
  if(view.healthy!==true || view.failures!==0) return false;
  for(const [lane,item] of Object.entries(view.lanes)) {
   if(stalled(item)) return false;

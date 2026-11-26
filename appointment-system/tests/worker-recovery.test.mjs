@@ -106,7 +106,8 @@ test('queue transport failures retry; invalid hints are acknowledged without a p
  assert.equal(messages[1].acked,true);assert.equal(messages[1].retried,undefined);
 });
 test('public wake endpoint accepts only an authenticated empty request and stores an opaque hint',async()=>{
- const queued=[],bound={...env,BOOKING_WAKE_QUEUE:{send(value){queued.push(value);}}};
+ const queued=[],noting={idFromName:()=> 'synthetic',get:()=>({fetch:async()=>Response.json({noted:true})})};
+ const bound={...env,BOOKING_RECOVERY_STATE:noting,BOOKING_WAKE_QUEUE:{send(value){queued.push(value);}}};
  const make=body=>new Request('https://worker.example.test/wake',{method:'POST',headers:{'content-type':'application/json',authorization:'Bearer '+key(24)},body});
  assert.equal((await recoveryFetch(make('{"email":"private@example.test"}'),bound)).status,422);
  assert.equal(queued.length,0);assert.equal((await recoveryFetch(make('{}'),bound)).status,202);
@@ -175,7 +176,13 @@ test('wake method body limits and private health access do not expose database w
  assert.equal((await recoveryFetch(request('/wake'),{...bound,BOOKING_RECOVERY_STATE:noteless,BOOKING_WAKE_QUEUE:{send:async()=>{throw Error('synthetic queue failure');}}})).status,503);
  const refused={idFromName:()=> 'synthetic',get:()=>({fetch:async()=>new Response('{}',{status:503})})};
  assert.equal((await recoveryFetch(request('/wake'),{...bound,BOOKING_RECOVERY_STATE:refused,BOOKING_WAKE_QUEUE:{send:async()=>{throw Error('synthetic queue failure');}}})).status,503);
- assert.equal((await recoveryFetch(request('/wake'),{...bound,BOOKING_RECOVERY_STATE:refused})).status,202);
+ // Without a durable note the ring is refused even though the queue send worked, so the website tries again
+ // instead of trusting a queue message that can be dropped after five busy retries.
+ let sent=0;
+ assert.equal((await recoveryFetch(request('/wake'),{...bound,BOOKING_RECOVERY_STATE:refused,BOOKING_WAKE_QUEUE:{send:async()=>{sent++;}}})).status,503);
+ assert.equal(sent,1);
+ assert.equal((await recoveryFetch(request('/wake'),{...bound,BOOKING_RECOVERY_STATE:noteless,BOOKING_WAKE_QUEUE:{send:async()=>{sent++;}}})).status,503);
+ assert.equal(sent,2);
 });
 
 test('scheduled and queued work preserve exact hint and report unavailable execution',async()=>{

@@ -1,10 +1,10 @@
 // One implementation for every contained project worker. No database credentials.
 import {facts} from './installation.mjs';
-import {canonical} from './service-state.mjs';
+import {canonical,productObject} from './service-state.mjs';
 import {decide,followUp,healthy,summarise,failed,merged,usable} from './quiet-timer.mjs';
 export const LANES=Object.freeze(['verification_email','payment_events','payment','booking_records','email_events',
  'notification_email','enquiry_records','maintenance','control_publication']);
-const PERIOD=900000,DEADLINE=90000,HTTP_TIMEOUT=25000;
+const PERIOD=900000,DEADLINE=90000,HTTP_TIMEOUT=25000,STATE_TIMEOUT=1500;
 const UUID=/^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/;
 const HEX=/^[a-f0-9]{64}$/;
 const exact=(value,fields)=>value && typeof value==='object' && !Array.isArray(value)
@@ -175,6 +175,31 @@ export class BookingRecoveryState {
   // The quiet timer's notebook and marks. Older code ignores both tables; a rollback shows as newer run rows.
   ctx.storage.sql.exec('CREATE TABLE IF NOT EXISTS recovery_view(singleton INTEGER PRIMARY KEY CHECK(singleton=1),view TEXT NOT NULL)');
   ctx.storage.sql.exec('CREATE TABLE IF NOT EXISTS recovery_marks(singleton INTEGER PRIMARY KEY CHECK(singleton=1),wake_pending_at INTEGER,last_tick_at INTEGER,hint_at INTEGER)');
+  // Sleep mode's mark: when a tick last found the site resting. Older code ignores this table.
+  ctx.storage.sql.exec('CREATE TABLE IF NOT EXISTS recovery_rest(singleton INTEGER PRIMARY KEY CHECK(singleton=1),resting_at INTEGER)');
+ }
+ restingAt() {
+  return this.ctx.storage.sql.exec('SELECT resting_at FROM recovery_rest WHERE singleton=1').toArray()[0]?.resting_at ?? null;
+ }
+ markRest(value) {
+  this.ctx.storage.sql.exec('INSERT INTO recovery_rest(singleton,resting_at) VALUES(1,?) ON CONFLICT(singleton) DO UPDATE SET resting_at=excluded.resting_at',value);
+ }
+ // The worker's own signed ON/OFF copy, never Neon. Any fault, delay, pending restore or unexpected shape gives null,
+ // which keeps today's pace.
+ async productState() {
+  let timer;
+  try {
+   const read=(async()=>{
+    const response=await productObject(this.env).fetch('https://product.internal/internal/recovery-state');
+    if(response.status!==200) {await response.body?.cancel().catch(()=>{});return null;}
+    return await response.json();
+   })();
+   read.catch(()=>{});
+   const value=await Promise.race([read,new Promise(resolve=>{timer=setTimeout(()=>resolve(null),STATE_TIMEOUT);})]);
+   if(!exact(value,'idle,pending,published_at_ms') || typeof value.idle!=='boolean' || value.pending!==false
+    || !time(value.published_at_ms)) return null;
+   return value;
+  } catch {return null;} finally {clearTimeout(timer);}
  }
  view() {
   const row=this.ctx.storage.sql.exec('SELECT view FROM recovery_view WHERE singleton=1').toArray()[0];
@@ -196,7 +221,7 @@ export class BookingRecoveryState {
   const path=new URL(request.url).pathname;
   if(path==='/health') {
    const legacy=this.ctx.storage.sql.exec("SELECT scheduled,completed,healthy FROM recovery_runs WHERE source='scheduled' ORDER BY scheduled DESC LIMIT 1").toArray()[0];
-   const okay=healthy(this.view(),this.marks(),this.latest(),legacy,Date.now());
+   const okay=healthy(this.view(),this.marks(),this.latest(),legacy,Date.now(),this.restingAt());
    return Response.json({status:okay?'healthy':'attention'},{status:okay?200:503,headers:{'cache-control':'no-store'}});
   }
   if(request.method!=='POST' || !['/run','/tick','/wake-note'].includes(path)) return failure('not_found',404);
@@ -212,11 +237,15 @@ export class BookingRecoveryState {
   return this.tick(work);
  }
  async tick(work) {
+  this.mark('last_tick_at',Date.now());
+  const completedBefore=this.latest(),state=await this.productState();
+  // A run or wake note may have arrived during that read, so the lease, notebook and marks are read after it.
   const now=Date.now();
-  this.mark('last_tick_at',now);
   const active=this.ctx.storage.sql.exec('SELECT until_ms FROM recovery_lease WHERE singleton=1').toArray()[0];
   const decision=active && active.until_ms>now?{run:false,reason:'busy'}
-   :decide(this.view(),this.marks(),this.latest(),now,configuration(this.env).release_digest);
+   :decide(this.view(),this.marks(),this.latest(),now,configuration(this.env).release_digest,state);
+  // A run that completed during the read may have seen a newer ON copy, so only an undisturbed tick marks rest.
+  if(decision.rest===true && this.latest()===completedBefore) this.markRest(now);
   console.log(canonical({event:'booking_recovery_tick',reason:decision.reason,run:decision.run}));
   if(decision.run) await this.runWork(work);
   else if(decision.hint_at!==undefined) await this.follow(Math.ceil((decision.hint_at-now)/1000),0);
@@ -265,6 +294,8 @@ export class BookingRecoveryState {
      JSON.stringify(merged(previous,next)));
     const pending=this.marks().wake_pending_at;
     if(result && pending!==null && pending<=startedAt) this.mark('wake_pending_at',null);
+    // A completed run is a fresh full look, so the week-long health allowance of rest ends here.
+    if(result) this.markRest(null);
    });
   }
   const view=this.view(),next=view?followUp(view,work.attempt,Date.now(),result!==undefined):null;
@@ -299,11 +330,12 @@ export async function recoveryFetch(request,env) {
   const bytes=await boundedWakeBody(request);
   if(bytes.trim()!=='{}') return failure('request_invalid',422);
   if(!env.BOOKING_WAKE_QUEUE) return failure('worker_configuration');
-  // The note makes the next tick run even if the queue message is lost; the queue makes it run now.
-  let noted=false,queued=false;
+  // The note makes the next tick run even if the queue message is lost; the queue makes it run now. Without a durable
+  // note the ring is refused, so the website tries again instead of trusting a queue message that can be dropped.
+  let noted=false;
   try {noted=(await state(env).fetch('https://recovery.internal/wake-note',{method:'POST'})).status===200;} catch {}
-  try {await env.BOOKING_WAKE_QUEUE.send(hint(env,'wake',Date.now()));queued=true;} catch {}
-  if(!noted && !queued) return failure('worker_unavailable');
+  try {await env.BOOKING_WAKE_QUEUE.send(hint(env,'wake',Date.now()));} catch {}
+  if(!noted) return failure('worker_unavailable');
   return Response.json({application:declared.project,queued:true},{status:202,headers:{'cache-control':'no-store'}});
  } catch{return failure('worker_unavailable');}
 }

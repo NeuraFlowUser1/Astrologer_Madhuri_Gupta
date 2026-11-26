@@ -183,3 +183,62 @@ test('company Google approval uses only the documented destination and reloads a
  await page.locator('[data-google-resource="calendar"]').click();await page.waitForURL('https://accounts.google.com/**');
  assert.equal(new URL(page.url()).searchParams.get('client_id'),'synthetic');
 }));
+
+test('a switch change on its way is checked again every 20 seconds for ten minutes, then waits for the button',{skip:!available},()=>companyFixture(async(page,state)=>{
+ await page.clock.install();
+ const reads=()=>state.calls.filter(c=>c.path==='/api/company/control/status').length;
+ // Real replies take real time, so the fake clock moves one check at a time and the test waits for each reply.
+ const quiet=()=>new Promise(resolve=>setTimeout(resolve,80));
+ const until=async count=>{const end=Date.now()+3000;while(reads()<count && Date.now()<end) await new Promise(resolve=>setTimeout(resolve,20));await quiet();};
+ const step=async(ms=20000)=>{const before=reads();await page.clock.runFor(ms);await until(before+1);return reads()-before;};
+ // Effective: no automatic checks.
+ assert.equal(await step(120000),0);
+ state.progress='accepted';await page.click('#refresh');
+ await waitText(page,'#status','New bookings have stopped and the website is being updated. Please keep this page open; it checks again every 20 seconds.');
+ assert.equal(await step(),1);
+ // A short interruption does not end the checks.
+ state.handlers.set('/api/company/control/status',({reply})=>reply({},503));
+ assert.equal(await step(),1);await waitText(page,'#status','could not check its saved state');
+ state.handlers.delete('/api/company/control/status');
+ assert.equal(await step(),1);await waitText(page,'#status','keep this page open');
+ // ON on its way, then effective: the checks stop by themselves.
+ state.snapshot={...state.snapshot,enabled:true};
+ assert.equal(await step(),1);await waitText(page,'#status','Booking is being switched on. Please keep this page open; it checks again every 20 seconds.');
+ state.progress='effective';assert.equal(await step(),1);await waitText(page,'#status','Booking is on and the website is updated.');
+ assert.equal(await step(300000),0);
+ // Still on its way after ten minutes: thirty checks, then the usual line and the button remain.
+ state.progress='published';await page.click('#refresh');await waitText(page,'#status','keep this page open');
+ let automatic=0;for(let i=0;i<35;i++) automatic+=await step();
+ assert.equal(automatic,30);
+ await waitText(page,'#status','Turning booking on. New bookings wait for the website update.');
+ assert.equal(await step(120000),0);
+ // The button starts a fresh window.
+ await page.click('#refresh');await waitText(page,'#status','keep this page open');
+ assert.equal(await step(),1);
+ // Signing out ends the checks.
+ await page.click('#logout');await page.locator('#signed-out').waitFor({state:'visible'});
+ assert.equal(await step(120000),0);
+}));
+
+test('automatic checks mark themselves, survive a refused read after the button, and never hide a change outcome',{skip:!available},()=>companyFixture(async(page,state)=>{
+ await page.clock.install();
+ const marks=[];let refuse=false;
+ state.handlers.set('/api/company/control/status',({req,reply})=>{marks.push(req.headers['x-company-recheck'] ?? null);
+  return refuse?reply({},503):reply({snapshot:state.snapshot,csrf_token:'a'.repeat(64),progress:state.progress});});
+ const until=async count=>{const end=Date.now()+3000;while(marks.length<count && Date.now()<end) await new Promise(resolve=>setTimeout(resolve,20));await new Promise(resolve=>setTimeout(resolve,80));};
+ const step=async()=>{const before=marks.length;await page.clock.runFor(20000);await until(before+1);return marks.slice(before);};
+ state.progress='accepted';await page.click('#refresh');await waitText(page,'#status','keep this page open');
+ assert.equal(marks.at(-1),null,'a button read is not automatic');
+ assert.deepEqual(await step(),['1']);
+ // The button pressed while the website refuses: the fresh window still re-arms.
+ refuse=true;await page.click('#refresh');await waitText(page,'#status','could not check its saved state');
+ refuse=false;assert.deepEqual(await step(),['1']);await waitText(page,'#status','keep this page open');
+ // A change whose reply is interrupted keeps its instruction; no automatic check overwrites it.
+ state.handlers.set('/api/company/control/change',({res})=>res.destroy());
+ await page.click('#change');await waitText(page,'#status','response was interrupted');
+ assert.deepEqual(await step(),[]);await waitText(page,'#status','response was interrupted');
+ // A conflict keeps its message too.
+ state.handlers.set('/api/company/control/change',({reply})=>reply({code:'company_state_changed'},409));
+ await page.click('#change');await waitText(page,'#status','Another change was saved first');
+ assert.deepEqual(await step(),[]);await waitText(page,'#status','Another change was saved first');
+}));

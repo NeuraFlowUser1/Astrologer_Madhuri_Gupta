@@ -100,6 +100,15 @@ export class BookingProductState {
     try {
       const url = new URL(request.url);
       if (url.search) return failure('state_request_invalid',400);
+      if (url.pathname === '/internal/recovery-state' && request.method === 'GET') {
+        // For the recovery timer only: whether every switchable database feature is OFF (in 1.x: booking OFF), whether
+        // a restore awaits reconciliation, and when this copy was published. No signature, snapshot or identity.
+        let state;
+        try { state = this.load(); } catch { return failure('state_unavailable'); }
+        if (!state) return failure('state_reconciliation_required');
+        return Response.json({idle:state.snapshot.enabled === false,pending:state.pending,published_at_ms:state.published_at_ms},
+          {headers:{'cache-control':'no-store'}});
+      }
       if (url.pathname === '/service-state' && request.method === 'GET') {
         const nonce = request.headers.get('x-booking-state-nonce');
         if (!HEX.test(nonce || '')) return failure('state_request_invalid',400);
@@ -165,13 +174,20 @@ export class BookingProductState {
   }
 }
 
+// The one product-state object of this installation; the caller cannot select an object, client, origin or environment.
+export function productObject(env) {
+  if (!env.BOOKING_PRODUCT_STATE) throw Error('state_configuration');
+  const declared=facts(env);
+  return env.BOOKING_PRODUCT_STATE.get(env.BOOKING_PRODUCT_STATE.idFromName('booking-product:'+declared.installation_id+':'+declared.environment));
+}
+
 export async function serviceState(request, env) {
   const path = new URL(request.url).pathname;
+  // Only these paths are forwarded from the internet; /internal/recovery-state is reachable only from this worker's
+  // own recovery object.
   if (path !== '/service-state' && !path.startsWith('/service-control/')) return null;
   try {
     if (!env.BOOKING_PRODUCT_STATE) return failure('state_configuration');
-    // The caller cannot select an object, client, origin or environment.
-    const declared=facts(env); const id = env.BOOKING_PRODUCT_STATE.idFromName('booking-product:'+declared.installation_id+':'+declared.environment);
-    return await env.BOOKING_PRODUCT_STATE.get(id).fetch(request);
+    return await productObject(env).fetch(request);
   } catch { return failure('state_unavailable'); }
 }

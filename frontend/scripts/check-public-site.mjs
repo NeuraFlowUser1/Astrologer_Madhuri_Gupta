@@ -17,7 +17,7 @@ export function checkProtectedPaths(paths,approvedSettings=[]){
  assert.deepEqual(protectedPaths,[],'Protected backend or settings changed');
 }
 /** Reviewed branch-cutover checkpoint; the accepted website/posters stay fixed. */
-const approvedRelease='543b61005ae7205cca96af33d7cc7b3430ef736700f703435a1771eadfda2edb';
+const approvedRelease='9385323f1fbe99864911500b12240cbc59ac921aef1108bed3fedf40fd055111';
 const addedMedia=[768,1280,1920].map(width=>`/media/consultation-still-life-${width}.webp`).concat('/media/sarsa-madhuri-share-20261022.webp');
 const addedHosting=['frontend/src/render-public.jsx','frontend/src/site/about-portrait.mjs','frontend/src/site/brand.css','frontend/src/site/hero-band-motion.mjs','frontend/src/site/hero-content.mjs','frontend/src/site/hero-refinement.css','frontend/src/site/HeroDetails.jsx','frontend/scripts/check-public-site.mjs','frontend/public/media/sarsa-kundli-lotus-favicon.png','frontend/public/media/sarsa-kundli-lotus-logo-128.png',...addedMedia.map(path=>'frontend/public'+path)];
 addedHosting.push('frontend/src/site/PhoneLink.jsx','frontend/src/site/practice-contact.mjs','frontend/src/site/VastuDetails.jsx','frontend/src/site/vastu-content.mjs','frontend/src/site/vastu-motion.mjs','frontend/src/site/vastu.css',...[480,800,1200].map(width=>`frontend/src/site/media/vastu/vastu-home-cutaway-${width}.webp`));
@@ -51,7 +51,7 @@ function checkContainedRelease(root){
  // runtime contracts and forbidden symlinks. Do not trust a copied label alone.
  const verifyScript="import json,sys; from pathlib import Path; p=Path(sys.argv[1]); sys.path.insert(0,str(p)); from tools.install.package import verify; r=verify(p); print(json.dumps({'release':r['release'],'digest':r['content_digest'],'files':len(r['files'])}))";
  const checked=JSON.parse(execFileSync('python3',['-c',verifyScript,packageRoot],{encoding:'utf8'}));
- assert.equal(checked.release,'1.0.2-rc.2');assert.equal(checked.digest,approvedRelease);assert.equal(checked.files,585);
+ assert.equal(checked.release,'1.0.2-rc.3');assert.equal(checked.digest,approvedRelease);assert.equal(checked.files,588);
  const release=JSON.parse(readFileSync(resolve(packageRoot,'release.json'),'utf8'));
  return new Set(['appointment-system/release.json',...Object.keys(release.files).map(path=>'appointment-system/'+path)]);
 }
@@ -68,7 +68,7 @@ export function runChecks({root=resolve(import.meta.dirname,'../..'),baseline='8
  checkProtectedPaths([...changed,...untracked].filter(path=>!verifiedPackage.has(path)),checkApprovedClientSettings(root,baseline));
  const source=listFiles(resolve(frontend,'src')).filter(p=>/\.(?:jsx?|mjs|tsx?)$/.test(p));
  assert.ok(source.length>20,'Unexpected working-source denominator');
- console.log(JSON.stringify({checks:'passed',ordinary_public_routes:publicPaths.length,booking_utilities:4,total_routes:16,working_source_files:source.length,protected_diff:'unchanged-outside-approved-client-settings',appearance:'approved-pages-preserved-with-operating-search-refinements',contained_release:'1.0.2-rc.2',contained_digest:approvedRelease}));
+ console.log(JSON.stringify({checks:'passed',ordinary_public_routes:publicPaths.length,booking_utilities:4,total_routes:16,working_source_files:source.length,protected_diff:'unchanged-outside-approved-client-settings',appearance:'approved-pages-preserved-with-operating-search-refinements',contained_release:'1.0.2-rc.3',contained_digest:approvedRelease}));
  return {source:source.map(p=>relative(frontend,p)),routes:Object.keys(pages)};
 }
 if(process.argv[1]&&resolve(process.argv[1])===fileURLToPath(import.meta.url))runChecks();

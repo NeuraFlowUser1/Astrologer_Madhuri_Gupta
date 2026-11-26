@@ -9,11 +9,25 @@
   let pending = null;
   let business = null;
   let pendingBusiness = null;
-  async function request(path, body) {
+  // While a switch change is on its way to the website, the page checks again by itself every 20 seconds for up to
+  // ten minutes; each check also republishes the change and nudges the background helper.
+  const ON_ITS_WAY = ['accepted','publishing','published'];
+  const RECHECK_EVERY = 20000, RECHECK_FOR = 600000;
+  let recheck = null;
+  function watch(active) {
+    if (recheck) clearTimeout(recheck.timer);
+    if (!active) { recheck = null; return false; }
+    const since = recheck?.since ?? Date.now();
+    if (Date.now() - since >= RECHECK_FOR) { recheck = { since, timer: undefined }; return false; }
+    const epoch = accessEpoch;
+    recheck = { since, timer: setTimeout(() => { if (epoch === accessEpoch) refresh(true); }, RECHECK_EVERY) };
+    return true;
+  }
+  async function request(path, body, extra = {}) {
     const epoch = accessEpoch;
     const response = await fetch(path, { method: body === undefined ? 'GET' : 'POST',
       credentials: 'same-origin', cache: 'no-store', redirect: 'error',
-      headers: { 'Content-Type': 'application/json', ...(csrf ? { 'X-Company-CSRF': csrf } : {}) },
+      headers: { 'Content-Type': 'application/json', ...(csrf ? { 'X-Company-CSRF': csrf } : {}), ...extra },
       ...(body === undefined ? {} : { body: JSON.stringify(body) }), signal: AbortSignal.timeout(15000) });
     if ([401,403].includes(response.status) && !['/api/company/sign-in/start','/api/company/reauthenticate','/api/company/password'].includes(path)) {
       if (epoch === accessEpoch) { ++accessEpoch; hidePrivate(); $('status').textContent = 'Please sign in again to continue.'; }
@@ -28,6 +42,7 @@
     pending = journal.save('mode',value);
   }
   function hidePrivate() {
+    watch(false);
     current = null; csrf = null; business = null; pending = null; pendingBusiness = null;
     for (const id of ['signed-in','diagnostics','business-section','credentials-section','google-section','business-form']) $(id).hidden = true;
     $('signed-out').hidden = false;
@@ -55,14 +70,19 @@
     $('status').textContent = value.progress === 'effective'
       ? current.enabled ? 'Booking is on and the website is updated.' : 'New bookings are off and the website is updated.'
       : current.enabled ? 'Turning booking on. New bookings wait for the website update.' : 'New bookings have stopped. The website update is pending.';
+    if (watch(ON_ITS_WAY.includes(value.progress))) $('status').textContent = current.enabled
+      ? 'Booking is being switched on. Please keep this page open; it checks again every 20 seconds.'
+      : 'New bookings have stopped and the website is being updated. Please keep this page open; it checks again every 20 seconds.';
     if (!storageReady) $('status').textContent = storageMessage;
   }
-  async function refresh() {
+  async function refresh(automatic = false) {
     const epoch=accessEpoch;
-    try { const value=await request('/api/company/control/status'); if(epoch===accessEpoch)show(value); }
+    try { const value=await request('/api/company/control/status', undefined, automatic === true ? { 'X-Company-Recheck': '1' } : {}); if(epoch===accessEpoch)show(value); }
     catch (error) {
       if(epoch!==accessEpoch)return;
       $('status').textContent = 'The company tool could not check its saved state. Please try again.';
+      // A short interruption does not end the automatic checks while a change is on its way.
+      if (recheck) watch(true);
     }
   }
   $('login-form').addEventListener('submit', async event => {
@@ -72,7 +92,8 @@
     catch { $('password').value=''; $('status').textContent = 'Sign-in failed. Check your username and password, or wait before trying again.'; }
     finally { $('login').disabled = false; }
   });
-  $('refresh').addEventListener('click', refresh);
+  // Pressing the button starts a fresh ten-minute window of automatic checks if a change is still on its way.
+  $('refresh').addEventListener('click', () => { watch(false); recheck = { since: Date.now(), timer: undefined }; refresh(); });
   $('logout').addEventListener('click', async () => {
     ++accessEpoch;
     try { await request('/api/company/sign-out', {}); hidePrivate(); $('status').textContent = 'You are signed out.'; }
@@ -81,7 +102,7 @@
   $('change').addEventListener('click', async () => {
     if (!current || !csrf) return;
     const epoch=accessEpoch;
-    $('change').disabled = true; $('status').textContent = 'Saving this change…';
+    watch(false); $('change').disabled = true; $('status').textContent = 'Saving this change…';
     try {
       pending = journal.read('mode') || pending;
       remember(pending || { operation_id: crypto.randomUUID(), generation: current.restore_generation,
@@ -90,12 +111,12 @@
       if(epoch!==accessEpoch)return;
       if ((value?.receipt?.operation_id || value?.operation_id) !== pending.operation_id
           || typeof (value.current || value).snapshot?.enabled !== 'boolean') throw new Error();
-      remember(null); show(value);
+      remember(null); watch(false); show(value);
     } catch (error) {
       if(epoch!==accessEpoch)return;
       if (error.code === 'company_command_storage_unavailable') { $('status').textContent = storageMessage; }
       else if (error.status === 409) {
-        try { remember(null); await refresh(); $('status').textContent = 'Another change was saved first. Please review the current state before changing it.'; }
+        try { remember(null); await refresh(); watch(false); $('status').textContent = 'Another change was saved first. Please review the current state before changing it.'; }
         catch { $('status').textContent = storageMessage; }
       }
       else { $('status').textContent = 'The response was interrupted. Check the saved change again; it will not create a second change.'; $('change').textContent = 'Check the saved change'; $('change').disabled = false; }
